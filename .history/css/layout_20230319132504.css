@@ -1,0 +1,206 @@
+* {
+    margin: 0;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+#header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 20%;
+}
+
+.logo {
+  margin-left: 2%;
+}
+
+.container {
+  height: 100vh;
+}
+
+.hero_image {
+  display: block;
+  margin-bottom: 10%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 4%;
+  width: 80%;
+}
+
+.site_links {
+margin-right: 5%;
+display:flex;
+margin-left: auto;
+margin-top: 3%;
+margin-bottom: 1rem;
+
+}
+
+.site_links p {
+    margin-left: 2%;
+}
+
+.site_links a {
+  color: #dcfdf6;
+  text-decoration: none;
+}
+
+.site_links button {
+  background: hsla(274,97%,50%,.7); 
+  border-radius: 999px;
+  box-shadow: #4f3275 0 10px 20px -10px;
+  box-sizing: border-box;
+  cursor: pointer;
+  font-family: Inter,Helvetica,"Apple Color Emoji","Segoe UI Emoji",NotoColorEmoji,"Noto Color Emoji","Segoe UI Symbol","Android Emoji",EmojiSymbols,-apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue","Noto Sans",sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+  opacity: 1;
+  outline: 0 solid transparent;
+  padding: 8px 18px;
+  width: 8rem;
+  word-break: break-word;
+  border: 0;
+}
+
+
+.bottom_line {
+  margin-top: -.8%;
+  display: flex;
+  justify-content: space-evenly;
+
+}
+
+.bottom_line p{
+  margin-top: 1%;
+  width: 100%;
+}
+
+.bio_section {
+  display: flex;
+  margin-left: 20%;
+  margin-bottom: 10%;
+}
+
+.bio_section img {
+  width: 80%;
+}
+
+.projects {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 90%;
+  margin: 0 auto;
+  background-color: white;
+}
+
+.project {
+  width: 100%;
+  padding: 8px;
+  position: relative;
+}
+
+.project img {
+  display: block;
+  width: 100%;
+  height: auto;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.small-project {
+  width: 100%;
+  padding: 8px;
+  position: relative;
+}
+
+.small-project img {
+  display: block;
+  width: 100%;
+  height: auto;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);}
+
+.button {
+  display: inline-block;
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 8px 16px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: white;
+  background-color: black;
+  text-decoration: none;
+  border-radius: 8px;
+}
+
+.small-projects {
+  display: flex;
+  justify-content: space-between;
+  width: 101%;
+  margin-top: 16px;
+}
+
+/* .small-project button-container {
+  height: 500px;
+} */
+
+/* .small-project button.mhq {
+  display: inline-block;
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-150%);
+  padding: 8px 16px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: white;
+  background-color: red;
+  text-decoration: none;
+  border-radius: 8px;
+} */
+
+.small-project button.mhq.right {
+  transform: translateX(60%);
+}
+
+
+.button.tl {
+  background-color: #58ACFD;
+}
+
+
+.button.pf {
+  background-color: #00A3E0;
+}
+
+.button.ha {
+  background-color: #FF414D;
+}
+
+.button.right {
+  transform: translateX(300%);
+}
+
+/* Header needs to be a Header */
+
+/* Buttons need to be Sewn onto the album covers */
+
+/* make big projects be same width as small projects */
+
+/* spinny box around portrait div */
+
+/* Then you can add cool mouse-over effects  */
+
+/* ask Krys for more sketches once we get the album covers working right */
+
+
+
+footer {
+  position: absolute;
+  width: 100%;
+}
