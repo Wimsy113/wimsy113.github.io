@@ -81,9 +81,16 @@ nav a:hover{
   justify-self: center;
 }
 
-.button-container{
+.big-project .button-container{
   display: flex;
   flex-direction: column;
+  transform: translate(55rem, -10rem);
+}
+
+.small-project .button-container{
+  display: flex;
+  flex-direction: column;
+  transform: translate(25rem, -12rem);
 }
 
 .button-container a{
@@ -98,6 +105,23 @@ nav a:hover{
   margin: 4px 2px;
   cursor: pointer;
   font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  display: inherit;
   width: 20%;
+  color: white;
 }
+
+/* .button-container a{
+  border: none;
+  color:white;
+  padding: 6px 36px;
+  text-align: center;
+  text-decoration: none;
+  display: inherit;
+  background-color: #58acfd;
+  font-size: 18px;
+  border-radius: 8px;
+  width: 80%;
+  position: relative;
+  margin: 4px 2px;
+  cursor: pointer;
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+} */
