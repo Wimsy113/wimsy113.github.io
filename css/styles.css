@@ -82,6 +82,15 @@ nav a:hover{
 }
 
 .button-container a{
+  border: none;
+  padding: 6px 36px;
   background-color: #FF414D;
-  border-radius: 4px;
+  border-radius: 8px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 18px;
+  position: relative;
+  margin: 4px 2px;
+  cursor: pointer;
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
