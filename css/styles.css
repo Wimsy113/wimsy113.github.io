@@ -1,6 +1,6 @@
-* {
+/* * {
   border: dashed 1px #b82463;
-}
+} */
 
 /* nav */
 
@@ -71,8 +71,17 @@ nav a:hover{
   justify-self: center;
 }
 
+#small-projects .penfed img {
+  margin-left: 4%;
+}
+
 .big-project img{
   max-width: 100%;
   height: auto;
   justify-self: center;
+}
+
+.button-container a{
+  background-color: #FF414D;
+  border-radius: 4px;
 }
