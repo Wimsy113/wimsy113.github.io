@@ -81,6 +81,11 @@ nav a:hover{
   justify-self: center;
 }
 
+.button-container{
+  display: flex;
+  flex-direction: column;
+}
+
 .button-container a{
   border: none;
   padding: 6px 36px;
@@ -93,4 +98,6 @@ nav a:hover{
   margin: 4px 2px;
   cursor: pointer;
   font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  display: inherit;
+  width: 20%;
 }
