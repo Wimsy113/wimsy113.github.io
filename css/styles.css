@@ -50,8 +50,6 @@ nav a:hover{
   width: 100%;
 }
 
-
-
 #small-projects{
   display: flex;
   flex-wrap: wrap;
@@ -73,6 +71,14 @@ nav a:hover{
 
 #small-projects .penfed img {
   margin-left: 4%;
+}
+
+.big-project:first-of-type{
+  margin-bottom: -5%;
+}
+
+.big-project:last-of-type{
+  margin-top: -5%;
 }
 
 .big-project img{
@@ -107,6 +113,22 @@ nav a:hover{
   font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   width: 20%;
   color: white;
+}
+
+.true-link a{
+  background-color: #58acfd;
+}
+
+.movehq a{
+  background-color: #ff0000;
+}
+
+.penfed a{
+  background-color: #0f2c52;
+}
+
+.hazadapt a{
+  background-color: #FF414D;
 }
 
 /* .button-container a{
