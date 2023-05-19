@@ -1,6 +1,6 @@
-/* * {
+* {
   border: dashed 1px #b82463;
-} */
+}
 
 /* nav */
 
@@ -73,12 +73,16 @@ nav a:hover{
   margin-left: 4%;
 }
 
+.big-project{
+  display: flex;
+}
+
 .big-project:first-of-type{
-  margin-bottom: -5%;
+  margin-bottom: .2rem;
 }
 
 .big-project:last-of-type{
-  margin-top: -5%;
+  margin-top: 1rem;
 }
 
 .big-project img{
@@ -86,17 +90,36 @@ nav a:hover{
   height: auto;
   justify-self: center;
 }
+/* Button Media Queries */
+/* @media screen and (max-width: 900px) {
+  .button-container {
+    transform: translateX(-100rem);
+  }
+  
+} */
 
-.big-project .button-container{
+
+/* Button Container stuff */
+/* .big-project .button-container{
   display: flex;
   flex-direction: column;
+  overflow: hidden;
   transform: translate(55rem, -10rem);
 }
 
 .small-project .button-container{
   display: flex;
   flex-direction: column;
+  overflow: hidden;
   transform: translate(25rem, -12rem);
+} */
+
+.big-project .button-container{
+  display: flex;
+  align-items: center;
+  position: absolute;
+  right: 20%;
+
 }
 
 .button-container a{
