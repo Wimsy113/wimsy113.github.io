@@ -1,84 +1,63 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Krystyna Ewing - Creative Technologist</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-  <script src="https://kit.fontawesome.com/a482c5ced2.js" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="/css/styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
-  <!-- nav -->
-  <section>
-    <nav id="nav">
-      <a href="#bio">About</a>
-      <a href="#projects">Work</a>
-      <a href="https://medium.com/@krystynaux">Blog</a>
-      <a href="https://www.figma.com/proto/LU8gDjNI1WYCRimbci3LPl/Resume'?page-id=653%3A2&node-id=2149-2&viewport=250%2C455%2C0.24&t=yhnqAZUdQbK73RbI-1&scaling=min-zoom">Resume</a>
-    </nav>
-  </section>
-<!-- hero image -->
-  <section id="hero">
-    <img src="/images/website_hero.png" alt="hero image replace this with an actual alt text later">
-  </section>
-<!-- bio -->
-  <fieldset id="bio">
-    <img src="/images/dialogue_box.png" alt="bio image replace this with an actual alt text later">
-  </fieldset>
-<!-- projects -->
-  <fieldset id="projects">
-    <div id="projects">
-      <!-- TrueLink -->
-      <div class="big-project">
-        <img src="/images/True_Link_album.png" alt="True Link album">
-        <div class="button-container">
-          <ul>
-            <li><a href="https://www.figma.com/proto/vqaZXRphE3eEJuOrEqUPLq/True-Link-Case-Studies?page-id=0%3A1&node-id=1-3"><a>Draft Disbursements</a></li>
-            <li><a href="https://www.figma.com/proto/vqaZXRphE3eEJuOrEqUPLq/True-Link-Case-Studies?page-id=&node-id=113-62&viewport=446%2C1127%2C0.30069223046302795&scaling=min-zoom">Beneficiary Profile</a></li>
-          </ul>
-        </div>
-      </div>
-      <div id="small-projects">
-        <!-- MoveHQ -->
-        <div class="small-project">
-          <img src="/images/updated_movehq_album.png" alt="MoveHQ Album">
-          <div class="button-container ha-button">
+    <header>
+        <h1>Krystin Ewing</h1>
+        <nav>
             <ul>
-              <li><a href="https://www.figma.com/design/pVJeyqpvyFJ9APLkW5m4Z6/MoveHQ_Claims?node-id=123%3A6859&t=ZhBXbWHHEFx5fwRt-1">Claims Flow</a></li>
-              <!-- <li><a href="#button 2 destination">Case Study</a></li> -->
+                <li><a href="#about">About</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#linkedin">LinkedIn</a></li>
+                <li><a href="#3d-printing">3D Printing</a></li>
+                <li><a href="#blog">Blog</a></li>
             </ul>
-          </div>
+        </nav>
+    </header>
+    <section id="hero">
+        <img src="hero-image.png" alt="Hero Image">
+    </section>
+    <section id="projects">
+        <div class="project">
+            <h2>WellDone</h2>
+            <p>A humanitarian aide project that provides real time status tracking of water well function in underdeveloped countries</p>
+            <a href="link-to-figma" class="button">View in Figma</a>
+            <img src="welldone-map.png" alt="WellDone Map">
         </div>
-        <!-- PenFed -->
-        <div class="small-project">
-          <img src="/images/updated_penfed_album.png" alt="PenFed Album">
-          <div class="button-container pf-button">
-            <ul>
-              <li><a href="https://www.figma.com/design/LCc2i4qTqGLquFQ6drFtmV/Penfed---Pre-Qualified-Offers?node-id=0%3A1&t=MLMqBWDN2CtwgQ8A-1">Pre-Qaulified Offers</a></li>
-              <!-- <li><a href="#button 2 destination">Case Study</a></li> -->
-            </ul>
-          </div>
+        <div class="project">
+            <h2>hazadapt</h2>
+            <p>A collection of hazard guides and preparation activities designed to help people increase their resilience and recovery in a crisis</p>
+            <a href="link-to-figma" class="button">View in Figma</a>
+            <img src="hazadapt-screenshot.png" alt="hazadapt Screenshot">
         </div>
-      </div>
-      <!-- Hazadapt -->
-      <div class="big-project">
-        <img src="/images/hazadapt_album.png" alt="Hazadapt Album">
-        <div class="button-container hq-button">
-          <ul>
-            <li><a href="https://www.figma.com/file/Kx0V8Bw8RJHVX9sNkDnD0D/Public-App---Web?type=design&node-id=6%3A26&mode=design&t=GzX7Twr23DbA59mD-1">Public App</a></li>
-            <!-- <li><a href="#button 2 destination">Case Study</a></li> -->
-          </ul>
+        <div class="project">
+            <h2>True Link</h2>
+            <p>A financial institution working to ensure the safety and freedom of aging and disabled populations</p>
+            <a href="link-to-figma" class="button">View in Figma</a>
+            <img src="truelink-screenshot.png" alt="True Link Screenshot">
         </div>
-      </div>
-    </div>
-  </fieldset>
+        <div class="project">
+            <h2>Operation Code</h2>
+            <p>Connecting veterans to education and opportunities in tech leveraging community resources and veteran education benefits</p>
+            <a href="link-to-website" class="button">View Website</a>
+            <img src="operationcode-screenshot.png" alt="Operation Code Screenshot">
+        </div>
+    </section>
+    <section id="other-projects">
+        <h2>Other Projects include:</h2>
+        <ul>
+            <li>JPMorgan Chase & Co.</li>
+            <li>MoveHQ</li>
+            <li>ResiliencePoint</li>
+            <li>PENFED</li>
+            <li>MAPFRE Insurance</li>
+        </ul>
+        <img src="other-projects-image.png" alt="Other Projects Image">
+    </section>
 </body>
-<!-- No Footer Necessary -->
 </html>

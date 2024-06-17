@@ -1,4 +1,102 @@
-fieldset{
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #fff;
+    color: #333;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #000;
+    color: #fff;
+}
+
+header h1 {
+    margin: 0;
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 15px;
+}
+
+nav ul li {
+    margin: 0;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+#hero {
+    background: #000;
+    color: #fff;
+    text-align: center;
+    padding: 50px 0;
+}
+
+#hero img {
+    max-width: 100%;
+    height: auto;
+}
+
+#projects, #other-projects {
+    padding: 50px 20px;
+}
+
+.project {
+    margin-bottom: 50px;
+}
+
+.project h2 {
+    color: #0073e6;
+}
+
+.project p {
+    margin-bottom: 10px;
+}
+
+.project .button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #0073e6;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.project img {
+    max-width: 100%;
+    height: auto;
+}
+
+#other-projects h2 {
+    color: #0073e6;
+}
+
+#other-projects ul {
+    list-style: none;
+    padding: 0;
+}
+
+#other-projects ul li {
+    margin-bottom: 10px;
+}
+
+#other-projects img {
+    max-width: 100%;
+    height: auto;
+    margin-top: 20px;
+}fieldset{
   border: none;
   margin: 8px 0 8px 0;
 }
