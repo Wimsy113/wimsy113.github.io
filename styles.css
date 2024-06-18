@@ -41,9 +41,11 @@ nav ul li a {
     color: #fff;
     text-align: center;
     padding: 50px 0;
+    clip-path: polygon(0% 0%, 100% 0%, 100% 100%)
 }
 
 #hero img {
+    display: block;
     max-width: 100%;
     height: auto;
 }
@@ -237,3 +239,22 @@ nav a:hover{
   background-color: #FF414D;
 }
 
+    .container {
+      position: relative;
+      display: inline-block; /* Adjust as necessary */
+    }
+    
+    .triangle-background {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 1729px;
+      height: 1071px;
+      background-color: #000000;
+      clip-path: polygon(0% 0%, 100% 0%, 100% 100%);
+      z-index: -1; /* Ensures the triangle is behind the image */
+    }
+    
+    .image {
+      display: block; /* Ensures the image respects the dimensions */
+    }
