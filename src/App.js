@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import { HashRouter as Router, Routes, Route, Link } from "react-router-dom";
 import './styles/App.css';
 import logo from "./images/logo.png";
 import Home from "./Home";
@@ -32,7 +32,7 @@ function App() {
   }, []);
 
   return (
-  <BrowserRouter basename="/wimsy113.github.io">
+  <Router>
     <div className="app-body">
       <nav className={`nav ${isSticky ? "sticky" : ""}`}>
         <ul className="nav-list">
@@ -65,7 +65,7 @@ function App() {
         </div>
       </footer>
     </div>
-  </BrowserRouter>
+  </Router>
   );
 }
 
