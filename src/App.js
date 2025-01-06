@@ -32,7 +32,7 @@ function App() {
   }, []);
 
   return (
-  <BrowserRouter basename="/wimsy.github.io">
+  <BrowserRouter basename="/wimsy113.github.io">
     <div className="app-body">
       <nav className={`nav ${isSticky ? "sticky" : ""}`}>
         <ul className="nav-list">
