@@ -1,0 +1,105 @@
+@font-face {
+    font-family: "Kano";
+    src: url("../fonts/Kano.otf");
+    font-weight: bold;
+    }
+
+@font-face {
+    font-family: "Inria";
+    src: url("../fonts/InriaSans-Regular.ttf");
+    }
+
+@font-face {
+    font-family: "Inria-bold";
+    src: url("../fonts/InriaSans-Bold.ttf");
+    font-weight: bold;
+    }
+
+.banner {
+    width: 100%;
+    margin-top: 7.8rem;
+}
+
+.section {
+    width: 82%;
+    margin-left: 9%;
+    margin-top: 5rem;
+}
+
+.section h2 {
+    color: #05446A;
+    font-family: "Inria-bold";
+    font-size: 4em;
+    margin: 0;
+}
+
+.h2-center {
+    text-align: center;
+}
+
+.section p {
+    font-family: "Inria";
+    font-size: 1.6em;
+}
+
+.section .blue{
+    background-color: #05446A;
+    color: white;
+    font-family: "Inria-bold";
+    padding: 7rem;
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+    border-radius: .6rem;
+}
+
+.section div {
+    display: flex;
+    margin-top: 2rem;
+    flex-direction: row;
+    justify-content: center;
+    text-align: center;
+    flex-wrap: nowrap; /* Ensure items stay in a single row */
+}
+
+div.section-item {
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    max-width: 18rem;
+    justify-content: flex-start;
+    align-items: center;
+    text-align: center;
+    margin: 3rem;
+}
+
+.section-item img {
+    width: 8rem;
+}
+
+.first-iteration {
+    width: 100%;
+    margin-top: 3rem;
+}
+
+.back-to-the {
+    width: 100%;
+    margin-top: 3rem;
+}
+
+.hi-fi {
+    width: 100%;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+}
+
+@media (max-width: 800px) {
+    .banner {
+        margin-top: 6rem;
+    }
+}
+
+@media (max-width: 560px) {
+    .banner {
+        margin-top: 6.5rem;
+    }
+}

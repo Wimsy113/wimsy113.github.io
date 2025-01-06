@@ -1,0 +1,3 @@
+2024-12-21T13:16:20.955-05:00  INFO 24876 --- [gamecollectorapi] [restartedMain] w.o.g.GamecollectorapiApplication        : Starting GamecollectorapiApplication using Java 17.0.12 with PID 24876 (C:\Users\Matt Lee\Documents\WCCI\game-collector-game-collector\gamecollectorapi\target\classes started by Matt Lee in C:\Users\Matt Lee\Documents\ScooterTheSecond\wimsy113.github.io\portfolio)
+2024-12-21T13:16:20.957-05:00 DEBUG 24876 --- [gamecollectorapi] [restartedMain] w.o.g.GamecollectorapiApplication        : Running with Spring Boot v3.3.5, Spring v6.1.14
+2024-12-21T13:16:20.958-05:00  INFO 24876 --- [gamecollectorapi] [restartedMain] w.o.g.GamecollectorapiApplication        : No active profile set, falling back to 1 default profile: "default"
