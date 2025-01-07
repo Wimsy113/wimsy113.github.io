@@ -13,6 +13,7 @@ import bioPhoto from "./images/bioPhoto.png";
 import linkedIn from "./images/linkedIn.png";
 import instagram from "./images/instagram.png";
 import gmail from "./images/gmail.png";
+import github from "./images/github-logo.png";
 
 function Home() {
     return (
@@ -27,7 +28,7 @@ function Home() {
           </div>
           <div id="work"></div>
           {/* Hazadapt */}
-          <Link to={"/Hazadapt"} className="home-element , desktop">
+          <Link to={"/HazadaptRP"} className="home-element , desktop">
               <div className="home-element-left">
                 <img className="hazadapt-logo" src={hazadaptLogo} alt="HazAdapt Logo"/>
                 <p className="text1">Timeline: August 2022-Present</p>
@@ -41,10 +42,10 @@ function Home() {
               <p className="text1">Timeline: August 2022-Present</p>
               <p className="text2">A collection of hazard guides and preparation activities designed to help people increase their resilience and recovery in a crisis</p>
             </div>
-            <div className="home-element-right"><Link className="element-button" to={"/Hazadapt"}>View Case Study</Link><img src={hazadaptImage} alt="HazAdapt on a phone"/></div>
+            <div className="home-element-right"><Link className="element-button" to={"/HazadaptRP"}>View Case Study</Link><img src={hazadaptImage} alt="HazAdapt on a phone"/></div>
           </div>
           {/* Well Done */}
-          <Link className="home-element , well-done , desktop">
+          <Link className="home-element , well-done , desktop" to="/Welldone">
               <div className="home-element-left">
                 <img className="hazadapt-logo" src={welldoneLogo} alt="Well Done Logo"/>
                 <p className="text1">Timeline: August 2022-Present</p>
@@ -58,7 +59,7 @@ function Home() {
               <p className="text1">Timeline: August 2022-Present</p>
               <p className="text2">A humanitarian aide project that provides real time status tracking of water well function in underdeveloped countries</p>
             </div>
-            <div className="home-element-right"><Link className="element-button" to=" ">View Case Study</Link><img src={welldoneImage} alt="Well Done on a computer"/></div>
+            <div className="home-element-right"><Link className="element-button" to="/Welldone">View Case Study</Link><img src={welldoneImage} alt="Well Done on a computer"/></div>
           </div>
           {/* Operation Code */}
           <Link className="home-element , operation-code , desktop">
@@ -66,6 +67,7 @@ function Home() {
                 <img className="hazadapt-logo" src={operationCodeLogo} alt="Operation Code Logo"/>
                 <p className="text1">Timeline: August 2022-Present</p>
                 <p className="text2">Connecting veterans to education and opportunities in tech leveraging community resources and veteran education benefits</p>
+                <p className="text1">Coming Soon</p>
               </div>
               <div className="home-element-right"><img src={operationCodeImage} alt="Operation Code on a computer"/></div>
           </Link>
@@ -75,7 +77,7 @@ function Home() {
               <p className="text1">Timeline: August 2022-Present</p>
               <p className="text2">Connecting veterans to education and opportunities in tech leveraging community resources and veteran education benefits</p>
             </div>
-            <div className="home-element-right"><Link className="element-button" to=" ">View Case Study</Link><img src={operationCodeImage} alt="Operation Code on a computer"/></div>
+            <div className="home-element-right"><Link className="element-button" to=" ">Coming Soon</Link><img src={operationCodeImage} alt="Operation Code on a computer"/></div>
           </div>
           {/* True Link */}
           <Link className="home-element , true-link , desktop">
@@ -83,6 +85,7 @@ function Home() {
               <img className="hazadapt-logo" src={trueLinkLogo} alt="HazAdapt Logo"/>
               <p className="text1">Timeline: August 2022-Present</p>
               <p className="text2">A financial institution working to ensure the safety and freedom of aging and disabled populations</p>
+              <p className="text1">Coming Soon</p>
             </div>
             <div className="home-element-right"><img src={trueLinkImage} alt="True Link shown on a computer"/></div>
           </Link>
@@ -92,7 +95,7 @@ function Home() {
               <p className="text1">Timeline: August 2022-Present</p>
               <p className="text2">A financial institution working to ensure the safety and freedom of aging and disabled populations</p>
             </div>
-            <div className="home-element-right"><Link className="element-button" to=" ">View Case Study</Link><img src={trueLinkImage} alt="True Link shown on a computer"/></div>
+            <div className="home-element-right"><Link className="element-button" to=" ">Coming Soon</Link><img src={trueLinkImage} alt="True Link shown on a computer"/></div>
           </div>
           {/* About Section */}
           <div className="home-element , krys-bio">
@@ -114,6 +117,14 @@ function Home() {
             </div>
             <div className="home-element-right"><img src={bioPhoto} alt="bio"/></div>
           </div>
+          <footer>
+            <div className="bio-contact">
+              <p>Website built with care, by Matthew Lee: </p>
+              <Link to=""><img src={linkedIn} alt="LinkedIn"/></Link>
+              <Link to=""><img src={github} alt="Github"/></Link>
+              <Link to=""><img src={gmail} alt="Gmail"/></Link>
+            </div>
+          </footer>
         </div>
     );
   }
