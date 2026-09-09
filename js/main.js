@@ -1,157 +1,103 @@
-/*global $, jQuery, alert*/
-$(document).ready(function() {
-
+(function () {
   'use strict';
 
-  // ========================================================================= //
-  //  //SMOOTH SCROLL
-  // ========================================================================= //
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  // ---------------------------------------------------------------
+  // Mobile nav toggle
+  // ---------------------------------------------------------------
+  var navToggle = document.getElementById('navToggle');
+  var primaryNav = document.getElementById('primaryNav');
 
-  $(document).on("scroll", onScroll);
+  if (navToggle && primaryNav) {
+    navToggle.addEventListener('click', function () {
+      var isOpen = primaryNav.classList.toggle('is-open');
+      navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
 
-  $('a[href^="#"]').on('click', function(e) {
-    e.preventDefault();
-    $(document).off("scroll");
-
-    $('a').each(function() {
-      $(this).removeClass('active');
-      if ($(window).width() < 768) {
-        $('.nav-menu').slideUp();
+    primaryNav.addEventListener('click', function (e) {
+      if (e.target.tagName === 'A') {
+        primaryNav.classList.remove('is-open');
+        navToggle.setAttribute('aria-expanded', 'false');
       }
     });
-
-    $(this).addClass('active');
-
-    var target = this.hash,
-        menu = target;
-
-    target = $(target);
-    $('html, body').stop().animate({
-      'scrollTop': target.offset().top - 80
-    }, 500, 'swing', function() {
-      window.location.hash = target.selector;
-      $(document).on("scroll", onScroll);
-    });
-  });
-
-
-  function onScroll(event) {
-    if ($('.home').length) {
-      var scrollPos = $(document).scrollTop();
-      $('nav ul li a').each(function() {
-        var currLink = $(this);
-        var refElement = $(currLink.attr("href"));
-      });
-    }
   }
 
-  // ========================================================================= //
-  //  //NAVBAR SHOW - HIDE
-  // ========================================================================= //
+  // ---------------------------------------------------------------
+  // Typing effect in the hero subhead
+  // ---------------------------------------------------------------
+  var typedTarget = document.getElementById('typedTarget');
+  var phrases = ['accessible design.', 'clean code.', 'loud color.', 'punk rock.'];
 
+  if (typedTarget && !reduceMotion) {
+    var phraseIndex = 0;
+    var charIndex = 0;
+    var deleting = false;
 
-  $(window).scroll(function() {
-    var scroll = $(window).scrollTop();
-    if (scroll > 200 ) {
-      $("#main-nav, #main-nav-subpage").slideDown(700);
-      $("#main-nav-subpage").removeClass('subpage-nav');
-    } else {
-      $("#main-nav").slideUp(700);
-      $("#main-nav-subpage").hide();
-      $("#main-nav-subpage").addClass('subpage-nav');
-    }
-  });
+    function tick() {
+      var current = phrases[phraseIndex];
 
-  // ========================================================================= //
-  //  // RESPONSIVE MENU
-  // ========================================================================= //
-
-  $('.responsive').on('click', function(e) {
-    $('.nav-menu').slideToggle();
-  });
-
-  // ========================================================================= //
-  //  Typed Js
-  // ========================================================================= //
-
-  var typed = $(".typed");
-
-  $(function() {
-    typed.typed({
-      strings: ["Painting.", "Freelancing.", "Coding."],
-      typeSpeed: 150,
-      loop: true,
-    });
-  });
-
-
-  // ========================================================================= //
-  //  Owl Carousel Services
-  // ========================================================================= //
-
-
-  $('.services-carousel').owlCarousel({
-      autoplay: true,
-      loop: true,
-      margin: 20,
-      dots: true,
-      nav: false,
-      responsiveClass: true,
-      responsive: { 0: { items: 1 }, 768: { items: 2 }, 900: { items: 4 } }
-    });
-
-  // ========================================================================= //
-  //  magnificPopup
-  // ========================================================================= //
-
-  var magnifPopup = function() {
-    $('.popup-img').magnificPopup({
-      type: 'image',
-      removalDelay: 300,
-      mainClass: 'mfp-with-zoom',
-      gallery: {
-        enabled: true
-      },
-      zoom: {
-        enabled: true, // By default it's false, so don't forget to enable it
-
-        duration: 300, // duration of the effect, in milliseconds
-        easing: 'ease-in-out', // CSS transition easing function
-
-        // The "opener" function should return the element from which popup will be zoomed in
-        // and to which popup will be scaled down
-        // By defailt it looks for an image tag:
-        opener: function(openerElement) {
-          // openerElement is the element on which popup was initialized, in this case its <a> tag
-          // you don't need to add "opener" option if this code matches your needs, it's defailt one.
-          return openerElement.is('img') ? openerElement : openerElement.find('img');
+      if (!deleting) {
+        charIndex++;
+        typedTarget.textContent = current.slice(0, charIndex);
+        if (charIndex === current.length) {
+          deleting = true;
+          setTimeout(tick, 1400);
+          return;
+        }
+      } else {
+        charIndex--;
+        typedTarget.textContent = current.slice(0, charIndex);
+        if (charIndex === 0) {
+          deleting = false;
+          phraseIndex = (phraseIndex + 1) % phrases.length;
         }
       }
+
+      setTimeout(tick, deleting ? 45 : 90);
+    }
+
+    tick();
+  }
+
+  // ---------------------------------------------------------------
+  // Reveal-on-scroll
+  // ---------------------------------------------------------------
+  var revealTargets = document.querySelectorAll(
+    '.case-card, .quest-card, .skill-group, .about-photo, .about-copy, .art-feature, .art-copy, .off-clock-copy, .off-clock-photo'
+  );
+
+  revealTargets.forEach(function (el) {
+    el.setAttribute('data-reveal', '');
+  });
+
+  if ('IntersectionObserver' in window && !reduceMotion) {
+    var observer = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
+
+    revealTargets.forEach(function (el) {
+      observer.observe(el);
     });
-  };
+  } else {
+    revealTargets.forEach(function (el) {
+      el.classList.add('is-visible');
+    });
+  }
 
-
-  // Call the functions
-  magnifPopup();
-
-});
-
-// ========================================================================= //
-//  Porfolio isotope and filter
-// ========================================================================= //
-$(window).load(function(){
-
-  var portfolioIsotope = $('.portfolio-container').isotope({
-    itemSelector: '.portfolio-thumbnail',
-    layoutMode: 'fitRows'
-  });
-
-  $('#portfolio-flters li').on( 'click', function() {
-    $("#portfolio-flters li").removeClass('filter-active');
-    $(this).addClass('filter-active');
-
-    portfolioIsotope.isotope({ filter: $(this).data('filter') });
-  });
-
-})
+  // ---------------------------------------------------------------
+  // Footer year
+  // ---------------------------------------------------------------
+  var yearEl = document.getElementById('year');
+  if (yearEl) {
+    yearEl.textContent = new Date().getFullYear();
+  }
+})();

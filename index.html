@@ -1,64 +1,343 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Krystyna Ewing — UX Designer &amp; Developer</title>
+  <meta name="description" content="Krystyna Ewing — UX designer and developer with 10+ years in tech, working across product design, front-end development, and illustration.">
+
+  <link rel="icon" href="images/favicon.ico">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Permanent+Marker&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header>
-        <img src="/images/site_logo.png" alt="Hero Image">
-        <nav>
-            <ul>
-                <li><a href="#about">About</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#linkedin">LinkedIn</a></li>
-                <li><a href="#3d-printing">3D Printing</a></li>
-                <li><a href="#blog">Blog</a></li>
-            </ul>
-        </nav>
-    </header>
-        <div class="container">
-            <img src="/images/hero.png" alt="Your Image" class="image">
-            <div class="triangle-background"></div>
-        </div>
-    <section id="projects">
-        <div class="project">
-            <h2>WellDone</h2>
-            <p>A humanitarian aide project that provides real time status tracking of water well function in underdeveloped countries</p>
-            <a href="link-to-figma" class="button">View in Figma</a>
-            <img src="welldone-map.png" alt="WellDone Map">
-        </div>
-        <div class="project">
-            <h2>hazadapt</h2>
-            <p>A collection of hazard guides and preparation activities designed to help people increase their resilience and recovery in a crisis</p>
-            <a href="link-to-figma" class="button">View in Figma</a>
-            <img src="hazadapt-screenshot.png" alt="hazadapt Screenshot">
-        </div>
-        <div class="project">
-            <h2>True Link</h2>
-            <p>A financial institution working to ensure the safety and freedom of aging and disabled populations</p>
-            <a href="link-to-figma" class="button">View in Figma</a>
-            <img src="truelink-screenshot.png" alt="True Link Screenshot">
-        </div>
-        <div class="project">
-            <h2>Operation Code</h2>
-            <p>Connecting veterans to education and opportunities in tech leveraging community resources and veteran education benefits</p>
-            <a href="link-to-website" class="button">View Website</a>
-            <img src="operationcode-screenshot.png" alt="Operation Code Screenshot">
-        </div>
-    </section>
-    <section id="other-projects">
-        <h2>Other Projects include:</h2>
+
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header" id="top">
+    <div class="header-inner">
+      <a class="brand" href="#top" aria-label="Krystyna Ewing — home">
+        <img src="images/hero.png" alt="" class="brand-mascot" aria-hidden="true">
+        <span class="brand-name">Krystyna&nbsp;Ewing</span>
+      </a>
+
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="primaryNav">
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+        <span class="sr-only">Menu</span>
+      </button>
+
+      <nav class="primary-nav" id="primaryNav" aria-label="Primary">
         <ul>
-            <li>JPMorgan Chase & Co.</li>
-            <li>MoveHQ</li>
-            <li>ResiliencePoint</li>
-            <li>PENFED</li>
-            <li>MAPFRE Insurance</li>
+          <li><a href="#work">Work</a></li>
+          <li><a href="#side-quests">Side&nbsp;Quests</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#art">Art</a></li>
+          <li><a href="#contact" class="nav-cta">Say&nbsp;Hi</a></li>
         </ul>
-        <img src="other-projects-image.png" alt="Other Projects Image">
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- ============ HERO ============ -->
+    <section class="hero">
+      <div class="hero-grain" aria-hidden="true"></div>
+      <div class="hero-inner">
+        <p class="hero-eyebrow">// UX designer &amp; developer, est. 10+ years ago</p>
+        <h1 class="hero-title">
+          <span>I design things.</span>
+          <span>I build things.</span>
+          <span class="hero-title-accent">I don't do quiet.</span>
+        </h1>
+        <p class="hero-sub">
+          Currently obsessed with <span class="typed-target" id="typedTarget">accessible design</span>
+        </p>
+        <div class="hero-actions">
+          <a href="#work" class="btn btn-primary">See the work</a>
+          <a href="#contact" class="btn btn-ghost">Get in touch</a>
+        </div>
+      </div>
+      <img src="images/hero.png" alt="Illustrated purple-haired, green-eyed character with fangs — Krystyna's drawn alter ego" class="hero-mascot">
+      <a href="#work" class="scroll-cue" aria-label="Scroll to work">↓</a>
     </section>
+
+    <!-- ============ MARQUEE ============ -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee-track">
+        <span>UX RESEARCH</span><span>★</span>
+        <span>FRONT-END DEV</span><span>★</span>
+        <span>DESIGN SYSTEMS</span><span>★</span>
+        <span>ACCESSIBILITY</span><span>★</span>
+        <span>ILLUSTRATION</span><span>★</span>
+        <span>PROTOTYPING</span><span>★</span>
+        <span>UX RESEARCH</span><span>★</span>
+        <span>FRONT-END DEV</span><span>★</span>
+        <span>DESIGN SYSTEMS</span><span>★</span>
+        <span>ACCESSIBILITY</span><span>★</span>
+        <span>ILLUSTRATION</span><span>★</span>
+        <span>PROTOTYPING</span><span>★</span>
+      </div>
+    </div>
+
+    <!-- ============ ABOUT ============ -->
+    <section class="about" id="about">
+      <div class="about-photo">
+        <img src="images/me.png" alt="Portrait of Krystyna Ewing">
+        <span class="tape tape-1" aria-hidden="true"></span>
+        <span class="tape tape-2" aria-hidden="true"></span>
+      </div>
+      <div class="about-copy">
+        <p class="section-kicker">About</p>
+        <h2 class="section-title">Ten-plus years of<br>writing code <em>and</em><br>breaking grids.</h2>
+        <p>
+          I've spent my career on both sides of the screen — as a software developer and as a
+          UX designer — which mostly means I've never met a hand-off I couldn't argue with.
+          I've designed and built for humanitarian water-tracking in the field, disaster-prep
+          tools people reach for on their worst day, fintech built to protect aging and disabled
+          adults, and programs helping veterans land in tech.
+        </p>
+        <p>
+          The through-line: high-stakes moments, real people, and interfaces that have to earn
+          their keep. Outside of that, I'm drawing fanged little monsters, arguing about design
+          systems, and generally refusing to make anything boring.
+        </p>
+        <ul class="about-facts">
+          <li><span>10+ yrs</span> in tech — dev &amp; design</li>
+          <li><span>Fintech · Nonprofit · Public Safety</span> case work</li>
+          <li><span>Illustrator</span> on the side, loudly</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ SKILLS ============ -->
+    <section class="skills" id="skills">
+      <p class="section-kicker center">The Arsenal</p>
+      <h2 class="section-title center">Stuff I'm dangerous with</h2>
+
+      <div class="skills-grid">
+        <div class="skill-group">
+          <h3>Design</h3>
+          <ul class="patches">
+            <li class="patch">UX Research</li>
+            <li class="patch">Wireframing &amp; Prototyping</li>
+            <li class="patch">Design Systems</li>
+            <li class="patch">Accessibility (WCAG)</li>
+            <li class="patch">Interaction Design</li>
+            <li class="patch">Usability Testing</li>
+          </ul>
+        </div>
+        <div class="skill-group">
+          <h3>Development</h3>
+          <ul class="patches">
+            <li class="patch">HTML / CSS / JS</li>
+            <li class="patch">React</li>
+            <li class="patch">Git &amp; GitHub</li>
+            <li class="patch">API Integration</li>
+            <li class="patch">Responsive Dev</li>
+          </ul>
+        </div>
+        <div class="skill-group">
+          <h3>Craft</h3>
+          <ul class="patches">
+            <li class="patch">Illustration</li>
+            <li class="patch">Branding &amp; Identity</li>
+            <li class="patch">Visual Design</li>
+            <li class="patch">Character &amp; Icon Art</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ WORK ============ -->
+    <section class="work" id="work">
+      <p class="section-kicker center">Selected Work</p>
+      <h2 class="section-title center">Things I've shipped</h2>
+
+      <div class="work-grid">
+
+        <article class="case-card">
+          <div class="case-card-cover case-card-cover--text case-card-cover--red">
+            <span>WellDone</span>
+          </div>
+          <div class="case-card-body">
+            <div class="case-card-tags">
+              <span class="tag">Product Design</span>
+              <span class="tag">Field Research</span>
+              <span class="tag">Non-Profit</span>
+            </div>
+            <h3>WellDone</h3>
+            <p>WellDone gives humanitarian teams real-time visibility into water well function
+              across developing regions — so a broken pump gets fixed in days, not months.</p>
+            <!-- TODO: replace with real case study / Figma link -->
+            <a href="#" class="btn btn-small">View in Figma →</a>
+          </div>
+        </article>
+
+        <article class="case-card">
+          <div class="case-card-cover">
+            <img src="images/hazadapt_album.png" alt="hazadapt logo">
+          </div>
+          <div class="case-card-body">
+            <div class="case-card-tags">
+              <span class="tag">UX Design</span>
+              <span class="tag">Content Strategy</span>
+              <span class="tag">Public Safety</span>
+            </div>
+            <h3>hazadapt</h3>
+            <p>A library of hazard guides and prep activities built to help people build
+              resilience before a crisis hits — and recover faster after.</p>
+            <!-- TODO: replace with real case study / Figma link -->
+            <a href="#" class="btn btn-small">View in Figma →</a>
+          </div>
+        </article>
+
+        <article class="case-card">
+          <div class="case-card-cover">
+            <img src="images/True_Link_album.png" alt="True Link logo">
+          </div>
+          <div class="case-card-body">
+            <div class="case-card-tags">
+              <span class="tag">Fintech</span>
+              <span class="tag">Accessibility</span>
+              <span class="tag">Design Systems</span>
+            </div>
+            <h3>True Link</h3>
+            <p>Financial tools built to protect the safety and independence of aging and
+              disabled adults — without stripping away their autonomy.</p>
+            <!-- TODO: replace with real case study / Figma link -->
+            <a href="#" class="btn btn-small">View in Figma →</a>
+          </div>
+        </article>
+
+        <article class="case-card">
+          <div class="case-card-cover case-card-cover--text case-card-cover--purple">
+            <span>Operation Code</span>
+          </div>
+          <div class="case-card-body">
+            <div class="case-card-tags">
+              <span class="tag">Nonprofit</span>
+              <span class="tag">Ed-Tech</span>
+              <span class="tag">Community</span>
+            </div>
+            <h3>Operation Code</h3>
+            <p>Connecting veterans to tech careers — pairing education benefits with
+              mentorship and a community that's already been where they're headed.</p>
+            <!-- TODO: replace with real website link -->
+            <a href="#" class="btn btn-small">View Website →</a>
+          </div>
+        </article>
+
+      </div>
+
+      <div class="other-clients">
+        <p>Also built things for:</p>
+        <ul>
+          <li>JPMorgan Chase &amp; Co.</li>
+          <li>MoveHQ</li>
+          <li>ResiliencePoint</li>
+          <li>PenFed</li>
+          <li>MAPFRE Insurance</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ SIDE QUESTS ============ -->
+    <section class="side-quests" id="side-quests">
+      <p class="section-kicker center">Side Quests</p>
+      <h2 class="section-title center">Personal projects, no client required</h2>
+
+      <div class="quest-grid">
+        <article class="quest-card">
+          <img src="images/somnus_portfolio_cover.png" alt="Somnus project cover">
+          <div class="quest-card-body">
+            <h3>Somnus</h3>
+            <p>A dreamy little world built around night skies and slow moments.</p>
+            <span class="tag">Concept + Visual Design</span>
+          </div>
+        </article>
+        <article class="quest-card">
+          <img src="images/gormonjee_portfolio_cover.png" alt="GorMonjee project cover">
+          <div class="quest-card-body">
+            <h3>GorMonjee</h3>
+            <p>Branding for something that still makes me smile.</p>
+            <span class="tag">Branding + Identity</span>
+          </div>
+        </article>
+        <article class="quest-card">
+          <img src="images/Zinc_Co-Op_Cover.png" alt="Zinc Co-Op project cover">
+          <div class="quest-card-body">
+            <h3>Zinc Co-Op</h3>
+            <p>Bold, high-contrast identity work for a co-op with something to say.</p>
+            <span class="tag">Branding + UI</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ============ ART ============ -->
+    <section class="art" id="art">
+      <div class="art-feature">
+        <img src="images/Artwork.png" alt="Original digital illustration by Krystyna Ewing">
+      </div>
+      <div class="art-copy">
+        <p class="section-kicker">Art</p>
+        <h2 class="section-title">Design pays the<br>bills. Art keeps<br>me sane.</h2>
+        <p>
+          That fanged, purple-haired troublemaker hanging around the top of this page? Mine.
+          Drawn, not stock. When I'm not shipping interfaces I'm usually somewhere in
+          Procreate, building weird little characters and worlds that don't need a stakeholder
+          sign-off.
+        </p>
+        <!-- TODO: link to Instagram / ArtStation / portfolio -->
+        <a href="#" class="btn btn-ghost">More art →</a>
+      </div>
+    </section>
+
+    <!-- ============ OFF THE CLOCK ============ -->
+    <section class="off-clock">
+      <div class="off-clock-copy">
+        <p class="section-kicker">Off the Clock</p>
+        <h2 class="section-title">Currently</h2>
+        <ul class="zine-list">
+          <li>Fishing for shooting stars at 2am, digitally</li>
+          <li>Rebuilding this exact website out of spite</li>
+          <li>Collecting monsters, both drawn and coded</li>
+          <li>Still right about that design system decision</li>
+        </ul>
+      </div>
+      <div class="off-clock-photo">
+        <img src="images/night_fishing.jpg" alt="Night fishing scene from Animal Crossing: New Horizons">
+      </div>
+    </section>
+
+    <!-- ============ CONTACT ============ -->
+    <section class="contact" id="contact">
+      <p class="section-kicker center">Get in touch</p>
+      <h2 class="contact-title">Let's make<br>something loud.</h2>
+      <!-- TODO: swap in preferred contact email -->
+      <a href="mailto:hello@krystynaewing.com" class="contact-email">hello@krystynaewing.com</a>
+      <ul class="social-links">
+        <!-- TODO: replace with real profile links -->
+        <li><a href="#">LinkedIn</a></li>
+        <li><a href="#">GitHub</a></li>
+        <li><a href="#">Instagram</a></li>
+      </ul>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; <span id="year"></span> Krystyna Ewing. Built with black coffee and spite.</p>
+    <a href="#top" class="back-to-top">Back to top ↑</a>
+  </footer>
+
+  <script src="js/main.js"></script>
 </body>
 </html>
