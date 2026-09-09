@@ -61,73 +61,171 @@
 
       <p class="tag-row">hazadapt · UX Design · Content Strategy · Public Safety</p>
       <h1 class="case-title">ResiliencePoint</h1>
-      <p class="case-summary">A tool for tracking community resilience over time.</p>
+      <p class="case-summary">A platform for emergency managers to gather insights about their communities, hazards, and outreach effectiveness — built as a clearer, more actionable successor to EM-Dash.</p>
 
       <dl class="case-meta">
-        <div><dt>Role</dt><dd>To fill in</dd></div>
-        <div><dt>Timeline</dt><dd>To fill in</dd></div>
-        <div><dt>Tools</dt><dd>To fill in</dd></div>
+        <div><dt>Role</dt><dd>UX Designer</dd></div>
+        <div><dt>Duration</dt><dd>2023</dd></div>
+        <div><dt>Tools</dt><dd>Figma, ClickUp, Google Docs, Otter.ai</dd></div>
         <div><dt>Platform</dt><dd>To fill in</dd></div>
       </dl>
     </div>
 
     <section class="case-section">
-      <span class="section-index">01 — The Problem</span>
-      <h2 class="case-section-title">What needed solving</h2>
+      <span class="section-index">01 — Overview</span>
+      <h2 class="case-section-title">Project overview</h2>
       <div class="case-section-body">
-        <div class="placeholder-block">
-          <span class="placeholder-tag">To fill in</span>
-          <p>Describe the core problem this case study addressed — who was affected, and why the existing experience fell short.</p>
-        </div>
-
+        <p>ResiliencePoint is a platform for emergency managers (EMs) to gather insights
+          about their communities, hazards, and outreach effectiveness. It was developed
+          as a successor to EM-Dash to provide a more actionable, clear, and
+          human-centered interface for interpreting data and making decisions. The
+          platform needed to balance rich datasets with simplicity, enabling EMs to
+          quickly understand local conditions and adapt their outreach strategies.</p>
       </div>
     </section>
 
     <section class="case-section">
-      <span class="section-index">02 — The Approach</span>
-      <h2 class="case-section-title">How I got there</h2>
+      <span class="section-index">02 — Design Process &amp; Development</span>
+      <h2 class="case-section-title">Understanding EM workflows</h2>
       <div class="case-section-body">
-        <div class="placeholder-block">
-          <span class="placeholder-tag">To fill in</span>
-          <p>Summarize the process: research, constraints, key decisions, who you worked with.</p>
-        </div>
+        <p>Our process began by analyzing EM workflows and needs.</p>
+
+        <h3>User Research</h3>
+        <p>Interviews and observations revealed that EMs needed rapid access to key
+          metrics: population counts, hazard activity, and prep check engagement in
+          their jurisdiction. They required clear ways to search, filter, and
+          visualize data for actionable insights.</p>
+
+        <h3>Wireframing &amp; Prototyping</h3>
+        <p>Pages were designed with multiple graphs and tables, navigated via a top
+          menu bar. The goal was to give EMs access to core metrics while keeping all
+          visualizations immediately accessible.</p>
+
+        <h3>Feature Planning</h3>
+        <p>Based on the PRD, features included:</p>
+        <ul>
+          <li>Prep check engagement summaries</li>
+          <li>Hazard activity heatmaps</li>
+          <li>Recent incident or insight feeds</li>
+          <li>Search tied to individual graphs/tables</li>
+        </ul>
 
         <div class="placeholder-image">
-          <span>Add a research artifact, sketch, or process photo</span>
+          <span>Wireframe showing top menu and multiple component layouts</span>
         </div>
 
+        <h3>Testing &amp; Observations</h3>
+        <ul>
+          <li>The top navigation created cognitive overload; users had difficulty
+            understanding hierarchy.</li>
+          <li>Component-level search required repeated queries for each chart or
+            table, slowing workflow.</li>
+          <li>Critical insights were often buried and not visible at a glance.</li>
+          <li>Accessibility issues appeared: some text contrast, alignment, and
+            hierarchy made rapid comprehension challenging.</li>
+        </ul>
       </div>
     </section>
 
     <section class="case-section">
-      <span class="section-index">03 — The Solution</span>
-      <h2 class="case-section-title">What shipped</h2>
+      <span class="section-index">03 — The Pivot</span>
+      <h2 class="case-section-title">Discovering usability issues</h2>
       <div class="case-section-body">
-        <div class="placeholder-block">
-          <span class="placeholder-tag">To fill in</span>
-          <p>Walk through the final solution — key screens and the reasoning behind them.</p>
-        </div>
-
-        <div class="placeholder-image">
-          <span>Add a key screen or flow screenshot</span>
-        </div>
-
-        <div class="placeholder-image">
-          <span>Add another screen or before/after comparison</span>
-        </div>
-
+        <p>Through usability and accessibility testing, it became clear the design
+          needed a rethink:</p>
+        <ul>
+          <li>Navigation via a top menu was overwhelming and visually cluttered.</li>
+          <li>Component-specific search caused inefficiencies and inconsistent
+            workflows.</li>
+          <li>Key insights were difficult to locate quickly.</li>
+        </ul>
+        <p>This led to a redesign that emphasized clarity, hierarchy, and workflow
+          efficiency, while addressing accessibility concerns.</p>
       </div>
     </section>
 
     <section class="case-section">
-      <span class="section-index">04 — Outcome</span>
-      <h2 class="case-section-title">What changed</h2>
+      <span class="section-index">04 — Redesign &amp; Enhancements</span>
+      <h2 class="case-section-title">What changed, and why</h2>
       <div class="case-section-body">
-        <div class="placeholder-block">
-          <span class="placeholder-tag">To fill in</span>
-          <p>Add outcomes or metrics if you have them — adoption, feedback, what it replaced. If there aren't hard numbers, describe the qualitative impact instead.</p>
+        <h3>1. Side Menu Navigation</h3>
+        <ul>
+          <li>Replaced top menu with a vertical side menu to reduce clutter and
+            establish clear hierarchy.</li>
+          <li>Allowed more space for dashboards and summary insights.</li>
+        </ul>
+        <div class="placeholder-image">
+          <span>Redesigned side menu</span>
         </div>
 
+        <h3>2. Overview Section</h3>
+        <ul>
+          <li>Added a concise overview highlighting the most important metrics: total
+            population, hazard activity, and prep check engagement.</li>
+          <li>Brought key insights to the forefront for EMs to consume at a glance.</li>
+        </ul>
+        <div class="placeholder-image">
+          <span>Overview section screenshot</span>
+        </div>
+
+        <h3>3. Page-Wide Search Integration</h3>
+        <ul>
+          <li>Moved search from individual components to a platform-wide search on
+            the main page.</li>
+          <li>Improved workflow efficiency and clarity.</li>
+        </ul>
+        <div class="placeholder-image">
+          <span>Integrated search example</span>
+        </div>
+
+        <h3>4. Residents vs Visitors Toggle</h3>
+        <p><em>Added after the pivot.</em></p>
+        <ul>
+          <li>Positioned on the main page after realizing EMs needed to differentiate
+            populations for more accurate insights.</li>
+          <li>Enhanced outreach strategy decisions based on population type.</li>
+        </ul>
+        <div class="placeholder-image">
+          <span>Residents vs visitors toggle screenshot</span>
+        </div>
+
+        <h3>5. Best Practice Overrides Familiarity</h3>
+        <p>The original idea to tie search to each graph (inspired by other
+          platforms) was reconsidered. Page-wide search provided faster, more
+          consistent results.</p>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <span class="section-index">05 — Impact</span>
+      <h2 class="case-section-title">What it changed</h2>
+      <div class="case-section-body">
+        <ul>
+          <li>Critical insights are now surfaced upfront, reducing time to interpret
+            data.</li>
+          <li>Navigation and hierarchy improvements allow EMs to focus on
+            decision-making.</li>
+          <li>Page-wide search and residents vs visitors toggle improve accuracy and
+            actionable insight.</li>
+          <li>The platform is scalable for future features without overcomplicating
+            the interface.</li>
+        </ul>
+        <div class="placeholder-image">
+          <span>Full dashboard screenshot highlighting the redesigned interface</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <span class="section-index">06 — Conclusion</span>
+      <h2 class="case-section-title">Conclusion</h2>
+      <div class="case-section-body">
+        <p>ResiliencePoint illustrates the power of iterative, user-centered design.
+          By observing EM workflows, identifying pain points, and pivoting to a
+          cleaner, more efficient interface, we delivered a platform that balances
+          rich data with clarity. The redesign laid the foundation for EMs to make
+          faster, better-informed decisions, while keeping room for ongoing
+          evolution.</p>
       </div>
     </section>
   </main>

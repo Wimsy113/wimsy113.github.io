@@ -955,6 +955,12 @@ body::before {
   margin: 0 0 1.2em;
 }
 .case-section-body li { margin-bottom: 0.4em; }
+.case-section-body h3 {
+  font-size: 1rem;
+  color: var(--accent);
+  margin: 1.8em 0 0.6em;
+}
+.case-section-body h3:first-child { margin-top: 0; }
 
 /* sub-project cards on overview pages */
 .subcase-grid {
