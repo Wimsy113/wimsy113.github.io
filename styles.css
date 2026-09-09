@@ -803,3 +803,239 @@ body::before {
 @media (prefers-reduced-motion: reduce) {
   [data-reveal] { opacity: 1; }
 }
+
+/* ===========================================================
+   CASE STUDY PAGES (overview + detail)
+   =========================================================== */
+
+.breadcrumb {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1.5em 1.25em 0;
+  font-size: 0.75rem;
+  color: var(--dim);
+  letter-spacing: 0.02em;
+}
+.breadcrumb a {
+  color: var(--dim);
+  text-decoration: none;
+  border-bottom: 1px solid var(--line);
+}
+.breadcrumb a:hover, .breadcrumb a:focus-visible {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+.breadcrumb .current { color: var(--bone); }
+
+.case-hero {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2em 1.25em 4em;
+}
+.case-hero-cover {
+  aspect-ratio: 21 / 8;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  margin-bottom: 2em;
+  background: var(--panel);
+}
+.case-hero-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.case-hero-cover.case-hero-cover--text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.case-hero-cover.case-hero-cover--text span {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 5vw, 3rem);
+  text-transform: uppercase;
+  color: var(--dim);
+}
+
+.case-title {
+  font-size: clamp(2rem, 5vw, 3.4rem);
+  color: var(--bone);
+  margin-bottom: 0.3em;
+}
+
+.case-meta {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 1.5em;
+  margin: 2em 0;
+  padding: 1.5em 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+.case-meta dt {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--accent);
+  margin: 0 0 0.4em;
+}
+.case-meta dd {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--dim);
+}
+
+.case-summary {
+  max-width: 70ch;
+  font-size: 1.05rem;
+  color: var(--dim);
+}
+
+/* placeholder content blocks — visible marker for what needs real content */
+.placeholder-block {
+  border: 1px dashed var(--line);
+  padding: 1.5em;
+  margin: 1.5em 0;
+}
+.placeholder-tag {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  padding: 0.2em 0.6em;
+  margin-bottom: 0.8em;
+}
+.placeholder-block p {
+  color: var(--dim);
+  font-style: italic;
+  margin: 0;
+}
+
+.placeholder-image {
+  aspect-ratio: 16 / 9;
+  border: 1px dashed var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 1.5em;
+  margin: 1.5em 0;
+  background: var(--panel);
+}
+.placeholder-image span {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--dim);
+  font-style: italic;
+  max-width: 32ch;
+}
+
+/* case body sections */
+.case-section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 4em 1.25em;
+  border-top: 1px solid var(--line);
+}
+.case-section .section-index { display: block; margin-bottom: 0.6em; }
+.case-section-title {
+  font-size: clamp(1.5rem, 3.2vw, 2.1rem);
+  color: var(--bone);
+  margin-bottom: 0.8em;
+}
+.case-section-body {
+  max-width: 70ch;
+}
+.case-section-body p { color: var(--dim); }
+.case-section-body ul {
+  color: var(--dim);
+  padding-left: 1.2em;
+  margin: 0 0 1.2em;
+}
+.case-section-body li { margin-bottom: 0.4em; }
+
+/* sub-project cards on overview pages */
+.subcase-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+  margin-top: 2em;
+}
+.subcase-card {
+  background: var(--black);
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: inherit;
+  transition: background 0.15s ease;
+}
+.subcase-card:hover, .subcase-card:focus-visible {
+  background: var(--panel);
+}
+.subcase-card-body {
+  padding: 1.75em;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+}
+.subcase-card-body h3 {
+  font-size: 1.15rem;
+  margin: 0;
+  color: var(--bone);
+}
+.subcase-card-body p {
+  color: var(--dim);
+  font-size: 0.85rem;
+  margin: 0;
+  flex: 1;
+}
+.subcase-card-link {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--accent);
+}
+
+/* prev/next case navigation */
+.case-nav {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 3em 1.25em 5em;
+  display: flex;
+  justify-content: space-between;
+  gap: 2em;
+  flex-wrap: wrap;
+}
+.case-nav a {
+  text-decoration: none;
+  max-width: 320px;
+}
+.case-nav-label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--dim);
+  margin-bottom: 0.4em;
+}
+.case-nav-title {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  text-transform: uppercase;
+  color: var(--bone);
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 4px;
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+.case-nav a:hover .case-nav-title, .case-nav a:focus-visible .case-nav-title {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+.case-nav-next { text-align: right; margin-left: auto; }
