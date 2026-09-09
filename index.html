@@ -50,48 +50,53 @@
 
     <!-- ============ HERO ============ -->
     <section class="hero">
-      <span class="hero-mark duotone" aria-hidden="true">
-        <img src="images/hero.png" alt="">
-      </span>
-      <p class="hero-kicker">UX Designer &amp; Developer — selected work, 2014–present</p>
-      <h1 class="hero-name">Krystyna<br>Ewing</h1>
-      <p class="hero-role">Product Design / Front-End Development / Illustration</p>
-      <p class="hero-statement">
-        Ten years designing and building software for people having a hard day —
-        water crises, financial abuse, disaster prep, career pivots. Still allergic
-        to a boring interface.
-      </p>
-      <div class="hero-links">
-        <a href="#work" class="text-link">Work ↓</a>
-        <a href="#contact" class="text-link">Contact ↗</a>
+      <div class="hero-window win">
+        <div class="win-bar">
+          <span class="win-dots"><span class="win-dot"></span><span class="win-dot"></span><span class="win-dot"></span></span>
+          <span class="win-title">krystyna@ewing — zsh</span>
+        </div>
+        <div class="hero-content">
+          <span class="hero-mark duotone" aria-hidden="true">
+            <img src="images/hero.png" alt="">
+          </span>
+          <p class="hero-kicker">$ whoami</p>
+          <h1 class="hero-name">Krystyna<br>Ewing<span class="cursor" aria-hidden="true">_</span></h1>
+          <p class="hero-role">Product Design / Front-End Development / Illustration</p>
+          <p class="hero-statement">
+            Ten years designing and building software for people having a hard day —
+            water crises, financial abuse, disaster prep, career pivots. Still allergic
+            to a boring interface.
+          </p>
+          <div class="hero-links">
+            <a href="#work" class="text-link">Work ↓</a>
+            <a href="#contact" class="text-link">Contact ↗</a>
+          </div>
+        </div>
       </div>
     </section>
 
     <!-- ============ MARQUEE ============ -->
     <div class="marquee" aria-hidden="true">
       <div class="marquee-track">
-        <span>UX RESEARCH</span><span class="sep">/</span>
-        <span>FRONT-END DEVELOPMENT</span><span class="sep">/</span>
-        <span>DESIGN SYSTEMS</span><span class="sep">/</span>
-        <span>ACCESSIBILITY</span><span class="sep">/</span>
-        <span>ILLUSTRATION</span><span class="sep">/</span>
-        <span>PROTOTYPING</span><span class="sep">/</span>
-        <span>UX RESEARCH</span><span class="sep">/</span>
-        <span>FRONT-END DEVELOPMENT</span><span class="sep">/</span>
-        <span>DESIGN SYSTEMS</span><span class="sep">/</span>
-        <span>ACCESSIBILITY</span><span class="sep">/</span>
-        <span>ILLUSTRATION</span><span class="sep">/</span>
-        <span>PROTOTYPING</span><span class="sep">/</span>
+        <span>--ux-research</span><span class="sep">|</span>
+        <span>--front-end-dev</span><span class="sep">|</span>
+        <span>--design-systems</span><span class="sep">|</span>
+        <span>--accessibility</span><span class="sep">|</span>
+        <span>--illustration</span><span class="sep">|</span>
+        <span>--prototyping</span><span class="sep">|</span>
+        <span>--ux-research</span><span class="sep">|</span>
+        <span>--front-end-dev</span><span class="sep">|</span>
+        <span>--design-systems</span><span class="sep">|</span>
+        <span>--accessibility</span><span class="sep">|</span>
+        <span>--illustration</span><span class="sep">|</span>
+        <span>--prototyping</span><span class="sep">|</span>
       </div>
     </div>
 
     <!-- ============ ABOUT ============ -->
     <section class="about" id="about">
-      <div class="about-photo">
-        <img src="images/me.png" alt="Portrait of Krystyna Ewing">
-      </div>
       <div class="about-copy">
-        <span class="section-index">01 — About</span>
+        <span class="section-index">~/about</span>
         <h2 class="section-title">Ten years in,<br>both sides of<br>the screen.</h2>
         <p>
           I've worked as a software developer and as a UX designer — long enough to
@@ -115,7 +120,7 @@
 
     <!-- ============ CAPABILITIES ============ -->
     <section class="skills" id="skills">
-      <span class="section-index center">02 — Capabilities</span>
+      <span class="section-index center">~/capabilities</span>
       <h2 class="section-title center">What I actually do</h2>
 
       <div class="skills-grid">
@@ -154,12 +159,16 @@
 
     <!-- ============ WORK ============ -->
     <section class="work" id="work">
-      <span class="section-index center">03 — Selected Work</span>
+      <span class="section-index center">~/work</span>
       <h2 class="section-title center">Things I've shipped</h2>
 
       <div class="work-grid">
 
         <article class="case-card">
+          <div class="win-bar">
+            <span class="win-dots"><span class="win-dot"></span><span class="win-dot"></span><span class="win-dot"></span></span>
+            <span class="win-title">welldone.fig</span>
+          </div>
           <div class="case-card-cover case-card-cover--text">
             <span>WellDone</span>
           </div>
@@ -168,12 +177,16 @@
             <h3>WellDone</h3>
             <p>Real-time visibility into water well function across developing
               regions — so a broken pump gets fixed in days, not months.</p>
-            <!-- TODO: replace with real case study / Figma link -->
-            <a href="#" class="text-link">View in Figma →</a>
+            <!-- TODO: replace with real case study link -->
+            <a href="#" class="text-link">View Case Study →</a>
           </div>
         </article>
 
         <article class="case-card">
+          <div class="win-bar">
+            <span class="win-dots"><span class="win-dot"></span><span class="win-dot"></span><span class="win-dot"></span></span>
+            <span class="win-title">hazadapt.fig</span>
+          </div>
           <div class="case-card-cover">
             <img src="images/hazadapt_album.png" alt="hazadapt logo">
           </div>
@@ -182,12 +195,16 @@
             <h3>hazadapt</h3>
             <p>A library of hazard guides and prep activities built to help people
               build resilience before a crisis hits — and recover faster after.</p>
-            <!-- TODO: replace with real case study / Figma link -->
-            <a href="#" class="text-link">View in Figma →</a>
+            <!-- TODO: replace with real case study link -->
+            <a href="#" class="text-link">View Case Study →</a>
           </div>
         </article>
 
         <article class="case-card">
+          <div class="win-bar">
+            <span class="win-dots"><span class="win-dot"></span><span class="win-dot"></span><span class="win-dot"></span></span>
+            <span class="win-title">true-link.fig</span>
+          </div>
           <div class="case-card-cover">
             <img src="images/True_Link_album.png" alt="True Link logo">
           </div>
@@ -196,12 +213,16 @@
             <h3>True Link</h3>
             <p>Financial tools built to protect the safety and independence of
               aging and disabled adults — without stripping away their autonomy.</p>
-            <!-- TODO: replace with real case study / Figma link -->
-            <a href="#" class="text-link">View in Figma →</a>
+            <!-- TODO: replace with real case study link -->
+            <a href="#" class="text-link">View Case Study →</a>
           </div>
         </article>
 
         <article class="case-card">
+          <div class="win-bar">
+            <span class="win-dots"><span class="win-dot"></span><span class="win-dot"></span><span class="win-dot"></span></span>
+            <span class="win-title">operation-code.site</span>
+          </div>
           <div class="case-card-cover case-card-cover--text">
             <span>Operation Code</span>
           </div>
@@ -211,8 +232,8 @@
             <p>Connecting veterans to tech careers — pairing education benefits
               with mentorship and a community that's already been where they're
               headed.</p>
-            <!-- TODO: replace with real website link -->
-            <a href="#" class="text-link">View Website →</a>
+            <!-- TODO: replace with real case study link -->
+            <a href="#" class="text-link">View Case Study →</a>
           </div>
         </article>
 
@@ -232,11 +253,15 @@
 
     <!-- ============ INDEPENDENT WORK ============ -->
     <section class="side-quests" id="side-quests">
-      <span class="section-index center">04 — Independent Work</span>
+      <span class="section-index center">~/independent</span>
       <h2 class="section-title center">Personal projects, no client required</h2>
 
       <div class="quest-grid">
         <article class="quest-card">
+          <div class="win-bar">
+            <span class="win-dots"><span class="win-dot"></span><span class="win-dot"></span><span class="win-dot"></span></span>
+            <span class="win-title">somnus.psd</span>
+          </div>
           <img src="images/somnus_portfolio_cover.png" alt="Somnus project cover">
           <div class="quest-card-body">
             <h3>Somnus</h3>
@@ -245,6 +270,10 @@
           </div>
         </article>
         <article class="quest-card">
+          <div class="win-bar">
+            <span class="win-dots"><span class="win-dot"></span><span class="win-dot"></span><span class="win-dot"></span></span>
+            <span class="win-title">gormonjee.ai</span>
+          </div>
           <img src="images/gormonjee_portfolio_cover.png" alt="GorMonjee project cover">
           <div class="quest-card-body">
             <h3>GorMonjee</h3>
@@ -253,6 +282,10 @@
           </div>
         </article>
         <article class="quest-card">
+          <div class="win-bar">
+            <span class="win-dots"><span class="win-dot"></span><span class="win-dot"></span><span class="win-dot"></span></span>
+            <span class="win-title">zinc-coop.indd</span>
+          </div>
           <img src="images/Zinc_Co-Op_Cover.png" alt="Zinc Co-Op project cover">
           <div class="quest-card-body">
             <h3>Zinc Co-Op</h3>
@@ -269,7 +302,7 @@
         <img src="images/Artwork.png" alt="Original digital illustration by Krystyna Ewing">
       </div>
       <div class="art-copy">
-        <span class="section-index">05 — Where the color lives</span>
+        <span class="section-index">~/art</span>
         <h2 class="section-title">Client work<br>stays disciplined.<br>This doesn't.</h2>
         <p>
           Original character and illustration work, done on my own time and my
@@ -284,7 +317,7 @@
     <!-- ============ ELSEWHERE ============ -->
     <section class="off-clock">
       <div class="off-clock-copy">
-        <span class="section-index">06 — Elsewhere</span>
+        <span class="section-index">~/elsewhere</span>
         <h2 class="section-title">Off the clock</h2>
         <ul class="zine-list">
           <li>Illustration and character design</li>
@@ -301,7 +334,7 @@
 
     <!-- ============ CONTACT ============ -->
     <section class="contact" id="contact">
-      <span class="section-index center">07 — Get in touch</span>
+      <span class="section-index center">~/contact</span>
       <h2 class="contact-title">Let's talk.</h2>
       <!-- TODO: swap in preferred contact email -->
       <a href="mailto:hello@krystynaewing.com" class="contact-email">hello@krystynaewing.com</a>
@@ -316,8 +349,9 @@
   </main>
 
   <footer class="site-footer">
-    <p>&copy; <span id="year"></span> Krystyna Ewing.</p>
-    <a href="#top" class="back-to-top">Back to top ↑</a>
+    <p class="footer-path">~/krystyna-ewing — &copy; <span id="year"></span></p>
+    <p class="footer-clock" aria-hidden="true"><span id="clock"></span> local</p>
+    <a href="#top" class="back-to-top">[ ^ top ]</a>
   </footer>
 
   <script src="js/main.js"></script>

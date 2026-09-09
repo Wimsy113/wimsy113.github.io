@@ -197,6 +197,50 @@ body::before {
   margin: 0 0 0.8em;
 }
 
+/* ---------- window chrome (desktop/terminal motif) ---------- */
+.win {
+  background: var(--panel);
+  border: 1px solid var(--line);
+}
+.win-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.6em;
+  padding: 0.55em 0.9em;
+  border-bottom: 1px solid var(--line);
+  background: var(--panel);
+}
+.win-dots {
+  display: flex;
+  gap: 5px;
+  flex: none;
+}
+.win-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--line);
+}
+.win-title {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--dim);
+  letter-spacing: 0.03em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cursor {
+  display: inline-block;
+  color: var(--accent);
+  animation: blink 1s step-end infinite;
+}
+@keyframes blink { 50% { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) {
+  .cursor { animation: none; }
+}
+
 /* ===========================================================
    HEADER / NAV
    =========================================================== */
@@ -278,6 +322,10 @@ body::before {
   letter-spacing: 0.08em;
   position: relative;
 }
+.primary-nav a:not(.nav-cta)::before {
+  content: "~/";
+  color: var(--dim);
+}
 .primary-nav a:not(.nav-cta)::after {
   content: "";
   position: absolute;
@@ -320,22 +368,25 @@ body::before {
    HERO
    =========================================================== */
 .hero {
-  position: relative;
-  min-height: 92vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 7em 1.25em 4em;
+  padding: 3em 1.25em 4em;
   max-width: 1200px;
   margin: 0 auto;
 }
 
+.hero-window {
+  position: relative;
+}
+
+.hero-content {
+  padding: 3em 2.5em 3.5em;
+}
+
 .hero-mark {
   position: absolute;
-  top: 6em;
-  right: 1.25em;
-  width: 130px;
-  height: 130px;
+  top: 2.2em;
+  right: 2.2em;
+  width: 110px;
+  height: 110px;
   opacity: 0.9;
 }
 
@@ -376,7 +427,8 @@ body::before {
 }
 
 @media (max-width: 700px) {
-  .hero-mark { width: 84px; height: 84px; top: 5.5em; right: 1em; opacity: 0.55; }
+  .hero-content { padding: 2.5em 1.5em 2.5em; }
+  .hero-mark { width: 64px; height: 64px; top: 1.4em; right: 1.4em; opacity: 0.55; }
   .hero-name { text-shadow: 4px 0 0 var(--accent); }
 }
 
@@ -422,29 +474,6 @@ body::before {
   max-width: 1200px;
   margin: 0 auto;
   padding: 6em 1.25em;
-  display: grid;
-  grid-template-columns: minmax(220px, 300px) 1fr;
-  gap: 4em;
-  align-items: start;
-}
-
-.about-photo {
-  position: relative;
-}
-.about-photo::before {
-  content: "";
-  position: absolute;
-  top: 14px;
-  left: -14px;
-  right: 14px;
-  bottom: -14px;
-  border: 1px solid var(--accent);
-  z-index: -1;
-}
-.about-photo img {
-  width: 100%;
-  border: 1px solid var(--line);
-  filter: contrast(1.05);
 }
 
 .about-copy p { color: var(--dim); max-width: 60ch; }
@@ -466,10 +495,6 @@ body::before {
   font-weight: 700;
 }
 
-@media (max-width: 800px) {
-  .about { grid-template-columns: 1fr; }
-  .about-photo { max-width: 260px; }
-}
 
 /* ===========================================================
    CAPABILITIES
@@ -519,10 +544,13 @@ body::before {
   max-width: 1200px;
   margin: 3em auto 0;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(2, 1fr);
   gap: 1px;
   background: var(--line);
   border: 1px solid var(--line);
+}
+@media (max-width: 720px) {
+  .work-grid { grid-template-columns: 1fr; }
 }
 
 .case-card {
@@ -749,13 +777,19 @@ body::before {
 .site-footer {
   display: flex;
   flex-wrap: wrap;
-  gap: 1em;
+  gap: 1em 2em;
   justify-content: space-between;
   align-items: center;
-  padding: 1.5em 1.25em;
-  font-size: 0.75rem;
+  padding: 0.9em 1.25em;
+  font-size: 0.72rem;
   color: var(--dim);
+  background: var(--panel);
   border-top: 1px solid var(--line);
+}
+.site-footer p { margin: 0; }
+.footer-clock {
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.03em;
 }
 .back-to-top { text-decoration: none; color: var(--dim); }
 .back-to-top:hover, .back-to-top:focus-visible { color: var(--accent); }

@@ -27,7 +27,7 @@
   // Reveal-on-scroll (plain fade, no motion tricks)
   // ---------------------------------------------------------------
   var revealTargets = document.querySelectorAll(
-    '.case-card, .quest-card, .skill-group, .about-photo, .about-copy, .art-feature, .art-copy, .off-clock-copy, .off-clock-photo'
+    '.case-card, .quest-card, .skill-group, .about-copy, .art-feature, .art-copy, .off-clock-copy, .off-clock-photo'
   );
 
   revealTargets.forEach(function (el) {
@@ -62,5 +62,20 @@
   var yearEl = document.getElementById('year');
   if (yearEl) {
     yearEl.textContent = new Date().getFullYear();
+  }
+
+  // ---------------------------------------------------------------
+  // Footer clock (local time, status-bar style)
+  // ---------------------------------------------------------------
+  var clockEl = document.getElementById('clock');
+  if (clockEl) {
+    var updateClock = function () {
+      var now = new Date();
+      var hh = String(now.getHours()).padStart(2, '0');
+      var mm = String(now.getMinutes()).padStart(2, '0');
+      clockEl.textContent = hh + ':' + mm;
+    };
+    updateClock();
+    setInterval(updateClock, 15000);
   }
 })();
