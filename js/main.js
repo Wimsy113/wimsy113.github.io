@@ -24,44 +24,7 @@
   }
 
   // ---------------------------------------------------------------
-  // Typing effect in the hero subhead
-  // ---------------------------------------------------------------
-  var typedTarget = document.getElementById('typedTarget');
-  var phrases = ['accessible design.', 'clean code.', 'loud color.', 'punk rock.'];
-
-  if (typedTarget && !reduceMotion) {
-    var phraseIndex = 0;
-    var charIndex = 0;
-    var deleting = false;
-
-    function tick() {
-      var current = phrases[phraseIndex];
-
-      if (!deleting) {
-        charIndex++;
-        typedTarget.textContent = current.slice(0, charIndex);
-        if (charIndex === current.length) {
-          deleting = true;
-          setTimeout(tick, 1400);
-          return;
-        }
-      } else {
-        charIndex--;
-        typedTarget.textContent = current.slice(0, charIndex);
-        if (charIndex === 0) {
-          deleting = false;
-          phraseIndex = (phraseIndex + 1) % phrases.length;
-        }
-      }
-
-      setTimeout(tick, deleting ? 45 : 90);
-    }
-
-    tick();
-  }
-
-  // ---------------------------------------------------------------
-  // Reveal-on-scroll
+  // Reveal-on-scroll (plain fade, no motion tricks)
   // ---------------------------------------------------------------
   var revealTargets = document.querySelectorAll(
     '.case-card, .quest-card, .skill-group, .about-photo, .about-copy, .art-feature, .art-copy, .off-clock-copy, .off-clock-photo'
@@ -81,7 +44,7 @@
           }
         });
       },
-      { threshold: 0.15 }
+      { threshold: 0.1, rootMargin: '0px 0px -5% 0px' }
     );
 
     revealTargets.forEach(function (el) {
