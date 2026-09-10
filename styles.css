@@ -556,27 +556,45 @@ body::before {
   background: var(--black);
   display: flex;
   flex-direction: column;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-@media (min-width: 800px) {
-  .case-card { flex-direction: row; flex-wrap: wrap; }
+.case-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+  position: relative;
+  z-index: 2;
 }
 
 .case-card-cover {
   position: relative;
-  aspect-ratio: 16 / 8;
+  aspect-ratio: 16 / 9;
   overflow: hidden;
   background: var(--panel);
+}
+@media (min-width: 700px) {
+  .case-card-cover, .case-card-cover--text { aspect-ratio: 21 / 9; }
 }
 .case-card-cover img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   filter: grayscale(1) contrast(1.05);
-  transition: filter 0.35s ease;
+  transition: filter 0.5s ease, transform 0.5s ease;
 }
 .case-card:hover .case-card-cover img {
   filter: grayscale(0) contrast(1.05);
+  transform: scale(1.06);
 }
+.case-card-cover::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(115deg, transparent 40%, rgba(255,255,255,0.12) 50%, transparent 60%);
+  transform: translateX(-120%);
+  transition: transform 0.7s ease;
+  pointer-events: none;
+}
+.case-card:hover .case-card-cover::after { transform: translateX(120%); }
 
 .case-card-cover--text {
   display: flex;
@@ -586,31 +604,23 @@ body::before {
 }
 .case-card-cover--text span {
   font-family: var(--font-display);
-  font-size: 2.4rem;
+  font-size: clamp(2.2rem, 6vw, 3.4rem);
   text-transform: uppercase;
   color: var(--dim);
   text-align: center;
   padding: 0 0.5em;
-  transition: color 0.2s ease;
+  transition: color 0.3s ease, transform 0.3s ease;
 }
-.case-card:hover .case-card-cover--text span { color: var(--accent); }
-
-@media (min-width: 800px) {
-  .case-card-cover, .case-card-cover--text {
-    flex: 0 0 46%;
-    aspect-ratio: auto;
-    border-bottom: none;
-    border-right: 1px solid var(--line);
-  }
+.case-card:hover .case-card-cover--text span {
+  color: var(--accent);
+  transform: scale(1.04);
 }
 
 .case-card-body {
-  padding: 2.5em;
+  padding: 2em 2.5em;
   display: flex;
   flex-direction: column;
   gap: 0.5em;
-  flex: 1;
-  justify-content: center;
 }
 .case-card-body h3 {
   font-size: 2rem;
@@ -820,6 +830,30 @@ body::before {
 [data-reveal].is-visible { opacity: 1; }
 @media (prefers-reduced-motion: reduce) {
   [data-reveal] { opacity: 1; }
+}
+
+/* punchier entrance for work-grid / quest-grid cards specifically */
+.work-grid [data-reveal], .quest-grid [data-reveal] {
+  transform: translateY(36px) scale(0.98);
+  transition: opacity 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.work-grid [data-reveal].is-visible, .quest-grid [data-reveal].is-visible {
+  transform: translateY(0) scale(1);
+}
+@media (prefers-reduced-motion: reduce) {
+  .work-grid [data-reveal], .quest-grid [data-reveal] { transform: none; }
+}
+
+/* ambient life: slow pulse on window dots */
+@keyframes dot-pulse {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+.win-dots .win-dot:nth-child(1) { animation: dot-pulse 3.2s ease-in-out infinite; }
+.win-dots .win-dot:nth-child(2) { animation: dot-pulse 3.2s ease-in-out infinite 0.4s; }
+.win-dots .win-dot:nth-child(3) { animation: dot-pulse 3.2s ease-in-out infinite 0.8s; }
+@media (prefers-reduced-motion: reduce) {
+  .win-dots .win-dot { animation: none; }
 }
 
 /* ===========================================================

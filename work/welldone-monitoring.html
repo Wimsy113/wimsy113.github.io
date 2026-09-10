@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WellDone — Krystyna Ewing</title>
+  <meta name="description" content="WellDone — designing a better way to monitor and maintain water infrastructure.">
+
+  <link rel="icon" href="../images/favicon.ico">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="../index.html" aria-label="Krystyna Ewing — home">
+        <span class="brand-mascot duotone" aria-hidden="true">
+          <img src="../images/hero.png" alt="">
+        </span>
+        <span class="brand-name">Krystyna Ewing</span>
+      </a>
+
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="primaryNav">
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+        <span class="sr-only">Menu</span>
+      </button>
+
+      <nav class="primary-nav" id="primaryNav" aria-label="Primary">
+        <ul>
+          <li><a href="../index.html#work">Work</a></li>
+          <li><a href="../index.html#side-quests">Independent</a></li>
+          <li><a href="../index.html#about">About</a></li>
+          <li><a href="../index.html#art">Art</a></li>
+          <li><a href="../index.html#contact" class="nav-cta">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <p class="breadcrumb"><a href="../index.html">~</a> / <a href="welldone.html">work/welldone</a> / <span class="current">monitoring</span></p>
+
+  <main id="main">
+    <div class="case-hero">
+      <div class="win">
+        <div class="win-bar">
+          <span class="win-dots"><span class="win-dot"></span><span class="win-dot"></span><span class="win-dot"></span></span>
+          <span class="win-title">welldone-monitoring.fig</span>
+        </div>
+        <div class="case-hero-cover case-hero-cover--text">
+          <span>WellDone</span>
+        </div>
+      </div>
+
+      <p class="tag-row">WellDone · UX Research · Information Architecture · Interaction Design</p>
+      <h1 class="case-title">Designing a Better Way to Monitor and Maintain Water Infrastructure</h1>
+      <p class="case-summary">Redesigning how a nonprofit monitors remote water systems — from a dense table to scannable, status-first cards built for unreliable connectivity.</p>
+
+      <dl class="case-meta">
+        <div><dt>Role</dt><dd>UX Designer</dd></div>
+        <div><dt>Project Type</dt><dd>Client Project / Nonprofit</dd></div>
+        <div><dt>Focus</dt><dd>UX Research, Information Architecture, Interaction Design, Prototyping</dd></div>
+      </dl>
+    </div>
+
+    <section class="case-section">
+      <span class="section-index">01 — Overview</span>
+      <h2 class="case-section-title">Overview</h2>
+      <div class="case-section-body">
+        <p>WellDone is a nonprofit organization focused on building and maintaining
+          sustainable water infrastructure for communities that need reliable access
+          to safe drinking water.</p>
+        <p>Providing the infrastructure itself is only part of that challenge. Once a
+          well or water system is installed, someone still needs to know whether it
+          is functioning correctly, when it requires maintenance, and what is
+          happening across multiple locations. That becomes considerably more
+          difficult when those locations are remote and internet connectivity is
+          inconsistent.</p>
+        <p>Our project focused on improving the experience of monitoring wells and
+          coordinating maintenance so that the people responsible for these systems
+          could understand what needed attention without digging through an
+          overwhelming amount of information.</p>
+        <div class="placeholder-image"><span>WellDone project overview / hero image</span></div>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <span class="section-index">02 — The Problem</span>
+      <h2 class="case-section-title">Simple questions, buried in a dense table</h2>
+      <div class="case-section-body">
+        <p>WellDone needed to communicate information about water systems located
+          across multiple communities. The existing experience presented much of
+          that information through a dense, table-based interface. While tables can
+          be useful when someone needs to compare large amounts of data, this
+          implementation made it difficult to quickly understand the status of an
+          individual well.</p>
+        <p>Users needed to answer much simpler questions:</p>
+        <ul>
+          <li>Is this well working?</li>
+          <li>Does something need attention?</li>
+          <li>What happened?</li>
+          <li>What needs to happen next?</li>
+        </ul>
+        <p>Those answers were buried inside an interface that required users to
+          interpret multiple pieces of information before understanding the actual
+          condition of a system. That was especially problematic because the
+          product wasn't being designed for an environment where we could assume
+          users would always have fast, reliable internet access.</p>
+        <p>The interface needed to make important information easy to identify and
+          useful under less-than-ideal conditions.</p>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <span class="section-index">03 — Understanding the Context</span>
+      <h2 class="case-section-title">Not a dashboard for a desk</h2>
+      <div class="case-section-body">
+        <p>One of the biggest considerations throughout the project was
+          understanding that we weren't designing a traditional dashboard for
+          people sitting behind desks with reliable broadband connections. The
+          product supported water infrastructure located in remote communities.
+          That changed the way we thought about the experience.</p>
+        <p>Connectivity couldn't be treated as a guarantee. Information needed to be
+          easy to scan. Important statuses needed to be obvious. The interface
+          couldn't depend on users repeatedly navigating through several screens
+          just to understand what was happening.</p>
+        <p>We had to think about what information mattered most when someone
+          checked a well and how quickly we could help them understand its
+          condition.</p>
+        <div class="placeholder-image"><span>Research notes / project requirements / early exploration</span></div>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <span class="section-index">04 — From Tables to Cards</span>
+      <h2 class="case-section-title">Access isn't the same thing as clarity</h2>
+      <div class="case-section-body">
+        <p>The existing table gave users access to information, but access wasn't
+          the same thing as clarity. When everything is presented with similar
+          visual weight, the user has to do the work of figuring out what matters.
+          We wanted the interface to do more of that work for them.</p>
+        <p>Instead of asking users to read across rows of information and interpret
+          the data themselves, we explored ways to organize the experience around
+          the individual water systems being monitored. That led us toward a more
+          visual, card-based approach.</p>
+        <div class="placeholder-image"><span>Existing table-based interface</span></div>
+        <p>Moving from a dense table to cards was one of the most important changes
+          in the project. Each card could represent a well or monitored location as
+          its own object rather than simply another row in a database. That gave us
+          space to establish a clearer hierarchy — the most important information
+          could appear first, while secondary details could remain available
+          without competing for attention.</p>
+        <p>A user scanning the page could quickly identify a well, understand its
+          current condition, and determine whether something required attention.
+          The goal wasn't to remove information. It was to make the information
+          easier to process.</p>
+        <div class="placeholder-image"><span>Early card concepts / wireframes</span></div>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <span class="section-index">05 — Designing Around Status</span>
+      <h2 class="case-section-title">A hierarchy built around what matters first</h2>
+      <div class="case-section-body">
+        <p>Once the information was separated into individual cards, we could think
+          more intentionally about status. Monitoring data is only useful when
+          someone can understand what it means. Rather than forcing users to
+          interpret raw information before determining whether something was
+          wrong, the design placed greater emphasis on communicating the state of
+          the system itself.</p>
+        <p>This allowed someone checking several locations to scan the interface
+          and focus their attention on the wells that needed it. The hierarchy
+          became:</p>
+        <ul>
+          <li>What am I looking at?</li>
+          <li>What is its current status?</li>
+          <li>Does it need attention?</li>
+          <li>What information do I need to understand the problem?</li>
+        </ul>
+        <p>That hierarchy informed the way information was organized throughout the
+          design.</p>
+        <div class="placeholder-image"><span>Well card showing status hierarchy</span></div>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <span class="section-index">06 — Supporting Maintenance</span>
+      <h2 class="case-section-title">Connecting monitoring, alerts, and action</h2>
+      <div class="case-section-body">
+        <p>Monitoring a well doesn't accomplish much if the information can't lead
+          to action. Maintenance therefore became an important part of how we
+          thought about the experience. The product needed to help teams understand
+          when something required attention and support the work that happened
+          after a problem was identified.</p>
+        <p>Instead of treating monitoring, alerts, and maintenance as completely
+          separate pieces of information, the experience needed to connect them. A
+          person should be able to recognize that something was wrong, understand
+          the available information about the issue, and determine what needed to
+          happen next. This was especially important when coordinating work across
+          multiple remote locations.</p>
+        <div class="placeholder-image"><span>Maintenance workflow / task interface</span></div>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <span class="section-index">07 — Designing for Limited Connectivity</span>
+      <h2 class="case-section-title">Low connectivity wasn't an edge case</h2>
+      <div class="case-section-body">
+        <p>Low connectivity wasn't an edge case for this project. It was part of
+          the environment we were designing for. That meant we couldn't build the
+          experience around the assumption that users could constantly load new
+          information or move through complicated navigation patterns.</p>
+        <p>We prioritized making important information visible and understandable
+          with as little friction as possible. That influenced decisions around:</p>
+        <ul>
+          <li>Reducing unnecessary navigation</li>
+          <li>Creating a strong information hierarchy</li>
+          <li>Making system status immediately visible</li>
+          <li>Keeping individual locations easy to identify</li>
+          <li>Avoiding unnecessary complexity</li>
+          <li>Considering how the experience would behave when connectivity was
+            unreliable</li>
+        </ul>
+        <p>The challenge wasn't simply designing a monitoring dashboard. It was
+          designing one that still made sense in the environments where the work
+          was actually happening.</p>
+        <div class="placeholder-image"><span>Mobile or low-connectivity design example</span></div>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <span class="section-index">08 — Monitoring and Communication</span>
+      <h2 class="case-section-title">Making sense of a problem someone else has to solve</h2>
+      <div class="case-section-body">
+        <p>Another important part of the problem was communication. When
+          infrastructure exists across remote locations, the information
+          surrounding a maintenance issue may need to move between multiple
+          people. Someone may identify the problem, while someone else is
+          responsible for resolving it.</p>
+        <p>The experience therefore needed to communicate enough context for
+          another person to understand what was happening without having to
+          reconstruct the situation themselves. Clear statuses, maintenance
+          information, and reporting all contributed to creating a shared
+          understanding of the system.</p>
+        <div class="placeholder-image"><span>Reporting / communication flow</span></div>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <span class="section-index">09 — The Final Direction</span>
+      <h2 class="case-section-title">Designed around what people are responsible for</h2>
+      <div class="case-section-body">
+        <p>The resulting direction moved away from treating the experience
+          primarily as a collection of data. Instead, we designed around the
+          things users were actually responsible for: the individual water systems
+          and their condition.</p>
+        <p>Cards created clearer separation between locations. Status became
+          easier to recognize. Maintenance information had greater context. And
+          the overall experience required less interpretation before a user could
+          understand what needed their attention.</p>
+        <div class="placeholder-image"><span>Final dashboard design</span></div>
+        <div class="placeholder-image"><span>Final well card component</span></div>
+        <div class="placeholder-image"><span>Maintenance or reporting screen</span></div>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <span class="section-index">10 — What I Learned</span>
+      <h2 class="case-section-title">Context matters as much as the interface</h2>
+      <div class="case-section-body">
+        <p>WellDone reinforced something that has carried into a lot of my work
+          since: context matters just as much as the interface.</p>
+        <p>It would have been easy to approach this as another dashboard redesign
+          and focus entirely on making the data look cleaner. But the people using
+          the product weren't necessarily sitting at desks with perfect internet
+          connections. They were supporting physical infrastructure spread across
+          communities where access to water mattered far more than whether a
+          dashboard looked polished.</p>
+        <p>That changed the design priorities. The most successful solution wasn't
+          the one that displayed the most information. It was the one that made
+          the right information understandable when someone actually needed it.
+          For me, that meant simplifying the experience without oversimplifying
+          the work behind it.</p>
+        <h3>Key Takeaway</h3>
+        <p>Designing for real-world constraints means understanding what happens
+          outside of the screen. For WellDone, improving the interface meant
+          looking beyond the dashboard itself and considering connectivity,
+          maintenance, communication, and the physical infrastructure the product
+          existed to support.</p>
+      </div>
+    </section>
+  </main>
+
+  <nav class="case-nav" aria-label="More case studies">
+    <a href="true-link-beneficiary-experience.html" class="case-nav-prev">
+      <span class="case-nav-label">← Previous</span>
+      <span class="case-nav-title">Beneficiary Experience</span>
+    </a>
+    <a href="hazadapt-resiliencepoint.html" class="case-nav-next">
+      <span class="case-nav-label">Next →</span>
+      <span class="case-nav-title">ResiliencePoint</span>
+    </a>
+  </nav>
+  <footer class="site-footer">
+    <p class="footer-path">~/krystyna-ewing — &copy; <span id="year"></span></p>
+    <p class="footer-clock" aria-hidden="true"><span id="clock"></span> local</p>
+    <a href="../index.html#top" class="back-to-top">[ ^ top ]</a>
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>
