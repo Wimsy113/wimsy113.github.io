@@ -204,6 +204,7 @@ body::before {
   border: 1px solid var(--line);
 }
 .win-bar {
+  width: 100%;
   display: flex;
   align-items: center;
   gap: 0.6em;
@@ -557,7 +558,7 @@ body::before {
   flex-direction: column;
 }
 @media (min-width: 800px) {
-  .case-card { flex-direction: row; }
+  .case-card { flex-direction: row; flex-wrap: wrap; }
 }
 
 .case-card-cover {
