@@ -60,11 +60,11 @@
   // Scramble-in project names on first scroll into view
   // ---------------------------------------------------------------
   var scrambleTargets = document.querySelectorAll(
-    '.case-card-body h3, .quest-card-body h3'
+    '.case-card-body h3, .case-card-body p, .quest-card-body h3, .quest-card-body p'
   );
 
   if (scrambleTargets.length && !reduceMotion) {
-    var scrambleChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ#%&$?/\\<>[]{}';
+    var scrambleChars = '!@#$%^&*()_+-=[]{}|;:,.<>/?~`\\';
 
     var randomChar = function () {
       return scrambleChars[Math.floor(Math.random() * scrambleChars.length)];
@@ -79,8 +79,8 @@
     };
 
     var scrambleReveal = function (el, finalText) {
-      var duration = 700;
-      var frameDelay = 1000 / 30;
+      var frameDelay = 45;
+      var duration = Math.min(4500, 900 + finalText.length * 18);
       var totalFrames = Math.round(duration / frameDelay);
       var frame = 0;
 
@@ -94,10 +94,14 @@
             out += randomChar();
           }
         }
+        // typewriter cursor at the current typing position
+        if (lockedCount < finalText.length) {
+          out = out.slice(0, lockedCount) + '▌' + out.slice(lockedCount + 1);
+        }
         el.textContent = out;
         frame++;
         if (frame <= totalFrames) {
-          requestAnimationFrame(tick);
+          setTimeout(function () { requestAnimationFrame(tick); }, frameDelay);
         } else {
           el.textContent = finalText;
         }
