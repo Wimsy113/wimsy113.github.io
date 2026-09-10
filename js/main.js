@@ -78,4 +78,65 @@
     updateClock();
     setInterval(updateClock, 15000);
   }
+
+  // ---------------------------------------------------------------
+  // Click-to-enlarge lightbox for case study screenshots
+  // ---------------------------------------------------------------
+  var caseImages = document.querySelectorAll('.case-image img');
+  if (caseImages.length) {
+    var lightbox = document.createElement('div');
+    lightbox.className = 'lightbox';
+    lightbox.setAttribute('role', 'dialog');
+    lightbox.setAttribute('aria-modal', 'true');
+    lightbox.setAttribute('aria-hidden', 'true');
+    lightbox.innerHTML =
+      '<button type="button" class="lightbox-close">[ Close ]</button>' +
+      '<div class="lightbox-content">' +
+      '<img src="" alt="">' +
+      '<figcaption></figcaption>' +
+      '</div>';
+    document.body.appendChild(lightbox);
+
+    var lightboxImg = lightbox.querySelector('img');
+    var lightboxCaption = lightbox.querySelector('figcaption');
+    var lightboxClose = lightbox.querySelector('.lightbox-close');
+    var lastFocused = null;
+
+    var openLightbox = function (img) {
+      lastFocused = document.activeElement;
+      lightboxImg.src = img.currentSrc || img.src;
+      lightboxImg.alt = img.alt || '';
+      var figure = img.closest('.case-image');
+      var caption = figure ? figure.querySelector('figcaption') : null;
+      lightboxCaption.textContent = caption ? caption.textContent : '';
+      lightbox.classList.add('is-open');
+      lightbox.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      lightboxClose.focus();
+    };
+
+    var closeLightbox = function () {
+      lightbox.classList.remove('is-open');
+      lightbox.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+      lightboxImg.src = '';
+      if (lastFocused) { lastFocused.focus(); }
+    };
+
+    caseImages.forEach(function (img) {
+      img.addEventListener('click', function () {
+        openLightbox(img);
+      });
+    });
+
+    lightboxClose.addEventListener('click', closeLightbox);
+    lightbox.addEventListener('click', function (e) {
+      if (e.target === lightbox) { closeLightbox(); }
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && lightbox.classList.contains('is-open')) {
+        closeLightbox();
+      }
+    });
+  }
 })();

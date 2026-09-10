@@ -983,21 +983,94 @@ body::before {
 
 /* real artifact images within a case study */
 .case-image {
-  margin: 1.5em 0;
+  max-width: 100%;
+  width: fit-content;
+  margin: 2em auto;
   border: 1px solid var(--line);
   background: var(--panel);
 }
 .case-image img {
-  width: 100%;
-  height: auto;
   display: block;
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  max-height: 520px;
+  margin: 0 auto;
+  cursor: zoom-in;
+  transition: opacity 0.2s ease;
 }
+.case-image img:hover { opacity: 0.85; }
 .case-image figcaption {
   padding: 0.6em 0.9em;
   font-family: var(--font-mono);
   font-size: 0.75rem;
   color: var(--dim);
   border-top: 1px solid var(--line);
+  text-align: center;
+}
+
+/* click-to-enlarge lightbox */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 10, 11, 0.94);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3em 1.5em;
+  z-index: 2000;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.25s ease;
+}
+.lightbox.is-open {
+  opacity: 1;
+  visibility: visible;
+}
+.lightbox-content {
+  max-width: 90vw;
+  max-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.lightbox-content img {
+  max-width: 90vw;
+  max-height: 78vh;
+  width: auto;
+  height: auto;
+  border: 1px solid var(--line);
+  display: block;
+  cursor: default;
+}
+.lightbox-content figcaption {
+  margin-top: 1em;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--dim);
+  text-align: center;
+}
+.lightbox-close {
+  position: fixed;
+  top: 1.5em;
+  right: 1.5em;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--bone);
+  background: transparent;
+  border: 1px solid var(--line);
+  padding: 0.6em 1em;
+  cursor: pointer;
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+.lightbox-close:hover, .lightbox-close:focus-visible {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+@media (prefers-reduced-motion: reduce) {
+  .lightbox { transition: none; }
 }
 
 /* case body sections */
