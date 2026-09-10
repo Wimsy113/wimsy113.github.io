@@ -1,77 +1,336 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Krystyna Ewing - Creative Technologist</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Krystyna Ewing — UX Designer &amp; Developer</title>
+  <meta name="description" content="Krystyna Ewing — UX designer and developer with 10+ years in tech, working across product design, front-end development, and illustration.">
+
+  <link rel="icon" href="images/favicon.ico">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-  <script src="https://kit.fontawesome.com/a482c5ced2.js" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="../css/layout.css">
-</head>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 
+  <link rel="stylesheet" href="styles.css">
+</head>
 <body>
-  <div class="anchor">
-    <div class="container">
-      <section>
-        <header id="header">
-          <!-- <img src="./images/site_logo.png" alt="site logo" class="logo"> -->
-          <div class="site_links">
-            <p><a href="#">About</a></p>
-            <p><a href="#">Work</a></p>
-            <p><a href="#">Blog</a></p>
-            <p><a href="#">Resume</a></p>
+
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header" id="top">
+    <div class="header-inner">
+      <a class="brand" href="#top" aria-label="Krystyna Ewing — home">
+        <span class="brand-mascot duotone" aria-hidden="true">
+          <img src="images/hero.png" alt="">
+        </span>
+        <span class="brand-name">Krystyna Ewing</span>
+      </a>
+
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="primaryNav">
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+        <span class="sr-only">Menu</span>
+      </button>
+
+      <nav class="primary-nav" id="primaryNav" aria-label="Primary">
+        <ul>
+          <li><a href="#work">Work</a></li>
+          <li><a href="#side-quests">Independent</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#art">Art</a></li>
+          <li><a href="#contact" class="nav-cta">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- ============ HERO ============ -->
+    <section class="hero">
+      <div class="hero-window win">
+        <div class="win-bar">
+          <span class="win-dots"><span class="win-dot"></span><span class="win-dot"></span><span class="win-dot"></span></span>
+          <span class="win-title">krystyna@ewing — zsh</span>
+        </div>
+        <div class="hero-content">
+          <span class="hero-mark duotone" aria-hidden="true">
+            <img src="images/hero.png" alt="">
+          </span>
+          <p class="hero-kicker">$ whoami</p>
+          <h1 class="hero-name">Krystyna<br>Ewing<span class="cursor" aria-hidden="true">_</span></h1>
+          <p class="hero-role">Product Design / Front-End Development / Illustration</p>
+          <p class="hero-statement">
+            Ten years designing and building software for people having a hard day —
+            water crises, financial abuse, disaster prep, career pivots. Still allergic
+            to a boring interface.
+          </p>
+          <div class="hero-links">
+            <a href="#work" class="text-link">Work ↓</a>
+            <a href="#contact" class="text-link">Contact ↗</a>
           </div>
-        </header>
-        <img src="images/website_hero.png" alt="illustration" class="hero_image">
-        <!-- <div class="bottom_line">
-          <p>Software Development</p>
-          <p>User Experience Design</p>
-          <p>Illustration</p>        
-        </div>-->
-        </section> 
-        <section>
-          <div class="bio_section">
-            <img src="images/dialogue_box.png" alt=""> 
-        </section>
-        <section>
-          <div class="projects">
-              <div class="project">
-                <img src="images/True_Link_album.png" alt="TrueLink logo">
-                <div class="button-container">
-                  <a href="" class="button left tl">Button 1</a>
-                  <a href="" class="button right tl">Button 2</a>
-                </div>
-              </div>
-              <div class="small-projects">
-                <div class="small-project">
-                  <img src="images/movehq_album.png" alt="MoveHQ logo">
-                  <div class="button-container">
-                    <a href="" class="button left mhq">Button 1</a>
-                    <a href="" class="button right mhq">Button 2</a>
-                  </div>
-                </div>
-                <div class="small-project">
-                  <img src="images/penfed_album.png" alt="PenFed logo">
-                  <div class="button-container">
-                    <a href="" class="button left pf">Button 1</a>
-                    <a href="" class="button right pf">Button 2</a>
-                  </div>
-                </div>
-              </div>
-              <div class="project">
-                <img src="images/hazadapt_album.png" alt="HazAdapt logo">
-                <div class="button-container">
-                  <a href="" class="button left ha">Button 1</a>
-                  <a href="" class="button right ha">Button 2</a>
-                </div>
-              </div>
-            </div>
-        </section>
-    
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ MARQUEE ============ -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee-track">
+        <span>--ux-research</span><span class="sep">|</span>
+        <span>--front-end-dev</span><span class="sep">|</span>
+        <span>--design-systems</span><span class="sep">|</span>
+        <span>--accessibility</span><span class="sep">|</span>
+        <span>--illustration</span><span class="sep">|</span>
+        <span>--prototyping</span><span class="sep">|</span>
+        <span>--ux-research</span><span class="sep">|</span>
+        <span>--front-end-dev</span><span class="sep">|</span>
+        <span>--design-systems</span><span class="sep">|</span>
+        <span>--accessibility</span><span class="sep">|</span>
+        <span>--illustration</span><span class="sep">|</span>
+        <span>--prototyping</span><span class="sep">|</span>
+      </div>
+    </div>
+
+    <!-- ============ ABOUT ============ -->
+    <section class="about" id="about">
+      <div class="about-copy">
+        <span class="section-index">~/about</span>
+        <h2 class="section-title">Ten years in,<br>both sides of<br>the screen.</h2>
+        <p>
+          I've worked as a software developer and as a UX designer — long enough to
+          stop pretending those are different jobs. I've designed and built
+          humanitarian water-tracking tools used in the field, disaster-prep guides
+          people open on their worst day, financial products meant to protect aging
+          and disabled adults, and programs that get veterans into tech.
+        </p>
+        <p>
+          The pattern, if there is one: high-stakes moments, real constraints, and
+          interfaces that have to hold up under pressure. Outside of client work,
+          I draw — mostly things with too many teeth.
+        </p>
+        <ul class="about-facts">
+          <li><span>10+ years</span> — development &amp; design</li>
+          <li><span>Fintech · Public Safety · Nonprofit</span> — case work</li>
+          <li><span>Illustrator</span>, unofficially</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ CAPABILITIES ============ -->
+    <section class="skills" id="skills">
+      <span class="section-index center">~/capabilities</span>
+      <h2 class="section-title center">What I actually do</h2>
+
+      <div class="skills-grid">
+        <div class="skill-group">
+          <h3>Design</h3>
+          <ul class="patches">
+            <li class="patch">UX Research</li>
+            <li class="patch">Wireframing &amp; Prototyping</li>
+            <li class="patch">Design Systems</li>
+            <li class="patch">Accessibility (WCAG)</li>
+            <li class="patch">Interaction Design</li>
+            <li class="patch">Usability Testing</li>
+          </ul>
+        </div>
+        <div class="skill-group">
+          <h3>Development</h3>
+          <ul class="patches">
+            <li class="patch">HTML / CSS / JS</li>
+            <li class="patch">React</li>
+            <li class="patch">Git &amp; GitHub</li>
+            <li class="patch">API Integration</li>
+            <li class="patch">Responsive Development</li>
+          </ul>
+        </div>
+        <div class="skill-group">
+          <h3>Craft</h3>
+          <ul class="patches">
+            <li class="patch">Illustration</li>
+            <li class="patch">Branding &amp; Identity</li>
+            <li class="patch">Visual Design</li>
+            <li class="patch">Character &amp; Icon Art</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ WORK ============ -->
+    <section class="work" id="work">
+      <span class="section-index center">~/work</span>
+      <h2 class="section-title center">Things I've shipped</h2>
+
+      <div class="work-grid">
+
+        <article class="case-card">
+          <div class="win-bar">
+            <span class="win-dots"><span class="win-dot"></span><span class="win-dot"></span><span class="win-dot"></span></span>
+            <span class="win-title">hazadapt.fig</span>
+          </div>
+          <div class="case-card-cover">
+            <img src="images/hazadapt_album.png" alt="hazadapt logo">
+          </div>
+          <div class="case-card-body">
+            <p class="tag-row">UX Design · Content Strategy · Public Safety</p>
+            <h3>hazadapt</h3>
+            <p>A library of hazard guides and prep activities built to help people
+              build resilience before a crisis hits — and recover faster after.</p>
+            <a href="work/hazadapt.html" class="text-link">View Case Study →</a>
+          </div>
+        </article>
+
+        <article class="case-card">
+          <div class="win-bar">
+            <span class="win-dots"><span class="win-dot"></span><span class="win-dot"></span><span class="win-dot"></span></span>
+            <span class="win-title">true-link.fig</span>
+          </div>
+          <div class="case-card-cover">
+            <img src="images/True_Link_album.png" alt="True Link logo">
+          </div>
+          <div class="case-card-body">
+            <p class="tag-row">Fintech · Accessibility · Design Systems</p>
+            <h3>True Link</h3>
+            <p>Financial tools built to protect the safety and independence of
+              aging and disabled adults — without stripping away their autonomy.</p>
+            <a href="work/true-link.html" class="text-link">View Case Study →</a>
+          </div>
+        </article>
+
+        <article class="case-card">
+          <div class="win-bar">
+            <span class="win-dots"><span class="win-dot"></span><span class="win-dot"></span><span class="win-dot"></span></span>
+            <span class="win-title">welldone.fig</span>
+          </div>
+          <div class="case-card-cover case-card-cover--text">
+            <span>WellDone</span>
+          </div>
+          <div class="case-card-body">
+            <p class="tag-row">Product Design · Behavior Change · Student Project</p>
+            <h3>WellDone</h3>
+            <p>A habit-building app exploring how progress can stay visible and
+              forgiving — instead of turning one missed day into a broken streak.</p>
+            <a href="work/welldone.html" class="text-link">View Case Study →</a>
+          </div>
+        </article>
+
+      </div>
+
+      <div class="other-clients">
+        <p class="tag-row">Also built for</p>
+        <ul>
+          <li>JPMorgan Chase &amp; Co.</li>
+          <li>MoveHQ</li>
+          <li>PenFed</li>
+          <li>MAPFRE Insurance</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ INDEPENDENT WORK ============ -->
+    <section class="side-quests" id="side-quests">
+      <span class="section-index center">~/independent</span>
+      <h2 class="section-title center">Personal projects, no client required</h2>
+
+      <div class="quest-grid">
+        <article class="quest-card">
+          <div class="win-bar">
+            <span class="win-dots"><span class="win-dot"></span><span class="win-dot"></span><span class="win-dot"></span></span>
+            <span class="win-title">somnus.psd</span>
+          </div>
+          <img src="images/somnus_portfolio_cover.png" alt="Somnus project cover">
+          <div class="quest-card-body">
+            <h3>Somnus</h3>
+            <p>A slower, quieter interface built around night skies.</p>
+            <p class="tag-row">Concept &amp; Visual Design</p>
+          </div>
+        </article>
+        <article class="quest-card">
+          <div class="win-bar">
+            <span class="win-dots"><span class="win-dot"></span><span class="win-dot"></span><span class="win-dot"></span></span>
+            <span class="win-title">gormonjee.ai</span>
+          </div>
+          <img src="images/gormonjee_portfolio_cover.png" alt="GorMonjee project cover">
+          <div class="quest-card-body">
+            <h3>GorMonjee</h3>
+            <p>Brand identity for a project with more personality than budget.</p>
+            <p class="tag-row">Branding &amp; Identity</p>
+          </div>
+        </article>
+        <article class="quest-card">
+          <div class="win-bar">
+            <span class="win-dots"><span class="win-dot"></span><span class="win-dot"></span><span class="win-dot"></span></span>
+            <span class="win-title">zinc-coop.indd</span>
+          </div>
+          <img src="images/Zinc_Co-Op_Cover.png" alt="Zinc Co-Op project cover">
+          <div class="quest-card-body">
+            <h3>Zinc Co-Op</h3>
+            <p>High-contrast identity system for a co-op that doesn't whisper.</p>
+            <p class="tag-row">Branding &amp; UI</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ============ ART ============ -->
+    <section class="art" id="art">
+      <div class="art-feature">
+        <img src="images/Artwork.png" alt="Original digital illustration by Krystyna Ewing">
+      </div>
+      <div class="art-copy">
+        <span class="section-index">~/art</span>
+        <h2 class="section-title">Client work<br>stays disciplined.<br>This doesn't.</h2>
+        <p>
+          Original character and illustration work, done on my own time and my
+          own terms. The character on this page is mine too — drawn, not
+          licensed.
+        </p>
+        <!-- TODO: link to Instagram / ArtStation / portfolio -->
+        <a href="#" class="text-link">More art →</a>
+      </div>
+    </section>
+
+    <!-- ============ ELSEWHERE ============ -->
+    <section class="off-clock">
+      <div class="off-clock-copy">
+        <span class="section-index">~/elsewhere</span>
+        <h2 class="section-title">Off the clock</h2>
+        <ul class="zine-list">
+          <li>Illustration and character design</li>
+          <li>Generative art experiments</li>
+          <li>Long opinions about type systems</li>
+          <li>Video games, unreasonably competitive about it</li>
+        </ul>
+      </div>
+      <div class="off-clock-photo">
+        <img src="images/night_fishing.jpg" alt="Night fishing scene from Animal Crossing: New Horizons">
+        <p class="off-clock-caption">Animal Crossing: New Horizons, 2am.</p>
+      </div>
+    </section>
+
+    <!-- ============ CONTACT ============ -->
+    <section class="contact" id="contact">
+      <span class="section-index center">~/contact</span>
+      <h2 class="contact-title">Let's talk.</h2>
+      <!-- TODO: swap in preferred contact email -->
+      <a href="mailto:hello@krystynaewing.com" class="contact-email">hello@krystynaewing.com</a>
+      <ul class="social-links">
+        <!-- TODO: replace with real profile links -->
+        <li><a href="#">LinkedIn</a></li>
+        <li><a href="#">GitHub</a></li>
+        <li><a href="#">Instagram</a></li>
+      </ul>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <p class="footer-path">~/krystyna-ewing — &copy; <span id="year"></span></p>
+    <p class="footer-clock" aria-hidden="true"><span id="clock"></span> local</p>
+    <a href="#top" class="back-to-top">[ ^ top ]</a>
+  </footer>
+
+  <script src="js/main.js"></script>
 </body>
-<!-- No Footer Necessary -->
 </html>
