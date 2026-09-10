@@ -981,6 +981,25 @@ body::before {
   max-width: 32ch;
 }
 
+/* real artifact images within a case study */
+.case-image {
+  margin: 1.5em 0;
+  border: 1px solid var(--line);
+  background: var(--panel);
+}
+.case-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.case-image figcaption {
+  padding: 0.6em 0.9em;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--dim);
+  border-top: 1px solid var(--line);
+}
+
 /* case body sections */
 .case-section {
   max-width: 1200px;
