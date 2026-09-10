@@ -544,12 +544,12 @@ body::before {
   max-width: 1200px;
   margin: 3em auto 0;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 1px;
   background: var(--line);
   border: 1px solid var(--line);
 }
-@media (max-width: 720px) {
+@media (max-width: 900px) {
   .work-grid { grid-template-columns: 1fr; }
 }
 

@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ResiliencePoint — hazadapt — Krystyna Ewing</title>
-  <meta name="description" content="ResiliencePoint — a case study within hazadapt.">
+  <meta name="description" content="ResiliencePoint — turning emergency preparedness data into something emergency managers can actually use.">
 
   <link rel="icon" href="../images/favicon.ico">
 
@@ -59,185 +59,303 @@
         </div>
       </div>
 
-      <p class="tag-row">hazadapt · UX Design · Content Strategy · Public Safety</p>
+      <p class="tag-row">hazadapt · UX Research · Product Design · Data Visualization · Accessibility</p>
       <h1 class="case-title">ResiliencePoint</h1>
-      <p class="case-summary">A platform for emergency managers to gather insights about their communities, hazards, and outreach effectiveness — built as a clearer, more actionable successor to EM-Dash.</p>
+      <p class="case-summary">Turning emergency preparedness data into something people can actually use — a successor to EM-Dash built to help emergency managers investigate, not just view, community preparedness.</p>
 
       <dl class="case-meta">
-        <div><dt>Role</dt><dd>UX Designer</dd></div>
-        <div><dt>Duration</dt><dd>2023</dd></div>
-        <div><dt>Tools</dt><dd>Figma, ClickUp, Google Docs, Otter.ai</dd></div>
+        <div><dt>Role</dt><dd>Lead UX Designer</dd></div>
+        <div><dt>Duration</dt><dd>2023–2024</dd></div>
         <div><dt>Platform</dt><dd>Web, Mobile Web</dd></div>
+        <div><dt>Tools</dt><dd>Figma, ClickUp, Google Docs, Otter.ai</dd></div>
+        <div><dt>Focus</dt><dd>UX Research, Product Design, Data Visualization, Accessibility, Design Systems, Developer Handoff, QA</dd></div>
       </dl>
     </div>
 
     <section class="case-section">
       <span class="section-index">01 — Overview</span>
-      <h2 class="case-section-title">Project overview</h2>
+      <h2 class="case-section-title">Overview</h2>
       <div class="case-section-body">
-        <p>ResiliencePoint is a platform for emergency managers (EMs) to gather insights
-          about their communities, hazards, and outreach effectiveness. It was developed
-          as a successor to EM-Dash to provide a more actionable, clear, and
-          human-centered interface for interpreting data and making decisions. The
-          platform needed to balance rich datasets with simplicity, enabling EMs to
-          quickly understand local conditions and adapt their outreach strategies.</p>
+        <p>Emergency managers work with an enormous amount of information. They need
+          to understand the hazards affecting their communities, how prepared
+          residents are, where gaps exist, and how those patterns change depending on
+          location and population.</p>
+        <p>The information itself can be incredibly useful, but usefulness depends on
+          whether someone can actually get to it, understand it, and make a decision
+          from it. That was the problem we were working through with ResiliencePoint.</p>
+        <p>ResiliencePoint grew out of earlier work around an emergency-management
+          dashboard called EM-Dash. As the product evolved, we began thinking beyond
+          simply displaying information and toward giving emergency-management
+          professionals a tool they could actively use to investigate preparedness
+          data.</p>
+        <p>My role involved helping shape that transition through research,
+          interaction design, usability testing, accessibility work, component
+          design, developer handoff, and product QA.</p>
       </div>
     </section>
 
     <section class="case-section">
-      <span class="section-index">02 — Design Process &amp; Development</span>
-      <h2 class="case-section-title">Understanding EM workflows</h2>
+      <span class="section-index">02 — Understanding the Problem</span>
+      <h2 class="case-section-title">Two needs in tension</h2>
       <div class="case-section-body">
-        <p>Our process began by analyzing EM workflows and needs.</p>
-
-        <h3>User Research</h3>
-        <p>Interviews and observations revealed that EMs needed rapid access to key
-          metrics: population counts, hazard activity, and prep check engagement in
-          their jurisdiction. They required clear ways to search, filter, and
-          visualize data for actionable insights.</p>
-
-        <h3>Wireframing &amp; Prototyping</h3>
-        <p>Pages were designed with multiple graphs and tables, navigated via a top
-          menu bar. The goal was to give EMs access to core metrics while keeping all
-          visualizations immediately accessible.</p>
-
-        <h3>Feature Planning</h3>
-        <p>Based on the PRD, features included:</p>
+        <p>Emergency-management professionals often have to make decisions across
+          multiple layers of information. They may need to understand preparedness at
+          a state level, then narrow down to a county, ZIP code, or another
+          geographic area. They may be comparing hazards, looking at preparedness
+          trends, or trying to identify where public education and emergency
+          resources should be focused.</p>
+        <p>The product therefore had to support two very different needs:</p>
         <ul>
-          <li>Prep check engagement summaries</li>
-          <li>Hazard activity heatmaps</li>
-          <li>Recent incident or insight feeds</li>
-          <li>Search tied to individual graphs/tables</li>
+          <li>Give someone a useful overview quickly.</li>
+          <li>Allow them to dig deeply into the data when they needed more detail.</li>
         </ul>
-
-        <div class="placeholder-image">
-          <span>Wireframe showing top menu and multiple component layouts</span>
-        </div>
-
-        <h3>Testing &amp; Observations</h3>
-        <ul>
-          <li>The top navigation created cognitive overload; users had difficulty
-            understanding hierarchy.</li>
-          <li>Component-level search required repeated queries for each chart or
-            table, slowing workflow.</li>
-          <li>Critical insights were often buried and not visible at a glance.</li>
-          <li>Accessibility issues appeared: some text contrast, alignment, and
-            hierarchy made rapid comprehension challenging.</li>
-        </ul>
+        <p>Those goals sound compatible, but they created a difficult interaction
+          problem. If we exposed everything at once, the interface became
+          overwhelming. If we hid too much, users could not understand what
+          information was available or how to get to it.</p>
+        <div class="placeholder-image"><span>Early dashboard / EM-Dash screenshot</span></div>
+        <div class="placeholder-image"><span>Early information architecture or research artifact</span></div>
       </div>
     </section>
 
     <section class="case-section">
-      <span class="section-index">03 — The Pivot</span>
-      <h2 class="case-section-title">Discovering usability issues</h2>
+      <span class="section-index">03 — Research</span>
+      <h2 class="case-section-title">Researching how emergency managers work</h2>
       <div class="case-section-body">
-        <p>Through usability and accessibility testing, it became clear the design
-          needed a rethink:</p>
+        <p>Our design decisions were grounded in conversations with people working in
+          emergency management and adjacent preparedness roles. We were looking at
+          more than whether someone could complete a task — we wanted to understand
+          how they thought about the information. Questions included:</p>
         <ul>
-          <li>Navigation via a top menu was overwhelming and visually cluttered.</li>
-          <li>Component-specific search caused inefficiencies and inconsistent
-            workflows.</li>
-          <li>Key insights were difficult to locate quickly.</li>
+          <li>What information do you look for first?</li>
+          <li>How do you define the area you are responsible for?</li>
+          <li>When would you compare one location with another?</li>
+          <li>Which preparedness statistics are immediately useful?</li>
+          <li>How much information belongs on the dashboard before it becomes
+            overwhelming?</li>
+          <li>What terminology makes sense to someone working in emergency
+            management?</li>
+          <li>What needs to be exportable or shareable with someone else?</li>
         </ul>
-        <p>This led to a redesign that emphasized clarity, hierarchy, and workflow
-          efficiency, while addressing accessibility concerns.</p>
+        <p>Those conversations showed us that the product could not simply behave
+          like a traditional analytics dashboard. Emergency managers needed a way to
+          ask increasingly specific questions of the data.</p>
       </div>
     </section>
 
     <section class="case-section">
-      <span class="section-index">04 — Redesign &amp; Enhancements</span>
-      <h2 class="case-section-title">What changed, and why</h2>
+      <span class="section-index">04 — Designing the Dashboard</span>
+      <h2 class="case-section-title">A useful overview, first</h2>
       <div class="case-section-body">
-        <h3>1. Side Menu Navigation</h3>
-        <ul>
-          <li>Replaced top menu with a vertical side menu to reduce clutter and
-            establish clear hierarchy.</li>
-          <li>Allowed more space for dashboards and summary insights.</li>
-        </ul>
-        <div class="placeholder-image">
-          <span>Redesigned side menu</span>
-        </div>
-
-        <h3>2. Overview Section</h3>
-        <ul>
-          <li>Added a concise overview highlighting the most important metrics: total
-            population, hazard activity, and prep check engagement.</li>
-          <li>Brought key insights to the forefront for EMs to consume at a glance.</li>
-        </ul>
-        <div class="placeholder-image">
-          <span>Overview section screenshot</span>
-        </div>
-
-        <h3>3. Page-Wide Search Integration</h3>
-        <ul>
-          <li>Moved search from individual components to a platform-wide search on
-            the main page.</li>
-          <li>Improved workflow efficiency and clarity.</li>
-        </ul>
-        <div class="placeholder-image">
-          <span>Integrated search example</span>
-        </div>
-
-        <h3>4. Residents vs Visitors Toggle</h3>
-        <p><em>Added after the pivot.</em></p>
-        <ul>
-          <li>Positioned on the main page after realizing EMs needed to differentiate
-            populations for more accurate insights.</li>
-          <li>Enhanced outreach strategy decisions based on population type.</li>
-        </ul>
-        <div class="placeholder-image">
-          <span>Residents vs visitors toggle screenshot</span>
-        </div>
-
-        <h3>5. Best Practice Overrides Familiarity</h3>
-        <p>The original idea to tie search to each graph (inspired by other
-          platforms) was reconsidered. Page-wide search provided faster, more
-          consistent results.</p>
+        <p>The dashboard was structured to provide high-level information first.
+          Quick statistics and trend cards gave users an immediate snapshot of
+          preparedness without requiring them to configure a complicated query.
+          Hazard information also needed a predictable default state, so the
+          interface surfaced the top ten hazards rather than loading users into an
+          enormous list without context.</p>
+        <p>Location was another major part of the experience. The product needed to
+          support multiple jurisdiction levels, including state, county, and ZIP
+          code. Map behavior changed depending on the type of jurisdiction being
+          viewed so users would enter the experience at a useful geographic scale
+          instead of manually correcting the zoom every time.</p>
+        <p>We also worked on navigation, including redesigning the side menu so
+          moving between major areas of the platform felt more deliberate and
+          understandable.</p>
+        <div class="placeholder-image"><span>Dashboard screenshot</span></div>
+        <div class="placeholder-image"><span>Quick statistics / trend card designs</span></div>
+        <div class="placeholder-image"><span>Map and jurisdiction designs</span></div>
       </div>
     </section>
 
     <section class="case-section">
-      <span class="section-index">05 — Impact</span>
-      <h2 class="case-section-title">What it changed</h2>
+      <span class="section-index">05 — The Problem We Found</span>
+      <h2 class="case-section-title">An interface inside the interface</h2>
       <div class="case-section-body">
-        <ul>
-          <li>Critical insights are now surfaced upfront, reducing time to interpret
-            data.</li>
-          <li>Navigation and hierarchy improvements allow EMs to focus on
-            decision-making.</li>
-          <li>Page-wide search and residents vs visitors toggle improve accuracy and
-            actionable insight.</li>
-          <li>The platform is scalable for future features without overcomplicating
-            the interface.</li>
-        </ul>
-        <div class="placeholder-image">
-          <span>Full dashboard screenshot highlighting the redesigned interface</span>
-        </div>
+        <p>As the product became more capable, the query controls grew with it.
+          Filtering was originally handled through controls that behaved more like
+          dashboard dropdowns. That approach worked while the number of options was
+          small. It did not scale.</p>
+        <p>Every new variable created another decision inside an increasingly
+          compressed part of the interface. Users needed to select geography,
+          hazards, and other criteria while still understanding the relationships
+          between those choices. The controls were becoming an interface inside the
+          interface.</p>
+        <p>Instead of making the data easier to explore, the dashboard was asking
+          people to mentally keep track of too many selections at once. That was the
+          point where the problem changed for us. We were not designing a better
+          dropdown anymore. We were designing a query-building experience.</p>
+        <div class="placeholder-image"><span>Earlier dropdown/filter design</span></div>
+        <div class="placeholder-image"><span>Usability notes identifying the problem</span></div>
       </div>
     </section>
 
     <section class="case-section">
-      <span class="section-index">06 — Conclusion</span>
-      <h2 class="case-section-title">Conclusion</h2>
+      <span class="section-index">06 — The Pivot</span>
+      <h2 class="case-section-title">Giving queries their own space</h2>
       <div class="case-section-body">
-        <p>ResiliencePoint illustrates the power of iterative, user-centered design.
-          By observing EM workflows, identifying pain points, and pivoting to a
-          cleaner, more efficient interface, we delivered a platform that balances
-          rich data with clarity. The redesign laid the foundation for EMs to make
-          faster, better-informed decisions, while keeping room for ongoing
-          evolution.</p>
+        <p>The biggest redesign decision was moving query creation out of the
+          compressed dashboard controls and into a full-page query experience. This
+          gave each decision enough room to be understandable.</p>
+        <p>Instead of opening several dropdowns and trying to remember what had been
+          selected, users could progressively build a query. Selections were visible.
+          Relationships between options were clearer. The interface could also
+          support more complicated filtering without turning the dashboard into a
+          wall of controls.</p>
+        <p>This changed the product from something that primarily displayed data into
+          something that allowed emergency managers to actively investigate it.</p>
+        <div class="placeholder-image"><span>Full-page query builder wireframe</span></div>
+        <div class="placeholder-image"><span>Final query builder design</span></div>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <span class="section-index">07 — Designing for Real Questions</span>
+      <h2 class="case-section-title">What the query builder made possible</h2>
+      <div class="case-section-body">
+        <p>Once the query builder had enough room to grow, we were able to introduce
+          features that made the analytics much more useful.</p>
+
+        <h3>Resident vs. Visitor Segmentation</h3>
+        <p>Preparedness does not necessarily look the same for someone who lives in a
+          community and someone who is temporarily there. A resident may know local
+          hazards, evacuation routes, emergency systems, and available resources. A
+          visitor may know almost none of those things. Treating both groups as one
+          population could hide those differences. Adding a resident/visitor toggle
+          allowed emergency managers to investigate the preparedness experience of
+          each group separately.</p>
+        <div class="placeholder-image"><span>Resident vs. visitor toggle</span></div>
+
+        <h3>Multi-Select Geography</h3>
+        <p>Emergency-management work rarely fits neatly into one geographic boundary.
+          We introduced multi-selection across state, county, and ZIP-level
+          information so users could create queries that better reflected the areas
+          they were actually trying to understand.</p>
+
+        <h3>Local Safety Information Presence</h3>
+        <p>ResiliencePoint also connects conceptually with HazAdapt's Local Safety
+          Information product, or LoCo. We added the ability to investigate whether
+          Local Safety Information was present for a given area, creating another
+          way to understand the relationship between preparedness resources and
+          preparedness behavior.</p>
+
+        <h3>Location Buffering</h3>
+        <p>People do not always interact with geographic boundaries as neatly as
+          software does. To reduce problems around people located near a
+          jurisdiction boundary, we incorporated a roughly 400–500 foot geographic
+          buffer into relevant location queries. This helped prevent the system from
+          treating someone standing just outside an administrative boundary as if
+          they were completely disconnected from the nearby community.</p>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <span class="section-index">08 — Results, Export &amp; Sharing</span>
+      <h2 class="case-section-title">Making the results understandable — and portable</h2>
+      <div class="case-section-body">
+        <p>Giving users access to more data only helps if the results remain
+          understandable. Trend cards helped surface changes without requiring users
+          to interpret raw tables. Charts allowed patterns to be compared visually.
+          Plain-language summaries provided another layer of interpretation so the
+          interface did not assume every user wanted to analyze a chart from
+          scratch. Users could also return to previous searches through query
+          history, reducing the amount of repeated configuration required.</p>
+        <div class="placeholder-image"><span>Results page</span></div>
+        <div class="placeholder-image"><span>Charts and plain-language summary</span></div>
+        <div class="placeholder-image"><span>Query history design</span></div>
+        <p>Emergency-management tools rarely exist in isolation. Information may need
+          to move into a report, presentation, planning document, or conversation
+          with another department. We therefore designed export functionality that
+          allowed visualizations and information to be exported as PNG or PDF.
+          Saving and sharing behavior was also explored as the query system matured
+          — the goal was to make ResiliencePoint useful beyond the moment someone was
+          sitting inside the application.</p>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <span class="section-index">09 — Accessibility &amp; Inclusive Design</span>
+      <h2 class="case-section-title">Beyond WCAG compliance</h2>
+      <div class="case-section-body">
+        <p>Accessibility was part of the product process rather than something added
+          at the end. I used tools and methods including accessibility reviews, WAVE
+          testing, and GenderMag sessions to identify barriers that were not obvious
+          from visual inspection alone. Across our work, GenderMag sessions surfaced
+          four inclusivity showstoppers that could have prevented or seriously
+          disrupted task completion for some users.</p>
+        <p>Those findings influenced interaction patterns, instructions, hierarchy,
+          and how much knowledge the interface expected someone to already have. The
+          goal was not simply WCAG compliance — emergency-preparedness technology
+          needs to work for people with different levels of technical confidence,
+          domain knowledge, and familiarity with the product.</p>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <span class="section-index">10 — Building for Development</span>
+      <h2 class="case-section-title">Where design work meets engineering</h2>
+      <div class="case-section-body">
+        <p>My role continued after the design files were complete. I maintained
+          components and design-system patterns in Figma and used Dev Mode to make
+          implementation details easier for developers to inspect. I also worked
+          directly with engineering during implementation, including:</p>
+        <ul>
+          <li>Reviewing implemented designs</li>
+          <li>Testing product behavior</li>
+          <li>Writing acceptance tests</li>
+          <li>Identifying visual and interaction inconsistencies</li>
+          <li>Clarifying intended component behavior</li>
+          <li>Helping resolve gaps between the design and the production build</li>
+        </ul>
+        <p>Our stack and product ecosystem included technologies such as Mapbox,
+          Chart.js, Ionic, and Stripe. Subscription and seat-management functionality
+          also became part of the platform as ResiliencePoint moved toward a
+          sustainable product model.</p>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <span class="section-index">11 — From Prototype to Production</span>
+      <h2 class="case-section-title">Into real use</h2>
+      <div class="case-section-body">
+        <p>The ResiliencePoint MVP moved through acceptance testing between
+          approximately May and August 2024. Seeing the product move into real use
+          changed the nature of the design work — we were no longer asking whether
+          the concept made sense in a prototype. We were looking at what happened
+          when actual information, actual jurisdictions, and actual workflows
+          entered the system.</p>
+        <p>ResiliencePoint ultimately reached production use with organizations
+          including El Segundo, California and Oregon State University.</p>
+        <div class="placeholder-image"><span>Full dashboard screenshot highlighting the redesigned interface</span></div>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <span class="section-index">12 — What I Learned</span>
+      <h2 class="case-section-title">When the structure stops fitting the job</h2>
+      <div class="case-section-body">
+        <p>The biggest lesson from ResiliencePoint was that adding features is
+          sometimes a signal that the interaction model itself needs to change. The
+          dropdown approach was not inherently bad — it simply stopped matching the
+          complexity of the product. Trying to force more functionality into the
+          same pattern would have made the experience progressively harder to
+          understand.</p>
+        <p>Moving query building into its own experience gave the product somewhere
+          to grow. It also reinforced something that has become a major part of how
+          I approach design: when an interface keeps getting harder every time you
+          add something, the problem may not be the new feature. The structure
+          underneath it may no longer fit the job.</p>
       </div>
     </section>
   </main>
 
   <nav class="case-nav" aria-label="More case studies">
-    <a href="welldone-website-mobile-app-redesign.html" class="case-nav-prev">
+    <a href="welldone-habit-building.html" class="case-nav-prev">
       <span class="case-nav-label">← Previous</span>
-      <span class="case-nav-title">Website / Mobile App Redesign</span>
+      <span class="case-nav-title">WellDone</span>
     </a>
-    <a href="hazadapt-local-hazard-safety-information.html" class="case-nav-next">
+    <a href="hazadapt-prep-checks.html" class="case-nav-next">
       <span class="case-nav-label">Next →</span>
-      <span class="case-nav-title">Local Hazard Safety Information</span>
+      <span class="case-nav-title">Prep Checks</span>
     </a>
   </nav>
   <footer class="site-footer">

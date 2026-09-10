@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LoCo — Local Safety Information — hazadapt — Krystyna Ewing</title>
+  <meta name="description" content="LoCo — making local emergency information easier to find before it is needed.">
+
+  <link rel="icon" href="../images/favicon.ico">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="../index.html" aria-label="Krystyna Ewing — home">
+        <span class="brand-mascot duotone" aria-hidden="true">
+          <img src="../images/hero.png" alt="">
+        </span>
+        <span class="brand-name">Krystyna Ewing</span>
+      </a>
+
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="primaryNav">
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+        <span class="sr-only">Menu</span>
+      </button>
+
+      <nav class="primary-nav" id="primaryNav" aria-label="Primary">
+        <ul>
+          <li><a href="../index.html#work">Work</a></li>
+          <li><a href="../index.html#side-quests">Independent</a></li>
+          <li><a href="../index.html#about">About</a></li>
+          <li><a href="../index.html#art">Art</a></li>
+          <li><a href="../index.html#contact" class="nav-cta">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <p class="breadcrumb"><a href="../index.html">~</a> / <a href="hazadapt.html">work/hazadapt</a> / <span class="current">loco</span></p>
+
+  <main id="main">
+    <div class="case-hero">
+      <div class="win">
+        <div class="win-bar">
+          <span class="win-dots"><span class="win-dot"></span><span class="win-dot"></span><span class="win-dot"></span></span>
+          <span class="win-title">hazadapt-loco.fig</span>
+        </div>
+        <div class="case-hero-cover case-hero-cover--text">
+          <span>LoCo</span>
+        </div>
+      </div>
+
+      <p class="tag-row">hazadapt · UX Design · Multilingual Experiences · Location-Aware Design · Accessibility</p>
+      <h1 class="case-title">LoCo — Local Safety Information</h1>
+      <p class="case-summary">Making local emergency information easier to find before it's needed — location-aware, multilingual, and built to still work when connectivity doesn't.</p>
+
+      <dl class="case-meta">
+        <div><dt>Role</dt><dd>Lead UX Designer</dd></div>
+        <div><dt>Platform</dt><dd>Web, Mobile Web</dd></div>
+        <div><dt>Focus</dt><dd>UX Design, Multilingual Experiences, Location-Aware Design, Accessibility, Mobile UX</dd></div>
+      </dl>
+    </div>
+
+    <section class="case-section">
+      <span class="section-index">01 — Overview</span>
+      <h2 class="case-section-title">Overview</h2>
+      <div class="case-section-body">
+        <p>When an emergency happens, people often need information about a place
+          immediately. The problem is that local emergency information tends to be
+          scattered across city websites, county pages, PDFs, emergency-management
+          systems, social media, and resources people may not even know exist.</p>
+        <p>HazAdapt's Local Safety Information product, commonly called LoCo, was
+          designed to create a clearer way for people to access safety information
+          associated with where they were.</p>
+        <p>My work focused on making that information understandable, accessible,
+          multilingual, mobile-friendly, and resilient enough to remain useful when
+          connectivity was unreliable.</p>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <span class="section-index">02 — Designing Around Location</span>
+      <h2 class="case-section-title">"I'm here. What do I need to know?"</h2>
+      <div class="case-section-body">
+        <p>Location is the foundation of LoCo. The application needed to determine
+          which safety information was relevant to the user without expecting
+          someone to understand government jurisdiction structures.</p>
+        <p>People think: <em>I'm here. What do I need to know?</em> They do not
+          necessarily think: <em>Which county emergency-management jurisdiction
+          currently contains my coordinates?</em> The interface therefore had to
+          translate location data into something that felt natural.</p>
+
+        <h3>Handling Boundaries</h3>
+        <p>Geographic data becomes complicated around borders. Someone may be
+          physically close to a community while technically falling just outside of
+          its official boundary. We explored location buffering to reduce
+          situations where tiny differences in coordinates produced dramatically
+          different experiences.</p>
+        <p>The product also needed to represent multiple kinds of boundaries. We
+          designed behavior around two boundary concepts: a boundary users could see
+          in the interface, and a boundary associated with downloadable or
+          location-specific content. That allowed the visual experience and
+          underlying information behavior to serve different purposes without
+          pretending they were always identical.</p>
+        <div class="placeholder-image"><span>LoCo map</span></div>
+        <div class="placeholder-image"><span>Boundary visualization</span></div>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <span class="section-index">03 — Multilingual Safety Information</span>
+      <h2 class="case-section-title">Accessibility means understanding it, too</h2>
+      <div class="case-section-body">
+        <p>Emergency information is only useful if people can understand it. LoCo
+          was designed to support multiple languages, including English, Spanish,
+          French, German, Russian, Chinese, and Japanese.</p>
+        <p>Language controls had to remain easy to find without overwhelming the
+          core content. We treated language selection as part of accessibility
+          rather than a secondary preference hidden deep inside settings.</p>
+        <div class="placeholder-image"><span>Language selector</span></div>
+        <div class="placeholder-image"><span>Multilingual content example</span></div>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <span class="section-index">04 — Mobile First Where It Matters</span>
+      <h2 class="case-section-title">Designing for the device people actually have with them</h2>
+      <div class="case-section-body">
+        <p>People are unlikely to be sitting at a desktop computer when they
+          suddenly need local emergency information. Mobile behavior therefore
+          mattered significantly. LoCo moved into a mobile beta experience where we
+          could test how location-aware safety information behaved on the device
+          someone would most likely have with them.</p>
+        <p>Navigation included a "Jump to LoCo" interaction to get users into the
+          local-information experience quickly. The goal was to reduce the distance
+          between <em>something is happening around me</em> and <em>here is
+          information that can help me understand what to do.</em></p>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <span class="section-index">05 — Designing for Bad Connectivity</span>
+      <h2 class="case-section-title">When the network fails, the product can't</h2>
+      <div class="case-section-body">
+        <p>Emergency technology has an uncomfortable contradiction: the moment
+          people need information most may also be the moment their internet
+          connection works least reliably. LoCo therefore needed fallback behavior.
+          We designed an offline experience so previously available or fallback
+          safety information could still provide value when the application could
+          not retrieve everything normally.</p>
+        <p>A roughly five-minute buffer also helped account for changes in location
+          and connectivity instead of requiring constant perfect communication with
+          the server.</p>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <span class="section-index">06 — Content Hierarchy</span>
+      <h2 class="case-section-title">Not just a collection of links</h2>
+      <div class="case-section-body">
+        <p>A safety-information product can easily become a giant collection of
+          links. That was not what we wanted. Information needed to be structured
+          around what someone was trying to understand. The interface therefore
+          emphasized clear hierarchy, scannability, and the ability to move quickly
+          between major categories of local information.</p>
+        <p>The design had to work for someone casually preparing at home and someone
+          quickly looking for information during a stressful situation. Those are
+          very different cognitive environments.</p>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <span class="section-index">07 — Connecting LoCo to the Larger Platform</span>
+      <h2 class="case-section-title">From public tool to shared signal</h2>
+      <div class="case-section-body">
+        <p>LoCo eventually became meaningful beyond the standalone public
+          experience. Within ResiliencePoint, emergency-management professionals
+          could investigate whether Local Safety Information was available within a
+          particular area. That created a relationship between the public-facing
+          preparedness tools and the analytics tools used by organizations.</p>
+        <p>One product helped people access local information. The other could help
+          emergency managers better understand preparedness at the community
+          level.</p>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <span class="section-index">08 — What I Learned</span>
+      <h2 class="case-section-title">Ideal conditions disappear — design for that</h2>
+      <div class="case-section-body">
+        <p>LoCo made location feel less like a map-design problem and more like an
+          accessibility problem. A technically accurate boundary is not
+          automatically a useful experience. A perfectly translated string is not
+          automatically understandable. An application that works beautifully
+          online is not automatically useful during an emergency.</p>
+        <p>Designing for emergency preparedness means constantly asking what happens
+          when the ideal conditions disappear.</p>
+      </div>
+    </section>
+  </main>
+
+  <nav class="case-nav" aria-label="More case studies">
+    <a href="hazadapt-prep-checks.html" class="case-nav-prev">
+      <span class="case-nav-label">← Previous</span>
+      <span class="case-nav-title">Prep Checks</span>
+    </a>
+    <a href="true-link-create-draft-disbursements.html" class="case-nav-next">
+      <span class="case-nav-label">Next →</span>
+      <span class="case-nav-title">Create Draft Disbursements</span>
+    </a>
+  </nav>
+  <footer class="site-footer">
+    <p class="footer-path">~/krystyna-ewing — &copy; <span id="year"></span></p>
+    <p class="footer-clock" aria-hidden="true"><span id="clock"></span> local</p>
+    <a href="../index.html#top" class="back-to-top">[ ^ top ]</a>
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>

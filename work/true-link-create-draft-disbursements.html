@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Create Draft Disbursements — True Link — Krystyna Ewing</title>
-  <meta name="description" content="Create Draft Disbursements — a case study within True Link.">
+  <meta name="description" content="Create Draft Disbursements — reducing repetitive work in a complex financial workflow.">
 
   <link rel="icon" href="../images/favicon.ico">
 
@@ -59,87 +59,145 @@
         </div>
       </div>
 
-      <p class="tag-row">True Link · Fintech · Accessibility · Design Systems</p>
+      <p class="tag-row">True Link · Trust Team · Workflow Design · Financial Operations</p>
       <h1 class="case-title">Create Draft Disbursements</h1>
-      <p class="case-summary">Getting money to the right place, safely, without friction.</p>
+      <p class="case-summary">Reducing repetitive work in a complex financial workflow — separating useful friction from repetitive friction.</p>
 
       <dl class="case-meta">
-        <div><dt>Role</dt><dd>To fill in</dd></div>
-        <div><dt>Timeline</dt><dd>To fill in</dd></div>
-        <div><dt>Tools</dt><dd>To fill in</dd></div>
-        <div><dt>Platform</dt><dd>To fill in</dd></div>
+        <div><dt>Role</dt><dd>UX Designer</dd></div>
+        <div><dt>Team</dt><dd>Trust</dd></div>
+        <div><dt>Timeline</dt><dd>March–May 2020</dd></div>
+        <div><dt>Focus</dt><dd>UX Research, Workflow Design, Financial Operations, Prototyping</dd></div>
       </dl>
     </div>
 
     <section class="case-section">
-      <span class="section-index">01 — The Problem</span>
-      <h2 class="case-section-title">What needed solving</h2>
+      <span class="section-index">01 — Overview</span>
+      <h2 class="case-section-title">Overview</h2>
       <div class="case-section-body">
-        <div class="placeholder-block">
-          <span class="placeholder-tag">To fill in</span>
-          <p>Describe the core problem this case study addressed — who was affected, and why the existing experience fell short.</p>
-        </div>
-
+        <p>Trust administrators manage financial responsibilities for
+          beneficiaries, often across pooled trusts and other complicated account
+          structures. A large part of that work involves disbursements. The
+          process has to be accurate because administrators are working with real
+          people's money. But accuracy does not mean the workflow should require
+          unnecessary repetition.</p>
+        <p>Create Draft Disbursements focused on making it easier for trust
+          administrators to prepare disbursement information while maintaining
+          control over the final financial action.</p>
       </div>
     </section>
 
     <section class="case-section">
-      <span class="section-index">02 — The Approach</span>
-      <h2 class="case-section-title">How I got there</h2>
+      <span class="section-index">02 — Understanding the Workflow</span>
+      <h2 class="case-section-title">Creating information vs. executing a transaction</h2>
       <div class="case-section-body">
-        <div class="placeholder-block">
-          <span class="placeholder-tag">To fill in</span>
-          <p>Summarize the process: research, constraints, key decisions, who you worked with.</p>
-        </div>
-
-        <div class="placeholder-image">
-          <span>Add a research artifact, sketch, or process photo</span>
-        </div>
-
+        <p>Before designing the feature, I worked with product partners and trust
+          administrators to understand how disbursements were actually being
+          handled. The important distinction was between creating information and
+          executing a financial transaction.</p>
+        <p>Administrators often knew that a payment or disbursement needed to be
+          prepared before every final detail was ready for submission. The product
+          needed a way to preserve that work without forcing someone to either
+          finish everything immediately or start over later.</p>
       </div>
     </section>
 
     <section class="case-section">
-      <span class="section-index">03 — The Solution</span>
-      <h2 class="case-section-title">What shipped</h2>
+      <span class="section-index">03 — The Opportunity</span>
+      <h2 class="case-section-title">What does "draft" mean in a financial product?</h2>
       <div class="case-section-body">
-        <div class="placeholder-block">
-          <span class="placeholder-tag">To fill in</span>
-          <p>Walk through the final solution — key screens and the reasoning behind them.</p>
-        </div>
-
-        <div class="placeholder-image">
-          <span>Add a key screen or flow screenshot</span>
-        </div>
-
-        <div class="placeholder-image">
-          <span>Add another screen or before/after comparison</span>
-        </div>
-
+        <p>Draft functionality sounds simple until it enters a financial product.
+          What does "draft" mean? Which fields are required? Which information can
+          be incomplete? Who is allowed to edit it? When does it become a real
+          transaction? What happens when someone returns later? How do we make sure
+          a draft cannot accidentally be mistaken for a submitted disbursement?
+          Those questions shaped the experience.</p>
       </div>
     </section>
 
     <section class="case-section">
-      <span class="section-index">04 — Outcome</span>
-      <h2 class="case-section-title">What changed</h2>
+      <span class="section-index">04 — Designing the Draft Workflow</span>
+      <h2 class="case-section-title">Making financial state unambiguous</h2>
       <div class="case-section-body">
-        <div class="placeholder-block">
-          <span class="placeholder-tag">To fill in</span>
-          <p>Add outcomes or metrics if you have them — adoption, feedback, what it replaced. If there aren't hard numbers, describe the qualitative impact instead.</p>
-        </div>
+        <p>The workflow allowed administrators to create a disbursement and save
+          progress before completing the final action. The interface had to clearly
+          distinguish between in-progress information, required financial
+          information, saved drafts, and completed or submitted actions.</p>
+        <p>Visual hierarchy and language became extremely important because the
+          system could not leave the financial state ambiguous.</p>
+        <div class="placeholder-image"><span>Disbursement workflow</span></div>
+        <div class="placeholder-image"><span>Draft state wireframe</span></div>
+        <div class="placeholder-image"><span>Final design</span></div>
+      </div>
+    </section>
 
+    <section class="case-section">
+      <span class="section-index">05 — Designing for Pooled Trust Administration</span>
+      <h2 class="case-section-title">One workflow, repeated across many accounts</h2>
+      <div class="case-section-body">
+        <p>Pooled trusts add another layer of complexity because administrators may
+          be responsible for many beneficiary accounts. The feature therefore could
+          not be designed as though someone were managing a single personal
+          account. Efficiency matters differently when the same workflow may be
+          repeated across many people during a workday.</p>
+        <p>We looked for opportunities to reduce unnecessary re-entry while
+          preserving the controls administrators needed to verify each
+          disbursement.</p>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <span class="section-index">06 — Research &amp; Collaboration</span>
+      <h2 class="case-section-title">Where the friction actually lived</h2>
+      <div class="case-section-body">
+        <p>I worked with administrators and product stakeholders throughout the
+          project. Those conversations were particularly useful because the people
+          using the product understood where operational friction lived in ways
+          that were difficult to see from the interface alone.</p>
+        <p>A workflow might appear reasonable when viewed once in a prototype.
+          Repeating that workflow dozens of times can reveal entirely different
+          problems. That understanding influenced field organization, workflow
+          order, terminology, and draft behavior.</p>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <span class="section-index">07 — Balancing Speed With Safety</span>
+      <h2 class="case-section-title">Useful friction vs. repetitive friction</h2>
+      <div class="case-section-body">
+        <p>One of the biggest UX challenges in financial products is that "faster"
+          is not always automatically better. Removing a step can save time. It can
+          also remove an important opportunity to verify information. The goal was
+          not to eliminate friction indiscriminately — it was to separate useful
+          friction from repetitive friction.</p>
+        <p>Useful friction protects someone from making an expensive mistake.
+          Repetitive friction makes them type or navigate through something again
+          without improving the quality of the decision.</p>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <span class="section-index">08 — What I Learned</span>
+      <h2 class="case-section-title">Not every step should be cut</h2>
+      <div class="case-section-body">
+        <p>Create Draft Disbursements changed how I think about efficiency. Good
+          enterprise design is not about turning every five-step process into a
+          three-step process. Sometimes all five steps matter.</p>
+        <p>The better question is: does every action the user takes contribute to
+          completing or verifying the work? When the answer is no, that is where the
+          design opportunity usually lives.</p>
       </div>
     </section>
   </main>
 
   <nav class="case-nav" aria-label="More case studies">
-    <a href="true-link-beneficiary-profile.html" class="case-nav-prev">
+    <a href="hazadapt-loco.html" class="case-nav-prev">
       <span class="case-nav-label">← Previous</span>
-      <span class="case-nav-title">Beneficiary Profile</span>
+      <span class="case-nav-title">LoCo — Local Safety Information</span>
     </a>
-    <a href="operation-code-website-redesign.html" class="case-nav-next">
+    <a href="true-link-beneficiary-experience.html" class="case-nav-next">
       <span class="case-nav-label">Next →</span>
-      <span class="case-nav-title">Website Redesign</span>
+      <span class="case-nav-title">Beneficiary Experience</span>
     </a>
   </nav>
   <footer class="site-footer">
