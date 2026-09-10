@@ -80,7 +80,7 @@
 
     var scrambleReveal = function (el, finalText) {
       var frameDelay = 45;
-      var duration = Math.min(4500, 900 + finalText.length * 18);
+      var duration = Math.min(2000, 500 + finalText.length * 7);
       var totalFrames = Math.round(duration / frameDelay);
       var frame = 0;
 
