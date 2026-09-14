@@ -879,12 +879,12 @@ body::before {
   margin: 0 auto;
   padding: 2em 1.25em 4em;
 }
-.case-hero > .win,
-.case-hero > .tag-row,
-.case-hero > .case-title,
-.case-hero > .case-summary,
-.case-hero > .case-meta,
-.case-hero > .placeholder-block {
+body:not(.case-overview) .case-hero > .win,
+body:not(.case-overview) .case-hero > .tag-row,
+body:not(.case-overview) .case-hero > .case-title,
+body:not(.case-overview) .case-hero > .case-summary,
+body:not(.case-overview) .case-hero > .case-meta,
+body:not(.case-overview) .case-hero > .placeholder-block {
   max-width: 760px;
   margin-left: auto;
   margin-right: auto;
@@ -1091,19 +1091,18 @@ body::before {
 .case-section .section-index {
   display: block;
   margin-bottom: 0.6em;
-  max-width: 760px;
-  margin-left: auto;
-  margin-right: auto;
 }
 .case-section-title {
   font-size: clamp(1.5rem, 3.2vw, 2.1rem);
   color: var(--bone);
   margin-bottom: 0.8em;
-  max-width: 760px;
-  margin-left: auto;
-  margin-right: auto;
 }
 .case-section-body {
+  max-width: 70ch;
+}
+body:not(.case-overview) .case-section .section-index,
+body:not(.case-overview) .case-section-title,
+body:not(.case-overview) .case-section-body {
   max-width: 760px;
   margin-left: auto;
   margin-right: auto;
