@@ -879,6 +879,16 @@ body::before {
   margin: 0 auto;
   padding: 2em 1.25em 4em;
 }
+.case-hero > .win,
+.case-hero > .tag-row,
+.case-hero > .case-title,
+.case-hero > .case-summary,
+.case-hero > .case-meta,
+.case-hero > .placeholder-block {
+  max-width: 760px;
+  margin-left: auto;
+  margin-right: auto;
+}
 .case-hero-cover {
   aspect-ratio: 21 / 8;
   overflow: hidden;
@@ -1078,14 +1088,25 @@ body::before {
   padding: 4em 1.25em;
   border-top: 1px solid var(--line);
 }
-.case-section .section-index { display: block; margin-bottom: 0.6em; }
+.case-section .section-index {
+  display: block;
+  margin-bottom: 0.6em;
+  max-width: 760px;
+  margin-left: auto;
+  margin-right: auto;
+}
 .case-section-title {
   font-size: clamp(1.5rem, 3.2vw, 2.1rem);
   color: var(--bone);
   margin-bottom: 0.8em;
+  max-width: 760px;
+  margin-left: auto;
+  margin-right: auto;
 }
 .case-section-body {
-  max-width: 70ch;
+  max-width: 760px;
+  margin-left: auto;
+  margin-right: auto;
 }
 .case-section-body p { color: var(--dim); }
 .case-section-body ul {
