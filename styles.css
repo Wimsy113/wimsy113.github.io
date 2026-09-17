@@ -1169,7 +1169,8 @@ body:not(.case-overview) .case-section-body {
 
 /* featured sub-project (the platform, not just a feature of it) */
 .subcase-featured {
-  display: block;
+  display: flex;
+  align-items: stretch;
   margin-top: 2em;
   border: 1px solid var(--line);
   background: var(--black);
@@ -1182,9 +1183,10 @@ body:not(.case-overview) .case-section-body {
   background: var(--panel);
 }
 .subcase-featured-cover {
-  aspect-ratio: 21 / 8;
+  flex: 0 0 320px;
+  aspect-ratio: 16 / 10;
   overflow: hidden;
-  border-bottom: 1px solid var(--line);
+  border-right: 1px solid var(--line);
   background: var(--panel);
 }
 .subcase-featured-cover img {
@@ -1193,7 +1195,11 @@ body:not(.case-overview) .case-section-body {
   object-fit: cover;
 }
 .subcase-featured-body {
-  padding: 2em;
+  flex: 1;
+  padding: 1.75em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 .subcase-featured-tag {
   display: inline-block;
@@ -1204,18 +1210,30 @@ body:not(.case-overview) .case-section-body {
   color: var(--accent);
   border: 1px solid var(--accent);
   padding: 0.25em 0.6em;
-  margin-bottom: 1em;
+  margin-bottom: 0.8em;
+  align-self: flex-start;
 }
 .subcase-featured-body h3 {
-  font-size: clamp(1.4rem, 3vw, 1.8rem);
-  margin: 0 0 0.5em;
+  font-size: 1.3rem;
+  margin: 0 0 0.4em;
   color: var(--bone);
 }
 .subcase-featured-body p {
   color: var(--dim);
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   max-width: 60ch;
-  margin: 0 0 1.2em;
+  margin: 0 0 0.8em;
+}
+@media (max-width: 800px) {
+  .subcase-featured {
+    flex-direction: column;
+  }
+  .subcase-featured-cover {
+    flex: none;
+    aspect-ratio: 21 / 9;
+    border-right: none;
+    border-bottom: 1px solid var(--line);
+  }
 }
 .subcase-grid-label {
   font-family: var(--font-mono);
