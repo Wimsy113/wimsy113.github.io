@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LoCo: Local Safety Information — hazadapt — Krystyna Ewing</title>
-  <meta name="description" content="LoCo — making local emergency information easier to find before it is needed.">
+  <title>LoCo — hazadapt — Krystyna Ewing</title>
+  <meta name="description" content="LoCo — bringing trusted local safety information into HazAdapt's Hazard Guides.">
 
   <link rel="icon" href="../images/favicon.ico">
 
@@ -53,151 +53,351 @@
         <span>LoCo</span>
       </div>
 
-      <p class="tag-row">hazadapt · UX Design · Multilingual Experiences · Location-Aware Design · Accessibility</p>
-      <h1 class="case-title">LoCo: Local Safety Information</h1>
-      <p class="case-summary">Making local emergency information easier to find before it's needed, location-aware, multilingual, and built to still work when connectivity doesn't.</p>
+      <p class="tag-row">hazadapt · UX Research · Product Design · Emergency Preparedness · Accessibility</p>
+      <h1 class="case-title">LoCo</h1>
+      <p class="case-summary">Bringing trusted local safety information into HazAdapt's Hazard Guides so emergency managers can provide community-specific guidance without forcing people to search for it somewhere else.</p>
 
       <dl class="case-meta">
         <div><dt>Role</dt><dd>Lead UX Designer</dd></div>
+        <div><dt>Duration</dt><dd>2023 to 2024</dd></div>
         <div><dt>Platform</dt><dd>Web, Mobile Web</dd></div>
-        <div><dt>Focus</dt><dd>UX Design, Multilingual Experiences, Location-Aware Design, Accessibility, Mobile UX</dd></div>
+        <div><dt>Tools</dt><dd>Figma, ClickUp, Google Docs, Otter.ai</dd></div>
+        <div><dt>Focus</dt><dd>UX Research, Product Design, Information Architecture, Accessibility, Responsive Design, Design Systems, Developer Handoff, QA</dd></div>
       </dl>
     </div>
 
     <section class="case-section">
       <span class="section-index">01. Overview</span>
-      <h2 class="case-section-title">Overview</h2>
+      <h2 class="case-section-title">Making preparedness information local</h2>
       <div class="case-section-body">
-        <p>When an emergency happens, people often need information about a place
-          immediately. The problem is that local emergency information tends to be
-          scattered across city websites, county pages, PDFs, emergency-management
-          systems, social media, and resources people may not even know exist.</p>
-        <p>HazAdapt's Local Safety Information product, commonly called LoCo, was
-          designed to create a clearer way for people to access safety information
-          associated with where they were.</p>
-        <p>My work focused on making that information understandable, accessible,
-          multilingual, mobile-friendly, and resilient enough to remain useful when
-          connectivity was unreliable.</p>
+        <p>HazAdapt's Hazard Guides gave people general information about hazards and
+          emergency preparedness, but preparedness is inherently local. The
+          information someone needs can change depending on where they live, the
+          hazards affecting their community, and the resources available around
+          them.</p>
+        <p>LoCo, short for Local Safety Information, was created to bridge that gap.</p>
+        <p>The product gave emergency managers and resilience organizations a way to
+          add trusted, localized information directly into HazAdapt's existing
+          Hazard Guides. Instead of asking someone to leave the platform and search
+          through government websites, PDFs, social media, or other resources,
+          relevant local information could appear alongside the general
+          preparedness guidance they were already using.</p>
+        <p>My role involved helping shape both sides of that experience: the tools
+          organizations used to create and manage local information and the
+          public-facing experience people used to find and interact with it.</p>
       </div>
     </section>
 
     <section class="case-section">
-      <span class="section-index">02. Designing Around Location</span>
-      <h2 class="case-section-title">"I'm here. What do I need to know?"</h2>
+      <span class="section-index">02. Understanding the Problem</span>
+      <h2 class="case-section-title">General guidance only gets you so far</h2>
       <div class="case-section-body">
-        <p>Location is the foundation of LoCo. The application needed to determine
-          which safety information was relevant to the user without expecting
-          someone to understand government jurisdiction structures.</p>
-        <p>People think: <em>I'm here. What do I need to know?</em> They do not
-          necessarily think: <em>Which county emergency-management jurisdiction
-          currently contains my coordinates?</em> The interface therefore had to
-          translate location data into something that felt natural.</p>
-
-        <h3>Handling Boundaries</h3>
-        <p>Geographic data becomes complicated around borders. Someone may be
-          physically close to a community while technically falling just outside of
-          its official boundary. We explored location buffering to reduce
-          situations where tiny differences in coordinates produced dramatically
-          different experiences.</p>
-        <p>The product also needed to represent multiple kinds of boundaries. We
-          designed behavior around two boundary concepts: a boundary users could see
-          in the interface, and a boundary associated with downloadable or
-          location-specific content. That allowed the visual experience and
-          underlying information behavior to serve different purposes without
-          pretending they were always identical.</p>
-        <div class="placeholder-image"><span>LoCo map</span></div>
-        <div class="placeholder-image"><span>Boundary visualization</span></div>
+        <p>A general Hazard Guide can explain what someone should do before, during,
+          and after a wildfire, flood, earthquake, or other emergency. What it
+          cannot always tell them is what that guidance means specifically for
+          their community.</p>
+        <p>Local emergency-management organizations already have that information,
+          but it is often distributed across multiple places. Someone may need to
+          find a city website, navigate to the correct department, locate a PDF,
+          search social media, or already know which organization is responsible
+          for the information they need.</p>
+        <p>We wanted to reduce that disconnect.</p>
+        <p>At the same time, simply putting more information into a Hazard Guide
+          wasn't necessarily the answer. These guides already contained a
+          significant amount of safety information. Adding local content without a
+          clear hierarchy risked making the experience more difficult to navigate,
+          especially for someone who might already be under stress.</p>
+        <p>That created two needs in tension:</p>
+        <ul>
+          <li>Local information needed to be visible enough to be discovered.</li>
+          <li>It could not overwhelm or compete with the core safety guidance.</li>
+        </ul>
+        <div class="placeholder-image"><span>HazAdapt Hazard Guide before LoCo integration</span></div>
       </div>
     </section>
 
     <section class="case-section">
-      <span class="section-index">03. Multilingual Safety Information</span>
-      <h2 class="case-section-title">Accessibility means understanding it, too</h2>
+      <span class="section-index">03. Research</span>
+      <h2 class="case-section-title">Understanding how local information fits into preparedness</h2>
       <div class="case-section-body">
-        <p>Emergency information is only useful if people can understand it. LoCo
-          was designed to support multiple languages, including English, Spanish,
-          French, German, Russian, Chinese, and Japanese.</p>
-        <p>Language controls had to remain easy to find without overwhelming the
-          core content. We treated language selection as part of accessibility
-          rather than a secondary preference hidden deep inside settings.</p>
-        <div class="placeholder-image"><span>Language selector</span></div>
-        <div class="placeholder-image"><span>Multilingual content example</span></div>
+        <p>Our research looked at both the organizations providing safety
+          information and the people ultimately consuming it.</p>
+        <p>For emergency managers and resilience organizations, we needed to
+          understand how they thought about local preparedness content. The
+          information wasn't simply associated with a hazard. It could also relate
+          to a particular point in the preparedness process and a particular
+          geographic area.</p>
+        <p>That meant asking questions such as:</p>
+        <ul>
+          <li>Where does this information belong within a Hazard Guide?</li>
+          <li>Which community or geographic area should receive it?</li>
+          <li>How much information does someone need immediately?</li>
+          <li>What information can be progressively revealed?</li>
+          <li>How should an organization preview information before publishing it?</li>
+          <li>How do we make local information recognizable without making it distracting?</li>
+          <li>How does the experience translate to a phone?</li>
+          <li>What happens when someone's connection is limited or unavailable?</li>
+        </ul>
+        <p>The research helped establish that LoCo wasn't simply a
+          content-management feature. It was a system connecting organizations,
+          geography, Hazard Guide structure, and the public-facing preparedness
+          experience.</p>
       </div>
     </section>
 
     <section class="case-section">
-      <span class="section-index">04. Mobile First Where It Matters</span>
-      <h2 class="case-section-title">Designing for the device people actually have with them</h2>
+      <span class="section-index">04. Designing the Content Workflow</span>
+      <h2 class="case-section-title">Putting information where it actually belongs</h2>
       <div class="case-section-body">
-        <p>People are unlikely to be sitting at a desktop computer when they
-          suddenly need local emergency information. Mobile behavior therefore
-          mattered significantly. LoCo moved into a mobile beta experience where we
-          could test how location-aware safety information behaved on the device
-          someone would most likely have with them.</p>
-        <p>Navigation included a "Jump to LoCo" interaction to get users into the
-          local-information experience quickly. The goal was to reduce the distance
-          between <em>something is happening around me</em> and <em>here is
-          information that can help me understand what to do.</em></p>
+        <p>The organization-facing experience needed structure.</p>
+        <p>Rather than giving emergency managers an unrestricted publishing tool and
+          asking them to decide where their content should appear afterward, we
+          connected the creation process directly to the structure already used by
+          Hazard Guides.</p>
+        <p>Organizations could identify the appropriate:</p>
+        <p class="flow-line">Hazard → Stage → Space</p>
+        <p>This gave the local information context.</p>
+        <p>Instead of creating a separate library of local resources, an
+          organization could place information alongside the preparedness guidance
+          it supplemented.</p>
+        <p>The content model also needed to support different amounts of
+          information. Some local guidance might only require a short message,
+          while other information needed additional explanation.</p>
+        <p>Tier 1, Tier 2, and Tier 3 content allowed the experience to
+          progressively reveal more information rather than placing everything in
+          front of the user at once.</p>
+        <p>The creation tools also accounted for links, rich text, language
+          options, and geographic assignment.</p>
+        <div class="placeholder-image"><span>Creating Local Safety Information</span></div>
+        <div class="placeholder-image"><span>Connecting local information to the Hazard Guide structure</span></div>
+        <div class="placeholder-image"><span>Progressive levels of Local Safety Information</span></div>
       </div>
     </section>
 
     <section class="case-section">
-      <span class="section-index">05. Designing for Bad Connectivity</span>
-      <h2 class="case-section-title">When the network fails, the product can't</h2>
+      <span class="section-index">05. The Problem We Found</span>
+      <h2 class="case-section-title">More information was becoming more noise</h2>
       <div class="case-section-body">
-        <p>Emergency technology has an uncomfortable contradiction: the moment
-          people need information most may also be the moment their internet
-          connection works least reliably. LoCo therefore needed fallback behavior.
-          We designed an offline experience so previously available or fallback
-          safety information could still provide value when the application could
-          not retrieve everything normally.</p>
-        <p>A roughly five-minute buffer also helped account for changes in location
-          and connectivity instead of requiring constant perfect communication with
-          the server.</p>
+        <p>Once we started putting LoCo into the Hazard Guide experience, another
+          problem became much more obvious.</p>
+        <p>Local information had to stand out enough for someone to understand
+          that something specific to their community was available. But every
+          visual element we added also had to compete with the existing
+          preparedness content.</p>
+        <p>Earlier explorations used combinations of icons, interactive elements,
+          borders, badges, color, and other visual treatments to distinguish the
+          local information.</p>
+        <p>Individually, those choices made sense.</p>
+        <p>Together, they could make the interface busier than it needed to be.</p>
+        <p>When multiple elements were given similar visual weight, users had more
+          things to interpret before they could determine what actually mattered.</p>
+        <p>The challenge was no longer simply <em>How do we make LoCo visible?</em></p>
+        <p>It became <em>How do we make LoCo recognizable without making the
+          entire Hazard Guide harder to use?</em></p>
+        <div class="placeholder-image"><span>Earlier visual treatment of Local Safety Information</span></div>
       </div>
     </section>
 
     <section class="case-section">
-      <span class="section-index">06. Content Hierarchy</span>
-      <h2 class="case-section-title">Not just a collection of links</h2>
+      <span class="section-index">06. The Pivot</span>
+      <h2 class="case-section-title">Making relevance louder than the interface</h2>
       <div class="case-section-body">
-        <p>A safety-information product can easily become a giant collection of
-          links. That was not what we wanted. Information needed to be structured
-          around what someone was trying to understand. The interface therefore
-          emphasized clear hierarchy, scannability, and the ability to move quickly
-          between major categories of local information.</p>
-        <p>The design had to work for someone casually preparing at home and someone
-          quickly looking for information during a stressful situation. Those are
-          very different cognitive environments.</p>
+        <p>Instead of continuing to add visual emphasis, we started simplifying.</p>
+        <p>The goal shifted away from making LoCo look like a separate feature
+          inside the Hazard Guide. Local Safety Information needed to feel like
+          part of the guide itself.</p>
+        <p>We refined the information hierarchy, iconography, interactive states,
+          borders, spacing, color usage, and progressive disclosure.</p>
+        <p>Badge-style elements and other visually heavy treatments were
+          reconsidered in favor of more neutral patterns that communicated
+          additional information without competing with the primary guidance.</p>
+        <p>Internal taste tests, demos, and iterative reviews helped us see where
+          the interface was asking people to process too much at once.</p>
+        <p>The result was a quieter interaction model.</p>
+        <p>LoCo didn't need to announce every capability of the system.</p>
+        <p>It needed to tell someone <em>there is information here that is
+          relevant to where you are.</em></p>
+        <div class="placeholder-image"><span>Before and after the LoCo interface refinement</span></div>
       </div>
     </section>
 
     <section class="case-section">
-      <span class="section-index">07. Connecting LoCo to the Larger Platform</span>
-      <h2 class="case-section-title">From public tool to shared signal</h2>
+      <span class="section-index">07. Designing for Local Context</span>
+      <h2 class="case-section-title">Showing the right information in the right place</h2>
       <div class="case-section-body">
-        <p>LoCo eventually became meaningful beyond the standalone public
-          experience. Within ResiliencePoint, emergency-management professionals
-          could investigate whether Local Safety Information was available within a
-          particular area. That created a relationship between the public-facing
-          preparedness tools and the analytics tools used by organizations.</p>
-        <p>One product helped people access local information. The other could help
-          emergency managers better understand preparedness at the community
-          level.</p>
+        <p>Geography was fundamental to LoCo.</p>
+        <p>Organizations needed to associate their information with the geographic
+          area it actually served. That geographic relationship helped determine
+          when Local Safety Information was relevant instead of showing every
+          piece of local content to everyone.</p>
+        <p>This kept the feature from becoming another generic section of a
+          Hazard Guide.</p>
+        <p>The experience was designed around the idea that someone should
+          encounter local information because it was relevant to their context,
+          not simply because more content happened to exist.</p>
+        <p>We also had to think about discovery outside the individual Hazard
+          Guide.</p>
+        <p>If someone didn't know Local Safety Information existed, designing a
+          good interaction inside the guide wouldn't solve the entire problem.
+          LoCo therefore became part of the broader HazAdapt experience, including
+          entry points that helped people recognize when local information was
+          available.</p>
+        <p>Consistent visual cues were important here. Once someone learned how
+          HazAdapt represented Local Safety Information, that pattern needed to
+          remain recognizable elsewhere.</p>
+        <div class="placeholder-image"><span>Assigning Local Safety Information to a community</span></div>
+        <div class="placeholder-image"><span>Helping people discover available local information</span></div>
       </div>
     </section>
 
     <section class="case-section">
-      <span class="section-index">08. What I Learned</span>
-      <h2 class="case-section-title">Ideal conditions disappear: design for that</h2>
+      <span class="section-index">08. Responsive, Multilingual &amp; Offline</span>
+      <h2 class="case-section-title">Designing for the conditions people actually use it in</h2>
       <div class="case-section-body">
-        <p>LoCo made location feel less like a map-design problem and more like an
-          accessibility problem. A technically accurate boundary is not
-          automatically a useful experience. A perfectly translated string is not
-          automatically understandable. An application that works beautifully
-          online is not automatically useful during an emergency.</p>
-        <p>Designing for emergency preparedness means constantly asking what happens
-          when the ideal conditions disappear.</p>
+        <p>LoCo couldn't assume someone was sitting at a desktop computer with a
+          perfect internet connection.</p>
+        <p>The public-facing experience needed to work across desktop and mobile
+          web. On desktop, interactive and hover states could help communicate
+          that additional information was available. On mobile, the same
+          interactions had to work without relying on hover behavior and without
+          turning a smaller screen into a dense wall of preparedness content.</p>
+        <p>The product also needed to accommodate multiple languages, including
+          English, Spanish, French, German, Russian, Chinese, and Japanese.</p>
+        <p>Translated content can change significantly in length, so components
+          couldn't be designed around the assumption that a line of English text
+          would occupy the same amount of space in every language. That affected
+          component sizing, hierarchy, wrapping behavior, spacing, and responsive
+          layouts.</p>
+        <p>Connectivity created another consideration.</p>
+        <p>Emergency information may be needed at exactly the moment someone's
+          connection becomes unreliable. LoCo therefore had to account for offline
+          or degraded-network conditions so previously available safety
+          information could remain useful rather than designing the entire
+          experience around constant connectivity.</p>
+        <div class="placeholder-image"><span>LoCo on desktop</span></div>
+        <div class="placeholder-image"><span>LoCo on mobile</span></div>
+        <div class="placeholder-image"><span>Multilingual content behavior</span></div>
+        <div class="placeholder-image"><span>Designing for unreliable connectivity</span></div>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <span class="section-index">09. Review, Publishing &amp; Engagement</span>
+      <h2 class="case-section-title">The work doesn't stop at publish</h2>
+      <div class="case-section-body">
+        <p>Because organizations were publishing safety information, the workflow
+          needed more structure than a typical content editor.</p>
+        <p>Organizations could create their information, preview how it would
+          appear, review it, and submit it before the content became publicly
+          available. The workflow followed:</p>
+        <p class="flow-line">Create → Preview → Review → Submit → Approval → Live</p>
+        <p>This created a deliberate separation between writing something and
+          publishing trusted safety information to the public.</p>
+        <p>But publishing was only one half of the problem.</p>
+        <p>Organizations also needed some understanding of whether people were
+          actually finding and interacting with the information they created.
+          LoCo included engagement tracking around interactions such as Hazard
+          Guide activity, Local Safety Information interactions, link activity,
+          and geographic engagement.</p>
+        <p>A history log also gave organizations visibility into how their content
+          changed over time.</p>
+        <p>Instead of publishing information and simply assuming people were
+          finding it, organizations had a way to better understand how their
+          local content was being used.</p>
+        <div class="placeholder-image"><span>Reviewing information before publication</span></div>
+        <div class="placeholder-image"><span>LoCo publishing workflow</span></div>
+        <div class="placeholder-image"><span>Understanding interaction with Local Safety Information</span></div>
+        <div class="placeholder-image"><span>Tracking changes over time</span></div>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <span class="section-index">10. Accessibility &amp; Inclusive Design</span>
+      <h2 class="case-section-title">Safety information has to work for more than one kind of user</h2>
+      <div class="case-section-body">
+        <p>Accessibility was part of the product process rather than something
+          added once the interface was complete.</p>
+        <p>We considered contrast, hierarchy, interaction states, responsive
+          behavior, language, and the amount of information someone had to
+          understand at once.</p>
+        <p>The context made cognitive accessibility especially important.</p>
+        <p>Someone using HazAdapt might be casually preparing for a hazard weeks or
+          months ahead of time. Someone else could be looking at the exact same
+          interface while stressed, distracted, unfamiliar with the area, or
+          trying to understand what to do quickly.</p>
+        <p>That changed how we thought about hierarchy.</p>
+        <p>Important information needed to be immediately scannable. Supporting
+          details could still exist, but they shouldn't compete with what someone
+          needed first.</p>
+        <p>Progressive disclosure became especially valuable because it allowed
+          the interface to preserve detailed local information without requiring
+          every user to process all of it immediately.</p>
+        <p>The goal wasn't simply to make LoCo technically accessible.</p>
+        <p>It was to make local safety information understandable under the kinds
+          of conditions in which someone might actually need it.</p>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <span class="section-index">11. Building for Development</span>
+      <h2 class="case-section-title">Turning the system into a real product</h2>
+      <div class="case-section-body">
+        <p>My role continued beyond designing the screens.</p>
+        <p>LoCo had to work within the existing HazAdapt product, design system,
+          Hazard Guide structure, and responsive behavior rather than functioning
+          as an isolated feature.</p>
+        <p>I worked with components and design-system patterns in Figma and
+          collaborated with development during implementation. That included:</p>
+        <ul>
+          <li>Reviewing implemented designs</li>
+          <li>Testing responsive behavior</li>
+          <li>Checking interaction states</li>
+          <li>Identifying inconsistencies between design and implementation</li>
+          <li>Clarifying intended component behavior</li>
+          <li>Reviewing accessibility issues</li>
+          <li>Supporting QA and acceptance testing</li>
+        </ul>
+        <p>One of the most important boundaries we maintained was what LoCo
+          wasn't.</p>
+        <p>LoCo wasn't intended to become a real-time emergency alerting system or
+          replace existing emergency-notification platforms. Its purpose was much
+          more focused: allow trusted organizations to supplement HazAdapt's
+          existing preparedness guidance with relevant local information.</p>
+        <p>Restricted-access functionality and other expansions were considered as
+          possible future directions rather than being treated as part of the
+          core experience.</p>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <span class="section-index">12. What I Learned</span>
+      <h2 class="case-section-title">More information isn't automatically better information</h2>
+      <div class="case-section-body">
+        <p>LoCo reinforced something that became important across a lot of my work
+          at HazAdapt: complexity doesn't disappear just because you put it
+          behind a clean interface.</p>
+        <p>There was a lot happening underneath this product. We were dealing with
+          hazards, stages, spaces, geographic areas, organizations, content tiers,
+          publishing workflows, languages, accessibility, mobile behavior,
+          engagement, and unreliable connectivity.</p>
+        <p>The UX challenge wasn't figuring out how to show all of that.</p>
+        <p>It was figuring out which parts of that complexity someone actually
+          needed to understand at a particular moment.</p>
+        <p>Some of our earlier explorations exposed too much visual information at
+          once. Simplifying the experience didn't mean removing the complexity
+          that made LoCo useful. It meant putting that complexity in the right
+          places.</p>
+        <p>The project also changed the way I think about designing
+          emergency-preparedness products. You can't assume the person using the
+          interface is calmly sitting at a computer and carefully reading every
+          option. They might be on their phone. They might be unfamiliar with the
+          area. They might have a poor connection. They might be stressed.</p>
+        <p>The interface still has to make sense.</p>
+        <p>The best version of LoCo wasn't the one that showed everything the
+          system could do.</p>
+        <p>It was the one that helped someone understand <em>what matters here,
+          where I am, right now</em> without needing to understand the system
+          behind it.</p>
       </div>
     </section>
   </main>

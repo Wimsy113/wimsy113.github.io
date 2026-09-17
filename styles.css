@@ -1120,6 +1120,13 @@ body:not(.case-overview) .case-section-body {
   margin: 1.8em 0 0.6em;
 }
 .case-section-body h3:first-child { margin-top: 0; }
+.case-section-body .flow-line {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  color: var(--accent);
+  letter-spacing: 0.02em;
+  margin: 1.4em 0;
+}
 
 /* sub-project cards on overview pages */
 .subcase-grid {
