@@ -1167,6 +1167,65 @@ body:not(.case-overview) .case-section-body {
   color: var(--accent);
 }
 
+/* featured sub-project (the platform, not just a feature of it) */
+.subcase-featured {
+  display: block;
+  margin-top: 2em;
+  border: 1px solid var(--line);
+  background: var(--black);
+  text-decoration: none;
+  color: inherit;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+.subcase-featured:hover, .subcase-featured:focus-visible {
+  border-color: var(--accent);
+  background: var(--panel);
+}
+.subcase-featured-cover {
+  aspect-ratio: 21 / 8;
+  overflow: hidden;
+  border-bottom: 1px solid var(--line);
+  background: var(--panel);
+}
+.subcase-featured-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.subcase-featured-body {
+  padding: 2em;
+}
+.subcase-featured-tag {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  padding: 0.25em 0.6em;
+  margin-bottom: 1em;
+}
+.subcase-featured-body h3 {
+  font-size: clamp(1.4rem, 3vw, 1.8rem);
+  margin: 0 0 0.5em;
+  color: var(--bone);
+}
+.subcase-featured-body p {
+  color: var(--dim);
+  font-size: 0.95rem;
+  max-width: 60ch;
+  margin: 0 0 1.2em;
+}
+.subcase-grid-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--dim);
+  margin: 2.5em 0 0.8em;
+}
+
 /* prev/next case navigation */
 .case-nav {
   max-width: 1200px;
