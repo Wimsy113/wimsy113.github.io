@@ -630,6 +630,67 @@ body::before {
 .case-card-body .tag-row { font-size: 0.78rem; }
 .case-card-body .text-link { align-self: flex-start; }
 
+/* flagship case study — deliberately bigger and more editorial than the rest of the grid */
+.featured-work {
+  max-width: 1200px;
+  margin: 3em auto 0;
+}
+.featured-case {
+  display: block;
+  background: var(--black);
+  border: 1px solid var(--accent);
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.featured-case:hover, .featured-case:focus-visible {
+  transform: translateY(-6px);
+  box-shadow: 0 24px 48px rgba(0,0,0,0.5);
+}
+.featured-case-cover {
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-bottom: 1px solid var(--line);
+}
+@media (min-width: 700px) {
+  .featured-case-cover { aspect-ratio: 21 / 8; }
+}
+.featured-case-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.featured-case-body {
+  padding: 2em 2.5em 2.5em;
+}
+@media (min-width: 700px) {
+  .featured-case-body { padding: 2.5em 3.5em 3em; }
+}
+.featured-case-tag {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  padding: 0.3em 0.7em;
+  margin-bottom: 1em;
+}
+.featured-case-body h3 {
+  font-size: clamp(1.7rem, 8vw, 3.4rem);
+  margin: 0 0 0.3em;
+  overflow-wrap: break-word;
+}
+.featured-case-body .tag-row { margin-bottom: 1.2em; }
+.featured-case-copy {
+  color: var(--dim);
+  font-size: 1.1rem;
+  max-width: 65ch;
+  margin: 0 0 1.4em;
+}
+.featured-case-body .text-link { font-size: 0.85rem; }
+
 .other-clients {
   max-width: 1200px;
   margin: 3.5em auto 0;
@@ -1174,56 +1235,25 @@ body:not(.case-overview) .case-section-body {
   color: var(--accent);
 }
 
-/* featured sub-project (the platform, not just a feature of it) */
-.subcase-featured {
-  display: block;
-  margin-top: 2em;
-  border: 1px solid var(--line);
-  background: var(--black);
-  text-decoration: none;
-  color: inherit;
-  transition: border-color 0.15s ease, background 0.15s ease;
-}
-.subcase-featured:hover, .subcase-featured:focus-visible {
-  border-color: var(--accent);
-  background: var(--panel);
-}
-.subcase-featured-cover {
-  aspect-ratio: 21 / 8;
-  overflow: hidden;
-  border-bottom: 1px solid var(--line);
-  background: var(--panel);
-}
-.subcase-featured-cover img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-.subcase-featured-body {
-  padding: 2em;
-}
-.subcase-featured-tag {
-  display: inline-block;
-  font-family: var(--font-mono);
-  font-size: 0.68rem;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--accent);
-  border: 1px solid var(--accent);
-  padding: 0.25em 0.6em;
-  margin-bottom: 1em;
-}
-.subcase-featured-body h3 {
-  font-size: clamp(1.4rem, 3vw, 1.8rem);
-  margin: 0 0 0.5em;
-  color: var(--bone);
-}
-.subcase-featured-body p {
+/* subtle pointer to a related case study that already has its own entry point */
+.rp-callout {
+  margin-top: 2.5em;
+  padding: 1.4em 1.75em;
+  border: 1px dashed var(--line);
   color: var(--dim);
-  font-size: 0.95rem;
-  max-width: 60ch;
-  margin: 0 0 1.2em;
+  font-size: 0.85rem;
 }
+.rp-callout p { margin: 0; }
+.rp-callout strong { color: var(--bone); }
+.rp-callout a {
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+}
+.rp-callout a:hover, .rp-callout a:focus-visible {
+  border-bottom-color: var(--accent);
+}
+
 .subcase-grid-label {
   font-family: var(--font-mono);
   font-size: 0.7rem;
@@ -1232,6 +1262,7 @@ body:not(.case-overview) .case-section-body {
   color: var(--dim);
   margin: 2.5em 0 0.8em;
 }
+.subcase-grid-label.center { text-align: center; }
 
 /* prev/next case navigation */
 .case-nav {
