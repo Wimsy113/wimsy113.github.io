@@ -453,26 +453,20 @@ body::before {
   font-family: var(--font-voice);
   font-weight: 400;
   font-style: normal;
-  font-size: clamp(2.6rem, 7vw, 5.8rem);
+  font-size: clamp(2.8rem, 9vw, 7rem);
   line-height: 1.1;
   color: var(--h-fg);
   text-transform: none;
   letter-spacing: 0;
-  max-width: 15ch;
-  margin: 0 0 0.9em;
-}
-.home .hero-statement em {
-  font-style: normal;
-  font-weight: 600;
-  color: var(--h-accent);
+  margin: 0 0 0.7em;
 }
 .home .hero-support {
   font-family: var(--font-body);
-  font-size: 1.05rem;
-  line-height: 1.6;
+  font-size: 1.1rem;
+  line-height: 1.7;
   color: var(--h-muted);
-  max-width: 38ch;
-  margin: 0 0 2.2em clamp(0px, 18vw, 220px);
+  max-width: 58ch;
+  margin: 0 0 2.2em;
 }
 .home .hero-cta.text-link {
   align-self: flex-start;
