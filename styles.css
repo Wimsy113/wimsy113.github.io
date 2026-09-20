@@ -486,25 +486,22 @@ body::before {
 }
 
 /* ---------- FEATURE: ResiliencePoint, the cover story ---------- */
+/* the featured project gets a wider content column than the rest of the
+   homepage so its image can feel expansive, while text inside (.feature-hook,
+   etc.) keeps its own comfortable reading width via max-width/ch constraints */
 .home .feature {
-  max-width: 1320px;
+  max-width: 1760px;
   margin: 0 auto;
   padding: 2em 1.5em 5em;
 }
 .home .feature-frame {
   position: relative;
   border: 1px solid var(--h-line);
-  overflow: hidden;
-  aspect-ratio: 16 / 9;
-}
-@media (min-width: 700px) {
-  .home .feature-frame { aspect-ratio: 21 / 9; }
 }
 .home .feature-frame img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
   display: block;
+  width: 100%;
+  height: auto;
 }
 .home .feature-stamp {
   position: absolute;
@@ -620,12 +617,10 @@ body::before {
 .home .collection--truelink .collection-body { grid-template-columns: 1.1fr 0.9fr; }
 .home .collection-media {
   border: 1px solid var(--h-line);
-  aspect-ratio: 4 / 3;
-  overflow: hidden;
   background: var(--h-bg-raised);
+  padding: 2em;
 }
-.home .collection--truelink .collection-media { aspect-ratio: 16 / 10; }
-.home .collection-media img { width: 100%; height: 100%; object-fit: cover; }
+.home .collection-media img { display: block; width: 100%; height: auto; }
 .home .project-index {
   list-style: none;
   margin: 0;
@@ -672,11 +667,10 @@ body::before {
 .home .standalone-frame {
   position: relative;
   border: 1px solid var(--h-line);
-  aspect-ratio: 4 / 3;
-  overflow: hidden;
   background: var(--h-bg-raised);
+  padding: 2em;
 }
-.home .standalone-frame img { width: 100%; height: 100%; object-fit: cover; }
+.home .standalone-frame img { display: block; width: 100%; height: auto; }
 .home .standalone-number {
   position: absolute;
   top: -0.2em;
