@@ -10,11 +10,11 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600&family=Space+Mono:wght@400;700&family=Fraunces:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body class="home">
 
   <a class="skip-link" href="#main">Skip to content</a>
 
@@ -50,23 +50,25 @@
 
     <!-- ============ HERO ============ -->
     <section class="hero">
-      <div class="hero-content">
-        <div class="hero-text">
-          <p class="hero-kicker">$ whoami</p>
-          <h1 class="hero-name">Krystyna<br>Ewing<span class="cursor" aria-hidden="true">_</span></h1>
-          <p class="hero-role">Product Design / Front-End Development / Illustration</p>
-          <p class="hero-statement">
-            Ten years designing and building software for people having a hard day:
-            water crises, financial abuse, disaster prep, career pivots. Still allergic
-            to a boring interface.
-          </p>
-          <div class="hero-links">
-            <a href="#work" class="text-link">Work ↓</a>
-            <a href="#contact" class="text-link">Contact ↗</a>
-          </div>
+      <div class="hero-grid">
+        <div class="hero-meta">
+          <p class="doc-label">Field Notes — Vol. 01</p>
+          <p class="hero-byline">Krystyna Ewing<span class="cursor" aria-hidden="true">_</span></p>
+          <p class="hero-role">UX Design / Product / Research / Creative Technology</p>
         </div>
+
+        <h1 class="hero-statement">Working as intended<br><em>isn't the same as</em> working.</h1>
+
+        <p class="hero-annotation">→ Ten years building for people having a hard day: water
+          crises, financial abuse, disaster prep, career pivots.</p>
+
         <div class="hero-image duotone">
           <img src="images/hero.png" alt="Illustrated purple-haired, green-eyed character with fangs, Krystyna's drawn alter ego">
+        </div>
+
+        <div class="hero-links">
+          <a href="#work" class="text-link">Work ↓</a>
+          <a href="#contact" class="text-link">Contact ↗</a>
         </div>
       </div>
     </section>
@@ -116,8 +118,8 @@
 
     <!-- ============ CAPABILITIES ============ -->
     <section class="skills" id="skills">
-      <span class="section-index center">~/capabilities</span>
-      <h2 class="section-title center">What I actually do</h2>
+      <span class="section-index">~/capabilities</span>
+      <h2 class="section-title">What I actually do</h2>
 
       <div class="skills-grid">
         <div class="skill-group">
@@ -155,83 +157,110 @@
 
     <!-- ============ WORK ============ -->
     <section class="work" id="work">
-      <span class="section-index center">~/work</span>
-      <h2 class="section-title center">Things I've shipped</h2>
+      <span class="section-index">~/work</span>
+      <h2 class="section-title">Things I've shipped</h2>
 
-      <div class="featured-work">
-        <a class="featured-case" href="work/hazadapt-resiliencepoint.html">
-          <div class="featured-case-cover">
-            <img src="images/work/hazadapt-resiliencepoint/platform-cover.png" alt="ResiliencePoint dashboard showing trending hazards and a nationwide activity map">
+      <!-- 01 — ResiliencePoint, the flagship -->
+      <article class="dossier dossier--flagship">
+        <div class="dossier-media">
+          <img src="images/work/hazadapt-resiliencepoint/platform-cover.png" alt="ResiliencePoint dashboard showing trending hazards and a nationwide activity map">
+        </div>
+        <div class="dossier-body">
+          <div class="dossier-tag-row">
+            <span class="dossier-number">01</span>
+            <span class="dossier-kicker">Featured Investigation</span>
           </div>
-          <div class="featured-case-body">
-            <span class="featured-case-tag">Flagship Case Study</span>
-            <h3>ResiliencePoint</h3>
-            <p class="tag-row">hazadapt · UX Research · Product Design · Data Visualization</p>
-            <p class="featured-case-copy">We built what we thought emergency managers needed. Research
-              showed us they needed something else: a way to investigate community
-              preparedness data, not just view it. ResiliencePoint grew from a
-              simple dashboard into a full platform built around that
-              difference.</p>
-            <span class="text-link">View ResiliencePoint Case Study →</span>
-          </div>
-        </a>
-      </div>
+          <p class="dossier-org">HazAdapt</p>
+          <h3 class="dossier-title">ResiliencePoint</h3>
+          <p class="dossier-hook">We built what we thought emergency managers needed.
+            Research showed us they needed something else: a way to investigate
+            community preparedness data, not just view it.</p>
+          <p class="dossier-annotation">→ research changed the product</p>
+          <a href="work/hazadapt-resiliencepoint.html" class="text-link">View ResiliencePoint Case Study →</a>
+        </div>
+      </article>
 
-      <p class="subcase-grid-label center">Also shipped</p>
-      <div class="work-grid">
-
-        <article class="case-card">
-          <div class="win-bar">
-            <span class="win-dots"><span class="win-dot"></span><span class="win-dot"></span><span class="win-dot"></span></span>
-            <span class="win-title">hazadapt.fig</span>
-          </div>
-          <div class="case-card-cover">
+      <!-- 02 — HazAdapt, a project index -->
+      <article class="dossier dossier--index">
+        <div class="dossier-tag-row">
+          <span class="dossier-number">02</span>
+          <span class="dossier-kicker">Project Index</span>
+        </div>
+        <div class="index-layout">
+          <div class="index-media">
             <img src="images/hazadapt_album.png" alt="hazadapt logo">
           </div>
-          <div class="case-card-body">
-            <p class="tag-row">UX Design · Content Strategy · Public Safety</p>
-            <h3>HazAdapt</h3>
-            <p>Multiple products and features focused on emergency preparedness,
-              community resilience, and access to safety information.</p>
+          <div class="index-body">
+            <h3 class="dossier-title-sm">HazAdapt</h3>
+            <p class="dossier-hook-sm">Multiple products and features focused on
+              emergency preparedness, community resilience, and access to safety
+              information.</p>
+            <ul class="index-list">
+              <li>
+                <a href="work/hazadapt-loco.html">
+                  <span class="index-num">02.1</span>
+                  <span class="index-name">LoCo</span>
+                  <span class="index-note">→ local safety info, inside the Hazard Guide</span>
+                </a>
+              </li>
+              <li>
+                <a href="work/hazadapt-prep-checks.html">
+                  <span class="index-num">02.2</span>
+                  <span class="index-name">Prep Checks</span>
+                  <span class="index-note">→ bite-sized preparedness people finish</span>
+                </a>
+              </li>
+            </ul>
             <a href="work/hazadapt.html" class="text-link">Explore HazAdapt →</a>
           </div>
-        </article>
+        </div>
+      </article>
 
-        <article class="case-card">
-          <div class="win-bar">
-            <span class="win-dots"><span class="win-dot"></span><span class="win-dot"></span><span class="win-dot"></span></span>
-            <span class="win-title">true-link.fig</span>
-          </div>
-          <div class="case-card-cover">
-            <img src="images/True_Link_album.png" alt="True Link logo">
-          </div>
-          <div class="case-card-body">
-            <p class="tag-row">Fintech · Accessibility · Design Systems</p>
-            <h3>True Link</h3>
-            <p>Financial tools built to protect the safety and independence of
-              aging and disabled adults without stripping away their autonomy.</p>
+      <!-- 03 — True Link, same system, different composition -->
+      <article class="dossier dossier--split">
+        <div class="dossier-tag-row">
+          <span class="dossier-number">03</span>
+          <span class="dossier-kicker">Company Collection</span>
+        </div>
+        <div class="split-layout">
+          <div class="split-body">
+            <h3 class="dossier-title-sm">True Link</h3>
+            <p class="dossier-hook-sm">Financial tools built to protect the safety
+              and independence of aging and disabled adults without stripping away
+              their autonomy.</p>
+            <p class="dossier-annotation">→ trust and safety, not just fintech</p>
+            <ul class="inline-index">
+              <li><a href="work/true-link-beneficiary-experience.html">03.1 Beneficiary Experience</a></li>
+              <li><a href="work/true-link-create-draft-disbursements.html">03.2 Create Draft Disbursements</a></li>
+            </ul>
             <a href="work/true-link.html" class="text-link">View Case Study →</a>
           </div>
-        </article>
-
-        <article class="case-card">
-          <div class="win-bar">
-            <span class="win-dots"><span class="win-dot"></span><span class="win-dot"></span><span class="win-dot"></span></span>
-            <span class="win-title">welldone.fig</span>
+          <div class="split-media">
+            <img src="images/True_Link_album.png" alt="True Link logo">
           </div>
-          <div class="case-card-cover">
+        </div>
+      </article>
+
+      <!-- 04 — WellDone, standalone -->
+      <article class="dossier dossier--standalone">
+        <div class="dossier-tag-row">
+          <span class="dossier-number">04</span>
+          <span class="dossier-kicker">Standalone Project</span>
+        </div>
+        <div class="standalone-layout">
+          <div class="standalone-media">
             <img src="images/welldone_album.png" alt="WellDone logo">
           </div>
-          <div class="case-card-body">
-            <p class="tag-row">UX Research · Information Architecture · Nonprofit</p>
-            <h3>WellDone</h3>
-            <p>Redesigning how a nonprofit monitors remote water infrastructure,
-              from a dense table to scannable, status-first cards.</p>
+          <div class="standalone-body">
+            <h3 class="dossier-title-sm">WellDone</h3>
+            <p class="dossier-hook-sm">Redesigning how a nonprofit monitors remote
+              water infrastructure, from a dense table to scannable, status-first
+              cards.</p>
+            <p class="dossier-annotation">→ moved from a table to status-first cards</p>
             <a href="work/welldone.html" class="text-link">View Case Study →</a>
           </div>
-        </article>
-
-      </div>
+        </div>
+      </article>
 
       <div class="other-clients">
         <p class="tag-row">Also built for</p>
@@ -244,10 +273,25 @@
       </div>
     </section>
 
+    <!-- ============ NOTEBOOK / QUESTIONS ============ -->
+    <section class="questions" id="questions">
+      <span class="section-index">~/notebook</span>
+      <h2 class="section-title">Things I tend to question</h2>
+
+      <div class="question-field">
+        <p class="q q-1">Why does the user need to know this?</p>
+        <p class="q q-2">→ what happens<br>without internet?</p>
+        <p class="q q-3">Is that actually a button?</p>
+        <p class="q q-4">who isn't<br>represented<br>here?</p>
+        <p class="q q-5">What happens outside the happy path?</p>
+        <p class="q q-6">Are we fixing the interface, or fixing the wrong problem?</p>
+      </div>
+    </section>
+
     <!-- ============ INDEPENDENT WORK ============ -->
     <section class="side-quests" id="side-quests">
-      <span class="section-index center">~/independent</span>
-      <h2 class="section-title center">Personal projects, no client required</h2>
+      <span class="section-index">~/independent</span>
+      <h2 class="section-title">Personal projects, no client required</h2>
 
       <div class="quest-grid">
         <article class="quest-card">
@@ -327,7 +371,7 @@
 
     <!-- ============ CONTACT ============ -->
     <section class="contact" id="contact">
-      <span class="section-index center">~/contact</span>
+      <span class="section-index">~/contact</span>
       <h2 class="contact-title">Let's talk.</h2>
       <!-- TODO: swap in preferred contact email -->
       <a href="mailto:hello@krystynaewing.com" class="contact-email">hello@krystynaewing.com</a>
