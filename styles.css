@@ -443,11 +443,12 @@ body::before {
 .home .hero {
   max-width: 1200px;
   margin: 0 auto;
-  padding: clamp(4em, 12vw, 7em) 1.5em clamp(3em, 8vw, 5em);
+  padding: clamp(3em, 8vw, 5em) 1.5em clamp(3em, 8vw, 5em);
   min-height: min(76vh, 700px);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 2em 3em;
+  align-items: center;
 }
 .home .hero-statement {
   font-family: var(--font-voice);
@@ -469,14 +470,26 @@ body::before {
   margin: 0 0 2.2em;
 }
 .home .hero-cta.text-link {
-  align-self: flex-start;
   font-family: var(--font-body);
   font-weight: 600;
   font-size: 0.8rem;
 }
-@media (max-width: 700px) {
-  .home .hero { min-height: auto; padding-top: 3em; }
-  .home .hero-support { margin-left: 0; }
+.home .hero-portrait img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+@media (max-width: 800px) {
+  .home .hero {
+    grid-template-columns: 1fr;
+    min-height: auto;
+    padding-top: 3em;
+  }
+  .home .hero-portrait {
+    order: -1;
+    max-width: 280px;
+    margin: 0 auto 1em;
+  }
 }
 
 /* ---------- FEATURE: ResiliencePoint, the cover story ---------- */
