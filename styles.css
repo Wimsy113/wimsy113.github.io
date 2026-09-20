@@ -14,12 +14,11 @@
   --accent: #6e4ff0;
   --accent-dim: #4a3699;
 
-  --font-display: 'Oswald', 'Arial Narrow', sans-serif;
+  /* two-voice type system: voice = personality/expressive moments only,
+     body = everything functional (nav, buttons, metadata, case-study copy) */
+  --font-voice: 'Grenze Gotisch', 'Georgia', serif;
+  --font-body: 'Source Sans 3', -apple-system, 'Segoe UI', sans-serif;
   --font-mono: 'Space Mono', 'Courier New', monospace;
-
-  /* editorial system — homepage only, see .home scoping below */
-  --font-editorial: 'Fraunces', 'Georgia', serif;
-  --font-body: 'Inter', 'Helvetica Neue', sans-serif;
 
   color-scheme: dark;
 }
@@ -57,19 +56,15 @@ body {
   margin: 0;
   background: var(--black);
   color: var(--bone);
-  font-family: var(--font-mono);
-  font-size: 15px;
-  line-height: 1.7;
-  overflow-x: hidden;
-}
-/* homepage only: readable body copy instead of all-monospace; metadata/labels
-   keep var(--font-mono) explicitly wherever they already set it */
-body.home {
-  background: var(--h-bg);
-  color: var(--h-fg);
   font-family: var(--font-body);
   font-size: 16px;
   line-height: 1.65;
+  overflow-x: hidden;
+}
+/* homepage only: color system stays scoped here, font now matches the base */
+body.home {
+  background: var(--h-bg);
+  color: var(--h-fg);
 }
 
 img { max-width: 100%; display: block; }
@@ -79,11 +74,11 @@ a {
 }
 
 h1, h2, h3 {
-  font-family: var(--font-display);
-  text-transform: uppercase;
-  font-weight: 500;
-  letter-spacing: 0.01em;
-  line-height: 1.02;
+  font-family: var(--font-body);
+  text-transform: none;
+  font-weight: 600;
+  letter-spacing: 0;
+  line-height: 1.15;
   margin: 0 0 0.4em;
 }
 
@@ -151,10 +146,12 @@ body::before {
 
 /* ---------- section scaffolding ---------- */
 .section-index {
-  font-family: var(--font-mono);
+  font-family: var(--font-body);
+  font-weight: 600;
+  text-transform: uppercase;
   color: var(--dim);
-  font-size: 0.8rem;
-  letter-spacing: 0.15em;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
   display: block;
   margin-bottom: 0.6em;
 }
@@ -175,7 +172,7 @@ body::before {
 /* ---------- buttons / links ---------- */
 .btn {
   display: inline-block;
-  font-family: var(--font-mono);
+  font-family: var(--font-body);
   font-weight: 700;
   text-decoration: none;
   text-transform: uppercase;
@@ -223,7 +220,8 @@ body::before {
 }
 
 .tag-row {
-  font-family: var(--font-mono);
+  font-family: var(--font-body);
+  font-weight: 600;
   font-size: 0.7rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -309,7 +307,8 @@ body::before {
   overflow: hidden;
 }
 .brand-name {
-  font-family: var(--font-display);
+  font-family: var(--font-body);
+  font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.03em;
   font-size: 1rem;
@@ -351,15 +350,13 @@ body::before {
   padding: 0;
 }
 .primary-nav a {
+  font-family: var(--font-body);
+  font-weight: 600;
   text-decoration: none;
   text-transform: uppercase;
   font-size: 0.75rem;
   letter-spacing: 0.08em;
   position: relative;
-}
-.primary-nav a:not(.nav-cta)::before {
-  content: "~/";
-  color: var(--dim);
 }
 .primary-nav a:not(.nav-cta)::after {
   content: "";
@@ -402,11 +399,10 @@ body::before {
 
 /* ---------- homepage: header/nav adopt the editorial system, drop terminal decoration ---------- */
 .home .site-header { background: var(--h-bg); border-bottom-color: var(--h-line); }
-.home .brand-name { font-family: var(--font-body); font-weight: 600; text-transform: none; letter-spacing: 0; color: var(--h-fg); }
+.home .brand-name { color: var(--h-fg); }
 .home .nav-toggle { border-color: var(--h-fg); }
 .home .nav-toggle-bar { background: var(--h-fg); }
-.home .primary-nav a { color: var(--h-fg); font-family: var(--font-body); }
-.home .primary-nav a:not(.nav-cta)::before { content: none; }
+.home .primary-nav a { color: var(--h-fg); }
 .home .primary-nav a:not(.nav-cta)::after { background: var(--h-accent); }
 @media (max-width: 800px) {
   .home .primary-nav { background: var(--h-bg); border-bottom-color: var(--h-line); }
@@ -417,7 +413,8 @@ body::before {
 
 /* shared small labels used across sections */
 .home .index-mark {
-  font-family: var(--font-mono);
+  font-family: var(--font-body);
+  font-weight: 600;
   font-size: 0.75rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -425,7 +422,8 @@ body::before {
   margin: 0 0 0.5em;
 }
 .home .annotation {
-  font-family: var(--font-mono);
+  font-family: var(--font-body);
+  font-weight: 600;
   font-size: 0.8rem;
   color: var(--h-accent);
   margin: 0.6em 0 1.2em;
@@ -452,11 +450,11 @@ body::before {
   justify-content: center;
 }
 .home .hero-statement {
-  font-family: var(--font-editorial);
-  font-weight: 500;
+  font-family: var(--font-voice);
+  font-weight: 400;
   font-style: normal;
   font-size: clamp(2.6rem, 7vw, 5.8rem);
-  line-height: 1.06;
+  line-height: 1.1;
   color: var(--h-fg);
   text-transform: none;
   letter-spacing: 0;
@@ -464,8 +462,8 @@ body::before {
   margin: 0 0 0.9em;
 }
 .home .hero-statement em {
-  font-style: italic;
-  font-weight: 500;
+  font-style: normal;
+  font-weight: 600;
   color: var(--h-accent);
 }
 .home .hero-support {
@@ -478,7 +476,8 @@ body::before {
 }
 .home .hero-cta.text-link {
   align-self: flex-start;
-  font-family: var(--font-mono);
+  font-family: var(--font-body);
+  font-weight: 600;
   font-size: 0.8rem;
 }
 @media (max-width: 700px) {
@@ -520,8 +519,8 @@ body::before {
 }
 .home .feature-stamp .index-mark { margin-bottom: 0.3em; }
 .home .feature-stamp h2 {
-  font-family: var(--font-editorial);
-  font-weight: 500;
+  font-family: var(--font-body);
+  font-weight: 700;
   font-size: clamp(2rem, 5vw, 3.6rem);
   color: var(--h-fg);
   text-transform: none;
@@ -537,7 +536,8 @@ body::before {
 }
 .home .feature-meta {
   grid-area: meta;
-  font-family: var(--font-mono);
+  font-family: var(--font-body);
+  font-weight: 600;
   font-size: 0.78rem;
   letter-spacing: 0.03em;
   color: var(--h-muted);
@@ -577,11 +577,10 @@ body::before {
   transform: translateY(24%);
 }
 .home .interrupt-note {
-  font-family: 'Caveat', cursive;
-  font-weight: 600;
-  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-family: var(--font-voice);
+  font-weight: 400;
+  font-size: clamp(1.7rem, 3.4vw, 2.3rem);
   color: var(--h-accent);
-  transform: rotate(-1.5deg);
   margin: 0 0 0.4em;
 }
 @media (max-width: 600px) {
@@ -597,8 +596,8 @@ body::before {
   border-top: 1px solid var(--h-line);
 }
 .home .collection-head h2 {
-  font-family: var(--font-editorial);
-  font-weight: 600;
+  font-family: var(--font-body);
+  font-weight: 700;
   font-size: clamp(1.9rem, 4vw, 2.8rem);
   color: var(--h-fg);
   text-transform: none;
@@ -650,7 +649,8 @@ body::before {
   padding-left: 0.5em;
 }
 .home .project-index-num {
-  font-family: var(--font-mono);
+  font-family: var(--font-body);
+  font-weight: 600;
   font-size: 0.78rem;
   color: var(--h-muted);
 }
@@ -681,8 +681,8 @@ body::before {
   position: absolute;
   top: -0.2em;
   right: 0.3em;
-  font-family: var(--font-editorial);
-  font-weight: 600;
+  font-family: var(--font-body);
+  font-weight: 700;
   font-size: clamp(3.5rem, 9vw, 7rem);
   color: var(--h-fg);
   opacity: 0.12;
@@ -691,8 +691,8 @@ body::before {
   pointer-events: none;
 }
 .home .standalone-content h2 {
-  font-family: var(--font-editorial);
-  font-weight: 600;
+  font-family: var(--font-body);
+  font-weight: 700;
   font-size: clamp(1.9rem, 4vw, 2.8rem);
   color: var(--h-fg);
   text-transform: none;
@@ -727,10 +727,10 @@ body::before {
   .home .art-frame img { margin-right: -2.5em; }
 }
 .home .art-content h2 {
-  font-family: var(--font-editorial);
-  font-style: italic;
-  font-weight: 500;
-  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  font-family: var(--font-voice);
+  font-style: normal;
+  font-weight: 400;
+  font-size: clamp(2rem, 4.6vw, 2.9rem);
   color: var(--h-fg);
   text-transform: none;
   margin: 0.2em 0 0.5em;
@@ -754,17 +754,17 @@ body::before {
   border-top: 1px solid var(--h-line);
 }
 .home .about-teaser .index-mark {
-  font-family: 'Caveat', cursive;
-  font-weight: 600;
+  font-family: var(--font-voice);
+  font-weight: 400;
   text-transform: none;
   letter-spacing: 0;
-  font-size: 1.4rem;
+  font-size: 1.6rem;
   color: var(--h-accent);
 }
 .home .about-teaser h2 {
-  font-family: var(--font-editorial);
-  font-weight: 600;
-  font-size: clamp(2rem, 5vw, 3rem);
+  font-family: var(--font-voice);
+  font-weight: 400;
+  font-size: clamp(2.2rem, 5.4vw, 3.2rem);
   color: var(--h-fg);
   text-transform: none;
   margin: 0.1em 0 0.6em;
@@ -818,14 +818,15 @@ body::before {
   border-bottom: 1px solid var(--h-line);
 }
 .home .footer-name {
-  font-family: var(--font-editorial);
-  font-weight: 600;
+  font-family: var(--font-body);
+  font-weight: 700;
   font-size: 1.3rem;
   color: var(--h-fg);
   margin: 0 0 0.3em;
 }
 .home .footer-email {
-  font-family: var(--font-mono);
+  font-family: var(--font-body);
+  font-weight: 500;
   font-size: 0.85rem;
   color: var(--h-muted);
   text-decoration: none;
@@ -852,11 +853,10 @@ body::before {
 .home .footer-note {
   max-width: 1320px;
   margin: 1.6em auto 0.4em;
-  font-family: 'Caveat', cursive;
-  font-weight: 600;
-  font-size: 1.25rem;
+  font-family: var(--font-voice);
+  font-weight: 400;
+  font-size: 1.4rem;
   color: var(--h-muted);
-  transform: rotate(-0.6deg);
 }
 .home .footer-note a {
   color: var(--h-accent);
@@ -865,7 +865,7 @@ body::before {
 .home .footer-legal {
   max-width: 1320px;
   margin: 0 auto;
-  font-family: var(--font-mono);
+  font-family: var(--font-body);
   font-size: 0.72rem;
   color: var(--h-muted);
   opacity: 0.8;
@@ -952,7 +952,8 @@ body:not(.case-overview) .case-hero > .placeholder-block {
   justify-content: center;
 }
 .case-hero-cover.case-hero-cover--text span {
-  font-family: var(--font-display);
+  font-family: var(--font-body);
+  font-weight: 700;
   font-size: clamp(1.8rem, 5vw, 3rem);
   text-transform: uppercase;
   color: var(--dim);
@@ -1000,7 +1001,8 @@ body:not(.case-overview) .case-hero > .placeholder-block {
 }
 .placeholder-tag {
   display: inline-block;
-  font-family: var(--font-mono);
+  font-family: var(--font-body);
+  font-weight: 600;
   font-size: 0.65rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
@@ -1027,7 +1029,7 @@ body:not(.case-overview) .case-hero > .placeholder-block {
   background: var(--panel);
 }
 .placeholder-image span {
-  font-family: var(--font-mono);
+  font-family: var(--font-body);
   font-size: 0.8rem;
   color: var(--dim);
   font-style: italic;
@@ -1055,7 +1057,7 @@ body:not(.case-overview) .case-hero > .placeholder-block {
 .case-image img:hover { opacity: 0.85; }
 .case-image figcaption {
   padding: 0.6em 0.9em;
-  font-family: var(--font-mono);
+  font-family: var(--font-body);
   font-size: 0.75rem;
   color: var(--dim);
   border-top: 1px solid var(--line);
@@ -1098,7 +1100,7 @@ body:not(.case-overview) .case-hero > .placeholder-block {
 }
 .lightbox-content figcaption {
   margin-top: 1em;
-  font-family: var(--font-mono);
+  font-family: var(--font-body);
   font-size: 0.8rem;
   color: var(--dim);
   text-align: center;
@@ -1107,7 +1109,8 @@ body:not(.case-overview) .case-hero > .placeholder-block {
   position: fixed;
   top: 1.5em;
   right: 1.5em;
-  font-family: var(--font-mono);
+  font-family: var(--font-body);
+  font-weight: 600;
   font-size: 0.8rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -1142,6 +1145,14 @@ body:not(.case-overview) .case-hero > .placeholder-block {
   color: var(--bone);
   margin-bottom: 0.8em;
 }
+/* one sanctioned voice moment per case study: the reflective "what I learned" beat */
+.case-section-title--voice {
+  font-family: var(--font-voice);
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: clamp(1.9rem, 3.8vw, 2.6rem);
+}
 .case-section-body {
   max-width: 70ch;
 }
@@ -1166,7 +1177,8 @@ body:not(.case-overview) .case-section-body {
 }
 .case-section-body h3:first-child { margin-top: 0; }
 .case-section-body .flow-line {
-  font-family: var(--font-mono);
+  font-family: var(--font-body);
+  font-weight: 600;
   font-size: 0.9rem;
   color: var(--accent);
   letter-spacing: 0.02em;
@@ -1212,7 +1224,8 @@ body:not(.case-overview) .case-section-body {
   flex: 1;
 }
 .subcase-card-link {
-  font-family: var(--font-mono);
+  font-family: var(--font-body);
+  font-weight: 600;
   font-size: 0.72rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -1255,7 +1268,8 @@ body:not(.case-overview) .case-section-body {
 }
 .case-nav-label {
   display: block;
-  font-family: var(--font-mono);
+  font-family: var(--font-body);
+  font-weight: 600;
   font-size: 0.7rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
@@ -1263,7 +1277,8 @@ body:not(.case-overview) .case-section-body {
   margin-bottom: 0.4em;
 }
 .case-nav-title {
-  font-family: var(--font-display);
+  font-family: var(--font-body);
+  font-weight: 700;
   font-size: 1.3rem;
   text-transform: uppercase;
   color: var(--bone);
