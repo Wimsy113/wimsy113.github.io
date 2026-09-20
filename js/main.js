@@ -27,7 +27,7 @@
   // Reveal-on-scroll (plain fade, no motion tricks)
   // ---------------------------------------------------------------
   var revealTargets = document.querySelectorAll(
-    '.case-card, .quest-card, .skill-group, .about-copy, .art-feature, .art-copy, .off-clock-copy, .off-clock-photo'
+    '.feature, .interrupt, .collection, .standalone, .art-section, .about-teaser'
   );
 
   revealTargets.forEach(function (el) {
@@ -54,85 +54,6 @@
     revealTargets.forEach(function (el) {
       el.classList.add('is-visible');
     });
-  }
-
-  // ---------------------------------------------------------------
-  // Scramble-in project names on first scroll into view
-  // ---------------------------------------------------------------
-  var scrambleTargets = document.querySelectorAll(
-    '.case-card-body h3, .case-card-body p, .quest-card-body h3, .quest-card-body p'
-  );
-
-  if (scrambleTargets.length && !reduceMotion) {
-    var scrambleChars = '!@#$%^&*()_+-=[]{}|;:,.<>/?~`\\';
-
-    var randomChar = function () {
-      return scrambleChars[Math.floor(Math.random() * scrambleChars.length)];
-    };
-
-    var scrambledString = function (text) {
-      var out = '';
-      for (var i = 0; i < text.length; i++) {
-        out += text[i] === ' ' ? ' ' : randomChar();
-      }
-      return out;
-    };
-
-    var scrambleReveal = function (el, finalText) {
-      var frameDelay = 45;
-      var duration = Math.min(2000, 500 + finalText.length * 7);
-      var totalFrames = Math.round(duration / frameDelay);
-      var frame = 0;
-
-      var tick = function () {
-        var lockedCount = Math.floor((frame / totalFrames) * finalText.length);
-        var out = '';
-        for (var i = 0; i < finalText.length; i++) {
-          if (i < lockedCount || finalText[i] === ' ') {
-            out += finalText[i];
-          } else {
-            out += randomChar();
-          }
-        }
-        // typewriter cursor at the current typing position
-        if (lockedCount < finalText.length) {
-          out = out.slice(0, lockedCount) + '▌' + out.slice(lockedCount + 1);
-        }
-        el.textContent = out;
-        frame++;
-        if (frame <= totalFrames) {
-          setTimeout(function () { requestAnimationFrame(tick); }, frameDelay);
-        } else {
-          el.textContent = finalText;
-        }
-      };
-      tick();
-    };
-
-    var scrambleData = [];
-    scrambleTargets.forEach(function (el) {
-      var finalText = el.textContent;
-      el.textContent = scrambledString(finalText);
-      scrambleData.push({ el: el, finalText: finalText });
-    });
-
-    if ('IntersectionObserver' in window) {
-      var scrambleObserver = new IntersectionObserver(
-        function (entries) {
-          entries.forEach(function (entry) {
-            if (entry.isIntersecting) {
-              var data = scrambleData.filter(function (d) { return d.el === entry.target; })[0];
-              if (data) { scrambleReveal(data.el, data.finalText); }
-              scrambleObserver.unobserve(entry.target);
-            }
-          });
-        },
-        { threshold: 0.4 }
-      );
-      scrambleTargets.forEach(function (el) { scrambleObserver.observe(el); });
-    } else {
-      scrambleData.forEach(function (d) { d.el.textContent = d.finalText; });
-    }
   }
 
   // ---------------------------------------------------------------

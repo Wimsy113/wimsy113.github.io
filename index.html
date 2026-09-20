@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Krystyna Ewing — UX Designer &amp; Developer</title>
-  <meta name="description" content="Krystyna Ewing — UX designer and developer with 10+ years in tech, working across product design, front-end development, and illustration.">
+  <title>Krystyna Ewing — UX Designer</title>
+  <meta name="description" content="Krystyna Ewing — UX designer working across product design, research, and front-end development.">
 
   <link rel="icon" href="images/favicon.ico">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600&family=Space+Mono:wght@400;700&family=Fraunces:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="styles.css">
 </head>
@@ -37,10 +37,10 @@
       <nav class="primary-nav" id="primaryNav" aria-label="Primary">
         <ul>
           <li><a href="#work">Work</a></li>
-          <li><a href="#side-quests">Independent</a></li>
-          <li><a href="#about">About</a></li>
           <li><a href="#art">Art</a></li>
-          <li><a href="#contact" class="nav-cta">Contact</a></li>
+          <li><a href="#about">About</a></li>
+          <!-- TODO: link to résumé PDF/page -->
+          <li><a href="#">Résumé</a></li>
         </ul>
       </nav>
     </div>
@@ -49,346 +49,140 @@
   <main id="main">
 
     <!-- ============ HERO ============ -->
-    <section class="hero">
-      <div class="hero-grid">
-        <div class="hero-meta">
-          <p class="doc-label">Field Notes — Vol. 01</p>
-          <p class="hero-byline">Krystyna Ewing<span class="cursor" aria-hidden="true">_</span></p>
-          <p class="hero-role">UX Design / Product / Research / Creative Technology</p>
+    <section class="hero" id="hero">
+      <h1 class="hero-statement">Working as intended<br>isn't the same as <em>working.</em></h1>
+      <p class="hero-support">I design products, test assumptions, and occasionally
+        discover that the thing we built isn't the thing people needed.</p>
+      <a href="#work" class="text-link hero-cta">Selected Work ↓</a>
+    </section>
+
+    <!-- ============ RESILIENCEPOINT — the cover story ============ -->
+    <section class="feature" id="work">
+      <div class="feature-frame">
+        <img src="images/work/hazadapt-resiliencepoint/platform-cover.png" alt="ResiliencePoint dashboard showing trending hazards and a nationwide activity map">
+        <div class="feature-stamp">
+          <p class="index-mark">01 — Featured Work</p>
+          <h2>ResiliencePoint</h2>
         </div>
-
-        <h1 class="hero-statement">Working as intended<br><em>isn't the same as</em> working.</h1>
-
-        <p class="hero-annotation">→ Ten years building for people having a hard day: water
-          crises, financial abuse, disaster prep, career pivots.</p>
-
-        <div class="hero-image duotone">
-          <img src="images/hero.png" alt="Illustrated purple-haired, green-eyed character with fangs, Krystyna's drawn alter ego">
-        </div>
-
-        <div class="hero-links">
-          <a href="#work" class="text-link">Work ↓</a>
-          <a href="#contact" class="text-link">Contact ↗</a>
-        </div>
+      </div>
+      <div class="feature-details">
+        <p class="feature-meta">HazAdapt · Lead UX Designer · Web, Mobile Web</p>
+        <p class="feature-hook">We built what we thought people needed. Then the
+          evidence changed the product.</p>
+        <a href="work/hazadapt-resiliencepoint.html" class="text-link">Read the Case Study →</a>
       </div>
     </section>
 
-    <!-- ============ MARQUEE ============ -->
-    <div class="marquee" aria-hidden="true">
-      <div class="marquee-track">
-        <span>--ux-research</span><span class="sep">|</span>
-        <span>--front-end-dev</span><span class="sep">|</span>
-        <span>--design-systems</span><span class="sep">|</span>
-        <span>--accessibility</span><span class="sep">|</span>
-        <span>--illustration</span><span class="sep">|</span>
-        <span>--prototyping</span><span class="sep">|</span>
-        <span>--ux-research</span><span class="sep">|</span>
-        <span>--front-end-dev</span><span class="sep">|</span>
-        <span>--design-systems</span><span class="sep">|</span>
-        <span>--accessibility</span><span class="sep">|</span>
-        <span>--illustration</span><span class="sep">|</span>
-        <span>--prototyping</span><span class="sep">|</span>
+    <!-- ============ PERSONALITY INTERRUPTION ============ -->
+    <aside class="interrupt">
+      <div class="interrupt-figure duotone" aria-hidden="true">
+        <img src="images/hero.png" alt="">
       </div>
-    </div>
+      <p class="interrupt-note">Okay, but does it actually work?</p>
+    </aside>
 
-    <!-- ============ ABOUT ============ -->
-    <section class="about" id="about">
-      <div class="about-copy">
-        <span class="section-index">~/about</span>
-        <h2 class="section-title">Ten years in,<br>both sides of<br>the screen.</h2>
-        <p>
-          I've worked as both a software developer and a UX designer, long enough to
-          stop pretending those are different jobs. I've designed and built
-          humanitarian water-tracking tools used in the field, disaster-prep guides
-          people open on their worst day, financial products meant to protect aging
-          and disabled adults, and programs that get veterans into tech.
-        </p>
-        <p>
-          The pattern, if there is one: high-stakes moments, real constraints, and
-          interfaces that have to hold up under pressure. Outside of client work,
-          I draw: mostly things with too many teeth.
-        </p>
-        <ul class="about-facts">
-          <li><span>10+ years</span>: development &amp; design</li>
-          <li><span>Fintech · Public Safety · Nonprofit</span>: case work</li>
-          <li><span>Illustrator</span>, unofficially</li>
+    <!-- ============ HAZADAPT — breadth ============ -->
+    <section class="collection" id="hazadapt">
+      <p class="index-mark">02 — Product Ecosystem</p>
+      <div class="collection-head">
+        <h2>HazAdapt</h2>
+        <p class="collection-summary">2021 to present. One ecosystem, a lot of
+          different problems.</p>
+      </div>
+      <div class="collection-body">
+        <div class="collection-media">
+          <img src="images/hazadapt_album.png" alt="hazadapt logo">
+        </div>
+        <ul class="project-index">
+          <li><a href="work/hazadapt-loco.html"><span class="project-index-num">01</span> LoCo</a></li>
+          <li><a href="work/hazadapt-prep-checks.html"><span class="project-index-num">02</span> Prep Checks</a></li>
         </ul>
       </div>
+      <a href="work/hazadapt.html" class="text-link">Explore HazAdapt →</a>
     </section>
 
-    <!-- ============ CAPABILITIES ============ -->
-    <section class="skills" id="skills">
-      <span class="section-index">~/capabilities</span>
-      <h2 class="section-title">What I actually do</h2>
-
-      <div class="skills-grid">
-        <div class="skill-group">
-          <h3>Design</h3>
-          <ul class="patches">
-            <li class="patch">UX Research</li>
-            <li class="patch">Wireframing &amp; Prototyping</li>
-            <li class="patch">Design Systems</li>
-            <li class="patch">Accessibility (WCAG)</li>
-            <li class="patch">Interaction Design</li>
-            <li class="patch">Usability Testing</li>
-          </ul>
-        </div>
-        <div class="skill-group">
-          <h3>Development</h3>
-          <ul class="patches">
-            <li class="patch">HTML / CSS / JS</li>
-            <li class="patch">React</li>
-            <li class="patch">Git &amp; GitHub</li>
-            <li class="patch">API Integration</li>
-            <li class="patch">Responsive Development</li>
-          </ul>
-        </div>
-        <div class="skill-group">
-          <h3>Craft</h3>
-          <ul class="patches">
-            <li class="patch">Illustration</li>
-            <li class="patch">Branding &amp; Identity</li>
-            <li class="patch">Visual Design</li>
-            <li class="patch">Character &amp; Icon Art</li>
-          </ul>
-        </div>
+    <!-- ============ TRUE LINK FINANCIAL — same system, different composition ============ -->
+    <section class="collection collection--truelink" id="truelink">
+      <p class="index-mark">03 — Company Collection</p>
+      <div class="collection-head">
+        <h2>True Link Financial</h2>
+        <p class="collection-summary">Financial tools built to protect autonomy,
+          not just assets.</p>
       </div>
-    </section>
-
-    <!-- ============ WORK ============ -->
-    <section class="work" id="work">
-      <span class="section-index">~/work</span>
-      <h2 class="section-title">Things I've shipped</h2>
-
-      <!-- 01 — ResiliencePoint, the flagship -->
-      <article class="dossier dossier--flagship">
-        <div class="dossier-media">
-          <img src="images/work/hazadapt-resiliencepoint/platform-cover.png" alt="ResiliencePoint dashboard showing trending hazards and a nationwide activity map">
-        </div>
-        <div class="dossier-body">
-          <div class="dossier-tag-row">
-            <span class="dossier-number">01</span>
-            <span class="dossier-kicker">Featured Investigation</span>
-          </div>
-          <p class="dossier-org">HazAdapt</p>
-          <h3 class="dossier-title">ResiliencePoint</h3>
-          <p class="dossier-hook">We built what we thought emergency managers needed.
-            Research showed us they needed something else: a way to investigate
-            community preparedness data, not just view it.</p>
-          <p class="dossier-annotation">→ research changed the product</p>
-          <a href="work/hazadapt-resiliencepoint.html" class="text-link">View ResiliencePoint Case Study →</a>
-        </div>
-      </article>
-
-      <!-- 02 — HazAdapt, a project index -->
-      <article class="dossier dossier--index">
-        <div class="dossier-tag-row">
-          <span class="dossier-number">02</span>
-          <span class="dossier-kicker">Project Index</span>
-        </div>
-        <div class="index-layout">
-          <div class="index-media">
-            <img src="images/hazadapt_album.png" alt="hazadapt logo">
-          </div>
-          <div class="index-body">
-            <h3 class="dossier-title-sm">HazAdapt</h3>
-            <p class="dossier-hook-sm">Multiple products and features focused on
-              emergency preparedness, community resilience, and access to safety
-              information.</p>
-            <ul class="index-list">
-              <li>
-                <a href="work/hazadapt-loco.html">
-                  <span class="index-num">02.1</span>
-                  <span class="index-name">LoCo</span>
-                  <span class="index-note">→ local safety info, inside the Hazard Guide</span>
-                </a>
-              </li>
-              <li>
-                <a href="work/hazadapt-prep-checks.html">
-                  <span class="index-num">02.2</span>
-                  <span class="index-name">Prep Checks</span>
-                  <span class="index-note">→ bite-sized preparedness people finish</span>
-                </a>
-              </li>
-            </ul>
-            <a href="work/hazadapt.html" class="text-link">Explore HazAdapt →</a>
-          </div>
-        </div>
-      </article>
-
-      <!-- 03 — True Link, same system, different composition -->
-      <article class="dossier dossier--split">
-        <div class="dossier-tag-row">
-          <span class="dossier-number">03</span>
-          <span class="dossier-kicker">Company Collection</span>
-        </div>
-        <div class="split-layout">
-          <div class="split-body">
-            <h3 class="dossier-title-sm">True Link</h3>
-            <p class="dossier-hook-sm">Financial tools built to protect the safety
-              and independence of aging and disabled adults without stripping away
-              their autonomy.</p>
-            <p class="dossier-annotation">→ trust and safety, not just fintech</p>
-            <ul class="inline-index">
-              <li><a href="work/true-link-beneficiary-experience.html">03.1 Beneficiary Experience</a></li>
-              <li><a href="work/true-link-create-draft-disbursements.html">03.2 Create Draft Disbursements</a></li>
-            </ul>
-            <a href="work/true-link.html" class="text-link">View Case Study →</a>
-          </div>
-          <div class="split-media">
-            <img src="images/True_Link_album.png" alt="True Link logo">
-          </div>
-        </div>
-      </article>
-
-      <!-- 04 — WellDone, standalone -->
-      <article class="dossier dossier--standalone">
-        <div class="dossier-tag-row">
-          <span class="dossier-number">04</span>
-          <span class="dossier-kicker">Standalone Project</span>
-        </div>
-        <div class="standalone-layout">
-          <div class="standalone-media">
-            <img src="images/welldone_album.png" alt="WellDone logo">
-          </div>
-          <div class="standalone-body">
-            <h3 class="dossier-title-sm">WellDone</h3>
-            <p class="dossier-hook-sm">Redesigning how a nonprofit monitors remote
-              water infrastructure, from a dense table to scannable, status-first
-              cards.</p>
-            <p class="dossier-annotation">→ moved from a table to status-first cards</p>
-            <a href="work/welldone.html" class="text-link">View Case Study →</a>
-          </div>
-        </div>
-      </article>
-
-      <div class="other-clients">
-        <p class="tag-row">Also built for</p>
-        <ul>
-          <li>JPMorgan Chase &amp; Co.</li>
-          <li>MoveHQ</li>
-          <li>PenFed</li>
-          <li>MAPFRE Insurance</li>
+      <div class="collection-body">
+        <ul class="project-index">
+          <li><a href="work/true-link-beneficiary-experience.html">Beneficiary Experience</a></li>
+          <li><a href="work/true-link-create-draft-disbursements.html">Create Draft Disbursements</a></li>
         </ul>
+        <div class="collection-media">
+          <img src="images/True_Link_album.png" alt="True Link logo">
+        </div>
+      </div>
+      <a href="work/true-link.html" class="text-link">Explore True Link →</a>
+    </section>
+
+    <!-- ============ WELLDONE — standalone ============ -->
+    <section class="standalone" id="welldone">
+      <div class="standalone-frame">
+        <img src="images/welldone_album.png" alt="WellDone logo">
+        <p class="standalone-number" aria-hidden="true">04</p>
+      </div>
+      <div class="standalone-content">
+        <p class="index-mark">Standalone Project</p>
+        <h2>WellDone</h2>
+        <p>Redesigning how a nonprofit monitors remote water infrastructure, from a
+          dense table to scannable, status-first cards.</p>
+        <p class="annotation">→ moved from a table to status-first cards</p>
+        <a href="work/welldone.html" class="text-link">View Case Study →</a>
       </div>
     </section>
 
-    <!-- ============ NOTEBOOK / QUESTIONS ============ -->
-    <section class="questions" id="questions">
-      <span class="section-index">~/notebook</span>
-      <h2 class="section-title">Things I tend to question</h2>
-
-      <div class="question-field">
-        <p class="q q-1">Why does the user need to know this?</p>
-        <p class="q q-2">→ what happens<br>without internet?</p>
-        <p class="q q-3">Is that actually a button?</p>
-        <p class="q q-4">who isn't<br>represented<br>here?</p>
-        <p class="q q-5">What happens outside the happy path?</p>
-        <p class="q q-6">Are we fixing the interface, or fixing the wrong problem?</p>
-      </div>
-    </section>
-
-    <!-- ============ INDEPENDENT WORK ============ -->
-    <section class="side-quests" id="side-quests">
-      <span class="section-index">~/independent</span>
-      <h2 class="section-title">Personal projects, no client required</h2>
-
-      <div class="quest-grid">
-        <article class="quest-card">
-          <div class="win-bar">
-            <span class="win-dots"><span class="win-dot"></span><span class="win-dot"></span><span class="win-dot"></span></span>
-            <span class="win-title">somnus.psd</span>
-          </div>
-          <img src="images/somnus_portfolio_cover.png" alt="Somnus project cover">
-          <div class="quest-card-body">
-            <h3>Somnus</h3>
-            <p>A slower, quieter interface built around night skies.</p>
-            <p class="tag-row">Concept &amp; Visual Design</p>
-          </div>
-        </article>
-        <article class="quest-card">
-          <div class="win-bar">
-            <span class="win-dots"><span class="win-dot"></span><span class="win-dot"></span><span class="win-dot"></span></span>
-            <span class="win-title">gormonjee.ai</span>
-          </div>
-          <img src="images/gormonjee_portfolio_cover.png" alt="GorMonjee project cover">
-          <div class="quest-card-body">
-            <h3>GorMonjee</h3>
-            <p>Brand identity for a project with more personality than budget.</p>
-            <p class="tag-row">Branding &amp; Identity</p>
-          </div>
-        </article>
-        <article class="quest-card">
-          <div class="win-bar">
-            <span class="win-dots"><span class="win-dot"></span><span class="win-dot"></span><span class="win-dot"></span></span>
-            <span class="win-title">zinc-coop.indd</span>
-          </div>
-          <img src="images/Zinc_Co-Op_Cover.png" alt="Zinc Co-Op project cover">
-          <div class="quest-card-body">
-            <h3>Zinc Co-Op</h3>
-            <p>High-contrast identity system for a co-op that doesn't whisper.</p>
-            <p class="tag-row">Branding &amp; UI</p>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <!-- ============ ART ============ -->
-    <section class="art" id="art">
-      <div class="art-feature">
+    <!-- ============ ART — the system loosens ============ -->
+    <section class="art-section" id="art">
+      <div class="art-frame">
         <img src="images/Artwork.png" alt="Original digital illustration by Krystyna Ewing">
       </div>
-      <div class="art-copy">
-        <span class="section-index">~/art</span>
-        <h2 class="section-title">Client work<br>stays disciplined.<br>This doesn't.</h2>
-        <p>
-          Original character and illustration work, done on my own time and my
-          own terms. The character on this page is mine too: drawn, not
-          licensed.
-        </p>
-        <!-- TODO: link to Instagram / ArtStation / portfolio -->
-        <a href="#" class="text-link">More art →</a>
+      <div class="art-content">
+        <p class="index-mark">Also True</p>
+        <h2>Apparently I can't leave things alone.</h2>
+        <p>Original character and illustration work, made on my own time and my own
+          terms. The character on this site is mine too: drawn, not licensed.</p>
+        <!-- TODO: link to Instagram / ArtStation / full art page -->
+        <a href="#" class="text-link">See What Else I've Been Making →</a>
       </div>
     </section>
 
-    <!-- ============ ELSEWHERE ============ -->
-    <section class="off-clock">
-      <div class="off-clock-copy">
-        <span class="section-index">~/elsewhere</span>
-        <h2 class="section-title">Off the clock</h2>
-        <ul class="zine-list">
-          <li>Illustration and character design</li>
-          <li>3D sculpting</li>
-          <li>Long opinions about type systems</li>
-          <li>Video games, unreasonably competitive about it</li>
-        </ul>
-      </div>
-      <div class="off-clock-photo">
-        <img src="images/night_fishing.jpg" alt="Night fishing scene from Animal Crossing: New Horizons">
-        <p class="off-clock-caption">Animal Crossing: New Horizons, 2am.</p>
-      </div>
-    </section>
-
-    <!-- ============ CONTACT ============ -->
-    <section class="contact" id="contact">
-      <span class="section-index">~/contact</span>
-      <h2 class="contact-title">Let's talk.</h2>
-      <!-- TODO: swap in preferred contact email -->
-      <a href="mailto:hello@krystynaewing.com" class="contact-email">hello@krystynaewing.com</a>
-      <ul class="social-links">
-        <!-- TODO: replace with real profile links -->
-        <li><a href="#">LinkedIn</a></li>
-        <li><a href="#">GitHub</a></li>
-        <li><a href="#">Instagram</a></li>
-      </ul>
+    <!-- ============ ABOUT TEASER ============ -->
+    <section class="about-teaser" id="about">
+      <p class="index-mark">Oh, right. Hi.</p>
+      <h2>I'm Krystyna.</h2>
+      <p>Detroit-born, lifelong artist, and someone with a bad habit of needing to
+        know how things work. That curiosity took me from software development
+        into UX, and it still shows up in accessibility reviews, 3D printing
+        experiments, and whatever I'm building at 1am.</p>
+      <!-- TODO: link to full About page -->
+      <a href="#" class="text-link">More About Me →</a>
     </section>
 
   </main>
 
-  <footer class="site-footer">
-    <p class="footer-path">~/krystyna-ewing · &copy; <span id="year"></span></p>
-    <p class="footer-clock" aria-hidden="true"><span id="clock"></span> local</p>
-    <a href="#top" class="back-to-top">[ ^ top ]</a>
+  <!-- ============ CONTACT / FOOTER ============ -->
+  <footer class="site-footer" id="contact">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <p class="footer-name">Krystyna Ewing</p>
+        <a href="mailto:hello@krystynaewing.com" class="footer-email">hello@krystynaewing.com</a>
+      </div>
+      <nav class="footer-nav" aria-label="Footer">
+        <a href="#work">Work</a>
+        <a href="#art">Art</a>
+        <a href="#about">About</a>
+        <!-- TODO: link to résumé PDF/page -->
+        <a href="#">Résumé</a>
+      </nav>
+    </div>
+    <p class="footer-note">Found something that doesn't work? <a href="mailto:hello@krystynaewing.com">Tell me.</a></p>
+    <p class="footer-legal">© <span id="year"></span> Krystyna Ewing</p>
   </footer>
 
   <script src="js/main.js"></script>
