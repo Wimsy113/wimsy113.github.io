@@ -459,201 +459,174 @@ body::before {
   color: var(--h-red);
 }
 
-/* ---------- HERO: an interactive reveal, not a text-column beside a
-   picture. Default state is almost entirely the illustrated portrait —
-   name + tagline are the only permanent copy. The introduction lives
-   behind the portrait and surfaces on hover, keyboard focus, or (via
-   the same trigger, click/tap) on touch. ---------- */
+/* ---------- HERO: full-bleed cover artwork. The illustration IS the
+   hero — it spans the full viewport width regardless of the site's
+   normal max-width containers, at a tall, immersive height. Name/
+   tagline and the bio-reveal control are layered on top of it; nothing
+   about the artwork's own size or position ever changes on interaction. ---------- */
 .home .hero {
   position: relative;
-  max-width: 1760px;
-  margin: 0 auto;
-  padding: clamp(2em, 6vw, 3.5em) 1.5em clamp(2.5em, 6vw, 4em);
-  overflow: visible;
+  width: 100vw;
+  max-width: none;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  height: 88vh;
+  min-height: 460px;
+  max-height: 920px;
+  overflow: hidden;
 }
-.home .hero-name {
-  position: relative;
-  z-index: 3;
-  font-family: var(--font-body);
-  font-weight: 700;
-  font-size: clamp(1.6rem, 3vw, 2.3rem);
-  line-height: 1.05;
-  color: var(--h-fg);
-  margin: 0;
-  transition: transform 0.35s ease, opacity 0.3s ease;
+.home .hero-media {
+  position: absolute;
+  inset: 0;
 }
-.home .hero-stage.is-revealed ~ .hero-name,
-.home .hero-stage:hover ~ .hero-name,
-.home .hero-stage:focus-within ~ .hero-name {
-  transform: translateY(-0.15em) scale(0.94);
-  transform-origin: left top;
-}
-.home .hero-stage {
-  position: relative;
-  display: flex;
-  align-items: center;
-  min-height: min(74vh, 640px);
-  margin-top: clamp(0.5em, 2vw, 1em);
-}
-/* the trigger is the portrait itself: a real button, no card, no
-   tooltip chrome — it just sits large and slightly off the edge */
-.home .hero-trigger {
-  position: relative;
-  z-index: 2;
-  display: block;
-  margin-left: auto;
-  width: min(58vw, 900px);
-  padding: 0;
-  border: 0;
-  background: none;
-  cursor: pointer;
-  transition: transform 0.4s cubic-bezier(0.22, 0.61, 0.36, 1);
-}
-.home .hero-stage.is-revealed .hero-trigger,
-.home .hero-stage:hover .hero-trigger,
-.home .hero-stage:focus-within .hero-trigger {
-  transform: translateX(6%);
-}
-.home .hero-portrait {
-  display: block;
-  transform: rotate(-2deg);
-}
-.home .hero-portrait img {
+.home .hero-media img {
   display: block;
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: cover;
+  /* keeps the face/eyes — the focal point — in frame; the lettering
+     already bleeds off all four edges of the artwork by design, so
+     cropping it further on any side is consistent, not destructive */
+  object-position: 50% 38%;
+}
+/* name + tagline: a small, quiet label over the artwork, not a headline
+   competing with it — top-left corner, where the illustration is emptiest */
+.home .hero-id {
+  position: absolute;
+  z-index: 2;
+  top: clamp(1.2em, 4vw, 2.2em);
+  left: clamp(1.2em, 4vw, 2.2em);
+  display: inline-flex;
+  flex-direction: column;
+  gap: 0.3em;
+  padding: 0.6em 0.9em;
+  background: color-mix(in srgb, var(--h-bg) 78%, transparent);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+.home .hero-name {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: clamp(1rem, 2vw, 1.35rem);
+  line-height: 1.1;
+  color: var(--h-fg);
+  margin: 0;
+}
+.home .hero-tagline {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.66rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--h-muted);
+  margin: 0;
+}
+/* the interactive corner: a small trigger pill, and the bio panel it
+   opens directly above itself. Both are layered over the artwork —
+   revealing the bio never resizes or moves the hero, the image, or
+   anything below it. */
+.home .hero-interactive {
+  position: absolute;
+  z-index: 3;
+  left: clamp(1.2em, 4vw, 2.2em);
+  bottom: clamp(1.2em, 4vw, 2.2em);
+}
+.home .hero-trigger {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  padding: 0.6em 1em;
+  border: 1px solid var(--h-line);
+  background: color-mix(in srgb, var(--h-bg) 78%, transparent);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  cursor: pointer;
 }
 .home .hero-trigger:focus-visible {
-  outline: none;
-}
-.home .hero-trigger:focus-visible .hero-portrait {
   outline: 2px solid var(--h-red);
-  outline-offset: 6px;
+  outline-offset: 3px;
 }
-/* the hand-drawn line that "draws" outward on reveal */
-.home .hero-arrow {
-  position: absolute;
-  left: -3.5em;
-  bottom: 3em;
-  width: 64px;
-  height: auto;
-  fill: none;
-  stroke: var(--h-accent);
-  stroke-width: 2.5;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  opacity: 0.9;
-  pointer-events: none;
-}
-.home .hero-arrow path {
-  stroke-dasharray: 140;
-  stroke-dashoffset: 140;
-  transition: stroke-dashoffset 0.4s ease;
-}
-.home .hero-stage.is-revealed .hero-arrow path,
-.home .hero-stage:hover .hero-arrow path,
-.home .hero-stage:focus-within .hero-arrow path {
-  stroke-dashoffset: 0;
-}
-/* the "psst." / "oh, hi." annotation on desktop; a plain "About Me +/–"
-   control on touch, where there's no hover to discover */
-.home .hero-cue {
-  position: absolute;
-  left: -3.6em;
-  bottom: 1.2em;
-  font-family: var(--font-voice);
-  font-size: 1.1rem;
-  color: var(--h-accent);
-  transform: rotate(-2deg);
+.home .hero-cue-desktop {
+  position: relative;
+  display: block;
 }
 .home .hero-cue-word {
   display: block;
+  font-family: var(--font-voice);
+  font-size: 1rem;
+  color: var(--h-accent);
+  white-space: nowrap;
   transition: opacity 0.25s ease;
 }
-.home .hero-cue-word--open { opacity: 0; margin-top: -1.3em; }
-.home .hero-stage.is-revealed .hero-cue-word--idle,
-.home .hero-stage:hover .hero-cue-word--idle,
-.home .hero-stage:focus-within .hero-cue-word--idle {
+.home .hero-cue-word--open {
+  position: absolute;
+  inset: 0;
   opacity: 0;
 }
-.home .hero-stage.is-revealed .hero-cue-word--open,
-.home .hero-stage:hover .hero-cue-word--open,
-.home .hero-stage:focus-within .hero-cue-word--open {
+.home .hero-interactive.is-revealed .hero-cue-word--idle,
+.home .hero-interactive:hover .hero-cue-word--idle,
+.home .hero-interactive:focus-within .hero-cue-word--idle {
+  opacity: 0;
+}
+.home .hero-interactive.is-revealed .hero-cue-word--open,
+.home .hero-interactive:hover .hero-cue-word--open,
+.home .hero-interactive:focus-within .hero-cue-word--open {
   opacity: 1;
 }
 .home .hero-cue-mobile { display: none; }
-/* the introduction itself: lives in the empty space the portrait's own
-   right-alignment leaves free, clipped away by default and unfolding in
-   place rather than appearing in a box */
+/* the bio panel: a designed overlay, not a full-image scrim. Only its
+   own footprint darkens the artwork underneath, anchored so it grows
+   upward from the trigger without ever moving the trigger itself. */
 .home .hero-bio {
   position: absolute;
-  z-index: 1;
   left: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  width: min(30ch, 38%);
-  max-height: 0;
+  bottom: 100%;
+  margin-bottom: 0.8em;
+  width: min(42vw, 520px);
+  padding: 1.5em 1.7em;
+  border: 1px solid var(--h-line);
+  background: color-mix(in srgb, var(--h-bg) 85%, transparent);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   opacity: 0;
-  overflow: hidden;
-  transition: max-height 0.45s ease, opacity 0.3s ease 0.05s;
+  transform: translateY(10px);
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.35s cubic-bezier(0.22, 0.61, 0.36, 1);
 }
-.home .hero-stage.is-revealed .hero-bio,
-.home .hero-stage:hover .hero-bio,
-.home .hero-stage:focus-within .hero-bio {
-  max-height: 420px;
+.home .hero-interactive.is-revealed .hero-bio,
+.home .hero-interactive:hover .hero-bio,
+.home .hero-interactive:focus-within .hero-bio {
   opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
 }
 .home .hero-bio-text {
   font-family: var(--font-body);
-  font-size: 1.02rem;
+  font-size: 0.98rem;
   line-height: 1.6;
   color: var(--h-muted);
   margin: 0 0 1em;
 }
-.home .hero-tagline {
-  position: relative;
-  z-index: 3;
-  font-family: var(--font-body);
-  font-weight: 600;
-  font-size: 0.78rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--h-muted);
-  margin: 0.4em 0 0;
-}
+.home .hero-bio-text:last-child { margin-bottom: 0; }
 @media (prefers-reduced-motion: reduce) {
-  .home .hero-name,
-  .home .hero-trigger,
-  .home .hero-arrow path,
   .home .hero-cue-word,
   .home .hero-bio {
     transition: none;
   }
 }
-@media (max-width: 900px) {
-  .home .hero-stage {
-    flex-direction: column;
-    align-items: stretch;
-    min-height: auto;
+@media (max-width: 700px) {
+  .home .hero {
+    height: 78vh;
+    min-height: 520px;
   }
-  .home .hero-trigger {
-    width: min(84vw, 460px);
-    margin: 0 auto;
+  .home .hero-media img {
+    object-position: 50% 30%;
   }
-  .home .hero-portrait { transform: rotate(-1.5deg); }
-  .home .hero-stage.is-revealed .hero-trigger,
-  .home .hero-stage:hover .hero-trigger,
-  .home .hero-stage:focus-within .hero-trigger {
-    transform: none;
-  }
-  .home .hero-arrow { display: none; }
-  .home .hero-cue {
-    position: static;
-    display: block;
-    width: fit-content;
-    margin: 1em auto 0;
-    transform: none;
-    pointer-events: auto;
+  .home .hero-interactive {
+    left: 1em;
+    right: 1em;
+    bottom: 1em;
   }
   .home .hero-cue-desktop { display: none; }
   .home .hero-cue-mobile {
@@ -662,7 +635,7 @@ body::before {
     gap: 0.4em;
     font-family: var(--font-body);
     font-weight: 600;
-    font-size: 0.85rem;
+    font-size: 0.82rem;
     letter-spacing: 0.04em;
     text-transform: uppercase;
     color: var(--h-fg);
@@ -670,12 +643,9 @@ body::before {
   .home .hero-cue-icon::before { content: "+"; }
   .home .hero-trigger[aria-expanded="true"] .hero-cue-icon::before { content: "\2013"; }
   .home .hero-bio {
-    position: static;
     width: auto;
-    max-width: none;
-    transform: none;
-    margin: 1em auto 0;
-    text-align: left;
+    left: 0;
+    right: 0;
   }
 }
 

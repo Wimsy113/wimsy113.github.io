@@ -48,30 +48,20 @@
 
   <main id="main">
 
-    <!-- ============ HERO — interactive reveal. Default state is almost
-         entirely artwork; the introduction lives behind the portrait and
-         only surfaces on hover, focus, or (on touch) a tap. ============ -->
+    <!-- ============ HERO — full-bleed cover artwork. The illustration IS
+         the hero section; name/tagline and the bio reveal are layered on
+         top of it, not placed beside it. ============ -->
     <section class="hero" id="hero">
-      <p class="hero-name">Krystyna<br>Ewing</p>
+      <div class="hero-media">
+        <img src="images/hero-portrait.png" alt="Hand-drawn self-portrait illustration by Krystyna Ewing: an animated character with a purple bucket hat and glowing green eyes, with her name lettered around it in purple marker.">
+      </div>
 
-      <div class="hero-stage" id="heroStage">
-        <button type="button" class="hero-trigger" id="heroTrigger" aria-expanded="false" aria-controls="heroBio" aria-label="Reveal introduction">
-          <span class="hero-portrait">
-            <img src="images/hero-portrait.png" alt="Hand-drawn self-portrait illustration by Krystyna Ewing: an animated character with a purple bucket hat and glowing green eyes, with her name lettered around it in purple marker.">
-          </span>
-          <svg class="hero-arrow" viewBox="0 0 90 46" aria-hidden="true" focusable="false">
-            <path d="M4 6c14 8 26 10 38 6 10-3 8-13-2-11-7 1-10 9-3 16 9 9 26 12 51 8" />
-            <path d="M77 20 88 25 79 34" />
-          </svg>
-          <span class="hero-cue" aria-hidden="true">
-            <span class="hero-cue-desktop">
-              <span class="hero-cue-word hero-cue-word--idle">psst.</span>
-              <span class="hero-cue-word hero-cue-word--open">oh, hi.</span>
-            </span>
-            <span class="hero-cue-mobile">About Me <span class="hero-cue-icon"></span></span>
-          </span>
-        </button>
+      <div class="hero-id">
+        <p class="hero-name">Krystyna Ewing</p>
+        <p class="hero-tagline">UX · Art · Technology</p>
+      </div>
 
+      <div class="hero-interactive" id="heroInteractive">
         <div class="hero-bio" id="heroBio">
           <p class="hero-bio-text">I design software, make art, build things, break things, and
             have a hard time leaving anything alone when I know it could work better.</p>
@@ -80,9 +70,17 @@
             into UX, and it still shows up in accessibility reviews, 3D printing experiments,
             and whatever I'm building at 1am.</p>
         </div>
-      </div>
 
-      <p class="hero-tagline">UX · Art · Technology</p>
+        <button type="button" class="hero-trigger" id="heroTrigger" aria-expanded="false" aria-controls="heroBio" aria-label="Reveal introduction">
+          <span class="hero-cue" aria-hidden="true">
+            <span class="hero-cue-desktop">
+              <span class="hero-cue-word hero-cue-word--idle">psst.</span>
+              <span class="hero-cue-word hero-cue-word--open">oh, hi.</span>
+            </span>
+            <span class="hero-cue-mobile">About Me <span class="hero-cue-icon"></span></span>
+          </span>
+        </button>
+      </div>
     </section>
 
     <!-- ============ PROJECT 01 — RESILIENCEPOINT: establishes the system ============ -->

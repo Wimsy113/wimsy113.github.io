@@ -29,16 +29,16 @@
   // persist on click/tap (mobile has no hover to fall back on) and
   // keeps aria-expanded in sync for assistive tech.
   // ---------------------------------------------------------------
-  var heroStage = document.getElementById('heroStage');
+  var heroInteractive = document.getElementById('heroInteractive');
   var heroTrigger = document.getElementById('heroTrigger');
 
-  if (heroStage && heroTrigger) {
+  if (heroInteractive && heroTrigger) {
     var setHeroExpanded = function (expanded) {
       heroTrigger.setAttribute('aria-expanded', expanded ? 'true' : 'false');
     };
 
     heroTrigger.addEventListener('click', function () {
-      var revealed = heroStage.classList.toggle('is-revealed');
+      var revealed = heroInteractive.classList.toggle('is-revealed');
       setHeroExpanded(revealed);
     });
 
@@ -47,7 +47,7 @@
     });
 
     heroTrigger.addEventListener('blur', function () {
-      setHeroExpanded(heroStage.classList.contains('is-revealed'));
+      setHeroExpanded(heroInteractive.classList.contains('is-revealed'));
     });
   }
 
