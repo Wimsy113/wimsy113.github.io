@@ -50,6 +50,7 @@
 
     <!-- ============ HERO ============ -->
     <section class="hero" id="hero">
+      <p class="hero-ghost" aria-hidden="true">MAKER</p>
       <div class="hero-copy">
         <h1 class="hero-statement">Hi, I'm Krystyna.</h1>
         <p class="hero-support">I'm a UX designer, artist, technologist, and maker from Detroit.
@@ -57,10 +58,12 @@
           anything alone when I know it could work better. Mostly, I just really like figuring
           out how things work, why they don't, and what happens when I start poking at them.</p>
         <a href="#work" class="text-link hero-cta">Selected work <span class="arrow arrow--down">↓</span></a>
-        <svg class="hero-scribble" viewBox="0 0 90 46" aria-hidden="true" focusable="false">
-          <path d="M4 6c14 8 26 10 38 6 10-3 8-13-2-11-7 1-10 9-3 16 9 9 26 12 51 8" />
-          <path d="M77 20 88 25 79 34" />
-        </svg>
+        <p class="hero-bridge">also me
+          <svg viewBox="0 0 90 46" aria-hidden="true" focusable="false">
+            <path d="M4 6c14 8 26 10 38 6 10-3 8-13-2-11-7 1-10 9-3 16 9 9 26 12 51 8" />
+            <path d="M77 20 88 25 79 34" />
+          </svg>
+        </p>
       </div>
       <div class="hero-portrait">
         <img src="images/hero-portrait.png" alt="Hand-drawn self-portrait illustration by Krystyna Ewing: an animated character with a purple bucket hat and glowing green eyes, with her name lettered around it in purple marker.">
@@ -69,20 +72,21 @@
 
     <!-- ============ RESILIENCEPOINT — the cover story ============ -->
     <section class="feature" id="work">
+      <p class="feature-ghost-num" aria-hidden="true">01</p>
       <div class="feature-frame">
         <img src="images/work/hazadapt-resiliencepoint/platform-cover.png" alt="ResiliencePoint dashboard showing trending hazards and a nationwide activity map">
-        <div class="feature-stamp">
-          <p class="index-mark">01 — Featured Work</p>
-          <h2>ResiliencePoint</h2>
-        </div>
+      </div>
+      <div class="feature-stamp">
+        <p class="index-mark">Featured Work</p>
+        <h2>ResiliencePoint</h2>
       </div>
       <div class="feature-details">
         <p class="feature-meta">HazAdapt · Lead UX Designer · Web, Mobile Web</p>
         <p class="feature-hook">We built what we thought people needed. Then the
           evidence changed the product.</p>
         <a href="work/hazadapt-resiliencepoint.html" class="text-link">Read the Case Study <span class="arrow">→</span></a>
-        <p class="margin-note margin-note--feature">↖ ruined me for shipping without evidence, honestly.</p>
       </div>
+      <p class="margin-note margin-note--feature">↖ ruined me for shipping without evidence, honestly.</p>
     </section>
 
     <!-- ============ PERSONALITY INTERRUPTION ============ -->
@@ -94,12 +98,14 @@
     </aside>
 
     <!-- ============ HAZADAPT — breadth ============ -->
-    <section class="collection" id="hazadapt">
-      <p class="index-mark">02 — Product Ecosystem</p>
+    <section class="collection collection--hazadapt" id="hazadapt">
+      <p class="collection-ghost-num" aria-hidden="true">02</p>
+      <p class="index-mark">Product Ecosystem</p>
       <div class="collection-head">
         <h2>HazAdapt</h2>
         <p class="collection-summary">2021 to present. One ecosystem, a lot of
           different problems.</p>
+        <p class="margin-note margin-note--hazadapt">↑ ResiliencePoint is one branch of this. Here's the rest.</p>
       </div>
       <div class="collection-body">
         <div class="collection-media collection-media--folder">
@@ -115,34 +121,35 @@
 
     <!-- ============ TRUE LINK FINANCIAL — same system, different composition ============ -->
     <section class="collection collection--truelink" id="truelink">
-      <p class="index-mark">03 — Company Collection</p>
+      <p class="collection-ghost-num" aria-hidden="true">03</p>
+      <p class="index-mark">Company Collection</p>
       <div class="collection-head">
         <h2>True Link Financial</h2>
         <p class="collection-summary">Financial tools built to protect autonomy,
           not just assets.</p>
         <p class="collection-stamp" aria-hidden="true">On File · Fintech</p>
       </div>
-      <div class="collection-body">
-        <ul class="project-index">
-          <li><a href="work/true-link-beneficiary-experience.html">Beneficiary Experience</a></li>
-          <li><a href="work/true-link-create-draft-disbursements.html">Create Draft Disbursements</a></li>
-        </ul>
-        <div class="collection-media">
+      <div class="truelink-table">
+        <div class="truelink-doc truelink-doc--logo">
           <img src="images/True_Link_album.png" alt="True Link logo">
         </div>
+        <a class="truelink-doc truelink-doc--card truelink-doc--card-1" href="work/true-link-beneficiary-experience.html">
+          <span class="truelink-doc-label">Case File</span>
+          <span class="truelink-doc-title">Beneficiary Experience</span>
+          <span class="arrow">→</span>
+        </a>
+        <a class="truelink-doc truelink-doc--card truelink-doc--card-2" href="work/true-link-create-draft-disbursements.html">
+          <span class="truelink-doc-label">Case File</span>
+          <span class="truelink-doc-title">Create Draft Disbursements</span>
+          <span class="arrow">→</span>
+        </a>
       </div>
       <a href="work/true-link.html" class="text-link">Explore True Link <span class="arrow">→</span></a>
     </section>
 
     <!-- ============ WELLDONE — standalone ============ -->
     <section class="standalone" id="welldone">
-      <div class="standalone-frame">
-        <img src="images/welldone_album.png" alt="WellDone logo">
-        <p class="standalone-number" aria-hidden="true">04</p>
-        <a href="#art" class="art-peek" aria-label="Jump to the art section">
-          <img src="images/Artwork.png" alt="">
-        </a>
-      </div>
+      <p class="standalone-number" aria-hidden="true">04</p>
       <div class="standalone-content">
         <p class="index-mark">Standalone Project</p>
         <h2>WellDone</h2>
@@ -151,6 +158,12 @@
         <p class="annotation">→ moved from a table to status-first cards</p>
         <a href="work/welldone.html" class="text-link">View Case Study <span class="arrow">→</span></a>
         <p class="margin-note margin-note--welldone">still couldn't leave a spreadsheet alone.</p>
+      </div>
+      <div class="standalone-frame">
+        <img src="images/welldone_album.png" alt="WellDone logo">
+        <a href="#art" class="art-peek" aria-label="Jump to the art section">
+          <img src="images/Artwork.png" alt="">
+        </a>
       </div>
     </section>
 
