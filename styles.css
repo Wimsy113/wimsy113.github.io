@@ -218,6 +218,16 @@ body::before {
   border-color: var(--accent);
   color: var(--accent);
 }
+.text-link .arrow {
+  display: inline-block;
+  transition: transform 0.18s ease;
+}
+.text-link:hover .arrow, .text-link:focus-visible .arrow {
+  transform: translateX(4px);
+}
+.text-link:hover .arrow--down, .text-link:focus-visible .arrow--down {
+  transform: translateY(4px);
+}
 
 .tag-row {
   font-family: var(--font-body);
@@ -474,10 +484,37 @@ body::before {
   font-weight: 600;
   font-size: 0.8rem;
 }
+.home .hero-copy { position: relative; }
+/* a small hand-drawn nudge toward the CTA — one quiet gesture, not decoration */
+.home .hero-scribble {
+  width: 52px;
+  height: auto;
+  margin-left: 0.6em;
+  vertical-align: middle;
+  fill: none;
+  stroke: var(--h-accent);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  opacity: 0.85;
+}
+.home .hero-portrait {
+  position: relative;
+  justify-self: end;
+  width: 100%;
+  max-width: 360px;
+  transform: rotate(-2deg);
+}
 .home .hero-portrait img {
   display: block;
   width: 100%;
   height: auto;
+}
+@media (min-width: 1300px) {
+  /* let the portrait spill slightly past its column — one deliberate grid break.
+     Gated to screens well past .hero's own 1200px max-width, where there's
+     real margin outside it to bleed into without causing overflow. */
+  .home .hero-portrait { margin-right: -1.5em; }
 }
 @media (max-width: 800px) {
   .home .hero {
@@ -487,8 +524,10 @@ body::before {
   }
   .home .hero-portrait {
     order: -1;
+    justify-self: center;
     max-width: 280px;
     margin: 0 auto 1em;
+    transform: rotate(-1.5deg);
   }
 }
 
@@ -504,12 +543,17 @@ body::before {
 .home .feature-frame {
   position: relative;
   border: 1px solid var(--h-line);
+  transition: transform 0.2s ease, border-color 0.2s ease;
 }
 .home .feature-frame img {
   display: block;
   width: 100%;
   height: auto;
 }
+@media (hover: hover) {
+  .home .feature-frame:hover { transform: translateY(-6px); border-color: var(--h-accent); }
+}
+.home .feature:focus-within .feature-frame { transform: translateY(-6px); border-color: var(--h-accent); }
 .home .feature-stamp {
   position: absolute;
   left: 0;
@@ -534,7 +578,7 @@ body::before {
 .home .feature-details {
   display: grid;
   grid-template-columns: minmax(140px, 0.5fr) 1fr;
-  grid-template-areas: "meta hook" "meta link";
+  grid-template-areas: "meta hook" "meta link" "meta note";
   gap: 0.5em 3em;
   margin-top: 2.5em;
 }
@@ -559,8 +603,29 @@ body::before {
 }
 .home .feature-details .text-link { grid-area: link; align-self: start; font-size: 0.85rem; }
 @media (max-width: 800px) {
-  .home .feature-details { grid-template-columns: 1fr; grid-template-areas: "meta" "hook" "link"; gap: 0.8em; }
+  .home .feature-details { grid-template-columns: 1fr; grid-template-areas: "meta" "hook" "link" "note"; gap: 0.8em; }
   .home .feature-stamp { transform: none; padding: 1em 1.2em; }
+}
+
+/* ---------- marginalia: small handwritten notes, used sparingly ---------- */
+.margin-note {
+  font-family: var(--font-voice);
+  font-weight: 400;
+  font-size: 1.1rem;
+  line-height: 1.3;
+  color: var(--h-accent);
+  margin: 0;
+}
+.margin-note--feature {
+  grid-area: note;
+  justify-self: end;
+  max-width: 20ch;
+  text-align: right;
+  transform: rotate(1deg);
+  margin-top: 0.6em;
+}
+@media (max-width: 800px) {
+  .margin-note--feature { justify-self: start; text-align: left; margin-top: 0.8em; }
 }
 
 /* ---------- PERSONALITY INTERRUPTION ---------- */
@@ -614,6 +679,21 @@ body::before {
   max-width: 48ch;
   margin: 0 0 2em;
 }
+/* True Link reads slightly more like a filed document than a product tile */
+.home .collection-stamp {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--h-accent);
+  border: 1.5px solid var(--h-accent);
+  padding: 0.3em 0.6em;
+  transform: rotate(-3deg);
+  margin: -0.6em 0 1.6em;
+  opacity: 0.85;
+}
 .home .collection-body {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -623,11 +703,30 @@ body::before {
 }
 .home .collection--truelink .collection-body { grid-template-columns: 1.1fr 0.9fr; }
 .home .collection-media {
+  position: relative;
   border: 1px solid var(--h-line);
   background: var(--h-bg-raised);
   padding: 2em;
+  transition: transform 0.2s ease;
 }
 .home .collection-media img { display: block; width: 100%; height: auto; }
+@media (hover: hover) {
+  .home .collection-media:hover { transform: translateY(-4px) rotate(-0.4deg); }
+}
+.home .collection:focus-within .collection-media { transform: translateY(-4px) rotate(-0.4deg); }
+/* HazAdapt reads as a folder holding a few related projects, not a single card */
+.home .collection-media--folder { z-index: 0; }
+.home .collection-media--folder::before,
+.home .collection-media--folder::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 1px solid var(--h-line);
+  background: var(--h-bg-raised);
+  z-index: -1;
+}
+.home .collection-media--folder::before { transform: translate(6px, 6px) rotate(0.6deg); }
+.home .collection-media--folder::after { transform: translate(12px, 11px) rotate(1.1deg); }
 .home .project-index {
   list-style: none;
   margin: 0;
@@ -651,10 +750,29 @@ body::before {
   padding-left: 0.5em;
 }
 .home .project-index-num {
+  position: relative;
+  display: inline-block;
   font-family: var(--font-body);
   font-weight: 600;
   font-size: 0.78rem;
   color: var(--h-muted);
+  padding: 0.3em 0.5em;
+}
+/* a hand-drawn-feeling circle that appears around the number, not a perfect ring */
+.home .project-index-num::before {
+  content: "";
+  position: absolute;
+  inset: -0.1em -0.2em;
+  border: 1.5px solid var(--h-accent);
+  border-radius: 52% 48% 51% 49% / 48% 52% 48% 52%;
+  opacity: 0;
+  transform: scale(0.85) rotate(-4deg);
+  transition: opacity 0.18s ease, transform 0.18s ease;
+}
+.home .project-index a:hover .project-index-num::before,
+.home .project-index a:focus-visible .project-index-num::before {
+  opacity: 1;
+  transform: scale(1) rotate(-4deg);
 }
 @media (max-width: 800px) {
   .home .collection-body, .home .collection--truelink .collection-body { grid-template-columns: 1fr; gap: 1.5em; }
@@ -676,7 +794,13 @@ body::before {
   border: 1px solid var(--h-line);
   background: var(--h-bg-raised);
   padding: 2em;
+  transform: rotate(-1deg);
+  transition: transform 0.2s ease;
 }
+@media (hover: hover) {
+  .home .standalone-frame:hover { transform: rotate(-1deg) translateY(-4px); }
+}
+.home .standalone:focus-within .standalone-frame { transform: rotate(-1deg) translateY(-4px); }
 .home .standalone-frame img { display: block; width: 100%; height: auto; }
 .home .standalone-number {
   position: absolute;
@@ -690,6 +814,38 @@ body::before {
   line-height: 1;
   margin: 0;
   pointer-events: none;
+}
+.home .standalone-content p.margin-note--welldone {
+  font-family: var(--font-voice);
+  color: var(--h-accent);
+  font-size: 1rem;
+  max-width: none;
+  margin: 0.8em 0 0;
+  transform: rotate(-1deg);
+}
+/* a small peek of the art section, tucked into WellDone's corner so the
+   art section doesn't feel like a hard cut when the visitor reaches it */
+.art-peek {
+  position: absolute;
+  right: -1.2em;
+  bottom: -1.6em;
+  width: 64px;
+  height: 64px;
+  border: 2px solid var(--h-bg);
+  box-shadow: 0 0 0 1px var(--h-line);
+  overflow: hidden;
+  transform: rotate(6deg);
+  transition: transform 0.2s ease;
+  background: var(--h-bg-raised);
+}
+.art-peek:focus-visible {
+  outline: 2px solid var(--h-accent);
+  outline-offset: 3px;
+}
+.art-peek img { width: 100%; height: 100%; object-fit: cover; object-position: 30% 20%; }
+.art-peek:hover, .art-peek:focus-visible { transform: rotate(0deg) scale(1.08); }
+@media (max-width: 800px) {
+  .art-peek { right: 0.5em; bottom: -1.2em; width: 52px; height: 52px; }
 }
 .home .standalone-content h2 {
   font-family: var(--font-body);
@@ -723,6 +879,10 @@ body::before {
   width: 100%;
   border: 1px solid var(--h-line);
   transform: rotate(-1.2deg);
+  transition: transform 0.25s ease;
+}
+@media (hover: hover) {
+  .home .art-frame img:hover { transform: rotate(-0.3deg); }
 }
 @media (min-width: 900px) {
   .home .art-frame img { margin-right: -2.5em; }
