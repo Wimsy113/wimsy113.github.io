@@ -24,6 +24,12 @@
 }
 
 /* ---------- homepage editorial system: light/dark, one accent ---------- */
+/* three color roles, used consistently everywhere on the homepage:
+   --h-fg/--h-muted/--h-line = structural system (text, rules, borders)
+   --h-accent (purple)       = artistic/personal moments — anything in
+                               --font-voice, hand-drawn marginalia, art
+   --h-red                   = interaction & emphasis — links, hovers,
+                               eyebrow labels, the one accent rule/line */
 :root {
   --h-bg: #0c0b0a;
   --h-bg-raised: #17140f;
@@ -31,6 +37,7 @@
   --h-muted: #a39a8c;
   --h-line: #2c2823;
   --h-accent: #8368ff;
+  --h-red: #ff5b45;
 }
 @media (prefers-color-scheme: light) {
   :root {
@@ -40,6 +47,7 @@
     --h-muted: #6b6459;
     --h-line: #ddd3bf;
     --h-accent: #5a35c9;
+    --h-red: #b8341f;
   }
 }
 
@@ -413,7 +421,7 @@ body::before {
 .home .nav-toggle { border-color: var(--h-fg); }
 .home .nav-toggle-bar { background: var(--h-fg); }
 .home .primary-nav a { color: var(--h-fg); }
-.home .primary-nav a:not(.nav-cta)::after { background: var(--h-accent); }
+.home .primary-nav a:not(.nav-cta)::after { background: var(--h-red); }
 @media (max-width: 800px) {
   .home .primary-nav { background: var(--h-bg); border-bottom-color: var(--h-line); }
 }
@@ -421,41 +429,65 @@ body::before {
    HOMEPAGE — editorial system (controlled structure, occasional break)
    =========================================================== */
 
-/* shared small labels used across sections */
+/* shared small labels used across sections — red marks emphasis/metadata,
+   the same role it plays in every hover state on the page */
 .home .index-mark {
   font-family: var(--font-body);
   font-weight: 600;
   font-size: 0.75rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--h-accent);
+  color: var(--h-red);
   margin: 0 0 0.5em;
 }
 .home .annotation {
   font-family: var(--font-body);
   font-weight: 600;
   font-size: 0.8rem;
-  color: var(--h-accent);
+  color: var(--h-red);
   margin: 0.6em 0 1.2em;
 }
 
-/* homepage-scoped reuse of the shared .text-link arrow-link */
+/* homepage-scoped reuse of the shared .text-link arrow-link.
+   Red = interaction everywhere: this is the one hover/focus color. */
 .home .text-link {
   border-bottom-color: var(--h-line);
   color: var(--h-fg);
 }
 .home .text-link:hover, .home .text-link:focus-visible {
-  border-bottom-color: var(--h-accent);
-  color: var(--h-accent);
+  border-bottom-color: var(--h-red);
+  color: var(--h-red);
 }
 
-/* ---------- HERO: one poster, not a text-column beside a picture ---------- */
+/* ---------- ONE oversized-numeral treatment, reused at every section:
+   hero ("MAKER"), ResiliencePoint ("01"), HazAdapt ("02"), True Link
+   ("03"), WellDone ("04"). Only size and position change per instance —
+   color, opacity and weight never do. ---------- */
+.ghost-type {
+  position: absolute;
+  z-index: 0;
+  margin: 0;
+  font-family: var(--font-body);
+  font-weight: 700;
+  line-height: 0.78;
+  letter-spacing: -0.01em;
+  color: var(--h-fg);
+  opacity: 0.07;
+  white-space: nowrap;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* ---------- HERO: cover art, not a text-column beside a picture. This
+   section teaches the visual language the rest of the page repeats:
+   an oversized numeral/word (.ghost-type), one hand-drawn note in
+   --h-accent, one structural line (the shared .text-link underline). ---------- */
 .home .hero {
   position: relative;
   max-width: 1760px;
   margin: 0 auto;
-  padding: clamp(2.5em, 7vw, 4em) 1.5em clamp(5em, 15vw, 10em);
-  min-height: min(88vh, 800px);
+  padding: clamp(2em, 6vw, 3.5em) 1.5em clamp(5em, 15vw, 10em);
+  min-height: min(92vh, 860px);
   display: flex;
   align-items: center;
   overflow: visible;
@@ -463,7 +495,7 @@ body::before {
 .home .hero-copy {
   position: relative;
   z-index: 3;
-  max-width: 660px;
+  max-width: 560px;
   width: 100%;
 }
 .home .hero-statement {
@@ -483,7 +515,7 @@ body::before {
   font-size: 1.1rem;
   line-height: 1.7;
   color: var(--h-muted);
-  max-width: 42ch;
+  max-width: 36ch;
   margin: 0 0 1.8em;
 }
 .home .hero-cta.text-link {
@@ -491,38 +523,27 @@ body::before {
   font-weight: 600;
   font-size: 0.8rem;
 }
-/* an oversized word half-buried behind the artwork — typography as texture */
 .home .hero-ghost {
-  position: absolute;
-  z-index: 1;
   right: 0;
   top: -2%;
-  margin: 0;
-  font-family: var(--font-body);
-  font-weight: 700;
   font-size: clamp(5rem, 19vw, 14rem);
-  line-height: 0.82;
-  letter-spacing: -0.01em;
-  color: var(--h-fg);
-  opacity: 0.07;
-  white-space: nowrap;
-  pointer-events: none;
-  user-select: none;
 }
+/* the self-portrait: the dominant visual element of the opening viewport */
 .home .hero-portrait {
   position: absolute;
   z-index: 2;
-  top: 48%;
+  top: 50%;
   right: 0;
-  width: min(55vw, 800px);
-  transform: translateY(-52%) rotate(-2deg);
+  width: min(70vw, 1040px);
+  transform: translateY(-50%) rotate(-2deg);
 }
 .home .hero-portrait img {
   display: block;
   width: 100%;
   height: auto;
 }
-/* the one handmade gesture linking the introduction to the artwork beside it */
+/* the one handmade gesture linking the introduction to the artwork beside it —
+   same rotation, weight and color as every other marginalia note on the page */
 .home .hero-bridge {
   position: relative;
   z-index: 3;
@@ -535,7 +556,7 @@ body::before {
   font-weight: 400;
   font-size: 1.15rem;
   color: var(--h-accent);
-  transform: rotate(-2deg);
+  transform: rotate(-1.5deg);
 }
 .home .hero-bridge svg {
   width: 58px;
@@ -548,20 +569,23 @@ body::before {
   opacity: 0.9;
 }
 @media (min-width: 1500px) {
-  .home .hero-portrait { right: 0; width: min(52vw, 840px); }
+  .home .hero-portrait { width: min(64vw, 1120px); }
 }
 @media (max-width: 900px) {
   .home .hero {
-    display: block;
+    display: flex;
+    flex-direction: column;
     min-height: auto;
     padding: 3em 1.5em 4em;
   }
-  .home .hero-copy { max-width: none; }
+  .home .hero-copy { max-width: none; order: 2; }
+  .home .hero-support { max-width: none; }
   .home .hero-ghost { display: none; }
   .home .hero-portrait {
     position: static;
-    width: min(70vw, 300px);
-    margin: 0 auto 1.6em;
+    order: 1;
+    width: min(88vw, 420px);
+    margin: 0 auto 1.2em;
     transform: rotate(-1.5deg);
   }
   .home .hero-bridge { transform: rotate(-1.5deg); }
@@ -579,19 +603,9 @@ body::before {
 }
 /* a numeral big enough to read as texture, bleeding into the left margin */
 .home .feature-ghost-num {
-  position: absolute;
   left: clamp(-20px, -1.2vw, 0px);
   top: -0.5em;
-  z-index: 0;
-  margin: 0;
-  font-family: var(--font-body);
-  font-weight: 700;
   font-size: clamp(7rem, 18vw, 15rem);
-  line-height: 0.75;
-  color: var(--h-accent);
-  opacity: 0.1;
-  pointer-events: none;
-  user-select: none;
 }
 .home .feature-frame {
   position: relative;
@@ -605,9 +619,9 @@ body::before {
   height: auto;
 }
 @media (hover: hover) {
-  .home .feature-frame:hover { transform: translateY(-6px); border-color: var(--h-accent); }
+  .home .feature-frame:hover { transform: translateY(-6px); border-color: var(--h-red); }
 }
-.home .feature:focus-within .feature-frame { transform: translateY(-6px); border-color: var(--h-accent); }
+.home .feature:focus-within .feature-frame { transform: translateY(-6px); border-color: var(--h-red); }
 /* the title straddles the image's bottom edge instead of sitting inside it */
 .home .feature-stamp {
   position: relative;
@@ -616,7 +630,7 @@ body::before {
   margin: -1.6em 0 0 clamp(0px, 4vw, 3em);
   padding: 0.9em 1.2em 0 1.4em;
   background: var(--h-bg);
-  border-left: 3px solid var(--h-accent);
+  border-left: 3px solid var(--h-red);
 }
 .home .feature-stamp .index-mark { margin-bottom: 0.2em; }
 .home .feature-stamp h2 {
@@ -656,7 +670,9 @@ body::before {
   .home .feature-details { margin-left: 0; }
 }
 
-/* ---------- marginalia: small handwritten notes, used sparingly ---------- */
+/* ---------- marginalia: ONE handwritten-note style, reused everywhere a
+   personal aside appears (hero, ResiliencePoint, HazAdapt, True Link,
+   WellDone). Same font, same color, same tilt every time. ---------- */
 .margin-note {
   font-family: var(--font-voice);
   font-weight: 400;
@@ -664,6 +680,7 @@ body::before {
   line-height: 1.3;
   color: var(--h-accent);
   margin: 0;
+  transform: rotate(-1.5deg);
 }
 .margin-note--feature {
   position: absolute;
@@ -672,7 +689,6 @@ body::before {
   bottom: 0.5em;
   max-width: 18ch;
   text-align: right;
-  transform: rotate(1deg);
 }
 @media (max-width: 1100px) {
   .margin-note--feature { position: static; text-align: left; margin-top: 1.4em; }
@@ -718,18 +734,8 @@ body::before {
 }
 /* a bled numeral marking each collection, quieter than the RP/hero ones */
 .home .collection-ghost-num {
-  position: absolute;
-  z-index: 0;
   top: 0.2em;
-  margin: 0;
-  font-family: var(--font-body);
-  font-weight: 700;
   font-size: clamp(5.5rem, 13vw, 10rem);
-  line-height: 0.8;
-  color: var(--h-fg);
-  opacity: 0.055;
-  pointer-events: none;
-  user-select: none;
 }
 .home .collection--hazadapt .collection-ghost-num { right: clamp(0px, 2vw, 1em); }
 .home .collection--truelink .collection-ghost-num { left: clamp(0px, 2vw, 1em); }
@@ -752,25 +758,9 @@ body::before {
   max-width: 48ch;
   margin: 0 0 2em;
 }
-.margin-note--hazadapt {
+.margin-note--hazadapt, .margin-note--truelink {
   font-size: 1rem;
   margin: -1.2em 0 1.8em;
-  transform: rotate(-1deg);
-}
-/* True Link reads slightly more like a filed document than a product tile */
-.home .collection-stamp {
-  display: inline-block;
-  font-family: var(--font-body);
-  font-weight: 700;
-  font-size: 0.68rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--h-accent);
-  border: 1.5px solid var(--h-accent);
-  padding: 0.3em 0.6em;
-  transform: rotate(-3deg);
-  margin: -0.6em 0 1.6em;
-  opacity: 0.85;
 }
 .home .collection-body {
   display: grid;
@@ -780,31 +770,20 @@ body::before {
   margin-bottom: 1.8em;
 }
 .home .collection--truelink .collection-body { grid-template-columns: 1.1fr 0.9fr; }
+/* the one image-container treatment, reused for every project image on
+   the page: collection-media, standalone-frame, truelink-doc, art-peek */
 .home .collection-media {
   position: relative;
   border: 1px solid var(--h-line);
   background: var(--h-bg-raised);
   padding: 2em;
-  transition: transform 0.2s ease;
+  transition: transform 0.2s ease, border-color 0.2s ease;
 }
 .home .collection-media img { display: block; width: 100%; height: auto; }
 @media (hover: hover) {
-  .home .collection-media:hover { transform: translateY(-4px) rotate(-0.4deg); }
+  .home .collection-media:hover { transform: translateY(-4px) rotate(-0.4deg); border-color: var(--h-red); }
 }
-.home .collection:focus-within .collection-media { transform: translateY(-4px) rotate(-0.4deg); }
-/* HazAdapt reads as a folder holding a few related projects, not a single card */
-.home .collection-media--folder { z-index: 0; }
-.home .collection-media--folder::before,
-.home .collection-media--folder::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border: 1px solid var(--h-line);
-  background: var(--h-bg-raised);
-  z-index: -1;
-}
-.home .collection-media--folder::before { transform: translate(6px, 6px) rotate(0.6deg); }
-.home .collection-media--folder::after { transform: translate(12px, 11px) rotate(1.1deg); }
+.home .collection:focus-within .collection-media { transform: translateY(-4px) rotate(-0.4deg); border-color: var(--h-red); }
 .home .project-index {
   list-style: none;
   margin: 0;
@@ -841,7 +820,7 @@ body::before {
   transition: color 0.15s ease, padding-left 0.15s ease;
 }
 .home .project-index a:hover, .home .project-index a:focus-visible {
-  color: var(--h-accent);
+  color: var(--h-red);
   padding-left: 0.5em;
 }
 .home .project-index-num {
@@ -858,7 +837,7 @@ body::before {
   content: "";
   position: absolute;
   inset: -0.1em -0.2em;
-  border: 1.5px solid var(--h-accent);
+  border: 1.5px solid var(--h-red);
   border-radius: 52% 48% 51% 49% / 48% 52% 48% 52%;
   opacity: 0;
   transform: scale(0.85) rotate(-4deg);
@@ -905,7 +884,7 @@ body::before {
 .truelink-doc--card-2 { transform: rotate(-1.2deg); }
 .truelink-doc--card:hover, .truelink-doc--card:focus-visible {
   transform: translateY(-4px) rotate(0deg);
-  border-color: var(--h-accent);
+  border-color: var(--h-red);
 }
 .truelink-doc-label {
   font-family: var(--font-body);
@@ -913,7 +892,7 @@ body::before {
   font-size: 0.62rem;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: var(--h-accent);
+  color: var(--h-red);
 }
 .truelink-doc-title {
   font-family: var(--font-body);
@@ -952,26 +931,17 @@ body::before {
   background: var(--h-bg-raised);
   padding: 1.6em;
   transform: rotate(-3deg);
-  transition: transform 0.2s ease;
+  transition: transform 0.2s ease, border-color 0.2s ease;
 }
 @media (hover: hover) {
-  .home .standalone-frame:hover { transform: rotate(-3deg) translateY(-4px); }
+  .home .standalone-frame:hover { transform: rotate(-3deg) translateY(-4px); border-color: var(--h-red); }
 }
-.home .standalone:focus-within .standalone-frame { transform: rotate(-3deg) translateY(-4px); }
+.home .standalone:focus-within .standalone-frame { transform: rotate(-3deg) translateY(-4px); border-color: var(--h-red); }
 .home .standalone-frame img { display: block; width: 100%; height: auto; }
 .home .standalone-number {
-  position: absolute;
-  z-index: 0;
   right: clamp(-20px, -1.2vw, 0px);
   bottom: -0.28em;
-  font-family: var(--font-body);
-  font-weight: 700;
   font-size: clamp(6rem, 15vw, 12rem);
-  color: var(--h-fg);
-  opacity: 0.09;
-  line-height: 0.75;
-  margin: 0;
-  pointer-events: none;
 }
 .home .standalone-content p.margin-note--welldone {
   font-family: var(--font-voice);
@@ -979,7 +949,6 @@ body::before {
   font-size: 1rem;
   max-width: none;
   margin: 0.8em 0 0;
-  transform: rotate(-1deg);
 }
 /* a small peek of the art section, tucked into WellDone's corner so the
    art section doesn't feel like a hard cut when the visitor reaches it */
@@ -989,15 +958,14 @@ body::before {
   bottom: -1.6em;
   width: 64px;
   height: 64px;
-  border: 2px solid var(--h-bg);
-  box-shadow: 0 0 0 1px var(--h-line);
+  border: 1px solid var(--h-line);
   overflow: hidden;
   transform: rotate(6deg);
   transition: transform 0.2s ease;
   background: var(--h-bg-raised);
 }
 .art-peek:focus-visible {
-  outline: 2px solid var(--h-accent);
+  outline: 2px solid var(--h-red);
   outline-offset: 3px;
 }
 .art-peek img { width: 100%; height: 100%; object-fit: cover; object-position: 30% 20%; }
@@ -1013,7 +981,7 @@ body::before {
   text-transform: none;
   margin: 0.2em 0 0.4em;
 }
-.home .standalone-content p {
+.home .standalone-content .standalone-description {
   font-family: var(--font-body);
   color: var(--h-muted);
   max-width: 42ch;
@@ -1056,7 +1024,7 @@ body::before {
   text-transform: none;
   margin: 0.2em 0 0.5em;
 }
-.home .art-content p {
+.home .art-content .art-description {
   font-family: var(--font-body);
   color: var(--h-muted);
   max-width: 46ch;
@@ -1154,8 +1122,8 @@ body::before {
   border-bottom: 1px solid var(--h-line);
 }
 .home .footer-email:hover, .home .footer-email:focus-visible {
-  color: var(--h-accent);
-  border-bottom-color: var(--h-accent);
+  color: var(--h-red);
+  border-bottom-color: var(--h-red);
 }
 .home .footer-nav {
   display: flex;
@@ -1170,7 +1138,7 @@ body::before {
   color: var(--h-muted);
   text-decoration: none;
 }
-.home .footer-nav a:hover, .home .footer-nav a:focus-visible { color: var(--h-accent); }
+.home .footer-nav a:hover, .home .footer-nav a:focus-visible { color: var(--h-red); }
 .home .footer-note {
   max-width: 1320px;
   margin: 1.6em auto 0.4em;
