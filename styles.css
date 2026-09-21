@@ -492,9 +492,17 @@ body::before {
   align-items: center;
   overflow: visible;
 }
-.home .hero-copy {
+/* aligns the introduction to the exact same column every project uses
+   below it, even though .hero itself is wider (to give the portrait
+   room to bleed toward the edge) — same technique as .project--feature */
+.home .hero-inner {
   position: relative;
   z-index: 3;
+  width: 100%;
+  max-width: calc(1320px - 3em);
+  margin: 0 auto;
+}
+.home .hero-copy {
   max-width: 560px;
   width: 100%;
 }
@@ -578,7 +586,8 @@ body::before {
     min-height: auto;
     padding: 3em 1.5em 4em;
   }
-  .home .hero-copy { max-width: none; order: 2; }
+  .home .hero-inner { max-width: none; order: 2; }
+  .home .hero-copy { max-width: none; }
   .home .hero-support { max-width: none; }
   .home .hero-ghost { display: none; }
   .home .hero-portrait {
@@ -591,199 +600,75 @@ body::before {
   .home .hero-bridge { transform: rotate(-1.5deg); }
 }
 
-/* ---------- FEATURE: ResiliencePoint — the image is the centerpiece,
-   everything else is built around it. The image's own size/ratio rules
-   (.feature-frame img) are never touched here. ---------- */
-.home .feature {
+/* ===========================================================
+   ONE PROJECT SYSTEM — 01 ResiliencePoint, 02 HazAdapt, 03 True Link,
+   04 WellDone. Same number treatment, same heading relationship, same
+   body column, same image frame, same link, every time. Composition
+   (image size, list vs. no list, alignment) can vary because the
+   content varies; the identity of each project never does.
+   =========================================================== */
+.home .project {
   position: relative;
-  max-width: 1760px;
+  max-width: 1320px;
   margin: 0 auto;
-  padding: clamp(3em, 8vw, 5em) 1.5em clamp(5em, 10vw, 7em);
-  overflow: visible;
+  padding: clamp(3em, 6vw, 4.5em) 1.5em;
+  border-top: 1px solid var(--h-line);
 }
-/* a numeral big enough to read as texture, bleeding into the left margin */
-.home .feature-ghost-num {
-  left: clamp(-20px, -1.2vw, 0px);
-  top: -0.5em;
-  font-size: clamp(7rem, 18vw, 15rem);
+.home .project-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  column-gap: 0.9em;
+  margin-bottom: 0.6em;
 }
-.home .feature-frame {
-  position: relative;
-  z-index: 1;
-  border: 1px solid var(--h-line);
-  transition: transform 0.2s ease, border-color 0.2s ease;
-}
-.home .feature-frame img {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-@media (hover: hover) {
-  .home .feature-frame:hover { transform: translateY(-6px); border-color: var(--h-red); }
-}
-.home .feature:focus-within .feature-frame { transform: translateY(-6px); border-color: var(--h-red); }
-/* the title straddles the image's bottom edge instead of sitting inside it */
-.home .feature-stamp {
-  position: relative;
-  z-index: 2;
-  max-width: 46rem;
-  margin: -1.6em 0 0 clamp(0px, 4vw, 3em);
-  padding: 0.9em 1.2em 0 1.4em;
-  background: var(--h-bg);
-  border-left: 3px solid var(--h-red);
-}
-.home .feature-stamp .index-mark { margin-bottom: 0.2em; }
-.home .feature-stamp h2 {
+.home .project-num {
   font-family: var(--font-body);
   font-weight: 700;
-  font-size: clamp(2.6rem, 7vw, 5.6rem);
-  color: var(--h-fg);
-  text-transform: none;
-  margin: 0;
-  line-height: 0.95;
+  font-size: clamp(1.6rem, 2.6vw, 2.1rem);
+  line-height: 1;
+  color: var(--h-line);
 }
-.home .feature-details {
-  position: relative;
-  z-index: 1;
-  max-width: 620px;
-  margin: 3em 0 0 clamp(0px, 4vw, 3em);
-}
-.home .feature-meta {
-  font-family: var(--font-body);
-  font-weight: 600;
-  font-size: 0.78rem;
-  letter-spacing: 0.03em;
-  color: var(--h-muted);
-  text-transform: uppercase;
-  margin: 0 0 0.8em;
-}
-.home .feature-hook {
-  font-family: var(--font-body);
-  font-size: clamp(1.15rem, 1.6vw, 1.4rem);
-  line-height: 1.5;
-  color: var(--h-fg);
-  margin: 0 0 1.1em;
-  max-width: 30ch;
-}
-@media (max-width: 800px) {
-  .home .feature-stamp { margin-left: 0; }
-  .home .feature-details { margin-left: 0; }
-}
-
-/* ---------- marginalia: ONE handwritten-note style, reused everywhere a
-   personal aside appears (hero, ResiliencePoint, HazAdapt, True Link,
-   WellDone). Same font, same color, same tilt every time. ---------- */
-.margin-note {
-  font-family: var(--font-voice);
-  font-weight: 400;
-  font-size: 1.1rem;
-  line-height: 1.3;
-  color: var(--h-accent);
-  margin: 0;
-  transform: rotate(-1.5deg);
-}
-.margin-note--feature {
-  position: absolute;
-  z-index: 1;
-  right: clamp(0px, 6vw, 4em);
-  bottom: 0.5em;
-  max-width: 18ch;
-  text-align: right;
-}
-@media (max-width: 1100px) {
-  .margin-note--feature { position: static; text-align: left; margin-top: 1.4em; }
-}
-
-/* ---------- PERSONALITY INTERRUPTION ---------- */
-.home .interrupt {
-  position: relative;
-  max-width: 1320px;
-  margin: 0 auto;
-  padding: 1.5em 1.5em 3em;
-  display: flex;
-  align-items: flex-end;
-  gap: 1.2em;
-  min-height: 120px;
-}
-.home .interrupt-figure {
-  width: 90px;
-  height: 90px;
-  flex: none;
-  transform: translateY(24%);
-}
-.home .interrupt-note {
-  font-family: var(--font-voice);
-  font-weight: 400;
-  font-size: clamp(1.7rem, 3.4vw, 2.3rem);
-  color: var(--h-accent);
-  margin: 0 0 0.4em;
-}
-@media (max-width: 600px) {
-  .home .interrupt { padding: 0.5em 1.25em 2em; gap: 0.8em; }
-  .home .interrupt-figure { width: 60px; height: 60px; }
-}
-
-/* ---------- COLLECTION: HazAdapt (breadth) + True Link (same system) ---------- */
-.home .collection {
-  position: relative;
-  max-width: 1320px;
-  margin: 0 auto;
-  padding: clamp(3em, 7vw, 5em) 1.5em;
-  border-top: 1px solid var(--h-line);
-  overflow: visible;
-}
-/* a bled numeral marking each collection, quieter than the RP/hero ones */
-.home .collection-ghost-num {
-  top: 0.2em;
-  font-size: clamp(5.5rem, 13vw, 10rem);
-}
-.home .collection--hazadapt .collection-ghost-num { right: clamp(0px, 2vw, 1em); }
-.home .collection--truelink .collection-ghost-num { left: clamp(0px, 2vw, 1em); }
-.home .collection-head, .home .collection-body, .home .collection > .text-link, .home .collection > .margin-note {
-  position: relative;
-  z-index: 1;
-}
-.home .collection-head h2 {
+.home .project-head .index-mark { margin: 0; }
+.home .project-title {
   font-family: var(--font-body);
   font-weight: 700;
   font-size: clamp(1.9rem, 4vw, 2.8rem);
   color: var(--h-fg);
   text-transform: none;
-  margin: 0.2em 0 0.3em;
+  line-height: 1.05;
+  margin: 0.15em 0 0;
+  flex-basis: 100%;
 }
-.home .collection-summary {
+.home .project-summary {
   font-family: var(--font-body);
   color: var(--h-muted);
   font-size: 1rem;
   max-width: 48ch;
   margin: 0 0 2em;
 }
-.margin-note--hazadapt, .margin-note--truelink {
-  font-size: 1rem;
-  margin: -1.2em 0 1.8em;
-}
-.home .collection-body {
+.home .project-body {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 2.5em;
   align-items: center;
   margin-bottom: 1.8em;
 }
-.home .collection--truelink .collection-body { grid-template-columns: 1.1fr 0.9fr; }
-/* the one image-container treatment, reused for every project image on
-   the page: collection-media, standalone-frame, truelink-doc, art-peek */
-.home .collection-media {
+.home .project-body--reverse { grid-template-columns: 1.1fr 0.9fr; }
+.home .project-body-text { display: flex; flex-direction: column; gap: 0.6em; }
+/* the one image-container treatment, reused for every project image
+   on the page */
+.home .project-media {
   position: relative;
   border: 1px solid var(--h-line);
   background: var(--h-bg-raised);
   padding: 2em;
   transition: transform 0.2s ease, border-color 0.2s ease;
 }
-.home .collection-media img { display: block; width: 100%; height: auto; }
+.home .project-media img { display: block; width: 100%; height: auto; }
 @media (hover: hover) {
-  .home .collection-media:hover { transform: translateY(-4px) rotate(-0.4deg); border-color: var(--h-red); }
+  .home .project-media:hover { transform: translateY(-4px) rotate(-0.4deg); border-color: var(--h-red); }
 }
-.home .collection:focus-within .collection-media { transform: translateY(-4px) rotate(-0.4deg); border-color: var(--h-red); }
+.home .project:focus-within .project-media { transform: translateY(-4px) rotate(-0.4deg); border-color: var(--h-red); }
 .home .project-index {
   list-style: none;
   margin: 0;
@@ -791,23 +676,6 @@ body::before {
   border-top: 1px solid var(--h-line);
 }
 .home .project-index li { border-bottom: 1px solid var(--h-line); }
-/* HazAdapt's sub-projects branch off a line rather than sitting in a plain list */
-.home .collection--hazadapt .project-index {
-  border-top: none;
-  border-left: 2px solid var(--h-line);
-  padding-left: 1.3em;
-}
-.home .collection--hazadapt .project-index li { border-bottom: none; position: relative; }
-.home .collection--hazadapt .project-index li + li { margin-top: 0.2em; }
-.home .collection--hazadapt .project-index li::before {
-  content: "";
-  position: absolute;
-  left: -1.3em;
-  top: 1.35em;
-  width: 1em;
-  height: 2px;
-  background: var(--h-line);
-}
 .home .project-index a {
   display: flex;
   align-items: baseline;
@@ -849,109 +717,100 @@ body::before {
   transform: scale(1) rotate(-4deg);
 }
 @media (max-width: 800px) {
-  .home .collection-body, .home .collection--truelink .collection-body { grid-template-columns: 1fr; gap: 1.5em; }
+  .home .project-body, .home .project-body--reverse { grid-template-columns: 1fr; gap: 1.5em; }
 }
 
-/* ---------- TRUE LINK: research spread across a table, not three matching cards --- */
-.home .truelink-table {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: flex-start;
-  gap: 1.8em 2.2em;
-  margin: 0.5em 0 2.2em;
+/* ---------- Project 01, ResiliencePoint: establishes the system above.
+   The image is the centerpiece, so it gets a wider outer frame — but the
+   text realigns to the exact same 1320px column as every project below
+   it via .project-inner. The image's own size rule never changes here. ---------- */
+.home .project--feature {
+  max-width: 1760px;
+  padding-top: clamp(2em, 5vw, 3em);
+  border-top: none;
 }
-.truelink-doc {
-  background: var(--h-bg-raised);
+.home .project--feature .project-inner {
+  max-width: calc(1320px - 3em);
+  margin: 0 auto;
+}
+.home .feature-frame {
+  position: relative;
   border: 1px solid var(--h-line);
+  margin-bottom: 1.6em;
   transition: transform 0.2s ease, border-color 0.2s ease;
 }
-.truelink-doc--logo {
-  width: min(300px, 46vw);
-  padding: 1.7em;
-  transform: rotate(-2deg);
+.home .feature-frame img {
+  display: block;
+  width: 100%;
+  height: auto;
 }
-.truelink-doc--logo img { display: block; width: 100%; height: auto; }
-.truelink-doc--card {
-  width: 208px;
-  padding: 1.3em 1.2em;
-  display: flex;
-  flex-direction: column;
-  gap: 0.6em;
-  text-decoration: none;
-  color: inherit;
+@media (hover: hover) {
+  .home .feature-frame:hover { transform: translateY(-6px); border-color: var(--h-red); }
 }
-.truelink-doc--card-1 { transform: rotate(1.5deg); margin-top: 1.4em; }
-.truelink-doc--card-2 { transform: rotate(-1.2deg); }
-.truelink-doc--card:hover, .truelink-doc--card:focus-visible {
-  transform: translateY(-4px) rotate(0deg);
-  border-color: var(--h-red);
-}
-.truelink-doc-label {
-  font-family: var(--font-body);
-  font-weight: 700;
-  font-size: 0.62rem;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--h-red);
-}
-.truelink-doc-title {
+.home .project--feature:focus-within .feature-frame { transform: translateY(-6px); border-color: var(--h-red); }
+.home .project-details { max-width: 620px; }
+.home .project-meta {
   font-family: var(--font-body);
   font-weight: 600;
-  font-size: 1rem;
-  color: var(--h-fg);
-  line-height: 1.3;
+  font-size: 0.78rem;
+  letter-spacing: 0.03em;
+  color: var(--h-muted);
+  text-transform: uppercase;
+  margin: 0 0 0.8em;
 }
-.truelink-doc--card .arrow { align-self: flex-end; opacity: 0.7; }
-@media (max-width: 600px) {
-  .truelink-doc--logo, .truelink-doc--card-1, .truelink-doc--card-2 { transform: none; margin-top: 0; }
+.home .project-hook {
+  font-family: var(--font-body);
+  font-size: clamp(1.1rem, 1.6vw, 1.3rem);
+  line-height: 1.5;
+  color: var(--h-fg);
+  margin: 0 0 1.1em;
+  max-width: 42ch;
 }
 
-/* ---------- STANDALONE: WellDone — this one gets to be weirder. Typography
-   leads, the logo is tucked into a corner instead of filling half the grid. ---------- */
-.home .standalone {
+/* ---------- marginalia: ONE handwritten-note style, used three times
+   total across the whole homepage (hero, ResiliencePoint, WellDone). ---------- */
+.margin-note {
+  font-family: var(--font-voice);
+  font-weight: 400;
+  font-size: 1.1rem;
+  line-height: 1.3;
+  color: var(--h-accent);
+  margin: 0.8em 0 0;
+  transform: rotate(-1.5deg);
+}
+.margin-note--feature { max-width: 32ch; }
+
+/* ---------- PERSONALITY INTERRUPTION ---------- */
+.home .interrupt {
   position: relative;
   max-width: 1320px;
   margin: 0 auto;
-  padding: clamp(4em, 9vw, 6em) 1.5em clamp(5em, 11vw, 8em);
-  border-top: 1px solid var(--h-line);
-  overflow: visible;
-  display: grid;
-  grid-template-columns: 1.5fr 1fr;
-  gap: 2em;
-  align-items: end;
+  padding: 1.5em 1.5em 3em;
+  display: flex;
+  align-items: flex-end;
+  gap: 1.2em;
+  min-height: 120px;
 }
-.home .standalone-content { position: relative; z-index: 1; }
-.home .standalone-frame {
-  position: relative;
-  z-index: 1;
-  justify-self: end;
-  align-self: center;
-  width: min(70%, 300px);
-  border: 1px solid var(--h-line);
-  background: var(--h-bg-raised);
-  padding: 1.6em;
-  transform: rotate(-3deg);
-  transition: transform 0.2s ease, border-color 0.2s ease;
+.home .interrupt-figure {
+  width: 90px;
+  height: 90px;
+  flex: none;
+  transform: translateY(24%);
 }
-@media (hover: hover) {
-  .home .standalone-frame:hover { transform: rotate(-3deg) translateY(-4px); border-color: var(--h-red); }
-}
-.home .standalone:focus-within .standalone-frame { transform: rotate(-3deg) translateY(-4px); border-color: var(--h-red); }
-.home .standalone-frame img { display: block; width: 100%; height: auto; }
-.home .standalone-number {
-  right: clamp(-20px, -1.2vw, 0px);
-  bottom: -0.28em;
-  font-size: clamp(6rem, 15vw, 12rem);
-}
-.home .standalone-content p.margin-note--welldone {
+.home .interrupt-note {
   font-family: var(--font-voice);
+  font-weight: 400;
+  font-size: clamp(1.7rem, 3.4vw, 2.3rem);
   color: var(--h-accent);
-  font-size: 1rem;
-  max-width: none;
-  margin: 0.8em 0 0;
+  margin: 0 0 0.4em;
 }
-/* a small peek of the art section, tucked into WellDone's corner so the
-   art section doesn't feel like a hard cut when the visitor reaches it */
+@media (max-width: 600px) {
+  .home .interrupt { padding: 0.5em 1.25em 2em; gap: 0.8em; }
+  .home .interrupt-figure { width: 60px; height: 60px; }
+}
+
+/* a small peek of the art section, tucked into WellDone's project image
+   so the art section doesn't feel like a hard cut when it arrives */
 .art-peek {
   position: absolute;
   right: -1.2em;
@@ -972,24 +831,6 @@ body::before {
 .art-peek:hover, .art-peek:focus-visible { transform: rotate(0deg) scale(1.08); }
 @media (max-width: 800px) {
   .art-peek { right: 0.5em; bottom: -1.2em; width: 52px; height: 52px; }
-}
-.home .standalone-content h2 {
-  font-family: var(--font-body);
-  font-weight: 700;
-  font-size: clamp(2.4rem, 6vw, 4.2rem);
-  color: var(--h-fg);
-  text-transform: none;
-  margin: 0.2em 0 0.4em;
-}
-.home .standalone-content .standalone-description {
-  font-family: var(--font-body);
-  color: var(--h-muted);
-  max-width: 42ch;
-}
-@media (max-width: 800px) {
-  .home .standalone { grid-template-columns: 1fr; gap: 1.5em; }
-  .home .standalone-frame { justify-self: center; width: min(60%, 240px); margin-top: 1.5em; }
-  .home .standalone-number { right: 0; bottom: -0.15em; }
 }
 
 /* ---------- ART: the system loosens ---------- */
@@ -1035,13 +876,16 @@ body::before {
   .home .art-frame img { transform: none; margin-right: 0; }
 }
 
-/* ---------- ABOUT TEASER ---------- */
+/* ---------- ABOUT TEASER — the closing paragraph. Left-aligned to the
+   same column as the hero introduction, for the callback: "Hi, I'm
+   Krystyna" at the top, "Oh, right. Hi. I'm Krystyna." at the close. ---------- */
 .home .about-teaser {
-  max-width: 800px;
+  max-width: 1320px;
   margin: 0 auto;
   padding: 5em 1.5em 6em;
   border-top: 1px solid var(--h-line);
 }
+.home .about-teaser .project-inner { max-width: 640px; }
 .home .about-teaser .index-mark {
   font-family: var(--font-voice);
   font-weight: 400;
