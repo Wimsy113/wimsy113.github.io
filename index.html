@@ -48,32 +48,41 @@
 
   <main id="main">
 
-    <!-- ============ HERO ============ -->
+    <!-- ============ HERO — interactive reveal. Default state is almost
+         entirely artwork; the introduction lives behind the portrait and
+         only surfaces on hover, focus, or (on touch) a tap. ============ -->
     <section class="hero" id="hero">
-      <p class="ghost-type hero-ghost" aria-hidden="true">MAKER</p>
-      <div class="hero-top">
-        <div class="hero-inner">
-          <div class="hero-copy">
-            <h1 class="hero-statement">Hi, I'm Krystyna.</h1>
-            <a href="#work" class="text-link hero-cta">Selected work <span class="arrow arrow--down">↓</span></a>
-            <p class="hero-bridge">also me
-              <svg viewBox="0 0 90 46" aria-hidden="true" focusable="false">
-                <path d="M4 6c14 8 26 10 38 6 10-3 8-13-2-11-7 1-10 9-3 16 9 9 26 12 51 8" />
-                <path d="M77 20 88 25 79 34" />
-              </svg>
-            </p>
-          </div>
-        </div>
-        <div class="hero-portrait">
-          <img src="images/hero-portrait.png" alt="Hand-drawn self-portrait illustration by Krystyna Ewing: an animated character with a purple bucket hat and glowing green eyes, with her name lettered around it in purple marker.">
+      <p class="hero-name">Krystyna<br>Ewing</p>
+
+      <div class="hero-stage" id="heroStage">
+        <button type="button" class="hero-trigger" id="heroTrigger" aria-expanded="false" aria-controls="heroBio" aria-label="Reveal introduction">
+          <span class="hero-portrait">
+            <img src="images/hero-portrait.png" alt="Hand-drawn self-portrait illustration by Krystyna Ewing: an animated character with a purple bucket hat and glowing green eyes, with her name lettered around it in purple marker.">
+          </span>
+          <svg class="hero-arrow" viewBox="0 0 90 46" aria-hidden="true" focusable="false">
+            <path d="M4 6c14 8 26 10 38 6 10-3 8-13-2-11-7 1-10 9-3 16 9 9 26 12 51 8" />
+            <path d="M77 20 88 25 79 34" />
+          </svg>
+          <span class="hero-cue" aria-hidden="true">
+            <span class="hero-cue-desktop">
+              <span class="hero-cue-word hero-cue-word--idle">psst.</span>
+              <span class="hero-cue-word hero-cue-word--open">oh, hi.</span>
+            </span>
+            <span class="hero-cue-mobile">About Me <span class="hero-cue-icon"></span></span>
+          </span>
+        </button>
+
+        <div class="hero-bio" id="heroBio">
+          <p class="hero-bio-text">I design software, make art, build things, break things, and
+            have a hard time leaving anything alone when I know it could work better.</p>
+          <p class="hero-bio-text">Detroit-born, lifelong artist, and someone with a bad habit of
+            needing to know how things work. That curiosity took me from software development
+            into UX, and it still shows up in accessibility reviews, 3D printing experiments,
+            and whatever I'm building at 1am.</p>
         </div>
       </div>
-      <div class="hero-bio-wrap">
-        <p class="hero-support">I'm a UX designer, artist, technologist, and maker from Detroit.
-          I design software, make art, build things, break things, and have a hard time leaving
-          anything alone when I know it could work better. Mostly, I just really like figuring
-          out how things work, why they don't, and what happens when I start poking at them.</p>
-      </div>
+
+      <p class="hero-tagline">UX · Art · Technology</p>
     </section>
 
     <!-- ============ PROJECT 01 — RESILIENCEPOINT: establishes the system ============ -->
@@ -192,17 +201,15 @@
       </div>
     </section>
 
-    <!-- ============ ABOUT TEASER — the closing paragraph, same column as the hero ============ -->
+    <!-- ============ CLOSING — small on purpose. The introduction already
+         happened in the hero; this just points somewhere next. ============ -->
     <section class="about-teaser" id="about">
       <div class="project-inner">
-        <p class="index-mark">Oh, right. Hi.</p>
-        <h2>I'm Krystyna.</h2>
-        <p>Detroit-born, lifelong artist, and someone with a bad habit of needing to
-          know how things work. That curiosity took me from software development
-          into UX, and it still shows up in accessibility reviews, 3D printing
-          experiments, and whatever I'm building at 1am.</p>
-        <!-- TODO: link to full About page -->
-        <a href="#" class="text-link">More About Me <span class="arrow">→</span></a>
+        <p class="index-mark">That's the pitch.</p>
+        <h2>Want the longer version?</h2>
+        <p>Process notes, tools, and whatever I'm building next — all one click away.</p>
+        <!-- TODO: link to résumé PDF/page -->
+        <a href="#" class="text-link">View Résumé <span class="arrow">→</span></a>
       </div>
     </section>
 

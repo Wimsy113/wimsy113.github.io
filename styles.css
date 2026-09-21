@@ -459,110 +459,83 @@ body::before {
   color: var(--h-red);
 }
 
-/* ---------- ONE oversized-numeral treatment, reused at every section:
-   hero ("MAKER"), ResiliencePoint ("01"), HazAdapt ("02"), True Link
-   ("03"), WellDone ("04"). Only size and position change per instance —
-   color, opacity and weight never do. ---------- */
-.ghost-type {
-  position: absolute;
-  z-index: 0;
-  margin: 0;
-  font-family: var(--font-body);
-  font-weight: 700;
-  line-height: 0.78;
-  letter-spacing: -0.01em;
-  color: var(--h-fg);
-  opacity: 0.07;
-  white-space: nowrap;
-  pointer-events: none;
-  user-select: none;
-}
-
-/* ---------- HERO: cover art, not a text-column beside a picture. This
-   section teaches the visual language the rest of the page repeats:
-   an oversized numeral/word (.ghost-type), one hand-drawn note in
-   --h-accent, one structural line (the shared .text-link underline). ---------- */
+/* ---------- HERO: an interactive reveal, not a text-column beside a
+   picture. Default state is almost entirely the illustrated portrait —
+   name + tagline are the only permanent copy. The introduction lives
+   behind the portrait and surfaces on hover, keyboard focus, or (via
+   the same trigger, click/tap) on touch. ---------- */
 .home .hero {
   position: relative;
   max-width: 1760px;
   margin: 0 auto;
-  padding: clamp(2em, 6vw, 3.5em) 1.5em clamp(3em, 7vw, 5em);
+  padding: clamp(2em, 6vw, 3.5em) 1.5em clamp(2.5em, 6vw, 4em);
   overflow: visible;
 }
-.home .hero-top {
+.home .hero-name {
+  position: relative;
+  z-index: 3;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: clamp(1.6rem, 3vw, 2.3rem);
+  line-height: 1.05;
+  color: var(--h-fg);
+  margin: 0;
+  transition: transform 0.35s ease, opacity 0.3s ease;
+}
+.home .hero-stage.is-revealed ~ .hero-name,
+.home .hero-stage:hover ~ .hero-name,
+.home .hero-stage:focus-within ~ .hero-name {
+  transform: translateY(-0.15em) scale(0.94);
+  transform-origin: left top;
+}
+.home .hero-stage {
   position: relative;
   display: flex;
   align-items: center;
-  min-height: min(78vh, 700px);
+  min-height: min(74vh, 640px);
+  margin-top: clamp(0.5em, 2vw, 1em);
 }
-/* aligns the introduction to the exact same column every project uses
-   below it, even though .hero itself is wider (to give the portrait
-   room to bleed toward the edge) — same technique as .project--feature */
-.home .hero-inner {
+/* the trigger is the portrait itself: a real button, no card, no
+   tooltip chrome — it just sits large and slightly off the edge */
+.home .hero-trigger {
   position: relative;
-  z-index: 3;
-  width: 100%;
-  max-width: calc(1320px - 3em);
-  margin: 0 auto;
-}
-.home .hero-copy {
-  max-width: 560px;
-  width: 100%;
-}
-.home .hero-statement {
-  font-family: var(--font-voice);
-  font-weight: 400;
-  font-style: normal;
-  font-size: clamp(3.4rem, 10.5vw, 8.4rem);
-  line-height: 0.96;
-  color: var(--h-fg);
-  text-transform: none;
-  letter-spacing: 0;
-  max-width: none;
-  margin: 0 0 0.6em;
-}
-.home .hero-cta.text-link {
-  font-family: var(--font-body);
-  font-weight: 600;
-  font-size: 0.8rem;
-}
-.home .hero-ghost {
-  right: 0;
-  top: -2%;
-  font-size: clamp(5rem, 19vw, 14rem);
-}
-/* the self-portrait: the dominant visual element of the opening viewport */
-.home .hero-portrait {
-  position: absolute;
   z-index: 2;
-  top: 50%;
-  right: 0;
-  width: min(70vw, 1040px);
-  transform: translateY(-50%) rotate(-2deg);
+  display: block;
+  margin-left: auto;
+  width: min(58vw, 900px);
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  transition: transform 0.4s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+.home .hero-stage.is-revealed .hero-trigger,
+.home .hero-stage:hover .hero-trigger,
+.home .hero-stage:focus-within .hero-trigger {
+  transform: translateX(6%);
+}
+.home .hero-portrait {
+  display: block;
+  transform: rotate(-2deg);
 }
 .home .hero-portrait img {
   display: block;
   width: 100%;
   height: auto;
 }
-/* the one handmade gesture linking the introduction to the artwork beside it —
-   same rotation, weight and color as every other marginalia note on the page */
-.home .hero-bridge {
-  position: relative;
-  z-index: 3;
-  display: flex;
-  align-items: center;
-  gap: 0.5em;
-  width: fit-content;
-  margin: 1.4em 0 0;
-  font-family: var(--font-voice);
-  font-weight: 400;
-  font-size: 1.15rem;
-  color: var(--h-accent);
-  transform: rotate(-1.5deg);
+.home .hero-trigger:focus-visible {
+  outline: none;
 }
-.home .hero-bridge svg {
-  width: 58px;
+.home .hero-trigger:focus-visible .hero-portrait {
+  outline: 2px solid var(--h-red);
+  outline-offset: 6px;
+}
+/* the hand-drawn line that "draws" outward on reveal */
+.home .hero-arrow {
+  position: absolute;
+  left: -3.5em;
+  bottom: 3em;
+  width: 64px;
   height: auto;
   fill: none;
   stroke: var(--h-accent);
@@ -570,48 +543,140 @@ body::before {
   stroke-linecap: round;
   stroke-linejoin: round;
   opacity: 0.9;
+  pointer-events: none;
 }
-/* the bio sits below the illustration, pulled up slightly to keep a
-   quiet overlap with its bottom edge rather than a hard break */
-.home .hero-bio-wrap {
+.home .hero-arrow path {
+  stroke-dasharray: 140;
+  stroke-dashoffset: 140;
+  transition: stroke-dashoffset 0.4s ease;
+}
+.home .hero-stage.is-revealed .hero-arrow path,
+.home .hero-stage:hover .hero-arrow path,
+.home .hero-stage:focus-within .hero-arrow path {
+  stroke-dashoffset: 0;
+}
+/* the "psst." / "oh, hi." annotation on desktop; a plain "About Me +/–"
+   control on touch, where there's no hover to discover */
+.home .hero-cue {
+  position: absolute;
+  left: -3.6em;
+  bottom: 1.2em;
+  font-family: var(--font-voice);
+  font-size: 1.1rem;
+  color: var(--h-accent);
+  transform: rotate(-2deg);
+}
+.home .hero-cue-word {
+  display: block;
+  transition: opacity 0.25s ease;
+}
+.home .hero-cue-word--open { opacity: 0; margin-top: -1.3em; }
+.home .hero-stage.is-revealed .hero-cue-word--idle,
+.home .hero-stage:hover .hero-cue-word--idle,
+.home .hero-stage:focus-within .hero-cue-word--idle {
+  opacity: 0;
+}
+.home .hero-stage.is-revealed .hero-cue-word--open,
+.home .hero-stage:hover .hero-cue-word--open,
+.home .hero-stage:focus-within .hero-cue-word--open {
+  opacity: 1;
+}
+.home .hero-cue-mobile { display: none; }
+/* the introduction itself: lives in the empty space the portrait's own
+   right-alignment leaves free, clipped away by default and unfolding in
+   place rather than appearing in a box */
+.home .hero-bio {
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: min(30ch, 38%);
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height 0.45s ease, opacity 0.3s ease 0.05s;
+}
+.home .hero-stage.is-revealed .hero-bio,
+.home .hero-stage:hover .hero-bio,
+.home .hero-stage:focus-within .hero-bio {
+  max-height: 420px;
+  opacity: 1;
+}
+.home .hero-bio-text {
+  font-family: var(--font-body);
+  font-size: 1.02rem;
+  line-height: 1.6;
+  color: var(--h-muted);
+  margin: 0 0 1em;
+}
+.home .hero-tagline {
   position: relative;
   z-index: 3;
-  max-width: calc(1320px - 3em);
-  margin: -2.5em auto 0;
-}
-.home .hero-support {
   font-family: var(--font-body);
-  font-size: 1.1rem;
-  line-height: 1.7;
+  font-weight: 600;
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
   color: var(--h-muted);
-  max-width: 60ch;
-  margin: 0;
+  margin: 0.4em 0 0;
 }
-@media (min-width: 1500px) {
-  .home .hero-portrait { width: min(64vw, 1120px); }
+@media (prefers-reduced-motion: reduce) {
+  .home .hero-name,
+  .home .hero-trigger,
+  .home .hero-arrow path,
+  .home .hero-cue-word,
+  .home .hero-bio {
+    transition: none;
+  }
 }
 @media (max-width: 900px) {
-  .home .hero { padding: 3em 1.5em 3.5em; }
-  .home .hero-top {
-    display: flex;
+  .home .hero-stage {
     flex-direction: column;
+    align-items: stretch;
     min-height: auto;
   }
-  .home .hero-inner { max-width: none; order: 2; }
-  .home .hero-copy { max-width: none; }
-  .home .hero-ghost { display: none; }
-  .home .hero-portrait {
-    position: static;
-    order: 1;
-    width: min(88vw, 420px);
-    margin: 0 auto 1.2em;
-    transform: rotate(-1.5deg);
+  .home .hero-trigger {
+    width: min(84vw, 460px);
+    margin: 0 auto;
   }
-  .home .hero-bridge { transform: rotate(-1.5deg); }
-  /* on the stacked layout the bio follows the bridge line, not the
-     portrait directly, so it gets normal spacing instead of an overlap */
-  .home .hero-bio-wrap { max-width: none; margin-top: 1.4em; }
-  .home .hero-support { max-width: none; }
+  .home .hero-portrait { transform: rotate(-1.5deg); }
+  .home .hero-stage.is-revealed .hero-trigger,
+  .home .hero-stage:hover .hero-trigger,
+  .home .hero-stage:focus-within .hero-trigger {
+    transform: none;
+  }
+  .home .hero-arrow { display: none; }
+  .home .hero-cue {
+    position: static;
+    display: block;
+    width: fit-content;
+    margin: 1em auto 0;
+    transform: none;
+    pointer-events: auto;
+  }
+  .home .hero-cue-desktop { display: none; }
+  .home .hero-cue-mobile {
+    display: flex;
+    align-items: center;
+    gap: 0.4em;
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 0.85rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--h-fg);
+  }
+  .home .hero-cue-icon::before { content: "+"; }
+  .home .hero-trigger[aria-expanded="true"] .hero-cue-icon::before { content: "\2013"; }
+  .home .hero-bio {
+    position: static;
+    width: auto;
+    max-width: none;
+    transform: none;
+    margin: 1em auto 0;
+    text-align: left;
+  }
 }
 
 /* ===========================================================
@@ -890,38 +955,38 @@ body::before {
   .home .art-frame img { transform: none; margin-right: 0; }
 }
 
-/* ---------- ABOUT TEASER — the closing paragraph. Left-aligned to the
-   same column as the hero introduction, for the callback: "Hi, I'm
-   Krystyna" at the top, "Oh, right. Hi. I'm Krystyna." at the close. ---------- */
+/* ---------- CLOSING — deliberately small. The introduction already
+   happened in the hero, so this doesn't repeat it; it just points
+   somewhere next (résumé). ---------- */
 .home .about-teaser {
   max-width: 1320px;
   margin: 0 auto;
-  padding: 5em 1.5em 6em;
+  padding: 3.5em 1.5em 4.5em;
   border-top: 1px solid var(--h-line);
 }
-.home .about-teaser .project-inner { max-width: 640px; }
+.home .about-teaser .project-inner { max-width: 520px; }
 .home .about-teaser .index-mark {
   font-family: var(--font-voice);
   font-weight: 400;
   text-transform: none;
   letter-spacing: 0;
-  font-size: 1.6rem;
+  font-size: 1.3rem;
   color: var(--h-accent);
 }
 .home .about-teaser h2 {
   font-family: var(--font-voice);
   font-weight: 400;
-  font-size: clamp(2.2rem, 5.4vw, 3.2rem);
+  font-size: clamp(1.7rem, 3.6vw, 2.2rem);
   color: var(--h-fg);
   text-transform: none;
-  margin: 0.1em 0 0.6em;
+  margin: 0.1em 0 0.5em;
 }
 .home .about-teaser p {
   font-family: var(--font-body);
   color: var(--h-muted);
-  font-size: 1.05rem;
+  font-size: 1rem;
   line-height: 1.6;
-  margin: 0 0 1.4em;
+  margin: 0 0 1.2em;
 }
 /* ===========================================================
    FOOTER

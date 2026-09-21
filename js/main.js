@@ -24,6 +24,34 @@
   }
 
   // ---------------------------------------------------------------
+  // Hero: interactive self-portrait reveal. Hover/focus-within handle
+  // the desktop preview entirely in CSS; this just makes the reveal
+  // persist on click/tap (mobile has no hover to fall back on) and
+  // keeps aria-expanded in sync for assistive tech.
+  // ---------------------------------------------------------------
+  var heroStage = document.getElementById('heroStage');
+  var heroTrigger = document.getElementById('heroTrigger');
+
+  if (heroStage && heroTrigger) {
+    var setHeroExpanded = function (expanded) {
+      heroTrigger.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+    };
+
+    heroTrigger.addEventListener('click', function () {
+      var revealed = heroStage.classList.toggle('is-revealed');
+      setHeroExpanded(revealed);
+    });
+
+    heroTrigger.addEventListener('focus', function () {
+      setHeroExpanded(true);
+    });
+
+    heroTrigger.addEventListener('blur', function () {
+      setHeroExpanded(heroStage.classList.contains('is-revealed'));
+    });
+  }
+
+  // ---------------------------------------------------------------
   // Reveal-on-scroll (plain fade, no motion tricks)
   // ---------------------------------------------------------------
   var revealTargets = document.querySelectorAll(
