@@ -486,11 +486,14 @@ body::before {
   position: relative;
   max-width: 1760px;
   margin: 0 auto;
-  padding: clamp(2em, 6vw, 3.5em) 1.5em clamp(5em, 15vw, 10em);
-  min-height: min(92vh, 860px);
+  padding: clamp(2em, 6vw, 3.5em) 1.5em clamp(3em, 7vw, 5em);
+  overflow: visible;
+}
+.home .hero-top {
+  position: relative;
   display: flex;
   align-items: center;
-  overflow: visible;
+  min-height: min(78vh, 700px);
 }
 /* aligns the introduction to the exact same column every project uses
    below it, even though .hero itself is wider (to give the portrait
@@ -516,15 +519,7 @@ body::before {
   text-transform: none;
   letter-spacing: 0;
   max-width: none;
-  margin: 0 0 0.5em;
-}
-.home .hero-support {
-  font-family: var(--font-body);
-  font-size: 1.1rem;
-  line-height: 1.7;
-  color: var(--h-muted);
-  max-width: 36ch;
-  margin: 0 0 1.8em;
+  margin: 0 0 0.6em;
 }
 .home .hero-cta.text-link {
   font-family: var(--font-body);
@@ -576,19 +571,34 @@ body::before {
   stroke-linejoin: round;
   opacity: 0.9;
 }
+/* the bio sits below the illustration, pulled up slightly to keep a
+   quiet overlap with its bottom edge rather than a hard break */
+.home .hero-bio-wrap {
+  position: relative;
+  z-index: 3;
+  max-width: calc(1320px - 3em);
+  margin: -2.5em auto 0;
+}
+.home .hero-support {
+  font-family: var(--font-body);
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: var(--h-muted);
+  max-width: 60ch;
+  margin: 0;
+}
 @media (min-width: 1500px) {
   .home .hero-portrait { width: min(64vw, 1120px); }
 }
 @media (max-width: 900px) {
-  .home .hero {
+  .home .hero { padding: 3em 1.5em 3.5em; }
+  .home .hero-top {
     display: flex;
     flex-direction: column;
     min-height: auto;
-    padding: 3em 1.5em 4em;
   }
   .home .hero-inner { max-width: none; order: 2; }
   .home .hero-copy { max-width: none; }
-  .home .hero-support { max-width: none; }
   .home .hero-ghost { display: none; }
   .home .hero-portrait {
     position: static;
@@ -598,6 +608,10 @@ body::before {
     transform: rotate(-1.5deg);
   }
   .home .hero-bridge { transform: rotate(-1.5deg); }
+  /* on the stacked layout the bio follows the bridge line, not the
+     portrait directly, so it gets normal spacing instead of an overlap */
+  .home .hero-bio-wrap { max-width: none; margin-top: 1.4em; }
+  .home .hero-support { max-width: none; }
 }
 
 /* ===========================================================
