@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Art — Krystyna Ewing</title>
+  <meta name="description" content="Krystyna Ewing — original illustration, character work, and 3D printing, outside the client work.">
+
+  <link rel="icon" href="images/favicon.ico">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Grenze+Gotisch:wght@400;600&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="art-page">
+
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header" id="top">
+    <div class="header-inner">
+      <a class="brand" href="index.html" aria-label="Krystyna Ewing — home">
+        <span class="brand-mascot duotone" aria-hidden="true">
+          <img src="images/hero.png" alt="">
+        </span>
+        <span class="brand-name">Krystyna Ewing</span>
+      </a>
+
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="primaryNav">
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+        <span class="sr-only">Menu</span>
+      </button>
+
+      <nav class="primary-nav" id="primaryNav" aria-label="Primary">
+        <ul>
+          <li><a href="index.html#work">Work</a></li>
+          <li><a href="art.html" aria-current="page">Art</a></li>
+          <li><a href="index.html#about">About</a></li>
+          <!-- TODO: link to résumé PDF/page -->
+          <li><a href="#">Résumé</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- ============ COVER — the magazine's front page. Typography and
+         artwork share the same space instead of sitting side by side. ============ -->
+    <section class="art-cover">
+      <p class="art-folio">Krystyna Ewing — Art / Selected Work · 2026</p>
+
+      <div class="art-cover-type">
+        <span class="art-cover-ghost" aria-hidden="true">Art</span>
+        <h1 class="art-cover-title">Art</h1>
+        <span class="art-cover-ghost art-cover-ghost--b" aria-hidden="true">Art</span>
+      </div>
+
+      <div class="art-cover-image">
+        <img src="images/Artwork.png" alt="Original digital illustration by Krystyna Ewing.">
+      </div>
+
+      <div class="art-cover-meta">
+        <p class="art-cover-name">Krystyna Ewing</p>
+        <p class="art-cover-sub">Selected Work</p>
+        <p class="art-cover-year">2026</p>
+      </div>
+
+      <p class="art-cover-intro">You've seen how I solve problems. Here's what happens when nobody tells me what to make.</p>
+    </section>
+
+    <!-- ============ SPREAD 01 — two pieces, same character, different distance ============ -->
+    <section class="art-spread art-spread--duo" aria-labelledby="spread01-title">
+      <p class="art-folio">Krystyna Ewing — Art · 01/04</p>
+      <h2 id="spread01-title" class="sr-only">Self-Portrait and detail crop</h2>
+
+      <div class="art-duo">
+        <figure class="art-piece art-piece--duo-a">
+          <img src="images/hero-portrait.png" alt="Hand-drawn self-portrait illustration by Krystyna Ewing: a character with a purple bucket hat and glowing green eyes, with her name lettered around it in purple marker.">
+          <figcaption class="art-caption">
+            <span class="art-caption-num">01</span>
+            <span class="art-caption-title">Self-Portrait</span>
+            <span class="art-caption-meta">Digital Illustration · 2026</span>
+          </figcaption>
+        </figure>
+
+        <figure class="art-piece art-piece--duo-b">
+          <img src="images/header.png" alt="Detail crop of the same character, face only, without the surrounding lettering.">
+          <figcaption class="art-caption">
+            <span class="art-caption-num">01a</span>
+            <span class="art-caption-title">Detail</span>
+            <span class="art-caption-meta">Crop · 2026</span>
+          </figcaption>
+        </figure>
+      </div>
+
+      <p class="art-note">I had an idea. Unfortunately, that meant I had to make it.</p>
+    </section>
+
+    <!-- ============ SPREAD 02 — full-bleed. Turning the page. ============ -->
+    <section class="art-bleed" aria-labelledby="spread02-title">
+      <p class="art-folio art-folio--on-bleed">Krystyna Ewing — Art · 02/04</p>
+      <h2 id="spread02-title" class="sr-only">First Pass</h2>
+      <img src="images/website_hero.png" alt="An early, unfinished sketch mockup mixing loose line art with a hand-lettered name banner.">
+      <figcaption class="art-caption art-caption--on-bleed">
+        <span class="art-caption-num">02</span>
+        <span class="art-caption-title">First Pass</span>
+        <span class="art-caption-meta">Sketch, Digital · 2026</span>
+      </figcaption>
+    </section>
+
+    <!-- ============ SPREAD 03 — two passes of the same illustration ============ -->
+    <section class="art-spread art-spread--process" aria-labelledby="spread03-title">
+      <p class="art-folio">Krystyna Ewing — Art · 03/04</p>
+      <h2 id="spread03-title" class="sr-only">Reach, finished and an earlier pass</h2>
+      <span class="art-typeword" aria-hidden="true">Draw</span>
+
+      <figure class="art-piece art-piece--process-main">
+        <img src="images/Artwork.png" alt="Finished digital illustration by Krystyna Ewing — a figure reaching forward.">
+        <figcaption class="art-caption">
+          <span class="art-caption-num">03</span>
+          <span class="art-caption-title">Reach</span>
+          <span class="art-caption-meta">Digital Illustration · 2026</span>
+        </figcaption>
+      </figure>
+
+      <figure class="art-piece art-piece--process-inset">
+        <img src="images/Hero_Image.png" alt="An earlier color pass of the same illustration, before the linework and shading were finished.">
+        <figcaption class="art-caption art-caption--tiny">Earlier Pass</figcaption>
+      </figure>
+
+      <p class="art-note">This took way longer than I expected.</p>
+    </section>
+
+    <!-- ============ SPREAD 04 — 3D work. Structure ready; photos to follow. ============ -->
+    <section class="art-spread art-spread--3d" aria-labelledby="spread04-title">
+      <p class="art-folio">Krystyna Ewing — Art · 04/04</p>
+      <h2 id="spread04-title" class="sr-only">3D printing and sculpting</h2>
+      <span class="art-typeword" aria-hidden="true">Build</span>
+
+      <div class="art-grid-3d">
+        <figure class="art-piece art-piece--placeholder">
+          <span class="art-placeholder-mark" aria-hidden="true">＋</span>
+          <span class="art-placeholder-label">Photo coming soon</span>
+          <figcaption class="art-caption">
+            <span class="art-caption-num">04</span>
+            <span class="art-caption-title">Sculpt Study</span>
+            <span class="art-caption-meta">3D Print · 2026</span>
+          </figcaption>
+        </figure>
+
+        <figure class="art-piece art-piece--placeholder">
+          <span class="art-placeholder-mark" aria-hidden="true">＋</span>
+          <span class="art-placeholder-label">Photo coming soon</span>
+          <figcaption class="art-caption">
+            <span class="art-caption-num">04a</span>
+            <span class="art-caption-title">Detail, Primed</span>
+            <span class="art-caption-meta">Process · 2026</span>
+          </figcaption>
+        </figure>
+
+        <figure class="art-piece art-piece--placeholder art-piece--placeholder-wide">
+          <span class="art-placeholder-mark" aria-hidden="true">＋</span>
+          <span class="art-placeholder-label">Photo coming soon</span>
+          <figcaption class="art-caption">
+            <span class="art-caption-num">04b</span>
+            <span class="art-caption-title">Print → Paint</span>
+            <span class="art-caption-meta">Process Sequence · 2026</span>
+          </figcaption>
+        </figure>
+      </div>
+
+      <dl class="art-tech">
+        <div><dt>Material</dt><dd>Resin</dd></div>
+        <div><dt>Process</dt><dd>Print · Sand · Prime · Paint</dd></div>
+        <div><dt>Tools</dt><dd>Nomad Sculpt · Chitubox</dd></div>
+      </dl>
+
+      <p class="art-note">I printed it anyway.</p>
+    </section>
+
+    <!-- ============ CLOSING ============ -->
+    <section class="art-close">
+      <p class="art-close-line">That's what's on the wall right now.</p>
+      <a href="index.html#work" class="text-link">Back to the Work <span class="arrow">→</span></a>
+    </section>
+
+  </main>
+
+  <!-- ============ CONTACT / FOOTER ============ -->
+  <footer class="site-footer" id="contact">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <p class="footer-name">Krystyna Ewing</p>
+        <a href="mailto:hello@krystynaewing.com" class="footer-email">hello@krystynaewing.com</a>
+      </div>
+      <nav class="footer-nav" aria-label="Footer">
+        <a href="index.html#work">Work</a>
+        <a href="art.html">Art</a>
+        <a href="index.html#about">About</a>
+        <!-- TODO: link to résumé PDF/page -->
+        <a href="#">Résumé</a>
+      </nav>
+    </div>
+    <p class="footer-note">Found something that doesn't work? <a href="mailto:hello@krystynaewing.com">Tell me.</a></p>
+    <p class="footer-legal">© <span id="year"></span> Krystyna Ewing</p>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
