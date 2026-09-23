@@ -54,15 +54,30 @@
       <p class="wb-intro-sub">Art · Experiments · Things I Make</p>
     </div>
 
-    <!-- ============ THE WORKBENCH — one continuous surface. Finished
-         pieces, an earlier pass, a detail crop and a loose sketch,
-         arranged the way they'd actually sit on a table. Multi-stage
-         pieces use a "stack": one image visible at a time, the other
-         stage a tab-press away, never a separate floating overlap. ============ -->
-    <section class="workbench" aria-label="Workbench">
+    <!-- ============ WORK INDEX — a way to reach any piece without
+         hunting across the canvas, and the only way that doesn't
+         depend on a mouse. ============ -->
+    <nav class="wb-index" aria-label="Jump to a piece">
+      <button type="button" class="wb-index-item" data-target="piece-reach">Reach</button>
+      <button type="button" class="wb-index-item" data-target="piece-portrait">Self-Portrait</button>
+      <button type="button" class="wb-index-item" data-target="piece-firstpass">First Pass</button>
+      <button type="button" class="wb-reset" id="wbReset">Reset Table</button>
+    </nav>
 
-      <!-- Reach: finished illustration + the earlier color pass -->
-      <figure class="wb-piece wb-piece--reach" data-title="Reach" data-medium="Digital Illustration">
+    <!-- ============ THE CANVAS — one continuous, irregular surface.
+         Pieces overlap on purpose; a "stack" brings a different
+         documented stage forward without ever adding a second
+         floating image. Drag is a bonus for a mouse — every piece,
+         every stage, is already reachable from the index above by
+         keyboard or screen reader. ============ -->
+    <section class="wb-canvas" id="wbCanvas" aria-label="Workbench canvas">
+      <p class="wb-canvas-hint">Drag anything. Click to look closer.</p>
+
+      <!-- Reach: finished illustration + the earlier color pass. The
+           anchor piece of the desk — everything else sits around it. -->
+      <figure class="wb-piece wb-piece--lg" id="piece-reach"
+        data-title="Reach" data-medium="Digital Illustration"
+        style="--x:3%; --y:3%; --w:44%; --rot:-2deg; --z:3;">
         <div class="wb-stack">
           <button type="button" class="wb-stack-trigger" aria-label="View larger: Reach, digital illustration">
             <img src="images/Artwork.png" alt="Digital illustration by Krystyna Ewing — a figure in a soft cap reaching a hand forward out of shadow.">
@@ -84,10 +99,13 @@
         </figcaption>
       </figure>
 
-      <p class="wb-note wb-note--reach">I had an idea. Unfortunately, that meant I had to make it.</p>
+      <p class="wb-note" style="--x:50%; --y:6%; --w:22ch; --rot:-1deg; --z:2;">I had an idea. Unfortunately, that meant I had to make it.</p>
 
-      <!-- First Pass: a single loose sketch, pinned down, not part of any stack -->
-      <figure class="wb-piece wb-piece--sketch" data-title="First Pass" data-medium="Sketch, Digital">
+      <!-- First Pass: a single loose sketch, tucked half under Reach's
+           corner, not part of any stack -->
+      <figure class="wb-piece wb-piece--sm" id="piece-firstpass"
+        data-title="First Pass" data-medium="Sketch, Digital"
+        style="--x:27%; --y:30%; --w:21%; --rot:6deg; --z:1;">
         <span class="wb-tape" aria-hidden="true"></span>
         <div class="wb-stack">
           <button type="button" class="wb-stack-trigger" aria-label="View larger: First Pass, sketch">
@@ -101,7 +119,9 @@
       </figure>
 
       <!-- Self-Portrait: the full lettered piece + a clean detail crop -->
-      <figure class="wb-piece wb-piece--portrait" data-title="Self-Portrait" data-medium="Digital Illustration">
+      <figure class="wb-piece wb-piece--lg" id="piece-portrait"
+        data-title="Self-Portrait" data-medium="Digital Illustration"
+        style="--x:47%; --y:38%; --w:42%; --rot:1.5deg; --z:2;">
         <div class="wb-stack">
           <button type="button" class="wb-stack-trigger" aria-label="View larger: Self-Portrait, digital illustration">
             <img src="images/hero-portrait.png" alt="Hand-drawn self-portrait illustration by Krystyna Ewing: a character with a purple bucket hat and glowing green eyes, with her name lettered around it in purple marker.">
@@ -123,11 +143,12 @@
         </figcaption>
       </figure>
 
-      <p class="wb-note wb-note--portrait">This took way longer than I expected.</p>
+      <p class="wb-note" style="--x:4%; --y:68%; --w:24ch; --rot:1deg; --z:2;">This took way longer than I expected.</p>
 
-      <!-- the physical side of the table — genuinely empty right now -->
-      <div class="wb-corner">
-        <p class="wb-corner-text">The physical stuff — sculpture, prints, anything made with my hands instead of a tablet — isn't photographed yet. When it is, it'll be sitting right here on the table.</p>
+      <!-- the physical side of the table — genuinely empty right now,
+           a note among the other scraps rather than a placeholder box -->
+      <div class="wb-sticky" style="--x:62%; --y:70%; --w:30ch; --rot:-1.5deg; --z:1;">
+        <p>The physical stuff — sculpture, prints, anything made with my hands instead of a tablet — isn't photographed yet. When it is, it'll be sitting right here on the table.</p>
       </div>
 
     </section>

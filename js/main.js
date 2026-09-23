@@ -194,6 +194,110 @@
       });
     });
 
+    // -------------------------------------------------------------
+    // Bring-to-front + drag. Every piece keeps its authored --z; this
+    // only ever raises it, and only in response to the visitor's own
+    // interaction. Reset Table restores the authored value.
+    // -------------------------------------------------------------
+    var wbZTop = 10;
+    var wbOriginalZ = new Map();
+    wbPieces.forEach(function (piece) {
+      wbOriginalZ.set(piece, piece.style.getPropertyValue('--z') || '1');
+    });
+
+    function wbBringToFront(piece) {
+      wbZTop += 1;
+      piece.style.setProperty('--z', String(wbZTop));
+    }
+
+    // Dragging is a bonus for a mouse/trackpad -- never wired up for a
+    // coarse (touch) primary pointer, so it can never fight with page
+    // scrolling. Every piece stays fully usable without it.
+    var wbFinePointer = !!(window.matchMedia && window.matchMedia('(pointer: fine)').matches);
+    var WB_DRAG_THRESHOLD = 6;
+
+    wbPieces.forEach(function (piece) {
+      var trigger = piece.querySelector('.wb-stack-trigger');
+
+      trigger.addEventListener('focus', function () { wbBringToFront(piece); });
+
+      if (!wbFinePointer) { return; }
+
+      var isDragging = false;
+      var startX = 0, startY = 0, baseX = 0, baseY = 0, activePointerId = null;
+
+      var onPointerMove = function (e) {
+        var dx = e.clientX - startX;
+        var dy = e.clientY - startY;
+        if (!isDragging && Math.hypot(dx, dy) > WB_DRAG_THRESHOLD) {
+          isDragging = true;
+          piece.classList.add('is-dragging');
+        }
+        if (isDragging) {
+          piece.style.setProperty('--drag-x', (baseX + dx) + 'px');
+          piece.style.setProperty('--drag-y', (baseY + dy) + 'px');
+        }
+      };
+
+      var onPointerUp = function () {
+        if (activePointerId !== null) {
+          try { trigger.releasePointerCapture(activePointerId); } catch (err) { /* no-op */ }
+        }
+        trigger.removeEventListener('pointermove', onPointerMove);
+        trigger.removeEventListener('pointerup', onPointerUp);
+        trigger.removeEventListener('pointercancel', onPointerUp);
+        piece.classList.remove('is-dragging');
+        if (isDragging) {
+          var suppressNextClick = function (e) {
+            e.preventDefault();
+            e.stopImmediatePropagation();
+            trigger.removeEventListener('click', suppressNextClick, true);
+          };
+          trigger.addEventListener('click', suppressNextClick, true);
+        }
+        isDragging = false;
+        activePointerId = null;
+      };
+
+      trigger.addEventListener('pointerdown', function (e) {
+        if (e.pointerType === 'touch' || (e.button !== undefined && e.button !== 0)) { return; }
+        activePointerId = e.pointerId;
+        startX = e.clientX;
+        startY = e.clientY;
+        baseX = parseFloat(piece.style.getPropertyValue('--drag-x')) || 0;
+        baseY = parseFloat(piece.style.getPropertyValue('--drag-y')) || 0;
+        wbBringToFront(piece);
+        trigger.setPointerCapture(activePointerId);
+        trigger.addEventListener('pointermove', onPointerMove);
+        trigger.addEventListener('pointerup', onPointerUp);
+        trigger.addEventListener('pointercancel', onPointerUp);
+      });
+    });
+
+    var wbResetBtn = document.getElementById('wbReset');
+    if (wbResetBtn) {
+      wbResetBtn.addEventListener('click', function () {
+        wbPieces.forEach(function (piece) {
+          piece.style.removeProperty('--drag-x');
+          piece.style.removeProperty('--drag-y');
+          piece.style.setProperty('--z', wbOriginalZ.get(piece));
+        });
+      });
+    }
+
+    // Work index: reach any piece without hunting the canvas, and the
+    // only path that doesn't assume a mouse.
+    Array.prototype.slice.call(document.querySelectorAll('.wb-index-item')).forEach(function (item) {
+      item.addEventListener('click', function () {
+        var piece = document.getElementById(item.getAttribute('data-target'));
+        if (!piece) { return; }
+        wbBringToFront(piece);
+        piece.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'center' });
+        var trigger = piece.querySelector('.wb-stack-trigger');
+        if (trigger) { trigger.focus({ preventScroll: true }); }
+      });
+    });
+
     var wbLightbox = document.createElement('div');
     wbLightbox.className = 'wb-lightbox';
     wbLightbox.setAttribute('role', 'dialog');
@@ -279,6 +383,7 @@
 
     wbPieces.forEach(function (piece, index) {
       piece.querySelector('.wb-stack-trigger').addEventListener('click', function () {
+        wbBringToFront(piece);
         openWbLightbox(index);
       });
     });

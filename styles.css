@@ -1515,38 +1515,76 @@ body:not(.case-overview) .case-section-body {
   margin: 0.3em 0 0;
 }
 
-/* ---------- the surface itself ---------- */
-.art-page .workbench {
+/* ---------- WORK INDEX: reach any piece without hunting the canvas.
+   Also the only navigation path that doesn't assume a mouse. ---------- */
+.art-page .wb-index {
+  max-width: 1400px;
+  margin: 0.8em auto 0;
+  padding: 0 clamp(1.2em, 4vw, 2.5em);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6em;
+  align-items: center;
+}
+.art-page .wb-index-item, .art-page .wb-reset {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.5em 0.8em;
+  border: 1px solid var(--h-line);
+  background: transparent;
+  color: var(--h-muted);
+  cursor: pointer;
+}
+.art-page .wb-index-item:hover, .art-page .wb-index-item:focus-visible,
+.art-page .wb-reset:hover, .art-page .wb-reset:focus-visible {
+  color: var(--h-fg);
+  border-color: var(--h-red);
+}
+.art-page .wb-index-item:focus-visible, .art-page .wb-reset:focus-visible {
+  outline: 2px solid var(--h-red);
+  outline-offset: 2px;
+}
+.art-page .wb-reset { margin-left: auto; color: var(--h-red); border-color: var(--h-red); }
+
+/* ---------- THE CANVAS: one irregular surface. Every piece is
+   authored at a --x/--y/--w/--rot/--z position; dragging (mouse only)
+   layers a --drag-x/--drag-y offset on top without touching those
+   authored values, so "Reset Table" is just clearing two variables. ---------- */
+.art-page .wb-canvas {
   position: relative;
   max-width: 1400px;
-  margin: 0 auto;
-  padding: clamp(1.5em, 4vw, 2.5em) clamp(1.2em, 4vw, 2.5em) clamp(3em, 7vw, 5em);
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  column-gap: clamp(1em, 2.5vw, 2em);
-  row-gap: clamp(2.5em, 6vw, 4.5em);
-  align-items: end;
+  margin: 1.4em auto 0;
+  padding: clamp(1.5em, 4vw, 2.5em) clamp(1.2em, 4vw, 2.5em);
+  min-height: 980px;
 }
-.art-page .wb-piece--reach { grid-column: 1 / span 8; grid-row: 1; transform: rotate(-0.4deg); }
-.art-page .wb-note--reach { grid-column: 9 / span 4; grid-row: 1; }
-.art-page .wb-piece--sketch { grid-column: 1 / span 4; grid-row: 2; transform: rotate(-2deg); }
-.art-page .wb-piece--portrait { grid-column: 5 / span 8; grid-row: 2; transform: rotate(0.5deg); }
-.art-page .wb-note--portrait { grid-column: 1 / span 4; grid-row: 3; }
-.art-page .wb-corner { grid-column: 5 / span 8; grid-row: 3; }
-
-@media (max-width: 800px) {
-  .art-page .workbench { display: block; }
-  .art-page .wb-piece--reach { width: 100%; margin: 0 0 1.2em; transform: rotate(-0.3deg); }
-  .art-page .wb-note--reach { width: 78%; margin: 0 0 2.5em; }
-  .art-page .wb-piece--sketch { width: 56%; margin: 0 0 1.6em; }
-  .art-page .wb-piece--portrait { width: 92%; margin: 0 0 1.2em auto; }
-  .art-page .wb-note--portrait { width: 78%; margin: 0 0 2.5em; }
-  .art-page .wb-corner { width: 100%; }
+.art-page .wb-canvas-hint {
+  position: absolute;
+  top: clamp(0.5em, 2vw, 1em);
+  right: clamp(1.2em, 4vw, 2.5em);
+  z-index: 0;
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 0.68rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--h-muted);
+  opacity: 0.7;
 }
 
 /* ---------- one piece: a mounted print on the table, whichever
    stage is currently forward ---------- */
-.art-page .wb-piece { position: relative; margin: 0; }
+.art-page .wb-piece {
+  position: absolute;
+  left: var(--x, 0%);
+  top: var(--y, 0%);
+  width: var(--w, 30%);
+  z-index: var(--z, 1);
+  margin: 0;
+  transform: rotate(var(--rot, 0deg)) translate(var(--drag-x, 0px), var(--drag-y, 0px));
+}
 .art-page .wb-stack { position: relative; }
 .art-page .wb-stack-trigger {
   display: block;
@@ -1554,29 +1592,32 @@ body:not(.case-overview) .case-section-body {
   padding: 0;
   border: 1px solid var(--h-line);
   background: var(--h-bg-raised);
-  cursor: zoom-in;
+  cursor: grab;
+  touch-action: pan-y;
   box-shadow: 0 14px 28px -16px rgba(0, 0, 0, 0.55), 0 3px 8px rgba(0, 0, 0, 0.3);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: box-shadow 0.2s ease;
 }
 .art-page .wb-stack-trigger img {
   display: block;
   width: 100%;
   height: auto;
+  pointer-events: none;
+}
+.art-page .wb-piece.is-dragging .wb-stack-trigger {
+  cursor: grabbing;
+  box-shadow: 0 26px 40px -16px rgba(0, 0, 0, 0.65), 0 8px 16px rgba(0, 0, 0, 0.4);
 }
 @media (hover: hover) {
   .art-page .wb-stack-trigger:hover {
-    transform: translateY(-4px);
     box-shadow: 0 20px 34px -16px rgba(0, 0, 0, 0.6), 0 6px 12px rgba(0, 0, 0, 0.35);
   }
 }
 .art-page .wb-stack-trigger:focus-visible {
   outline: 2px solid var(--h-red);
   outline-offset: 4px;
-  transform: translateY(-4px);
 }
 @media (prefers-reduced-motion: reduce) {
   .art-page .wb-stack-trigger { transition: none; }
-  .art-page .wb-stack-trigger:hover, .art-page .wb-stack-trigger:focus-visible { transform: none; }
 }
 
 /* a small piece of tape holding a loose sketch down */
@@ -1644,8 +1685,14 @@ body:not(.case-overview) .case-section-body {
 
 /* ---------- margin notes, the artist's own voice ---------- */
 .art-page .wb-note {
-  max-width: 26ch;
+  position: absolute;
+  left: var(--x, 0%);
+  top: var(--y, 0%);
+  z-index: var(--z, 1);
+  width: var(--w, 24ch);
+  max-width: 40vw;
   margin: 0;
+  transform: rotate(var(--rot, 0deg));
   font-family: var(--font-voice);
   font-weight: 400;
   font-size: 1.1rem;
@@ -1653,17 +1700,44 @@ body:not(.case-overview) .case-section-body {
   color: var(--h-accent);
 }
 
-/* ---------- the empty corner of the table, honestly labeled ---------- */
-.art-page .wb-corner {
-  padding: 1.3em 1.5em;
+/* ---------- the empty corner of the table, honestly labeled — a
+   note among the other scraps, not a placeholder box ---------- */
+.art-page .wb-sticky {
+  position: absolute;
+  left: var(--x, 0%);
+  top: var(--y, 0%);
+  z-index: var(--z, 1);
+  width: var(--w, 26ch);
+  max-width: 42vw;
+  transform: rotate(var(--rot, 0deg));
+  padding: 1em 1.2em;
   border: 1px dashed var(--h-line);
+  background: var(--h-bg);
 }
-.art-page .wb-corner-text {
+.art-page .wb-sticky p {
   margin: 0;
   font-family: var(--font-body);
-  font-size: 0.95rem;
-  line-height: 1.6;
+  font-size: 0.88rem;
+  line-height: 1.55;
   color: var(--h-muted);
+}
+
+@media (max-width: 900px) {
+  .art-page .wb-canvas-hint { display: none; }
+  .art-page .wb-canvas {
+    min-height: 0;
+    padding: 1.5em 1.2em clamp(2.5em, 8vw, 4em);
+  }
+  .art-page .wb-piece, .art-page .wb-note, .art-page .wb-sticky {
+    position: relative;
+    left: auto; top: auto; max-width: none;
+    transform: rotate(var(--rot, 0deg));
+  }
+  .art-page .wb-piece { width: 82%; margin: 0 0 1.6em; }
+  .art-page .wb-note { width: 70%; margin: 0 0 2em 8%; }
+  .art-page .wb-sticky { width: 84%; margin: 0 0 2em auto; }
+  .art-page .wb-piece#piece-firstpass { width: 55%; margin-left: 12%; }
+  .art-page .wb-piece#piece-portrait { width: 88%; margin-left: auto; }
 }
 
 /* ---------- CLOSING ---------- */
