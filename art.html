@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Art — Krystyna Ewing</title>
-  <meta name="description" content="Krystyna Ewing — original illustration, character work, and 3D printing, outside the client work.">
+  <meta name="description" content="Krystyna Ewing's workbench — illustration, character work, and physical art, outside the client work.">
 
   <link rel="icon" href="images/favicon.ico">
 
@@ -48,102 +48,93 @@
 
   <main id="main">
 
-    <!-- ============ COVER — one masthead over the strongest existing
-         piece. No repeated typography, no gallery-card treatment. ============ -->
-    <section class="art-cover art-fullbleed">
-      <figure class="art-piece art-piece--cover">
-        <button type="button" class="art-trigger" aria-label="View larger: Reach, digital illustration">
-          <img src="images/Artwork.png" alt="Digital illustration by Krystyna Ewing — a figure in a soft cap reaching a hand forward out of shadow.">
-        </button>
-        <figcaption class="art-caption art-caption--credit">
-          <span class="art-caption-title">Reach</span>
-          <span class="art-caption-meta">Digital Illustration</span>
+    <!-- ============ small, understated opener — not a hero ============ -->
+    <div class="wb-intro">
+      <h1 class="wb-intro-title">The Workbench</h1>
+      <p class="wb-intro-sub">Art · Experiments · Things I Make</p>
+    </div>
+
+    <!-- ============ THE WORKBENCH — one continuous surface. Finished
+         pieces, an earlier pass, a detail crop and a loose sketch,
+         arranged the way they'd actually sit on a table. Multi-stage
+         pieces use a "stack": one image visible at a time, the other
+         stage a tab-press away, never a separate floating overlap. ============ -->
+    <section class="workbench" aria-label="Workbench">
+
+      <!-- Reach: finished illustration + the earlier color pass -->
+      <figure class="wb-piece wb-piece--reach" data-title="Reach" data-medium="Digital Illustration">
+        <div class="wb-stack">
+          <button type="button" class="wb-stack-trigger" aria-label="View larger: Reach, digital illustration">
+            <img src="images/Artwork.png" alt="Digital illustration by Krystyna Ewing — a figure in a soft cap reaching a hand forward out of shadow.">
+          </button>
+        </div>
+        <div class="wb-tabs">
+          <button type="button" class="wb-tab is-active" aria-pressed="true"
+            data-src="images/Artwork.png"
+            data-alt="Digital illustration by Krystyna Ewing — a figure in a soft cap reaching a hand forward out of shadow."
+            data-label="Final">Final</button>
+          <button type="button" class="wb-tab" aria-pressed="false"
+            data-src="images/Hero_Image.png"
+            data-alt="An earlier color pass of the same illustration, before the linework and shading were finished."
+            data-label="Earlier Pass">Earlier Pass</button>
+        </div>
+        <figcaption class="wb-caption">
+          <span class="wb-caption-title">Reach</span>
+          <span class="wb-caption-meta">Digital Illustration</span>
         </figcaption>
       </figure>
 
-      <div class="art-masthead">
-        <h1 class="art-masthead-title">Art</h1>
-        <p class="art-masthead-meta">Krystyna Ewing · Selected Work</p>
-      </div>
-    </section>
+      <p class="wb-note wb-note--reach">I had an idea. Unfortunately, that meant I had to make it.</p>
 
-    <!-- ============ GALLERY — one curated story, varied scale, no two
-         pieces treated the same way. ============ -->
-    <section class="art-gallery" aria-labelledby="gallery-title">
-      <p id="gallery-title" class="index-mark">Gallery</p>
+      <!-- First Pass: a single loose sketch, pinned down, not part of any stack -->
+      <figure class="wb-piece wb-piece--sketch" data-title="First Pass" data-medium="Sketch, Digital">
+        <span class="wb-tape" aria-hidden="true"></span>
+        <div class="wb-stack">
+          <button type="button" class="wb-stack-trigger" aria-label="View larger: First Pass, sketch">
+            <img src="images/website_hero.png" alt="An early, unfinished sketch mixing loose line art with a hand-lettered name banner.">
+          </button>
+        </div>
+        <figcaption class="wb-caption">
+          <span class="wb-caption-title">First Pass</span>
+          <span class="wb-caption-meta">Sketch, Digital</span>
+        </figcaption>
+      </figure>
 
-      <div class="art-pair">
-        <figure class="art-piece art-piece--lg">
-          <button type="button" class="art-trigger" aria-label="View larger: Self-Portrait, digital illustration">
+      <!-- Self-Portrait: the full lettered piece + a clean detail crop -->
+      <figure class="wb-piece wb-piece--portrait" data-title="Self-Portrait" data-medium="Digital Illustration">
+        <div class="wb-stack">
+          <button type="button" class="wb-stack-trigger" aria-label="View larger: Self-Portrait, digital illustration">
             <img src="images/hero-portrait.png" alt="Hand-drawn self-portrait illustration by Krystyna Ewing: a character with a purple bucket hat and glowing green eyes, with her name lettered around it in purple marker.">
           </button>
-          <figcaption class="art-caption">
-            <span class="art-caption-title">Self-Portrait</span>
-            <span class="art-caption-meta">Digital Illustration</span>
-          </figcaption>
-        </figure>
+        </div>
+        <div class="wb-tabs">
+          <button type="button" class="wb-tab is-active" aria-pressed="true"
+            data-src="images/hero-portrait.png"
+            data-alt="Hand-drawn self-portrait illustration by Krystyna Ewing: a character with a purple bucket hat and glowing green eyes, with her name lettered around it in purple marker."
+            data-label="Full Piece">Full Piece</button>
+          <button type="button" class="wb-tab" aria-pressed="false"
+            data-src="images/header.png"
+            data-alt="Detail crop of the same character, face only, without the surrounding lettering."
+            data-label="Detail">Detail</button>
+        </div>
+        <figcaption class="wb-caption">
+          <span class="wb-caption-title">Self-Portrait</span>
+          <span class="wb-caption-meta">Digital Illustration</span>
+        </figcaption>
+      </figure>
 
-        <figure class="art-piece art-piece--sm art-piece--offset">
-          <button type="button" class="art-trigger" aria-label="View larger: detail crop of the self-portrait">
-            <img src="images/header.png" alt="Detail crop of the same character, face only, without the surrounding lettering.">
-          </button>
-          <figcaption class="art-caption art-caption--tiny">
-            <span class="art-caption-title">Detail</span>
-          </figcaption>
-        </figure>
+      <p class="wb-note wb-note--portrait">This took way longer than I expected.</p>
+
+      <!-- the physical side of the table — genuinely empty right now -->
+      <div class="wb-corner">
+        <p class="wb-corner-text">The physical stuff — sculpture, prints, anything made with my hands instead of a tablet — isn't photographed yet. When it is, it'll be sitting right here on the table.</p>
       </div>
 
-      <p class="art-note">I had an idea. Unfortunately, that meant I had to make it.</p>
-    </section>
-
-    <!-- full-bleed piece lives outside .art-gallery's own max-width/padding
-         so it can actually reach the viewport edges -->
-    <figure class="art-piece art-piece--fullbleed art-fullbleed">
-      <button type="button" class="art-trigger" aria-label="View larger: First Pass, sketch">
-        <img src="images/website_hero.png" alt="An early, unfinished sketch mixing loose line art with a hand-lettered name banner.">
-      </button>
-      <figcaption class="art-caption art-caption--on-bleed">
-        <span class="art-caption-title">First Pass</span>
-        <span class="art-caption-meta">Sketch, Digital</span>
-      </figcaption>
-    </figure>
-
-    <section class="art-gallery" aria-label="Gallery, continued">
-      <div class="art-pair art-pair--reverse">
-        <figure class="art-piece art-piece--sm art-piece--offset">
-          <button type="button" class="art-trigger" aria-label="View larger: an earlier pass of Reach">
-            <img src="images/Hero_Image.png" alt="An earlier color pass of the same illustration, before the linework and shading were finished.">
-          </button>
-          <figcaption class="art-caption art-caption--tiny">
-            <span class="art-caption-title">Earlier Pass</span>
-          </figcaption>
-        </figure>
-
-        <figure class="art-piece art-piece--md">
-          <button type="button" class="art-trigger" aria-label="View larger: Reach, digital illustration">
-            <img src="images/Artwork.png" alt="Digital illustration by Krystyna Ewing — a figure reaching a hand forward.">
-          </button>
-          <figcaption class="art-caption">
-            <span class="art-caption-title">Reach</span>
-            <span class="art-caption-meta">Digital Illustration</span>
-          </figcaption>
-        </figure>
-      </div>
-
-      <p class="art-note">This took way longer than I expected.</p>
-    </section>
-
-    <!-- ============ WORKSHOP — no 3D photos exist yet, so none are
-         faked here. Text-led until there's real work to show. ============ -->
-    <section class="art-workshop" aria-labelledby="workshop-title">
-      <p id="workshop-title" class="index-mark">Workshop</p>
-      <p class="art-workshop-text">The physical side of this — 3D prints, sculpting, paint — doesn't have proper photos yet. When it does, this is where it'll live.</p>
-      <div class="art-workshop-grid"></div>
     </section>
 
     <!-- ============ CLOSING ============ -->
     <section class="art-close">
-      <p class="art-close-line">That's what's on the wall right now.</p>
+      <p class="art-close-line">That's what's on the table right now.</p>
       <a href="index.html#work" class="text-link">Back to the Work <span class="arrow">→</span></a>
     </section>
 
