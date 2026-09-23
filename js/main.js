@@ -167,4 +167,83 @@
       }
     });
   }
+
+  // ---------------------------------------------------------------
+  // Art page: accessible lightbox for every piece. Each trigger is a
+  // real <button>, so click, Enter/Space, and touch all open it the
+  // same way; Escape closes, arrow keys move to the next/previous
+  // piece without needing hover for anything.
+  // ---------------------------------------------------------------
+  var artTriggers = Array.prototype.slice.call(document.querySelectorAll('.art-trigger'));
+  if (artTriggers.length) {
+    var artLightbox = document.createElement('div');
+    artLightbox.className = 'art-lightbox';
+    artLightbox.setAttribute('role', 'dialog');
+    artLightbox.setAttribute('aria-modal', 'true');
+    artLightbox.setAttribute('aria-hidden', 'true');
+    artLightbox.innerHTML =
+      '<button type="button" class="art-lightbox-prev" aria-label="Previous piece">&#8592;</button>' +
+      '<figure class="art-lightbox-figure">' +
+      '<img src="" alt="">' +
+      '<figcaption class="art-lightbox-caption"></figcaption>' +
+      '</figure>' +
+      '<button type="button" class="art-lightbox-next" aria-label="Next piece">&#8594;</button>' +
+      '<button type="button" class="art-lightbox-close">[ Close ]</button>';
+    document.body.appendChild(artLightbox);
+
+    var artLightboxImg = artLightbox.querySelector('img');
+    var artLightboxCaption = artLightbox.querySelector('.art-lightbox-caption');
+    var artLightboxClose = artLightbox.querySelector('.art-lightbox-close');
+    var artLightboxPrev = artLightbox.querySelector('.art-lightbox-prev');
+    var artLightboxNext = artLightbox.querySelector('.art-lightbox-next');
+    var artLastFocused = null;
+    var artCurrentIndex = 0;
+
+    var showArtPiece = function (index) {
+      artCurrentIndex = (index + artTriggers.length) % artTriggers.length;
+      var trigger = artTriggers[artCurrentIndex];
+      var img = trigger.querySelector('img');
+      var figure = trigger.closest('.art-piece');
+      var caption = figure ? figure.querySelector('figcaption') : null;
+      artLightboxImg.src = img.currentSrc || img.src;
+      artLightboxImg.alt = img.alt || '';
+      artLightboxCaption.textContent = caption ? caption.textContent : (trigger.getAttribute('aria-label') || '');
+    };
+
+    var openArtLightbox = function (index) {
+      artLastFocused = document.activeElement;
+      showArtPiece(index);
+      artLightbox.classList.add('is-open');
+      artLightbox.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      artLightboxClose.focus();
+    };
+
+    var closeArtLightbox = function () {
+      artLightbox.classList.remove('is-open');
+      artLightbox.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+      artLightboxImg.src = '';
+      if (artLastFocused) { artLastFocused.focus(); }
+    };
+
+    artTriggers.forEach(function (trigger, index) {
+      trigger.addEventListener('click', function () {
+        openArtLightbox(index);
+      });
+    });
+
+    artLightboxClose.addEventListener('click', closeArtLightbox);
+    artLightboxPrev.addEventListener('click', function () { showArtPiece(artCurrentIndex - 1); });
+    artLightboxNext.addEventListener('click', function () { showArtPiece(artCurrentIndex + 1); });
+    artLightbox.addEventListener('click', function (e) {
+      if (e.target === artLightbox) { closeArtLightbox(); }
+    });
+    document.addEventListener('keydown', function (e) {
+      if (!artLightbox.classList.contains('is-open')) { return; }
+      if (e.key === 'Escape') { closeArtLightbox(); }
+      if (e.key === 'ArrowLeft') { showArtPiece(artCurrentIndex - 1); }
+      if (e.key === 'ArrowRight') { showArtPiece(artCurrentIndex + 1); }
+    });
+  }
 })();

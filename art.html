@@ -48,51 +48,47 @@
 
   <main id="main">
 
-    <!-- ============ COVER — the magazine's front page. Typography and
-         artwork share the same space instead of sitting side by side. ============ -->
-    <section class="art-cover">
-      <p class="art-folio">Krystyna Ewing — Art / Selected Work · 2026</p>
+    <!-- ============ COVER — one masthead over the strongest existing
+         piece. No repeated typography, no gallery-card treatment. ============ -->
+    <section class="art-cover art-fullbleed">
+      <figure class="art-piece art-piece--cover">
+        <button type="button" class="art-trigger" aria-label="View larger: Reach, digital illustration">
+          <img src="images/Artwork.png" alt="Digital illustration by Krystyna Ewing — a figure in a soft cap reaching a hand forward out of shadow.">
+        </button>
+        <figcaption class="art-caption art-caption--credit">
+          <span class="art-caption-title">Reach</span>
+          <span class="art-caption-meta">Digital Illustration</span>
+        </figcaption>
+      </figure>
 
-      <div class="art-cover-type">
-        <span class="art-cover-ghost" aria-hidden="true">Art</span>
-        <h1 class="art-cover-title">Art</h1>
-        <span class="art-cover-ghost art-cover-ghost--b" aria-hidden="true">Art</span>
+      <div class="art-masthead">
+        <h1 class="art-masthead-title">Art</h1>
+        <p class="art-masthead-meta">Krystyna Ewing · Selected Work</p>
       </div>
-
-      <div class="art-cover-image">
-        <img src="images/Artwork.png" alt="Original digital illustration by Krystyna Ewing.">
-      </div>
-
-      <div class="art-cover-meta">
-        <p class="art-cover-name">Krystyna Ewing</p>
-        <p class="art-cover-sub">Selected Work</p>
-        <p class="art-cover-year">2026</p>
-      </div>
-
-      <p class="art-cover-intro">You've seen how I solve problems. Here's what happens when nobody tells me what to make.</p>
     </section>
 
-    <!-- ============ SPREAD 01 — two pieces, same character, different distance ============ -->
-    <section class="art-spread art-spread--duo" aria-labelledby="spread01-title">
-      <p class="art-folio">Krystyna Ewing — Art · 01/04</p>
-      <h2 id="spread01-title" class="sr-only">Self-Portrait and detail crop</h2>
+    <!-- ============ GALLERY — one curated story, varied scale, no two
+         pieces treated the same way. ============ -->
+    <section class="art-gallery" aria-labelledby="gallery-title">
+      <p id="gallery-title" class="index-mark">Gallery</p>
 
-      <div class="art-duo">
-        <figure class="art-piece art-piece--duo-a">
-          <img src="images/hero-portrait.png" alt="Hand-drawn self-portrait illustration by Krystyna Ewing: a character with a purple bucket hat and glowing green eyes, with her name lettered around it in purple marker.">
+      <div class="art-pair">
+        <figure class="art-piece art-piece--lg">
+          <button type="button" class="art-trigger" aria-label="View larger: Self-Portrait, digital illustration">
+            <img src="images/hero-portrait.png" alt="Hand-drawn self-portrait illustration by Krystyna Ewing: a character with a purple bucket hat and glowing green eyes, with her name lettered around it in purple marker.">
+          </button>
           <figcaption class="art-caption">
-            <span class="art-caption-num">01</span>
             <span class="art-caption-title">Self-Portrait</span>
-            <span class="art-caption-meta">Digital Illustration · 2026</span>
+            <span class="art-caption-meta">Digital Illustration</span>
           </figcaption>
         </figure>
 
-        <figure class="art-piece art-piece--duo-b">
-          <img src="images/header.png" alt="Detail crop of the same character, face only, without the surrounding lettering.">
-          <figcaption class="art-caption">
-            <span class="art-caption-num">01a</span>
+        <figure class="art-piece art-piece--sm art-piece--offset">
+          <button type="button" class="art-trigger" aria-label="View larger: detail crop of the self-portrait">
+            <img src="images/header.png" alt="Detail crop of the same character, face only, without the surrounding lettering.">
+          </button>
+          <figcaption class="art-caption art-caption--tiny">
             <span class="art-caption-title">Detail</span>
-            <span class="art-caption-meta">Crop · 2026</span>
           </figcaption>
         </figure>
       </div>
@@ -100,86 +96,49 @@
       <p class="art-note">I had an idea. Unfortunately, that meant I had to make it.</p>
     </section>
 
-    <!-- ============ SPREAD 02 — full-bleed. Turning the page. ============ -->
-    <section class="art-bleed" aria-labelledby="spread02-title">
-      <p class="art-folio art-folio--on-bleed">Krystyna Ewing — Art · 02/04</p>
-      <h2 id="spread02-title" class="sr-only">First Pass</h2>
-      <img src="images/website_hero.png" alt="An early, unfinished sketch mockup mixing loose line art with a hand-lettered name banner.">
+    <!-- full-bleed piece lives outside .art-gallery's own max-width/padding
+         so it can actually reach the viewport edges -->
+    <figure class="art-piece art-piece--fullbleed art-fullbleed">
+      <button type="button" class="art-trigger" aria-label="View larger: First Pass, sketch">
+        <img src="images/website_hero.png" alt="An early, unfinished sketch mixing loose line art with a hand-lettered name banner.">
+      </button>
       <figcaption class="art-caption art-caption--on-bleed">
-        <span class="art-caption-num">02</span>
         <span class="art-caption-title">First Pass</span>
-        <span class="art-caption-meta">Sketch, Digital · 2026</span>
+        <span class="art-caption-meta">Sketch, Digital</span>
       </figcaption>
-    </section>
+    </figure>
 
-    <!-- ============ SPREAD 03 — two passes of the same illustration ============ -->
-    <section class="art-spread art-spread--process" aria-labelledby="spread03-title">
-      <p class="art-folio">Krystyna Ewing — Art · 03/04</p>
-      <h2 id="spread03-title" class="sr-only">Reach, finished and an earlier pass</h2>
-      <span class="art-typeword" aria-hidden="true">Draw</span>
-
-      <figure class="art-piece art-piece--process-main">
-        <img src="images/Artwork.png" alt="Finished digital illustration by Krystyna Ewing — a figure reaching forward.">
-        <figcaption class="art-caption">
-          <span class="art-caption-num">03</span>
-          <span class="art-caption-title">Reach</span>
-          <span class="art-caption-meta">Digital Illustration · 2026</span>
-        </figcaption>
-      </figure>
-
-      <figure class="art-piece art-piece--process-inset">
-        <img src="images/Hero_Image.png" alt="An earlier color pass of the same illustration, before the linework and shading were finished.">
-        <figcaption class="art-caption art-caption--tiny">Earlier Pass</figcaption>
-      </figure>
-
-      <p class="art-note">This took way longer than I expected.</p>
-    </section>
-
-    <!-- ============ SPREAD 04 — 3D work. Structure ready; photos to follow. ============ -->
-    <section class="art-spread art-spread--3d" aria-labelledby="spread04-title">
-      <p class="art-folio">Krystyna Ewing — Art · 04/04</p>
-      <h2 id="spread04-title" class="sr-only">3D printing and sculpting</h2>
-      <span class="art-typeword" aria-hidden="true">Build</span>
-
-      <div class="art-grid-3d">
-        <figure class="art-piece art-piece--placeholder">
-          <span class="art-placeholder-mark" aria-hidden="true">＋</span>
-          <span class="art-placeholder-label">Photo coming soon</span>
-          <figcaption class="art-caption">
-            <span class="art-caption-num">04</span>
-            <span class="art-caption-title">Sculpt Study</span>
-            <span class="art-caption-meta">3D Print · 2026</span>
+    <section class="art-gallery" aria-label="Gallery, continued">
+      <div class="art-pair art-pair--reverse">
+        <figure class="art-piece art-piece--sm art-piece--offset">
+          <button type="button" class="art-trigger" aria-label="View larger: an earlier pass of Reach">
+            <img src="images/Hero_Image.png" alt="An earlier color pass of the same illustration, before the linework and shading were finished.">
+          </button>
+          <figcaption class="art-caption art-caption--tiny">
+            <span class="art-caption-title">Earlier Pass</span>
           </figcaption>
         </figure>
 
-        <figure class="art-piece art-piece--placeholder">
-          <span class="art-placeholder-mark" aria-hidden="true">＋</span>
-          <span class="art-placeholder-label">Photo coming soon</span>
+        <figure class="art-piece art-piece--md">
+          <button type="button" class="art-trigger" aria-label="View larger: Reach, digital illustration">
+            <img src="images/Artwork.png" alt="Digital illustration by Krystyna Ewing — a figure reaching a hand forward.">
+          </button>
           <figcaption class="art-caption">
-            <span class="art-caption-num">04a</span>
-            <span class="art-caption-title">Detail, Primed</span>
-            <span class="art-caption-meta">Process · 2026</span>
-          </figcaption>
-        </figure>
-
-        <figure class="art-piece art-piece--placeholder art-piece--placeholder-wide">
-          <span class="art-placeholder-mark" aria-hidden="true">＋</span>
-          <span class="art-placeholder-label">Photo coming soon</span>
-          <figcaption class="art-caption">
-            <span class="art-caption-num">04b</span>
-            <span class="art-caption-title">Print → Paint</span>
-            <span class="art-caption-meta">Process Sequence · 2026</span>
+            <span class="art-caption-title">Reach</span>
+            <span class="art-caption-meta">Digital Illustration</span>
           </figcaption>
         </figure>
       </div>
 
-      <dl class="art-tech">
-        <div><dt>Material</dt><dd>Resin</dd></div>
-        <div><dt>Process</dt><dd>Print · Sand · Prime · Paint</dd></div>
-        <div><dt>Tools</dt><dd>Nomad Sculpt · Chitubox</dd></div>
-      </dl>
+      <p class="art-note">This took way longer than I expected.</p>
+    </section>
 
-      <p class="art-note">I printed it anyway.</p>
+    <!-- ============ WORKSHOP — no 3D photos exist yet, so none are
+         faked here. Text-led until there's real work to show. ============ -->
+    <section class="art-workshop" aria-labelledby="workshop-title">
+      <p id="workshop-title" class="index-mark">Workshop</p>
+      <p class="art-workshop-text">The physical side of this — 3D prints, sculpting, paint — doesn't have proper photos yet. When it does, this is where it'll live.</p>
+      <div class="art-workshop-grid"></div>
     </section>
 
     <!-- ============ CLOSING ============ -->
