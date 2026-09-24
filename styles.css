@@ -1,8 +1,10 @@
 /* ===========================================================
    Krystyna Ewing — portfolio
-   Post-punk / darkwave. Black, bone, one sharp accent.
-   Swiss-poster structure, clinical monospace, no decoration
-   that doesn't earn its place.
+   Oxide: a visual system built from one photograph -- an oxidized,
+   hard-lit skull. Violet and a deep red stand in for the photo's own
+   pink and burnt orange (its raw tones don't clear AA text contrast);
+   brutalist display type carries the drama, gothic accents stay rare,
+   and the working sans face carries everything that has to be read.
    =========================================================== */
 
 :root {
@@ -14,8 +16,10 @@
   --accent: #6e4ff0;
   --accent-dim: #4a3699;
 
-  /* two-voice type system: voice = personality/expressive moments only,
+  /* three-voice type system: display = brutalist, oversized, structural
+     drama; voice = gothic accent, personal moments only, used sparingly;
      body = everything functional (nav, buttons, metadata, case-study copy) */
+  --font-display: 'Big Shoulders Display', 'Arial Narrow', sans-serif;
   --font-voice: 'Grenze Gotisch', 'Georgia', serif;
   --font-body: 'Source Sans 3', -apple-system, 'Segoe UI', sans-serif;
   --font-mono: 'Space Mono', 'Courier New', monospace;
@@ -23,13 +27,18 @@
   color-scheme: dark;
 }
 
-/* ---------- homepage editorial system: light/dark, one accent ---------- */
-/* three color roles, used consistently everywhere on the homepage:
+/* ---------- homepage editorial system: light/dark, one accent pair ---------- */
+/* color roles, used consistently everywhere on the homepage:
    --h-fg/--h-muted/--h-line = structural system (text, rules, borders)
-   --h-accent (purple)       = artistic/personal moments — anything in
+   --h-accent (violet)       = artistic/personal moments — anything in
                                --font-voice, hand-drawn marginalia, art
-   --h-red                   = interaction & emphasis — links, hovers,
-                               eyebrow labels, the one accent rule/line */
+   --h-red (crimson)         = interaction & emphasis — links, hovers,
+                               eyebrow labels, the one accent rule/line
+   --h-garnet                = the deep red itself: display type, borders,
+                               fills. Decorative only on dark surfaces --
+                               it fails AA there; never use it for text
+                               except on the light theme, where it's the
+                               strongest-contrast color in the palette */
 :root {
   --h-bg: #0c0b0a;
   --h-bg-raised: #17140f;
@@ -37,7 +46,8 @@
   --h-muted: #a39a8c;
   --h-line: #2c2823;
   --h-accent: #8368ff;
-  --h-red: #ff5b45;
+  --h-red: #e4445e;
+  --h-garnet: #7a1220;
 }
 @media (prefers-color-scheme: light) {
   :root {
@@ -47,7 +57,8 @@
     --h-muted: #6b6459;
     --h-line: #ddd3bf;
     --h-accent: #5a35c9;
-    --h-red: #b8341f;
+    --h-red: #98162b;
+    --h-garnet: #5c0e18;
   }
 }
 
@@ -676,21 +687,27 @@ body.art-page { background: var(--h-bg); color: var(--h-fg); }
   margin-bottom: 0.6em;
 }
 .home .project-num {
-  font-family: var(--font-body);
-  font-weight: 700;
-  font-size: clamp(1.6rem, 2.6vw, 2.1rem);
-  line-height: 1;
-  color: var(--h-line);
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(3rem, 7vw, 5.5rem);
+  line-height: 0.85;
+  letter-spacing: -0.01em;
+  color: var(--h-red);
 }
-.home .project-head .index-mark { margin: 0; }
+.home .project-head .index-mark {
+  margin: 0;
+  padding: 0.25em 0.6em;
+  border: 1px solid var(--h-line);
+}
 .home .project-title {
-  font-family: var(--font-body);
-  font-weight: 700;
-  font-size: clamp(1.9rem, 4vw, 2.8rem);
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(2.6rem, 6vw, 5rem);
   color: var(--h-fg);
-  text-transform: none;
-  line-height: 1.05;
-  margin: 0.15em 0 0;
+  text-transform: uppercase;
+  letter-spacing: -0.005em;
+  line-height: 0.9;
+  margin: 0.1em 0 0;
   flex-basis: 100%;
 }
 .home .project-summary {
@@ -786,6 +803,11 @@ body.art-page { background: var(--h-bg); color: var(--h-fg); }
 .home .project--feature .project-inner {
   max-width: calc(1320px - 3em);
   margin: 0 auto;
+}
+/* the opening number gets the loudest treatment on the page -- still
+   text, still AA-safe crimson, just larger, since this is the cover */
+.home .project--feature .project-num {
+  font-size: clamp(4rem, 10vw, 8rem);
 }
 .home .feature-frame {
   position: relative;
@@ -1030,12 +1052,21 @@ body.art-page { background: var(--h-bg); color: var(--h-fg); }
   gap: 1.5em;
 }
 .home .footer-nav a, .art-page .footer-nav a {
+  position: relative;
   font-family: var(--font-body);
   font-size: 0.85rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   color: var(--h-muted);
   text-decoration: none;
+}
+.home .footer-nav a:not(:last-child)::after,
+.art-page .footer-nav a:not(:last-child)::after {
+  content: "—";
+  position: absolute;
+  left: 100%;
+  margin-left: 0.75em;
+  color: var(--h-muted);
 }
 .home .footer-nav a:hover, .home .footer-nav a:focus-visible,
 .art-page .footer-nav a:hover, .art-page .footer-nav a:focus-visible { color: var(--h-red); }
