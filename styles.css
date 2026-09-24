@@ -504,27 +504,32 @@ body.art-page { background: var(--h-bg); color: var(--h-fg); }
   --hero-pink: #ff4d6a;
   background: var(--hero-bg);
 }
-/* layered color explosion behind the skull -- violet, crimson, garnet and
-   pink (all one hue family, just pushed brighter/hotter here) as soft-edged
-   blooms, screened against black so they glow instead of sitting flat.
-   This replaces a single flat diagonal panel: same restrained palette,
-   a lot more of the photo's own hard, saturated lighting. */
-.home .hero::before {
-  content: "";
-  position: absolute;
-  inset: -10%;
-  z-index: 0;
-  background:
-    radial-gradient(circle at 78% 30%, var(--hero-pink) 0%, transparent 42%),
-    radial-gradient(circle at 60% 70%, var(--hero-garnet) 0%, transparent 45%),
-    radial-gradient(circle at 90% 80%, var(--hero-red) 0%, transparent 40%),
-    radial-gradient(circle at 35% 20%, var(--hero-accent) 0%, transparent 35%);
-  filter: blur(70px);
-  mix-blend-mode: screen;
-}
-.home .hero-media {
+/* ink, not glow: real irregular splatter shapes (SVG turbulence-displaced
+   ellipses, markup in index.html), not soft gradient circles -- gradient
+   blooms read as stock/ad backgrounds; distorted, hard-bled paint shapes
+   don't. Violet, crimson, garnet and pink -- one hue family, pushed hot. */
+.home .hero-ink {
   position: absolute;
   inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  mix-blend-mode: screen;
+}
+.ink-blob { opacity: 0.92; }
+.ink-blob--accent { fill: var(--hero-accent); }
+.ink-blob--garnet { fill: var(--hero-garnet); }
+.ink-blob--red { fill: var(--hero-red); }
+.ink-blob--pink { fill: var(--hero-pink); }
+/* the skull is one element in the wreckage, not the whole frame -- sized
+   and placed the way it sits in the reference collage: upper-right,
+   contained, partly buried in the ink rather than filling the hero */
+.home .hero-media {
+  position: absolute;
+  top: 6%;
+  right: 3%;
+  width: 48%;
+  height: 64%;
   z-index: 1;
 }
 .home .hero-media img {
@@ -532,10 +537,8 @@ body.art-page { background: var(--h-bg); color: var(--h-fg); }
   width: 100%;
   height: 100%;
   object-fit: contain;
-  /* off-axis, not centered: the skull sits right-of-center, breaking
-     across the diagonal accent instead of floating politely inside it */
-  object-position: 68% 50%;
-  filter: contrast(1.12) saturate(1.18);
+  object-position: 50% 50%;
+  filter: contrast(1.12) saturate(1.18) drop-shadow(0 20px 40px rgba(0, 0, 0, 0.55));
 }
 /* name + tagline: the headline, not a caption -- big enough to break
    across the skull's own silhouette, the way giant type sits directly
@@ -674,8 +677,9 @@ body.art-page { background: var(--h-bg); color: var(--h-fg); }
     height: 78vh;
     min-height: 520px;
   }
-  .home .hero-media img {
-    object-position: 50% 40%;
+  .home .hero-media {
+    width: 62%;
+    height: 46%;
   }
   .home .hero-interactive {
     top: 1em;

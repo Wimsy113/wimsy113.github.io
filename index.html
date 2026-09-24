@@ -52,6 +52,29 @@
          the hero section; name/tagline and the bio reveal are layered on
          top of it, not placed beside it. ============ -->
     <section class="hero" id="hero">
+      <svg class="hero-ink" viewBox="0 0 1440 810" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+        <defs>
+          <filter id="inkDistortA" x="-60%" y="-60%" width="220%" height="220%">
+            <feTurbulence type="fractalNoise" baseFrequency="0.011 0.016" numOctaves="3" seed="7" result="noise"/>
+            <feDisplacementMap in="SourceGraphic" in2="noise" scale="130" xChannelSelector="R" yChannelSelector="G"/>
+          </filter>
+          <filter id="inkDistortB" x="-60%" y="-60%" width="220%" height="220%">
+            <feTurbulence type="fractalNoise" baseFrequency="0.018 0.027" numOctaves="2" seed="23" result="noise"/>
+            <feDisplacementMap in="SourceGraphic" in2="noise" scale="90" xChannelSelector="R" yChannelSelector="G"/>
+          </filter>
+        </defs>
+        <g filter="url(#inkDistortA)">
+          <ellipse class="ink-blob ink-blob--accent" cx="560" cy="480" rx="300" ry="250"/>
+          <ellipse class="ink-blob ink-blob--garnet" cx="820" cy="560" rx="340" ry="270"/>
+          <ellipse class="ink-blob ink-blob--accent" cx="980" cy="360" rx="180" ry="160"/>
+        </g>
+        <g filter="url(#inkDistortB)">
+          <ellipse class="ink-blob ink-blob--pink" cx="900" cy="460" rx="170" ry="140"/>
+          <ellipse class="ink-blob ink-blob--red" cx="1120" cy="620" rx="150" ry="120"/>
+          <ellipse class="ink-blob ink-blob--red" cx="160" cy="700" rx="130" ry="100"/>
+        </g>
+      </svg>
+
       <div class="hero-media">
         <img src="images/hero-skull.webp" alt="A skull finished in an oxidized metallic patina, pink and burnt-orange under hard, dramatic lighting against a dark ground — the source photograph behind this site's color and type system.">
       </div>
