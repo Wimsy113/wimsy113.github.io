@@ -7,6 +7,45 @@
    and the working sans face carries everything that has to be read.
    =========================================================== */
 
+/* ===========================================================
+   "Beautifully Unhinged" -- homepage v2 tokens, from the client's own
+   high-fidelity handoff (design_handoff_portfolio/README.md). Manual
+   dark/light toggle (not OS preference): dark is the unconditional
+   default, [data-theme="light"] overrides it. Currently scoped to the
+   homepage only -- art.html and the case study pages still run on the
+   --h-* tokens above/below until their own pass.
+   =========================================================== */
+:root {
+  --bg: #0d0c0c;
+  --ink: #ece6dc;
+  --muted: #aaa69f;
+  --metal: #8d8a85;
+  --ghost: #1f1d1c;
+  --line2: #34322f;
+  --red2: oklch(0.6 0.2 27);
+  --on-red: #0d0c0c;
+  --pink: #f45b8e;
+  --mat: #1c1f1d;
+  --matline: rgba(236, 230, 220, .07);
+  --matline2: rgba(236, 230, 220, .16);
+  --grain: .1;
+}
+:root[data-theme="light"] {
+  --bg: #e8e2d7;
+  --ink: #151312;
+  --muted: #4c4945;
+  --metal: #6c6964;
+  --ghost: #d8d1c4;
+  --line2: #b9b1a3;
+  --red2: oklch(0.5 0.2 27);
+  --on-red: #fff;
+  --pink: #b8154f;
+  --mat: #cfd3c8;
+  --matline: rgba(21, 19, 18, .08);
+  --matline2: rgba(21, 19, 18, .2);
+  --grain: .07;
+}
+
 :root {
   --black: #0a0a0b;
   --panel: #141317;
@@ -439,13 +478,120 @@ body::before {
   .home .primary-nav, .art-page .primary-nav { background: var(--h-bg); border-bottom-color: var(--h-line); }
 }
 body.art-page { background: var(--h-bg); color: var(--h-fg); }
+
+/* ===========================================================
+   HOMEPAGE v2 — "Beautifully Unhinged". body.home switches to the new
+   token set (--bg/--ink/--pink/etc.) and the fixed bottom nav replaces
+   the shared sticky top .site-header for this page only.
+   =========================================================== */
+body.home {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  padding-bottom: 0;
+}
+body.home::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  pointer-events: none;
+  opacity: var(--grain);
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+}
+body.home .skip-link {
+  position: absolute;
+  left: 1em;
+  top: -100px;
+  z-index: 1000;
+  background: var(--pink);
+  color: var(--on-red);
+  padding: 0.8em 1.2em;
+  font-family: var(--font-body);
+  font-weight: 700;
+  transition: top 0.15s ease;
+}
+body.home .skip-link:focus { top: 1em; }
+
+/* fixed bottom nav, shared-chrome per the handoff spec (currently only
+   wired up on the homepage; other pages keep their existing top header
+   until their own pass) */
+.home-nav {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 500;
+  display: flex;
+  align-items: center;
+  gap: clamp(1em, 3vw, 2em);
+  padding: 0.8em clamp(1em, 3vw, 2em);
+  background: var(--bg);
+  border-top: 1px solid var(--line2);
+  font-family: var(--font-body);
+}
+.home-nav-brand {
+  font-family: var(--font-voice);
+  font-size: 1.15rem;
+  color: var(--ink);
+  text-decoration: none;
+  margin-right: auto;
+}
+.home-nav-list {
+  list-style: none;
+  display: flex;
+  gap: clamp(1em, 2.5vw, 1.8em);
+  margin: 0;
+  padding: 0;
+}
+.home-nav-list a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  min-height: 44px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--ink);
+  text-decoration: none;
+}
+.home-nav-list a:hover, .home-nav-list a:focus-visible { color: var(--red2); }
+.home-nav-marker { color: var(--red2); font-size: 0.7em; }
+.home-nav-list a[aria-current="page"] .home-nav-marker::before { content: "■"; }
+.home-nav-list a:not([aria-current="page"]) .home-nav-marker::before { content: "□"; }
+.home-theme-toggle {
+  min-height: 44px;
+  padding: 0 1em;
+  background: none;
+  border: 1px solid var(--line2);
+  color: var(--ink);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.home-theme-toggle:hover, .home-theme-toggle:focus-visible { border-color: var(--red2); color: var(--red2); }
+@media (max-width: 700px) {
+  .home-nav { flex-wrap: wrap; }
+  .home-nav-list { gap: 1em; flex-wrap: wrap; }
+}
+/* everything on the page needs room to clear the fixed nav */
+body.home main, body.home .contact-band, body.home .contact-note, body.home .site-footer-legal {
+  position: relative;
+  z-index: 1;
+}
+body.home .site-footer-legal { padding-bottom: clamp(6em, 12vw, 7.5em); }
+
 /* ===========================================================
    HOMEPAGE — editorial system (controlled structure, occasional break)
    =========================================================== */
 
 /* shared small labels used across sections — red marks emphasis/metadata,
    the same role it plays in every hover state on the page */
-.home .index-mark, .art-page .index-mark {
+.art-page .index-mark {
   font-family: var(--font-body);
   font-weight: 600;
   font-size: 0.75rem;
@@ -454,537 +600,594 @@ body.art-page { background: var(--h-bg); color: var(--h-fg); }
   color: var(--h-red);
   margin: 0 0 0.5em;
 }
-.home .annotation {
-  font-family: var(--font-body);
-  font-weight: 600;
-  font-size: 0.8rem;
-  color: var(--h-red);
-  margin: 0.6em 0 1.2em;
-}
 
 /* homepage + art page reuse of the shared .text-link arrow-link.
    Red = interaction everywhere: this is the one hover/focus color. */
-.home .text-link, .art-page .text-link {
+.art-page .text-link {
   border-bottom-color: var(--h-line);
   color: var(--h-fg);
 }
-.home .text-link:hover, .home .text-link:focus-visible,
 .art-page .text-link:hover, .art-page .text-link:focus-visible {
   border-bottom-color: var(--h-red);
   color: var(--h-red);
 }
 .art-page :focus-visible { outline-color: var(--h-red); }
 
-/* ---------- HERO: full-bleed cover artwork. The illustration IS the
-   hero — it spans the full viewport width regardless of the site's
-   normal max-width containers, at a tall, immersive height. Name/
-   tagline and the bio-reveal control are layered on top of it; nothing
-   about the artwork's own size or position ever changes on interaction. ---------- */
+/* homepage v2 uses its own tokens (--ink/--pink/--red2/etc.) throughout */
+.home .text-link {
+  border-bottom: 1px solid var(--line2);
+  color: var(--ink);
+  text-decoration: none;
+  padding-bottom: 0.05em;
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+.home .text-link:hover, .home .text-link:focus-visible {
+  border-bottom-color: var(--red2);
+  color: var(--red2);
+}
+.home :focus-visible {
+  outline: 3px solid var(--pink);
+  outline-offset: 4px;
+}
+
+/* ---------- HERO v2: giant ghost "beautifully" behind everything; the
+   skull huge and right-cropped; her name artwork sliced into 5 bands
+   that slide apart horizontally as the hero scrolls past. Two extra
+   skull "tear" slices drift slightly with the cursor. ---------- */
 .home .hero {
   position: relative;
   width: 100vw;
   max-width: none;
   margin-left: calc(50% - 50vw);
   margin-right: calc(50% - 50vw);
-  height: 88vh;
-  min-height: 460px;
-  max-height: 920px;
+  min-height: max(100svh, 720px);
   overflow: hidden;
+  background: var(--bg);
+  --scroll-progress: 0;
 }
-.home .hero-media {
+.home .hero-ghost {
+  position: absolute;
+  top: 66%;
+  left: -0.05em;
+  z-index: 0;
+  margin: 0;
+  font-family: var(--font-voice);
+  font-weight: 400;
+  font-size: min(22vw, 340px);
+  line-height: 0.8;
+  color: var(--ghost);
+  white-space: nowrap;
+  pointer-events: none;
+  user-select: none;
+}
+.home .hero-skull {
+  position: absolute;
+  z-index: 1;
+  top: 8%;
+  right: -14%;
+  width: min(72vw, 980px);
+  aspect-ratio: 1;
+  transform: rotate(-8deg);
+  transform-origin: 60% 40%;
+}
+.home .hero-skull-img {
   position: absolute;
   inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
-.home .hero-media img {
+.home .hero-skull-tear {
+  will-change: transform;
+}
+.home .hero-skull-tear--a {
+  clip-path: inset(40% 0 52%);
+  transform: translate3d(calc(var(--tear-x, 0) * 1px), calc(var(--tear-y, 0) * 1px), 0);
+}
+.home .hero-skull-tear--b {
+  clip-path: inset(64% 0 31%);
+  transform: translate3d(calc(var(--tear-x, 0) * -1px), calc(var(--tear-y, 0) * -1px), 0);
+}
+.home .hero-name {
+  position: absolute;
+  z-index: 2;
+  left: -1%;
+  top: 21%;
+  width: 99%;
+  aspect-ratio: 2048 / 768;
+  pointer-events: none;
+  user-select: none;
+}
+.home .hero-name-strip {
+  position: absolute;
+  inset: 0;
+  clip-path: inset(var(--band-top) 0 var(--band-bottom));
+  transform: translate3d(calc(var(--offset) * var(--scroll-progress, 0)), 0, 0);
+  will-change: transform;
+}
+.home .hero-name-strip img {
   display: block;
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  /* the collage is a tall (721x2000) piece; the name lettering and skull
-     sit in its top ~40%, so anchoring to the top keeps them in frame at
-     any hero aspect ratio instead of cropping into the ink below them */
-  object-position: 50% 0%;
+  object-fit: fill;
 }
-/* name + tagline: a small, quiet label over the artwork, not a headline
-   competing with it -- the artwork already carries her name */
-.home .hero-id {
-  position: absolute;
-  z-index: 2;
-  top: clamp(1.2em, 4vw, 2.2em);
-  left: clamp(1.2em, 4vw, 2.2em);
-  display: inline-flex;
-  flex-direction: column;
-  gap: 0.3em;
-  padding: 0.6em 0.9em;
-  background: color-mix(in srgb, var(--h-bg) 78%, transparent);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-}
-.home .hero-name {
-  font-family: var(--font-body);
-  font-weight: 700;
-  font-size: clamp(1rem, 2vw, 1.35rem);
-  line-height: 1.1;
-  color: var(--h-fg);
-  margin: 0;
-}
-.home .hero-tagline {
-  font-family: var(--font-body);
-  font-weight: 600;
-  font-size: 0.66rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--h-muted);
-  margin: 0;
-}
-/* the interactive corner: a small trigger pill, and the bio panel it
-   opens directly above itself. Both are layered over the artwork —
-   revealing the bio never resizes or moves the hero, the image, or
-   anything below it. */
-.home .hero-interactive {
+.home .hero-plate {
   position: absolute;
   z-index: 3;
-  left: clamp(1.2em, 4vw, 2.2em);
-  bottom: clamp(1.2em, 4vw, 2.2em);
+  max-width: min(46vw, 420px);
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(1.1rem, 2.2vw, 1.6rem);
+  line-height: 1.15;
+  text-transform: uppercase;
+  color: var(--ink);
+  margin: 0;
+}
+.home .hero-plate--left { top: clamp(1em, 3.5vw, 2.2em); left: clamp(1em, 3.5vw, 2.2em); }
+.home .hero-plate--right {
+  top: clamp(1em, 3.5vw, 2.2em);
+  right: clamp(1em, 3.5vw, 2.2em);
+  text-align: right;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+}
+.home .hero-plate--right p { margin: 0; }
+.home .hero-plate .hero-amp { color: var(--red2); font-style: italic; }
+.home .hero-interactive {
+  position: absolute;
+  z-index: 4;
+  left: clamp(1em, 3.5vw, 2.2em);
+  /* clear the fixed bottom nav (~72px tall) plus a real gap -- the hero
+     is exactly one viewport tall, so its own bottom edge always sits
+     right under the nav */
+  bottom: calc(72px + clamp(1em, 3.5vw, 2em));
 }
 .home .hero-trigger {
   position: relative;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5em;
-  padding: 0.6em 1em;
-  border: 1px solid var(--h-line);
-  background: color-mix(in srgb, var(--h-bg) 78%, transparent);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-  cursor: pointer;
-}
-.home .hero-trigger:focus-visible {
-  outline: 2px solid var(--h-red);
-  outline-offset: 3px;
-}
-.home .hero-cue-desktop {
-  position: relative;
-  display: block;
-}
-.home .hero-cue-word {
   display: block;
   font-family: var(--font-voice);
-  font-size: 1rem;
-  color: var(--h-accent);
-  white-space: nowrap;
-  transition: opacity 0.25s ease;
+  font-size: 1.8rem;
+  color: var(--pink);
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
 }
-.home .hero-cue-word--open {
-  position: absolute;
-  inset: 0;
-  opacity: 0;
-}
-.home .hero-interactive.is-revealed .hero-cue-word--idle,
-.home .hero-interactive:hover .hero-cue-word--idle,
-.home .hero-interactive:focus-within .hero-cue-word--idle {
-  opacity: 0;
-}
-.home .hero-interactive.is-revealed .hero-cue-word--open,
-.home .hero-interactive:hover .hero-cue-word--open,
-.home .hero-interactive:focus-within .hero-cue-word--open {
-  opacity: 1;
-}
-.home .hero-cue-mobile { display: none; }
-/* the bio panel: a designed overlay, not a full-image scrim. Only its
-   own footprint darkens the artwork underneath, anchored so it grows
-   upward from the trigger without ever moving the trigger itself. */
+.home .hero-cue-open { display: none; }
+.home .hero-interactive.is-revealed .hero-cue-idle { display: none; }
+.home .hero-interactive.is-revealed .hero-cue-open { display: block; }
 .home .hero-bio {
   position: absolute;
   left: 0;
   bottom: 100%;
-  margin-bottom: 0.8em;
-  width: min(42vw, 520px);
+  margin-bottom: 0.9em;
+  width: min(44vw, 520px);
   padding: 1.5em 1.7em;
-  border: 1px solid var(--h-line);
-  background: color-mix(in srgb, var(--h-bg) 85%, transparent);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  background: var(--bg);
+  border: 1px solid var(--line2);
+  box-shadow: 10px 10px 0 var(--red2);
+  transform: rotate(-1deg);
   opacity: 0;
-  transform: translateY(10px);
   pointer-events: none;
-  transition: opacity 0.3s ease, transform 0.35s cubic-bezier(0.22, 0.61, 0.36, 1);
+  transition: opacity 0.2s ease;
 }
-.home .hero-interactive.is-revealed .hero-bio,
-.home .hero-interactive:hover .hero-bio,
-.home .hero-interactive:focus-within .hero-bio {
+.home .hero-interactive.is-revealed .hero-bio {
   opacity: 1;
-  transform: translateY(0);
   pointer-events: auto;
 }
-.home .hero-bio-text {
+.home .hero-bio p {
   font-family: var(--font-body);
   font-size: 0.98rem;
   line-height: 1.6;
-  color: var(--h-muted);
+  color: var(--muted);
   margin: 0 0 1em;
 }
-.home .hero-bio-text:last-child { margin-bottom: 0; }
+.home .hero-bio p:last-child { margin-bottom: 0; }
 @media (prefers-reduced-motion: reduce) {
-  .home .hero-cue-word,
+  .home .hero-name-strip,
+  .home .hero-skull-tear,
   .home .hero-bio {
     transition: none;
   }
 }
-@media (max-width: 700px) {
-  .home .hero {
-    height: 78vh;
-    min-height: 520px;
-  }
-  .home .hero-media img {
-    object-position: 50% 0%;
-  }
-  .home .hero-interactive {
-    left: 1em;
-    right: 1em;
-    bottom: 1em;
-  }
-  .home .hero-cue-desktop { display: none; }
-  .home .hero-cue-mobile {
-    display: flex;
-    align-items: center;
-    gap: 0.4em;
-    font-family: var(--font-body);
-    font-weight: 600;
-    font-size: 0.82rem;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    color: var(--h-fg);
-  }
-  .home .hero-cue-icon::before { content: "+"; }
-  .home .hero-trigger[aria-expanded="true"] .hero-cue-icon::before { content: "\2013"; }
-  .home .hero-bio {
-    width: auto;
-    left: 0;
-    right: 0;
-  }
+@media (max-width: 760px) {
+  .home .hero { min-height: max(88svh, 620px); }
+  .home .hero-ghost { font-size: 32vw; top: 55%; }
+  .home .hero-skull { top: 4%; right: -30%; width: 92vw; }
+  .home .hero-name { top: 16%; }
+  .home .hero-plate { max-width: 80vw; }
+  .home .hero-plate--right { display: none; }
+  .home .hero-bio { width: calc(100vw - 2.8em); }
 }
 
 /* ===========================================================
-   ONE PROJECT SYSTEM — 01 ResiliencePoint, 02 HazAdapt, 03 True Link,
-   04 WellDone. Same number treatment, same heading relationship, same
-   body column, same image frame, same link, every time. Composition
-   (image size, list vs. no list, alignment) can vary because the
-   content varies; the identity of each project never does.
+   SELECTED WORK v2 — five exhibits, five different treatments on
+   purpose (per brief: "avoid ... the same giant heading treatment
+   throughout"). Content, hrefs and hook copy are unchanged from the
+   original site; only the presentation varies per row.
    =========================================================== */
-.home .project {
-  position: relative;
-  max-width: 1320px;
+.home .work-index {
+  max-width: 1400px;
   margin: 0 auto;
-  padding: clamp(3em, 6vw, 4.5em) 1.5em;
-  border-top: 1px solid var(--h-line);
+  padding: clamp(3em, 7vw, 5.5em) clamp(1.25em, 4vw, 2.5em);
 }
-.home .project-head {
+.home .work-index-head {
   display: flex;
   flex-wrap: wrap;
   align-items: baseline;
-  column-gap: 0.9em;
+  justify-content: space-between;
+  gap: 1em;
+  border-bottom: 1px solid var(--line2);
+  padding-bottom: 0.6em;
+  margin-bottom: 2.5em;
+}
+.home .work-index-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(2.6rem, 6vw, 4.5rem);
+  text-transform: uppercase;
+  line-height: 0.95;
+  color: var(--ink);
+}
+.home .work-index-title-accent {
+  font-family: var(--font-voice);
+  font-weight: 400;
+  text-transform: none;
+  color: var(--red2);
+}
+.home .work-index-count {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.home .work-rail {
+  position: relative;
+  padding-left: clamp(1.2em, 3vw, 2em);
+  border-left: 2px solid var(--red2);
+  margin-bottom: 3em;
+}
+.home .work-rail-link {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--red2);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  margin-bottom: 2em;
+}
+.home .work-rail-link:hover, .home .work-rail-link:focus-visible {
+  border-bottom-color: currentColor;
+}
+.home .work-row { margin-bottom: 3em; }
+.home .work-row:last-of-type { margin-bottom: 0; }
+.home .work-row-num {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--metal);
   margin-bottom: 0.6em;
 }
-.home .project-num {
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: clamp(3rem, 7vw, 5.5rem);
-  line-height: 0.85;
-  letter-spacing: -0.01em;
-  color: var(--h-red);
+.home .work-row-title {
+  margin: 0 0 0.4em;
+  color: var(--ink);
 }
-.home .project-head .index-mark {
-  margin: 0;
-  padding: 0.25em 0.6em;
-  border: 1px solid var(--h-line);
-}
-.home .project-title {
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: clamp(2.6rem, 6vw, 5rem);
-  color: var(--h-fg);
+.home .work-row-meta {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
-  letter-spacing: -0.005em;
-  line-height: 0.9;
-  margin: 0.1em 0 0;
-  flex-basis: 100%;
+  color: var(--metal);
+  margin: 0 0 0.6em;
 }
-.home .project-summary {
-  font-family: var(--font-body);
-  color: var(--h-muted);
-  font-size: 1rem;
-  max-width: 48ch;
-  margin: 0 0 2em;
-}
-.home .project-body {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2.5em;
-  align-items: center;
-  margin-bottom: 1.8em;
-}
-.home .project-body--reverse { grid-template-columns: 1.1fr 0.9fr; }
-.home .project-body-text { display: flex; flex-direction: column; gap: 0.6em; }
-/* the one image-container treatment, reused for every project image
-   on the page */
-.home .project-media {
-  position: relative;
-  border: 1px solid var(--h-line);
-  background: var(--h-bg-raised);
-  padding: 2em;
-  transition: transform 0.2s ease, border-color 0.2s ease;
-}
-.home .project-media img { display: block; width: 100%; height: auto; }
-@media (hover: hover) {
-  .home .project-media:hover { transform: translateY(-4px) rotate(-0.4deg); border-color: var(--h-red); }
-}
-.home .project:focus-within .project-media { transform: translateY(-4px) rotate(-0.4deg); border-color: var(--h-red); }
-.home .project-index {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  border-top: 1px solid var(--h-line);
-}
-.home .project-index li { border-bottom: 1px solid var(--h-line); }
-.home .project-index a {
-  display: flex;
-  align-items: baseline;
-  gap: 0.9em;
-  padding: 0.9em 0.2em;
-  text-decoration: none;
-  color: var(--h-fg);
+.home .work-row-hook {
   font-family: var(--font-body);
   font-size: 1.05rem;
-  transition: color 0.15s ease, padding-left 0.15s ease;
-}
-.home .project-index a:hover, .home .project-index a:focus-visible {
-  color: var(--h-red);
-  padding-left: 0.5em;
-}
-.home .project-index-num {
-  position: relative;
-  display: inline-block;
-  font-family: var(--font-body);
-  font-weight: 600;
-  font-size: 0.78rem;
-  color: var(--h-muted);
-  padding: 0.3em 0.5em;
-}
-/* a hand-drawn-feeling circle that appears around the number, not a perfect ring */
-.home .project-index-num::before {
-  content: "";
-  position: absolute;
-  inset: -0.1em -0.2em;
-  border: 1.5px solid var(--h-red);
-  border-radius: 52% 48% 51% 49% / 48% 52% 48% 52%;
-  opacity: 0;
-  transform: scale(0.85) rotate(-4deg);
-  transition: opacity 0.18s ease, transform 0.18s ease;
-}
-.home .project-index a:hover .project-index-num::before,
-.home .project-index a:focus-visible .project-index-num::before {
-  opacity: 1;
-  transform: scale(1) rotate(-4deg);
-}
-@media (max-width: 800px) {
-  .home .project-body, .home .project-body--reverse { grid-template-columns: 1fr; gap: 1.5em; }
-}
-
-/* ---------- Project 01, ResiliencePoint: establishes the system above.
-   The image is the centerpiece, so it gets a wider outer frame — but the
-   text realigns to the exact same 1320px column as every project below
-   it via .project-inner. The image's own size rule never changes here. ---------- */
-.home .project--feature {
-  max-width: 1760px;
-  padding-top: clamp(2em, 5vw, 3em);
-  border-top: none;
-}
-.home .project--feature .project-inner {
-  max-width: calc(1320px - 3em);
-  margin: 0 auto;
-}
-/* the opening number gets the loudest treatment on the page -- still
-   text, still AA-safe crimson, just larger, since this is the cover */
-.home .project--feature .project-num {
-  font-size: clamp(4rem, 10vw, 8rem);
-}
-.home .feature-frame {
-  position: relative;
-  border: 1px solid var(--h-line);
-  margin-bottom: 1.6em;
-  transition: transform 0.2s ease, border-color 0.2s ease;
-}
-.home .feature-frame img {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-@media (hover: hover) {
-  .home .feature-frame:hover { transform: translateY(-6px); border-color: var(--h-red); }
-}
-.home .project--feature:focus-within .feature-frame { transform: translateY(-6px); border-color: var(--h-red); }
-.home .project-details { max-width: 620px; }
-.home .project-meta {
-  font-family: var(--font-body);
-  font-weight: 600;
-  font-size: 0.78rem;
-  letter-spacing: 0.03em;
-  color: var(--h-muted);
-  text-transform: uppercase;
+  line-height: 1.5;
+  color: var(--ink);
+  max-width: 42ch;
   margin: 0 0 0.8em;
 }
-.home .project-hook {
+.home .work-row-link {
+  display: inline-block;
   font-family: var(--font-body);
-  font-size: clamp(1.1rem, 1.6vw, 1.3rem);
-  line-height: 1.5;
-  color: var(--h-fg);
-  margin: 0 0 1.1em;
-  max-width: 42ch;
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--ink);
+  text-decoration: none;
+  border-bottom: 1px solid var(--line2);
 }
-
-/* ---------- marginalia: ONE handwritten-note style, used three times
-   total across the whole homepage (hero, ResiliencePoint, WellDone). ---------- */
-.margin-note {
+.home .work-row-link:hover, .home .work-row-link:focus-visible { color: var(--red2); border-color: var(--red2); }
+.home .work-row-note {
   font-family: var(--font-voice);
-  font-weight: 400;
-  font-size: 1.1rem;
-  line-height: 1.3;
-  color: var(--h-accent);
+  font-size: 1.05rem;
+  color: var(--pink);
   margin: 0.8em 0 0;
-  transform: rotate(-1.5deg);
+  transform: rotate(-1.2deg);
 }
-.margin-note--feature { max-width: 32ch; }
 
-/* ---------- PERSONALITY INTERRUPTION ---------- */
-.home .interrupt {
-  position: relative;
-  max-width: 1320px;
-  margin: 0 auto;
-  padding: 1.5em 1.5em 3em;
-  display: flex;
-  align-items: flex-end;
-  gap: 1.2em;
-  min-height: 120px;
+/* 01 -- ResiliencePoint: featured, huge title + cover thumbnail */
+.home .work-row--feature .work-row-title {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(2.8rem, 7vw, 5.5rem);
+  text-transform: uppercase;
+  line-height: 0.92;
 }
-.home .interrupt-figure {
-  width: 90px;
-  height: 90px;
-  flex: none;
-  transform: translateY(24%);
+.home .work-row--feature .work-row-body {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 2.5em;
+  align-items: start;
 }
-.home .interrupt-note {
+.home .work-row--feature .work-row-media {
+  border: 1px solid var(--line2);
+  background: var(--ghost);
+  padding: 1.5em;
+  order: 2;
+}
+.home .work-row--feature .work-row-media img { display: block; width: 100%; height: auto; }
+@media (max-width: 900px) {
+  .home .work-row--feature .work-row-body { grid-template-columns: 1fr; }
+  .home .work-row--feature .work-row-media { order: 0; }
+}
+
+/* 02 -- LoCo: huge, right-aligned, meta on the left */
+.home .work-row--loco {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: end;
+  gap: 1.5em;
+}
+.home .work-row-loco-text { max-width: 34ch; }
+.home .work-row-title--huge {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(3.5rem, 10vw, 7.5rem);
+  text-transform: uppercase;
+  line-height: 0.85;
+  text-decoration: none;
+  text-align: right;
+}
+.home .work-row-title--huge:hover, .home .work-row-title--huge:focus-visible {
+  -webkit-text-stroke: 1.5px var(--ink);
+  color: var(--bg);
+}
+.home .work-row-num-inline {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  letter-spacing: 0.06em;
+  color: var(--red2);
+}
+@media (max-width: 700px) {
+  .home .work-row--loco { grid-template-columns: 1fr; text-align: left; }
+  .home .work-row-title--huge, .home .work-row-title--huge:hover { text-align: left; }
+}
+
+/* 03 -- Prep Checks: the voice font carries the title itself */
+.home .work-row--prepchecks {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 2em;
+}
+.home .work-row-title--voice {
   font-family: var(--font-voice);
   font-weight: 400;
-  font-size: clamp(1.7rem, 3.4vw, 2.3rem);
-  color: var(--h-accent);
+  font-size: clamp(2.4rem, 6vw, 4.2rem);
+  line-height: 1;
+  text-decoration: none;
+  color: var(--ink);
+  white-space: nowrap;
+}
+.home .work-row-title--voice:hover, .home .work-row-title--voice:focus-visible { color: var(--red2); }
+.home .work-row-prep-text { max-width: 36ch; }
+@media (max-width: 700px) {
+  .home .work-row--prepchecks { grid-template-columns: 1fr; }
+  .home .work-row-title--voice { white-space: normal; }
+}
+
+/* 04 -- True Link: stacked title, sub-link list in a bordered box */
+.home .work-row--truelink .work-row-title {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(2.4rem, 5.5vw, 4rem);
+  text-transform: uppercase;
+  line-height: 0.95;
+}
+.home .work-row-sublinks {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7em;
+  align-items: flex-start;
+  border: 1px solid var(--line2);
+  padding: 1.2em 1.4em;
+  margin-top: 1em;
+}
+.home .work-row-sublinks a {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--ink);
+  text-decoration: none;
+  border-bottom: 1px solid var(--line2);
+}
+.home .work-row-sublinks a:hover, .home .work-row-sublinks a:focus-visible { color: var(--red2); border-color: var(--red2); }
+
+/* 05 -- WellDone: mirrors ResiliencePoint's asymmetry the other way */
+.home .work-row--welldone {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: end;
+  gap: 2em;
+}
+.home .work-row-welldone-text { max-width: 38ch; }
+@media (max-width: 700px) {
+  .home .work-row--welldone { grid-template-columns: 1fr; }
+  .home .work-row--welldone .work-row-title--huge { text-align: left; }
+}
+
+/* ===========================================================
+   WORKBENCH TEASER — a quieter beat between the case studies and
+   the wall label; links through to the full interactive table on
+   art.html rather than duplicating its drag mechanics here.
+   =========================================================== */
+.home .wb-teaser {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: clamp(3em, 6vw, 5em) clamp(1.25em, 4vw, 2.5em);
+  border-top: 1px solid var(--line2);
+  background: var(--mat);
+  background-image:
+    repeating-linear-gradient(0deg, var(--matline2) 0 1px, transparent 1px 200px),
+    repeating-linear-gradient(90deg, var(--matline2) 0 1px, transparent 1px 200px),
+    repeating-linear-gradient(0deg, var(--matline) 0 1px, transparent 1px 40px),
+    repeating-linear-gradient(90deg, var(--matline) 0 1px, transparent 1px 40px);
+}
+.home .wb-teaser-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--red2);
   margin: 0 0 0.4em;
 }
-@media (max-width: 600px) {
-  .home .interrupt { padding: 0.5em 1.25em 2em; gap: 0.8em; }
-  .home .interrupt-figure { width: 60px; height: 60px; }
-}
-
-/* a small peek of the art section, tucked into WellDone's project image
-   so the art section doesn't feel like a hard cut when it arrives */
-.art-peek {
-  position: absolute;
-  right: -1.2em;
-  bottom: -1.6em;
-  width: 64px;
-  height: 64px;
-  border: 1px solid var(--h-line);
-  overflow: hidden;
-  transform: rotate(6deg);
-  transition: transform 0.2s ease;
-  background: var(--h-bg-raised);
-}
-.art-peek:focus-visible {
-  outline: 2px solid var(--h-red);
-  outline-offset: 3px;
-}
-.art-peek img { width: 100%; height: 100%; object-fit: cover; object-position: 30% 20%; }
-.art-peek:hover, .art-peek:focus-visible { transform: rotate(0deg) scale(1.08); }
-@media (max-width: 800px) {
-  .art-peek { right: 0.5em; bottom: -1.2em; width: 52px; height: 52px; }
-}
-
-/* ---------- ART: the system loosens ---------- */
-.home .art-section {
-  max-width: 1320px;
-  margin: 0 auto;
-  padding: 5em 1.5em;
-  border-top: 1px solid var(--h-line);
-  display: grid;
-  grid-template-columns: 1.15fr 0.85fr;
-  gap: 3em;
-  align-items: center;
-}
-.home .art-frame img {
-  width: 100%;
-  border: 1px solid var(--h-line);
-  transform: rotate(-1.2deg);
-  transition: transform 0.25s ease;
-}
-@media (hover: hover) {
-  .home .art-frame img:hover { transform: rotate(-0.3deg); }
-}
-@media (min-width: 900px) {
-  .home .art-frame img { margin-right: -2.5em; }
-}
-.home .art-content h2 {
+.home .wb-teaser-title {
   font-family: var(--font-voice);
-  font-style: normal;
   font-weight: 400;
-  font-size: clamp(2rem, 4.6vw, 2.9rem);
-  color: var(--h-fg);
-  text-transform: none;
-  margin: 0.2em 0 0.5em;
+  font-size: clamp(2.2rem, 6vw, 3.6rem);
+  color: var(--ink);
+  margin: 0 0 0.4em;
 }
-.home .art-content .art-description {
+.home .wb-teaser-copy {
   font-family: var(--font-body);
-  color: var(--h-muted);
+  color: var(--muted);
   max-width: 46ch;
-  margin: 0 0 1.2em;
-}
-@media (max-width: 900px) {
-  .home .art-section { grid-template-columns: 1fr; gap: 1.5em; }
-  .home .art-frame img { transform: none; margin-right: 0; }
+  margin: 0 0 1em;
 }
 
-/* ---------- CLOSING — deliberately small. The introduction already
-   happened in the hero, so this doesn't repeat it; it just points
-   somewhere next (résumé). ---------- */
-.home .about-teaser {
-  max-width: 1320px;
+/* ===========================================================
+   ABOUT — museum wall label
+   =========================================================== */
+.home .about-wall {
+  max-width: 1400px;
   margin: 0 auto;
-  padding: 3.5em 1.5em 4.5em;
-  border-top: 1px solid var(--h-line);
+  padding: clamp(3em, 6vw, 5em) clamp(1.25em, 4vw, 2.5em);
+  border-top: 1px solid var(--line2);
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 3em;
+  align-items: start;
 }
-.home .about-teaser .project-inner { max-width: 520px; }
-.home .about-teaser .index-mark {
-  font-family: var(--font-voice);
-  font-weight: 400;
-  text-transform: none;
-  letter-spacing: 0;
-  font-size: 1.3rem;
-  color: var(--h-accent);
+.home .about-wall-figure {
+  width: 120px;
+  flex: none;
 }
-.home .about-teaser h2 {
-  font-family: var(--font-voice);
-  font-weight: 400;
-  font-size: clamp(1.7rem, 3.6vw, 2.2rem);
-  color: var(--h-fg);
-  text-transform: none;
-  margin: 0.1em 0 0.5em;
+.home .about-wall-figure img { width: 100%; height: auto; }
+.home .about-wall-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--metal);
+  margin: 0 0 1em;
 }
-.home .about-teaser p {
+.home .about-wall-dl {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: 1.2em;
+  row-gap: 0.4em;
+  margin: 0 0 1.4em;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+}
+.home .about-wall-dl dt { color: var(--metal); text-transform: uppercase; letter-spacing: 0.06em; }
+.home .about-wall-dl dd { margin: 0; color: var(--ink); }
+.home .about-wall p.about-wall-bio {
   font-family: var(--font-body);
-  color: var(--h-muted);
-  font-size: 1rem;
-  line-height: 1.6;
+  font-size: 1.05rem;
+  line-height: 1.65;
+  color: var(--ink);
+  max-width: 62ch;
   margin: 0 0 1.2em;
 }
+@media (max-width: 700px) {
+  .home .about-wall { grid-template-columns: 1fr; }
+  .home .about-wall-figure { width: 80px; }
+}
+
+/* ===========================================================
+   CONTACT — tilted marquee band
+   =========================================================== */
+.home .contact-band {
+  position: relative;
+  overflow: hidden;
+  background: var(--red2);
+  color: var(--on-red);
+  transform: rotate(-1deg);
+  margin: 2.5em 0;
+  padding: 0.9em 0;
+  white-space: nowrap;
+}
+.home .contact-marquee {
+  display: inline-flex;
+  gap: 2em;
+  animation: contact-scroll 18s linear infinite;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(1.3rem, 3vw, 2.2rem);
+  text-transform: uppercase;
+}
+.home .contact-band:hover .contact-marquee,
+.home .contact-band:focus-within .contact-marquee {
+  animation-play-state: paused;
+}
+@keyframes contact-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .home .contact-marquee { animation: none; }
+}
+.home .contact-note {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 clamp(1.25em, 4vw, 2.5em) 1em;
+  font-family: var(--font-body);
+  color: var(--muted);
+}
+.home .contact-note a { color: var(--ink); }
+.home .site-footer-legal {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 clamp(1.25em, 4vw, 2.5em) clamp(6em, 12vw, 7.5em);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1em;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--metal);
+}
+.home .site-footer-legal a { color: var(--metal); }
+.home .site-footer-legal a:hover, .home .site-footer-legal a:focus-visible { color: var(--red2); }
 /* ===========================================================
    FOOTER
    =========================================================== */

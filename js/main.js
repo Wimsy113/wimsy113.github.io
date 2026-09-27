@@ -85,6 +85,89 @@
   }
 
   // ---------------------------------------------------------------
+  // Homepage v2 hero: name strips slide apart as the hero scrolls past,
+  // and two skull "tear" slices drift slightly toward the cursor. Both
+  // are pure enhancement -- the hero is fully legible at rest with
+  // neither running, so both are skipped outright under reduced motion.
+  // ---------------------------------------------------------------
+  var heroSection = document.querySelector('[data-hero]');
+  if (heroSection && !reduceMotion) {
+    var updateHeroScroll = function () {
+      var rect = heroSection.getBoundingClientRect();
+      var progress = Math.min(Math.max(-rect.top / Math.max(rect.height, 1), 0), 1);
+      heroSection.style.setProperty('--scroll-progress', String(progress));
+    };
+    updateHeroScroll();
+    window.addEventListener('scroll', updateHeroScroll, { passive: true });
+    window.addEventListener('resize', updateHeroScroll);
+
+    if (window.matchMedia('(pointer: fine)').matches) {
+      var tearX = 0, tearY = 0, targetX = 0, targetY = 0;
+      var LERP = 0.08;
+      heroSection.addEventListener('mousemove', function (e) {
+        var rect = heroSection.getBoundingClientRect();
+        targetX = ((e.clientX - rect.left) / rect.width - 0.5) * 24;
+        targetY = ((e.clientY - rect.top) / rect.height - 0.5) * 24;
+      });
+      (function tick() {
+        tearX += (targetX - tearX) * LERP;
+        tearY += (targetY - tearY) * LERP;
+        heroSection.style.setProperty('--tear-x', tearX.toFixed(2));
+        heroSection.style.setProperty('--tear-y', tearY.toFixed(2));
+        requestAnimationFrame(tick);
+      })();
+    }
+  }
+
+  // ---------------------------------------------------------------
+  // Homepage v2: manual dark/light toggle, persisted, applied before
+  // paint by the inline head script -- this just keeps the button and
+  // storage in sync with whatever's currently applied.
+  // ---------------------------------------------------------------
+  var themeToggle = document.getElementById('themeToggle');
+  if (themeToggle) {
+    var getTheme = function () {
+      return document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+    };
+    var syncToggleLabel = function () {
+      var isLight = getTheme() === 'light';
+      themeToggle.textContent = isLight ? 'Dark' : 'Light';
+      themeToggle.setAttribute('aria-pressed', isLight ? 'true' : 'false');
+    };
+    syncToggleLabel();
+    themeToggle.addEventListener('click', function () {
+      var next = getTheme() === 'light' ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', next);
+      try { localStorage.setItem('theme', next); } catch (e) {}
+      syncToggleLabel();
+    });
+  }
+
+  // ---------------------------------------------------------------
+  // Homepage v2 fixed nav: mark the section currently in view so the
+  // □/■ markers reflect scroll position, not just a hardcoded default.
+  // ---------------------------------------------------------------
+  var navLinks = Array.prototype.slice.call(document.querySelectorAll('.home-nav-list a[href^="#"]'));
+  if (navLinks.length && 'IntersectionObserver' in window) {
+    var navSections = navLinks
+      .map(function (a) { return document.querySelector(a.getAttribute('href')); })
+      .filter(Boolean);
+    var setActiveNav = function (id) {
+      navLinks.forEach(function (a) {
+        var match = a.getAttribute('href') === '#' + id;
+        if (match) { a.setAttribute('aria-current', 'page'); }
+        else { a.removeAttribute('aria-current'); }
+      });
+    };
+    var navObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) { setActiveNav(entry.target.id); }
+      });
+    }, { rootMargin: '-45% 0px -45% 0px' });
+    navSections.forEach(function (section) { navObserver.observe(section); });
+  }
+
+  // ---------------------------------------------------------------
   // Footer year
   // ---------------------------------------------------------------
   var yearEl = document.getElementById('year');

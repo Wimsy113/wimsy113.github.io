@@ -3,14 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Krystyna Ewing — UX Designer</title>
-  <meta name="description" content="Krystyna Ewing — UX designer working across product design, research, and front-end development.">
+  <title>Krystyna Ewing — UX, Art, Technology</title>
+  <meta name="description" content="Krystyna Ewing — UX designer, creative technologist, artist and maker.">
 
   <link rel="icon" href="images/favicon.ico">
 
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem('theme');
+        if (t === 'light' || t === 'dark') { document.documentElement.setAttribute('data-theme', t); }
+      } catch (e) {}
+    })();
+  </script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Grenze+Gotisch:wght@400;600&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800;900&family=Grenze+Gotisch:wght@400;600&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="styles.css">
 </head>
@@ -18,219 +27,179 @@
 
   <a class="skip-link" href="#main">Skip to content</a>
 
-  <header class="site-header" id="top">
-    <div class="header-inner">
-      <a class="brand" href="#top" aria-label="Krystyna Ewing — home">
-        <span class="brand-mascot duotone" aria-hidden="true">
-          <img src="images/hero.png" alt="">
-        </span>
-        <span class="brand-name">Krystyna Ewing</span>
-      </a>
-
-      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="primaryNav">
-        <span class="nav-toggle-bar"></span>
-        <span class="nav-toggle-bar"></span>
-        <span class="nav-toggle-bar"></span>
-        <span class="sr-only">Menu</span>
-      </button>
-
-      <nav class="primary-nav" id="primaryNav" aria-label="Primary">
-        <ul>
-          <li><a href="#work">Work</a></li>
-          <li><a href="art.html">Art</a></li>
-          <li><a href="#about">About</a></li>
-          <!-- TODO: link to résumé PDF/page -->
-          <li><a href="#">Résumé</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
-
   <main id="main">
 
-    <!-- ============ HERO — full-bleed cover artwork. The illustration IS
-         the hero section; name/tagline and the bio reveal are layered on
-         top of it, not placed beside it. ============ -->
-    <section class="hero" id="hero">
-      <div class="hero-media">
-        <img src="images/hero-collage.webp" alt="A collage by Krystyna Ewing: her name in distressed white and pink lettering, an oxidized metallic skull, and an explosion of blue, violet and red ink.">
+    <!-- ============ HERO — ghost "beautifully" behind everything; the
+         skull huge and right-cropped; her name artwork sliced into 5
+         bands that slide apart horizontally as the hero scrolls past. ============ -->
+    <section class="hero" id="hero" data-hero>
+      <h1 class="sr-only">Krystyna Ewing</h1>
+      <p class="hero-ghost" aria-hidden="true">beautifully</p>
+
+      <div class="hero-skull" aria-hidden="true">
+        <img class="hero-skull-img" src="images/skull.webp" alt="">
+        <img class="hero-skull-img hero-skull-tear hero-skull-tear--a" src="images/skull.webp" alt="">
+        <img class="hero-skull-img hero-skull-tear hero-skull-tear--b" src="images/skull.webp" alt="">
       </div>
 
-      <div class="hero-id">
-        <h1 class="hero-name">Krystyna Ewing</h1>
-        <p class="hero-tagline">UX · Art · Technology</p>
+      <div class="hero-name" role="img" aria-label="Krystyna Ewing">
+        <div class="hero-name-strip" style="--band-top:0%; --band-bottom:82%; --offset:-160px"><img src="images/name.webp" alt=""></div>
+        <div class="hero-name-strip" style="--band-top:18%; --band-bottom:63%; --offset:110px"><img src="images/name.webp" alt=""></div>
+        <div class="hero-name-strip" style="--band-top:37%; --band-bottom:44%; --offset:-70px"><img src="images/name.webp" alt=""></div>
+        <div class="hero-name-strip" style="--band-top:56%; --band-bottom:22%; --offset:190px"><img src="images/name.webp" alt=""></div>
+        <div class="hero-name-strip" style="--band-top:78%; --band-bottom:0%; --offset:-120px"><img src="images/name.webp" alt=""></div>
+      </div>
+
+      <p class="hero-plate hero-plate--left">UX designer, creative technologist, artist <span class="hero-amp">&amp;</span> maker.</p>
+      <div class="hero-plate hero-plate--right">
+        <p>UX · Art · Technology</p>
+        <p>Beautifully unhinged</p>
       </div>
 
       <div class="hero-interactive" id="heroInteractive">
+        <button type="button" class="hero-trigger" id="heroTrigger" aria-expanded="false" aria-controls="heroBio">
+          <span class="hero-cue-idle">psst.</span>
+          <span class="hero-cue-open">oh, hi.</span>
+        </button>
         <div class="hero-bio" id="heroBio">
-          <p class="hero-bio-text">I design software, make art, build things, break things, and
+          <p>I design software, make art, build things, break things, and
             have a hard time leaving anything alone when I know it could work better.</p>
-          <p class="hero-bio-text">Detroit-born, lifelong artist, and someone with a bad habit of
+          <p>Detroit-born, lifelong artist, and someone with a bad habit of
             needing to know how things work. That curiosity took me from software development
             into UX, and it still shows up in accessibility reviews, 3D printing experiments,
             and whatever I'm building at 1am.</p>
         </div>
-
-        <button type="button" class="hero-trigger" id="heroTrigger" aria-expanded="false" aria-controls="heroBio" aria-label="Reveal introduction">
-          <span class="hero-cue" aria-hidden="true">
-            <span class="hero-cue-desktop">
-              <span class="hero-cue-word hero-cue-word--idle">psst.</span>
-              <span class="hero-cue-word hero-cue-word--open">oh, hi.</span>
-            </span>
-            <span class="hero-cue-mobile">About Me <span class="hero-cue-icon"></span></span>
-          </span>
-        </button>
       </div>
     </section>
 
-    <!-- ============ PROJECT 01 — RESILIENCEPOINT: establishes the system ============ -->
-    <section class="project project--feature" id="work">
-      <div class="feature-frame">
-        <img src="images/work/hazadapt-resiliencepoint/platform-cover.png" alt="ResiliencePoint dashboard showing trending hazards and a nationwide activity map">
+    <!-- ============ SELECTED WORK — five exhibits, five different
+         treatments; the HazAdapt trio grouped by a red rail. ============ -->
+    <section class="work-index" id="work">
+      <div class="work-index-head">
+        <h2 class="work-index-title"><span>Selected</span> <span class="work-index-title-accent">work</span></h2>
+        <p class="work-index-count">Index of exhibits · 05</p>
       </div>
-      <div class="project-inner">
-        <div class="project-head">
-          <span class="project-num">01</span>
-          <p class="index-mark">Featured Work</p>
-          <h2 class="project-title">ResiliencePoint</h2>
-        </div>
-        <div class="project-details">
-          <p class="project-meta">HazAdapt · Lead UX Designer · Web, Mobile Web</p>
-          <p class="project-hook">We built what we thought people needed. Then the
-            evidence changed the product.</p>
-          <a href="work/hazadapt-resiliencepoint.html" class="text-link">Read the Case Study <span class="arrow">→</span></a>
-        </div>
-        <p class="margin-note margin-note--feature">↖ ruined me for shipping without evidence, honestly.</p>
+
+      <div class="work-rail">
+        <a class="work-rail-link" href="work/hazadapt.html">HazAdapt ecosystem · 2021 to present <span class="arrow">→</span></a>
+
+        <article class="work-row work-row--feature" id="resiliencepoint">
+          <span class="work-row-num">01 · Featured</span>
+          <h3 class="work-row-title">Resilience­Point</h3>
+          <div class="work-row-body">
+            <div class="work-row-media">
+              <img src="images/work/hazadapt-resiliencepoint/platform-cover.png" alt="ResiliencePoint dashboard showing trending hazards and a nationwide activity map">
+            </div>
+            <div class="work-row-text">
+              <p class="work-row-meta">HazAdapt · Lead UX Designer · 2023 to 2024</p>
+              <p class="work-row-hook">We built what we thought people needed. Then the evidence changed the product.</p>
+              <a href="work/hazadapt-resiliencepoint.html" class="work-row-link">Read the case study <span class="arrow">→</span></a>
+              <p class="work-row-note">↖ ruined me for shipping without evidence, honestly.</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="work-row work-row--loco" id="loco">
+          <div class="work-row-loco-text">
+            <p class="work-row-meta">HazAdapt · Lead UX Designer · 2023 to 2024</p>
+            <p class="work-row-hook">Bringing trusted local safety information directly into HazAdapt's Hazard Guides.</p>
+            <a href="work/hazadapt-loco.html" class="work-row-link">Read the case study <span class="arrow">→</span></a>
+          </div>
+          <a class="work-row-title--huge" href="work/hazadapt-loco.html"><span class="work-row-num-inline">02</span>LoCo</a>
+        </article>
+
+        <article class="work-row work-row--prepchecks" id="prepchecks">
+          <a class="work-row-title--voice" href="work/hazadapt-prep-checks.html"><span class="work-row-num-inline">03</span> Prep Checks</a>
+          <div class="work-row-prep-text">
+            <p class="work-row-meta">HazAdapt · Lead UX Designer · Web, Mobile Web</p>
+            <p class="work-row-hook">Bite-sized preparedness activities people actually finish.</p>
+            <a href="work/hazadapt-prep-checks.html" class="work-row-link">Read the case study <span class="arrow">→</span></a>
+          </div>
+        </article>
       </div>
+
+      <article class="work-row work-row--truelink" id="truelink">
+        <span class="work-row-num">04 · Company collection</span>
+        <h3 class="work-row-title">True Link<br>Financial</h3>
+        <p class="work-row-hook">Financial tools built to protect autonomy, not just assets.</p>
+        <div class="work-row-sublinks">
+          <p class="work-row-meta">UX Designer · Trust team</p>
+          <a href="work/true-link-beneficiary-experience.html">Beneficiary Experience <span class="arrow">→</span></a>
+          <a href="work/true-link-create-draft-disbursements.html">Create Draft Disbursements <span class="arrow">→</span></a>
+          <a href="work/true-link.html" class="work-row-link">Explore True Link <span class="arrow">→</span></a>
+        </div>
+      </article>
+
+      <article class="work-row work-row--welldone" id="welldone">
+        <div class="work-row-welldone-text">
+          <span class="work-row-num">05</span>
+          <p class="work-row-meta">Standalone · UX/UI Designer · Student project</p>
+          <p class="work-row-hook">Redesigning how a nonprofit monitors remote water infrastructure, from a dense table to scannable, status-first cards.</p>
+          <a href="work/welldone-monitoring.html" class="work-row-link">View case study <span class="arrow">→</span></a>
+          <p class="work-row-note">still couldn't leave a spreadsheet alone.</p>
+        </div>
+        <a class="work-row-title--huge" href="work/welldone-monitoring.html">WellDone</a>
+      </article>
     </section>
 
-    <!-- ============ PERSONALITY INTERRUPTION ============ -->
-    <aside class="interrupt">
-      <div class="interrupt-figure duotone" aria-hidden="true">
+    <!-- ============ WORKBENCH TEASER ============ -->
+    <section class="wb-teaser" id="workbench">
+      <p class="wb-teaser-eyebrow">Also true · Art, experiments, things I make</p>
+      <h2 class="wb-teaser-title">the workbench</h2>
+      <p class="wb-teaser-copy">Apparently I can't leave things alone. 3D printing, sculpture, illustration,
+        creative coding, and the strange half-finished stuff — all on one cutting mat, all draggable.</p>
+      <a href="art.html" class="text-link">See what else I've been making <span class="arrow">→</span></a>
+    </section>
+
+    <!-- ============ ABOUT — museum wall label ============ -->
+    <section class="about-wall" id="about">
+      <div class="about-wall-figure duotone" aria-hidden="true">
         <img src="images/hero.png" alt="">
       </div>
-      <p class="interrupt-note">Okay, but does it actually work?</p>
-    </aside>
-
-    <!-- ============ PROJECT 02 — HAZADAPT ============ -->
-    <section class="project" id="hazadapt">
-      <div class="project-inner">
-        <div class="project-head">
-          <span class="project-num">02</span>
-          <p class="index-mark">Product Ecosystem</p>
-          <h2 class="project-title">HazAdapt</h2>
-        </div>
-        <p class="project-summary">2021 to present. One ecosystem, a lot of
-          different problems.</p>
-        <div class="project-body">
-          <div class="project-media">
-            <img src="images/hazadapt_album.png" alt="hazadapt logo">
-          </div>
-          <ul class="project-index">
-            <li><a href="work/hazadapt-loco.html"><span class="project-index-num">01</span> LoCo</a></li>
-            <li><a href="work/hazadapt-prep-checks.html"><span class="project-index-num">02</span> Prep Checks</a></li>
-          </ul>
-        </div>
-        <a href="work/hazadapt.html" class="text-link">Explore HazAdapt <span class="arrow">→</span></a>
-      </div>
-    </section>
-
-    <!-- ============ PROJECT 03 — TRUE LINK FINANCIAL ============ -->
-    <section class="project" id="truelink">
-      <div class="project-inner">
-        <div class="project-head">
-          <span class="project-num">03</span>
-          <p class="index-mark">Company Collection</p>
-          <h2 class="project-title">True Link Financial</h2>
-        </div>
-        <p class="project-summary">Financial tools built to protect autonomy,
-          not just assets.</p>
-        <div class="project-body project-body--reverse">
-          <ul class="project-index">
-            <li><a href="work/true-link-beneficiary-experience.html">Beneficiary Experience</a></li>
-            <li><a href="work/true-link-create-draft-disbursements.html">Create Draft Disbursements</a></li>
-          </ul>
-          <div class="project-media">
-            <img src="images/True_Link_album.png" alt="True Link logo">
-          </div>
-        </div>
-        <a href="work/true-link.html" class="text-link">Explore True Link <span class="arrow">→</span></a>
-      </div>
-    </section>
-
-    <!-- ============ PROJECT 04 — WELLDONE ============ -->
-    <section class="project" id="welldone">
-      <div class="project-inner">
-        <div class="project-head">
-          <span class="project-num">04</span>
-          <p class="index-mark">Standalone Project</p>
-          <h2 class="project-title">WellDone</h2>
-        </div>
-        <p class="project-summary">Redesigning how a nonprofit monitors remote water infrastructure, from a
-          dense table to scannable, status-first cards.</p>
-        <div class="project-body">
-          <div class="project-media">
-            <img src="images/welldone_album.png" alt="WellDone logo">
-            <a href="#art" class="art-peek" aria-label="Jump to the art section">
-              <img src="images/Artwork.png" alt="">
-            </a>
-          </div>
-          <div class="project-body-text">
-            <p class="annotation">→ moved from a table to status-first cards</p>
-            <p class="margin-note margin-note--welldone">still couldn't leave a spreadsheet alone.</p>
-          </div>
-        </div>
-        <a href="work/welldone-monitoring.html" class="text-link">View Case Study <span class="arrow">→</span></a>
-      </div>
-    </section>
-
-    <!-- ============ ART — the system loosens ============ -->
-    <section class="art-section" id="art">
-      <div class="art-frame">
-        <img src="images/Artwork.png" alt="Original digital illustration by Krystyna Ewing">
-      </div>
-      <div class="art-content">
-        <p class="index-mark">Also True</p>
-        <h2>Apparently I can't leave things alone.</h2>
-        <p class="art-description">Original character and illustration work, made on my own time and my own
-          terms. The character on this site is mine too: drawn, not licensed.</p>
-        <!-- TODO: link to Instagram / ArtStation / full art page -->
-        <a href="art.html" class="text-link">See What Else I've Been Making <span class="arrow">→</span></a>
-      </div>
-    </section>
-
-    <!-- ============ CLOSING — small on purpose. The introduction already
-         happened in the hero; this just points somewhere next. ============ -->
-    <section class="about-teaser" id="about">
-      <div class="project-inner">
-        <p class="index-mark">That's the pitch.</p>
-        <h2>Want the longer version?</h2>
-        <p>Process notes, tools, and whatever I'm building next — all one click away.</p>
-        <!-- TODO: link to résumé PDF/page -->
-        <a href="#" class="text-link">View Résumé <span class="arrow">→</span></a>
+      <div>
+        <p class="about-wall-eyebrow">About · Wall label</p>
+        <dl class="about-wall-dl">
+          <dt>Artist</dt><dd>Krystyna Ewing, Detroit-born</dd>
+          <dt>Medium</dt><dd>Software, UX, art, 3D printing, curiosity</dd>
+          <dt>Hours</dt><dd>Including 1am</dd>
+        </dl>
+        <p class="about-wall-bio">Detroit-born, lifelong artist, and someone with a bad habit of
+          needing to know how things work. That curiosity took me from software development into UX,
+          and it still shows up in accessibility reviews, 3D printing experiments, and whatever
+          I'm building at 1am.</p>
+        <a href="#" class="text-link">Want the longer version? View résumé <span class="arrow">→</span></a>
       </div>
     </section>
 
   </main>
 
-  <!-- ============ CONTACT / FOOTER ============ -->
-  <footer class="site-footer" id="contact">
-    <div class="footer-inner">
-      <div class="footer-brand">
-        <p class="footer-name">Krystyna Ewing</p>
-        <a href="mailto:hello@krystynaewing.com" class="footer-email">hello@krystynaewing.com</a>
-      </div>
-      <nav class="footer-nav" aria-label="Footer">
-        <a href="#work">Work</a>
-        <a href="art.html">Art</a>
-        <a href="#about">About</a>
-        <!-- TODO: link to résumé PDF/page -->
-        <a href="#">Résumé</a>
-      </nav>
-    </div>
-    <p class="footer-note">Found something that doesn't work? <a href="mailto:hello@krystynaewing.com">Tell me.</a></p>
-    <p class="footer-legal">© <span id="year"></span> Krystyna Ewing</p>
+  <!-- ============ CONTACT ============ -->
+  <section class="contact-band" id="contact" aria-label="Contact: hello@krystynaewing.com">
+    <span class="contact-marquee" aria-hidden="true">
+      <span>HELLO@KRYSTYNAEWING.COM ✕ SAY SOMETHING ✕</span>
+      <span>HELLO@KRYSTYNAEWING.COM ✕ SAY SOMETHING ✕</span>
+    </span>
+  </section>
+  <p class="contact-note">Email <a href="mailto:hello@krystynaewing.com">hello@krystynaewing.com</a> — or, found something that doesn't work? <a href="mailto:hello@krystynaewing.com">Tell me.</a></p>
+
+  <footer class="site-footer-legal">
+    <p>© <span id="year"></span> Krystyna Ewing</p>
+    <nav aria-label="Footer">
+      <a href="#">Résumé</a> · <a href="art.html">Art</a>
+    </nav>
   </footer>
+
+  <!-- ============ FIXED BOTTOM NAV — shared chrome ============ -->
+  <nav class="home-nav" aria-label="Primary">
+    <a class="home-nav-brand" href="#top">K. Ewing</a>
+    <ul class="home-nav-list">
+      <li><a href="#work" aria-current="page"><span class="home-nav-marker" aria-hidden="true"></span>Work</a></li>
+      <li><a href="art.html"><span class="home-nav-marker" aria-hidden="true"></span>Workbench</a></li>
+      <li><a href="#about"><span class="home-nav-marker" aria-hidden="true"></span>About</a></li>
+      <li><a href="#contact"><span class="home-nav-marker" aria-hidden="true"></span>Contact</a></li>
+    </ul>
+    <button type="button" class="home-theme-toggle" id="themeToggle" aria-pressed="false">Light</button>
+  </nav>
 
   <script src="js/main.js"></script>
 </body>
