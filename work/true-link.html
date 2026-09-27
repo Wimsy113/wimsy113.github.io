@@ -1,107 +1,122 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>True Link — Krystyna Ewing</title>
-  <meta name="description" content="True Link — case study overview.">
-
-  <link rel="icon" href="../images/favicon.ico">
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Grenze+Gotisch:wght@400;600&family=Source+Sans+3:wght@400;500;600;700&family=Space+Mono&display=swap" rel="stylesheet">
-
-  <link rel="stylesheet" href="../styles.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="../support.js"></script>
 </head>
-<body class="case-overview">
+<body>
+<x-dc>
+<helmet>
+<link rel="icon" href="../images/favicon.ico">
+<title>True Link — Krystyna Ewing</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="True Link — case study overview.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800;900&family=Grenze+Gotisch:wght@400;600&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<script src="../image-slot.js"></script>
+<style>
+html{--bg:#0d0c0c;--ink:#ece6dc;--muted:#aaa69f;--metal:#8d8a85;--ghost:#1f1d1c;--line:#34322f;--red:oklch(0.6 0.2 27);--on-red:#0d0c0c;--pink:#f45b8e;--grain:.1;background:var(--bg);color:var(--ink);scroll-behavior:smooth}
+html[data-theme="light"]{--bg:#e8e2d7;--ink:#151312;--muted:#4c4945;--metal:#6c6964;--ghost:#d8d1c4;--line:#b9b1a3;--red:oklch(0.5 0.2 27);--on-red:#fff;--pink:#b8154f;--grain:.07}
+html[data-grain="off"]{--grain:0}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Source Sans 3",system-ui,sans-serif;-webkit-font-smoothing:antialiased;transition:background-color .35s,color .35s;overflow-x:hidden}
+body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:300;opacity:var(--grain);mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E")}
+a{color:inherit;text-decoration-thickness:1px;text-underline-offset:.22em}
+a:hover{color:var(--red)}
+:focus-visible{outline:3px solid var(--pink);outline-offset:4px}
+::selection{background:var(--pink);color:#0d0c0c}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+</style>
+</helmet>
 
-  <a class="skip-link" href="#main">Skip to content</a>
-  <header class="site-header">
-    <div class="header-inner">
-      <a class="brand" href="../index.html" aria-label="Krystyna Ewing — home">
-        <span class="brand-mascot duotone" aria-hidden="true">
-          <img src="../images/hero.png" alt="">
-        </span>
-        <span class="brand-name">Krystyna Ewing</span>
-      </a>
+<a href="#main" style="position:fixed;left:16px;top:-80px;z-index:400;background:var(--pink);color:#0d0c0c;padding:12px 18px;font:700 14px/1 'Space Mono',monospace;text-decoration:none" style-focus="top:16px">Skip to content</a>
 
-      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="primaryNav">
-        <span class="nav-toggle-bar"></span>
-        <span class="nav-toggle-bar"></span>
-        <span class="nav-toggle-bar"></span>
-        <span class="sr-only">Menu</span>
-      </button>
+<nav aria-label="Primary" style="position:fixed;left:0;right:0;bottom:0;z-index:150;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:4px 20px;padding:4px clamp(12px,2.4vw,32px);background:var(--bg);border-top:1px solid var(--ink);font:700 12px/1 'Space Mono',monospace;letter-spacing:.06em;text-transform:uppercase">
+  <a href="../index.html" aria-label="Krystyna Ewing, home" style="font:400 26px/1 'Grenze Gotisch',serif;letter-spacing:0;text-transform:none;text-decoration:none;min-height:44px;display:flex;align-items:center">K. Ewing</a>
+  <div style="display:flex;flex-wrap:wrap;gap:0 clamp(12px,2.4vw,30px)">
+    <a href="../index.html#work" style="text-decoration:none;min-height:44px;display:flex;align-items:center;gap:8px"><span aria-hidden="true" style="color:var(--red)">■</span>Work</a>
+    <a href="../index.html#workbench" style="text-decoration:none;min-height:44px;display:flex;align-items:center;gap:8px"><span aria-hidden="true" style="color:var(--red)">□</span>Workbench</a>
+    <a href="../index.html#about" style="text-decoration:none;min-height:44px;display:flex;align-items:center;gap:8px"><span aria-hidden="true" style="color:var(--red)">□</span>About</a>
+    <a href="../index.html#contact" style="text-decoration:none;min-height:44px;display:flex;align-items:center;gap:8px"><span aria-hidden="true" style="color:var(--red)">□</span>Contact</a>
+  </div>
+  <button type="button" onClick="{{ toggleTheme }}" aria-pressed="{{ lightPressed }}" style="font:inherit;letter-spacing:inherit;text-transform:inherit;color:var(--bg);background:var(--ink);border:1px solid var(--ink);padding:0 12px;min-height:40px;cursor:pointer" style-hover="background:var(--red);border-color:var(--red)">{{ themeLabel }}</button>
+</nav>
 
-      <nav class="primary-nav" id="primaryNav" aria-label="Primary">
-        <ul>
-          <li><a href="../index.html#work">Work</a></li>
-          <li><a href="../index.html#about">About</a></li>
-          <li><a href="../index.html#art">Art</a></li>
-          <li><a href="../index.html#contact" class="nav-cta">Contact</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
-
-  <p class="breadcrumb"><a href="../index.html">~</a> / <span class="current">work/true-link</span></p>
-
-  <main id="main">
-    <div class="case-hero">
-      <div class="case-hero-cover">
-        <img src="../images/True_Link_album.png" alt="True Link logo">
-      </div>
-
-      <p class="tag-row">Fintech · Accessibility · Design Systems</p>
-      <h1 class="case-title">True Link</h1>
-      <p class="case-summary">Financial tools built to protect the safety and independence of aging and disabled adults without stripping away their autonomy.</p>
-
-      <dl class="case-meta">
-        <div><dt>Role</dt><dd>UX Designer</dd></div>
-        <div><dt>Team</dt><dd>Trust</dd></div>
+<header style="padding:clamp(28px,4vw,48px) clamp(16px,5vw,80px) clamp(56px,7vw,100px);border-bottom:2px solid var(--ink);position:relative;overflow:hidden">
+  <p style="margin:0 0 clamp(40px,6vw,80px);font:400 12px/1 'Space Mono',monospace;letter-spacing:.08em;color:var(--muted)"><a href="../index.html">~</a> / <span style="color:var(--ink)">work/true-link</span></p>
+  <p style="margin:0 0 14px;font:400 12px/1.6 'Space Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--pink)">Fintech · Accessibility · Design Systems</p>
+  <h1 style="margin:0;font:900 clamp(56px,12vw,220px)/.82 'Big Shoulders Display',sans-serif;text-transform:uppercase;letter-spacing:-.015em;overflow-wrap:anywhere;text-wrap:balance">True Link</h1>
+  <div style="display:flex;flex-wrap:wrap;gap:40px 64px;margin-top:clamp(32px,4vw,56px);align-items:flex-start">
+    <div style="flex:1 1 420px;min-width:0;display:grid;gap:28px">
+      <p style="margin:0;max-width:34ch;font:600 clamp(22px,2.2vw,32px)/1.25 'Source Sans 3',sans-serif;text-wrap:pretty">Financial tools built to protect the safety and independence of aging and disabled adults without stripping away their autonomy.</p>
+      <dl style="margin:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,180px),1fr));gap:18px 28px;padding-top:20px;border-top:1px solid var(--line)">
+        <div style="display:grid;gap:4px"><dt style="font:400 11px/1.3 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">Role</dt><dd style="margin:0;font:600 17px/1.35 'Source Sans 3',sans-serif">UX Designer</dd></div>
+        <div style="display:grid;gap:4px"><dt style="font:400 11px/1.3 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">Team</dt><dd style="margin:0;font:600 17px/1.35 'Source Sans 3',sans-serif">Trust</dd></div>
       </dl>
-
-      <p class="case-summary">My work at True Link spanned both sides of the platform: internal
-        workflow tools that let trust administrators manage disbursements safely
-        and efficiently, and the beneficiary-facing experience that makes that
-        same money understandable to the people it belongs to.</p>
+      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">My work at True Link spanned both sides of the platform: internal workflow tools that let trust administrators manage disbursements safely and efficiently, and the beneficiary-facing experience that makes that same money understandable to the people it belongs to.</p>
+      
     </div>
+    <img src="../images/True_Link_album.png" alt="True Link logo" style="flex:1 1 360px;min-width:0;max-width:640px;height:auto;display:block;transform:rotate(1.5deg);box-shadow:14px 14px 0 var(--red)">
+  </div>
+</header>
 
-    <section class="case-section">
-      <span class="section-index">~/work/true-link</span>
-      <h2 class="case-section-title">Case studies in this project</h2>
-      <div class="subcase-grid">
-        <a class="subcase-card" href="true-link-beneficiary-experience.html">
-          <div class="win-bar">
-            <span class="win-dots"><span class="win-dot"></span><span class="win-dot"></span><span class="win-dot"></span></span>
-            <span class="win-title">true-link-beneficiary-experience.fig</span>
-          </div>
-          <div class="subcase-card-body">
-            <h3>Beneficiary Experience</h3>
-            <p>Making financial information understandable for the people it belongs to, not just the people administering it.</p>
-            <span class="subcase-card-link">View Case Study →</span>
-          </div>
+<div style="display:flex;flex-wrap:wrap;gap:0 clamp(32px,5vw,80px);padding:0 clamp(16px,5vw,80px)">
+  <main id="main" style="flex:1 1 600px;min-width:0;max-width:1040px;margin:0 auto">
+
+    <section id="s01" aria-labelledby="s01-h" style="display:grid;gap:22px;padding:clamp(56px,7vw,110px) 0;scroll-margin-top:24px">
+      <p style="margin:0;display:flex;align-items:baseline;gap:14px"><span style="font:400 12px/1 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">~/work/true-link</span></p>
+      <h2 id="s01-h" style="margin:0 0 8px;max-width:22ch;font:700 clamp(34px,4vw,60px)/1.02 'Source Sans 3',sans-serif;letter-spacing:-.025em;text-wrap:balance">Case studies in this project</h2>
+      <div style="display:grid;border-top:2px solid var(--ink)">
+        <a href="true-link-beneficiary-experience.html" style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:12px 40px;padding:clamp(24px,3vw,40px) 0;border-bottom:1px solid var(--line);text-decoration:none" style-hover="color:var(--ink);padding-left:12px">
+          <span style="flex:1 1 360px;min-width:0;display:grid;gap:8px"><span style="font:700 12px/1 'Space Mono',monospace;letter-spacing:.08em;color:var(--pink)">01 · true-link-beneficiary-experience.fig</span><span style="font:900 clamp(44px,6vw,96px)/.85 'Big Shoulders Display',sans-serif;text-transform:uppercase">Beneficiary Experience</span></span>
+          <span style="flex:0 1 340px;display:grid;gap:12px"><span style="font:400 19px/1.4 'Source Sans 3',sans-serif">Making financial information understandable for the people it belongs to, not just the people administering it.</span><span style="font:700 13px/1 'Space Mono',monospace;letter-spacing:.06em;text-transform:uppercase;text-decoration:underline;text-underline-offset:.22em">View Case Study →</span></span>
         </a>
-        <a class="subcase-card" href="true-link-create-draft-disbursements.html">
-          <div class="win-bar">
-            <span class="win-dots"><span class="win-dot"></span><span class="win-dot"></span><span class="win-dot"></span></span>
-            <span class="win-title">true-link-create-draft-disbursements.fig</span>
-          </div>
-          <div class="subcase-card-body">
-            <h3>Create Draft Disbursements</h3>
-            <p>Getting money to the right place, safely, without friction.</p>
-            <span class="subcase-card-link">View Case Study →</span>
-          </div>
+        <a href="true-link-create-draft-disbursements.html" style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:12px 40px;padding:clamp(24px,3vw,40px) 0;border-bottom:1px solid var(--line);text-decoration:none" style-hover="color:var(--ink);padding-left:12px">
+          <span style="flex:1 1 360px;min-width:0;display:grid;gap:8px"><span style="font:700 12px/1 'Space Mono',monospace;letter-spacing:.08em;color:var(--pink)">02 · true-link-create-draft-disbursements.fig</span><span style="font:900 clamp(44px,6vw,96px)/.85 'Big Shoulders Display',sans-serif;text-transform:uppercase">Create Draft Disbursements</span></span>
+          <span style="flex:0 1 340px;display:grid;gap:12px"><span style="font:400 19px/1.4 'Source Sans 3',sans-serif">Getting money to the right place, safely, without friction.</span><span style="font:700 13px/1 'Space Mono',monospace;letter-spacing:.06em;text-transform:uppercase;text-decoration:underline;text-underline-offset:.22em">View Case Study →</span></span>
         </a>
       </div>
     </section>
   </main>
-  <footer class="site-footer">
-    <p class="footer-path">~/krystyna-ewing · &copy; <span id="year"></span></p>
-    <p class="footer-clock" aria-hidden="true"><span id="clock"></span> local</p>
-    <a href="../index.html#top" class="back-to-top">[ ^ top ]</a>
-  </footer>
+</div>
 
-  <script src="../js/main.js"></script>
+<nav aria-label="Back" style="border-top:2px solid var(--ink);padding:clamp(36px,5vw,72px) clamp(16px,5vw,80px)"><a href="../index.html#work" style="font:900 clamp(40px,5vw,80px)/.9 'Big Shoulders Display',sans-serif;text-transform:uppercase;text-decoration:none" style-hover="color:var(--red)">← All work</a></nav>
+
+<footer style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:16px;padding:32px clamp(16px,5vw,80px) 110px;font:400 12px/1.6 'Space Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)">
+  <span>~/krystyna-ewing · © 2026</span>
+  <a href="mailto:hello@krystynaewing.com" style="color:var(--ink)">hello@krystynaewing.com</a>
+  <a href="#main" style="min-height:44px;display:inline-flex;align-items:center">[ ^ top ]</a>
+</footer>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;defaultTheme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;dark&quot;,&quot;light&quot;],&quot;default&quot;:&quot;dark&quot;,&quot;tsType&quot;:&quot;'dark'|'light'&quot;,&quot;section&quot;:&quot;Look&quot;},&quot;grain&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Look&quot;}}">
+class Component extends DCLogic {
+  state = { theme: this.props.defaultTheme ?? 'dark', active: 's01', tocOpen: true };
+  applyRoot() {
+    const r = document.documentElement;
+    r.dataset.theme = this.state.theme;
+    r.dataset.grain = (this.props.grain ?? true) ? 'on' : 'off';
+  }
+  componentDidMount() {
+    this.applyRoot();
+    this.io = new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecting) this.setState({ active: en.target.id }); }), { rootMargin: '-40% 0px -55% 0px' });
+    document.querySelectorAll('main section[id]').forEach(el => this.io.observe(el));
+  }
+  componentDidUpdate(pp) {
+    if (pp.defaultTheme !== this.props.defaultTheme && this.props.defaultTheme) this.setState({ theme: this.props.defaultTheme }, () => this.applyRoot());
+    else this.applyRoot();
+  }
+  componentWillUnmount() { if (this.io) this.io.disconnect(); }
+  renderVals() {
+    const s = this.state, light = s.theme === 'light', mk = {};
+    for (let i = 1; i <= 24; i++) { const id = 's' + String(i).padStart(2, '0'); mk[id] = s.active === id ? '■' : '□'; }
+    return {
+      mk, tocOpen: s.tocOpen, tocClosed: !s.tocOpen, tocExpanded: s.tocOpen ? 'true' : 'false', tocIcon: '− Hide',
+      toggleToc: () => this.setState(st => ({ tocOpen: !st.tocOpen })),
+      themeLabel: light ? 'Dark' : 'Light', lightPressed: light ? 'true' : 'false',
+      toggleTheme: () => this.setState(st => ({ theme: st.theme === 'light' ? 'dark' : 'light' }), () => this.applyRoot())
+    };
+  }
+}
+</script>
 </body>
 </html>

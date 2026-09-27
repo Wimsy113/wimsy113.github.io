@@ -1,395 +1,313 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ResiliencePoint — Krystyna Ewing</title>
-  <meta name="description" content="ResiliencePoint — turning emergency preparedness data into something emergency managers can actually use.">
-
-  <link rel="icon" href="../images/favicon.ico">
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Grenze+Gotisch:wght@400;600&family=Source+Sans+3:wght@400;500;600;700&family=Space+Mono&display=swap" rel="stylesheet">
-
-  <link rel="stylesheet" href="../styles.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="../support.js"></script>
 </head>
 <body>
+<x-dc>
+<helmet>
+<link rel="icon" href="../images/favicon.ico">
+<title>ResiliencePoint — Krystyna Ewing</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="ResiliencePoint — turning emergency preparedness data into something emergency managers can actually use.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800;900&family=Grenze+Gotisch:wght@400;600&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+html{--bg:#0d0c0c;--ink:#ece6dc;--muted:#aaa69f;--metal:#8d8a85;--ghost:#1f1d1c;--line:#34322f;--red:oklch(0.6 0.2 27);--on-red:#0d0c0c;--pink:#f45b8e;--grain:.1;background:var(--bg);color:var(--ink);scroll-behavior:smooth}
+html[data-theme="light"]{--bg:#e8e2d7;--ink:#151312;--muted:#4c4945;--metal:#6c6964;--ghost:#d8d1c4;--line:#b9b1a3;--red:oklch(0.5 0.2 27);--on-red:#fff;--pink:#b8154f;--grain:.07}
+html[data-grain="off"]{--grain:0}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Source Sans 3",system-ui,sans-serif;-webkit-font-smoothing:antialiased;transition:background-color .35s,color .35s;overflow-x:hidden}
+body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:300;opacity:var(--grain);mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E")}
+a{color:inherit;text-decoration-thickness:1px;text-underline-offset:.22em}
+a:hover{color:var(--red)}
+:focus-visible{outline:3px solid var(--pink);outline-offset:4px}
+::selection{background:var(--pink);color:#0d0c0c}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+</style>
+</helmet>
 
-  <a class="skip-link" href="#main">Skip to content</a>
-  <header class="site-header">
-    <div class="header-inner">
-      <a class="brand" href="../index.html" aria-label="Krystyna Ewing — home">
-        <span class="brand-mascot duotone" aria-hidden="true">
-          <img src="../images/hero.png" alt="">
-        </span>
-        <span class="brand-name">Krystyna Ewing</span>
-      </a>
+<a href="#main" style="position:fixed;left:16px;top:-80px;z-index:400;background:var(--pink);color:#0d0c0c;padding:12px 18px;font:700 14px/1 'Space Mono',monospace;text-decoration:none" style-focus="top:16px">Skip to content</a>
 
-      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="primaryNav">
-        <span class="nav-toggle-bar"></span>
-        <span class="nav-toggle-bar"></span>
-        <span class="nav-toggle-bar"></span>
-        <span class="sr-only">Menu</span>
-      </button>
+<nav aria-label="Primary" style="position:fixed;left:0;right:0;bottom:0;z-index:150;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:4px 20px;padding:4px clamp(12px,2.4vw,32px);background:var(--bg);border-top:1px solid var(--ink);font:700 12px/1 'Space Mono',monospace;letter-spacing:.06em;text-transform:uppercase">
+  <a href="../index.html" aria-label="Krystyna Ewing, home" style="font:400 26px/1 'Grenze Gotisch',serif;letter-spacing:0;text-transform:none;text-decoration:none;min-height:44px;display:flex;align-items:center">K. Ewing</a>
+  <div style="display:flex;flex-wrap:wrap;gap:0 clamp(12px,2.4vw,30px)">
+    <a href="../index.html#work" style="text-decoration:none;min-height:44px;display:flex;align-items:center;gap:8px"><span aria-hidden="true" style="color:var(--red)">■</span>Work</a>
+    <a href="../index.html#workbench" style="text-decoration:none;min-height:44px;display:flex;align-items:center;gap:8px"><span aria-hidden="true" style="color:var(--red)">□</span>Workbench</a>
+    <a href="../index.html#about" style="text-decoration:none;min-height:44px;display:flex;align-items:center;gap:8px"><span aria-hidden="true" style="color:var(--red)">□</span>About</a>
+    <a href="../index.html#contact" style="text-decoration:none;min-height:44px;display:flex;align-items:center;gap:8px"><span aria-hidden="true" style="color:var(--red)">□</span>Contact</a>
+  </div>
+  <button type="button" onClick="{{ toggleTheme }}" aria-pressed="{{ lightPressed }}" style="font:inherit;letter-spacing:inherit;text-transform:inherit;color:var(--bg);background:var(--ink);border:1px solid var(--ink);padding:0 12px;min-height:40px;cursor:pointer" style-hover="background:var(--red);border-color:var(--red)">{{ themeLabel }}</button>
+</nav>
 
-      <nav class="primary-nav" id="primaryNav" aria-label="Primary">
-        <ul>
-          <li><a href="../index.html#work">Work</a></li>
-          <li><a href="../index.html#about">About</a></li>
-          <li><a href="../index.html#art">Art</a></li>
-          <li><a href="../index.html#contact" class="nav-cta">Contact</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
-
-  <p class="breadcrumb"><a href="../index.html">~</a> / <span class="current">work/resiliencepoint</span></p>
-
-  <main id="main">
-    <div class="case-hero">
-      <div class="case-hero-cover">
-        <img src="../images/work/hazadapt-resiliencepoint/cover.png" alt="ResiliencePoint logo">
-      </div>
-
-      <p class="tag-row">hazadapt · UX Research · Product Design · Data Visualization · Accessibility</p>
-      <h1 class="case-title">ResiliencePoint</h1>
-      <p class="case-summary">Turning emergency preparedness data into something people can actually use, a successor to EM-Dash built to help emergency managers investigate, not just view, community preparedness.</p>
-
-      <dl class="case-meta">
-        <div><dt>Organization</dt><dd>HazAdapt</dd></div>
-        <div><dt>Role</dt><dd>Lead UX Designer</dd></div>
-        <div><dt>Duration</dt><dd>2023 to 2024</dd></div>
-        <div><dt>Platform</dt><dd>Web, Mobile Web</dd></div>
-        <div><dt>Tools</dt><dd>Figma, ClickUp, Google Docs, Otter.ai</dd></div>
-        <div><dt>Focus</dt><dd>UX Research, Product Design, Data Visualization, Accessibility, Design Systems, Developer Handoff, QA</dd></div>
+<header style="padding:clamp(28px,4vw,48px) clamp(16px,5vw,80px) clamp(56px,7vw,100px);border-bottom:2px solid var(--ink);position:relative;overflow:hidden">
+  <p style="margin:0 0 clamp(40px,6vw,80px);font:400 12px/1 'Space Mono',monospace;letter-spacing:.08em;color:var(--muted)"><a href="../index.html">~</a> / work / <span style="color:var(--ink)">resiliencepoint</span></p>
+  <p style="margin:0 0 14px;font:400 12px/1.6 'Space Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--pink)">hazadapt · UX Research · Product Design · Data Visualization · Accessibility</p>
+  <h1 style="margin:0;font:900 clamp(64px,13vw,230px)/.8 'Big Shoulders Display',sans-serif;text-transform:uppercase;letter-spacing:-.015em;overflow-wrap:anywhere">Resilience&shy;Point</h1>
+  <div style="display:flex;flex-wrap:wrap;gap:40px 64px;margin-top:clamp(32px,4vw,56px);align-items:flex-start">
+    <div style="flex:1 1 420px;min-width:0;display:grid;gap:28px">
+      <p style="margin:0;max-width:34ch;font:600 clamp(22px,2.2vw,32px)/1.25 'Source Sans 3',sans-serif;text-wrap:pretty">Turning emergency preparedness data into something people can actually use, a successor to EM-Dash built to help emergency managers investigate, not just view, community preparedness.</p>
+      <dl style="margin:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,180px),1fr));gap:18px 28px;padding-top:20px;border-top:1px solid var(--line)">
+        <div style="display:grid;gap:4px"><dt style="font:400 11px/1.3 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">Organization</dt><dd style="margin:0;font:600 17px/1.35 'Source Sans 3',sans-serif">HazAdapt</dd></div>
+        <div style="display:grid;gap:4px"><dt style="font:400 11px/1.3 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">Role</dt><dd style="margin:0;font:600 17px/1.35 'Source Sans 3',sans-serif">Lead UX Designer</dd></div>
+        <div style="display:grid;gap:4px"><dt style="font:400 11px/1.3 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">Duration</dt><dd style="margin:0;font:600 17px/1.35 'Source Sans 3',sans-serif">2023 to 2024</dd></div>
+        <div style="display:grid;gap:4px"><dt style="font:400 11px/1.3 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">Platform</dt><dd style="margin:0;font:600 17px/1.35 'Source Sans 3',sans-serif">Web, Mobile Web</dd></div>
+        <div style="display:grid;gap:4px"><dt style="font:400 11px/1.3 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">Tools</dt><dd style="margin:0;font:600 17px/1.35 'Source Sans 3',sans-serif">Figma, ClickUp, Google Docs, Otter.ai</dd></div>
+        <div style="display:grid;gap:4px;grid-column:1 / -1"><dt style="font:400 11px/1.3 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">Focus</dt><dd style="margin:0;font:600 17px/1.35 'Source Sans 3',sans-serif">UX Research, Product Design, Data Visualization, Accessibility, Design Systems, Developer Handoff, QA</dd></div>
       </dl>
-
-      <p><a href="hazadapt.html" class="text-link">More work from HazAdapt →</a></p>
+      <a href="hazadapt.html" style="font:700 13px/1 'Space Mono',monospace;letter-spacing:.06em;text-transform:uppercase;min-height:44px;display:inline-flex;align-items:center;justify-self:start">More work from HazAdapt →</a>
     </div>
+    <img src="../images/work/hazadapt-resiliencepoint/cover.png" alt="ResiliencePoint logo" style="flex:1 1 360px;min-width:0;max-width:640px;height:auto;display:block;transform:rotate(1.5deg);box-shadow:14px 14px 0 var(--red)">
+  </div>
+</header>
 
-    <section class="case-section">
-      <span class="section-index">01. Overview</span>
-      <h2 class="case-section-title">Overview</h2>
-      <div class="case-section-body">
-        <p>Emergency managers work with an enormous amount of information. They need
-          to understand the hazards affecting their communities, how prepared
-          residents are, where gaps exist, and how those patterns change depending on
-          location and population.</p>
-        <p>The information itself can be incredibly useful, but usefulness depends on
-          whether someone can actually get to it, understand it, and make a decision
-          from it. That was the problem we were working through with ResiliencePoint.</p>
-        <p>ResiliencePoint grew out of earlier work around an emergency-management
-          dashboard called EM-Dash. As the product evolved, we began thinking beyond
-          simply displaying information and toward giving emergency-management
-          professionals a tool they could actively use to investigate preparedness
-          data.</p>
-        <p>My role involved helping shape that transition through research,
-          interaction design, usability testing, accessibility work, component
-          design, developer handoff, and product QA.</p>
-      </div>
+<div style="display:flex;flex-wrap:wrap;gap:0 clamp(32px,5vw,80px);padding:0 clamp(16px,5vw,80px)">
+  <sc-if value="{{ tocOpen }}" hint-placeholder-val="{{ true }}">
+  <aside aria-label="Case study contents" style="flex:0 1 230px;min-width:0;padding-top:clamp(56px,7vw,110px)">
+    <nav aria-label="Sections" style="position:sticky;top:28px">
+      <button type="button" onClick="{{ toggleToc }}" aria-expanded="{{ tocExpanded }}" aria-controls="toc-list" style="display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;min-height:44px;margin:0 0 10px;padding:0 0 6px;background:transparent;border:0;border-bottom:1px solid var(--line);color:var(--metal);cursor:pointer;text-align:left" style-hover="color:var(--ink)">
+        <span style="font:400 30px/1 'Grenze Gotisch',serif">contents</span>
+        <span aria-hidden="true" style="font:700 12px/1 'Space Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--pink)">{{ tocIcon }}</span>
+      </button>
+      <ol id="toc-list" style="list-style:none;margin:0;padding:0;display:grid;font:400 12px/1.35 'Space Mono',monospace;letter-spacing:.04em">
+        <li><a href="#s01" style="display:flex;gap:10px;padding:7px 0;text-decoration:none"><span aria-hidden="true" style="color:var(--red)">{{ mk.s01 }}</span>01 Overview</a></li>
+        <li><a href="#s02" style="display:flex;gap:10px;padding:7px 0;text-decoration:none"><span aria-hidden="true" style="color:var(--red)">{{ mk.s02 }}</span>02 Understanding the Problem</a></li>
+        <li><a href="#s03" style="display:flex;gap:10px;padding:7px 0;text-decoration:none"><span aria-hidden="true" style="color:var(--red)">{{ mk.s03 }}</span>03 Research</a></li>
+        <li><a href="#s04" style="display:flex;gap:10px;padding:7px 0;text-decoration:none"><span aria-hidden="true" style="color:var(--red)">{{ mk.s04 }}</span>04 Designing the Dashboard</a></li>
+        <li><a href="#s05" style="display:flex;gap:10px;padding:7px 0;text-decoration:none"><span aria-hidden="true" style="color:var(--red)">{{ mk.s05 }}</span>05 The Problem We Found</a></li>
+        <li><a href="#s06" style="display:flex;gap:10px;padding:7px 0;text-decoration:none"><span aria-hidden="true" style="color:var(--red)">{{ mk.s06 }}</span>06 The Pivot</a></li>
+        <li><a href="#s07" style="display:flex;gap:10px;padding:7px 0;text-decoration:none"><span aria-hidden="true" style="color:var(--red)">{{ mk.s07 }}</span>07 Designing for Real Questions</a></li>
+        <li><a href="#s08" style="display:flex;gap:10px;padding:7px 0;text-decoration:none"><span aria-hidden="true" style="color:var(--red)">{{ mk.s08 }}</span>08 Results, Export &amp; Sharing</a></li>
+        <li><a href="#s09" style="display:flex;gap:10px;padding:7px 0;text-decoration:none"><span aria-hidden="true" style="color:var(--red)">{{ mk.s09 }}</span>09 Accessibility &amp; Inclusive Design</a></li>
+        <li><a href="#s10" style="display:flex;gap:10px;padding:7px 0;text-decoration:none"><span aria-hidden="true" style="color:var(--red)">{{ mk.s10 }}</span>10 Building for Development</a></li>
+        <li><a href="#s11" style="display:flex;gap:10px;padding:7px 0;text-decoration:none"><span aria-hidden="true" style="color:var(--red)">{{ mk.s11 }}</span>11 From Prototype to Production</a></li>
+        <li><a href="#s12" style="display:flex;gap:10px;padding:7px 0;text-decoration:none"><span aria-hidden="true" style="color:var(--red)">{{ mk.s12 }}</span>12 What I Learned</a></li>
+      </ol>
+    </nav>
+  </aside>
+  </sc-if>
+  <sc-if value="{{ tocClosed }}" hint-placeholder-val="{{ false }}">
+    <button type="button" onClick="{{ toggleToc }}" aria-expanded="false" aria-controls="toc-list" aria-label="Show contents" style="position:fixed;left:0;top:50%;transform:translateY(-50%);z-index:140;writing-mode:vertical-rl;display:flex;align-items:center;gap:12px;padding:18px 10px;min-width:44px;background:var(--ink);color:var(--bg);border:0;cursor:pointer;font:700 12px/1 'Space Mono',monospace;letter-spacing:.12em;text-transform:uppercase" style-hover="background:var(--red);color:var(--on-red)"><span aria-hidden="true">+</span>Contents</button>
+  </sc-if>
+
+  <main id="main" style="flex:1 1 600px;min-width:0;max-width:1040px;margin:0 auto">
+
+    <section id="s01" aria-labelledby="s01-h" style="display:grid;gap:22px;padding:clamp(56px,7vw,110px) 0;scroll-margin-top:24px">
+      <p style="margin:0;display:flex;align-items:baseline;gap:14px"><span style="font:900 40px/.8 'Big Shoulders Display',sans-serif;color:var(--pink)">01</span><span style="font:400 12px/1 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">Overview</span></p>
+      <h2 id="s01-h" style="margin:0 0 8px;max-width:22ch;font:700 clamp(34px,4vw,60px)/1.02 'Source Sans 3',sans-serif;letter-spacing:-.025em;text-wrap:balance">Overview</h2>
+      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">Emergency managers work with an enormous amount of information. They need to understand the hazards affecting their communities, how prepared residents are, where gaps exist, and how those patterns change depending on location and population.</p>
+      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">The information itself can be incredibly useful, but usefulness depends on whether someone can actually get to it, understand it, and make a decision from it. That was the problem we were working through with ResiliencePoint.</p>
+      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">ResiliencePoint grew out of earlier work around an emergency-management dashboard called EM-Dash. As the product evolved, we began thinking beyond simply displaying information and toward giving emergency-management professionals a tool they could actively use to investigate preparedness data.</p>
+      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">My role involved helping shape that transition through research, interaction design, usability testing, accessibility work, component design, developer handoff, and product QA.</p>
     </section>
 
-    <section class="case-section">
-      <span class="section-index">02. Understanding the Problem</span>
-      <h2 class="case-section-title">Two needs in tension</h2>
-      <div class="case-section-body">
-        <p>Emergency-management professionals often have to make decisions across
-          multiple layers of information. They may need to understand preparedness at
-          a state level, then narrow down to a county, ZIP code, or another
-          geographic area. They may be comparing hazards, looking at preparedness
-          trends, or trying to identify where public education and emergency
-          resources should be focused.</p>
-        <p>The product therefore had to support two very different needs:</p>
-        <ul>
-          <li>Give someone a useful overview quickly.</li>
-          <li>Allow them to dig deeply into the data when they needed more detail.</li>
-        </ul>
-        <p>Those goals sound compatible, but they created a difficult interaction
-          problem. If we exposed everything at once, the interface became
-          overwhelming. If we hid too much, users could not understand what
-          information was available or how to get to it.</p>
-        <figure class="case-image">
-          <img src="../images/work/hazadapt-resiliencepoint/early-em-dash-screenshot.png" alt="Early EM-Dash dashboard showing hazard guide activity, usage charts, and a jurisdiction map">
-          <figcaption>EM-Dash, ResiliencePoint's predecessor</figcaption>
-        </figure>
-        <figure class="case-image">
-          <img src="../images/work/hazadapt-resiliencepoint/early-information-architecture.png" alt="Early EM-Dash resilience data table and hazard guide click-through view">
-          <figcaption>Early information architecture</figcaption>
-        </figure>
-      </div>
+    <section id="s02" aria-labelledby="s02-h" style="display:grid;gap:22px;padding:clamp(56px,7vw,110px) 0;border-top:1px solid var(--line);scroll-margin-top:24px">
+      <p style="margin:0;display:flex;align-items:baseline;gap:14px"><span style="font:900 40px/.8 'Big Shoulders Display',sans-serif;color:var(--pink)">02</span><span style="font:400 12px/1 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">Understanding the Problem</span></p>
+      <h2 id="s02-h" style="margin:0 0 8px;max-width:22ch;font:700 clamp(34px,4vw,60px)/1.02 'Source Sans 3',sans-serif;letter-spacing:-.025em;text-wrap:balance">Two needs in tension</h2>
+      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">Emergency-management professionals often have to make decisions across multiple layers of information. They may need to understand preparedness at a state level, then narrow down to a county, ZIP code, or another geographic area. They may be comparing hazards, looking at preparedness trends, or trying to identify where public education and emergency resources should be focused.</p>
+      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">The product therefore had to support two very different needs:</p>
+      <ul style="margin:0;padding-left:1.2em;max-width:64ch;display:grid;gap:8px;font:400 clamp(18px,1.3vw,20px)/1.55 'Source Sans 3',sans-serif">
+        <li>Give someone a useful overview quickly.</li>
+        <li>Allow them to dig deeply into the data when they needed more detail.</li>
+      </ul>
+      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">Those goals sound compatible, but they created a difficult interaction problem. If we exposed everything at once, the interface became overwhelming. If we hid too much, users could not understand what information was available or how to get to it.</p>
+      <figure style="margin:clamp(12px,2vw,28px) 0 0;display:grid;gap:10px">
+        <img src="../images/work/hazadapt-resiliencepoint/early-em-dash-screenshot.png" alt="Early EM-Dash dashboard showing hazard guide activity, usage charts, and a jurisdiction map" style="display:block;width:100%;height:auto;border:1px solid var(--line)">
+        <figcaption style="font:400 12px/1.5 'Space Mono',monospace;letter-spacing:.06em;color:var(--muted)"><span style="color:var(--pink)">FIG. 01</span> — EM-Dash, ResiliencePoint's predecessor</figcaption>
+      </figure>
+      <figure style="margin:clamp(12px,2vw,28px) 0 0;display:grid;gap:10px">
+        <img src="../images/work/hazadapt-resiliencepoint/early-information-architecture.png" alt="Early EM-Dash resilience data table and hazard guide click-through view" style="display:block;width:100%;height:auto;border:1px solid var(--line)">
+        <figcaption style="font:400 12px/1.5 'Space Mono',monospace;letter-spacing:.06em;color:var(--muted)"><span style="color:var(--pink)">FIG. 02</span> — Early information architecture</figcaption>
+      </figure>
     </section>
 
-    <section class="case-section">
-      <span class="section-index">03. Research</span>
-      <h2 class="case-section-title">Researching how emergency managers work</h2>
-      <div class="case-section-body">
-        <p>Our design decisions were grounded in conversations with people working in
-          emergency management and adjacent preparedness roles. We were looking at
-          more than whether someone could complete a task. We wanted to understand
-          how they thought about the information. Questions included:</p>
-        <ul>
-          <li>What information do you look for first?</li>
-          <li>How do you define the area you are responsible for?</li>
-          <li>When would you compare one location with another?</li>
-          <li>Which preparedness statistics are immediately useful?</li>
-          <li>How much information belongs on the dashboard before it becomes
-            overwhelming?</li>
-          <li>What terminology makes sense to someone working in emergency
-            management?</li>
-          <li>What needs to be exportable or shareable with someone else?</li>
-        </ul>
-        <p>Those conversations showed us that the product could not simply behave
-          like a traditional analytics dashboard. Emergency managers needed a way to
-          ask increasingly specific questions of the data.</p>
-      </div>
+    <section id="s03" aria-labelledby="s03-h" style="display:grid;gap:22px;padding:clamp(56px,7vw,110px) 0;border-top:1px solid var(--line);scroll-margin-top:24px">
+      <p style="margin:0;display:flex;align-items:baseline;gap:14px"><span style="font:900 40px/.8 'Big Shoulders Display',sans-serif;color:var(--pink)">03</span><span style="font:400 12px/1 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">Research</span></p>
+      <h2 id="s03-h" style="margin:0 0 8px;max-width:22ch;font:700 clamp(34px,4vw,60px)/1.02 'Source Sans 3',sans-serif;letter-spacing:-.025em;text-wrap:balance">Researching how emergency managers work</h2>
+      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">Our design decisions were grounded in conversations with people working in emergency management and adjacent preparedness roles. We were looking at more than whether someone could complete a task. We wanted to understand how they thought about the information. Questions included:</p>
+      <ul style="margin:0;padding:0;list-style:none;max-width:64ch;display:grid;border-top:1px solid var(--line);font:400 clamp(18px,1.3vw,20px)/1.45 'Source Sans 3',sans-serif">
+        <li style="display:flex;gap:16px;padding:12px 0;border-bottom:1px solid var(--line)"><span aria-hidden="true" style="font:700 13px/1.9 'Space Mono',monospace;color:var(--pink)">?</span>What information do you look for first?</li>
+        <li style="display:flex;gap:16px;padding:12px 0;border-bottom:1px solid var(--line)"><span aria-hidden="true" style="font:700 13px/1.9 'Space Mono',monospace;color:var(--pink)">?</span>How do you define the area you are responsible for?</li>
+        <li style="display:flex;gap:16px;padding:12px 0;border-bottom:1px solid var(--line)"><span aria-hidden="true" style="font:700 13px/1.9 'Space Mono',monospace;color:var(--pink)">?</span>When would you compare one location with another?</li>
+        <li style="display:flex;gap:16px;padding:12px 0;border-bottom:1px solid var(--line)"><span aria-hidden="true" style="font:700 13px/1.9 'Space Mono',monospace;color:var(--pink)">?</span>Which preparedness statistics are immediately useful?</li>
+        <li style="display:flex;gap:16px;padding:12px 0;border-bottom:1px solid var(--line)"><span aria-hidden="true" style="font:700 13px/1.9 'Space Mono',monospace;color:var(--pink)">?</span>How much information belongs on the dashboard before it becomes overwhelming?</li>
+        <li style="display:flex;gap:16px;padding:12px 0;border-bottom:1px solid var(--line)"><span aria-hidden="true" style="font:700 13px/1.9 'Space Mono',monospace;color:var(--pink)">?</span>What terminology makes sense to someone working in emergency management?</li>
+        <li style="display:flex;gap:16px;padding:12px 0;border-bottom:1px solid var(--line)"><span aria-hidden="true" style="font:700 13px/1.9 'Space Mono',monospace;color:var(--pink)">?</span>What needs to be exportable or shareable with someone else?</li>
+      </ul>
+      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">Those conversations showed us that the product could not simply behave like a traditional analytics dashboard. Emergency managers needed a way to ask increasingly specific questions of the data.</p>
     </section>
 
-    <section class="case-section">
-      <span class="section-index">04. Designing the Dashboard</span>
-      <h2 class="case-section-title">A useful overview, first</h2>
-      <div class="case-section-body">
-        <p>The dashboard was structured to provide high-level information first.
-          Quick statistics and trend cards gave users an immediate snapshot of
-          preparedness without requiring them to configure a complicated query.
-          Hazard information also needed a predictable default state, so the
-          interface surfaced the top ten hazards rather than loading users into an
-          enormous list without context.</p>
-        <p>Location was another major part of the experience. The product needed to
-          support multiple jurisdiction levels, including state, county, and ZIP
-          code. Map behavior changed depending on the type of jurisdiction being
-          viewed so users would enter the experience at a useful geographic scale
-          instead of manually correcting the zoom every time.</p>
-        <p>We also worked on navigation, including redesigning the side menu so
-          moving between major areas of the platform felt more deliberate and
-          understandable.</p>
-        <figure class="case-image">
-          <img src="../images/work/hazadapt-resiliencepoint/dashboard-screenshot.png" alt="ResiliencePoint dashboard: trending hazards, a nationwide usage map, and summary stats">
-          <figcaption>The ResiliencePoint dashboard</figcaption>
+    <section id="s04" aria-labelledby="s04-h" style="display:grid;gap:22px;padding:clamp(56px,7vw,110px) 0;border-top:1px solid var(--line);scroll-margin-top:24px">
+      <p style="margin:0;display:flex;align-items:baseline;gap:14px"><span style="font:900 40px/.8 'Big Shoulders Display',sans-serif;color:var(--pink)">04</span><span style="font:400 12px/1 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">Designing the Dashboard</span></p>
+      <h2 id="s04-h" style="margin:0 0 8px;max-width:22ch;font:700 clamp(34px,4vw,60px)/1.02 'Source Sans 3',sans-serif;letter-spacing:-.025em;text-wrap:balance">A useful overview, first</h2>
+      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">The dashboard was structured to provide high-level information first. Quick statistics and trend cards gave users an immediate snapshot of preparedness without requiring them to configure a complicated query. Hazard information also needed a predictable default state, so the interface surfaced the top ten hazards rather than loading users into an enormous list without context.</p>
+      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">Location was another major part of the experience. The product needed to support multiple jurisdiction levels, including state, county, and ZIP code. Map behavior changed depending on the type of jurisdiction being viewed so users would enter the experience at a useful geographic scale instead of manually correcting the zoom every time.</p>
+      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">We also worked on navigation, including redesigning the side menu so moving between major areas of the platform felt more deliberate and understandable.</p>
+      <figure style="margin:clamp(12px,2vw,28px) 0 0;display:grid;gap:10px">
+        <img src="../images/work/hazadapt-resiliencepoint/dashboard-screenshot.png" alt="ResiliencePoint dashboard: trending hazards, a nationwide usage map, and summary stats" style="display:block;width:100%;height:auto;border:1px solid var(--line)">
+        <figcaption style="font:400 12px/1.5 'Space Mono',monospace;letter-spacing:.06em;color:var(--muted)"><span style="color:var(--pink)">FIG. 03</span> — The ResiliencePoint dashboard</figcaption>
+      </figure>
+      <div style="display:flex;flex-wrap:wrap;gap:24px;align-items:flex-start">
+        <figure style="margin:0;flex:1 1 320px;min-width:0;display:grid;gap:10px">
+          <img src="../images/work/hazadapt-resiliencepoint/trend-cards.png" alt="Trend cards summarizing registered users, new users, prep checks completed, and emergency-item readiness" style="display:block;width:100%;height:auto;border:1px solid var(--line)">
+          <figcaption style="font:400 12px/1.5 'Space Mono',monospace;letter-spacing:.06em;color:var(--muted)"><span style="color:var(--pink)">FIG. 04</span> — Quick statistics / trend cards</figcaption>
         </figure>
-        <figure class="case-image">
-          <img src="../images/work/hazadapt-resiliencepoint/trend-cards.png" alt="Trend cards summarizing registered users, new users, prep checks completed, and emergency-item readiness">
-          <figcaption>Quick statistics / trend cards</figcaption>
-        </figure>
-        <figure class="case-image">
-          <img src="../images/work/hazadapt-resiliencepoint/jurisdiction-map.png" alt="Jurisdiction-level risk map with low/medium/high shading">
-          <figcaption>Jurisdiction map</figcaption>
+        <figure style="margin:0;flex:1 1 320px;min-width:0;display:grid;gap:10px">
+          <img src="../images/work/hazadapt-resiliencepoint/jurisdiction-map.png" alt="Jurisdiction-level risk map with low/medium/high shading" style="display:block;width:100%;height:auto;border:1px solid var(--line)">
+          <figcaption style="font:400 12px/1.5 'Space Mono',monospace;letter-spacing:.06em;color:var(--muted)"><span style="color:var(--pink)">FIG. 05</span> — Jurisdiction map</figcaption>
         </figure>
       </div>
     </section>
 
-    <section class="case-section">
-      <span class="section-index">05. The Problem We Found</span>
-      <h2 class="case-section-title">An interface inside the interface</h2>
-      <div class="case-section-body">
-        <p>As the product became more capable, the query controls grew with it.
-          Filtering was originally handled through controls that behaved more like
-          dashboard dropdowns. That approach worked while the number of options was
-          small. It did not scale.</p>
-        <p>Every new variable created another decision inside an increasingly
-          compressed part of the interface. Users needed to select geography,
-          hazards, and other criteria while still understanding the relationships
-          between those choices. The controls were becoming an interface inside the
-          interface.</p>
-        <p>Instead of making the data easier to explore, the dashboard was asking
-          people to mentally keep track of too many selections at once. That was the
-          point where the problem changed for us. We were not designing a better
-          dropdown anymore. We were designing a query-building experience.</p>
-        <figure class="case-image">
-          <img src="../images/work/hazadapt-resiliencepoint/dropdown-example.png" alt="Jurisdiction risk-level map produced by the original dropdown-driven filter controls">
-          <figcaption>Earlier dropdown/filter design</figcaption>
+    <section id="s05" aria-labelledby="s05-h" style="display:grid;gap:22px;padding:clamp(56px,7vw,110px) 0;border-top:1px solid var(--line);scroll-margin-top:24px">
+      <p style="margin:0;display:flex;align-items:baseline;gap:14px"><span style="font:900 40px/.8 'Big Shoulders Display',sans-serif;color:var(--pink)">05</span><span style="font:400 12px/1 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">The Problem We Found</span></p>
+      <h2 id="s05-h" style="margin:0 0 8px;max-width:22ch;font:700 clamp(34px,4vw,60px)/1.02 'Source Sans 3',sans-serif;letter-spacing:-.025em;text-wrap:balance">An interface inside the interface</h2>
+      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">As the product became more capable, the query controls grew with it. Filtering was originally handled through controls that behaved more like dashboard dropdowns. That approach worked while the number of options was small. It did not scale.</p>
+      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">Every new variable created another decision inside an increasingly compressed part of the interface. Users needed to select geography, hazards, and other criteria while still understanding the relationships between those choices. The controls were becoming an interface inside the interface.</p>
+      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">Instead of making the data easier to explore, the dashboard was asking people to mentally keep track of too many selections at once. That was the point where the problem changed for us. We were not designing a better dropdown anymore. We were designing a query-building experience.</p>
+      <figure style="margin:clamp(12px,2vw,28px) 0 0;display:grid;gap:10px">
+        <img src="../images/work/hazadapt-resiliencepoint/dropdown-example.png" alt="Jurisdiction risk-level map produced by the original dropdown-driven filter controls" style="display:block;width:100%;height:auto;border:1px solid var(--line)">
+        <figcaption style="font:400 12px/1.5 'Space Mono',monospace;letter-spacing:.06em;color:var(--muted)"><span style="color:var(--pink)">FIG. 06</span> — Earlier dropdown/filter design</figcaption>
+      </figure>
+    </section>
+
+    <section id="s06" aria-labelledby="s06-h" style="display:grid;gap:22px;padding:clamp(56px,7vw,110px) 0;border-top:1px solid var(--line);scroll-margin-top:24px">
+      <p style="margin:0;display:flex;align-items:baseline;gap:14px"><span style="font:900 40px/.8 'Big Shoulders Display',sans-serif;color:var(--pink)">06</span><span style="font:400 12px/1 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">The Pivot</span></p>
+      <h2 id="s06-h" style="margin:0 0 8px;max-width:22ch;font:700 clamp(34px,4vw,60px)/1.02 'Source Sans 3',sans-serif;letter-spacing:-.025em;text-wrap:balance">Giving queries their own space</h2>
+      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">The biggest redesign decision was moving query creation out of the compressed dashboard controls and into a full-page query experience. This gave each decision enough room to be understandable.</p>
+      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">Instead of opening several dropdowns and trying to remember what had been selected, users could progressively build a query. Selections were visible. Relationships between options were clearer. The interface could also support more complicated filtering without turning the dashboard into a wall of controls.</p>
+      <p style="margin:0;max-width:68ch;font:600 clamp(20px,1.6vw,24px)/1.45 'Source Sans 3',sans-serif;text-wrap:pretty">This changed the product from something that primarily displayed data into something that allowed emergency managers to actively investigate it.</p>
+      <figure style="margin:clamp(12px,2vw,28px) 0 0;display:grid;gap:10px">
+        <img src="../images/work/hazadapt-resiliencepoint/query-builder.png" alt="Full-page Prep Check Activity query builder with hazard, area, and date range controls" style="display:block;width:100%;height:auto;border:1px solid var(--line)">
+        <figcaption style="font:400 12px/1.5 'Space Mono',monospace;letter-spacing:.06em;color:var(--muted)"><span style="color:var(--pink)">FIG. 07</span> — The redesigned, full-page query builder</figcaption>
+      </figure>
+    </section>
+
+    <section id="s07" aria-labelledby="s07-h" style="display:grid;gap:22px;padding:clamp(56px,7vw,110px) 0;border-top:1px solid var(--line);scroll-margin-top:24px">
+      <p style="margin:0;display:flex;align-items:baseline;gap:14px"><span style="font:900 40px/.8 'Big Shoulders Display',sans-serif;color:var(--pink)">07</span><span style="font:400 12px/1 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">Designing for Real Questions</span></p>
+      <h2 id="s07-h" style="margin:0 0 8px;max-width:22ch;font:700 clamp(34px,4vw,60px)/1.02 'Source Sans 3',sans-serif;letter-spacing:-.025em;text-wrap:balance">What the query builder made possible</h2>
+      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">Once the query builder had enough room to grow, we were able to introduce features that made the analytics much more useful.</p>
+      <h3 style="margin:18px 0 0;font:800 clamp(26px,2.4vw,34px)/1 'Big Shoulders Display',sans-serif;text-transform:uppercase;letter-spacing:.01em">Resident vs. Visitor Segmentation</h3>
+      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">Preparedness does not necessarily look the same for someone who lives in a community and someone who is temporarily there. A resident may know local hazards, evacuation routes, emergency systems, and available resources. A visitor may know almost none of those things. Treating both groups as one population could hide those differences. Adding a resident/visitor toggle allowed emergency managers to investigate the preparedness experience of each group separately.</p>
+      <figure style="margin:clamp(12px,2vw,28px) 0 0;display:grid;gap:10px">
+        <img src="../images/work/hazadapt-resiliencepoint/residents-visitors-toggle.png" alt="Prep Check Usage by Area map with a Residents/Visitors toggle in the panel header" style="display:block;width:100%;height:auto;border:1px solid var(--line)">
+        <figcaption style="font:400 12px/1.5 'Space Mono',monospace;letter-spacing:.06em;color:var(--muted)"><span style="color:var(--pink)">FIG. 08</span> — Resident vs. visitor toggle</figcaption>
+      </figure>
+      <h3 style="margin:18px 0 0;font:800 clamp(26px,2.4vw,34px)/1 'Big Shoulders Display',sans-serif;text-transform:uppercase;letter-spacing:.01em">Multi-Select Geography</h3>
+      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">Emergency-management work rarely fits neatly into one geographic boundary. We introduced multi-selection across state, county, and ZIP-level information so users could create queries that better reflected the areas they were actually trying to understand.</p>
+      <h3 style="margin:18px 0 0;font:800 clamp(26px,2.4vw,34px)/1 'Big Shoulders Display',sans-serif;text-transform:uppercase;letter-spacing:.01em">Local Safety Information Presence</h3>
+      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">ResiliencePoint also connects conceptually with HazAdapt's Local Safety Information product, or <a href="hazadapt-loco.html" style="color:var(--pink)">LoCo</a>. We added the ability to investigate whether Local Safety Information was present for a given area, creating another way to understand the relationship between preparedness resources and preparedness behavior.</p>
+      <h3 style="margin:18px 0 0;font:800 clamp(26px,2.4vw,34px)/1 'Big Shoulders Display',sans-serif;text-transform:uppercase;letter-spacing:.01em">Location Buffering</h3>
+      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">People do not always interact with geographic boundaries as neatly as software does. To reduce problems around people located near a jurisdiction boundary, we incorporated a roughly 400 to 500 foot geographic buffer into relevant location queries. This helped prevent the system from treating someone standing just outside an administrative boundary as if they were completely disconnected from the nearby community.</p>
+    </section>
+
+    <section id="s08" aria-labelledby="s08-h" style="display:grid;gap:22px;padding:clamp(56px,7vw,110px) 0;border-top:1px solid var(--line);scroll-margin-top:24px">
+      <p style="margin:0;display:flex;align-items:baseline;gap:14px"><span style="font:900 40px/.8 'Big Shoulders Display',sans-serif;color:var(--pink)">08</span><span style="font:400 12px/1 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">Results, Export &amp; Sharing</span></p>
+      <h2 id="s08-h" style="margin:0 0 8px;max-width:22ch;font:700 clamp(34px,4vw,60px)/1.02 'Source Sans 3',sans-serif;letter-spacing:-.025em;text-wrap:balance">Making the results understandable and portable</h2>
+      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">Giving users access to more data only helps if the results remain understandable. Trend cards helped surface changes without requiring users to interpret raw tables. Charts allowed patterns to be compared visually. Plain-language summaries provided another layer of interpretation so the interface did not assume every user wanted to analyze a chart from scratch. Users could also return to previous searches through query history, reducing the amount of repeated configuration required.</p>
+      <figure style="margin:clamp(12px,2vw,28px) 0 0;display:grid;gap:10px">
+        <img src="../images/work/hazadapt-resiliencepoint/query-results.png" alt="Hazard Guide Activity results page for a Bleeding query, with a usage map and per-phase charts" style="display:block;width:100%;height:auto;border:1px solid var(--line)">
+        <figcaption style="font:400 12px/1.5 'Space Mono',monospace;letter-spacing:.06em;color:var(--muted)"><span style="color:var(--pink)">FIG. 09</span> — Results page</figcaption>
+      </figure>
+      <div style="display:flex;flex-wrap:wrap;gap:24px;align-items:flex-start">
+        <figure style="margin:0;flex:1 1 320px;min-width:0;display:grid;gap:10px">
+          <img src="../images/work/hazadapt-resiliencepoint/plain-language-summaries.png" alt="Two insight cards with plain-language summaries explaining what each chart shows" style="display:block;width:100%;height:auto;border:1px solid var(--line)">
+          <figcaption style="font:400 12px/1.5 'Space Mono',monospace;letter-spacing:.06em;color:var(--muted)"><span style="color:var(--pink)">FIG. 10</span> — Plain-language summaries</figcaption>
+        </figure>
+        <figure style="margin:0;flex:1 1 320px;min-width:0;display:grid;gap:10px">
+          <img src="../images/work/hazadapt-resiliencepoint/saved-queries.png" alt="Saved Queries list showing past searches with date last used and quick actions" style="display:block;width:100%;height:auto;border:1px solid var(--line)">
+          <figcaption style="font:400 12px/1.5 'Space Mono',monospace;letter-spacing:.06em;color:var(--muted)"><span style="color:var(--pink)">FIG. 11</span> — Query history</figcaption>
         </figure>
       </div>
+      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">Emergency-management tools rarely exist in isolation. Information may need to move into a report, presentation, planning document, or conversation with another department. We therefore designed export functionality that allowed visualizations and information to be exported as PNG or PDF. Saving and sharing behavior was also explored as the query system matured. The goal was to make ResiliencePoint useful beyond the moment someone was sitting inside the application.</p>
     </section>
 
-    <section class="case-section">
-      <span class="section-index">06. The Pivot</span>
-      <h2 class="case-section-title">Giving queries their own space</h2>
-      <div class="case-section-body">
-        <p>The biggest redesign decision was moving query creation out of the
-          compressed dashboard controls and into a full-page query experience. This
-          gave each decision enough room to be understandable.</p>
-        <p>Instead of opening several dropdowns and trying to remember what had been
-          selected, users could progressively build a query. Selections were visible.
-          Relationships between options were clearer. The interface could also
-          support more complicated filtering without turning the dashboard into a
-          wall of controls.</p>
-        <p>This changed the product from something that primarily displayed data into
-          something that allowed emergency managers to actively investigate it.</p>
-        <figure class="case-image">
-          <img src="../images/work/hazadapt-resiliencepoint/query-builder.png" alt="Full-page Prep Check Activity query builder with hazard, area, and date range controls">
-          <figcaption>The redesigned, full-page query builder</figcaption>
-        </figure>
-      </div>
+    <section id="s09" aria-labelledby="s09-h" style="display:grid;gap:22px;padding:clamp(56px,7vw,110px) 0;border-top:1px solid var(--line);scroll-margin-top:24px">
+      <p style="margin:0;display:flex;align-items:baseline;gap:14px"><span style="font:900 40px/.8 'Big Shoulders Display',sans-serif;color:var(--pink)">09</span><span style="font:400 12px/1 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">Accessibility &amp; Inclusive Design</span></p>
+      <h2 id="s09-h" style="margin:0 0 8px;max-width:22ch;font:700 clamp(34px,4vw,60px)/1.02 'Source Sans 3',sans-serif;letter-spacing:-.025em;text-wrap:balance">Beyond WCAG compliance</h2>
+      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">Accessibility was part of the product process rather than something added at the end. I used tools and methods including accessibility reviews, WAVE testing, and GenderMag sessions to identify barriers that were not obvious from visual inspection alone. Across our work, GenderMag sessions surfaced four inclusivity showstoppers that could have prevented or seriously disrupted task completion for some users.</p>
+      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">Those findings influenced interaction patterns, instructions, hierarchy, and how much knowledge the interface expected someone to already have. The goal was not simply WCAG compliance. Emergency-preparedness technology needs to work for people with different levels of technical confidence, domain knowledge, and familiarity with the product.</p>
     </section>
 
-    <section class="case-section">
-      <span class="section-index">07. Designing for Real Questions</span>
-      <h2 class="case-section-title">What the query builder made possible</h2>
-      <div class="case-section-body">
-        <p>Once the query builder had enough room to grow, we were able to introduce
-          features that made the analytics much more useful.</p>
-
-        <h3>Resident vs. Visitor Segmentation</h3>
-        <p>Preparedness does not necessarily look the same for someone who lives in a
-          community and someone who is temporarily there. A resident may know local
-          hazards, evacuation routes, emergency systems, and available resources. A
-          visitor may know almost none of those things. Treating both groups as one
-          population could hide those differences. Adding a resident/visitor toggle
-          allowed emergency managers to investigate the preparedness experience of
-          each group separately.</p>
-        <figure class="case-image">
-          <img src="../images/work/hazadapt-resiliencepoint/residents-visitors-toggle.png" alt="Prep Check Usage by Area map with a Residents/Visitors toggle in the panel header">
-          <figcaption>Resident vs. visitor toggle</figcaption>
-        </figure>
-
-        <h3>Multi-Select Geography</h3>
-        <p>Emergency-management work rarely fits neatly into one geographic boundary.
-          We introduced multi-selection across state, county, and ZIP-level
-          information so users could create queries that better reflected the areas
-          they were actually trying to understand.</p>
-
-        <h3>Local Safety Information Presence</h3>
-        <p>ResiliencePoint also connects conceptually with HazAdapt's Local Safety
-          Information product, or LoCo. We added the ability to investigate whether
-          Local Safety Information was present for a given area, creating another
-          way to understand the relationship between preparedness resources and
-          preparedness behavior.</p>
-
-        <h3>Location Buffering</h3>
-        <p>People do not always interact with geographic boundaries as neatly as
-          software does. To reduce problems around people located near a
-          jurisdiction boundary, we incorporated a roughly 400 to 500 foot geographic
-          buffer into relevant location queries. This helped prevent the system from
-          treating someone standing just outside an administrative boundary as if
-          they were completely disconnected from the nearby community.</p>
-      </div>
+    <section id="s10" aria-labelledby="s10-h" style="display:grid;gap:22px;padding:clamp(56px,7vw,110px) 0;border-top:1px solid var(--line);scroll-margin-top:24px">
+      <p style="margin:0;display:flex;align-items:baseline;gap:14px"><span style="font:900 40px/.8 'Big Shoulders Display',sans-serif;color:var(--pink)">10</span><span style="font:400 12px/1 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">Building for Development</span></p>
+      <h2 id="s10-h" style="margin:0 0 8px;max-width:22ch;font:700 clamp(34px,4vw,60px)/1.02 'Source Sans 3',sans-serif;letter-spacing:-.025em;text-wrap:balance">Where design work meets engineering</h2>
+      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">My role continued after the design files were complete. I maintained components and design-system patterns in Figma and used Dev Mode to make implementation details easier for developers to inspect. I also worked directly with engineering during implementation, including:</p>
+      <ul style="margin:0;padding-left:1.2em;max-width:64ch;display:grid;gap:8px;font:400 clamp(18px,1.3vw,20px)/1.55 'Source Sans 3',sans-serif">
+        <li>Reviewing implemented designs</li>
+        <li>Testing product behavior</li>
+        <li>Writing acceptance tests</li>
+        <li>Identifying visual and interaction inconsistencies</li>
+        <li>Clarifying intended component behavior</li>
+        <li>Helping resolve gaps between the design and the production build</li>
+      </ul>
+      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">Our stack and product ecosystem included technologies such as Mapbox, Chart.js, Ionic, and Stripe. Subscription and seat-management functionality also became part of the platform as ResiliencePoint moved toward a sustainable product model.</p>
     </section>
 
-    <section class="case-section">
-      <span class="section-index">08. Results, Export &amp; Sharing</span>
-      <h2 class="case-section-title">Making the results understandable and portable</h2>
-      <div class="case-section-body">
-        <p>Giving users access to more data only helps if the results remain
-          understandable. Trend cards helped surface changes without requiring users
-          to interpret raw tables. Charts allowed patterns to be compared visually.
-          Plain-language summaries provided another layer of interpretation so the
-          interface did not assume every user wanted to analyze a chart from
-          scratch. Users could also return to previous searches through query
-          history, reducing the amount of repeated configuration required.</p>
-        <figure class="case-image">
-          <img src="../images/work/hazadapt-resiliencepoint/query-results.png" alt="Hazard Guide Activity results page for a Bleeding query, with a usage map and per-phase charts">
-          <figcaption>Results page</figcaption>
-        </figure>
-        <figure class="case-image">
-          <img src="../images/work/hazadapt-resiliencepoint/plain-language-summaries.png" alt="Two insight cards with plain-language summaries explaining what each chart shows">
-          <figcaption>Plain-language summaries</figcaption>
-        </figure>
-        <figure class="case-image">
-          <img src="../images/work/hazadapt-resiliencepoint/saved-queries.png" alt="Saved Queries list showing past searches with date last used and quick actions">
-          <figcaption>Query history</figcaption>
-        </figure>
-        <p>Emergency-management tools rarely exist in isolation. Information may need
-          to move into a report, presentation, planning document, or conversation
-          with another department. We therefore designed export functionality that
-          allowed visualizations and information to be exported as PNG or PDF.
-          Saving and sharing behavior was also explored as the query system matured.
-          The goal was to make ResiliencePoint useful beyond the moment someone was
-          sitting inside the application.</p>
-      </div>
+    <section id="s11" aria-labelledby="s11-h" style="display:grid;gap:22px;padding:clamp(56px,7vw,110px) 0;border-top:1px solid var(--line);scroll-margin-top:24px">
+      <p style="margin:0;display:flex;align-items:baseline;gap:14px"><span style="font:900 40px/.8 'Big Shoulders Display',sans-serif;color:var(--pink)">11</span><span style="font:400 12px/1 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">From Prototype to Production</span></p>
+      <h2 id="s11-h" style="margin:0 0 8px;max-width:22ch;font:700 clamp(34px,4vw,60px)/1.02 'Source Sans 3',sans-serif;letter-spacing:-.025em;text-wrap:balance">Into real use</h2>
+      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">The ResiliencePoint MVP moved through acceptance testing between approximately May and August 2024. Seeing the product move into real use changed the nature of the design work. We were no longer asking whether the concept made sense in a prototype. We were looking at what happened when actual information, actual jurisdictions, and actual workflows entered the system.</p>
+      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">ResiliencePoint ultimately reached production use with organizations including El Segundo, California and Oregon State University.</p>
     </section>
 
-    <section class="case-section">
-      <span class="section-index">09. Accessibility &amp; Inclusive Design</span>
-      <h2 class="case-section-title">Beyond WCAG compliance</h2>
-      <div class="case-section-body">
-        <p>Accessibility was part of the product process rather than something added
-          at the end. I used tools and methods including accessibility reviews, WAVE
-          testing, and GenderMag sessions to identify barriers that were not obvious
-          from visual inspection alone. Across our work, GenderMag sessions surfaced
-          four inclusivity showstoppers that could have prevented or seriously
-          disrupted task completion for some users.</p>
-        <p>Those findings influenced interaction patterns, instructions, hierarchy,
-          and how much knowledge the interface expected someone to already have. The
-          goal was not simply WCAG compliance. Emergency-preparedness technology
-          needs to work for people with different levels of technical confidence,
-          domain knowledge, and familiarity with the product.</p>
-      </div>
-    </section>
-
-    <section class="case-section">
-      <span class="section-index">10. Building for Development</span>
-      <h2 class="case-section-title">Where design work meets engineering</h2>
-      <div class="case-section-body">
-        <p>My role continued after the design files were complete. I maintained
-          components and design-system patterns in Figma and used Dev Mode to make
-          implementation details easier for developers to inspect. I also worked
-          directly with engineering during implementation, including:</p>
-        <ul>
-          <li>Reviewing implemented designs</li>
-          <li>Testing product behavior</li>
-          <li>Writing acceptance tests</li>
-          <li>Identifying visual and interaction inconsistencies</li>
-          <li>Clarifying intended component behavior</li>
-          <li>Helping resolve gaps between the design and the production build</li>
-        </ul>
-        <p>Our stack and product ecosystem included technologies such as Mapbox,
-          Chart.js, Ionic, and Stripe. Subscription and seat-management functionality
-          also became part of the platform as ResiliencePoint moved toward a
-          sustainable product model.</p>
-      </div>
-    </section>
-
-    <section class="case-section">
-      <span class="section-index">11. From Prototype to Production</span>
-      <h2 class="case-section-title">Into real use</h2>
-      <div class="case-section-body">
-        <p>The ResiliencePoint MVP moved through acceptance testing between
-          approximately May and August 2024. Seeing the product move into real use
-          changed the nature of the design work. We were no longer asking whether
-          the concept made sense in a prototype. We were looking at what happened
-          when actual information, actual jurisdictions, and actual workflows
-          entered the system.</p>
-        <p>ResiliencePoint ultimately reached production use with organizations
-          including El Segundo, California and Oregon State University.</p>
-      </div>
-    </section>
-
-    <section class="case-section">
-      <span class="section-index">12. What I Learned</span>
-      <h2 class="case-section-title case-section-title--voice">When the structure stops fitting the job</h2>
-      <div class="case-section-body">
-        <p>The biggest lesson from ResiliencePoint was that adding features is
-          sometimes a signal that the interaction model itself needs to change. The
-          dropdown approach was not inherently bad. It simply stopped matching the
-          complexity of the product. Trying to force more functionality into the
-          same pattern would have made the experience progressively harder to
-          understand.</p>
-        <p>Moving query building into its own experience gave the product somewhere
-          to grow. It also reinforced something that has become a major part of how
-          I approach design: when an interface keeps getting harder every time you
-          add something, the problem may not be the new feature. The structure
-          underneath it may no longer fit the job.</p>
-      </div>
+    <section id="s12" aria-labelledby="s12-h" style="display:grid;gap:22px;padding:clamp(56px,7vw,110px) 0;border-top:2px solid var(--ink);scroll-margin-top:24px">
+      <p style="margin:0;display:flex;align-items:baseline;gap:14px"><span style="font:900 40px/.8 'Big Shoulders Display',sans-serif;color:var(--pink)">12</span><span style="font:400 12px/1 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">What I Learned</span></p>
+      <h2 id="s12-h" style="margin:0 0 8px;max-width:18ch;font:400 clamp(52px,7vw,110px)/.86 'Grenze Gotisch',serif;color:var(--red);text-wrap:balance">When the structure stops fitting the job</h2>
+      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">The biggest lesson from ResiliencePoint was that adding features is sometimes a signal that the interaction model itself needs to change. The dropdown approach was not inherently bad. It simply stopped matching the complexity of the product. Trying to force more functionality into the same pattern would have made the experience progressively harder to understand.</p>
+      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">Moving query building into its own experience gave the product somewhere to grow. It also reinforced something that has become a major part of how I approach design: when an interface keeps getting harder every time you add something, the problem may not be the new feature. The structure underneath it may no longer fit the job.</p>
     </section>
   </main>
+</div>
 
-  <nav class="case-nav" aria-label="More case studies">
-    <a href="welldone-monitoring.html" class="case-nav-prev">
-      <span class="case-nav-label">← Previous</span>
-      <span class="case-nav-title">WellDone</span>
-    </a>
-    <a href="hazadapt-prep-checks.html" class="case-nav-next">
-      <span class="case-nav-label">Next →</span>
-      <span class="case-nav-title">Prep Checks</span>
-    </a>
-  </nav>
-  <footer class="site-footer">
-    <p class="footer-path">~/krystyna-ewing · &copy; <span id="year"></span></p>
-    <p class="footer-clock" aria-hidden="true"><span id="clock"></span> local</p>
-    <a href="../index.html#top" class="back-to-top">[ ^ top ]</a>
-  </footer>
+<nav aria-label="More case studies" style="display:flex;flex-wrap:wrap;border-top:2px solid var(--ink);border-bottom:1px solid var(--line)">
+  <a href="welldone-monitoring.html" style="flex:1 1 320px;display:grid;gap:10px;padding:clamp(36px,5vw,72px) clamp(16px,5vw,80px);text-decoration:none;border-right:1px solid var(--line)" style-hover="background:var(--ink);color:var(--bg)">
+    <span style="font:700 12px/1 'Space Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--pink)">← Previous</span>
+    <span style="font:900 clamp(52px,7vw,120px)/.82 'Big Shoulders Display',sans-serif;text-transform:uppercase">WellDone</span>
+  </a>
+  <a href="hazadapt-prep-checks.html" style="flex:1 1 320px;display:grid;gap:10px;justify-items:end;text-align:right;padding:clamp(36px,5vw,72px) clamp(16px,5vw,80px);text-decoration:none" style-hover="background:var(--ink);color:var(--bg)">
+    <span style="font:700 12px/1 'Space Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--pink)">Next →</span>
+    <span style="font:400 clamp(60px,8vw,130px)/.8 'Grenze Gotisch',serif">Prep Checks</span>
+  </a>
+</nav>
 
-  <script src="../js/main.js"></script>
+<footer style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:16px;padding:32px clamp(16px,5vw,80px) 110px;font:400 12px/1.6 'Space Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)">
+  <span>~/krystyna-ewing · © 2026</span>
+  <a href="mailto:hello@krystynaewing.com" style="color:var(--ink)">hello@krystynaewing.com</a>
+  <a href="#main" style="min-height:44px;display:inline-flex;align-items:center">[ ^ top ]</a>
+</footer>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;defaultTheme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;dark&quot;,&quot;light&quot;],&quot;default&quot;:&quot;dark&quot;,&quot;tsType&quot;:&quot;'dark'|'light'&quot;,&quot;section&quot;:&quot;Look&quot;},&quot;grain&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Look&quot;}}">
+class Component extends DCLogic {
+  state = { theme: this.props.defaultTheme ?? 'dark', active: 's01' };
+  applyRoot() {
+    const r = document.documentElement;
+    r.dataset.theme = this.state.theme;
+    r.dataset.grain = (this.props.grain ?? true) ? 'on' : 'off';
+  }
+  componentDidMount() {
+    this.applyRoot();
+    this.io = new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecting) this.setState({ active: en.target.id }); }), { rootMargin: '-40% 0px -55% 0px' });
+    for (let i = 1; i <= 12; i++) { const el = document.getElementById('s' + String(i).padStart(2, '0')); if (el) this.io.observe(el); }
+  }
+  componentDidUpdate(pp) {
+    if (pp.defaultTheme !== this.props.defaultTheme && this.props.defaultTheme) this.setState({ theme: this.props.defaultTheme }, () => this.applyRoot());
+    else this.applyRoot();
+  }
+  componentWillUnmount() { if (this.io) this.io.disconnect(); }
+  renderVals() {
+    const light = this.state.theme === 'light', mk = {};
+    for (let i = 1; i <= 12; i++) { const id = 's' + String(i).padStart(2, '0'); mk[id] = this.state.active === id ? '■' : '□'; }
+    return {
+      tocOpen: this.state.tocOpen !== false, tocClosed: this.state.tocOpen === false, tocExpanded: this.state.tocOpen !== false ? 'true' : 'false',
+      tocIcon: '− Hide',
+      toggleToc: () => this.setState(s => ({ tocOpen: s.tocOpen === false })),
+      mk, themeLabel: light ? 'Dark' : 'Light', lightPressed: light ? 'true' : 'false',
+      toggleTheme: () => this.setState(s => ({ theme: s.theme === 'light' ? 'dark' : 'light' }), () => this.applyRoot())
+    };
+  }
+}
+</script>
 </body>
 </html>

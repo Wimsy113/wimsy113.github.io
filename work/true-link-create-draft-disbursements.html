@@ -1,204 +1,208 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Create Draft Disbursements — True Link — Krystyna Ewing</title>
-  <meta name="description" content="Create Draft Disbursements — reducing repetitive work in a complex financial workflow.">
-
-  <link rel="icon" href="../images/favicon.ico">
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Grenze+Gotisch:wght@400;600&family=Source+Sans+3:wght@400;500;600;700&family=Space+Mono&display=swap" rel="stylesheet">
-
-  <link rel="stylesheet" href="../styles.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="../support.js"></script>
 </head>
 <body>
+<x-dc>
+<helmet>
+<link rel="icon" href="../images/favicon.ico">
+<title>Create Draft Disbursements — True Link — Krystyna Ewing</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Create Draft Disbursements — reducing repetitive work in a complex financial workflow.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800;900&family=Grenze+Gotisch:wght@400;600&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<script src="../image-slot.js"></script>
+<style>
+html{--bg:#0d0c0c;--ink:#ece6dc;--muted:#aaa69f;--metal:#8d8a85;--ghost:#1f1d1c;--line:#34322f;--red:oklch(0.6 0.2 27);--on-red:#0d0c0c;--pink:#f45b8e;--grain:.1;background:var(--bg);color:var(--ink);scroll-behavior:smooth}
+html[data-theme="light"]{--bg:#e8e2d7;--ink:#151312;--muted:#4c4945;--metal:#6c6964;--ghost:#d8d1c4;--line:#b9b1a3;--red:oklch(0.5 0.2 27);--on-red:#fff;--pink:#b8154f;--grain:.07}
+html[data-grain="off"]{--grain:0}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Source Sans 3",system-ui,sans-serif;-webkit-font-smoothing:antialiased;transition:background-color .35s,color .35s;overflow-x:hidden}
+body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:300;opacity:var(--grain);mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E")}
+a{color:inherit;text-decoration-thickness:1px;text-underline-offset:.22em}
+a:hover{color:var(--red)}
+:focus-visible{outline:3px solid var(--pink);outline-offset:4px}
+::selection{background:var(--pink);color:#0d0c0c}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+</style>
+</helmet>
 
-  <a class="skip-link" href="#main">Skip to content</a>
-  <header class="site-header">
-    <div class="header-inner">
-      <a class="brand" href="../index.html" aria-label="Krystyna Ewing — home">
-        <span class="brand-mascot duotone" aria-hidden="true">
-          <img src="../images/hero.png" alt="">
-        </span>
-        <span class="brand-name">Krystyna Ewing</span>
-      </a>
+<a href="#main" style="position:fixed;left:16px;top:-80px;z-index:400;background:var(--pink);color:#0d0c0c;padding:12px 18px;font:700 14px/1 'Space Mono',monospace;text-decoration:none" style-focus="top:16px">Skip to content</a>
 
-      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="primaryNav">
-        <span class="nav-toggle-bar"></span>
-        <span class="nav-toggle-bar"></span>
-        <span class="nav-toggle-bar"></span>
-        <span class="sr-only">Menu</span>
-      </button>
+<nav aria-label="Primary" style="position:fixed;left:0;right:0;bottom:0;z-index:150;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:4px 20px;padding:4px clamp(12px,2.4vw,32px);background:var(--bg);border-top:1px solid var(--ink);font:700 12px/1 'Space Mono',monospace;letter-spacing:.06em;text-transform:uppercase">
+  <a href="../index.html" aria-label="Krystyna Ewing, home" style="font:400 26px/1 'Grenze Gotisch',serif;letter-spacing:0;text-transform:none;text-decoration:none;min-height:44px;display:flex;align-items:center">K. Ewing</a>
+  <div style="display:flex;flex-wrap:wrap;gap:0 clamp(12px,2.4vw,30px)">
+    <a href="../index.html#work" style="text-decoration:none;min-height:44px;display:flex;align-items:center;gap:8px"><span aria-hidden="true" style="color:var(--red)">■</span>Work</a>
+    <a href="../index.html#workbench" style="text-decoration:none;min-height:44px;display:flex;align-items:center;gap:8px"><span aria-hidden="true" style="color:var(--red)">□</span>Workbench</a>
+    <a href="../index.html#about" style="text-decoration:none;min-height:44px;display:flex;align-items:center;gap:8px"><span aria-hidden="true" style="color:var(--red)">□</span>About</a>
+    <a href="../index.html#contact" style="text-decoration:none;min-height:44px;display:flex;align-items:center;gap:8px"><span aria-hidden="true" style="color:var(--red)">□</span>Contact</a>
+  </div>
+  <button type="button" onClick="{{ toggleTheme }}" aria-pressed="{{ lightPressed }}" style="font:inherit;letter-spacing:inherit;text-transform:inherit;color:var(--bg);background:var(--ink);border:1px solid var(--ink);padding:0 12px;min-height:40px;cursor:pointer" style-hover="background:var(--red);border-color:var(--red)">{{ themeLabel }}</button>
+</nav>
 
-      <nav class="primary-nav" id="primaryNav" aria-label="Primary">
-        <ul>
-          <li><a href="../index.html#work">Work</a></li>
-          <li><a href="../index.html#about">About</a></li>
-          <li><a href="../index.html#art">Art</a></li>
-          <li><a href="../index.html#contact" class="nav-cta">Contact</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
-
-  <p class="breadcrumb"><a href="../index.html">~</a> / <a href="true-link.html">work/true-link</a> / <span class="current">create-draft-disbursements</span></p>
-
-  <main id="main">
-    <div class="case-hero">
-      <div class="case-hero-cover case-hero-cover--text">
-        <span>Create Draft Disbursements</span>
-      </div>
-
-      <p class="tag-row">True Link · Trust Team · Workflow Design · Financial Operations</p>
-      <h1 class="case-title">Create Draft Disbursements</h1>
-      <p class="case-summary">Reducing repetitive work in a complex financial workflow, separating useful friction from repetitive friction.</p>
-
-      <dl class="case-meta">
-        <div><dt>Role</dt><dd>UX Designer</dd></div>
-        <div><dt>Team</dt><dd>Trust</dd></div>
-        <div><dt>Timeline</dt><dd>March to May 2020</dd></div>
-        <div><dt>Focus</dt><dd>UX Research, Workflow Design, Financial Operations, Prototyping</dd></div>
+<header style="padding:clamp(28px,4vw,48px) clamp(16px,5vw,80px) clamp(56px,7vw,100px);border-bottom:2px solid var(--ink);position:relative;overflow:hidden">
+  <p style="margin:0 0 clamp(40px,6vw,80px);font:400 12px/1 'Space Mono',monospace;letter-spacing:.08em;color:var(--muted)"><a href="../index.html">~</a> / <span style="color:var(--ink)">create-draft-disbursements</span></p>
+  <p style="margin:0 0 14px;font:400 12px/1.6 'Space Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--pink)">True Link · Trust Team · Workflow Design · Financial Operations</p>
+  <h1 style="margin:0;font:900 clamp(56px,8vw,220px)/.82 'Big Shoulders Display',sans-serif;text-transform:uppercase;letter-spacing:-.015em;overflow-wrap:anywhere;text-wrap:balance">Create Draft Disbursements</h1>
+  <div style="display:flex;flex-wrap:wrap;gap:40px 64px;margin-top:clamp(32px,4vw,56px);align-items:flex-start">
+    <div style="flex:1 1 420px;min-width:0;display:grid;gap:28px">
+      <p style="margin:0;max-width:34ch;font:600 clamp(22px,2.2vw,32px)/1.25 'Source Sans 3',sans-serif;text-wrap:pretty">Reducing repetitive work in a complex financial workflow, separating useful friction from repetitive friction.</p>
+      <dl style="margin:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,180px),1fr));gap:18px 28px;padding-top:20px;border-top:1px solid var(--line)">
+        <div style="display:grid;gap:4px"><dt style="font:400 11px/1.3 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">Role</dt><dd style="margin:0;font:600 17px/1.35 'Source Sans 3',sans-serif">UX Designer</dd></div>
+        <div style="display:grid;gap:4px"><dt style="font:400 11px/1.3 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">Team</dt><dd style="margin:0;font:600 17px/1.35 'Source Sans 3',sans-serif">Trust</dd></div>
+        <div style="display:grid;gap:4px"><dt style="font:400 11px/1.3 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">Timeline</dt><dd style="margin:0;font:600 17px/1.35 'Source Sans 3',sans-serif">March to May 2020</dd></div>
+        <div style="display:grid;gap:4px;grid-column:1 / -1"><dt style="font:400 11px/1.3 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">Focus</dt><dd style="margin:0;font:600 17px/1.35 'Source Sans 3',sans-serif">UX Research, Workflow Design, Financial Operations, Prototyping</dd></div>
       </dl>
+      
+      
     </div>
+    <div aria-hidden="true" style="flex:1 1 360px;min-width:0;max-width:640px;aspect-ratio:16/10;display:flex;align-items:center;justify-content:center;background:var(--ink);color:var(--bg);transform:rotate(1.5deg);box-shadow:14px 14px 0 var(--red);overflow:hidden"><span style="font:400 clamp(60px,9vw,150px)/.8 'Grenze Gotisch',serif;padding:0 .2em;text-align:center">Create Draft Disbursements</span></div>
+  </div>
+</header>
 
-    <section class="case-section">
-      <span class="section-index">01. Overview</span>
-      <h2 class="case-section-title">Overview</h2>
-      <div class="case-section-body">
-        <p>Trust administrators manage financial responsibilities for
-          beneficiaries, often across pooled trusts and other complicated account
-          structures. A large part of that work involves disbursements. The
-          process has to be accurate because administrators are working with real
-          people's money. But accuracy does not mean the workflow should require
-          unnecessary repetition.</p>
-        <p>Create Draft Disbursements focused on making it easier for trust
-          administrators to prepare disbursement information while maintaining
-          control over the final financial action.</p>
-      </div>
+<div style="display:flex;flex-wrap:wrap;gap:0 clamp(32px,5vw,80px);padding:0 clamp(16px,5vw,80px)">
+  <sc-if value="{{ tocOpen }}" hint-placeholder-val="{{ true }}">
+  <aside aria-label="Case study contents" style="flex:0 1 230px;min-width:0;padding-top:clamp(56px,7vw,110px)">
+    <nav aria-label="Sections" style="position:sticky;top:28px">
+      <button type="button" onClick="{{ toggleToc }}" aria-expanded="{{ tocExpanded }}" aria-controls="toc-list" style="display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;min-height:44px;margin:0 0 10px;padding:0 0 6px;background:transparent;border:0;border-bottom:1px solid var(--line);color:var(--metal);cursor:pointer;text-align:left" style-hover="color:var(--ink)">
+        <span style="font:400 30px/1 'Grenze Gotisch',serif">contents</span>
+        <span aria-hidden="true" style="font:700 12px/1 'Space Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--pink)">{{ tocIcon }}</span>
+      </button>
+      <ol id="toc-list" style="list-style:none;margin:0;padding:0;display:grid;font:400 12px/1.35 'Space Mono',monospace;letter-spacing:.04em">
+        <li><a href="#s01" style="display:flex;gap:10px;padding:7px 0;text-decoration:none"><span aria-hidden="true" style="color:var(--red)">{{ mk.s01 }}</span>01 Overview</a></li>
+        <li><a href="#s02" style="display:flex;gap:10px;padding:7px 0;text-decoration:none"><span aria-hidden="true" style="color:var(--red)">{{ mk.s02 }}</span>02 Understanding the Workflow</a></li>
+        <li><a href="#s03" style="display:flex;gap:10px;padding:7px 0;text-decoration:none"><span aria-hidden="true" style="color:var(--red)">{{ mk.s03 }}</span>03 The Opportunity</a></li>
+        <li><a href="#s04" style="display:flex;gap:10px;padding:7px 0;text-decoration:none"><span aria-hidden="true" style="color:var(--red)">{{ mk.s04 }}</span>04 Designing the Draft Workflow</a></li>
+        <li><a href="#s05" style="display:flex;gap:10px;padding:7px 0;text-decoration:none"><span aria-hidden="true" style="color:var(--red)">{{ mk.s05 }}</span>05 Designing for Pooled Trust Administration</a></li>
+        <li><a href="#s06" style="display:flex;gap:10px;padding:7px 0;text-decoration:none"><span aria-hidden="true" style="color:var(--red)">{{ mk.s06 }}</span>06 Research &amp; Collaboration</a></li>
+        <li><a href="#s07" style="display:flex;gap:10px;padding:7px 0;text-decoration:none"><span aria-hidden="true" style="color:var(--red)">{{ mk.s07 }}</span>07 Balancing Speed With Safety</a></li>
+        <li><a href="#s08" style="display:flex;gap:10px;padding:7px 0;text-decoration:none"><span aria-hidden="true" style="color:var(--red)">{{ mk.s08 }}</span>08 What I Learned</a></li>
+      </ol>
+    </nav>
+  </aside>
+  </sc-if>
+  <sc-if value="{{ tocClosed }}" hint-placeholder-val="{{ false }}">
+    <button type="button" onClick="{{ toggleToc }}" aria-expanded="false" aria-controls="toc-list" aria-label="Show contents" style="position:fixed;left:0;top:50%;transform:translateY(-50%);z-index:140;writing-mode:vertical-rl;display:flex;align-items:center;gap:12px;padding:18px 10px;min-width:44px;background:var(--ink);color:var(--bg);border:0;cursor:pointer;font:700 12px/1 'Space Mono',monospace;letter-spacing:.12em;text-transform:uppercase" style-hover="background:var(--red);color:var(--on-red)"><span aria-hidden="true">+</span>Contents</button>
+  </sc-if>
+  <main id="main" style="flex:1 1 600px;min-width:0;max-width:1040px;margin:0 auto">
+
+    <section id="s01" aria-labelledby="s01-h" style="display:grid;gap:22px;padding:clamp(56px,7vw,110px) 0;scroll-margin-top:24px">
+      <p style="margin:0;display:flex;align-items:baseline;gap:14px"><span style="font:900 40px/.8 'Big Shoulders Display',sans-serif;color:var(--pink)">01</span><span style="font:400 12px/1 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">Overview</span></p>
+      <h2 id="s01-h" style="margin:0 0 8px;max-width:22ch;font:700 clamp(34px,4vw,60px)/1.02 'Source Sans 3',sans-serif;letter-spacing:-.025em;text-wrap:balance">Overview</h2>
+      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">Trust administrators manage financial responsibilities for beneficiaries, often across pooled trusts and other complicated account structures. A large part of that work involves disbursements. The process has to be accurate because administrators are working with real people's money. But accuracy does not mean the workflow should require unnecessary repetition.</p>
+      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">Create Draft Disbursements focused on making it easier for trust administrators to prepare disbursement information while maintaining control over the final financial action.</p>
     </section>
 
-    <section class="case-section">
-      <span class="section-index">02. Understanding the Workflow</span>
-      <h2 class="case-section-title">Creating information vs. executing a transaction</h2>
-      <div class="case-section-body">
-        <p>Before designing the feature, I worked with product partners and trust
-          administrators to understand how disbursements were actually being
-          handled. The important distinction was between creating information and
-          executing a financial transaction.</p>
-        <p>Administrators often knew that a payment or disbursement needed to be
-          prepared before every final detail was ready for submission. The product
-          needed a way to preserve that work without forcing someone to either
-          finish everything immediately or start over later.</p>
-      </div>
+    <section id="s02" aria-labelledby="s02-h" style="display:grid;gap:22px;padding:clamp(56px,7vw,110px) 0;border-top:1px solid var(--line);scroll-margin-top:24px">
+      <p style="margin:0;display:flex;align-items:baseline;gap:14px"><span style="font:900 40px/.8 'Big Shoulders Display',sans-serif;color:var(--pink)">02</span><span style="font:400 12px/1 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">Understanding the Workflow</span></p>
+      <h2 id="s02-h" style="margin:0 0 8px;max-width:22ch;font:700 clamp(34px,4vw,60px)/1.02 'Source Sans 3',sans-serif;letter-spacing:-.025em;text-wrap:balance">Creating information vs. executing a transaction</h2>
+      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">Before designing the feature, I worked with product partners and trust administrators to understand how disbursements were actually being handled. The important distinction was between creating information and executing a financial transaction.</p>
+      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">Administrators often knew that a payment or disbursement needed to be prepared before every final detail was ready for submission. The product needed a way to preserve that work without forcing someone to either finish everything immediately or start over later.</p>
     </section>
 
-    <section class="case-section">
-      <span class="section-index">03. The Opportunity</span>
-      <h2 class="case-section-title">What does "draft" mean in a financial product?</h2>
-      <div class="case-section-body">
-        <p>Draft functionality sounds simple until it enters a financial product.
-          What does "draft" mean? Which fields are required? Which information can
-          be incomplete? Who is allowed to edit it? When does it become a real
-          transaction? What happens when someone returns later? How do we make sure
-          a draft cannot accidentally be mistaken for a submitted disbursement?
-          Those questions shaped the experience.</p>
-      </div>
+    <section id="s03" aria-labelledby="s03-h" style="display:grid;gap:22px;padding:clamp(56px,7vw,110px) 0;border-top:1px solid var(--line);scroll-margin-top:24px">
+      <p style="margin:0;display:flex;align-items:baseline;gap:14px"><span style="font:900 40px/.8 'Big Shoulders Display',sans-serif;color:var(--pink)">03</span><span style="font:400 12px/1 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">The Opportunity</span></p>
+      <h2 id="s03-h" style="margin:0 0 8px;max-width:22ch;font:700 clamp(34px,4vw,60px)/1.02 'Source Sans 3',sans-serif;letter-spacing:-.025em;text-wrap:balance">What does "draft" mean in a financial product?</h2>
+      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">Draft functionality sounds simple until it enters a financial product. What does "draft" mean? Which fields are required? Which information can be incomplete? Who is allowed to edit it? When does it become a real transaction? What happens when someone returns later? How do we make sure a draft cannot accidentally be mistaken for a submitted disbursement? Those questions shaped the experience.</p>
     </section>
 
-    <section class="case-section">
-      <span class="section-index">04. Designing the Draft Workflow</span>
-      <h2 class="case-section-title">Making financial state unambiguous</h2>
-      <div class="case-section-body">
-        <p>The workflow allowed administrators to create a disbursement and save
-          progress before completing the final action. The interface had to clearly
-          distinguish between in-progress information, required financial
-          information, saved drafts, and completed or submitted actions.</p>
-        <p>Visual hierarchy and language became extremely important because the
-          system could not leave the financial state ambiguous.</p>
-        <div class="placeholder-image"><span>Disbursement workflow</span></div>
-        <div class="placeholder-image"><span>Draft state wireframe</span></div>
-        <div class="placeholder-image"><span>Final design</span></div>
-      </div>
+    <section id="s04" aria-labelledby="s04-h" style="display:grid;gap:22px;padding:clamp(56px,7vw,110px) 0;border-top:1px solid var(--line);scroll-margin-top:24px">
+      <p style="margin:0;display:flex;align-items:baseline;gap:14px"><span style="font:900 40px/.8 'Big Shoulders Display',sans-serif;color:var(--pink)">04</span><span style="font:400 12px/1 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">Designing the Draft Workflow</span></p>
+      <h2 id="s04-h" style="margin:0 0 8px;max-width:22ch;font:700 clamp(34px,4vw,60px)/1.02 'Source Sans 3',sans-serif;letter-spacing:-.025em;text-wrap:balance">Making financial state unambiguous</h2>
+      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">The workflow allowed administrators to create a disbursement and save progress before completing the final action. The interface had to clearly distinguish between in-progress information, required financial information, saved drafts, and completed or submitted actions.</p>
+      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">Visual hierarchy and language became extremely important because the system could not leave the financial state ambiguous.</p>
+      <figure style="margin:clamp(12px,2vw,28px) 0 0;display:grid;gap:10px">
+        <div style="width:100%;min-width:0;aspect-ratio:16/9;position:relative"><image-slot id="true-link-create-draft-disbursements-1" shape="rect" fit="contain" placeholder="Disbursement workflow"></image-slot></div>
+        <figcaption style="font:400 12px/1.5 'Space Mono',monospace;letter-spacing:.06em;color:var(--muted)"><span style="color:var(--pink)">FIG. 01</span> — Disbursement workflow</figcaption>
+      </figure>
+      <figure style="margin:clamp(12px,2vw,28px) 0 0;display:grid;gap:10px">
+        <div style="width:100%;min-width:0;aspect-ratio:16/9;position:relative"><image-slot id="true-link-create-draft-disbursements-2" shape="rect" fit="contain" placeholder="Draft state wireframe"></image-slot></div>
+        <figcaption style="font:400 12px/1.5 'Space Mono',monospace;letter-spacing:.06em;color:var(--muted)"><span style="color:var(--pink)">FIG. 02</span> — Draft state wireframe</figcaption>
+      </figure>
+      <figure style="margin:clamp(12px,2vw,28px) 0 0;display:grid;gap:10px">
+        <div style="width:100%;min-width:0;aspect-ratio:16/9;position:relative"><image-slot id="true-link-create-draft-disbursements-3" shape="rect" fit="contain" placeholder="Final design"></image-slot></div>
+        <figcaption style="font:400 12px/1.5 'Space Mono',monospace;letter-spacing:.06em;color:var(--muted)"><span style="color:var(--pink)">FIG. 03</span> — Final design</figcaption>
+      </figure>
     </section>
 
-    <section class="case-section">
-      <span class="section-index">05. Designing for Pooled Trust Administration</span>
-      <h2 class="case-section-title">One workflow, repeated across many accounts</h2>
-      <div class="case-section-body">
-        <p>Pooled trusts add another layer of complexity because administrators may
-          be responsible for many beneficiary accounts. The feature therefore could
-          not be designed as though someone were managing a single personal
-          account. Efficiency matters differently when the same workflow may be
-          repeated across many people during a workday.</p>
-        <p>We looked for opportunities to reduce unnecessary re-entry while
-          preserving the controls administrators needed to verify each
-          disbursement.</p>
-      </div>
+    <section id="s05" aria-labelledby="s05-h" style="display:grid;gap:22px;padding:clamp(56px,7vw,110px) 0;border-top:1px solid var(--line);scroll-margin-top:24px">
+      <p style="margin:0;display:flex;align-items:baseline;gap:14px"><span style="font:900 40px/.8 'Big Shoulders Display',sans-serif;color:var(--pink)">05</span><span style="font:400 12px/1 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">Designing for Pooled Trust Administration</span></p>
+      <h2 id="s05-h" style="margin:0 0 8px;max-width:22ch;font:700 clamp(34px,4vw,60px)/1.02 'Source Sans 3',sans-serif;letter-spacing:-.025em;text-wrap:balance">One workflow, repeated across many accounts</h2>
+      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">Pooled trusts add another layer of complexity because administrators may be responsible for many beneficiary accounts. The feature therefore could not be designed as though someone were managing a single personal account. Efficiency matters differently when the same workflow may be repeated across many people during a workday.</p>
+      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">We looked for opportunities to reduce unnecessary re-entry while preserving the controls administrators needed to verify each disbursement.</p>
     </section>
 
-    <section class="case-section">
-      <span class="section-index">06. Research &amp; Collaboration</span>
-      <h2 class="case-section-title">Where the friction actually lived</h2>
-      <div class="case-section-body">
-        <p>I worked with administrators and product stakeholders throughout the
-          project. Those conversations were particularly useful because the people
-          using the product understood where operational friction lived in ways
-          that were difficult to see from the interface alone.</p>
-        <p>A workflow might appear reasonable when viewed once in a prototype.
-          Repeating that workflow dozens of times can reveal entirely different
-          problems. That understanding influenced field organization, workflow
-          order, terminology, and draft behavior.</p>
-      </div>
+    <section id="s06" aria-labelledby="s06-h" style="display:grid;gap:22px;padding:clamp(56px,7vw,110px) 0;border-top:1px solid var(--line);scroll-margin-top:24px">
+      <p style="margin:0;display:flex;align-items:baseline;gap:14px"><span style="font:900 40px/.8 'Big Shoulders Display',sans-serif;color:var(--pink)">06</span><span style="font:400 12px/1 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">Research &amp; Collaboration</span></p>
+      <h2 id="s06-h" style="margin:0 0 8px;max-width:22ch;font:700 clamp(34px,4vw,60px)/1.02 'Source Sans 3',sans-serif;letter-spacing:-.025em;text-wrap:balance">Where the friction actually lived</h2>
+      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">I worked with administrators and product stakeholders throughout the project. Those conversations were particularly useful because the people using the product understood where operational friction lived in ways that were difficult to see from the interface alone.</p>
+      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">A workflow might appear reasonable when viewed once in a prototype. Repeating that workflow dozens of times can reveal entirely different problems. That understanding influenced field organization, workflow order, terminology, and draft behavior.</p>
     </section>
 
-    <section class="case-section">
-      <span class="section-index">07. Balancing Speed With Safety</span>
-      <h2 class="case-section-title">Useful friction vs. repetitive friction</h2>
-      <div class="case-section-body">
-        <p>One of the biggest UX challenges in financial products is that "faster"
-          is not always automatically better. Removing a step can save time. It can
-          also remove an important opportunity to verify information. The goal was
-          not to eliminate friction indiscriminately. It was to separate useful
-          friction from repetitive friction.</p>
-        <p>Useful friction protects someone from making an expensive mistake.
-          Repetitive friction makes them type or navigate through something again
-          without improving the quality of the decision.</p>
-      </div>
+    <section id="s07" aria-labelledby="s07-h" style="display:grid;gap:22px;padding:clamp(56px,7vw,110px) 0;border-top:1px solid var(--line);scroll-margin-top:24px">
+      <p style="margin:0;display:flex;align-items:baseline;gap:14px"><span style="font:900 40px/.8 'Big Shoulders Display',sans-serif;color:var(--pink)">07</span><span style="font:400 12px/1 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">Balancing Speed With Safety</span></p>
+      <h2 id="s07-h" style="margin:0 0 8px;max-width:22ch;font:700 clamp(34px,4vw,60px)/1.02 'Source Sans 3',sans-serif;letter-spacing:-.025em;text-wrap:balance">Useful friction vs. repetitive friction</h2>
+      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">One of the biggest UX challenges in financial products is that "faster" is not always automatically better. Removing a step can save time. It can also remove an important opportunity to verify information. The goal was not to eliminate friction indiscriminately. It was to separate useful friction from repetitive friction.</p>
+      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">Useful friction protects someone from making an expensive mistake. Repetitive friction makes them type or navigate through something again without improving the quality of the decision.</p>
     </section>
 
-    <section class="case-section">
-      <span class="section-index">08. What I Learned</span>
-      <h2 class="case-section-title case-section-title--voice">Not every step should be cut</h2>
-      <div class="case-section-body">
-        <p>Create Draft Disbursements changed how I think about efficiency. Good
-          enterprise design is not about turning every five-step process into a
-          three-step process. Sometimes all five steps matter.</p>
-        <p>The better question is: does every action the user takes contribute to
-          completing or verifying the work? When the answer is no, that is where the
-          design opportunity usually lives.</p>
-      </div>
+    <section id="s08" aria-labelledby="s08-h" style="display:grid;gap:22px;padding:clamp(56px,7vw,110px) 0;border-top:2px solid var(--ink);scroll-margin-top:24px">
+      <p style="margin:0;display:flex;align-items:baseline;gap:14px"><span style="font:900 40px/.8 'Big Shoulders Display',sans-serif;color:var(--pink)">08</span><span style="font:400 12px/1 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">What I Learned</span></p>
+      <h2 id="s08-h" style="margin:0 0 8px;max-width:18ch;font:400 clamp(52px,7vw,110px)/.86 'Grenze Gotisch',serif;color:var(--red);text-wrap:balance">Not every step should be cut</h2>
+      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">Create Draft Disbursements changed how I think about efficiency. Good enterprise design is not about turning every five-step process into a three-step process. Sometimes all five steps matter.</p>
+      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">The better question is: does every action the user takes contribute to completing or verifying the work? When the answer is no, that is where the design opportunity usually lives.</p>
     </section>
   </main>
+</div>
 
-  <nav class="case-nav" aria-label="More case studies">
-    <a href="hazadapt-loco.html" class="case-nav-prev">
-      <span class="case-nav-label">← Previous</span>
-      <span class="case-nav-title">LoCo: Local Safety Information</span>
-    </a>
-    <a href="true-link-beneficiary-experience.html" class="case-nav-next">
-      <span class="case-nav-label">Next →</span>
-      <span class="case-nav-title">Beneficiary Experience</span>
-    </a>
-  </nav>
-  <footer class="site-footer">
-    <p class="footer-path">~/krystyna-ewing · &copy; <span id="year"></span></p>
-    <p class="footer-clock" aria-hidden="true"><span id="clock"></span> local</p>
-    <a href="../index.html#top" class="back-to-top">[ ^ top ]</a>
-  </footer>
+<nav aria-label="More case studies" style="display:flex;flex-wrap:wrap;border-top:2px solid var(--ink);border-bottom:1px solid var(--line)">
+  <a href="hazadapt-loco.html" style="flex:1 1 320px;display:grid;gap:10px;border-right:1px solid var(--line);padding:clamp(36px,5vw,72px) clamp(16px,5vw,80px);text-decoration:none" style-hover="background:var(--ink);color:var(--bg)">
+    <span style="font:700 12px/1 'Space Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--pink)">← Previous</span>
+    <span style="font:900 clamp(48px,6.5vw,112px)/.84 'Big Shoulders Display',sans-serif;text-transform:uppercase;text-wrap:balance">LoCo: Local Safety Information</span>
+  </a>
+  <a href="true-link-beneficiary-experience.html" style="flex:1 1 320px;display:grid;gap:10px;justify-items:end;text-align:right;padding:clamp(36px,5vw,72px) clamp(16px,5vw,80px);text-decoration:none" style-hover="background:var(--ink);color:var(--bg)">
+    <span style="font:700 12px/1 'Space Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--pink)">Next →</span>
+    <span style="font:400 clamp(56px,7.5vw,124px)/.82 'Grenze Gotisch',serif;text-wrap:balance">Beneficiary Experience</span>
+  </a>
+</nav>
 
-  <script src="../js/main.js"></script>
+<footer style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:16px;padding:32px clamp(16px,5vw,80px) 110px;font:400 12px/1.6 'Space Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)">
+  <span>~/krystyna-ewing · © 2026</span>
+  <a href="mailto:hello@krystynaewing.com" style="color:var(--ink)">hello@krystynaewing.com</a>
+  <a href="#main" style="min-height:44px;display:inline-flex;align-items:center">[ ^ top ]</a>
+</footer>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;defaultTheme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;dark&quot;,&quot;light&quot;],&quot;default&quot;:&quot;dark&quot;,&quot;tsType&quot;:&quot;'dark'|'light'&quot;,&quot;section&quot;:&quot;Look&quot;},&quot;grain&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Look&quot;}}">
+class Component extends DCLogic {
+  state = { theme: this.props.defaultTheme ?? 'dark', active: 's01', tocOpen: true };
+  applyRoot() {
+    const r = document.documentElement;
+    r.dataset.theme = this.state.theme;
+    r.dataset.grain = (this.props.grain ?? true) ? 'on' : 'off';
+  }
+  componentDidMount() {
+    this.applyRoot();
+    this.io = new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecting) this.setState({ active: en.target.id }); }), { rootMargin: '-40% 0px -55% 0px' });
+    document.querySelectorAll('main section[id]').forEach(el => this.io.observe(el));
+  }
+  componentDidUpdate(pp) {
+    if (pp.defaultTheme !== this.props.defaultTheme && this.props.defaultTheme) this.setState({ theme: this.props.defaultTheme }, () => this.applyRoot());
+    else this.applyRoot();
+  }
+  componentWillUnmount() { if (this.io) this.io.disconnect(); }
+  renderVals() {
+    const s = this.state, light = s.theme === 'light', mk = {};
+    for (let i = 1; i <= 24; i++) { const id = 's' + String(i).padStart(2, '0'); mk[id] = s.active === id ? '■' : '□'; }
+    return {
+      mk, tocOpen: s.tocOpen, tocClosed: !s.tocOpen, tocExpanded: s.tocOpen ? 'true' : 'false', tocIcon: '− Hide',
+      toggleToc: () => this.setState(st => ({ tocOpen: !st.tocOpen })),
+      themeLabel: light ? 'Dark' : 'Light', lightPressed: light ? 'true' : 'false',
+      toggleTheme: () => this.setState(st => ({ theme: st.theme === 'light' ? 'dark' : 'light' }), () => this.applyRoot())
+    };
+  }
+}
+</script>
 </body>
 </html>
