@@ -480,11 +480,6 @@ body.art-page { background: var(--h-bg); color: var(--h-fg); }
    normal max-width containers, at a tall, immersive height. Name/
    tagline and the bio-reveal control are layered on top of it; nothing
    about the artwork's own size or position ever changes on interaction. ---------- */
-/* the hero is a fixed, always-dark composition -- it's a photograph and a
-   graphic shape, not reading content, so it doesn't follow the site's
-   light/dark toggle. (The diagonal accent stays dark in both themes
-   already; without this, light mode splits the backdrop into a pale half
-   and a dark half, and text crossing that seam fails contrast outright.) */
 .home .hero {
   position: relative;
   width: 100vw;
@@ -495,91 +490,51 @@ body.art-page { background: var(--h-bg); color: var(--h-fg); }
   min-height: 460px;
   max-height: 920px;
   overflow: hidden;
-  --hero-bg: #0c0b0a;
-  --hero-fg: #f3ede2;
-  --hero-muted: #a39a8c;
-  --hero-accent: #8368ff;
-  --hero-red: #e4445e;
-  --hero-garnet: #7a1220;
-  --hero-pink: #ff4d6a;
-  background: var(--hero-bg);
 }
-/* ink, not glow: real irregular splatter shapes (SVG turbulence-displaced
-   ellipses, markup in index.html), not soft gradient circles -- gradient
-   blooms read as stock/ad backgrounds; distorted, hard-bled paint shapes
-   don't. Violet, crimson, garnet and pink -- one hue family, pushed hot. */
-.home .hero-ink {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  width: 100%;
-  height: 100%;
-  mix-blend-mode: screen;
-}
-.ink-blob { opacity: 0.92; }
-.ink-blob--accent { fill: var(--hero-accent); }
-.ink-blob--garnet { fill: var(--hero-garnet); }
-.ink-blob--red { fill: var(--hero-red); }
-.ink-blob--pink { fill: var(--hero-pink); }
-/* the skull is one element in the wreckage, not the whole frame -- sized
-   and placed the way it sits in the reference collage: upper-right,
-   contained, partly buried in the ink rather than filling the hero */
 .home .hero-media {
   position: absolute;
-  top: 6%;
-  right: 3%;
-  width: 48%;
-  height: 64%;
-  z-index: 1;
+  inset: 0;
 }
 .home .hero-media img {
   display: block;
   width: 100%;
   height: 100%;
-  object-fit: contain;
-  object-position: 50% 50%;
-  filter: contrast(1.12) saturate(1.18) drop-shadow(0 20px 40px rgba(0, 0, 0, 0.55));
+  object-fit: cover;
+  /* the collage is a tall (721x2000) piece; the name lettering and skull
+     sit in its top ~40%, so anchoring to the top keeps them in frame at
+     any hero aspect ratio instead of cropping into the ink below them */
+  object-position: 50% 0%;
 }
-/* name + tagline: the headline, not a caption -- big enough to break
-   across the skull's own silhouette, the way giant type sits directly
-   on top of the photo rather than beside it */
+/* name + tagline: a small, quiet label over the artwork, not a headline
+   competing with it -- the artwork already carries her name */
 .home .hero-id {
   position: absolute;
   z-index: 2;
-  left: clamp(1em, 4vw, 2em);
-  bottom: clamp(1.4em, 5vw, 2.6em);
-  display: flex;
+  top: clamp(1.2em, 4vw, 2.2em);
+  left: clamp(1.2em, 4vw, 2.2em);
+  display: inline-flex;
   flex-direction: column;
-  gap: 0.2em;
-  max-width: 92vw;
-  transform: rotate(-1.6deg);
-  transform-origin: left bottom;
+  gap: 0.3em;
+  padding: 0.6em 0.9em;
+  background: color-mix(in srgb, var(--h-bg) 78%, transparent);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
 }
 .home .hero-name {
-  display: block;
-  font-family: var(--font-display);
-  font-weight: 900;
-  font-size: clamp(3.4rem, 11vw, 9.5rem);
-  line-height: 0.8;
-  letter-spacing: -0.01em;
-  text-transform: uppercase;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: clamp(1rem, 2vw, 1.35rem);
+  line-height: 1.1;
+  color: var(--h-fg);
   margin: 0;
 }
-.home .hero-name-line {
-  display: block;
-  color: var(--hero-fg);
-  text-shadow: 0 6px 32px rgba(0, 0, 0, 0.65);
-}
-.home .hero-name-line--accent {
-  color: var(--hero-pink);
-}
 .home .hero-tagline {
-  font-family: var(--font-mono);
+  font-family: var(--font-body);
   font-weight: 600;
-  font-size: 0.78rem;
-  letter-spacing: 0.28em;
+  font-size: 0.66rem;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--hero-fg);
+  color: var(--h-muted);
   margin: 0;
 }
 /* the interactive corner: a small trigger pill, and the bio panel it
@@ -589,8 +544,8 @@ body.art-page { background: var(--h-bg); color: var(--h-fg); }
 .home .hero-interactive {
   position: absolute;
   z-index: 3;
-  top: clamp(1.2em, 4vw, 2.2em);
-  right: clamp(1.2em, 4vw, 2.2em);
+  left: clamp(1.2em, 4vw, 2.2em);
+  bottom: clamp(1.2em, 4vw, 2.2em);
 }
 .home .hero-trigger {
   position: relative;
@@ -598,12 +553,14 @@ body.art-page { background: var(--h-bg); color: var(--h-fg); }
   align-items: center;
   gap: 0.5em;
   padding: 0.6em 1em;
-  border: 1px solid var(--hero-fg);
-  background: var(--hero-bg);
+  border: 1px solid var(--h-line);
+  background: color-mix(in srgb, var(--h-bg) 78%, transparent);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
   cursor: pointer;
 }
 .home .hero-trigger:focus-visible {
-  outline: 2px solid var(--hero-red);
+  outline: 2px solid var(--h-red);
   outline-offset: 3px;
 }
 .home .hero-cue-desktop {
@@ -614,7 +571,7 @@ body.art-page { background: var(--h-bg); color: var(--h-fg); }
   display: block;
   font-family: var(--font-voice);
   font-size: 1rem;
-  color: var(--hero-accent);
+  color: var(--h-accent);
   white-space: nowrap;
   transition: opacity 0.25s ease;
 }
@@ -639,15 +596,17 @@ body.art-page { background: var(--h-bg); color: var(--h-fg); }
    upward from the trigger without ever moving the trigger itself. */
 .home .hero-bio {
   position: absolute;
-  right: 0;
-  top: 100%;
-  margin-top: 0.8em;
+  left: 0;
+  bottom: 100%;
+  margin-bottom: 0.8em;
   width: min(42vw, 520px);
   padding: 1.5em 1.7em;
-  border: 1px solid var(--hero-fg);
-  background: var(--hero-bg);
+  border: 1px solid var(--h-line);
+  background: color-mix(in srgb, var(--h-bg) 85%, transparent);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   opacity: 0;
-  transform: translateY(-10px);
+  transform: translateY(10px);
   pointer-events: none;
   transition: opacity 0.3s ease, transform 0.35s cubic-bezier(0.22, 0.61, 0.36, 1);
 }
@@ -662,7 +621,7 @@ body.art-page { background: var(--h-bg); color: var(--h-fg); }
   font-family: var(--font-body);
   font-size: 0.98rem;
   line-height: 1.6;
-  color: var(--hero-muted);
+  color: var(--h-muted);
   margin: 0 0 1em;
 }
 .home .hero-bio-text:last-child { margin-bottom: 0; }
@@ -677,15 +636,13 @@ body.art-page { background: var(--h-bg); color: var(--h-fg); }
     height: 78vh;
     min-height: 520px;
   }
-  .home .hero-media {
-    width: 62%;
-    height: 46%;
+  .home .hero-media img {
+    object-position: 50% 0%;
   }
   .home .hero-interactive {
-    top: 1em;
+    left: 1em;
     right: 1em;
-    left: auto;
-    bottom: auto;
+    bottom: 1em;
   }
   .home .hero-cue-desktop { display: none; }
   .home .hero-cue-mobile {
@@ -697,7 +654,7 @@ body.art-page { background: var(--h-bg); color: var(--h-fg); }
     font-size: 0.82rem;
     letter-spacing: 0.04em;
     text-transform: uppercase;
-    color: var(--hero-fg);
+    color: var(--h-fg);
   }
   .home .hero-cue-icon::before { content: "+"; }
   .home .hero-trigger[aria-expanded="true"] .hero-cue-icon::before { content: "\2013"; }
