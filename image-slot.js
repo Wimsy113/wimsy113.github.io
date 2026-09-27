@@ -568,7 +568,9 @@
       this._subFn = () => this._render();
       // Shadow-DOM listeners live with the shadow DOM — bound once here so
       // disconnect/reconnect (e.g. React remount) doesn't stack handlers.
-      this._empty.addEventListener('click', () => this._input.click());
+      this._empty.addEventListener('click', () => {
+        if (window.omelette && window.omelette.writeFile) this._input.click();
+      });
       root.addEventListener('click', (e) => {
         const act = e.target && e.target.getAttribute && e.target.getAttribute('data-act');
         if (!act) return;
@@ -831,7 +833,11 @@
     }
 
     // Public: host's "Import from computer" calls this to run local browse.
-    openFilePicker() { this._exitReframe(true); this._input.click(); }
+    openFilePicker() {
+      if (!(window.omelette && window.omelette.writeFile)) return;
+      this._exitReframe(true);
+      this._input.click();
+    }
 
     // A src write is a newer intent for this slot's content — the host
     // pick path (setImageSlotImage) or an agent edit — so it must win
@@ -853,8 +859,12 @@
     }
 
     // handleEvent — one listener object for all four drag events keeps the
-    // add/remove symmetric and the depth counter correct.
+    // add/remove symmetric and the depth counter correct. Public visitors
+    // (no window.omelette bridge) get no drag-over affordance at all --
+    // _ingest also guards, but bailing here keeps the UI from even
+    // pretending a drop would do something.
     handleEvent(e) {
+      if (!(window.omelette && window.omelette.writeFile)) return;
       if (e.type === 'dragenter' || e.type === 'dragover') {
         // Without preventDefault the browser never fires 'drop'.
         e.preventDefault();
@@ -877,6 +887,11 @@
     }
 
     async _ingest(file) {
+      // Public visitors have no window.omelette bridge -- images are added
+      // by editing the page's own src/new-assets, not dropped in live.
+      // This is the single funnel both the file-input change handler and
+      // the drag/drop handler go through, so gating here covers both.
+      if (!(window.omelette && window.omelette.writeFile)) return;
       this._setError(null);
       if (!file || ACCEPT.indexOf(file.type) < 0) {
         this._setError('Drop a PNG, JPEG, WebP, or AVIF image.');
