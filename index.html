@@ -72,8 +72,11 @@ a:hover{color:var(--red)}
   <div onMouseEnter="{{ bioOpen }}" onMouseLeave="{{ bioClose }}" onKeyDown="{{ bioKey }}" style="position:absolute;left:clamp(16px,5vw,80px);bottom:84px;z-index:30;display:grid;gap:10px;justify-items:start;max-width:min(520px,calc(100vw - 32px))">
     <div id="heroBio" style="{{ bioStyle }}">
       <div style="background:var(--ink);color:var(--bg);padding:clamp(18px,2vw,26px);display:grid;gap:14px;transform:rotate(-1deg);box-shadow:10px 10px 0 var(--red)">
-        <p style="margin:0;font:600 clamp(19px,1.6vw,22px)/1.35 'Source Sans 3',sans-serif;text-wrap:pretty">I design software, make art, build things, break things, and have a hard time leaving anything alone when I know it could work better.</p>
-        <p style="margin:0;font:400 clamp(16px,1.3vw,18px)/1.5 'Source Sans 3',sans-serif;text-wrap:pretty">Detroit-born, lifelong artist, and someone with a bad habit of needing to know how things work. That curiosity took me from software development into UX, and it still shows up in accessibility reviews, 3D printing experiments, and whatever I'm building at 1am.</p>
+        <p style="margin:0;font:600 clamp(19px,1.6vw,22px)/1.35 'Source Sans 3',sans-serif;text-wrap:pretty">I'm a designer, artist, developer, and general maker of things. I started in software development, moved into UX because I wanted more room to be creative, and apparently never learned how to pick one thing and stick with it.</p>
+        <p style="margin:0;font:400 clamp(16px,1.3vw,18px)/1.5 'Source Sans 3',sans-serif;text-wrap:pretty">I've spent the last 8+ years designing, building, testing, breaking things, and figuring out how to make them work better. Outside of UX, I make art, build 3D prints, mess around with code, and start projects because I thought, &ldquo;I wonder if I could make that.&rdquo;</p>
+        <p style="margin:0;font:400 clamp(16px,1.3vw,18px)/1.5 'Source Sans 3',sans-serif;text-wrap:pretty">Usually I can.</p>
+        <p style="margin:0;font:400 clamp(16px,1.3vw,18px)/1.5 'Source Sans 3',sans-serif;text-wrap:pretty">Sometimes I absolutely cannot.</p>
+        <p style="margin:0;font:400 clamp(16px,1.3vw,18px)/1.5 'Source Sans 3',sans-serif;text-wrap:pretty">Either way, I'm probably going to try.</p>
       </div>
     </div>
     <button type="button" onClick="{{ bioToggle }}" onFocus="{{ bioOpen }}" aria-expanded="{{ bioExpanded }}" aria-controls="heroBio" aria-label="Reveal introduction" style="font:400 clamp(56px,6vw,96px)/.9 'Grenze Gotisch',serif;color:var(--pink);background:var(--bg);border:0;padding:4px 14px 10px;cursor:pointer;min-height:44px;transform:rotate(-3deg)" style-hover="color:var(--red)">{{ cueWord }}</button>
