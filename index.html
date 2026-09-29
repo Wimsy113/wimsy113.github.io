@@ -30,14 +30,14 @@ a:hover{color:var(--red)}
   @keyframes introVeilOut{0%,10%{opacity:1}100%{opacity:0}}
   @keyframes heroPieceIn{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
   @keyframes pageIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
-  #introVeil{animation:introVeilOut 1.3s cubic-bezier(.4,0,.2,1) both}
-  #heroGhost,#heroSkullWrap,#heroNameWrap,#heroPlates,#heroInteractive{opacity:0;animation:heroPieceIn .8s cubic-bezier(.16,1,.3,1) both}
-  #heroGhost{animation-delay:.1s}
-  #heroSkullWrap{animation-delay:.3s}
-  #heroNameWrap{animation-delay:.5s}
-  #heroPlates{animation-delay:.85s}
-  #heroInteractive{animation-delay:1s}
-  #top~section,main~footer{opacity:0;animation:pageIn 1s cubic-bezier(.16,1,.3,1) both;animation-delay:1.4s}
+  html:not([data-intro="seen"]) #introVeil{animation:introVeilOut 1.3s cubic-bezier(.4,0,.2,1) both}
+  html:not([data-intro="seen"]) #heroGhost,html:not([data-intro="seen"]) #heroSkullWrap,html:not([data-intro="seen"]) #heroNameWrap,html:not([data-intro="seen"]) #heroPlates,html:not([data-intro="seen"]) #heroInteractive{opacity:0;animation:heroPieceIn .8s cubic-bezier(.16,1,.3,1) both}
+  html:not([data-intro="seen"]) #heroGhost{animation-delay:.1s}
+  html:not([data-intro="seen"]) #heroSkullWrap{animation-delay:.3s}
+  html:not([data-intro="seen"]) #heroNameWrap{animation-delay:.5s}
+  html:not([data-intro="seen"]) #heroPlates{animation-delay:.85s}
+  html:not([data-intro="seen"]) #heroInteractive{animation-delay:1s}
+  html:not([data-intro="seen"]) #top~section,html:not([data-intro="seen"]) main~footer{opacity:0;animation:pageIn 1s cubic-bezier(.16,1,.3,1) both;animation-delay:1.4s}
 }
 </style>
 </helmet>
@@ -311,6 +311,14 @@ class Component extends DCLogic {
   componentDidMount() {
     this.applyRoot();
     this.reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    // The hero intro should only play once per visit, not on every page/route
+    // load within the same session -- check this before anything else touches
+    // the DOM so there's no flash of the un-gated state.
+    try {
+      this.introSeen = sessionStorage.getItem('keIntroSeen') === '1';
+      sessionStorage.setItem('keIntroSeen', '1');
+    } catch (e) { this.introSeen = false; }
+    if (this.introSeen) document.documentElement.dataset.intro = 'seen';
     const hero = this.heroRef.current, idx = this.idxRef.current;
     let tx = 0, ty = 0, cx = 0, cy = 0, raf = 0;
     const tick = () => {
@@ -344,7 +352,7 @@ class Component extends DCLogic {
       });
     };
     window.addEventListener('scroll', this.onScroll, { passive: true }); this.onScroll();
-    if (!this.reduce) {
+    if (!this.reduce && !this.introSeen) {
       // Reuse the scroll-shear variable that tears the ghost/skull/name strips apart:
       // sweep it in from a wide-open split down to rest so the hero assembles itself
       // out of the same effect, instead of a plain fade.
