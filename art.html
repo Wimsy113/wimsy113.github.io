@@ -136,9 +136,9 @@ a:hover{color:var(--red)}
         </h3>
         <sc-if value="{{ d.open }}" hint-placeholder-val="{{ false }}">
           <div id="{{ d.panelId }}" style="display:flex;flex-wrap:wrap;gap:20px;padding:0 0 clamp(28px,3vw,44px)">
-            <div style="flex:2 1 320px;min-width:0;aspect-ratio:16/10;position:relative;transform:rotate(-.6deg)"><image-slot id="{{ d.slotA }}" shape="rect" placeholder="{{ d.phA }}"></image-slot></div>
-            <div style="flex:1 1 200px;min-width:0;aspect-ratio:4/5;position:relative;transform:rotate(1deg)"><image-slot id="{{ d.slotB }}" shape="rect" placeholder="{{ d.phB }}"></image-slot></div>
-            <p style="flex:1 1 220px;margin:0;align-self:flex-end;font:400 12px/1.6 'Space Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)">Placeholder — image, title, medium and notes to come.</p>
+            <div style="flex:2 1 320px;min-width:0;aspect-ratio:16/10;position:relative;transform:rotate(-.6deg)"><image-slot id="{{ d.slotA }}" src="{{ d.srcA }}" shape="rect" placeholder="{{ d.phA }}"></image-slot></div>
+            <div style="flex:1 1 200px;min-width:0;aspect-ratio:4/5;position:relative;transform:rotate(1deg)"><image-slot id="{{ d.slotB }}" src="{{ d.srcB }}" shape="rect" placeholder="{{ d.phB }}"></image-slot></div>
+            <p style="flex:1 1 220px;margin:0;align-self:flex-end;font:400 12px/1.6 'Space Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)">{{ d.note }}</p>
           </div>
         </sc-if>
       </div>
@@ -264,10 +264,20 @@ class Component extends DCLogic {
     const setStage = (id, i) => () => this.setState(st => ({ stage: { ...st.stage, [id]: i } }));
     const open = id => () => this.setState({ lb: W.findIndex(w => w.id === id) });
     const cats = ['3D printing & fabrication', 'Sculpture & mixed media', 'Digital illustration & 3D modeling', 'Unfinished ideas & strange prototypes'];
+    const catImages = [
+      { srcA: 'images/workbench/silver-skull.jpg', srcB: 'images/workbench/skull-painting-process.jpg',
+        note: 'Silver Skull, 3D printed and hand-painted — plus a mid-process shot of painting a different cast.' },
+      { srcA: 'images/workbench/entomology-cicadas.jpg', srcB: '',
+        note: 'Entomology Cicadas — a small framed specimen display.' },
+      { srcA: 'images/workbench/stickers.jpg', srcB: '',
+        note: 'Stickers — original character illustration, cut and printed.' },
+      { srcA: '', srcB: '', note: 'Placeholder — image, title, medium and notes to come.' },
+    ];
     const drawers = cats.map((t, i) => ({
       num: String(i + 1).padStart(2, '0'), title: t, open: s.drawer === i, expanded: s.drawer === i ? 'true' : 'false',
       icon: s.drawer === i ? '− Close' : '+ Open', panelId: 'drawer-' + i,
       slotA: 'drawer-' + i + '-a', slotB: 'drawer-' + i + '-b', phA: t + ' — photo', phB: t + ' — detail / process',
+      srcA: catImages[i].srcA, srcB: catImages[i].srcB, note: catImages[i].note,
       toggle: () => this.setState(st => ({ drawer: st.drawer === i ? -1 : i }))
     }));
     let lb = null;
