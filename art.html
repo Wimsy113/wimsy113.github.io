@@ -263,7 +263,7 @@ class Component extends DCLogic {
     const s = this.state, light = s.theme === 'light', W = this.works();
     const setStage = (id, i) => () => this.setState(st => ({ stage: { ...st.stage, [id]: i } }));
     const open = id => () => this.setState({ lb: W.findIndex(w => w.id === id) });
-    const cats = ['3D printing & fabrication', 'Sculpture & mixed media', 'Digital illustration & 3D modeling', 'Unfinished ideas & strange prototypes'];
+    const cats = ['3D printing & fabrication', 'Sculpture & mixed media', 'Digital illustration', 'Unfinished ideas & strange prototypes'];
     const catImages = [
       { srcA: 'images/workbench/silver-skull.jpg', srcB: 'images/workbench/skull-painting-process.jpg',
         note: 'Silver Skull, 3D printed and hand-painted — plus a mid-process shot of painting a different cast.' },
