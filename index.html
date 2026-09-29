@@ -25,6 +25,17 @@ a:hover{color:var(--red)}
 :focus-visible{outline:3px solid var(--pink);outline-offset:4px}
 ::selection{background:var(--pink);color:#0d0c0c}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+@media (prefers-reduced-motion:no-preference){
+  @keyframes heroPieceIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+  @keyframes pageIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+  #heroGhost,#heroSkullWrap,#heroNameWrap,#heroPlates,#heroInteractive{opacity:0;animation:heroPieceIn .7s cubic-bezier(.16,1,.3,1) both}
+  #heroGhost{animation-delay:.05s}
+  #heroSkullWrap{animation-delay:.2s}
+  #heroNameWrap{animation-delay:.38s}
+  #heroPlates{animation-delay:.58s}
+  #heroInteractive{animation-delay:.72s}
+  #top~section,main~footer{opacity:0;animation:pageIn .9s cubic-bezier(.16,1,.3,1) both;animation-delay:1s}
+}
 </style>
 </helmet>
 
@@ -48,15 +59,15 @@ a:hover{color:var(--red)}
 <section id="top" ref="{{ heroRef }}" aria-label="Introduction" style="position:relative;min-height:max(100svh,720px);overflow:hidden;isolation:isolate">
   <h1 style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Krystyna Ewing</h1>
 
-  <p aria-hidden="true" style="position:absolute;left:-2vw;bottom:8vh;margin:0;z-index:0;font:400 clamp(160px,30vw,520px)/.7 'Grenze Gotisch',serif;color:var(--ghost);white-space:nowrap;transform:translateX(calc(var(--sy,0) * -18vw))">beautifully</p>
+  <p id="heroGhost" aria-hidden="true" style="position:absolute;left:-2vw;bottom:8vh;margin:0;z-index:0;font:400 clamp(160px,30vw,520px)/.7 'Grenze Gotisch',serif;color:var(--ghost);white-space:nowrap;transform:translateX(calc(var(--sy,0) * -18vw))">beautifully</p>
 
-  <div aria-hidden="true" style="position:absolute;right:-16vw;top:clamp(180px,26vh,300px);width:min(96vw,1120px);aspect-ratio:1;z-index:3;transform:translate(calc(var(--mx,0)*-22px),calc(var(--my,0)*-14px + var(--sy,0)*-120px)) rotate(calc(-8deg + var(--mx,0)*2deg))">
+  <div id="heroSkullWrap" aria-hidden="true" style="position:absolute;right:-16vw;top:clamp(180px,26vh,300px);width:min(96vw,1120px);aspect-ratio:1;z-index:3;transform:translate(calc(var(--mx,0)*-22px),calc(var(--my,0)*-14px + var(--sy,0)*-120px)) rotate(calc(-8deg + var(--mx,0)*2deg))">
     <img src="images/skull.png" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain">
     <img src="images/skull.png" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;clip-path:inset(40% 0 52% 0);transform:translateX(calc((var(--mx,0) + var(--sy,0)*2)*var(--tear)*50px));filter:hue-rotate(-24deg) saturate(1.6)">
     <img src="images/skull.png" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;clip-path:inset(64% 0 31% 0);transform:translateX(calc((var(--mx,0) + var(--sy,0)*2)*var(--tear)*-34px))">
   </div>
 
-  <div role="img" aria-label="Krystyna Ewing, in distressed bone-white and pink block lettering" style="position:absolute;left:-1vw;top:clamp(150px,21vh,230px);width:min(102vw,1420px);aspect-ratio:2048/768;z-index:2;transform:translate(calc(var(--mx,0)*12px),calc(var(--my,0)*8px))">
+  <div id="heroNameWrap" role="img" aria-label="Krystyna Ewing, in distressed bone-white and pink block lettering" style="position:absolute;left:-1vw;top:clamp(150px,21vh,230px);width:min(102vw,1420px);aspect-ratio:2048/768;z-index:2;transform:translate(calc(var(--mx,0)*12px),calc(var(--my,0)*8px))">
     <img src="images/name.png" alt="" style="position:absolute;inset:0;width:100%;height:100%;clip-path:inset(0 0 82% 0);transform:translateX(calc(var(--sy,0)*var(--tear)*-160px))">
     <img src="images/name.png" alt="" style="position:absolute;inset:0;width:100%;height:100%;clip-path:inset(18% 0 63% 0);transform:translateX(calc(var(--sy,0)*var(--tear)*110px))">
     <img src="images/name.png" alt="" style="position:absolute;inset:0;width:100%;height:100%;clip-path:inset(37% 0 44% 0);transform:translateX(calc(var(--sy,0)*var(--tear)*-70px))">
@@ -64,12 +75,12 @@ a:hover{color:var(--red)}
     <img src="images/name.png" alt="" style="position:absolute;inset:0;width:100%;height:100%;clip-path:inset(78% 0 0 0);transform:translateX(calc(var(--sy,0)*var(--tear)*-120px))">
   </div>
 
-  <div style="position:absolute;inset:clamp(20px,4vh,40px) clamp(16px,3vw,40px) auto;z-index:30;pointer-events:none">
+  <div id="heroPlates" style="position:absolute;inset:clamp(20px,4vh,40px) clamp(16px,3vw,40px) auto;z-index:30;pointer-events:none">
     <p style="margin:0 210px 0 0;max-width:22ch;font:800 clamp(22px,2.5vw,36px)/.98 'Big Shoulders Display',sans-serif;text-transform:uppercase;background:var(--bg);padding:6px 10px 8px;display:inline-block">UX designer, creative technologist, artist <span style="font:400 1.1em/1 'Grenze Gotisch',serif;color:var(--red);text-transform:none">&amp;</span> maker.</p>
     <p style="position:absolute;right:0;top:0;margin:0;font:400 12px/1.6 'Space Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);background:var(--bg);padding:6px 10px;text-align:right">UX · Art · Technology<br>Beautifully unhinged</p>
   </div>
 
-  <div onMouseEnter="{{ bioOpen }}" onMouseLeave="{{ bioClose }}" onKeyDown="{{ bioKey }}" style="position:absolute;left:clamp(16px,5vw,80px);bottom:84px;z-index:30;display:grid;gap:10px;justify-items:start;max-width:min(520px,calc(100vw - 32px))">
+  <div id="heroInteractive" onMouseEnter="{{ bioOpen }}" onMouseLeave="{{ bioClose }}" onKeyDown="{{ bioKey }}" style="position:absolute;left:clamp(16px,5vw,80px);bottom:84px;z-index:30;display:grid;gap:10px;justify-items:start;max-width:min(520px,calc(100vw - 32px))">
     <div id="heroBio" style="{{ bioStyle }}">
       <div style="background:var(--ink);color:var(--bg);padding:clamp(18px,2vw,26px);display:grid;gap:14px;transform:rotate(-1deg);box-shadow:10px 10px 0 var(--red)">
         <p style="margin:0;font:600 clamp(19px,1.6vw,22px)/1.35 'Source Sans 3',sans-serif;text-wrap:pretty">I'm a designer, artist, developer, and general maker of things. I started in software development, moved into UX because I wanted more room to be creative, and apparently never learned how to pick one thing and stick with it.</p>
