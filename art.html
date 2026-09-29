@@ -110,11 +110,20 @@ a:hover{color:var(--red)}
       <p style="margin:0;font:400 clamp(26px,2.6vw,40px)/1 'Grenze Gotisch',serif;color:var(--ink);position:relative;padding-top:24px"><button type="button" onPointerDown="{{ note2.down }}" onPointerMove="{{ note2.move }}" onPointerUp="{{ note2.up }}" onKeyDown="{{ note2.key }}" aria-label="Move note. Drag, or use arrow keys." style="position:absolute;top:-12px;left:0;min-height:36px;padding:0 14px;border:0;background:rgba(226,214,188,.92);color:#151312;font:700 11px/1 'Space Mono',monospace;letter-spacing:.08em;text-transform:uppercase;cursor:grab;touch-action:none;transform:rotate(3deg)">⠿ Note</button>This took way longer than I expected.</p>
     </div>
 
-    <div style="{{ sticky.style }}">
-      <div style="position:relative;padding:28px 20px 20px;background:var(--red);color:var(--on-red);box-shadow:0 14px 24px rgba(0,0,0,.35)">
-        <button type="button" onPointerDown="{{ sticky.down }}" onPointerMove="{{ sticky.move }}" onPointerUp="{{ sticky.up }}" onKeyDown="{{ sticky.key }}" aria-label="Move sticky note. Drag, or use arrow keys." style="position:absolute;top:-16px;left:40%;transform:rotate(2deg);min-height:36px;padding:0 14px;border:0;background:rgba(226,214,188,.92);color:#151312;font:700 11px/1 'Space Mono',monospace;letter-spacing:.08em;text-transform:uppercase;cursor:grab;touch-action:none">⠿ Sticky</button>
-        <p style="margin:0;font:600 17px/1.4 'Source Sans 3',sans-serif">The physical stuff — sculpture, prints, anything made with my hands instead of a tablet — isn't photographed yet. When it is, it'll be sitting right here on the table.</p>
-      </div>
+    <div id="piece-miniHead" style="{{ miniHead.style }}">
+      <figure style="margin:0;background:#f3efe7;padding:10px 10px 12px;box-shadow:0 14px 24px rgba(0,0,0,.35);position:relative">
+        <button type="button" onPointerDown="{{ miniHead.down }}" onPointerMove="{{ miniHead.move }}" onPointerUp="{{ miniHead.up }}" onKeyDown="{{ miniHead.key }}" aria-label="Move Painted Head. Drag, or use arrow keys." style="position:absolute;top:-16px;left:10%;transform:rotate(-5deg);min-height:36px;padding:0 14px;border:0;background:rgba(226,214,188,.92);color:#151312;font:700 11px/1 'Space Mono',monospace;letter-spacing:.08em;text-transform:uppercase;cursor:grab;touch-action:none;z-index:2">⠿ Painted Head</button>
+        <button type="button" onClick="{{ openMiniHead }}" aria-label="View larger: Painted Head, in-progress miniature" style="display:block;width:100%;padding:0;border:0;background:transparent;cursor:zoom-in"><img src="images/workbench/mini-head-painting.jpg" alt="A hand-painted miniature head, mid-progress, held between two fingers — base skin tone and inked features, paint bottles and a mixing palette in the background." style="display:block;width:100%;height:auto" draggable="false"></button>
+        <figcaption style="display:flex;justify-content:space-between;gap:10px;margin-top:8px;font:400 11px/1.3 'Space Mono',monospace;letter-spacing:.04em;text-transform:uppercase;color:#151312"><strong>Painted Head</strong><span>Miniature · In Progress</span></figcaption>
+      </figure>
+    </div>
+
+    <div id="piece-blade" style="{{ blade.style }}">
+      <figure style="margin:0;background:#f3efe7;padding:10px 10px 12px;box-shadow:0 14px 24px rgba(0,0,0,.35);position:relative">
+        <button type="button" onPointerDown="{{ blade.down }}" onPointerMove="{{ blade.move }}" onPointerUp="{{ blade.up }}" onKeyDown="{{ blade.key }}" aria-label="Move Prop Blade. Drag, or use arrow keys." style="position:absolute;top:-16px;left:15%;transform:rotate(4deg);min-height:36px;padding:0 14px;border:0;background:rgba(226,214,188,.92);color:#151312;font:700 11px/1 'Space Mono',monospace;letter-spacing:.08em;text-transform:uppercase;cursor:grab;touch-action:none;z-index:2">⠿ Prop Blade</button>
+        <button type="button" onClick="{{ openBlade }}" aria-label="View larger: Prop Blade, in-progress 3D print" style="display:block;width:100%;padding:0;border:0;background:transparent;cursor:zoom-in"><img src="images/workbench/prop-blade-print.jpg" alt="An unfinished 3D printed prop blade standing on a desk, unpainted sections still bare plastic, next to a comic poster and desk clutter." style="display:block;width:100%;height:auto" draggable="false"></button>
+        <figcaption style="display:flex;justify-content:space-between;gap:10px;margin-top:8px;font:400 11px/1.3 'Space Mono',monospace;letter-spacing:.04em;text-transform:uppercase;color:#151312"><strong>Prop Blade</strong><span>3D Printed · In Progress</span></figcaption>
+      </figure>
     </div>
   </div>
 </section>
@@ -189,7 +198,7 @@ class Component extends DCLogic {
     return {
       reach: { x: 3, y: 3, r: -2, w: 40 }, note1: { x: 48, y: 2, r: -1, w: 22 },
       first: { x: 28, y: 46, r: 6, w: 20 }, portrait: { x: 55, y: 20, r: 1.5, w: 38 },
-      note2: { x: 4, y: 70, r: 1, w: 22 }, sticky: { x: 56, y: 78, r: -1.5, w: 30 }
+      note2: { x: 4, y: 70, r: 1, w: 22 }, miniHead: { x: 56, y: 68, r: -3, w: 20 }, blade: { x: 78, y: 46, r: 2.5, w: 20 }
     };
   }
   works() {
@@ -201,7 +210,11 @@ class Component extends DCLogic {
         { label: 'Full Piece', src: 'images/hero-portrait.png', alt: 'Hand-drawn self-portrait illustration by Krystyna Ewing: a character with a purple bucket hat and glowing green eyes, with her name lettered around it in purple marker.' },
         { label: 'Detail', src: 'images/header.png', alt: 'Detail crop of the same character, face only, without the surrounding lettering.' }] },
       { id: 'first', title: 'First Pass', medium: 'Sketch, Digital', stages: [
-        { label: 'Sketch', src: 'images/website_hero.png', alt: 'An early, unfinished sketch mixing loose line art with a hand-lettered name banner.' }] }
+        { label: 'Sketch', src: 'images/website_hero.png', alt: 'An early, unfinished sketch mixing loose line art with a hand-lettered name banner.' }] },
+      { id: 'miniHead', title: 'Painted Head', medium: 'Miniature', stages: [
+        { label: 'In Progress', src: 'images/workbench/mini-head-painting.jpg', alt: 'A hand-painted miniature head, mid-progress, held between two fingers — base skin tone and inked features, paint bottles and a mixing palette in the background.' }] },
+      { id: 'blade', title: 'Prop Blade', medium: '3D Printed', stages: [
+        { label: 'In Progress', src: 'images/workbench/prop-blade-print.jpg', alt: 'An unfinished 3D printed prop blade standing on a desk, unpainted sections still bare plastic, next to a comic poster and desk clutter.' }] }
     ];
   }
   state = {
@@ -239,7 +252,7 @@ class Component extends DCLogic {
   piece(id) {
     const p = this.state.pieces[id], narrow = this.state.narrow;
     const style = narrow
-      ? { position: 'relative', width: id.startsWith('note') || id === 'sticky' ? '100%' : '92%', alignSelf: ['portrait', 'note2'].includes(id) ? 'flex-end' : 'flex-start', transform: `rotate(${p.r * 0.6}deg)` }
+      ? { position: 'relative', width: id.startsWith('note') ? '100%' : '92%', alignSelf: ['portrait', 'note2'].includes(id) ? 'flex-end' : 'flex-start', transform: `rotate(${p.r * 0.6}deg)` }
       : { position: 'absolute', left: p.x + '%', top: p.y + '%', width: p.w + '%', transform: `rotate(${p.r}deg)`, zIndex: this.state.z[id] || 1, transition: this.drag && this.drag.id === id ? 'none' : 'transform .2s, filter .3s', filter: this.state.flash === id ? 'drop-shadow(0 0 0 #f45b8e) drop-shadow(0 0 14px #f45b8e)' : 'none' };
     const clampSet = (x, y) => this.setState(s => ({ pieces: { ...s.pieces, [id]: { ...s.pieces[id], x: Math.max(-4, Math.min(92, x)), y: Math.max(-2, Math.min(94, y)) } } }));
     return {
@@ -298,13 +311,14 @@ class Component extends DCLogic {
       resetDesk: () => this.setState({ pieces: this.defaults(), z: {} }),
       jumpReach: () => this.jump('reach'), jumpPortrait: () => this.jump('portrait'), jumpFirst: () => this.jump('first'),
       openReach: open('reach'), openPortrait: open('portrait'), openFirst: open('first'),
+      openMiniHead: open('miniHead'), openBlade: open('blade'),
       drawers, lbOpen: s.lb >= 0, lb: lb || { title: '', medium: '', stageLabel: '', src: '', alt: '', prevTitle: '', nextTitle: '', stages: [] },
       lbImgStyle: { width: '100%', height: '100%', backgroundImage: lb ? `url("${lb.src}")` : 'none', backgroundSize: 'contain', backgroundRepeat: 'no-repeat', backgroundPosition: 'center' },
       lbClose: () => this.setState({ lb: -1 }), lbPrev: step(-1), lbNext: step(1),
       lbKey: e => { if (e.key === 'Escape') this.setState({ lb: -1 }); else if (e.key === 'ArrowLeft') step(-1)(); else if (e.key === 'ArrowRight') step(1)(); }
     };
     [['reach', 2], ['portrait', 2]].forEach(([id, n]) => { for (let i = 0; i < n; i++) { const on = (s.stage[id] || 0) === i; r[id + 'S' + i] = on; r[id + 'I' + i] = { display: on ? 'block' : 'none', width: '100%', height: 'auto' }; r[id + 'P' + i] = on ? 'true' : 'false'; r[id + 'M' + i] = on ? '■' : '□'; r[id + 'To' + i] = setStage(id, i); } });
-    ['reach', 'note1', 'first', 'portrait', 'note2', 'sticky'].forEach(id => { r[id] = this.piece(id); });
+    ['reach', 'note1', 'first', 'portrait', 'note2', 'miniHead', 'blade'].forEach(id => { r[id] = this.piece(id); });
     return r;
   }
 }
