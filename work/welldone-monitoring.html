@@ -72,18 +72,15 @@ a:hover{color:var(--red)}
         <span aria-hidden="true" style="font:700 12px/1 'Space Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--pink)">{{ tocIcon }}</span>
       </button>
       <ol id="toc-list" style="list-style:none;margin:0;padding:0;display:grid;font:400 12px/1.35 'Space Mono',monospace;letter-spacing:.04em">
-        <li><a href="#s01" style="display:flex;gap:10px;padding:7px 0;text-decoration:none"><span aria-hidden="true" style="color:var(--red)">{{ mk.s01 }}</span>01 Overview</a></li>
-        <li><a href="#s02" style="display:flex;gap:10px;padding:7px 0;text-decoration:none"><span aria-hidden="true" style="color:var(--red)">{{ mk.s02 }}</span>02 Understanding the Problem</a></li>
-        <li><a href="#s03" style="display:flex;gap:10px;padding:7px 0;text-decoration:none"><span aria-hidden="true" style="color:var(--red)">{{ mk.s03 }}</span>03 Research</a></li>
+        <li><a href="#s01" style="display:flex;gap:10px;padding:7px 0;text-decoration:none"><span aria-hidden="true" style="color:var(--red)">{{ mk.s01 }}</span>01 The Problem</a></li>
+        <li><a href="#s02" style="display:flex;gap:10px;padding:7px 0;text-decoration:none"><span aria-hidden="true" style="color:var(--red)">{{ mk.s02 }}</span>02 Stakeholder Research</a></li>
+        <li><a href="#s03" style="display:flex;gap:10px;padding:7px 0;text-decoration:none"><span aria-hidden="true" style="color:var(--red)">{{ mk.s03 }}</span>03 Turning Information Into a Workflow</a></li>
         <li><a href="#s04" style="display:flex;gap:10px;padding:7px 0;text-decoration:none"><span aria-hidden="true" style="color:var(--red)">{{ mk.s04 }}</span>04 Designing the Monitoring Experience</a></li>
-        <li><a href="#s05" style="display:flex;gap:10px;padding:7px 0;text-decoration:none"><span aria-hidden="true" style="color:var(--red)">{{ mk.s05 }}</span>05 The Problem We Found</a></li>
-        <li><a href="#s06" style="display:flex;gap:10px;padding:7px 0;text-decoration:none"><span aria-hidden="true" style="color:var(--red)">{{ mk.s06 }}</span>06 The Pivot</a></li>
-        <li><a href="#s07" style="display:flex;gap:10px;padding:7px 0;text-decoration:none"><span aria-hidden="true" style="color:var(--red)">{{ mk.s07 }}</span>07 Designing for Different Responsibilities</a></li>
-        <li><a href="#s08" style="display:flex;gap:10px;padding:7px 0;text-decoration:none"><span aria-hidden="true" style="color:var(--red)">{{ mk.s08 }}</span>08 Communication &amp; Connectivity</a></li>
-        <li><a href="#s09" style="display:flex;gap:10px;padding:7px 0;text-decoration:none"><span aria-hidden="true" style="color:var(--red)">{{ mk.s09 }}</span>09 Supporting the Larger Experience</a></li>
-        <li><a href="#s10" style="display:flex;gap:10px;padding:7px 0;text-decoration:none"><span aria-hidden="true" style="color:var(--red)">{{ mk.s10 }}</span>10 Accessibility &amp; Inclusive Design</a></li>
-        <li><a href="#s11" style="display:flex;gap:10px;padding:7px 0;text-decoration:none"><span aria-hidden="true" style="color:var(--red)">{{ mk.s11 }}</span>11 Designing the System</a></li>
-        <li><a href="#s12" style="display:flex;gap:10px;padding:7px 0;text-decoration:none"><span aria-hidden="true" style="color:var(--red)">{{ mk.s12 }}</span>12 What I Learned</a></li>
+        <li><a href="#s05" style="display:flex;gap:10px;padding:7px 0;text-decoration:none"><span aria-hidden="true" style="color:var(--red)">{{ mk.s05 }}</span>05 Finding the Right Level of Information</a></li>
+        <li><a href="#s06" style="display:flex;gap:10px;padding:7px 0;text-decoration:none"><span aria-hidden="true" style="color:var(--red)">{{ mk.s06 }}</span>06 Iterating on the Dashboard</a></li>
+        <li><a href="#s07" style="display:flex;gap:10px;padding:7px 0;text-decoration:none"><span aria-hidden="true" style="color:var(--red)">{{ mk.s07 }}</span>07 A Shift in the Experience</a></li>
+        <li><a href="#s08" style="display:flex;gap:10px;padding:7px 0;text-decoration:none"><span aria-hidden="true" style="color:var(--red)">{{ mk.s08 }}</span>08 The Final Direction</a></li>
+        <li><a href="#s09" style="display:flex;gap:10px;padding:7px 0;text-decoration:none"><span aria-hidden="true" style="color:var(--red)">{{ mk.s09 }}</span>09 What I Took Away</a></li>
       </ol>
     </nav>
   </aside>
@@ -94,240 +91,162 @@ a:hover{color:var(--red)}
   <main id="main" style="flex:1 1 600px;min-width:0;max-width:1040px;margin:0 auto">
 
     <section id="s01" aria-labelledby="s01-h" style="display:grid;gap:22px;padding:clamp(56px,7vw,110px) 0;scroll-margin-top:24px">
-      <p style="margin:0;display:flex;align-items:baseline;gap:14px"><span style="font:900 40px/.8 'Big Shoulders Display',sans-serif;color:var(--pink)">01</span><span style="font:400 12px/1 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">Overview</span></p>
-      <h2 id="s01-h" style="margin:0 0 8px;max-width:22ch;font:700 clamp(34px,4vw,60px)/1.02 'Source Sans 3',sans-serif;letter-spacing:-.025em;text-wrap:balance">Designing for infrastructure thousands of miles away</h2>
-      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">WellDone is a nonprofit focused on improving access to safe drinking water in underserved communities through sustainable water infrastructure.</p>
-      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">One of the challenges with installing water infrastructure is that the work doesn't end when a well or hand pump is installed. Infrastructure needs to continue functioning over time, and the people responsible for maintaining it need a way to understand when something may be wrong.</p>
-      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">The project focused on interfaces supporting WellDone's remote well-monitoring system, including experiences for field workers and administrators as well as the supporting website.</p>
-      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">My work centered on redesigning how sensor information, well status, maintenance needs, and related information were communicated so someone could understand what was happening without having to interpret a dense collection of raw information first.</p>
+      <p style="margin:0;display:flex;align-items:baseline;gap:14px"><span style="font:900 40px/.8 'Big Shoulders Display',sans-serif;color:var(--pink)">01</span><span style="font:400 12px/1 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">The Problem</span></p>
+      <h2 id="s01-h" style="margin:0 0 8px;max-width:22ch;font:700 clamp(34px,4vw,60px)/1.02 'Source Sans 3',sans-serif;letter-spacing:-.025em;text-wrap:balance">From seeing data to understanding what matters</h2>
+      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">Installing a well is only part of providing reliable access to clean water. Once infrastructure is in place, WellDone still needs to understand what is happening with it.</p>
+      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">The organization needed a way to monitor its network of wells and the sensor data associated with them without forcing users to dig through disconnected information to understand what required their attention.</p>
+      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">The challenge for us was figuring out how to turn a large amount of operational information into an interface that made the condition of the system understandable.</p>
+      <p style="margin:0;max-width:68ch;padding:16px 20px;border:1px solid var(--ink);font:700 clamp(16px,1.4vw,19px)/1.5 'Source Sans 3',sans-serif">The core question: How do we help someone move from seeing data to understanding what needs their attention?</p>
     </section>
 
     <section id="s02" aria-labelledby="s02-h" style="display:grid;gap:22px;padding:clamp(56px,7vw,110px) 0;border-top:1px solid var(--line);scroll-margin-top:24px">
-      <p style="margin:0;display:flex;align-items:baseline;gap:14px"><span style="font:900 40px/.8 'Big Shoulders Display',sans-serif;color:var(--pink)">02</span><span style="font:400 12px/1 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">Understanding the Problem</span></p>
-      <h2 id="s02-h" style="margin:0 0 8px;max-width:22ch;font:700 clamp(34px,4vw,60px)/1.02 'Source Sans 3',sans-serif;letter-spacing:-.025em;text-wrap:balance">Knowing a well exists isn't the same as knowing it's working</h2>
-      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">Remote water infrastructure creates an unusual UX problem.</p>
-      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">The people monitoring a well may not physically be anywhere near it.</p>
-      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">Administrators need enough information to understand what is happening across multiple wells, while workers in the field need information that helps them understand where attention may be required.</p>
-      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">That means sensor data can't simply exist.</p>
-      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">It has to communicate something useful.</p>
-      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">The experience needed to help users answer basic questions quickly:</p>
+      <p style="margin:0;display:flex;align-items:baseline;gap:14px"><span style="font:900 40px/.8 'Big Shoulders Display',sans-serif;color:var(--pink)">02</span><span style="font:400 12px/1 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">Stakeholder Research</span></p>
+      <h2 id="s02-h" style="margin:0 0 8px;max-width:22ch;font:700 clamp(34px,4vw,60px)/1.02 'Source Sans 3',sans-serif;letter-spacing:-.025em;text-wrap:balance">The first task wasn't drawing screens</h2>
+      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">We didn't begin with an existing WellDone product that we were asked to redesign.</p>
+      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">Instead, the project began with information provided by stakeholders and findings from interviews they had already conducted. Those conversations gave us insight into how wells were being monitored, what information mattered to the people responsible for them, and where a digital monitoring system could support that work.</p>
+      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">Our first task was therefore not drawing screens.</p>
+      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">It was figuring out what the information meant.</p>
+      <h3 style="margin:8px 0 0;max-width:34ch;font:700 clamp(22px,2.2vw,30px)/1.15 'Source Sans 3',sans-serif;letter-spacing:-.01em">Translating research into product requirements</h3>
+      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">We worked through the stakeholder and interview findings to identify the tasks the platform needed to support.</p>
+      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">Several needs became central to the experience:</p>
       <ul style="margin:0;padding-left:1.2em;max-width:64ch;display:grid;gap:8px;font:400 clamp(18px,1.3vw,20px)/1.55 'Source Sans 3',sans-serif">
-        <li>Which well am I looking at?</li>
-        <li>What is its current status?</li>
-        <li>When was the information last updated?</li>
-        <li>Is something wrong?</li>
-        <li>Does someone need to take action?</li>
-        <li>What information does a worker need in the field?</li>
-        <li>What information does an administrator need while monitoring multiple locations?</li>
+        <li>Seeing the location and overall status of wells</li>
+        <li>Understanding which wells required attention</li>
+        <li>Reviewing sensor and historical data</li>
+        <li>Finding information about an individual well</li>
+        <li>Identifying maintenance or operational issues</li>
+        <li>Moving between a network-level view and detailed information without losing context</li>
       </ul>
-      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">The existing interface made some of those answers harder to find than they needed to be.</p>
+      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">Those needs became the foundation for the product structure.</p>
       <figure style="margin:clamp(12px,2vw,28px) 0 0;display:grid;gap:10px">
-        <div style="width:100%;min-width:0;aspect-ratio:16/9;position:relative"><image-slot id="welldone-monitoring-1" shape="rect" fit="contain" placeholder="Existing monitoring experience"></image-slot></div>
-        <figcaption style="font:400 12px/1.5 'Space Mono',monospace;letter-spacing:.06em;color:var(--muted)"><span style="color:var(--pink)">FIG. 01</span> — Existing monitoring experience</figcaption>
+        <div style="width:100%;min-width:0;aspect-ratio:16/9;position:relative"><image-slot id="welldone-monitoring-1" shape="rect" fit="contain" placeholder="Research synthesis — notes, requirements, affinity mapping"></image-slot></div>
+        <figcaption style="font:400 12px/1.5 'Space Mono',monospace;letter-spacing:.06em;color:var(--muted)"><span style="color:var(--pink)">FIG. 01</span> — Research synthesis and requirements</figcaption>
       </figure>
     </section>
 
     <section id="s03" aria-labelledby="s03-h" style="display:grid;gap:22px;padding:clamp(56px,7vw,110px) 0;border-top:1px solid var(--line);scroll-margin-top:24px">
-      <p style="margin:0;display:flex;align-items:baseline;gap:14px"><span style="font:900 40px/.8 'Big Shoulders Display',sans-serif;color:var(--pink)">03</span><span style="font:400 12px/1 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">Research</span></p>
-      <h2 id="s03-h" style="margin:0 0 8px;max-width:22ch;font:700 clamp(34px,4vw,60px)/1.02 'Source Sans 3',sans-serif;letter-spacing:-.025em;text-wrap:balance">Understanding the environment around the interface</h2>
-      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">A major part of the project was understanding that we weren't designing for a traditional office environment.</p>
-      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">The system connected people responsible for monitoring water infrastructure with people who may be physically working around that infrastructure.</p>
-      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">Those environments have very different constraints.</p>
-      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">An administrator may need to monitor the status of multiple wells and quickly identify which ones require attention.</p>
-      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">A field worker needs enough context to understand what is happening with a particular well and what needs attention without navigating through unnecessary information.</p>
-      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">Connectivity was another major consideration.</p>
-      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">The experience could not be designed around the assumption that everyone interacting with it would always have a reliable internet connection.</p>
-      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">That pushed the design toward prioritizing information that could be understood quickly:</p>
-      <ul style="margin:0;padding-left:1.2em;max-width:64ch;display:grid;gap:8px;font:400 clamp(18px,1.3vw,20px)/1.55 'Source Sans 3',sans-serif">
-        <li>Current well status</li>
-        <li>Maintenance context</li>
-        <li>Alerts</li>
-        <li>Recent activity</li>
-        <li>Timestamps</li>
-        <li>Clear identification of the well or sensor</li>
-        <li>Communication between people monitoring and maintaining the infrastructure</li>
-      </ul>
-      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">The environment surrounding the product became just as important as the interface itself.</p>
+      <p style="margin:0;display:flex;align-items:baseline;gap:14px"><span style="font:900 40px/.8 'Big Shoulders Display',sans-serif;color:var(--pink)">03</span><span style="font:400 12px/1 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">Turning Information Into a Workflow</span></p>
+      <h2 id="s03-h" style="margin:0 0 8px;max-width:22ch;font:700 clamp(34px,4vw,60px)/1.02 'Source Sans 3',sans-serif;letter-spacing:-.025em;text-wrap:balance">Organizing information around how it's actually used</h2>
+      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">Once we understood what people needed from the system, we began organizing that information around the way someone would actually use it.</p>
+      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">Rather than treating every piece of sensor data as equally important, we focused on helping users answer increasingly specific questions:</p>
+      <div style="max-width:52ch;padding:20px 24px;border:1px solid var(--ink);display:grid;gap:4px;justify-items:start;font:700 15px/1.5 'Space Mono',monospace;letter-spacing:.02em">
+        <span>What's happening across the network?</span>
+        <span aria-hidden="true" style="color:var(--red)">↓</span>
+        <span>Is something wrong?</span>
+        <span aria-hidden="true" style="color:var(--red)">↓</span>
+        <span>Where is it happening?</span>
+        <span aria-hidden="true" style="color:var(--red)">↓</span>
+        <span>What does the data tell me?</span>
+        <span aria-hidden="true" style="color:var(--red)">↓</span>
+        <span>What needs my attention?</span>
+      </div>
+      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">That progression became the backbone of the experience.</p>
+      <figure style="margin:clamp(12px,2vw,28px) 0 0;display:grid;gap:10px">
+        <div style="width:100%;min-width:0;aspect-ratio:16/9;position:relative"><image-slot id="welldone-monitoring-2" shape="rect" fit="contain" placeholder="User flow / information architecture"></image-slot></div>
+        <figcaption style="font:400 12px/1.5 'Space Mono',monospace;letter-spacing:.06em;color:var(--muted)"><span style="color:var(--pink)">FIG. 02</span> — User flow / information architecture</figcaption>
+      </figure>
+      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">This was particularly important because the platform wasn't just a reporting tool. It needed to help users interpret the state of physical infrastructure distributed across multiple locations.</p>
     </section>
 
     <section id="s04" aria-labelledby="s04-h" style="display:grid;gap:22px;padding:clamp(56px,7vw,110px) 0;border-top:1px solid var(--line);scroll-margin-top:24px">
       <p style="margin:0;display:flex;align-items:baseline;gap:14px"><span style="font:900 40px/.8 'Big Shoulders Display',sans-serif;color:var(--pink)">04</span><span style="font:400 12px/1 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">Designing the Monitoring Experience</span></p>
-      <h2 id="s04-h" style="margin:0 0 8px;max-width:22ch;font:700 clamp(34px,4vw,60px)/1.02 'Source Sans 3',sans-serif;letter-spacing:-.025em;text-wrap:balance">Status before data</h2>
-      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">The monitoring experience contained a lot of information, but not every piece of information had the same priority.</p>
-      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">The interface needed to make the condition of the infrastructure understandable before asking someone to interpret the details behind it.</p>
-      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">That led us toward a stronger hierarchy centered on status.</p>
-      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">Instead of requiring users to scan through rows of information and determine which details mattered, the redesigned experience brought the most important information forward.</p>
-      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">Well or sensor status needed to be immediately visible.</p>
-      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">Timestamps also became important because sensor information without context about when it was collected could be misleading. Someone needed to understand not only what a sensor was reporting, but how current that information actually was.</p>
-      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">Maintenance information and alerts could then provide additional context when something required attention.</p>
+      <h2 id="s04-h" style="margin:0 0 8px;max-width:24ch;font:700 clamp(34px,4vw,60px)/1.02 'Source Sans 3',sans-serif;letter-spacing:-.025em;text-wrap:balance">Three ways of understanding the system</h2>
+      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">The interface began taking shape around three primary ways of understanding the system.</p>
+      <h3 style="margin:8px 0 0;max-width:34ch;font:700 clamp(22px,2.2vw,30px)/1.15 'Source Sans 3',sans-serif;letter-spacing:-.01em;color:var(--pink)">Geographic monitoring</h3>
+      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">The map provided a high-level view of WellDone's wells and allowed users to understand where infrastructure was located.</p>
+      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">Rather than making the map purely visual, we treated it as a navigation and monitoring tool. Selecting a location could lead users deeper into the information associated with that well.</p>
       <figure style="margin:clamp(12px,2vw,28px) 0 0;display:grid;gap:10px">
-        <div style="width:100%;min-width:0;aspect-ratio:16/9;position:relative"><image-slot id="welldone-monitoring-2" shape="rect" fit="contain" placeholder="Earlier monitoring experience"></image-slot></div>
-        <figcaption style="font:400 12px/1.5 'Space Mono',monospace;letter-spacing:.06em;color:var(--muted)"><span style="color:var(--pink)">FIG. 02</span> — Earlier monitoring experience</figcaption>
+        <div style="width:100%;min-width:0;aspect-ratio:16/9;position:relative"><image-slot id="welldone-monitoring-3" shape="rect" fit="contain" placeholder="WellDone map screen"></image-slot></div>
+        <figcaption style="font:400 12px/1.5 'Space Mono',monospace;letter-spacing:.06em;color:var(--muted)"><span style="color:var(--pink)">FIG. 03</span> — WellDone map screen</figcaption>
       </figure>
+      <h3 style="margin:28px 0 0;max-width:34ch;font:700 clamp(22px,2.2vw,30px)/1.15 'Source Sans 3',sans-serif;letter-spacing:-.01em;color:var(--pink)">Sensor data</h3>
+      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">Once users identified a well they wanted to investigate, they needed access to the information being collected from it.</p>
+      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">We designed views that organized sensor information into something that could be scanned and compared rather than presenting users with an undifferentiated stream of data.</p>
       <figure style="margin:clamp(12px,2vw,28px) 0 0;display:grid;gap:10px">
-        <div style="width:100%;min-width:0;aspect-ratio:16/9;position:relative"><image-slot id="welldone-monitoring-3" shape="rect" fit="contain" placeholder="Status-focused redesign"></image-slot></div>
-        <figcaption style="font:400 12px/1.5 'Space Mono',monospace;letter-spacing:.06em;color:var(--muted)"><span style="color:var(--pink)">FIG. 03</span> — Status-focused redesign</figcaption>
+        <div style="width:100%;min-width:0;aspect-ratio:16/9;position:relative"><image-slot id="welldone-monitoring-4" shape="rect" fit="contain" placeholder="Sensor / data visualization screen"></image-slot></div>
+        <figcaption style="font:400 12px/1.5 'Space Mono',monospace;letter-spacing:.06em;color:var(--muted)"><span style="color:var(--pink)">FIG. 04</span> — Sensor / data visualization screen</figcaption>
       </figure>
+      <h3 style="margin:28px 0 0;max-width:34ch;font:700 clamp(22px,2.2vw,30px)/1.15 'Source Sans 3',sans-serif;letter-spacing:-.01em;color:var(--pink)">Individual well information</h3>
+      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">The individual-well experience brought the relevant information together so users could understand what was happening at a specific location without bouncing between unrelated screens.</p>
       <figure style="margin:clamp(12px,2vw,28px) 0 0;display:grid;gap:10px">
-        <div style="width:100%;min-width:0;aspect-ratio:16/9;position:relative"><image-slot id="welldone-monitoring-4" shape="rect" fit="contain" placeholder="Making condition and recency immediately visible"></image-slot></div>
-        <figcaption style="font:400 12px/1.5 'Space Mono',monospace;letter-spacing:.06em;color:var(--muted)"><span style="color:var(--pink)">FIG. 04</span> — Making condition and recency immediately visible</figcaption>
+        <div style="width:100%;min-width:0;aspect-ratio:16/9;position:relative"><image-slot id="welldone-monitoring-5" shape="rect" fit="contain" placeholder="Individual well / detail screen"></image-slot></div>
+        <figcaption style="font:400 12px/1.5 'Space Mono',monospace;letter-spacing:.06em;color:var(--muted)"><span style="color:var(--pink)">FIG. 05</span> — Individual well / detail screen</figcaption>
       </figure>
     </section>
 
     <section id="s05" aria-labelledby="s05-h" style="display:grid;gap:22px;padding:clamp(56px,7vw,110px) 0;border-top:1px solid var(--line);scroll-margin-top:24px">
-      <p style="margin:0;display:flex;align-items:baseline;gap:14px"><span style="font:900 40px/.8 'Big Shoulders Display',sans-serif;color:var(--pink)">05</span><span style="font:400 12px/1 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">The Problem We Found</span></p>
-      <h2 id="s05-h" style="margin:0 0 8px;max-width:22ch;font:700 clamp(34px,4vw,60px)/1.02 'Source Sans 3',sans-serif;letter-spacing:-.025em;text-wrap:balance">A table can contain everything and still tell you very little</h2>
-      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">One of the biggest issues with the monitoring experience was the way information was presented.</p>
-      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">The existing approach relied heavily on dense tabular information.</p>
-      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">Tables are useful when someone needs to compare exact values across a structured dataset, but they become harder to use when the primary question isn't <em>What are all of these values?</em></p>
-      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">The actual question was closer to <em>Which of these wells needs my attention?</em></p>
-      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">Users had to scan across information, interpret it, and mentally determine which entries were important.</p>
-      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">The interface technically contained the information they needed, but it wasn't doing enough to communicate priority.</p>
-      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">As we worked through the problem, it became clear that reorganizing the existing table wouldn't fully solve it.</p>
-      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">The information architecture needed to change.</p>
-      <figure style="margin:clamp(12px,2vw,28px) 0 0;display:grid;gap:10px">
-        <div style="width:100%;min-width:0;aspect-ratio:16/9;position:relative"><image-slot id="welldone-monitoring-5" shape="rect" fit="contain" placeholder="Dense table-based monitoring"></image-slot></div>
-        <figcaption style="font:400 12px/1.5 'Space Mono',monospace;letter-spacing:.06em;color:var(--muted)"><span style="color:var(--pink)">FIG. 05</span> — Dense table-based monitoring</figcaption>
-      </figure>
+      <p style="margin:0;display:flex;align-items:baseline;gap:14px"><span style="font:900 40px/.8 'Big Shoulders Display',sans-serif;color:var(--pink)">05</span><span style="font:400 12px/1 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">Finding the Right Level of Information</span></p>
+      <h2 id="s05-h" style="margin:0 0 8px;max-width:22ch;font:700 clamp(34px,4vw,60px)/1.02 'Source Sans 3',sans-serif;letter-spacing:-.025em;text-wrap:balance">It wasn't whether information should exist — it was when it should appear</h2>
+      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">One of the biggest design challenges wasn't determining whether information should exist.</p>
+      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">It was deciding when it should appear.</p>
+      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">A monitoring dashboard can become useless surprisingly quickly when every measurement, warning, status and control competes for attention.</p>
+      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">The interface needed enough information to help someone recognize a problem without requiring them to understand everything about a well before deciding whether it deserved further investigation.</p>
+      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">That led us toward a layered approach:</p>
+      <p style="margin:0;max-width:68ch;padding:16px 20px;border:1px solid var(--ink);font:700 clamp(14px,1.2vw,16px)/1.6 'Space Mono',monospace;letter-spacing:.03em">Network <span style="color:var(--red)">→</span> Status <span style="color:var(--red)">→</span> Well <span style="color:var(--red)">→</span> Data <span style="color:var(--red)">→</span> Detail</p>
+      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">Each level answered a different question and gave users a path toward more information when they needed it.</p>
     </section>
 
     <section id="s06" aria-labelledby="s06-h" style="display:grid;gap:22px;padding:clamp(56px,7vw,110px) 0;border-top:1px solid var(--line);scroll-margin-top:24px">
-      <p style="margin:0;display:flex;align-items:baseline;gap:14px"><span style="font:900 40px/.8 'Big Shoulders Display',sans-serif;color:var(--pink)">06</span><span style="font:400 12px/1 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">The Pivot</span></p>
-      <h2 id="s06-h" style="margin:0 0 8px;max-width:22ch;font:700 clamp(34px,4vw,60px)/1.02 'Source Sans 3',sans-serif;letter-spacing:-.025em;text-wrap:balance">From rows of data to scannable status</h2>
-      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">We moved away from relying on the table as the primary way to understand the system.</p>
-      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">Instead, the redesign explored a card-based approach that allowed each well or monitored element to communicate its condition as a recognizable unit.</p>
-      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">That changed the scanning behavior of the interface.</p>
-      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">Rather than moving horizontally through rows and columns and interpreting several values before understanding what was happening, users could scan the page for status first.</p>
-      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">The card structure gave us room to establish a clearer hierarchy:</p>
-      <p style="margin:0;max-width:68ch;padding:16px 20px;border:1px solid var(--ink);font:700 clamp(14px,1.2vw,16px)/1.6 'Space Mono',monospace;letter-spacing:.03em">Identity <span style="color:var(--red)">→</span> Status <span style="color:var(--red)">→</span> Recency <span style="color:var(--red)">→</span> Maintenance Context <span style="color:var(--red)">→</span> Additional Detail</p>
-      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">This didn't mean the underlying information became less important.</p>
-      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">It meant the interface stopped treating every piece of information as equally important.</p>
+      <p style="margin:0;display:flex;align-items:baseline;gap:14px"><span style="font:900 40px/.8 'Big Shoulders Display',sans-serif;color:var(--pink)">06</span><span style="font:400 12px/1 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">Iterating on the Dashboard</span></p>
+      <h2 id="s06-h" style="margin:0 0 8px;max-width:22ch;font:700 clamp(34px,4vw,60px)/1.02 'Source Sans 3',sans-serif;letter-spacing:-.025em;text-wrap:balance">Access isn't the same thing as clarity</h2>
+      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">As the interface developed, we explored different ways of presenting the information stakeholders had identified as important.</p>
+      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">Some versions exposed a significant amount of information directly on the dashboard.</p>
+      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">That technically gave users access to everything they might need, but access wasn't the same thing as clarity.</p>
+      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">The more information we surfaced simultaneously, the harder it became to understand what actually mattered.</p>
       <figure style="margin:clamp(12px,2vw,28px) 0 0;display:grid;gap:10px">
-        <div style="width:100%;min-width:0;aspect-ratio:16/9;position:relative"><image-slot id="welldone-monitoring-6" shape="rect" fit="contain" placeholder="From dense tables to scannable cards"></image-slot></div>
-        <figcaption style="font:400 12px/1.5 'Space Mono',monospace;letter-spacing:.06em;color:var(--muted)"><span style="color:var(--pink)">FIG. 06</span> — From dense tables to scannable cards</figcaption>
+        <div style="width:100%;min-width:0;aspect-ratio:16/9;position:relative"><image-slot id="welldone-monitoring-6" shape="rect" fit="contain" placeholder="Earlier dashboard exploration"></image-slot></div>
+        <figcaption style="font:400 12px/1.5 'Space Mono',monospace;letter-spacing:.06em;color:var(--muted)"><span style="color:var(--pink)">FIG. 06</span> — Earlier dashboard exploration</figcaption>
       </figure>
+      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">We began reducing that competition and strengthening the hierarchy between overall system health, wells requiring attention, and the detailed information users could investigate afterward.</p>
       <figure style="margin:clamp(12px,2vw,28px) 0 0;display:grid;gap:10px">
-        <div style="width:100%;min-width:0;aspect-ratio:16/9;position:relative"><image-slot id="welldone-monitoring-7" shape="rect" fit="contain" placeholder="Status hierarchy within a card"></image-slot></div>
-        <figcaption style="font:400 12px/1.5 'Space Mono',monospace;letter-spacing:.06em;color:var(--muted)"><span style="color:var(--pink)">FIG. 07</span> — Status hierarchy within a card</figcaption>
+        <div style="width:100%;min-width:0;aspect-ratio:16/9;position:relative"><image-slot id="welldone-monitoring-7" shape="rect" fit="contain" placeholder="Later dashboard iteration"></image-slot></div>
+        <figcaption style="font:400 12px/1.5 'Space Mono',monospace;letter-spacing:.06em;color:var(--muted)"><span style="color:var(--pink)">FIG. 07</span> — Later dashboard iteration</figcaption>
       </figure>
+      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">Instead of asking the dashboard to explain everything, we used it to answer a much simpler question:</p>
+      <p style="margin:0;max-width:68ch;font:600 clamp(20px,1.6vw,24px)/1.45 'Source Sans 3',sans-serif;text-wrap:pretty">Where should I look first?</p>
     </section>
 
     <section id="s07" aria-labelledby="s07-h" style="display:grid;gap:22px;padding:clamp(56px,7vw,110px) 0;border-top:1px solid var(--line);scroll-margin-top:24px">
-      <p style="margin:0;display:flex;align-items:baseline;gap:14px"><span style="font:900 40px/.8 'Big Shoulders Display',sans-serif;color:var(--pink)">07</span><span style="font:400 12px/1 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">Designing for Different Responsibilities</span></p>
-      <h2 id="s07-h" style="margin:0 0 8px;max-width:22ch;font:700 clamp(34px,4vw,60px)/1.02 'Source Sans 3',sans-serif;letter-spacing:-.025em;text-wrap:balance">The same infrastructure, different questions</h2>
-      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">The people interacting with the system weren't all doing the same job.</p>
-      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">An administrator monitoring multiple wells needs a broader view. They need to understand which infrastructure is operating normally and where attention may be required.</p>
-      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">A worker dealing with a particular well needs more focused context.</p>
-      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">That meant the interfaces couldn't simply show the same information at different screen sizes.</p>
-      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">The administrator experience emphasized monitoring, status visibility, alerts, and understanding what was happening across the system.</p>
-      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">The worker experience needed to make information about the relevant well easier to understand in the field.</p>
-      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">Maintenance context became especially important because identifying that something is wrong is only useful if the information can eventually support someone responding to the problem.</p>
-      <figure style="margin:clamp(12px,2vw,28px) 0 0;display:grid;gap:10px">
-        <div style="width:100%;min-width:0;aspect-ratio:16/9;position:relative"><image-slot id="welldone-monitoring-8" shape="rect" fit="contain" placeholder="Monitoring multiple wells"></image-slot></div>
-        <figcaption style="font:400 12px/1.5 'Space Mono',monospace;letter-spacing:.06em;color:var(--muted)"><span style="color:var(--pink)">FIG. 08</span> — Monitoring multiple wells</figcaption>
-      </figure>
-      <figure style="margin:clamp(12px,2vw,28px) 0 0;display:grid;gap:10px">
-        <div style="width:100%;min-width:0;aspect-ratio:16/9;position:relative"><image-slot id="welldone-monitoring-9" shape="rect" fit="contain" placeholder="Field-focused well information"></image-slot></div>
-        <figcaption style="font:400 12px/1.5 'Space Mono',monospace;letter-spacing:.06em;color:var(--muted)"><span style="color:var(--pink)">FIG. 09</span> — Field-focused well information</figcaption>
-      </figure>
-      <figure style="margin:clamp(12px,2vw,28px) 0 0;display:grid;gap:10px">
-        <div style="width:100%;min-width:0;aspect-ratio:16/9;position:relative"><image-slot id="welldone-monitoring-10" shape="rect" fit="contain" placeholder="Communicating when attention may be required"></image-slot></div>
-        <figcaption style="font:400 12px/1.5 'Space Mono',monospace;letter-spacing:.06em;color:var(--muted)"><span style="color:var(--pink)">FIG. 10</span> — Communicating when attention may be required</figcaption>
-      </figure>
+      <p style="margin:0;display:flex;align-items:baseline;gap:14px"><span style="font:900 40px/.8 'Big Shoulders Display',sans-serif;color:var(--pink)">07</span><span style="font:400 12px/1 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">A Shift in the Experience</span></p>
+      <h2 id="s07-h" style="margin:0 0 8px;max-width:24ch;font:700 clamp(34px,4vw,60px)/1.02 'Source Sans 3',sans-serif;letter-spacing:-.025em;text-wrap:balance">Less about adding, more about understanding</h2>
+      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">The project eventually reached a point where the problem became less about adding functionality and more about making the functionality we already had understandable.</p>
+      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">That changed the way we approached the interface.</p>
+      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">Rather than continuing to add information to individual screens, we focused more heavily on hierarchy, navigation and progressive disclosure.</p>
+      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">Users could begin with the condition of the overall network and move deeper only when something required investigation.</p>
+      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">That made the product feel less like a collection of sensor readings and more like a monitoring system.</p>
     </section>
 
     <section id="s08" aria-labelledby="s08-h" style="display:grid;gap:22px;padding:clamp(56px,7vw,110px) 0;border-top:1px solid var(--line);scroll-margin-top:24px">
-      <p style="margin:0;display:flex;align-items:baseline;gap:14px"><span style="font:900 40px/.8 'Big Shoulders Display',sans-serif;color:var(--pink)">08</span><span style="font:400 12px/1 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">Communication &amp; Connectivity</span></p>
-      <h2 id="s08-h" style="margin:0 0 8px;max-width:22ch;font:700 clamp(34px,4vw,60px)/1.02 'Source Sans 3',sans-serif;letter-spacing:-.025em;text-wrap:balance">Designing beyond the screen</h2>
-      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">A monitoring system only works if the information can eventually reach the person who can do something about it.</p>
-      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">That made communication part of the UX problem.</p>
-      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">We considered how alerts and maintenance information could move between the people monitoring infrastructure and workers responsible for responding in the field.</p>
-      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">Phone-based communication and tools such as WhatsApp were relevant considerations because the most effective communication method isn't necessarily another notification buried inside a web application.</p>
-      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">The same thinking applied to connectivity.</p>
-      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">A workflow designed around constant high-speed internet access may work perfectly during a design review and fail in the environment where it actually needs to be used.</p>
-      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">The product therefore had to prioritize clear, lightweight information and account for the reality that connectivity could be unreliable.</p>
-      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">This was an important shift in how I approached the project.</p>
-      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">We weren't just designing screens.</p>
-      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">We were designing how information moved between people.</p>
-      <figure style="margin:clamp(12px,2vw,28px) 0 0;display:grid;gap:10px">
-        <div style="width:100%;min-width:0;aspect-ratio:16/9;position:relative"><image-slot id="welldone-monitoring-11" shape="rect" fit="contain" placeholder="Connecting monitoring information with field response"></image-slot></div>
-        <figcaption style="font:400 12px/1.5 'Space Mono',monospace;letter-spacing:.06em;color:var(--muted)"><span style="color:var(--pink)">FIG. 11</span> — Connecting monitoring information with field response</figcaption>
+      <p style="margin:0;display:flex;align-items:baseline;gap:14px"><span style="font:900 40px/.8 'Big Shoulders Display',sans-serif;color:var(--pink)">08</span><span style="font:400 12px/1 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">The Final Direction</span></p>
+      <h2 id="s08-h" style="margin:0 0 8px;max-width:26ch;font:700 clamp(34px,4vw,60px)/1.02 'Source Sans 3',sans-serif;letter-spacing:-.025em;text-wrap:balance">Overview <span style="color:var(--red)">→</span> problem <span style="color:var(--red)">→</span> location <span style="color:var(--red)">→</span> evidence</h2>
+      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">The resulting experience connected WellDone's geographic, sensor and well information into a single monitoring workflow.</p>
+      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">Users could begin with the larger network, identify a location or potential problem, investigate an individual well, and then examine the underlying information in greater detail.</p>
+      <figure style="margin:clamp(20px,3vw,40px) 0 0;display:grid;gap:10px">
+        <div style="width:100%;min-width:0;aspect-ratio:21/9;position:relative"><image-slot id="welldone-monitoring-8" shape="rect" fit="contain" placeholder="Final WellDone dashboard"></image-slot></div>
+        <figcaption style="font:400 12px/1.5 'Space Mono',monospace;letter-spacing:.06em;color:var(--muted)"><span style="color:var(--pink)">FIG. 08</span> — Final WellDone dashboard</figcaption>
       </figure>
       <figure style="margin:clamp(12px,2vw,28px) 0 0;display:grid;gap:10px">
-        <div style="width:100%;min-width:0;aspect-ratio:16/9;position:relative"><image-slot id="welldone-monitoring-12" shape="rect" fit="contain" placeholder="Designing for field use"></image-slot></div>
-        <figcaption style="font:400 12px/1.5 'Space Mono',monospace;letter-spacing:.06em;color:var(--muted)"><span style="color:var(--pink)">FIG. 12</span> — Designing for field use</figcaption>
+        <div style="width:100%;min-width:0;aspect-ratio:16/9;position:relative"><image-slot id="welldone-monitoring-9" shape="rect" fit="contain" placeholder="Final map experience"></image-slot></div>
+        <figcaption style="font:400 12px/1.5 'Space Mono',monospace;letter-spacing:.06em;color:var(--muted)"><span style="color:var(--pink)">FIG. 09</span> — Final map experience</figcaption>
       </figure>
+      <figure style="margin:clamp(12px,2vw,28px) 0 0;display:grid;gap:10px">
+        <div style="width:100%;min-width:0;aspect-ratio:16/9;position:relative"><image-slot id="welldone-monitoring-10" shape="rect" fit="contain" placeholder="Final sensor / well detail experience"></image-slot></div>
+        <figcaption style="font:400 12px/1.5 'Space Mono',monospace;letter-spacing:.06em;color:var(--muted)"><span style="color:var(--pink)">FIG. 10</span> — Final sensor / well detail experience</figcaption>
+      </figure>
+      <p style="margin:clamp(8px,1.5vw,16px) 0 0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">The value wasn't any individual screen.</p>
+      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">It was the connection between them.</p>
+      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">The product created a path from overview → problem → location → evidence, allowing the information WellDone was already collecting to become something people could act on.</p>
     </section>
 
-    <section id="s09" aria-labelledby="s09-h" style="display:grid;gap:22px;padding:clamp(56px,7vw,110px) 0;border-top:1px solid var(--line);scroll-margin-top:24px">
-      <p style="margin:0;display:flex;align-items:baseline;gap:14px"><span style="font:900 40px/.8 'Big Shoulders Display',sans-serif;color:var(--pink)">09</span><span style="font:400 12px/1 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">Supporting the Larger Experience</span></p>
-      <h2 id="s09-h" style="margin:0 0 8px;max-width:22ch;font:700 clamp(34px,4vw,60px)/1.02 'Source Sans 3',sans-serif;letter-spacing:-.025em;text-wrap:balance">Connecting monitoring with the organization behind it</h2>
-      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">The project extended beyond the individual monitoring interfaces.</p>
-      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">The supporting WellDone website also needed to communicate the organization, its work, and the system surrounding the water infrastructure.</p>
-      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">That meant thinking about the relationship between the public-facing experience and the tools used by the people actually monitoring and maintaining wells.</p>
-      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">The visual and interaction design needed enough consistency that the experiences felt connected without pretending that every user had the same goal.</p>
-      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">The website could explain the larger mission.</p>
-      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">The administrator interface could support monitoring.</p>
-      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">The worker experience could support field activity.</p>
-      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">Together, those pieces formed a broader service rather than a collection of unrelated screens.</p>
-      <figure style="margin:clamp(12px,2vw,28px) 0 0;display:grid;gap:10px">
-        <div style="width:100%;min-width:0;aspect-ratio:16/9;position:relative"><image-slot id="welldone-monitoring-13" shape="rect" fit="contain" placeholder="Supporting web experience"></image-slot></div>
-        <figcaption style="font:400 12px/1.5 'Space Mono',monospace;letter-spacing:.06em;color:var(--muted)"><span style="color:var(--pink)">FIG. 13</span> — Supporting web experience</figcaption>
-      </figure>
-      <figure style="margin:clamp(12px,2vw,28px) 0 0;display:grid;gap:10px">
-        <div style="width:100%;min-width:0;aspect-ratio:16/9;position:relative"><image-slot id="welldone-monitoring-14" shape="rect" fit="contain" placeholder="Connecting the broader product ecosystem"></image-slot></div>
-        <figcaption style="font:400 12px/1.5 'Space Mono',monospace;letter-spacing:.06em;color:var(--muted)"><span style="color:var(--pink)">FIG. 14</span> — Connecting the broader product ecosystem</figcaption>
-      </figure>
-    </section>
-
-    <section id="s10" aria-labelledby="s10-h" style="display:grid;gap:22px;padding:clamp(56px,7vw,110px) 0;border-top:1px solid var(--line);scroll-margin-top:24px">
-      <p style="margin:0;display:flex;align-items:baseline;gap:14px"><span style="font:900 40px/.8 'Big Shoulders Display',sans-serif;color:var(--pink)">10</span><span style="font:400 12px/1 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">Accessibility &amp; Inclusive Design</span></p>
-      <h2 id="s10-h" style="margin:0 0 8px;max-width:22ch;font:700 clamp(34px,4vw,60px)/1.02 'Source Sans 3',sans-serif;letter-spacing:-.025em;text-wrap:balance">Designing around actual constraints</h2>
-      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">Accessibility in this project extended beyond visual compliance.</p>
-      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">The product had to account for people using different devices, working in different environments, and potentially dealing with unreliable connectivity.</p>
-      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">Information hierarchy therefore mattered significantly.</p>
-      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">Someone shouldn't need to read every value on the screen before understanding whether a well appears to be operating normally.</p>
-      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">Status needed to be communicated clearly.</p>
-      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">Timestamps needed to provide context.</p>
-      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">Alerts needed to be distinguishable from normal information.</p>
-      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">Navigation needed to stay focused enough that someone could understand where to go without learning a complicated system first.</p>
-      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">The card-based direction helped by grouping related information and giving each monitored element a clearer structure.</p>
-      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">Reducing the amount of interpretation required from the user became an accessibility decision as much as an information-design decision.</p>
-    </section>
-
-    <section id="s11" aria-labelledby="s11-h" style="display:grid;gap:22px;padding:clamp(56px,7vw,110px) 0;border-top:1px solid var(--line);scroll-margin-top:24px">
-      <p style="margin:0;display:flex;align-items:baseline;gap:14px"><span style="font:900 40px/.8 'Big Shoulders Display',sans-serif;color:var(--pink)">11</span><span style="font:400 12px/1 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">Designing the System</span></p>
-      <h2 id="s11-h" style="margin:0 0 8px;max-width:22ch;font:700 clamp(34px,4vw,60px)/1.02 'Source Sans 3',sans-serif;letter-spacing:-.025em;text-wrap:balance">Simplifying without oversimplifying</h2>
-      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">The redesign wasn't about removing technical information from the product.</p>
-      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">That information existed for a reason.</p>
-      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">The challenge was deciding when someone needed to see it.</p>
-      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">Cards gave the interface a clearer first layer of information while still allowing more detailed information to exist when necessary.</p>
-      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">That created a hierarchy between immediate status and deeper system information instead of forcing both into the same visual level.</p>
-      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">The same principles needed to carry between the administrator experience, worker experience, mobile layouts, and supporting website.</p>
-      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">The system had to remain recognizable even as the amount and type of information changed.</p>
-      <figure style="margin:clamp(12px,2vw,28px) 0 0;display:grid;gap:10px">
-        <div style="width:100%;min-width:0;aspect-ratio:16/9;position:relative"><image-slot id="welldone-monitoring-15" shape="rect" fit="contain" placeholder="Reusable monitoring patterns"></image-slot></div>
-        <figcaption style="font:400 12px/1.5 'Space Mono',monospace;letter-spacing:.06em;color:var(--muted)"><span style="color:var(--pink)">FIG. 15</span> — Reusable monitoring patterns</figcaption>
-      </figure>
-      <figure style="margin:clamp(12px,2vw,28px) 0 0;display:grid;gap:10px">
-        <div style="width:100%;min-width:0;aspect-ratio:16/9;position:relative"><image-slot id="welldone-monitoring-16" shape="rect" fit="contain" placeholder="Responsive information hierarchy"></image-slot></div>
-        <figcaption style="font:400 12px/1.5 'Space Mono',monospace;letter-spacing:.06em;color:var(--muted)"><span style="color:var(--pink)">FIG. 16</span> — Responsive information hierarchy</figcaption>
-      </figure>
-    </section>
-
-    <section id="s12" aria-labelledby="s12-h" style="display:grid;gap:22px;padding:clamp(56px,7vw,110px) 0;border-top:2px solid var(--ink);scroll-margin-top:24px">
-      <p style="margin:0;display:flex;align-items:baseline;gap:14px"><span style="font:900 40px/.8 'Big Shoulders Display',sans-serif;color:var(--pink)">12</span><span style="font:400 12px/1 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">What I Learned</span></p>
-      <h2 id="s12-h" style="margin:0 0 8px;max-width:18ch;font:400 clamp(52px,7vw,110px)/.86 'Grenze Gotisch',serif;color:var(--red);text-wrap:balance">The environment is part of the user experience</h2>
-      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">WellDone changed the way I thought about designing digital products for physical infrastructure.</p>
-      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">It's easy to design an interface around the conditions in which you're designing it: a reliable computer, a good internet connection, plenty of time, and a comfortable environment.</p>
-      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">Those aren't necessarily the conditions in which the product will be used.</p>
-      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">The people interacting with WellDone's system could have completely different responsibilities, devices, connectivity, and proximity to the infrastructure itself.</p>
-      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">That made context part of the design.</p>
-      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">The biggest lesson for me was that simplifying an interface doesn't mean simplifying the problem.</p>
-      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">Moving from a dense table toward scannable cards didn't remove the sensor information or the complexity behind monitoring water infrastructure. It changed the order in which the user had to understand it.</p>
-      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">Instead of asking someone to interpret the system first, the interface could tell them what mattered first and let them investigate further when they needed to.</p>
-      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">That idea has carried into a lot of my work since:</p>
-      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty"><em>Show people what they need to understand first, then give them somewhere to go when they need the complexity underneath it.</em></p>
+    <section id="s09" aria-labelledby="s09-h" style="display:grid;gap:22px;padding:clamp(56px,7vw,110px) 0;border-top:2px solid var(--ink);scroll-margin-top:24px">
+      <p style="margin:0;display:flex;align-items:baseline;gap:14px"><span style="font:900 40px/.8 'Big Shoulders Display',sans-serif;color:var(--pink)">09</span><span style="font:400 12px/1 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">What I Took Away</span></p>
+      <h2 id="s09-h" style="margin:0 0 8px;max-width:18ch;font:400 clamp(52px,7vw,110px)/.86 'Grenze Gotisch',serif;color:var(--red);text-wrap:balance">Information isn't understanding</h2>
+      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">WellDone was an early lesson for me in how much UX work happens before an interface exists.</p>
+      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">We weren't handed a polished product and asked to improve it. We were handed research, stakeholder knowledge, requirements and a complicated real-world system and had to determine what the digital experience should be.</p>
+      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">That meant making decisions about hierarchy, navigation, workflows and information architecture before worrying about what an individual screen looked like.</p>
+      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">It also taught me something that has followed me into a lot of my later work:</p>
+      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty"><em>Giving someone more information doesn't necessarily give them more understanding.</em></p>
+      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty"><em>The job of the interface is to help them figure out what matters.</em></p>
     </section>
   </main>
 </div>
