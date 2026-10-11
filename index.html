@@ -27,16 +27,19 @@
 <script>
 (function () {
   var scene = document.getElementById('scene');
-  var entered = false;
+  var entered = false, going = false;
+  function goHome() {
+    if (going) return;
+    going = true;
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduce) { window.location.href = 'home.html'; return; }
+    document.body.classList.add('leaving');
+    setTimeout(function () { window.location.href = 'home.html'; }, 1100);
+  }
   function enterSite() {
     if (entered) return;
     entered = true;
-    setTimeout(function () {
-      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      if (reduce) { window.location.href = 'home.html'; return; }
-      document.body.classList.add('leaving');
-      setTimeout(function () { window.location.href = 'home.html'; }, 1100);
-    }, 6000);
+    setTimeout(goHome, 6000);
   }
   // spline-viewer renders in this document (it's a web component, not a
   // cross-origin iframe), but its internal drag/orbit controls call
@@ -50,6 +53,19 @@
   document.addEventListener('pointerdown', function (e) {
     if (e.isTrusted && scene.contains(e.target)) enterSite();
   }, true);
+  // If the Spline scene itself is set up to signal when its reveal
+  // animation has actually finished, skip the fixed 6s wait and go
+  // straight there. Covers both ways a scene could signal it: a custom
+  // event dispatched on the <spline-viewer> element (the normal path for
+  // an embedded web component -- see Spline's addEventListener docs) and
+  // window postMessage (what a cross-origin iframe embed would have to use
+  // instead, since it can't dispatch DOM events out past that boundary).
+  // Neither does anything unless the scene is actually configured, in
+  // Spline's own editor, to send a "cicada:revealed" signal.
+  scene.addEventListener('cicada:revealed', goHome);
+  window.addEventListener('message', function (e) {
+    if (e.data && e.data.type === 'cicada:revealed') goHome();
+  });
 })();
 </script>
 </body>
