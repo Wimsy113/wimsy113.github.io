@@ -41,7 +41,13 @@
   // spline-viewer renders in this document (it's a web component, not a
   // cross-origin iframe), so a plain pointerdown on it is a reliable signal
   // -- no need for the focus/blur workaround a cross-origin iframe requires.
-  scene.addEventListener('pointerdown', enterSite);
+  // It does fire its own internal pointer events while setting up its
+  // camera/drag controls, though, so only react to a real, user-generated
+  // one (isTrusted is set by the browser and can't be spoofed by any script,
+  // the viewer's own included).
+  scene.addEventListener('pointerdown', function (e) {
+    if (e.isTrusted) enterSite();
+  });
 })();
 </script>
 </body>
