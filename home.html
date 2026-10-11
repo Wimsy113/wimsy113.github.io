@@ -313,9 +313,13 @@ class Component extends DCLogic {
     this.reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     // The hero intro should only play once per visit, not on every page/route
     // load within the same session -- check this before anything else touches
-    // the DOM so there's no flash of the un-gated state.
+    // the DOM so there's no flash of the un-gated state. Arriving straight
+    // from the cicada intro always gets the full entrance, even if this
+    // session already saw it once.
     try {
-      this.introSeen = sessionStorage.getItem('keIntroSeen') === '1';
+      const fromCicada = sessionStorage.getItem('fromCicada') === '1';
+      if (fromCicada) sessionStorage.removeItem('fromCicada');
+      this.introSeen = fromCicada ? false : sessionStorage.getItem('keIntroSeen') === '1';
       sessionStorage.setItem('keIntroSeen', '1');
     } catch (e) { this.introSeen = false; }
     if (this.introSeen) document.documentElement.dataset.intro = 'seen';
