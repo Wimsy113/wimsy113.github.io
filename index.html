@@ -18,6 +18,7 @@
 <style>
 html{--bg:#08090b;--ink:#e7e5e1;--muted:#b5b8bc;--metal:#9299a2;--line:#30343b;--red:#f87171;--on-red:#08090b;--pink:#8b7a90;--mat:#1c1f1d;--matline:rgba(236,230,220,.07);--matline2:rgba(236,230,220,.16);--grain:.1;background:var(--bg);color:var(--ink);scroll-behavior:smooth}
 html[data-theme="light"]{--bg:#e8e2d7;--ink:#151312;--muted:#4c4945;--metal:#6c6964;--line:#b9b1a3;--red:#b8231c;--on-red:#fff;--pink:#b8154f;--mat:#cfd3c8;--matline:rgba(21,19,18,.08);--matline2:rgba(21,19,18,.2);--grain:.07}
+html[data-theme="light"] nav[aria-label="Primary"]{--red:#b8231c}
 html[data-grain="off"]{--grain:0}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:"Inter",system-ui,sans-serif;-webkit-font-smoothing:antialiased;transition:background-color .35s,color .35s;overflow-x:hidden}
 body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:300;opacity:var(--grain);mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E")}
@@ -90,7 +91,7 @@ a:hover{color:var(--red)}
 <div ref="{{ progressRef }}" aria-hidden="true" style="position:fixed;left:0;top:0;z-index:250;height:3px;width:0%;background:var(--red);pointer-events:none"></div>
 <div id="pageCursor" ref="{{ cursorRef }}" aria-hidden="true"></div>
 
-<nav aria-label="Primary" style="--red:#59aab2;--pink:#8b7a90;position:fixed;left:0;right:0;bottom:0;z-index:150;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:4px 20px;padding:4px clamp(12px,2.4vw,32px);background:var(--bg);border-top:1px solid var(--ink);font:700 12px/1 'Space Mono',monospace;letter-spacing:.06em;text-transform:uppercase">
+<nav aria-label="Primary" style="--red:#f87171;--pink:#8b7a90;position:fixed;left:0;right:0;bottom:0;z-index:150;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:4px 20px;padding:4px clamp(12px,2.4vw,32px);background:var(--bg);border-top:1px solid var(--ink);font:700 12px/1 'Space Mono',monospace;letter-spacing:.06em;text-transform:uppercase">
   <a href="#top" aria-label="Krystyna Ewing, back to top" style="font:400 26px/1 'Grenze Gotisch',serif;letter-spacing:0;text-transform:none;text-decoration:none;min-height:44px;display:flex;align-items:center">K. Ewing</a>
   <div style="display:flex;flex-wrap:wrap;gap:0 clamp(12px,2.4vw,30px)">
     <a href="#work" style="text-decoration:none;min-height:44px;display:flex;align-items:center;gap:8px"><span aria-hidden="true" style="color:var(--red)">{{ mWork }}</span>Work</a>
@@ -152,6 +153,16 @@ a:hover{color:var(--red)}
       <p id="heroEwing" aria-hidden="true">Ewing</p>
     </div>
     <p aria-hidden="true" style="margin:0;max-width:90vw;text-align:center;font:900 clamp(22px,3vw,34px)/1 'Barlow Condensed',sans-serif;text-transform:uppercase;letter-spacing:-.01em">{{ activeTitle }}</p>
+
+    <div id="heroInteractive" onMouseEnter="{{ bioOpen }}" onMouseLeave="{{ bioClose }}" onKeyDown="{{ bioKey }}" style="margin-top:clamp(20px,3vh,32px);display:grid;justify-items:center;gap:10px;max-width:min(92vw,560px)">
+      <div id="heroBio" style="{{ bioStyle }}">
+        <div style="padding:clamp(16px,2vw,22px);background:var(--ink);color:var(--bg);transform:rotate(-1deg);box-shadow:8px 8px 0 var(--red)">
+          <p style="margin:0 0 8px;font:700 11px/1 'IBM Plex Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--red)">UX Designer / Creative Technologist</p>
+          <p style="margin:0;font:600 17px/1.45 'Inter',sans-serif">I design software, make art, build things, break things, and have a hard time leaving anything alone when I know it could work better.</p>
+        </div>
+      </div>
+      <button type="button" onClick="{{ bioToggle }}" aria-expanded="{{ bioExpanded }}" aria-controls="heroBio" aria-label="Reveal introduction" style="font:400 clamp(30px,4vw,48px)/1 'UnifrakturMaguntia',serif;color:var(--red);background:transparent;border:0;padding:4px 10px;cursor:pointer;min-height:44px" style-hover="color:var(--ink)">{{ cueWord }}</button>
+    </div>
 
     <div style="margin-top:clamp(28px,4vh,44px);width:min(100%,480px);text-align:center;font:500 11px/1 'IBM Plex Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--metal)">
       {{ autoStatus }}
@@ -384,7 +395,7 @@ class Component extends DCLogic {
     };
   }
   state = {
-    theme: this.props.defaultTheme ?? 'dark', active: 'top', activeProject: 0, autoPaused: false,
+    theme: this.props.defaultTheme ?? 'dark', active: 'top', activeProject: 0, autoPaused: false, bio: false,
     narrow: window.innerWidth < 760, canHover: window.matchMedia('(hover: hover) and (pointer: fine)').matches,
     pieces: this.defaults(), z: {}, top: 10
   };
@@ -500,6 +511,15 @@ class Component extends DCLogic {
       activeCode: active.code, activeYear: active.year, activeTitle: active.title, activeType: active.type, activeNote: active.note,
       autoStatus: s.autoPaused ? 'Manual signal / auto resumes soon' : 'Auto transmission / choose a signal',
       cycleLineClass: s.autoPaused ? 'is-paused' : '',
+      cueWord: s.bio ? 'oh, hi.' : 'psst.',
+      bioExpanded: s.bio ? 'true' : 'false',
+      bioOpen: () => { if (s.canHover && !s.bio) this.setState({ bio: true }); },
+      bioClose: () => { if (s.canHover && s.bio) this.setState({ bio: false }); },
+      bioToggle: () => this.setState(st => ({ bio: !st.bio })),
+      bioKey: e => { if (e.key === 'Escape') this.setState({ bio: false }); },
+      bioStyle: s.bio
+        ? { clipPath: 'inset(-20px -20px -20px -20px)', opacity: 1, visibility: 'visible', transform: 'translateY(0)', transition: this.reduce ? 'none' : 'clip-path .4s cubic-bezier(.2,.8,.2,1), opacity .2s, transform .4s' }
+        : { clipPath: 'inset(100% -20px -20px -20px)', opacity: 0, visibility: 'hidden', transform: 'translateY(16px)', transition: this.reduce ? 'none' : 'clip-path .3s, opacity .2s, transform .3s, visibility 0s .3s' },
       stageLight: e => { const b = e.currentTarget.getBoundingClientRect(); e.currentTarget.style.setProperty('--pointer-x', (e.clientX - b.left) + 'px'); e.currentTarget.style.setProperty('--pointer-y', (e.clientY - b.top) + 'px'); },
       benchHint: s.narrow ? "Here's what's on the table." : 'Grab the tape to move things around. Arrow keys work too.',
       deskStyle: s.narrow ? { position: 'relative', display: 'flex', flexDirection: 'column', gap: 44, paddingTop: 20 } : { position: 'relative', height: 'clamp(820px, 78vw, 1200px)' },
