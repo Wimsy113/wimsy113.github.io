@@ -13,40 +13,73 @@
 <title>Krystyna Ewing — UX, Art, Technology</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800;900&family=Grenze+Gotisch:wght@400;600&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800;900&family=Grenze+Gotisch:wght@400;600&family=IBM+Plex+Mono:wght@400;500;700&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&family=UnifrakturMaguntia&display=swap" rel="stylesheet">
 <script src="./image-slot.js"></script>
 <style>
-html{--bg:#08090b;--ink:#e7e5e1;--muted:#b5b8bc;--metal:#9299a2;--line:#30343b;--red:#59aab2;--on-red:#08090b;--pink:#8b7a90;--mat:#1c1f1d;--matline:rgba(236,230,220,.07);--matline2:rgba(236,230,220,.16);--grain:.1;background:var(--bg);color:var(--ink);scroll-behavior:smooth}
-html[data-theme="light"]{--bg:#e8e2d7;--ink:#151312;--muted:#4c4945;--metal:#6c6964;--line:#b9b1a3;--red:oklch(0.5 0.2 27);--on-red:#fff;--pink:#b8154f;--mat:#cfd3c8;--matline:rgba(21,19,18,.08);--matline2:rgba(21,19,18,.2);--grain:.07}
+html{--bg:#08090b;--ink:#e7e5e1;--muted:#b5b8bc;--metal:#9299a2;--line:#30343b;--red:#f87171;--on-red:#08090b;--pink:#8b7a90;--mat:#1c1f1d;--matline:rgba(236,230,220,.07);--matline2:rgba(236,230,220,.16);--grain:.1;background:var(--bg);color:var(--ink);scroll-behavior:smooth}
+html[data-theme="light"]{--bg:#e8e2d7;--ink:#151312;--muted:#4c4945;--metal:#6c6964;--line:#b9b1a3;--red:#b8231c;--on-red:#fff;--pink:#b8154f;--mat:#cfd3c8;--matline:rgba(21,19,18,.08);--matline2:rgba(21,19,18,.2);--grain:.07}
 html[data-grain="off"]{--grain:0}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:"Source Sans 3",system-ui,sans-serif;-webkit-font-smoothing:antialiased;transition:background-color .35s,color .35s;overflow-x:hidden}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Inter",system-ui,sans-serif;-webkit-font-smoothing:antialiased;transition:background-color .35s,color .35s;overflow-x:hidden}
 body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:300;opacity:var(--grain);mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E")}
 a{color:inherit;text-decoration-thickness:1px;text-underline-offset:.22em}
 a:hover{color:var(--red)}
 :focus-visible{outline:3px solid var(--pink);outline-offset:4px}
 ::selection{background:var(--pink);color:#08090b}
 #introVeil{opacity:0;pointer-events:none}
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+#pageCursor{position:fixed;left:0;top:0;z-index:260;width:18px;height:18px;margin:-9px;border:1px solid var(--red);border-radius:50%;pointer-events:none;transition:width .2s ease,height .2s ease,margin .2s ease}
+@media (hover:none),(pointer:coarse){#pageCursor{display:none}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}[data-reveal]{opacity:1!important;filter:none!important;translate:0!important}}
+[data-reveal]{opacity:var(--rv,0);filter:blur(calc((1 - var(--rv,0)) * 12px));translate:0 calc((1 - var(--rv,0)) * 2.4rem);transition:opacity .9s ease,filter .9s ease,translate .9s cubic-bezier(.16,1,.3,1)}
 @media (prefers-reduced-motion:no-preference){
   @keyframes introVeilOut{0%,10%{opacity:1}100%{opacity:0}}
-  @keyframes heroPieceIn{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+  @keyframes heroPieceIn{from{opacity:0}to{opacity:1}}
   @keyframes pageIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+  @keyframes driftParticle{0%{top:105%;opacity:0;transform:translateX(0) scale(.5)}15%{opacity:.8}55%{transform:translateX(5rem) scale(1.5)}90%{opacity:.5}100%{top:-5%;opacity:0;transform:translateX(-3rem) scale(.5)}}
+  @keyframes breathe{0%,100%{opacity:.55;transform:translate(-50%,-50%) scale(.9)}50%{opacity:1;transform:translate(-50%,-50%) scale(1.08)}}
+  @keyframes spinOrbit{to{transform:translate(-50%,-50%) rotate(360deg)}}
+  @keyframes eyeShift{0%,100%{transform:translate(-50%,-50%) rotate(-3deg)}50%{transform:translate(-50%,-50%) rotate(4deg)}}
+  @keyframes autoCycleLine{from{transform:scaleX(0)}to{transform:scaleX(1)}}
   html:not([data-intro="seen"]) #introVeil{animation:introVeilOut 1.3s cubic-bezier(.4,0,.2,1) both}
-  html:not([data-intro="seen"]) #heroCicada,html:not([data-intro="seen"]) #heroText{opacity:0;animation:heroPieceIn .8s cubic-bezier(.16,1,.3,1) both}
-  html:not([data-intro="seen"]) #heroCicada{animation-delay:.15s}
-  html:not([data-intro="seen"]) #heroText{animation-delay:.4s}
-  html:not([data-intro="seen"]) #top~section,html:not([data-intro="seen"]) main~footer{opacity:0;animation:pageIn 1s cubic-bezier(.16,1,.3,1) both;animation-delay:1.4s}
+  html:not([data-intro="seen"]) #heroStage{opacity:0;animation:heroPieceIn 1s ease both;animation-delay:.2s}
+  html:not([data-intro="seen"]) #top~section,html:not([data-intro="seen"]) main~footer{opacity:0;animation:pageIn 1s cubic-bezier(.16,1,.3,1) both;animation-delay:1.3s}
+  #heroAura{animation:breathe 7s ease-in-out infinite}
+  #heroCicadaBg{animation:breathe 9s ease-in-out infinite reverse}
+  #heroOrbit1{animation:spinOrbit 45s linear infinite}
+  #heroOrbit2{animation:spinOrbit 32s linear infinite reverse}
+  #heroParticles span{opacity:0;animation:driftParticle 9s linear infinite}
+  #heroParticles span:nth-child(3n+1){left:12%;animation-delay:-2s;animation-duration:11s}
+  #heroParticles span:nth-child(3n+2){left:48%;animation-delay:-5s;animation-duration:8s}
+  #heroParticles span:nth-child(3n){left:82%;animation-delay:-7s;animation-duration:13s}
+  #heroParticles span:nth-child(4n+1){margin-left:18%}
+  #heroParticles span:nth-child(5n+2){margin-left:-24%}
+  #contactEye1{animation:eyeShift 8s ease-in-out infinite}
+  #contactEye2{animation:eyeShift 8s ease-in-out infinite;animation-delay:-4s}
 }
-#heroKrystyna,#heroEwing{position:static;margin:0;padding:0 clamp(16px,5vw,64px)}
-#heroEwing{text-align:right}
+#heroPortal img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;opacity:0;transform:scale(1.08)}
+#heroPortal img.is-active{opacity:1;transform:scale(1)}
+@media (prefers-reduced-motion:no-preference){#heroPortal img{transition:opacity .7s ease,transform .7s ease}}
+#heroNodes button{position:absolute;transform:translate(-50%,-50%);left:18%;top:39%;width:44px;height:44px;border:1px solid var(--line);border-radius:50%;cursor:pointer;pointer-events:auto;font:700 11px/1 'IBM Plex Mono',monospace;background:color-mix(in srgb,var(--bg) 72%,transparent);color:var(--metal);transition:transform .3s ease,background-color .3s ease,color .3s ease,border-color .3s ease}
+#heroNodes button:nth-child(2){left:82%;top:31%}
+#heroNodes button:nth-child(3){left:75%;top:78%}
+#heroNodes button:nth-child(4){left:22%;top:76%}
+#heroNodes button:nth-child(5){left:50%;top:14%}
+#heroNodes button.is-active{background:var(--red);color:var(--bg);border-color:var(--red);transform:translate(-50%,-50%) scale(1.25)}
+#heroNodes button:focus-visible{outline:3px solid var(--pink);outline-offset:3px}
+#heroCycleLine{height:100%;background:var(--red);transform-origin:left}
+@media (prefers-reduced-motion:no-preference){#heroCycleLine{animation:autoCycleLine 5200ms linear infinite}}
+#heroCycleLine.is-paused{opacity:.3;animation-play-state:paused}
+.tilt-card{transform:perspective(70rem) rotateX(var(--card-x,0deg)) rotateY(var(--card-y,0deg));transition:transform .18s ease-out}
+#heroStageRow{display:flex;flex-direction:column;align-items:center;gap:14px}
+#heroKrystyna,#heroEwing{margin:0;text-align:center;font-weight:900;text-transform:uppercase;letter-spacing:-.01em;font-family:'Barlow Condensed',sans-serif;font-size:clamp(30px,8vw,48px);line-height:1;color:var(--ink)}
+#heroEwing{font-family:'UnifrakturMaguntia',serif;font-weight:400;text-transform:none;letter-spacing:0;color:var(--red);font-size:clamp(28px,7.4vw,46px)}
 @media (min-width:860px){
-  #heroCicada{margin-top:0}
-  #heroKrystyna,#heroEwing{position:absolute;width:auto;padding:0;font-size:clamp(34px,5.6vw,92px)}
-  #heroKrystyna{left:clamp(16px,4vw,48px);top:clamp(6px,2vh,22px)}
-  #heroEwing{right:clamp(16px,4vw,48px);bottom:clamp(6px,2vh,22px)}
+  #heroStageRow{flex-direction:row;justify-content:center;gap:clamp(20px,3.2vw,48px)}
+  #heroKrystyna,#heroEwing{font-size:clamp(32px,4.4vw,64px);white-space:nowrap}
+  #heroEwing{font-size:clamp(30px,4vw,60px)}
 }
 @media (max-width:699px){
-  #wrk-loco,#wrk-prep,#wrk-truelink,#wrk-welldone{grid-column:1 / -1 !important;margin-top:0 !important}
+  #wrk-01,#wrk-02,#wrk-03,#wrk-04,#wrk-05{position:relative!important;left:0!important;right:0!important;top:0!important;bottom:0!important;width:100%!important;transform:none!important;margin:0 0 56px!important}
+  #workConstellation{min-height:0!important}
 }
 </style>
 </helmet>
@@ -54,8 +87,10 @@ a:hover{color:var(--red)}
 <a href="#main" style="position:fixed;left:16px;top:-80px;z-index:400;background:var(--pink);color:#0d0c0c;padding:12px 18px;font:700 14px/1 'Space Mono',monospace;text-decoration:none" style-focus="top:16px">Skip to content</a>
 
 <div id="introVeil" aria-hidden="true" style="position:fixed;inset:0;z-index:500;background:#000"></div>
+<div ref="{{ progressRef }}" aria-hidden="true" style="position:fixed;left:0;top:0;z-index:250;height:3px;width:0%;background:var(--red);pointer-events:none"></div>
+<div id="pageCursor" ref="{{ cursorRef }}" aria-hidden="true"></div>
 
-<nav aria-label="Primary" style="position:fixed;left:0;right:0;bottom:0;z-index:150;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:4px 20px;padding:4px clamp(12px,2.4vw,32px);background:var(--bg);border-top:1px solid var(--ink);font:700 12px/1 'Space Mono',monospace;letter-spacing:.06em;text-transform:uppercase">
+<nav aria-label="Primary" style="--red:#59aab2;--pink:#8b7a90;position:fixed;left:0;right:0;bottom:0;z-index:150;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:4px 20px;padding:4px clamp(12px,2.4vw,32px);background:var(--bg);border-top:1px solid var(--ink);font:700 12px/1 'Space Mono',monospace;letter-spacing:.06em;text-transform:uppercase">
   <a href="#top" aria-label="Krystyna Ewing, back to top" style="font:400 26px/1 'Grenze Gotisch',serif;letter-spacing:0;text-transform:none;text-decoration:none;min-height:44px;display:flex;align-items:center">K. Ewing</a>
   <div style="display:flex;flex-wrap:wrap;gap:0 clamp(12px,2.4vw,30px)">
     <a href="#work" style="text-decoration:none;min-height:44px;display:flex;align-items:center;gap:8px"><span aria-hidden="true" style="color:var(--red)">{{ mWork }}</span>Work</a>
@@ -70,83 +105,155 @@ a:hover{color:var(--red)}
 
 <main id="main">
 
-<section id="top" aria-label="Introduction" style="position:relative;padding:clamp(28px,4vh,56px) 0 clamp(56px,8vh,96px);overflow:hidden">
+<section id="top" aria-label="Introduction" onPointerMove="{{ stageLight }}" style="position:relative;min-height:100svh;display:flex;align-items:center;justify-content:center;overflow:hidden;padding:clamp(96px,15vh,170px) clamp(16px,4vw,40px) clamp(80px,11vh,130px)">
   <h1 style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Krystyna Ewing</h1>
 
-  <div id="heroCicada" style="position:relative;width:100vw;margin-left:calc(50% - 50vw);aspect-ratio:2000/955;margin-top:clamp(28px,4vh,44px)">
-    <img src="images/cicada-hero.jpg" alt="An iridescent cicada viewed from above against a near-black background, head to the left, its translucent turquoise and violet wings spread wide to the right." style="display:block;width:100%;height:100%;object-fit:contain">
-    <p id="heroKrystyna" aria-hidden="true" style="font:400 clamp(44px,9vw,120px)/.82 'Grenze Gotisch',serif;color:var(--ink)">Krystyna</p>
-    <p id="heroEwing" aria-hidden="true" style="font:400 clamp(44px,9vw,120px)/.82 'Grenze Gotisch',serif;color:var(--red)">Ewing</p>
+  <div id="heroStage" style="position:absolute;inset:0">
+    <div id="heroParticles" aria-hidden="true" style="position:absolute;inset:0;overflow:hidden;pointer-events:none">
+      <span style="position:absolute;width:5px;height:5px;border-radius:50%;background:var(--red)"></span>
+      <span style="position:absolute;width:5px;height:5px;border-radius:50%;background:var(--red)"></span>
+      <span style="position:absolute;width:5px;height:5px;border-radius:50%;background:var(--red)"></span>
+      <span style="position:absolute;width:5px;height:5px;border-radius:50%;background:var(--red)"></span>
+      <span style="position:absolute;width:5px;height:5px;border-radius:50%;background:var(--red)"></span>
+      <span style="position:absolute;width:5px;height:5px;border-radius:50%;background:var(--red)"></span>
+      <span style="position:absolute;width:5px;height:5px;border-radius:50%;background:var(--red)"></span>
+      <span style="position:absolute;width:5px;height:5px;border-radius:50%;background:var(--red)"></span>
+      <span style="position:absolute;width:5px;height:5px;border-radius:50%;background:var(--red)"></span>
+      <span style="position:absolute;width:5px;height:5px;border-radius:50%;background:var(--red)"></span>
+      <span style="position:absolute;width:5px;height:5px;border-radius:50%;background:var(--red)"></span>
+      <span style="position:absolute;width:5px;height:5px;border-radius:50%;background:var(--red)"></span>
+      <span style="position:absolute;width:5px;height:5px;border-radius:50%;background:var(--red)"></span>
+      <span style="position:absolute;width:5px;height:5px;border-radius:50%;background:var(--red)"></span>
+    </div>
+    <div id="heroAura" aria-hidden="true" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(82vw,820px);aspect-ratio:1;border-radius:50%;filter:blur(24px);background:radial-gradient(circle,color-mix(in srgb,var(--red) 35%,transparent),color-mix(in srgb,var(--bg) 20%,transparent) 42%,transparent 70%)"></div>
+    <img id="heroCicadaBg" src="images/cicada-hero.jpg" alt="" aria-hidden="true" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(88vw,1300px);opacity:.12;mix-blend-mode:screen;filter:saturate(.3) contrast(1.2);pointer-events:none">
+    <div id="heroOrbit1" aria-hidden="true" style="position:absolute;left:50%;top:50%;width:min(68vw,760px);aspect-ratio:1;border-radius:50%;border:1px dashed var(--line);transform:translate(-50%,-50%)"></div>
+    <div id="heroOrbit2" aria-hidden="true" style="position:absolute;left:50%;top:50%;width:min(52vw,580px);aspect-ratio:1;border-radius:50%;border:1px solid var(--line);transform:translate(-50%,-50%)"></div>
   </div>
 
-  <div id="heroText" style="max-width:58ch;margin:clamp(28px,4vw,44px) 0 0;padding:0 clamp(16px,5vw,64px)">
-    <p style="margin:0;font:700 13px/1.6 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--red)">UX Designer / Creative Technologist</p>
-    <p style="margin:clamp(12px,1.6vw,18px) 0 0;font:400 clamp(17px,1.5vw,21px)/1.55 'Source Sans 3',sans-serif;color:var(--muted);text-wrap:pretty">I design software, make art, build things, break things, and have a hard time leaving anything alone when I know it could work better.</p>
+  <div style="position:absolute;left:clamp(16px,4vw,40px);top:clamp(100px,16vh,180px);z-index:5;font:500 11px/1.6 'IBM Plex Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--metal)">Selected apparition<br>{{ activeCode }} / {{ activeYear }}</div>
+  <div style="position:absolute;right:clamp(16px,4vw,40px);bottom:clamp(104px,17vh,180px);z-index:5;max-width:260px;text-align:right">
+    <p style="margin:0;font:400 14px/1.6 'Inter',sans-serif;color:var(--muted)">{{ activeNote }}</p>
+    <p style="margin:10px 0 0;font:700 11px/1 'IBM Plex Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--red)">{{ activeType }}</p>
+  </div>
+
+  <div style="position:relative;z-index:10;width:100%;max-width:1160px;display:flex;flex-direction:column;align-items:center;gap:clamp(16px,2.6vh,28px)">
+    <div id="heroStageRow">
+      <p id="heroKrystyna" aria-hidden="true">Krystyna</p>
+      <div id="heroPortal" style="position:relative;aspect-ratio:3/4;width:min(44vw,280px);overflow:hidden;clip-path:polygon(50% 0%,86% 10%,100% 45%,88% 88%,50% 100%,12% 88%,0% 45%,14% 10%);box-shadow:0 0 6rem color-mix(in srgb,var(--red) 25%,transparent)">
+        <img src="images/work/hazadapt-resiliencepoint/platform-cover.png" alt="" class="{{ p0 }}">
+        <img src="images/hazadapt_album.png" alt="" class="{{ p1 }}">
+        <img src="images/hazadapt_album.png" alt="" class="{{ p2 }}">
+        <img src="images/True_Link_album.png" alt="" class="{{ p3 }}">
+        <img src="images/welldone_album.png" alt="" class="{{ p4 }}">
+        <div aria-hidden="true" style="position:absolute;inset:0;background:color-mix(in srgb,var(--red) 18%,transparent);mix-blend-mode:color"></div>
+        <div aria-hidden="true" style="position:absolute;inset:0;background:linear-gradient(to top,var(--bg) 0%,transparent 55%)"></div>
+      </div>
+      <p id="heroEwing" aria-hidden="true">Ewing</p>
+    </div>
+    <p aria-hidden="true" style="margin:0;max-width:90vw;text-align:center;font:900 clamp(22px,3vw,34px)/1 'Barlow Condensed',sans-serif;text-transform:uppercase;letter-spacing:-.01em">{{ activeTitle }}</p>
+
+    <div style="margin-top:clamp(28px,4vh,44px);width:min(100%,480px);text-align:center;font:500 11px/1 'IBM Plex Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--metal)">
+      {{ autoStatus }}
+      <div style="margin-top:12px;height:2px;background:color-mix(in srgb,var(--line) 60%,transparent)">
+        <div id="heroCycleLine" class="{{ cycleLineClass }}"></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="heroNodes" aria-hidden="true" style="position:absolute;inset:0;z-index:20;pointer-events:none">
+    <button type="button" onClick="{{ sel0 }}" aria-hidden="true" tabindex="-1" class="{{ n0 }}">01</button>
+    <button type="button" onClick="{{ sel1 }}" aria-hidden="true" tabindex="-1" class="{{ n1 }}">02</button>
+    <button type="button" onClick="{{ sel2 }}" aria-hidden="true" tabindex="-1" class="{{ n2 }}">03</button>
+    <button type="button" onClick="{{ sel3 }}" aria-hidden="true" tabindex="-1" class="{{ n3 }}">04</button>
+    <button type="button" onClick="{{ sel4 }}" aria-hidden="true" tabindex="-1" class="{{ n4 }}">05</button>
   </div>
 </section>
 
-<section id="work" ref="{{ idxRef }}" aria-labelledby="work-h" onMouseLeave="{{ unhover }}" style="position:relative;padding:0 clamp(16px,5vw,80px) clamp(90px,12vw,180px)">
-  <div style="padding-bottom:20px;border-bottom:2px solid var(--ink)">
-    <h2 id="work-h" style="margin:0;display:flex;align-items:baseline;flex-wrap:wrap;gap:0 .15em"><span style="font:900 clamp(56px,9vw,150px)/.85 'Big Shoulders Display',sans-serif;text-transform:uppercase">Selected</span><span style="font:400 clamp(70px,11vw,180px)/.7 'Grenze Gotisch',serif;color:var(--red)">work</span></h2>
-  </div>
-
-  <div aria-hidden="true" style="position:absolute;left:var(--px,50%);top:var(--py,50%);width:min(36vw,520px);z-index:5;pointer-events:none">
-    <sc-if value="{{ previewOn }}" hint-placeholder-val="{{ false }}"><div style="{{ previewStyle }}">
-      <img src="images/work/hazadapt-resiliencepoint/platform-cover.png" alt="" style="{{ pv0 }}">
-      <img src="images/hazadapt_album.png" alt="" style="{{ pv1 }}">
-      <img src="images/True_Link_album.png" alt="" style="{{ pv2 }}">
-      <img src="images/welldone_album.png" alt="" style="{{ pv3 }}">
-    </div></sc-if>
-  </div>
-
-  <figure style="margin:0 0 clamp(16px,2.4vw,28px);position:relative;left:50%;width:100vw;transform:translateX(-50%)">
-    <a href="work/hazadapt-resiliencepoint.html" style="display:block" aria-label="ResiliencePoint — read the case study">
-      <img src="images/work/hazadapt-resiliencepoint/platform-cover.png" alt="ResiliencePoint dashboard showing trending hazards and a nationwide activity map" style="display:block;width:100%;height:auto">
-    </a>
-  </figure>
-  <div style="max-width:min(68ch,100%);padding:0 0 clamp(40px,6vw,72px);border-bottom:2px solid var(--ink)">
-    <p style="margin:0 0 6px;font:700 13px/1 'Space Mono',monospace;color:var(--pink)">01 · Featured</p>
-    <h3 style="margin:0 0 16px;font:900 clamp(52px,9vw,150px)/.85 'Big Shoulders Display',sans-serif;text-transform:uppercase;letter-spacing:-.015em"><a href="work/hazadapt-resiliencepoint.html" style="text-decoration:none;color:inherit" style-hover="color:var(--red)">Resilience&shy;Point</a></h3>
-    <p style="margin:0 0 4px;font:400 12px/1.6 'Space Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)">HazAdapt · Lead UX Designer · 2023 to 2024</p>
-    <p style="margin:0 0 18px;max-width:46ch;font:600 22px/1.35 'Source Sans 3',sans-serif">We built what we thought people needed. Then the evidence changed the product.</p>
-    <a href="work/hazadapt-resiliencepoint.html" style="font:700 13px/1 'Space Mono',monospace;letter-spacing:.06em;text-transform:uppercase;min-height:44px;display:inline-flex;align-items:center">Read the case study →</a>
-    <p style="margin:18px 0 0;font:400 24px/1.05 'Grenze Gotisch',serif;color:var(--pink);transform:rotate(-2deg)">↖ ruined me for shipping without evidence, honestly.</p>
-  </div>
-
-  <a href="work/hazadapt.html" style="display:inline-block;margin-top:clamp(20px,3vw,32px);font:700 12px/1 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;color:var(--red);min-height:44px;display:inline-flex;align-items:center" style-hover="color:var(--ink)">HazAdapt ecosystem · 2021 to present →</a>
-
-  <div style="display:grid;grid-template-columns:repeat(12,1fr);gap:clamp(28px,5vw,64px) clamp(16px,3vw,32px);margin-top:clamp(12px,2vw,20px)">
-    <div id="wrk-loco" onMouseEnter="{{ h1 }}" onFocus="{{ h1 }}" style="grid-column:1 / span 7">
-      <p style="margin:0 0 10px;font:700 13px/1 'Space Mono',monospace;color:var(--pink)">02 · HazAdapt · Lead UX Designer · 2023 to 2024</p>
-      <h3 style="margin:0 0 16px;font:900 clamp(60px,11vw,200px)/.8 'Big Shoulders Display',sans-serif;text-transform:uppercase"><a href="work/hazadapt-loco.html" style="text-decoration:none;color:inherit" style-hover="color:var(--red)">LoCo</a></h3>
-      <p style="margin:0 0 14px;max-width:38ch;font:400 19px/1.4 'Source Sans 3',sans-serif">Bringing trusted local safety information directly into HazAdapt's Hazard Guides.</p>
-      <a href="work/hazadapt-loco.html" style="font:700 13px/1 'Space Mono',monospace;letter-spacing:.06em;text-transform:uppercase;min-height:44px;display:inline-flex;align-items:center">Read the case study →</a>
+<section id="work" aria-labelledby="work-h" style="position:relative;padding:clamp(90px,14vh,160px) clamp(16px,4vw,40px) clamp(110px,16vh,180px)">
+  <div aria-hidden="true" style="position:absolute;left:50%;top:0;bottom:0;width:1px;background:var(--line)"></div>
+  <div style="position:relative;max-width:1800px;margin:0 auto">
+    <div data-reveal style="display:flex;flex-direction:column;align-items:center;text-align:center;margin-bottom:clamp(70px,10vw,140px)">
+      <p style="margin:0;font:700 11px/1 'IBM Plex Mono',monospace;letter-spacing:.16em;text-transform:uppercase;color:var(--red)">Archive · non-linear</p>
+      <h2 id="work-h" style="margin:18px 0 0;max-width:1000px;font:900 clamp(44px,9vw,120px)/.8 'Barlow Condensed',sans-serif;text-transform:uppercase;letter-spacing:-.02em">Five investigations,<br>one restless practice.</h2>
     </div>
 
-    <div id="wrk-prep" onMouseEnter="{{ h2 }}" onFocus="{{ h2 }}" style="grid-column:6 / span 7;margin-top:clamp(20px,5vw,72px);text-align:right">
-      <p style="margin:0 0 10px;font:700 13px/1 'Space Mono',monospace;color:var(--pink)">03 · HazAdapt · Lead UX Designer</p>
-      <h3 style="margin:0 0 16px;font:400 clamp(56px,9vw,150px)/.82 'Grenze Gotisch',serif"><a href="work/hazadapt-prep-checks.html" style="text-decoration:none;color:inherit" style-hover="color:var(--red)">Prep Checks</a></h3>
-      <p style="margin:0 0 14px 0;margin-left:auto;max-width:34ch;font:400 19px/1.4 'Source Sans 3',sans-serif">Bite-sized preparedness activities people actually finish.</p>
-      <a href="work/hazadapt-prep-checks.html" style="font:700 13px/1 'Space Mono',monospace;letter-spacing:.06em;text-transform:uppercase;min-height:44px;display:inline-flex;align-items:center">Read the case study →</a>
+    <div id="workConstellation" style="position:relative;min-height:clamp(1400px,220vw,2100px)">
+      <a id="wrk-01" href="work/hazadapt-resiliencepoint.html" data-reveal onPointerMove="{{ tilt0 }}" onPointerLeave="{{ untilt0 }}" style="position:absolute;left:2%;top:0;width:min(52vw,620px);text-decoration:none;color:inherit;transform:rotate(-2deg)">
+        <div class="tilt-card" style="position:relative;overflow:hidden;border:1px solid var(--line);background:var(--mat);aspect-ratio:4/5">
+          <img src="images/work/hazadapt-resiliencepoint/platform-cover.png" alt="ResiliencePoint dashboard showing trending hazards and a nationwide activity map" style="display:block;width:100%;height:100%;object-fit:cover;object-position:center top;filter:grayscale(1) contrast(1.15);transition:filter .6s ease,transform .6s ease" style-hover="filter:grayscale(0) contrast(1.1);transform:scale(1.04)">
+          <div aria-hidden="true" style="position:absolute;inset:0;background:color-mix(in srgb,var(--red) 20%,transparent);mix-blend-mode:color;transition:opacity .4s ease" style-hover="opacity:0"></div>
+          <p style="position:absolute;left:12px;top:12px;margin:0;padding:8px 12px;border:1px solid color-mix(in srgb,var(--ink) 40%,transparent);border-radius:999px;background:color-mix(in srgb,var(--bg) 70%,transparent);font:500 11px/1 'IBM Plex Mono',monospace">P–01</p>
+        </div>
+        <div style="margin-top:16px">
+          <h3 style="margin:0;font:900 clamp(40px,6vw,96px)/.9 'Barlow Condensed',sans-serif;text-transform:uppercase;letter-spacing:-.01em">ResiliencePoint</h3>
+          <div style="margin-top:10px;display:flex;justify-content:space-between;gap:16px;font:500 11px/1.5 'IBM Plex Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--metal)"><span>UX research · Product design · Data viz</span><span>2023–24</span></div>
+          <p style="margin:10px 0 0;font:400 16px/1.5 'Inter',sans-serif;color:var(--muted)">We built what we thought people needed. Then the evidence changed the product.</p>
+          <p style="margin:10px 0 0;font:700 11px/1 'IBM Plex Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--red)">Read the case study →</p>
+        </div>
+      </a>
+
+      <a id="wrk-02" href="work/hazadapt-loco.html" data-reveal onPointerMove="{{ tilt1 }}" onPointerLeave="{{ untilt1 }}" style="position:absolute;right:2%;top:16%;width:min(36vw,440px);text-decoration:none;color:inherit;transform:rotate(3deg)">
+        <div class="tilt-card" style="position:relative;overflow:hidden;border:1px solid var(--line);background:var(--mat);aspect-ratio:4/5">
+          <img src="images/hazadapt_album.png" alt="HazAdapt product collection" style="display:block;width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.15);transition:filter .6s ease,transform .6s ease" style-hover="filter:grayscale(0) contrast(1.1);transform:scale(1.04)">
+          <div aria-hidden="true" style="position:absolute;inset:0;background:color-mix(in srgb,var(--red) 20%,transparent);mix-blend-mode:color;transition:opacity .4s ease" style-hover="opacity:0"></div>
+          <p style="position:absolute;left:12px;top:12px;margin:0;padding:8px 12px;border:1px solid color-mix(in srgb,var(--ink) 40%,transparent);border-radius:999px;background:color-mix(in srgb,var(--bg) 70%,transparent);font:500 11px/1 'IBM Plex Mono',monospace">P–02</p>
+        </div>
+        <div style="margin-top:16px">
+          <h3 style="margin:0;font:900 clamp(32px,5vw,72px)/.9 'Barlow Condensed',sans-serif;text-transform:uppercase">LoCo</h3>
+          <div style="margin-top:10px;display:flex;justify-content:space-between;gap:16px;font:500 11px/1.5 'IBM Plex Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--metal)"><span>UX research · Emergency prep</span><span>2023–24</span></div>
+          <p style="margin:10px 0 0;font:400 16px/1.5 'Inter',sans-serif;color:var(--muted)">Trusted local safety information, placed where people are already looking for preparedness guidance.</p>
+          <p style="margin:10px 0 0;font:700 11px/1 'IBM Plex Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--red)">Read the case study →</p>
+        </div>
+      </a>
+
+      <a id="wrk-03" href="work/hazadapt-prep-checks.html" data-reveal onPointerMove="{{ tilt2 }}" onPointerLeave="{{ untilt2 }}" style="position:absolute;left:10%;top:40%;width:min(38vw,460px);text-decoration:none;color:inherit;transform:rotate(-1.5deg)">
+        <div class="tilt-card" style="position:relative;overflow:hidden;border:1px solid var(--line);background:var(--mat);aspect-ratio:4/5">
+          <img src="images/hazadapt_album.png" alt="HazAdapt preparedness product collection" style="display:block;width:100%;height:100%;object-fit:cover;object-position:center bottom;filter:grayscale(1) contrast(1.15);transition:filter .6s ease,transform .6s ease" style-hover="filter:grayscale(0) contrast(1.1);transform:scale(1.04)">
+          <div aria-hidden="true" style="position:absolute;inset:0;background:color-mix(in srgb,var(--red) 20%,transparent);mix-blend-mode:color;transition:opacity .4s ease" style-hover="opacity:0"></div>
+          <p style="position:absolute;left:12px;top:12px;margin:0;padding:8px 12px;border:1px solid color-mix(in srgb,var(--ink) 40%,transparent);border-radius:999px;background:color-mix(in srgb,var(--bg) 70%,transparent);font:500 11px/1 'IBM Plex Mono',monospace">P–03</p>
+        </div>
+        <div style="margin-top:16px">
+          <h3 style="margin:0;font:400 clamp(34px,5.2vw,78px)/.95 'UnifrakturMaguntia',serif">Prep Checks</h3>
+          <div style="margin-top:10px;display:flex;justify-content:space-between;gap:16px;font:500 11px/1.5 'IBM Plex Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--metal)"><span>Product design · UX research</span><span>2024</span></div>
+          <p style="margin:10px 0 0;font:400 16px/1.5 'Inter',sans-serif;color:var(--muted)">Bite-sized preparedness activities people can actually finish — and return to.</p>
+          <p style="margin:10px 0 0;font:700 11px/1 'IBM Plex Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--red)">Read the case study →</p>
+        </div>
+      </a>
+
+      <a id="wrk-04" href="work/true-link.html" data-reveal onPointerMove="{{ tilt3 }}" onPointerLeave="{{ untilt3 }}" style="position:absolute;right:4%;top:62%;width:min(40vw,480px);text-decoration:none;color:inherit;transform:rotate(2.5deg)">
+        <div class="tilt-card" style="position:relative;overflow:hidden;border:1px solid var(--line);background:var(--mat);aspect-ratio:4/5">
+          <img src="images/True_Link_album.png" alt="True Link financial platform collection" style="display:block;width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.15);transition:filter .6s ease,transform .6s ease" style-hover="filter:grayscale(0) contrast(1.1);transform:scale(1.04)">
+          <div aria-hidden="true" style="position:absolute;inset:0;background:color-mix(in srgb,var(--red) 20%,transparent);mix-blend-mode:color;transition:opacity .4s ease" style-hover="opacity:0"></div>
+          <p style="position:absolute;left:12px;top:12px;margin:0;padding:8px 12px;border:1px solid color-mix(in srgb,var(--ink) 40%,transparent);border-radius:999px;background:color-mix(in srgb,var(--bg) 70%,transparent);font:500 11px/1 'IBM Plex Mono',monospace">P–04</p>
+        </div>
+        <div style="margin-top:16px">
+          <h3 style="margin:0;font:900 clamp(30px,4.6vw,66px)/.95 'Barlow Condensed',sans-serif;text-transform:uppercase">True Link Financial</h3>
+          <div style="margin-top:10px;display:flex;justify-content:space-between;gap:16px;font:500 11px/1.5 'IBM Plex Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--metal)"><span>Financial UX · Workflow design</span><span>2023</span></div>
+          <p style="margin:10px 0 0;font:400 16px/1.5 'Inter',sans-serif;color:var(--muted)">Financial tools built to protect autonomy, not just assets.</p>
+          <p style="margin:10px 0 0;font:700 11px/1 'IBM Plex Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--red)">Explore True Link →</p>
+        </div>
+      </a>
+
+      <a id="wrk-05" href="work/welldone-monitoring.html" data-reveal onPointerMove="{{ tilt4 }}" onPointerLeave="{{ untilt4 }}" style="position:absolute;left:24%;bottom:0;width:min(42vw,500px);text-decoration:none;color:inherit;transform:rotate(-2.5deg)">
+        <div class="tilt-card" style="position:relative;overflow:hidden;border:1px solid var(--line);background:var(--mat);aspect-ratio:4/5">
+          <img src="images/welldone_album.png" alt="WellDone water monitoring project collection" style="display:block;width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.15);transition:filter .6s ease,transform .6s ease" style-hover="filter:grayscale(0) contrast(1.1);transform:scale(1.04)">
+          <div aria-hidden="true" style="position:absolute;inset:0;background:color-mix(in srgb,var(--red) 20%,transparent);mix-blend-mode:color;transition:opacity .4s ease" style-hover="opacity:0"></div>
+          <p style="position:absolute;left:12px;top:12px;margin:0;padding:8px 12px;border:1px solid color-mix(in srgb,var(--ink) 40%,transparent);border-radius:999px;background:color-mix(in srgb,var(--bg) 70%,transparent);font:500 11px/1 'IBM Plex Mono',monospace">P–05</p>
+        </div>
+        <div style="margin-top:16px">
+          <h3 style="margin:0;font:900 clamp(38px,5.8vw,90px)/.9 'Barlow Condensed',sans-serif;text-transform:uppercase">WellDone</h3>
+          <div style="margin-top:10px;display:flex;justify-content:space-between;gap:16px;font:500 11px/1.5 'IBM Plex Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--metal)"><span>UX/UI design · Monitoring · Standalone</span><span>2022</span></div>
+          <p style="margin:10px 0 0;font:400 16px/1.5 'Inter',sans-serif;color:var(--muted)">Turning a nonprofit's scattered well and sensor data into a monitoring workflow people can actually act on.</p>
+          <p style="margin:10px 0 0;font:700 11px/1 'IBM Plex Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--red)">View case study →</p>
+        </div>
+      </a>
     </div>
 
-    <div id="wrk-truelink" onMouseEnter="{{ h3 }}" onFocus="{{ h3 }}" style="grid-column:1 / span 8;margin-top:clamp(28px,6vw,88px)">
-      <p style="margin:0 0 10px;font:700 13px/1 'Space Mono',monospace;color:var(--pink)">04 · UX Designer · Trust team</p>
-      <h3 style="margin:0 0 16px;font:900 clamp(52px,8.4vw,150px)/.82 'Big Shoulders Display',sans-serif;text-transform:uppercase"><a href="work/true-link.html" style="text-decoration:none;color:inherit" style-hover="color:var(--red)">True Link Financial</a></h3>
-      <p style="margin:0 0 18px;max-width:40ch;font:600 clamp(20px,2vw,26px)/1.25 'Source Sans 3',sans-serif">Financial tools built to protect autonomy, not just assets.</p>
-      <div style="max-width:420px;display:grid">
-        <a href="work/true-link-beneficiary-experience.html" style="display:flex;justify-content:space-between;gap:12px;padding:14px 0;border-top:1px solid var(--line);text-decoration:none;font:600 19px/1.3 'Source Sans 3',sans-serif" style-hover="color:var(--red);padding-left:10px">Beneficiary Experience <span aria-hidden="true">→</span></a>
-        <a href="work/true-link-create-draft-disbursements.html" style="display:flex;justify-content:space-between;gap:12px;padding:14px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);text-decoration:none;font:600 19px/1.3 'Source Sans 3',sans-serif" style-hover="color:var(--red);padding-left:10px">Create Draft Disbursements <span aria-hidden="true">→</span></a>
-        <a href="work/true-link.html" style="margin-top:14px;font:700 13px/1 'Space Mono',monospace;letter-spacing:.06em;text-transform:uppercase;min-height:44px;display:inline-flex;align-items:center">Explore True Link →</a>
-      </div>
-    </div>
-
-    <div id="wrk-welldone" onMouseEnter="{{ h4 }}" onFocus="{{ h4 }}" style="grid-column:4 / span 9;margin-top:clamp(28px,6vw,88px);text-align:right">
-      <p style="margin:0 0 10px;font:700 13px/1 'Space Mono',monospace;color:var(--pink)">05 · Standalone · UX / UI Designer · Student project</p>
-      <h3 style="margin:0 0 16px;font:900 clamp(60px,11vw,200px)/.8 'Big Shoulders Display',sans-serif;text-transform:uppercase"><a href="work/welldone-monitoring.html" style="text-decoration:none;color:inherit" style-hover="color:var(--red)">WellDone</a></h3>
-      <p style="margin:0 0 14px 0;margin-left:auto;max-width:40ch;font:400 19px/1.4 'Source Sans 3',sans-serif">Turning a nonprofit's scattered well and sensor data into a monitoring workflow people can actually act on.</p>
-      <a href="work/welldone-monitoring.html" style="font:700 13px/1 'Space Mono',monospace;letter-spacing:.06em;text-transform:uppercase;min-height:44px;display:inline-flex;align-items:center">View case study →</a>
-    </div>
+    <a href="work/true-link-beneficiary-experience.html" style="display:inline-flex;align-items:center;gap:8px;margin:0 16px 10px 0;min-height:36px;font:500 12px/1 'IBM Plex Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--metal);text-decoration:none" style-hover="color:var(--red)">True Link · Beneficiary Experience →</a>
+    <a href="work/true-link-create-draft-disbursements.html" style="display:inline-flex;align-items:center;gap:8px;margin:0 0 10px;min-height:36px;font:500 12px/1 'IBM Plex Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--metal);text-decoration:none" style-hover="color:var(--red)">True Link · Create Draft Disbursements →</a>
+    <br>
+    <a href="work/hazadapt.html" style="display:inline-flex;align-items:center;min-height:36px;font:500 12px/1 'IBM Plex Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--metal);text-decoration:none" style-hover="color:var(--red)">HazAdapt ecosystem · 2021 to present →</a>
   </div>
 </section>
 
@@ -154,111 +261,120 @@ a:hover{color:var(--red)}
   <div aria-hidden="true" style="position:absolute;left:0;right:0;top:0;height:18px;background-image:repeating-linear-gradient(90deg,var(--red) 0 1px,transparent 1px 10px),repeating-linear-gradient(90deg,var(--red) 0 2px,transparent 2px 50px);background-size:100% 8px,100% 18px;background-repeat:no-repeat"></div>
   <div style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:20px;margin-bottom:clamp(30px,4vw,56px)">
     <div>
-      <p style="margin:0 0 8px;font:400 12px/1 'Space Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)">Also true · Art, experiments, things I make</p>
-      <h2 id="wb-h" style="margin:0;font:400 clamp(80px,13vw,220px)/.76 'Grenze Gotisch',serif">the workbench</h2>
+      <p style="margin:0 0 8px;font:500 12px/1 'IBM Plex Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--red)">Also true · Art, experiments, things I make</p>
+      <h2 id="wb-h" style="margin:0;font:900 clamp(56px,10vw,160px)/.82 'Barlow Condensed',sans-serif;text-transform:uppercase;letter-spacing:-.02em">The workbench</h2>
     </div>
     <div style="display:grid;gap:10px;justify-items:start;max-width:36ch">
-      <p style="margin:0;font:400 18px/1.4 'Source Sans 3',sans-serif">Apparently I can't leave things alone. {{ benchHint }}</p>
-      <button type="button" onClick="{{ resetDesk }}" style="font:700 12px/1 'Space Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--ink);background:transparent;border:1px solid var(--ink);padding:0 14px;min-height:44px;cursor:pointer" style-hover="background:var(--ink);color:var(--mat)">↺ Reset table</button>
+      <p style="margin:0;font:400 18px/1.4 'Inter',sans-serif">Apparently I can't leave things alone. {{ benchHint }}</p>
+      <button type="button" onClick="{{ resetDesk }}" style="font:700 12px/1 'IBM Plex Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--ink);background:transparent;border:1px solid var(--ink);padding:0 14px;min-height:44px;cursor:pointer" style-hover="background:var(--ink);color:var(--mat)">↺ Reset table</button>
     </div>
   </div>
 
   <ul aria-label="What lives here" style="list-style:none;margin:0 0 clamp(30px,4vw,56px);padding:0;display:flex;flex-wrap:wrap;gap:8px">
-    <li style="border:1px solid var(--ink);padding:8px 12px;font:400 12px/1.2 'Space Mono',monospace;letter-spacing:.06em;text-transform:uppercase">3D printing &amp; fabrication</li>
-    <li style="border:1px solid var(--ink);padding:8px 12px;font:400 12px/1.2 'Space Mono',monospace;letter-spacing:.06em;text-transform:uppercase">Sculpture &amp; mixed media</li>
-    <li style="border:1px solid var(--ink);padding:8px 12px;font:400 12px/1.2 'Space Mono',monospace;letter-spacing:.06em;text-transform:uppercase">Illustration &amp; 3D modeling</li>
-    <li style="border:1px solid var(--ink);padding:8px 12px;font:400 12px/1.2 'Space Mono',monospace;letter-spacing:.06em;text-transform:uppercase">Creative coding</li>
-    <li style="padding:8px 12px;font:400 12px/1.2 'Space Mono',monospace;letter-spacing:.06em;text-transform:uppercase;background:var(--red);color:var(--on-red)">Strange prototypes</li>
+    <li style="border:1px solid var(--ink);padding:8px 12px;font:400 12px/1.2 'IBM Plex Mono',monospace;letter-spacing:.06em;text-transform:uppercase">3D printing &amp; fabrication</li>
+    <li style="border:1px solid var(--ink);padding:8px 12px;font:400 12px/1.2 'IBM Plex Mono',monospace;letter-spacing:.06em;text-transform:uppercase">Sculpture &amp; mixed media</li>
+    <li style="border:1px solid var(--ink);padding:8px 12px;font:400 12px/1.2 'IBM Plex Mono',monospace;letter-spacing:.06em;text-transform:uppercase">Illustration &amp; 3D modeling</li>
+    <li style="border:1px solid var(--ink);padding:8px 12px;font:400 12px/1.2 'IBM Plex Mono',monospace;letter-spacing:.06em;text-transform:uppercase">Creative coding</li>
+    <li style="padding:8px 12px;font:400 12px/1.2 'IBM Plex Mono',monospace;letter-spacing:.06em;text-transform:uppercase;background:var(--red);color:var(--on-red)">Strange prototypes</li>
   </ul>
 
   <div ref="{{ deskRef }}" style="{{ deskStyle }}">
     <div style="{{ reach.style }}">
       <figure style="margin:0;background:#f3efe7;padding:12px 12px 14px;box-shadow:0 18px 30px rgba(0,0,0,.35);position:relative">
-        <button type="button" onPointerDown="{{ reach.down }}" onPointerMove="{{ reach.move }}" onPointerUp="{{ reach.up }}" onKeyDown="{{ reach.key }}" aria-label="Move Reach. Drag, or use arrow keys." style="position:absolute;top:-18px;left:50%;transform:translateX(-50%) rotate(-3deg);min-height:36px;padding:0 18px;border:0;background:rgba(226,214,188,.92);color:#151312;font:700 11px/1 'Space Mono',monospace;letter-spacing:.08em;text-transform:uppercase;cursor:grab;touch-action:none">⠿ Reach</button>
+        <button type="button" onPointerDown="{{ reach.down }}" onPointerMove="{{ reach.move }}" onPointerUp="{{ reach.up }}" onKeyDown="{{ reach.key }}" aria-label="Move Reach. Drag, or use arrow keys." style="position:absolute;top:-18px;left:50%;transform:translateX(-50%) rotate(-3deg);min-height:36px;padding:0 18px;border:0;background:rgba(226,214,188,.92);color:#151312;font:700 11px/1 'IBM Plex Mono',monospace;letter-spacing:.08em;text-transform:uppercase;cursor:grab;touch-action:none">⠿ Reach</button>
         <img src="images/Artwork.png" alt="Digital illustration by Krystyna Ewing — a figure in a soft cap reaching a hand forward out of shadow." style="display:block;width:100%;height:auto" draggable="false">
-        <figcaption style="display:flex;justify-content:space-between;gap:10px;margin-top:10px;font:400 11px/1.3 'Space Mono',monospace;letter-spacing:.04em;text-transform:uppercase;color:#151312"><strong>Reach</strong><span>Digital illustration</span></figcaption>
+        <figcaption style="display:flex;justify-content:space-between;gap:10px;margin-top:10px;font:400 11px/1.3 'IBM Plex Mono',monospace;letter-spacing:.04em;text-transform:uppercase;color:#151312"><strong>Reach</strong><span>Digital illustration</span></figcaption>
       </figure>
     </div>
     <div style="{{ note.style }}">
-      <p style="margin:0;font:400 clamp(28px,3vw,44px)/.98 'Grenze Gotisch',serif;color:var(--ink);position:relative;padding-top:24px"><button type="button" onPointerDown="{{ note.down }}" onPointerMove="{{ note.move }}" onPointerUp="{{ note.up }}" onKeyDown="{{ note.key }}" aria-label="Move note. Drag, or use arrow keys." style="position:absolute;top:-12px;left:0;min-height:36px;padding:0 14px;border:0;background:rgba(226,214,188,.92);color:#151312;font:700 11px/1 'Space Mono',monospace;letter-spacing:.08em;text-transform:uppercase;cursor:grab;touch-action:none;transform:rotate(-4deg)">⠿ Note</button>I had an idea. Unfortunately, that meant I had to make it.</p>
+      <p style="margin:0;font:400 clamp(26px,2.8vw,40px)/1 'UnifrakturMaguntia',serif;color:var(--ink);position:relative;padding-top:24px"><button type="button" onPointerDown="{{ note.down }}" onPointerMove="{{ note.move }}" onPointerUp="{{ note.up }}" onKeyDown="{{ note.key }}" aria-label="Move note. Drag, or use arrow keys." style="position:absolute;top:-12px;left:0;min-height:36px;padding:0 14px;border:0;background:rgba(226,214,188,.92);color:#151312;font:700 11px/1 'IBM Plex Mono',monospace;letter-spacing:.08em;text-transform:uppercase;cursor:grab;touch-action:none;transform:rotate(-4deg)">⠿ Note</button>I had an idea. Unfortunately, that meant I had to make it.</p>
     </div>
     <div style="{{ portrait.style }}">
       <figure style="margin:0;background:#f3efe7;padding:12px 12px 14px;box-shadow:0 18px 30px rgba(0,0,0,.35);position:relative">
-        <button type="button" onPointerDown="{{ portrait.down }}" onPointerMove="{{ portrait.move }}" onPointerUp="{{ portrait.up }}" onKeyDown="{{ portrait.key }}" aria-label="Move Self-Portrait. Drag, or use arrow keys." style="position:absolute;top:-18px;left:30%;transform:rotate(4deg);min-height:36px;padding:0 18px;border:0;background:rgba(226,214,188,.92);color:#151312;font:700 11px/1 'Space Mono',monospace;letter-spacing:.08em;text-transform:uppercase;cursor:grab;touch-action:none">⠿ Self-Portrait</button>
+        <button type="button" onPointerDown="{{ portrait.down }}" onPointerMove="{{ portrait.move }}" onPointerUp="{{ portrait.up }}" onKeyDown="{{ portrait.key }}" aria-label="Move Self-Portrait. Drag, or use arrow keys." style="position:absolute;top:-18px;left:30%;transform:rotate(4deg);min-height:36px;padding:0 18px;border:0;background:rgba(226,214,188,.92);color:#151312;font:700 11px/1 'IBM Plex Mono',monospace;letter-spacing:.08em;text-transform:uppercase;cursor:grab;touch-action:none">⠿ Self-Portrait</button>
         <img src="images/hero-portrait.png" alt="Hand-drawn self-portrait illustration by Krystyna Ewing: a character with a purple bucket hat and glowing green eyes, with her name lettered around it in purple marker." style="display:block;width:100%;height:auto" draggable="false">
-        <figcaption style="display:flex;justify-content:space-between;gap:10px;margin-top:10px;font:400 11px/1.3 'Space Mono',monospace;letter-spacing:.04em;text-transform:uppercase;color:#151312"><strong>Self-Portrait</strong><span>Digital illustration</span></figcaption>
+        <figcaption style="display:flex;justify-content:space-between;gap:10px;margin-top:10px;font:400 11px/1.3 'IBM Plex Mono',monospace;letter-spacing:.04em;text-transform:uppercase;color:#151312"><strong>Self-Portrait</strong><span>Digital illustration</span></figcaption>
       </figure>
     </div>
     <div style="{{ first.style }}">
       <figure style="margin:0;background:#f3efe7;padding:10px 10px 12px;box-shadow:0 14px 24px rgba(0,0,0,.35);position:relative">
-        <button type="button" onPointerDown="{{ first.down }}" onPointerMove="{{ first.move }}" onPointerUp="{{ first.up }}" onKeyDown="{{ first.key }}" aria-label="Move First Pass. Drag, or use arrow keys." style="position:absolute;top:-16px;left:10%;transform:rotate(-6deg);min-height:36px;padding:0 14px;border:0;background:rgba(226,214,188,.92);color:#151312;font:700 11px/1 'Space Mono',monospace;letter-spacing:.08em;text-transform:uppercase;cursor:grab;touch-action:none">⠿ First Pass</button>
+        <button type="button" onPointerDown="{{ first.down }}" onPointerMove="{{ first.move }}" onPointerUp="{{ first.up }}" onKeyDown="{{ first.key }}" aria-label="Move First Pass. Drag, or use arrow keys." style="position:absolute;top:-16px;left:10%;transform:rotate(-6deg);min-height:36px;padding:0 14px;border:0;background:rgba(226,214,188,.92);color:#151312;font:700 11px/1 'IBM Plex Mono',monospace;letter-spacing:.08em;text-transform:uppercase;cursor:grab;touch-action:none">⠿ First Pass</button>
         <img src="images/website_hero.png" alt="An early, unfinished sketch mixing loose line art with a hand-lettered name banner." style="display:block;width:100%;height:auto" draggable="false">
-        <figcaption style="margin-top:8px;font:700 11px/1.3 'Space Mono',monospace;letter-spacing:.04em;text-transform:uppercase;color:#151312">First Pass · Sketch</figcaption>
+        <figcaption style="margin-top:8px;font:700 11px/1.3 'IBM Plex Mono',monospace;letter-spacing:.04em;text-transform:uppercase;color:#151312">First Pass · Sketch</figcaption>
       </figure>
     </div>
     <div style="{{ fab.style }}">
       <div style="background:#f3efe7;padding:10px 10px 12px;box-shadow:0 14px 24px rgba(0,0,0,.35);position:relative">
-        <button type="button" onPointerDown="{{ fab.down }}" onPointerMove="{{ fab.move }}" onPointerUp="{{ fab.up }}" onKeyDown="{{ fab.key }}" aria-label="Move Silver Skull. Drag, or use arrow keys." style="position:absolute;top:-16px;left:20%;z-index:2;transform:rotate(3deg);min-height:36px;padding:0 14px;border:0;background:rgba(226,214,188,.92);color:#151312;font:700 11px/1 'Space Mono',monospace;letter-spacing:.08em;text-transform:uppercase;cursor:grab;touch-action:none">⠿ Silver Skull</button>
+        <button type="button" onPointerDown="{{ fab.down }}" onPointerMove="{{ fab.move }}" onPointerUp="{{ fab.up }}" onKeyDown="{{ fab.key }}" aria-label="Move Silver Skull. Drag, or use arrow keys." style="position:absolute;top:-16px;left:20%;z-index:2;transform:rotate(3deg);min-height:36px;padding:0 14px;border:0;background:rgba(226,214,188,.92);color:#151312;font:700 11px/1 'IBM Plex Mono',monospace;letter-spacing:.08em;text-transform:uppercase;cursor:grab;touch-action:none">⠿ Silver Skull</button>
         <div style="width:100%;min-width:0;aspect-ratio:4/5;position:relative"><image-slot id="v2-fab" src="images/workbench/silver-skull.jpg" shape="rect" placeholder="3D print / fabrication photo"></image-slot></div>
-        <p style="margin:8px 0 0;font:700 11px/1.3 'Space Mono',monospace;letter-spacing:.04em;text-transform:uppercase;color:#151312">Silver Skull · 3D printed, hand-painted</p>
+        <p style="margin:8px 0 0;font:700 11px/1.3 'IBM Plex Mono',monospace;letter-spacing:.04em;text-transform:uppercase;color:#151312">Silver Skull · 3D printed, hand-painted</p>
       </div>
     </div>
     <div style="{{ sculpt.style }}">
       <div style="background:#f3efe7;padding:10px 10px 12px;box-shadow:0 14px 24px rgba(0,0,0,.35);position:relative">
-        <button type="button" onPointerDown="{{ sculpt.down }}" onPointerMove="{{ sculpt.move }}" onPointerUp="{{ sculpt.up }}" onKeyDown="{{ sculpt.key }}" aria-label="Move Majin Buu. Drag, or use arrow keys." style="position:absolute;top:-16px;right:12%;z-index:2;transform:rotate(-3deg);min-height:36px;padding:0 14px;border:0;background:rgba(226,214,188,.92);color:#151312;font:700 11px/1 'Space Mono',monospace;letter-spacing:.08em;text-transform:uppercase;cursor:grab;touch-action:none">⠿ Majin Buu</button>
+        <button type="button" onPointerDown="{{ sculpt.down }}" onPointerMove="{{ sculpt.move }}" onPointerUp="{{ sculpt.up }}" onKeyDown="{{ sculpt.key }}" aria-label="Move Majin Buu. Drag, or use arrow keys." style="position:absolute;top:-16px;right:12%;z-index:2;transform:rotate(-3deg);min-height:36px;padding:0 14px;border:0;background:rgba(226,214,188,.92);color:#151312;font:700 11px/1 'IBM Plex Mono',monospace;letter-spacing:.08em;text-transform:uppercase;cursor:grab;touch-action:none">⠿ Majin Buu</button>
         <div style="width:100%;min-width:0;aspect-ratio:16/10;position:relative"><image-slot id="v2-sculpt" src="images/workbench/majin-buu-full.jpg" shape="rect" placeholder="Sculpture / mixed media photo"></image-slot></div>
-        <p style="margin:8px 0 0;font:700 11px/1.3 'Space Mono',monospace;letter-spacing:.04em;text-transform:uppercase;color:#151312">Majin Buu · 3D printed, hand-painted</p>
+        <p style="margin:8px 0 0;font:700 11px/1.3 'IBM Plex Mono',monospace;letter-spacing:.04em;text-transform:uppercase;color:#151312">Majin Buu · 3D printed, hand-painted</p>
       </div>
     </div>
     <div style="{{ sticky.style }}">
       <div style="position:relative;padding:28px 20px 20px;background:var(--red);color:var(--on-red);box-shadow:0 14px 24px rgba(0,0,0,.35)">
-        <button type="button" onPointerDown="{{ sticky.down }}" onPointerMove="{{ sticky.move }}" onPointerUp="{{ sticky.up }}" onKeyDown="{{ sticky.key }}" aria-label="Move sticky note. Drag, or use arrow keys." style="position:absolute;top:-16px;left:40%;transform:rotate(2deg);min-height:36px;padding:0 14px;border:0;background:rgba(226,214,188,.92);color:#151312;font:700 11px/1 'Space Mono',monospace;letter-spacing:.08em;text-transform:uppercase;cursor:grab;touch-action:none">⠿ Sticky</button>
-        <p style="margin:0;font:600 17px/1.4 'Source Sans 3',sans-serif">A couple of the physical pieces made it onto the table. More — sculpture, prints, anything made with my hands instead of a tablet — is still getting photographed.</p>
+        <button type="button" onPointerDown="{{ sticky.down }}" onPointerMove="{{ sticky.move }}" onPointerUp="{{ sticky.up }}" onKeyDown="{{ sticky.key }}" aria-label="Move sticky note. Drag, or use arrow keys." style="position:absolute;top:-16px;left:40%;transform:rotate(2deg);min-height:36px;padding:0 14px;border:0;background:rgba(226,214,188,.92);color:#151312;font:700 11px/1 'IBM Plex Mono',monospace;letter-spacing:.08em;text-transform:uppercase;cursor:grab;touch-action:none">⠿ Sticky</button>
+        <p style="margin:0;font:600 17px/1.4 'Inter',sans-serif">A couple of the physical pieces made it onto the table. More — sculpture, prints, anything made with my hands instead of a tablet — is still getting photographed.</p>
       </div>
     </div>
   </div>
 
-  <a href="art.html" style="margin-top:clamp(40px,5vw,72px);display:inline-flex;align-items:center;min-height:44px;font:700 14px/1 'Space Mono',monospace;letter-spacing:.06em;text-transform:uppercase;background:var(--ink);color:var(--mat);padding:0 18px;text-decoration:none" style-hover="background:var(--red);color:var(--on-red)">See what else I've been making →</a>
+  <a href="art.html" style="margin-top:clamp(40px,5vw,72px);display:inline-flex;align-items:center;min-height:44px;font:700 14px/1 'IBM Plex Mono',monospace;letter-spacing:.06em;text-transform:uppercase;background:var(--ink);color:var(--mat);padding:0 18px;text-decoration:none" style-hover="background:var(--red);color:var(--on-red)">See what else I've been making →</a>
 </section>
 
 <section id="about" aria-labelledby="about-h" style="position:relative;overflow:hidden;padding:clamp(90px,12vw,180px) clamp(16px,5vw,80px);display:flex;flex-wrap:wrap;gap:48px 64px;align-items:center">
-  <div aria-hidden="true" style="flex:1 1 360px;min-width:0;position:relative;height:clamp(320px,40vw,560px)">
+  <div aria-hidden="true" style="flex:1 1 360px;min-width:0;position:relative;height:clamp(320px,40vw,560px)" data-reveal>
     <img src="images/hero-portrait.png" alt="" style="position:absolute;left:-12%;top:0;width:130%;height:100%;object-fit:cover;object-position:50% 40%;filter:grayscale(1) contrast(1.4);mix-blend-mode:luminosity;opacity:.9;clip-path:polygon(0 6%,100% 0,94% 100%,4% 92%)">
-    <p style="position:absolute;left:0;bottom:-.1em;margin:0;font:400 clamp(110px,16vw,260px)/.8 'Grenze Gotisch',serif;color:var(--red)">oh, hi.</p>
+    <p style="position:absolute;left:0;bottom:-.1em;margin:0;font:400 clamp(100px,15vw,240px)/.85 'UnifrakturMaguntia',serif;color:var(--red)">oh, hi.</p>
   </div>
-  <div style="flex:1 1 380px;min-width:0;display:grid;gap:28px;max-width:560px">
-    <h2 id="about-h" style="margin:0;font:400 12px/1 'Space Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)">About</h2>
-    <dl style="margin:0;display:grid;grid-template-columns:auto minmax(0,1fr);gap:10px 24px;padding:20px 0;border-top:2px solid var(--ink);border-bottom:1px solid var(--line);font:400 13px/1.45 'Space Mono',monospace;letter-spacing:.04em">
-      <dt style="text-transform:uppercase;color:var(--muted)">Artist</dt><dd style="margin:0">Krystyna Ewing, Detroit-born</dd>
-      <dt style="text-transform:uppercase;color:var(--muted)">Medium</dt><dd style="margin:0">Software, UX, art, 3D printing, curiosity</dd>
-      <dt style="text-transform:uppercase;color:var(--muted)">Hours</dt><dd style="margin:0">Including 1am</dd>
+  <div data-reveal style="flex:1 1 380px;min-width:0;display:grid;gap:28px;max-width:560px">
+    <h2 id="about-h" style="margin:0;font:700 12px/1 'IBM Plex Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--red)">About</h2>
+    <dl style="margin:0;display:grid;grid-template-columns:auto minmax(0,1fr);gap:10px 24px;padding:20px 0;border-top:2px solid var(--ink);border-bottom:1px solid var(--line);font:400 13px/1.45 'IBM Plex Mono',monospace;letter-spacing:.04em">
+      <dt style="text-transform:uppercase;color:var(--metal)">Artist</dt><dd style="margin:0">Krystyna Ewing, Detroit-born</dd>
+      <dt style="text-transform:uppercase;color:var(--metal)">Medium</dt><dd style="margin:0">Software, UX, art, 3D printing, curiosity</dd>
+      <dt style="text-transform:uppercase;color:var(--metal)">Hours</dt><dd style="margin:0">Including 1am</dd>
     </dl>
-    <p style="margin:0;font:400 clamp(20px,1.8vw,24px)/1.5 'Source Sans 3',sans-serif;text-wrap:pretty">Detroit-born, lifelong artist, and someone with a bad habit of needing to know how things work. That curiosity took me from software development into UX, and it still shows up in accessibility reviews, 3D printing experiments, and whatever I'm building at 1am.</p>
-    <a href="#" style="font:700 14px/1 'Space Mono',monospace;letter-spacing:.06em;text-transform:uppercase;min-height:44px;display:inline-flex;align-items:center">Want the longer version? View résumé →</a>
+    <p style="margin:0;font:400 clamp(20px,1.8vw,24px)/1.5 'Inter',sans-serif;text-wrap:pretty">Detroit-born, lifelong artist, and someone with a bad habit of needing to know how things work. That curiosity took me from software development into UX, and it still shows up in accessibility reviews, 3D printing experiments, and whatever I'm building at 1am.</p>
+    <a href="#" style="font:700 14px/1 'IBM Plex Mono',monospace;letter-spacing:.06em;text-transform:uppercase;min-height:44px;display:inline-flex;align-items:center">Want the longer version? View résumé →</a>
     <div style="display:grid;gap:6px;padding-top:8px;border-top:1px solid var(--line)">
-      <p style="margin:0;font:400 11px/1 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">Photography Credits</p>
-      <p style="margin:0;max-width:52ch;font:400 13px/1.6 'Space Mono',monospace;letter-spacing:.02em;color:var(--muted)">Homepage cicada photograph by <a href="https://unsplash.com/@mayulec" style="color:var(--red)">Maya Alexa G. Romero</a> on <a href="https://unsplash.com/photos/a-colorful-cicada-with-translucent-wings-on-black-background-YVafzB3-8jQ" style="color:var(--red)">Unsplash</a>. Licensed under the <a href="https://unsplash.com/license" style="color:var(--red)">Unsplash License</a>.</p>
+      <p style="margin:0;font:400 11px/1 'IBM Plex Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--metal)">Photography Credits</p>
+      <p style="margin:0;max-width:52ch;font:400 13px/1.6 'IBM Plex Mono',monospace;letter-spacing:.02em;color:var(--metal)">Homepage cicada photograph by <a href="https://unsplash.com/@mayulec" style="color:var(--red)">Maya Alexa G. Romero</a> on <a href="https://unsplash.com/photos/a-colorful-cicada-with-translucent-wings-on-black-background-YVafzB3-8jQ" style="color:var(--red)">Unsplash</a>. Licensed under the <a href="https://unsplash.com/license" style="color:var(--red)">Unsplash License</a>.</p>
     </div>
   </div>
 </section>
 
 </main>
 
-<footer id="contact" style="padding:0 0 120px">
-  <a href="mailto:hello@krystynaewing.com" aria-label="Email hello@krystynaewing.com" onMouseEnter="{{ mqPause }}" onMouseLeave="{{ mqPlay }}" onFocus="{{ mqPause }}" onBlur="{{ mqPlay }}" style="display:block;overflow:hidden;background:var(--red);color:var(--on-red);text-decoration:none;padding:clamp(16px,2.4vw,32px) 0;transform:rotate(-1.5deg);margin:40px -2vw 0;width:104vw" style-hover="color:var(--on-red)">
-    <div ref="{{ mqRef }}" aria-hidden="true" style="display:flex;width:max-content;white-space:nowrap;font:900 clamp(56px,10vw,170px)/.9 'Big Shoulders Display',sans-serif;text-transform:uppercase">
+<footer id="contact" style="position:relative;overflow:hidden;padding:0 0 120px">
+  <div id="contactEye1" aria-hidden="true" style="position:absolute;left:50%;top:14%;width:min(90vw,900px);aspect-ratio:2/1;border-radius:50%;border:1px solid color-mix(in srgb,var(--red) 30%,transparent);transform:translate(-50%,-50%)"></div>
+  <div id="contactEye2" aria-hidden="true" style="position:absolute;left:50%;top:14%;width:min(64vw,640px);aspect-ratio:2/1;border-radius:50%;border:1px solid color-mix(in srgb,var(--red) 30%,transparent);transform:translate(-50%,-50%)"></div>
+  <a href="mailto:hello@krystynaewing.com" aria-label="Email hello@krystynaewing.com" onMouseEnter="{{ mqPause }}" onMouseLeave="{{ mqPlay }}" onFocus="{{ mqPause }}" onBlur="{{ mqPlay }}" style="position:relative;display:block;overflow:hidden;background:var(--red);color:var(--on-red);text-decoration:none;padding:clamp(16px,2.4vw,32px) 0;transform:rotate(-1.5deg);margin:40px -2vw 0;width:104vw" style-hover="color:var(--on-red)">
+    <div ref="{{ mqRef }}" aria-hidden="true" style="display:flex;width:max-content;white-space:nowrap;font:900 clamp(56px,10vw,170px)/.9 'Barlow Condensed',sans-serif;text-transform:uppercase">
       <span style="padding-right:.4em">hello@krystynaewing.com ✕ say something ✕</span><span style="padding-right:.4em">hello@krystynaewing.com ✕ say something ✕</span>
     </div>
   </a>
-  <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:24px;padding:clamp(48px,6vw,90px) clamp(16px,5vw,80px) 0">
-    <p style="margin:0;font:400 clamp(30px,3.4vw,52px)/1 'Grenze Gotisch',serif">Found something that doesn't work? <a href="mailto:hello@krystynaewing.com" style="color:var(--pink)">Tell me.</a></p>
-    <p style="margin:0;font:400 12px/1.6 'Space Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)">© 2026 Krystyna Ewing<br><a href="#">Résumé</a> · <a href="art.html">Art</a></p>
+  <div data-reveal style="position:relative;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:24px;padding:clamp(48px,6vw,90px) clamp(16px,5vw,80px) 0">
+    <p style="margin:0;font:400 clamp(30px,3.4vw,52px)/1 'UnifrakturMaguntia',serif">Found something that doesn't work? <a href="mailto:hello@krystynaewing.com" style="color:var(--pink)">Tell me.</a></p>
+    <p style="margin:0;font:400 12px/1.6 'IBM Plex Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--metal)">© 2026 Krystyna Ewing<br><a href="#">Résumé</a> · <a href="art.html">Art</a></p>
   </div>
 </footer>
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;defaultTheme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;dark&quot;,&quot;light&quot;],&quot;default&quot;:&quot;dark&quot;,&quot;tsType&quot;:&quot;'dark'|'light'&quot;,&quot;section&quot;:&quot;Look&quot;},&quot;grain&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Look&quot;}}">
+const PROJECTS = [
+  { code: 'P–01', title: 'ResiliencePoint', type: 'UX research · Product design · Data viz', year: '2023–24', note: "We built what we thought people needed. Then the evidence changed the product." },
+  { code: 'P–02', title: 'LoCo', type: 'UX research · Emergency preparedness', year: '2023–24', note: "Trusted local safety information, placed where people are already looking for preparedness guidance." },
+  { code: 'P–03', title: 'Prep Checks', type: 'Product design · UX research', year: '2024', note: "Bite-sized preparedness activities people can actually finish, and return to." },
+  { code: 'P–04', title: 'True Link Financial', type: 'Financial UX · Workflow design', year: '2023', note: "Financial tools built to protect autonomy, not just assets." },
+  { code: 'P–05', title: 'WellDone', type: 'UX / UI design · Monitoring', year: '2022', note: "A remote water-monitoring experience redesigned around scannable, status-first information." }
+];
 class Component extends DCLogic {
-  idxRef = React.createRef(); deskRef = React.createRef(); mqRef = React.createRef();
+  deskRef = React.createRef(); mqRef = React.createRef(); progressRef = React.createRef(); cursorRef = React.createRef();
   defaults() {
     return {
       reach: { x: 2, y: 4, r: -2, w: 38 }, note: { x: 44, y: 3, r: -1.5, w: 22 },
@@ -268,7 +384,7 @@ class Component extends DCLogic {
     };
   }
   state = {
-    theme: this.props.defaultTheme ?? 'dark', active: 'top', hover: -1,
+    theme: this.props.defaultTheme ?? 'dark', active: 'top', activeProject: 0, autoPaused: false,
     narrow: window.innerWidth < 760, canHover: window.matchMedia('(hover: hover) and (pointer: fine)').matches,
     pieces: this.defaults(), z: {}, top: 10
   };
@@ -280,15 +396,12 @@ class Component extends DCLogic {
   componentDidMount() {
     this.applyRoot();
     this.reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    // The hero intro should only play once per visit, not on every page/route
-    // load within the same session -- check this before anything else touches
-    // the DOM so there's no flash of the un-gated state.
     try {
       this.introSeen = sessionStorage.getItem('keIntroSeen') === '1';
       sessionStorage.setItem('keIntroSeen', '1');
     } catch (e) { this.introSeen = false; }
     if (this.introSeen) document.documentElement.dataset.intro = 'seen';
-    const idx = this.idxRef.current;
+
     this.onScroll = () => {
       if (this.sraf) return;
       this.sraf = requestAnimationFrame(() => {
@@ -298,26 +411,56 @@ class Component extends DCLogic {
           const p = this.reduce ? 1 : Math.max(0, Math.min(1, (vh - r.top) / (vh * 0.7)));
           el.style.setProperty('--p', p.toFixed(3));
         });
+        const avail = document.documentElement.scrollHeight - window.innerHeight;
+        const amount = avail > 0 ? (window.scrollY / avail) * 100 : 0;
+        if (this.progressRef.current) this.progressRef.current.style.width = amount + '%';
       });
     };
     window.addEventListener('scroll', this.onScroll, { passive: true }); this.onScroll();
-    this.onIdx = e => { const b = idx.getBoundingClientRect(); idx.style.setProperty('--px', (e.clientX - b.left + 40) + 'px'); idx.style.setProperty('--py', (e.clientY - b.top) + 'px'); };
-    idx.addEventListener('pointermove', this.onIdx);
+
+    this.onPointerMove = e => {
+      if (this.cursorRef.current) this.cursorRef.current.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0)`;
+    };
+    window.addEventListener('pointermove', this.onPointerMove);
+
     this.onResize = () => { const n = window.innerWidth < 760; if (n !== this.state.narrow) this.setState({ narrow: n }); };
     window.addEventListener('resize', this.onResize);
+
     this.io = new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecting) this.setState({ active: en.target.id }); }), { rootMargin: '-45% 0px -45% 0px' });
     ['top', 'work', 'workbench', 'about', 'contact'].forEach(id => { const el = document.getElementById(id); if (el) this.io.observe(el); });
+
+    this.revealIo = new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecting) en.target.style.setProperty('--rv', '1'); }), { threshold: .16 });
+    document.querySelectorAll('[data-reveal]').forEach(el => this.revealIo.observe(el));
+
     if (!this.reduce && this.mqRef.current) this.mq = this.mqRef.current.animate([{ transform: 'translateX(0)' }, { transform: 'translateX(-50%)' }], { duration: 28000, iterations: Infinity });
+
+    if (!this.reduce) {
+      this.cycleTimer = setInterval(() => {
+        if (!this.state.autoPaused) this.setState(s => ({ activeProject: (s.activeProject + 1) % PROJECTS.length }));
+      }, 5200);
+    }
   }
   componentDidUpdate(pp) {
     if (pp.defaultTheme !== this.props.defaultTheme && this.props.defaultTheme) this.setState({ theme: this.props.defaultTheme }, () => this.applyRoot());
     else this.applyRoot();
   }
   componentWillUnmount() {
-    if (this.idxRef.current) this.idxRef.current.removeEventListener('pointermove', this.onIdx);
     window.removeEventListener('scroll', this.onScroll); window.removeEventListener('resize', this.onResize);
-    if (this.io) this.io.disconnect(); if (this.mq) this.mq.cancel();
+    window.removeEventListener('pointermove', this.onPointerMove);
+    if (this.io) this.io.disconnect(); if (this.revealIo) this.revealIo.disconnect(); if (this.mq) this.mq.cancel();
+    if (this.cycleTimer) clearInterval(this.cycleTimer); if (this.pauseTimer) clearTimeout(this.pauseTimer);
   }
+  selectProject(i) {
+    this.setState({ activeProject: i, autoPaused: true });
+    clearTimeout(this.pauseTimer);
+    this.pauseTimer = setTimeout(() => this.setState({ autoPaused: false }), 8000);
+  }
+  tilt(e) {
+    const b = e.currentTarget.getBoundingClientRect();
+    const x = (e.clientX - b.left) / b.width - 0.5, y = (e.clientY - b.top) / b.height - 0.5;
+    e.currentTarget.style.setProperty('--card-x', (y * -7) + 'deg'); e.currentTarget.style.setProperty('--card-y', (x * 7) + 'deg');
+  }
+  untilt(e) { e.currentTarget.style.setProperty('--card-x', '0deg'); e.currentTarget.style.setProperty('--card-y', '0deg'); }
   piece(id) {
     const p = this.state.pieces[id], narrow = this.state.narrow;
     const style = narrow
@@ -348,22 +491,28 @@ class Component extends DCLogic {
   }
   renderVals() {
     const s = this.state, light = s.theme === 'light', mk = id => (s.active === id ? '■' : '□');
-    const srcs = ['images/work/hazadapt-resiliencepoint/platform-cover.png', 'images/hazadapt_album.png', 'images/hazadapt_album.png', 'images/True_Link_album.png', 'images/welldone_album.png'];
-    const show = s.canHover && s.hover >= 0;
-    const hv = i => () => { if (s.hover !== i) this.setState({ hover: i }); };
+    const active = PROJECTS[s.activeProject];
     const r = {
-      idxRef: this.idxRef, deskRef: this.deskRef, mqRef: this.mqRef,
+      deskRef: this.deskRef, mqRef: this.mqRef, progressRef: this.progressRef, cursorRef: this.cursorRef,
       mWork: mk('work'), mBench: mk('workbench'), mAbout: mk('about'), mContact: mk('contact'),
       themeLabel: light ? 'Dark' : 'Light', lightPressed: light ? 'true' : 'false',
       toggleTheme: () => this.setState(st => ({ theme: st.theme === 'light' ? 'dark' : 'light' }), () => this.applyRoot()),
-      ...(() => { const cur = [0, 1, 1, 2, 3][Math.max(0, s.hover)], o = {}; [0, 1, 2, 3].forEach(k => { o['pv' + k] = { display: k === cur ? 'block' : 'none', width: '100%', height: 'auto', boxShadow: '12px 12px 0 var(--red)' }; }); return o; })(), previewOn: s.canHover,
-      previewStyle: { opacity: show ? 1 : 0, transform: `translate(0,-50%) rotate(${s.hover % 2 ? 3 : -3}deg) scale(${show ? 1 : 0.9})`, transition: 'opacity .2s, transform .25s', clipPath: show ? 'inset(0 0 0 0)' : 'inset(50% 0 50% 0)' },
-      h0: hv(0), h1: hv(1), h2: hv(2), h3: hv(3), h4: hv(4), unhover: () => this.setState({ hover: -1 }),
+      activeCode: active.code, activeYear: active.year, activeTitle: active.title, activeType: active.type, activeNote: active.note,
+      autoStatus: s.autoPaused ? 'Manual signal / auto resumes soon' : 'Auto transmission / choose a signal',
+      cycleLineClass: s.autoPaused ? 'is-paused' : '',
+      stageLight: e => { const b = e.currentTarget.getBoundingClientRect(); e.currentTarget.style.setProperty('--pointer-x', (e.clientX - b.left) + 'px'); e.currentTarget.style.setProperty('--pointer-y', (e.clientY - b.top) + 'px'); },
       benchHint: s.narrow ? "Here's what's on the table." : 'Grab the tape to move things around. Arrow keys work too.',
       deskStyle: s.narrow ? { position: 'relative', display: 'flex', flexDirection: 'column', gap: 44, paddingTop: 20 } : { position: 'relative', height: 'clamp(820px, 78vw, 1200px)' },
       resetDesk: () => this.setState({ pieces: this.defaults(), z: {} }),
       mqPause: () => this.mq && this.mq.pause(), mqPlay: () => this.mq && this.mq.play()
     };
+    PROJECTS.forEach((p, i) => {
+      r['p' + i] = i === s.activeProject ? 'is-active' : '';
+      r['n' + i] = i === s.activeProject ? 'is-active' : '';
+      r['sel' + i] = () => this.selectProject(i);
+      r['tilt' + i] = e => this.tilt(e);
+      r['untilt' + i] = e => this.untilt(e);
+    });
     ['reach', 'note', 'portrait', 'first', 'fab', 'sculpt', 'sticky'].forEach(id => { r[id] = this.piece(id); });
     return r;
   }
