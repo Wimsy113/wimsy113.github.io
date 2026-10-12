@@ -284,7 +284,7 @@ a:hover{color:var(--red)}
       <button type="button" ref="{{ closeRef }}" onClick="{{ lbClose }}" style="font:700 12px/1 'Space Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:#0d0c0c;background:#ece6dc;border:0;padding:0 16px;min-height:44px;cursor:pointer" style-hover="background:#f45b8e">✕ Close</button>
     </div>
     <div style="min-height:0;display:flex;align-items:center;justify-content:center">
-      <img src="{{ lb.src }}" alt="{{ lb.alt }}" style="max-width:100%;max-height:100%;object-fit:contain;display:block">
+      <img ref="{{ lbImgRef }}" alt="{{ lb.alt }}" style="max-width:100%;max-height:100%;object-fit:contain;display:block">
     </div>
     <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px">
       <button type="button" onClick="{{ lbPrev }}" aria-label="Previous image" style="font:700 12px/1 'Space Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:#ece6dc;background:transparent;border:1px solid #ece6dc;padding:0 16px;min-height:44px;cursor:pointer" style-hover="background:#ece6dc;color:#0d0c0c">← Prev</button>
@@ -297,6 +297,7 @@ a:hover{color:var(--red)}
 <script type="text/x-dc" data-dc-script data-props="{&quot;defaultTheme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;dark&quot;,&quot;light&quot;],&quot;default&quot;:&quot;dark&quot;,&quot;tsType&quot;:&quot;'dark'|'light'&quot;,&quot;section&quot;:&quot;Look&quot;},&quot;grain&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Look&quot;}}">
 class Component extends DCLogic {
   closeRef = React.createRef();
+  lbImgRef = React.createRef();
   state = { theme: this.props.defaultTheme ?? 'dark', active: 's01', lb: -1 };
   applyRoot() {
     const r = document.documentElement;
@@ -315,6 +316,7 @@ class Component extends DCLogic {
     if (open && !this.wasOpen) { this.lastFocus = document.activeElement; document.body.style.overflow = 'hidden'; setTimeout(() => this.closeRef.current && this.closeRef.current.focus(), 30); }
     if (!open && this.wasOpen) { document.body.style.overflow = ''; if (this.lastFocus && this.lastFocus.focus) this.lastFocus.focus(); }
     this.wasOpen = open;
+    if (open && this.lbImgRef.current) this.lbImgRef.current.src = this.figs()[this.state.lb].src;
   }
   componentWillUnmount() { if (this.io) this.io.disconnect(); document.body.style.overflow = ''; }
   figs() {
@@ -343,7 +345,7 @@ class Component extends DCLogic {
       toggleToc: () => this.setState(s => ({ tocOpen: s.tocOpen === false })),
       mk, themeLabel: light ? 'Dark' : 'Light', lightPressed: light ? 'true' : 'false',
       toggleTheme: () => this.setState(s => ({ theme: s.theme === 'light' ? 'dark' : 'light' }), () => this.applyRoot()),
-      closeRef: this.closeRef, lbOpen: this.state.lb >= 0, lb,
+      closeRef: this.closeRef, lbImgRef: this.lbImgRef, lbOpen: this.state.lb >= 0, lb,
       lbClose: () => this.setState({ lb: -1 }), lbPrev: step(-1), lbNext: step(1),
       lbKey: e => { if (e.key === 'Escape') this.setState({ lb: -1 }); else if (e.key === 'ArrowLeft') step(-1)(); else if (e.key === 'ArrowRight') step(1)(); }
     };
