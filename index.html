@@ -35,51 +35,27 @@ a:hover{color:var(--red)}
   @keyframes introVeilOut{0%,10%{opacity:1}100%{opacity:0}}
   @keyframes heroPieceIn{from{opacity:0}to{opacity:1}}
   @keyframes pageIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
-  @keyframes driftParticle{0%{top:105%;opacity:0;transform:translateX(0) scale(.5)}15%{opacity:.8}55%{transform:translateX(5rem) scale(1.5)}90%{opacity:.5}100%{top:-5%;opacity:0;transform:translateX(-3rem) scale(.5)}}
-  @keyframes breathe{0%,100%{opacity:.55;transform:translate(-50%,-50%) scale(.9)}50%{opacity:1;transform:translate(-50%,-50%) scale(1.08)}}
-  @keyframes spinOrbit{to{transform:translate(-50%,-50%) rotate(360deg)}}
   @keyframes eyeShift{0%,100%{transform:translate(-50%,-50%) rotate(-3deg)}50%{transform:translate(-50%,-50%) rotate(4deg)}}
-  @keyframes autoCycleLine{from{transform:scaleX(0)}to{transform:scaleX(1)}}
   html:not([data-intro="seen"]) #introVeil{animation:introVeilOut 1.3s cubic-bezier(.4,0,.2,1) both}
-  html:not([data-intro="seen"]) #heroStage{opacity:0;animation:heroPieceIn 1s ease both;animation-delay:.2s}
+  html:not([data-intro="seen"]) #heroCicada,html:not([data-intro="seen"]) #heroInteractive{opacity:0;animation:heroPieceIn .8s ease both}
+  html:not([data-intro="seen"]) #heroCicada{animation-delay:.15s}
+  html:not([data-intro="seen"]) #heroInteractive{animation-delay:.4s}
   html:not([data-intro="seen"]) #top~section,html:not([data-intro="seen"]) main~footer{opacity:0;animation:pageIn 1s cubic-bezier(.16,1,.3,1) both;animation-delay:1.3s}
-  #heroAura{animation:breathe 7s ease-in-out infinite}
-  #heroCicadaBg{animation:breathe 9s ease-in-out infinite reverse}
-  #heroOrbit1{animation:spinOrbit 45s linear infinite}
-  #heroOrbit2{animation:spinOrbit 32s linear infinite reverse}
-  #heroParticles span{opacity:0;animation:driftParticle 9s linear infinite}
-  #heroParticles span:nth-child(3n+1){left:12%;animation-delay:-2s;animation-duration:11s}
-  #heroParticles span:nth-child(3n+2){left:48%;animation-delay:-5s;animation-duration:8s}
-  #heroParticles span:nth-child(3n){left:82%;animation-delay:-7s;animation-duration:13s}
-  #heroParticles span:nth-child(4n+1){margin-left:18%}
-  #heroParticles span:nth-child(5n+2){margin-left:-24%}
   #contactEye1{animation:eyeShift 8s ease-in-out infinite}
   #contactEye2{animation:eyeShift 8s ease-in-out infinite;animation-delay:-4s}
 }
-#heroPortal img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;opacity:0;transform:scale(1.08)}
-#heroPortal img.is-active{opacity:1;transform:scale(1)}
-@media (prefers-reduced-motion:no-preference){#heroPortal img{transition:opacity .7s ease,transform .7s ease}}
-#heroNodes button{position:absolute;transform:translate(-50%,-50%);left:18%;top:39%;width:44px;height:44px;border:1px solid var(--line);border-radius:50%;cursor:pointer;pointer-events:auto;font:700 11px/1 'IBM Plex Mono',monospace;background:color-mix(in srgb,var(--bg) 72%,transparent);color:var(--metal);transition:transform .3s ease,background-color .3s ease,color .3s ease,border-color .3s ease}
-#heroNodes button:nth-child(2){left:82%;top:31%}
-#heroNodes button:nth-child(3){left:75%;top:78%}
-#heroNodes button:nth-child(4){left:22%;top:76%}
-#heroNodes button:nth-child(5){left:50%;top:14%}
-#heroNodes button.is-active{background:var(--red);color:var(--bg);border-color:var(--red);transform:translate(-50%,-50%) scale(1.25)}
-#heroNodes button:focus-visible{outline:3px solid var(--pink);outline-offset:3px}
-#heroCycleLine{height:100%;background:var(--red);transform-origin:left}
-@media (prefers-reduced-motion:no-preference){#heroCycleLine{animation:autoCycleLine 5200ms linear infinite}}
-#heroCycleLine.is-paused{opacity:.3;animation-play-state:paused}
 .tilt-card{transform:perspective(70rem) rotateX(var(--card-x,0deg)) rotateY(var(--card-y,0deg));transition:transform .18s ease-out}
-#heroStageRow{display:flex;flex-direction:column;align-items:center;gap:14px}
-#heroKrystyna,#heroEwing{margin:0;text-align:center;font-weight:900;text-transform:uppercase;letter-spacing:-.01em;font-family:'Barlow Condensed',sans-serif;font-size:clamp(30px,8vw,48px);line-height:1;color:var(--ink)}
-#heroEwing{font-family:'UnifrakturMaguntia',serif;font-weight:400;text-transform:none;letter-spacing:0;color:var(--red);font-size:clamp(28px,7.4vw,46px)}
+@font-face{font-family:'Trickster';src:url('fonts/Trickster-Reg.otf') format('opentype');font-weight:400;font-style:normal;font-display:swap}
+#heroKrystyna,#heroEwing{position:static;margin:0;padding:0 clamp(16px,5vw,64px);font-family:'Trickster','Barlow Condensed',sans-serif;font-size:clamp(34px,8vw,52px);line-height:1;color:var(--ink)}
+#heroEwing{text-align:right;color:var(--red)}
 @media (min-width:860px){
-  #heroStageRow{flex-direction:row;justify-content:center;gap:clamp(20px,3.2vw,48px)}
-  #heroKrystyna,#heroEwing{font-size:clamp(32px,4.4vw,64px);white-space:nowrap}
-  #heroEwing{font-size:clamp(30px,4vw,60px)}
+  #heroCicada{margin-top:0}
+  #heroKrystyna,#heroEwing{position:absolute;width:auto;padding:0;font-size:clamp(34px,5.6vw,92px)}
+  #heroKrystyna{left:clamp(16px,4vw,48px);top:clamp(6px,2vh,22px)}
+  #heroEwing{right:clamp(16px,4vw,48px);bottom:clamp(6px,2vh,22px)}
 }
 @media (max-width:699px){
-  #wrk-01,#wrk-02,#wrk-03,#wrk-04,#wrk-05{position:relative!important;left:0!important;right:0!important;top:0!important;bottom:0!important;width:100%!important;transform:none!important;margin:0 0 56px!important}
+  #wrk-01,#wrk-02,#wrk-03,#wrk-04{position:relative!important;left:0!important;right:0!important;top:0!important;bottom:0!important;width:100%!important;transform:none!important;margin:0 0 56px!important}
   #workConstellation{min-height:0!important}
 }
 </style>
@@ -106,111 +82,55 @@ a:hover{color:var(--red)}
 
 <main id="main">
 
-<section id="top" aria-label="Introduction" onPointerMove="{{ stageLight }}" style="position:relative;min-height:100svh;display:flex;align-items:center;justify-content:center;overflow:hidden;padding:clamp(96px,15vh,170px) clamp(16px,4vw,40px) clamp(80px,11vh,130px)">
+<section id="top" aria-label="Introduction" style="position:relative;padding:clamp(28px,4vh,56px) 0 clamp(56px,8vh,96px);overflow:hidden">
   <h1 style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Krystyna Ewing</h1>
 
-  <div id="heroStage" style="position:absolute;inset:0">
-    <div id="heroParticles" aria-hidden="true" style="position:absolute;inset:0;overflow:hidden;pointer-events:none">
-      <span style="position:absolute;width:5px;height:5px;border-radius:50%;background:var(--red)"></span>
-      <span style="position:absolute;width:5px;height:5px;border-radius:50%;background:var(--red)"></span>
-      <span style="position:absolute;width:5px;height:5px;border-radius:50%;background:var(--red)"></span>
-      <span style="position:absolute;width:5px;height:5px;border-radius:50%;background:var(--red)"></span>
-      <span style="position:absolute;width:5px;height:5px;border-radius:50%;background:var(--red)"></span>
-      <span style="position:absolute;width:5px;height:5px;border-radius:50%;background:var(--red)"></span>
-      <span style="position:absolute;width:5px;height:5px;border-radius:50%;background:var(--red)"></span>
-      <span style="position:absolute;width:5px;height:5px;border-radius:50%;background:var(--red)"></span>
-      <span style="position:absolute;width:5px;height:5px;border-radius:50%;background:var(--red)"></span>
-      <span style="position:absolute;width:5px;height:5px;border-radius:50%;background:var(--red)"></span>
-      <span style="position:absolute;width:5px;height:5px;border-radius:50%;background:var(--red)"></span>
-      <span style="position:absolute;width:5px;height:5px;border-radius:50%;background:var(--red)"></span>
-      <span style="position:absolute;width:5px;height:5px;border-radius:50%;background:var(--red)"></span>
-      <span style="position:absolute;width:5px;height:5px;border-radius:50%;background:var(--red)"></span>
-    </div>
-    <div id="heroAura" aria-hidden="true" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(82vw,820px);aspect-ratio:1;border-radius:50%;filter:blur(24px);background:radial-gradient(circle,color-mix(in srgb,var(--red) 35%,transparent),color-mix(in srgb,var(--bg) 20%,transparent) 42%,transparent 70%)"></div>
-    <img id="heroCicadaBg" src="images/cicada-hero.jpg" alt="" aria-hidden="true" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(88vw,1300px);opacity:.12;mix-blend-mode:screen;filter:saturate(.3) contrast(1.2);pointer-events:none">
-    <div id="heroOrbit1" aria-hidden="true" style="position:absolute;left:50%;top:50%;width:min(68vw,760px);aspect-ratio:1;border-radius:50%;border:1px dashed var(--line);transform:translate(-50%,-50%)"></div>
-    <div id="heroOrbit2" aria-hidden="true" style="position:absolute;left:50%;top:50%;width:min(52vw,580px);aspect-ratio:1;border-radius:50%;border:1px solid var(--line);transform:translate(-50%,-50%)"></div>
+  <div id="heroCicada" style="position:relative;width:100vw;margin-left:calc(50% - 50vw);aspect-ratio:2000/955;margin-top:clamp(28px,4vh,44px)">
+    <img src="images/cicada-hero.jpg" alt="An iridescent cicada viewed from above against a near-black background, head to the left, its translucent turquoise and violet wings spread wide to the right." style="display:block;width:100%;height:100%;object-fit:contain">
+    <p id="heroKrystyna" aria-hidden="true">Krystyna</p>
+    <p id="heroEwing" aria-hidden="true">Ewing</p>
   </div>
 
-  <div style="position:absolute;left:clamp(16px,4vw,40px);top:clamp(100px,16vh,180px);z-index:5;font:500 11px/1.6 'IBM Plex Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--metal)">Selected apparition<br>{{ activeCode }} / {{ activeYear }}</div>
-  <div style="position:absolute;right:clamp(16px,4vw,40px);bottom:clamp(104px,17vh,180px);z-index:5;max-width:260px;text-align:right">
-    <p style="margin:0;font:400 14px/1.6 'Inter',sans-serif;color:var(--muted)">{{ activeNote }}</p>
-    <p style="margin:10px 0 0;font:700 11px/1 'IBM Plex Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--red)">{{ activeType }}</p>
-  </div>
-
-  <div style="position:relative;z-index:10;width:100%;max-width:1160px;display:flex;flex-direction:column;align-items:center;gap:clamp(16px,2.6vh,28px)">
-    <div id="heroStageRow">
-      <p id="heroKrystyna" aria-hidden="true">Krystyna</p>
-      <div id="heroPortal" style="position:relative;aspect-ratio:3/4;width:min(44vw,280px);overflow:hidden;clip-path:polygon(50% 0%,86% 10%,100% 45%,88% 88%,50% 100%,12% 88%,0% 45%,14% 10%);box-shadow:0 0 6rem color-mix(in srgb,var(--red) 25%,transparent)">
-        <img src="images/work/hazadapt-resiliencepoint/platform-cover.png" alt="" class="{{ p0 }}">
-        <img src="images/hazadapt_album.png" alt="" class="{{ p1 }}">
-        <img src="images/hazadapt_album.png" alt="" class="{{ p2 }}">
-        <img src="images/True_Link_album.png" alt="" class="{{ p3 }}">
-        <img src="images/welldone_album.png" alt="" class="{{ p4 }}">
-        <div aria-hidden="true" style="position:absolute;inset:0;background:color-mix(in srgb,var(--red) 18%,transparent);mix-blend-mode:color"></div>
-        <div aria-hidden="true" style="position:absolute;inset:0;background:linear-gradient(to top,var(--bg) 0%,transparent 55%)"></div>
-      </div>
-      <p id="heroEwing" aria-hidden="true">Ewing</p>
-    </div>
-    <p aria-hidden="true" style="margin:0;max-width:90vw;text-align:center;font:900 clamp(22px,3vw,34px)/1 'Barlow Condensed',sans-serif;text-transform:uppercase;letter-spacing:-.01em">{{ activeTitle }}</p>
-
-    <div id="heroInteractive" onMouseEnter="{{ bioOpen }}" onMouseLeave="{{ bioClose }}" onKeyDown="{{ bioKey }}" style="margin-top:clamp(20px,3vh,32px);display:grid;justify-items:center;gap:10px;max-width:min(92vw,560px)">
-      <div id="heroBio" style="{{ bioStyle }}">
-        <div style="max-width:52ch;display:grid;gap:14px;padding:clamp(18px,2.2vw,26px);background:var(--ink);color:var(--bg);transform:rotate(-1deg);box-shadow:8px 8px 0 var(--red)">
-          <p style="margin:0;font:700 11px/1 'IBM Plex Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--red)">UX Designer / Creative Technologist</p>
-          <p style="margin:0;font:600 19px/1.4 'Inter',sans-serif">I'm a designer, artist, developer, and general maker of things. I started in software development, moved into UX because I wanted more room to be creative, and apparently never learned how to pick one thing and stick with it.</p>
-          <p style="margin:0;font:400 16px/1.5 'Inter',sans-serif">I've spent the last 8+ years designing, building, testing, breaking things, and figuring out how to make them work better. Outside of UX, I make art, build 3D prints, mess around with code, and start projects because I thought, &ldquo;I wonder if I could make that.&rdquo;</p>
-          <p style="margin:0;font:400 16px/1.5 'Inter',sans-serif">Usually I can.</p>
-          <p style="margin:0;font:400 16px/1.5 'Inter',sans-serif">Sometimes I absolutely cannot.</p>
-          <p style="margin:0;font:400 16px/1.5 'Inter',sans-serif">Either way, I'm probably going to try.</p>
-        </div>
-      </div>
-      <button type="button" onClick="{{ bioToggle }}" aria-expanded="{{ bioExpanded }}" aria-controls="heroBio" aria-label="Reveal introduction" style="font:400 clamp(30px,4vw,48px)/1 'UnifrakturMaguntia',serif;color:var(--red);background:transparent;border:0;padding:4px 10px;cursor:pointer;min-height:44px" style-hover="color:var(--ink)">{{ cueWord }}</button>
-    </div>
-
-    <div style="margin-top:clamp(28px,4vh,44px);width:min(100%,480px);text-align:center;font:500 11px/1 'IBM Plex Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--metal)">
-      {{ autoStatus }}
-      <div style="margin-top:12px;height:2px;background:color-mix(in srgb,var(--line) 60%,transparent)">
-        <div id="heroCycleLine" class="{{ cycleLineClass }}"></div>
+  <div id="heroInteractive" onMouseEnter="{{ bioOpen }}" onMouseLeave="{{ bioClose }}" onKeyDown="{{ bioKey }}" style="margin:clamp(28px,4vh,44px) auto 0;display:grid;justify-items:center;gap:10px;max-width:min(92vw,560px);padding:0 clamp(16px,5vw,64px)">
+    <div id="heroBio" style="{{ bioStyle }}">
+      <div style="max-width:52ch;display:grid;gap:14px;padding:clamp(18px,2.2vw,26px);background:var(--ink);color:var(--bg);transform:rotate(-1deg);box-shadow:8px 8px 0 var(--red)">
+        <p style="margin:0;font:700 11px/1 'IBM Plex Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--red)">UX Designer / Creative Technologist</p>
+        <p style="margin:0;font:600 19px/1.4 'Inter',sans-serif">I'm a designer, artist, developer, and general maker of things. I started in software development, moved into UX because I wanted more room to be creative, and apparently never learned how to pick one thing and stick with it.</p>
+        <p style="margin:0;font:400 16px/1.5 'Inter',sans-serif">I've spent the last 8+ years designing, building, testing, breaking things, and figuring out how to make them work better. Outside of UX, I make art, build 3D prints, mess around with code, and start projects because I thought, &ldquo;I wonder if I could make that.&rdquo;</p>
+        <p style="margin:0;font:400 16px/1.5 'Inter',sans-serif">Usually I can.</p>
+        <p style="margin:0;font:400 16px/1.5 'Inter',sans-serif">Sometimes I absolutely cannot.</p>
+        <p style="margin:0;font:400 16px/1.5 'Inter',sans-serif">Either way, I'm probably going to try.</p>
       </div>
     </div>
-  </div>
-
-  <div id="heroNodes" aria-hidden="true" style="position:absolute;inset:0;z-index:20;pointer-events:none">
-    <button type="button" onClick="{{ sel0 }}" aria-hidden="true" tabindex="-1" class="{{ n0 }}">01</button>
-    <button type="button" onClick="{{ sel1 }}" aria-hidden="true" tabindex="-1" class="{{ n1 }}">02</button>
-    <button type="button" onClick="{{ sel2 }}" aria-hidden="true" tabindex="-1" class="{{ n2 }}">03</button>
-    <button type="button" onClick="{{ sel3 }}" aria-hidden="true" tabindex="-1" class="{{ n3 }}">04</button>
-    <button type="button" onClick="{{ sel4 }}" aria-hidden="true" tabindex="-1" class="{{ n4 }}">05</button>
+    <button type="button" onClick="{{ bioToggle }}" aria-expanded="{{ bioExpanded }}" aria-controls="heroBio" aria-label="Reveal introduction" style="font:400 clamp(30px,4vw,48px)/1 'UnifrakturMaguntia',serif;color:var(--red);background:transparent;border:0;padding:4px 10px;cursor:pointer;min-height:44px" style-hover="color:var(--ink)">{{ cueWord }}</button>
   </div>
 </section>
 
 <section id="work" aria-labelledby="work-h" style="position:relative;padding:clamp(90px,14vh,160px) clamp(16px,4vw,40px) clamp(110px,16vh,180px)">
   <div aria-hidden="true" style="position:absolute;left:50%;top:0;bottom:0;width:1px;background:var(--line)"></div>
   <div style="position:relative;max-width:1800px;margin:0 auto">
-    <div data-reveal style="display:flex;flex-direction:column;align-items:center;text-align:center;margin-bottom:clamp(70px,10vw,140px)">
+    <div data-reveal style="display:flex;flex-direction:column;align-items:center;text-align:center;margin-bottom:clamp(50px,7vw,90px)">
       <p style="margin:0;font:700 11px/1 'IBM Plex Mono',monospace;letter-spacing:.16em;text-transform:uppercase;color:var(--red)">Archive · non-linear</p>
       <h2 id="work-h" style="margin:18px 0 0;max-width:1000px;font:900 clamp(44px,9vw,120px)/.8 'Barlow Condensed',sans-serif;text-transform:uppercase;letter-spacing:-.02em">Five investigations,<br>one restless practice.</h2>
     </div>
 
-    <div id="workConstellation" style="position:relative;min-height:clamp(1400px,220vw,2100px)">
-      <a id="wrk-01" href="work/hazadapt-resiliencepoint.html" data-reveal onPointerMove="{{ tilt0 }}" onPointerLeave="{{ untilt0 }}" style="position:absolute;left:2%;top:0;width:min(52vw,620px);text-decoration:none;color:inherit;transform:rotate(-2deg)">
-        <div class="tilt-card" style="position:relative;overflow:hidden;border:1px solid var(--line);background:var(--mat);aspect-ratio:4/5">
-          <img src="images/work/hazadapt-resiliencepoint/platform-cover.png" alt="ResiliencePoint dashboard showing trending hazards and a nationwide activity map" style="display:block;width:100%;height:100%;object-fit:cover;object-position:center top;filter:grayscale(1) contrast(1.15);transition:filter .6s ease,transform .6s ease" style-hover="filter:grayscale(0) contrast(1.1);transform:scale(1.04)">
-          <div aria-hidden="true" style="position:absolute;inset:0;background:color-mix(in srgb,var(--red) 20%,transparent);mix-blend-mode:color;transition:opacity .4s ease" style-hover="opacity:0"></div>
-          <p style="position:absolute;left:12px;top:12px;margin:0;padding:8px 12px;border:1px solid color-mix(in srgb,var(--ink) 40%,transparent);border-radius:999px;background:color-mix(in srgb,var(--bg) 70%,transparent);font:500 11px/1 'IBM Plex Mono',monospace">P–01</p>
-        </div>
-        <div style="margin-top:16px">
-          <h3 style="margin:0;font:900 clamp(40px,6vw,96px)/.9 'Barlow Condensed',sans-serif;text-transform:uppercase;letter-spacing:-.01em">ResiliencePoint</h3>
-          <div style="margin-top:10px;display:flex;justify-content:space-between;gap:16px;font:500 11px/1.5 'IBM Plex Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--metal)"><span>UX research · Product design · Data viz</span><span>2023–24</span></div>
-          <p style="margin:10px 0 0;font:400 16px/1.5 'Inter',sans-serif;color:var(--muted)">We built what we thought people needed. Then the evidence changed the product.</p>
-          <p style="margin:10px 0 0;font:700 11px/1 'IBM Plex Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--red)">Read the case study →</p>
-        </div>
+    <figure data-reveal style="margin:0 0 clamp(16px,2.4vw,28px);position:relative;left:50%;width:100vw;transform:translateX(-50%)">
+      <a href="work/hazadapt-resiliencepoint.html" style="display:block" aria-label="ResiliencePoint — read the case study">
+        <img src="images/work/hazadapt-resiliencepoint/platform-cover.png" alt="ResiliencePoint dashboard showing trending hazards and a nationwide activity map" style="display:block;width:100%;height:auto">
       </a>
+    </figure>
+    <div data-reveal style="max-width:min(68ch,100%);padding:0 0 clamp(60px,8vw,110px);border-bottom:2px solid var(--line)">
+      <p style="margin:0 0 6px;font:700 11px/1 'IBM Plex Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--red)">P–01 · Capstone</p>
+      <h3 style="margin:0 0 16px;font:900 clamp(52px,9vw,150px)/.85 'Barlow Condensed',sans-serif;text-transform:uppercase;letter-spacing:-.015em"><a href="work/hazadapt-resiliencepoint.html" style="text-decoration:none;color:inherit" style-hover="color:var(--red)">ResiliencePoint</a></h3>
+      <p style="margin:0 0 4px;font:500 12px/1.5 'IBM Plex Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--metal)">HazAdapt · Lead UX Designer · 2023 to 2024</p>
+      <p style="margin:0 0 18px;max-width:46ch;font:600 22px/1.35 'Inter',sans-serif">We built what we thought people needed. Then the evidence changed the product.</p>
+      <a href="work/hazadapt-resiliencepoint.html" style="font:700 13px/1 'IBM Plex Mono',monospace;letter-spacing:.06em;text-transform:uppercase;min-height:44px;display:inline-flex;align-items:center;color:var(--red)">Read the case study →</a>
+    </div>
 
-      <a id="wrk-02" href="work/hazadapt-loco.html" data-reveal onPointerMove="{{ tilt1 }}" onPointerLeave="{{ untilt1 }}" style="position:absolute;right:2%;top:16%;width:min(36vw,440px);text-decoration:none;color:inherit;transform:rotate(3deg)">
-        <div class="tilt-card" style="position:relative;overflow:hidden;border:1px solid var(--line);background:var(--mat);aspect-ratio:4/5">
-          <img src="images/hazadapt_album.png" alt="HazAdapt product collection" style="display:block;width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.15);transition:filter .6s ease,transform .6s ease" style-hover="filter:grayscale(0) contrast(1.1);transform:scale(1.04)">
+    <div id="workConstellation" style="position:relative;min-height:clamp(1100px,170vw,1700px)">
+      <a id="wrk-01" href="work/hazadapt-loco.html" data-reveal onPointerMove="{{ tilt1 }}" onPointerLeave="{{ untilt1 }}" style="position:absolute;left:2%;top:0;width:min(36vw,440px);text-decoration:none;color:inherit;transform:rotate(3deg)">
+        <div class="tilt-card" style="position:relative;overflow:hidden;border:1px solid var(--line);background:var(--mat);aspect-ratio:12/5">
+          <img src="images/hazadapt_album.png" alt="HazAdapt product collection" style="display:block;width:100%;height:100%;object-fit:contain;filter:grayscale(1) contrast(1.15);transition:filter .6s ease,transform .6s ease" style-hover="filter:grayscale(0) contrast(1.1);transform:scale(1.04)">
           <div aria-hidden="true" style="position:absolute;inset:0;background:color-mix(in srgb,var(--red) 20%,transparent);mix-blend-mode:color;transition:opacity .4s ease" style-hover="opacity:0"></div>
           <p style="position:absolute;left:12px;top:12px;margin:0;padding:8px 12px;border:1px solid color-mix(in srgb,var(--ink) 40%,transparent);border-radius:999px;background:color-mix(in srgb,var(--bg) 70%,transparent);font:500 11px/1 'IBM Plex Mono',monospace">P–02</p>
         </div>
@@ -222,9 +142,9 @@ a:hover{color:var(--red)}
         </div>
       </a>
 
-      <a id="wrk-03" href="work/hazadapt-prep-checks.html" data-reveal onPointerMove="{{ tilt2 }}" onPointerLeave="{{ untilt2 }}" style="position:absolute;left:10%;top:40%;width:min(38vw,460px);text-decoration:none;color:inherit;transform:rotate(-1.5deg)">
-        <div class="tilt-card" style="position:relative;overflow:hidden;border:1px solid var(--line);background:var(--mat);aspect-ratio:4/5">
-          <img src="images/hazadapt_album.png" alt="HazAdapt preparedness product collection" style="display:block;width:100%;height:100%;object-fit:cover;object-position:center bottom;filter:grayscale(1) contrast(1.15);transition:filter .6s ease,transform .6s ease" style-hover="filter:grayscale(0) contrast(1.1);transform:scale(1.04)">
+      <a id="wrk-02" href="work/hazadapt-prep-checks.html" data-reveal onPointerMove="{{ tilt2 }}" onPointerLeave="{{ untilt2 }}" style="position:absolute;right:4%;top:28%;width:min(38vw,460px);text-decoration:none;color:inherit;transform:rotate(-1.5deg)">
+        <div class="tilt-card" style="position:relative;overflow:hidden;border:1px solid var(--line);background:var(--mat);aspect-ratio:12/5">
+          <img src="images/hazadapt_album.png" alt="HazAdapt preparedness product collection" style="display:block;width:100%;height:100%;object-fit:contain;filter:grayscale(1) contrast(1.15);transition:filter .6s ease,transform .6s ease" style-hover="filter:grayscale(0) contrast(1.1);transform:scale(1.04)">
           <div aria-hidden="true" style="position:absolute;inset:0;background:color-mix(in srgb,var(--red) 20%,transparent);mix-blend-mode:color;transition:opacity .4s ease" style-hover="opacity:0"></div>
           <p style="position:absolute;left:12px;top:12px;margin:0;padding:8px 12px;border:1px solid color-mix(in srgb,var(--ink) 40%,transparent);border-radius:999px;background:color-mix(in srgb,var(--bg) 70%,transparent);font:500 11px/1 'IBM Plex Mono',monospace">P–03</p>
         </div>
@@ -236,9 +156,9 @@ a:hover{color:var(--red)}
         </div>
       </a>
 
-      <a id="wrk-04" href="work/true-link.html" data-reveal onPointerMove="{{ tilt3 }}" onPointerLeave="{{ untilt3 }}" style="position:absolute;right:4%;top:62%;width:min(40vw,480px);text-decoration:none;color:inherit;transform:rotate(2.5deg)">
-        <div class="tilt-card" style="position:relative;overflow:hidden;border:1px solid var(--line);background:var(--mat);aspect-ratio:4/5">
-          <img src="images/True_Link_album.png" alt="True Link financial platform collection" style="display:block;width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.15);transition:filter .6s ease,transform .6s ease" style-hover="filter:grayscale(0) contrast(1.1);transform:scale(1.04)">
+      <a id="wrk-03" href="work/true-link.html" data-reveal onPointerMove="{{ tilt3 }}" onPointerLeave="{{ untilt3 }}" style="position:absolute;left:8%;top:58%;width:min(40vw,480px);text-decoration:none;color:inherit;transform:rotate(2.5deg)">
+        <div class="tilt-card" style="position:relative;overflow:hidden;border:1px solid var(--line);background:var(--mat);aspect-ratio:12/5">
+          <img src="images/True_Link_album.png" alt="True Link financial platform collection" style="display:block;width:100%;height:100%;object-fit:contain;filter:grayscale(1) contrast(1.15);transition:filter .6s ease,transform .6s ease" style-hover="filter:grayscale(0) contrast(1.1);transform:scale(1.04)">
           <div aria-hidden="true" style="position:absolute;inset:0;background:color-mix(in srgb,var(--red) 20%,transparent);mix-blend-mode:color;transition:opacity .4s ease" style-hover="opacity:0"></div>
           <p style="position:absolute;left:12px;top:12px;margin:0;padding:8px 12px;border:1px solid color-mix(in srgb,var(--ink) 40%,transparent);border-radius:999px;background:color-mix(in srgb,var(--bg) 70%,transparent);font:500 11px/1 'IBM Plex Mono',monospace">P–04</p>
         </div>
@@ -250,9 +170,9 @@ a:hover{color:var(--red)}
         </div>
       </a>
 
-      <a id="wrk-05" href="work/welldone-monitoring.html" data-reveal onPointerMove="{{ tilt4 }}" onPointerLeave="{{ untilt4 }}" style="position:absolute;left:24%;bottom:0;width:min(42vw,500px);text-decoration:none;color:inherit;transform:rotate(-2.5deg)">
-        <div class="tilt-card" style="position:relative;overflow:hidden;border:1px solid var(--line);background:var(--mat);aspect-ratio:4/5">
-          <img src="images/welldone_album.png" alt="WellDone water monitoring project collection" style="display:block;width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.15);transition:filter .6s ease,transform .6s ease" style-hover="filter:grayscale(0) contrast(1.1);transform:scale(1.04)">
+      <a id="wrk-04" href="work/welldone-monitoring.html" data-reveal onPointerMove="{{ tilt4 }}" onPointerLeave="{{ untilt4 }}" style="position:absolute;right:2%;bottom:0;width:min(42vw,500px);text-decoration:none;color:inherit;transform:rotate(-2.5deg)">
+        <div class="tilt-card" style="position:relative;overflow:hidden;border:1px solid var(--line);background:var(--mat);aspect-ratio:2/1">
+          <img src="images/welldone_album.png" alt="WellDone water monitoring project collection" style="display:block;width:100%;height:100%;object-fit:contain;filter:grayscale(1) contrast(1.15);transition:filter .6s ease,transform .6s ease" style-hover="filter:grayscale(0) contrast(1.1);transform:scale(1.04)">
           <div aria-hidden="true" style="position:absolute;inset:0;background:color-mix(in srgb,var(--red) 20%,transparent);mix-blend-mode:color;transition:opacity .4s ease" style-hover="opacity:0"></div>
           <p style="position:absolute;left:12px;top:12px;margin:0;padding:8px 12px;border:1px solid color-mix(in srgb,var(--ink) 40%,transparent);border-radius:999px;background:color-mix(in srgb,var(--bg) 70%,transparent);font:500 11px/1 'IBM Plex Mono',monospace">P–05</p>
         </div>
@@ -381,13 +301,6 @@ a:hover{color:var(--red)}
 </footer>
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;defaultTheme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;dark&quot;,&quot;light&quot;],&quot;default&quot;:&quot;dark&quot;,&quot;tsType&quot;:&quot;'dark'|'light'&quot;,&quot;section&quot;:&quot;Look&quot;},&quot;grain&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Look&quot;}}">
-const PROJECTS = [
-  { code: 'P–01', title: 'ResiliencePoint', type: 'UX research · Product design · Data viz', year: '2023–24', note: "We built what we thought people needed. Then the evidence changed the product." },
-  { code: 'P–02', title: 'LoCo', type: 'UX research · Emergency preparedness', year: '2023–24', note: "Trusted local safety information, placed where people are already looking for preparedness guidance." },
-  { code: 'P–03', title: 'Prep Checks', type: 'Product design · UX research', year: '2024', note: "Bite-sized preparedness activities people can actually finish, and return to." },
-  { code: 'P–04', title: 'True Link Financial', type: 'Financial UX · Workflow design', year: '2023', note: "Financial tools built to protect autonomy, not just assets." },
-  { code: 'P–05', title: 'WellDone', type: 'UX / UI design · Monitoring', year: '2022', note: "A remote water-monitoring experience redesigned around scannable, status-first information." }
-];
 class Component extends DCLogic {
   deskRef = React.createRef(); mqRef = React.createRef(); progressRef = React.createRef(); cursorRef = React.createRef();
   defaults() {
@@ -399,7 +312,7 @@ class Component extends DCLogic {
     };
   }
   state = {
-    theme: this.props.defaultTheme ?? 'dark', active: 'top', activeProject: 0, autoPaused: false, bio: false,
+    theme: this.props.defaultTheme ?? 'dark', active: 'top', bio: false,
     narrow: window.innerWidth < 760, canHover: window.matchMedia('(hover: hover) and (pointer: fine)').matches,
     pieces: this.defaults(), z: {}, top: 10
   };
@@ -448,12 +361,6 @@ class Component extends DCLogic {
     document.querySelectorAll('[data-reveal]').forEach(el => this.revealIo.observe(el));
 
     if (!this.reduce && this.mqRef.current) this.mq = this.mqRef.current.animate([{ transform: 'translateX(0)' }, { transform: 'translateX(-50%)' }], { duration: 28000, iterations: Infinity });
-
-    if (!this.reduce) {
-      this.cycleTimer = setInterval(() => {
-        if (!this.state.autoPaused) this.setState(s => ({ activeProject: (s.activeProject + 1) % PROJECTS.length }));
-      }, 5200);
-    }
   }
   componentDidUpdate(pp) {
     if (pp.defaultTheme !== this.props.defaultTheme && this.props.defaultTheme) this.setState({ theme: this.props.defaultTheme }, () => this.applyRoot());
@@ -463,12 +370,6 @@ class Component extends DCLogic {
     window.removeEventListener('scroll', this.onScroll); window.removeEventListener('resize', this.onResize);
     window.removeEventListener('pointermove', this.onPointerMove);
     if (this.io) this.io.disconnect(); if (this.revealIo) this.revealIo.disconnect(); if (this.mq) this.mq.cancel();
-    if (this.cycleTimer) clearInterval(this.cycleTimer); if (this.pauseTimer) clearTimeout(this.pauseTimer);
-  }
-  selectProject(i) {
-    this.setState({ activeProject: i, autoPaused: true });
-    clearTimeout(this.pauseTimer);
-    this.pauseTimer = setTimeout(() => this.setState({ autoPaused: false }), 8000);
   }
   tilt(e) {
     const b = e.currentTarget.getBoundingClientRect();
@@ -506,15 +407,11 @@ class Component extends DCLogic {
   }
   renderVals() {
     const s = this.state, light = s.theme === 'light', mk = id => (s.active === id ? '■' : '□');
-    const active = PROJECTS[s.activeProject];
     const r = {
       deskRef: this.deskRef, mqRef: this.mqRef, progressRef: this.progressRef, cursorRef: this.cursorRef,
       mWork: mk('work'), mBench: mk('workbench'), mAbout: mk('about'), mContact: mk('contact'),
       themeLabel: light ? 'Dark' : 'Light', lightPressed: light ? 'true' : 'false',
       toggleTheme: () => this.setState(st => ({ theme: st.theme === 'light' ? 'dark' : 'light' }), () => this.applyRoot()),
-      activeCode: active.code, activeYear: active.year, activeTitle: active.title, activeType: active.type, activeNote: active.note,
-      autoStatus: s.autoPaused ? 'Manual signal / auto resumes soon' : 'Auto transmission / choose a signal',
-      cycleLineClass: s.autoPaused ? 'is-paused' : '',
       cueWord: s.bio ? 'oh, hi.' : 'psst.',
       bioExpanded: s.bio ? 'true' : 'false',
       bioOpen: () => { if (s.canHover && !s.bio) this.setState({ bio: true }); },
@@ -524,16 +421,12 @@ class Component extends DCLogic {
       bioStyle: s.bio
         ? { clipPath: 'inset(-20px -20px -20px -20px)', opacity: 1, visibility: 'visible', transform: 'translateY(0)', transition: this.reduce ? 'none' : 'clip-path .4s cubic-bezier(.2,.8,.2,1), opacity .2s, transform .4s' }
         : { clipPath: 'inset(100% -20px -20px -20px)', opacity: 0, visibility: 'hidden', transform: 'translateY(16px)', transition: this.reduce ? 'none' : 'clip-path .3s, opacity .2s, transform .3s, visibility 0s .3s' },
-      stageLight: e => { const b = e.currentTarget.getBoundingClientRect(); e.currentTarget.style.setProperty('--pointer-x', (e.clientX - b.left) + 'px'); e.currentTarget.style.setProperty('--pointer-y', (e.clientY - b.top) + 'px'); },
       benchHint: s.narrow ? "Here's what's on the table." : 'Grab the tape to move things around. Arrow keys work too.',
       deskStyle: s.narrow ? { position: 'relative', display: 'flex', flexDirection: 'column', gap: 44, paddingTop: 20 } : { position: 'relative', height: 'clamp(820px, 78vw, 1200px)' },
       resetDesk: () => this.setState({ pieces: this.defaults(), z: {} }),
       mqPause: () => this.mq && this.mq.pause(), mqPlay: () => this.mq && this.mq.play()
     };
-    PROJECTS.forEach((p, i) => {
-      r['p' + i] = i === s.activeProject ? 'is-active' : '';
-      r['n' + i] = i === s.activeProject ? 'is-active' : '';
-      r['sel' + i] = () => this.selectProject(i);
+    [0, 1, 2, 3].forEach(i => {
       r['tilt' + i] = e => this.tilt(e);
       r['untilt' + i] = e => this.untilt(e);
     });
