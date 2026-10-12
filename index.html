@@ -156,9 +156,13 @@ a:hover{color:var(--red)}
 
     <div id="heroInteractive" onMouseEnter="{{ bioOpen }}" onMouseLeave="{{ bioClose }}" onKeyDown="{{ bioKey }}" style="margin-top:clamp(20px,3vh,32px);display:grid;justify-items:center;gap:10px;max-width:min(92vw,560px)">
       <div id="heroBio" style="{{ bioStyle }}">
-        <div style="padding:clamp(16px,2vw,22px);background:var(--ink);color:var(--bg);transform:rotate(-1deg);box-shadow:8px 8px 0 var(--red)">
-          <p style="margin:0 0 8px;font:700 11px/1 'IBM Plex Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--red)">UX Designer / Creative Technologist</p>
-          <p style="margin:0;font:600 17px/1.45 'Inter',sans-serif">I design software, make art, build things, break things, and have a hard time leaving anything alone when I know it could work better.</p>
+        <div style="max-width:52ch;display:grid;gap:14px;padding:clamp(18px,2.2vw,26px);background:var(--ink);color:var(--bg);transform:rotate(-1deg);box-shadow:8px 8px 0 var(--red)">
+          <p style="margin:0;font:700 11px/1 'IBM Plex Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--red)">UX Designer / Creative Technologist</p>
+          <p style="margin:0;font:600 19px/1.4 'Inter',sans-serif">I'm a designer, artist, developer, and general maker of things. I started in software development, moved into UX because I wanted more room to be creative, and apparently never learned how to pick one thing and stick with it.</p>
+          <p style="margin:0;font:400 16px/1.5 'Inter',sans-serif">I've spent the last 8+ years designing, building, testing, breaking things, and figuring out how to make them work better. Outside of UX, I make art, build 3D prints, mess around with code, and start projects because I thought, &ldquo;I wonder if I could make that.&rdquo;</p>
+          <p style="margin:0;font:400 16px/1.5 'Inter',sans-serif">Usually I can.</p>
+          <p style="margin:0;font:400 16px/1.5 'Inter',sans-serif">Sometimes I absolutely cannot.</p>
+          <p style="margin:0;font:400 16px/1.5 'Inter',sans-serif">Either way, I'm probably going to try.</p>
         </div>
       </div>
       <button type="button" onClick="{{ bioToggle }}" aria-expanded="{{ bioExpanded }}" aria-controls="heroBio" aria-label="Reveal introduction" style="font:400 clamp(30px,4vw,48px)/1 'UnifrakturMaguntia',serif;color:var(--red);background:transparent;border:0;padding:4px 10px;cursor:pointer;min-height:44px" style-hover="color:var(--ink)">{{ cueWord }}</button>
