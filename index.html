@@ -16,15 +16,15 @@
 <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800;900&family=Grenze+Gotisch:wght@400;600&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <script src="./image-slot.js"></script>
 <style>
-html{--bg:#0d0c0c;--ink:#ece6dc;--muted:#aaa69f;--metal:#8d8a85;--ghost:#1f1d1c;--line:#34322f;--red:oklch(0.6 0.2 27);--on-red:#0d0c0c;--pink:#f45b8e;--mat:#1c1f1d;--matline:rgba(236,230,220,.07);--matline2:rgba(236,230,220,.16);--grain:.1;--tear:1;background:var(--bg);color:var(--ink);scroll-behavior:smooth}
-html[data-theme="light"]{--bg:#e8e2d7;--ink:#151312;--muted:#4c4945;--metal:#6c6964;--ghost:#d8d1c4;--line:#b9b1a3;--red:oklch(0.5 0.2 27);--on-red:#fff;--pink:#b8154f;--mat:#cfd3c8;--matline:rgba(21,19,18,.08);--matline2:rgba(21,19,18,.2);--grain:.07}
+html{--bg:#08090b;--ink:#e7e5e1;--muted:#b5b8bc;--metal:#9299a2;--line:#30343b;--red:#59aab2;--on-red:#08090b;--pink:#8b7a90;--mat:#1c1f1d;--matline:rgba(236,230,220,.07);--matline2:rgba(236,230,220,.16);--grain:.1;background:var(--bg);color:var(--ink);scroll-behavior:smooth}
+html[data-theme="light"]{--bg:#e8e2d7;--ink:#151312;--muted:#4c4945;--metal:#6c6964;--line:#b9b1a3;--red:oklch(0.5 0.2 27);--on-red:#fff;--pink:#b8154f;--mat:#cfd3c8;--matline:rgba(21,19,18,.08);--matline2:rgba(21,19,18,.2);--grain:.07}
 html[data-grain="off"]{--grain:0}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:"Source Sans 3",system-ui,sans-serif;-webkit-font-smoothing:antialiased;transition:background-color .35s,color .35s;overflow-x:hidden}
 body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:300;opacity:var(--grain);mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E")}
 a{color:inherit;text-decoration-thickness:1px;text-underline-offset:.22em}
 a:hover{color:var(--red)}
 :focus-visible{outline:3px solid var(--pink);outline-offset:4px}
-::selection{background:var(--pink);color:#0d0c0c}
+::selection{background:var(--pink);color:#08090b}
 #introVeil{opacity:0;pointer-events:none}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
 @media (prefers-reduced-motion:no-preference){
@@ -32,12 +32,9 @@ a:hover{color:var(--red)}
   @keyframes heroPieceIn{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
   @keyframes pageIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
   html:not([data-intro="seen"]) #introVeil{animation:introVeilOut 1.3s cubic-bezier(.4,0,.2,1) both}
-  html:not([data-intro="seen"]) #heroGhost,html:not([data-intro="seen"]) #heroSkullWrap,html:not([data-intro="seen"]) #heroNameWrap,html:not([data-intro="seen"]) #heroPlates,html:not([data-intro="seen"]) #heroInteractive{opacity:0;animation:heroPieceIn .8s cubic-bezier(.16,1,.3,1) both}
-  html:not([data-intro="seen"]) #heroGhost{animation-delay:.1s}
-  html:not([data-intro="seen"]) #heroSkullWrap{animation-delay:.3s}
-  html:not([data-intro="seen"]) #heroNameWrap{animation-delay:.5s}
-  html:not([data-intro="seen"]) #heroPlates{animation-delay:.85s}
-  html:not([data-intro="seen"]) #heroInteractive{animation-delay:1s}
+  html:not([data-intro="seen"]) #heroName,html:not([data-intro="seen"]) #heroCicada{opacity:0;animation:heroPieceIn .8s cubic-bezier(.16,1,.3,1) both}
+  html:not([data-intro="seen"]) #heroName{animation-delay:.15s}
+  html:not([data-intro="seen"]) #heroCicada{animation-delay:.4s}
   html:not([data-intro="seen"]) #top~section,html:not([data-intro="seen"]) main~footer{opacity:0;animation:pageIn 1s cubic-bezier(.16,1,.3,1) both;animation-delay:1.4s}
 }
 </style>
@@ -62,41 +59,17 @@ a:hover{color:var(--red)}
 
 <main id="main">
 
-<section id="top" ref="{{ heroRef }}" aria-label="Introduction" style="position:relative;min-height:max(100svh,720px);overflow:hidden;isolation:isolate">
+<section id="top" aria-label="Introduction" style="position:relative;padding:clamp(120px,16vh,200px) clamp(16px,5vw,64px) clamp(70px,9vh,110px);overflow:hidden">
   <h1 style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Krystyna Ewing</h1>
 
-  <p id="heroGhost" aria-hidden="true" style="position:absolute;left:-2vw;bottom:8vh;margin:0;z-index:0;font:400 clamp(160px,30vw,520px)/.7 'Grenze Gotisch',serif;color:var(--ghost);white-space:nowrap;transform:translateX(calc(var(--sy,0) * -18vw))">beautifully</p>
-
-  <div id="heroSkullWrap" aria-hidden="true" style="position:absolute;right:-16vw;top:clamp(180px,26vh,300px);width:min(96vw,1120px);aspect-ratio:1;z-index:3;transform:translate(calc(var(--mx,0)*-22px),calc(var(--my,0)*-14px + var(--sy,0)*-120px)) rotate(calc(-8deg + var(--mx,0)*2deg))">
-    <img src="images/skull.png" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain">
-    <img src="images/skull.png" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;clip-path:inset(40% 0 52% 0);transform:translateX(calc((var(--mx,0) + var(--sy,0)*2)*var(--tear)*50px));filter:hue-rotate(-24deg) saturate(1.6)">
-    <img src="images/skull.png" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;clip-path:inset(64% 0 31% 0);transform:translateX(calc((var(--mx,0) + var(--sy,0)*2)*var(--tear)*-34px))">
+  <div id="heroName" style="position:relative;max-width:46ch">
+    <p aria-hidden="true" style="margin:0;font:400 clamp(64px,10vw,164px)/.84 'Grenze Gotisch',serif;color:var(--ink);text-wrap:balance">Krystyna<br>Ewing</p>
+    <p style="margin:clamp(14px,2vw,22px) 0 0;font:700 13px/1.6 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--red)">UX Designer / Creative Technologist</p>
+    <p style="margin:clamp(18px,2.4vw,26px) 0 0;max-width:58ch;font:400 clamp(17px,1.5vw,21px)/1.55 'Source Sans 3',sans-serif;color:var(--muted);text-wrap:pretty">I design software, make art, build things, break things, and have a hard time leaving anything alone when I know it could work better.</p>
   </div>
 
-  <div id="heroNameWrap" role="img" aria-label="Krystyna Ewing, in distressed bone-white and pink block lettering" style="position:absolute;left:-1vw;top:clamp(150px,21vh,230px);width:min(102vw,1420px);aspect-ratio:2048/768;z-index:2;transform:translate(calc(var(--mx,0)*12px),calc(var(--my,0)*8px))">
-    <img src="images/name.png" alt="" style="position:absolute;inset:0;width:100%;height:100%;clip-path:inset(0 0 82% 0);transform:translateX(calc(var(--sy,0)*var(--tear)*-160px))">
-    <img src="images/name.png" alt="" style="position:absolute;inset:0;width:100%;height:100%;clip-path:inset(18% 0 63% 0);transform:translateX(calc(var(--sy,0)*var(--tear)*110px))">
-    <img src="images/name.png" alt="" style="position:absolute;inset:0;width:100%;height:100%;clip-path:inset(37% 0 44% 0);transform:translateX(calc(var(--sy,0)*var(--tear)*-70px))">
-    <img src="images/name.png" alt="" style="position:absolute;inset:0;width:100%;height:100%;clip-path:inset(56% 0 22% 0);transform:translateX(calc(var(--sy,0)*var(--tear)*190px))">
-    <img src="images/name.png" alt="" style="position:absolute;inset:0;width:100%;height:100%;clip-path:inset(78% 0 0 0);transform:translateX(calc(var(--sy,0)*var(--tear)*-120px))">
-  </div>
-
-  <div id="heroPlates" style="position:absolute;inset:clamp(20px,4vh,40px) clamp(16px,3vw,40px) auto;z-index:30;pointer-events:none">
-    <p style="margin:0 210px 0 0;max-width:22ch;font:800 clamp(22px,2.5vw,36px)/.98 'Big Shoulders Display',sans-serif;text-transform:uppercase;background:var(--bg);padding:6px 10px 8px;display:inline-block">UX designer, creative technologist, artist <span style="font:400 1.1em/1 'Grenze Gotisch',serif;color:var(--red);text-transform:none">&amp;</span> maker.</p>
-    <p style="position:absolute;right:0;top:0;margin:0;font:400 12px/1.6 'Space Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);background:var(--bg);padding:6px 10px;text-align:right">UX · Art · Technology<br>Beautifully unhinged</p>
-  </div>
-
-  <div id="heroInteractive" onMouseEnter="{{ bioOpen }}" onMouseLeave="{{ bioClose }}" onKeyDown="{{ bioKey }}" style="position:absolute;left:clamp(16px,5vw,80px);bottom:84px;z-index:30;display:grid;gap:10px;justify-items:start;max-width:min(520px,calc(100vw - 32px))">
-    <div id="heroBio" style="{{ bioStyle }}">
-      <div style="background:var(--ink);color:var(--bg);padding:clamp(18px,2vw,26px);display:grid;gap:14px;transform:rotate(-1deg);box-shadow:10px 10px 0 var(--red)">
-        <p style="margin:0;font:600 clamp(19px,1.6vw,22px)/1.35 'Source Sans 3',sans-serif;text-wrap:pretty">I'm a designer, artist, developer, and general maker of things. I started in software development, moved into UX because I wanted more room to be creative, and apparently never learned how to pick one thing and stick with it.</p>
-        <p style="margin:0;font:400 clamp(16px,1.3vw,18px)/1.5 'Source Sans 3',sans-serif;text-wrap:pretty">I've spent the last 8+ years designing, building, testing, breaking things, and figuring out how to make them work better. Outside of UX, I make art, build 3D prints, mess around with code, and start projects because I thought, &ldquo;I wonder if I could make that.&rdquo;</p>
-        <p style="margin:0;font:400 clamp(16px,1.3vw,18px)/1.5 'Source Sans 3',sans-serif;text-wrap:pretty">Usually I can.</p>
-        <p style="margin:0;font:400 clamp(16px,1.3vw,18px)/1.5 'Source Sans 3',sans-serif;text-wrap:pretty">Sometimes I absolutely cannot.</p>
-        <p style="margin:0;font:400 clamp(16px,1.3vw,18px)/1.5 'Source Sans 3',sans-serif;text-wrap:pretty">Either way, I'm probably going to try.</p>
-      </div>
-    </div>
-    <button type="button" onClick="{{ bioToggle }}" onFocus="{{ bioOpen }}" aria-expanded="{{ bioExpanded }}" aria-controls="heroBio" aria-label="Reveal introduction" style="font:400 clamp(56px,6vw,96px)/.9 'Grenze Gotisch',serif;color:var(--pink);background:var(--bg);border:0;padding:4px 14px 10px;cursor:pointer;min-height:44px;transform:rotate(-3deg)" style-hover="color:var(--red)">{{ cueWord }}</button>
+  <div id="heroCicada" style="position:relative;margin:clamp(40px,6vw,72px) auto 0;width:100%;max-width:1760px;aspect-ratio:2000/955">
+    <img src="images/cicada-hero.jpg" alt="An iridescent cicada viewed from above against a near-black background, its translucent turquoise and violet wings spread wide." style="display:block;width:100%;height:100%;object-fit:contain">
   </div>
 </section>
 
@@ -115,22 +88,23 @@ a:hover{color:var(--red)}
     </div></sc-if>
   </div>
 
+  <figure style="margin:0 0 clamp(16px,2.4vw,28px);position:relative;left:50%;width:100vw;transform:translateX(-50%)">
+    <a href="work/hazadapt-resiliencepoint.html" style="display:block" aria-label="ResiliencePoint — read the case study">
+      <img src="images/work/hazadapt-resiliencepoint/platform-cover.png" alt="ResiliencePoint dashboard showing trending hazards and a nationwide activity map" style="display:block;width:100%;height:auto">
+    </a>
+  </figure>
+  <div style="max-width:min(68ch,100%);padding:0 0 clamp(40px,6vw,72px);border-bottom:2px solid var(--ink)">
+    <p style="margin:0 0 6px;font:700 13px/1 'Space Mono',monospace;color:var(--pink)">01 · Featured</p>
+    <h3 style="margin:0 0 16px;font:900 clamp(52px,9vw,150px)/.85 'Big Shoulders Display',sans-serif;text-transform:uppercase;letter-spacing:-.015em"><a href="work/hazadapt-resiliencepoint.html" style="text-decoration:none;color:inherit" style-hover="color:var(--red)">Resilience&shy;Point</a></h3>
+    <p style="margin:0 0 4px;font:400 12px/1.6 'Space Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)">HazAdapt · Lead UX Designer · 2023 to 2024</p>
+    <p style="margin:0 0 18px;max-width:46ch;font:600 22px/1.35 'Source Sans 3',sans-serif">We built what we thought people needed. Then the evidence changed the product.</p>
+    <a href="work/hazadapt-resiliencepoint.html" style="font:700 13px/1 'Space Mono',monospace;letter-spacing:.06em;text-transform:uppercase;min-height:44px;display:inline-flex;align-items:center">Read the case study →</a>
+    <p style="margin:18px 0 0;font:400 24px/1.05 'Grenze Gotisch',serif;color:var(--pink);transform:rotate(-2deg)">↖ ruined me for shipping without evidence, honestly.</p>
+  </div>
+
   <div style="display:grid;grid-template-columns:auto minmax(0,1fr);gap:0 clamp(10px,2vw,28px)">
     <a href="work/hazadapt.html" style="writing-mode:vertical-rl;transform:rotate(180deg);border-right:2px solid var(--red);padding:24px 8px 24px 0;font:700 12px/1 'Space Mono',monospace;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;color:var(--red);text-align:center" style-hover="color:var(--ink)">HazAdapt ecosystem · 2021 to present →</a>
     <ol style="list-style:none;margin:0;padding:0;display:grid">
-      <li onMouseEnter="{{ h0 }}" onFocus="{{ h0 }}" style="display:flex;flex-wrap:wrap;align-items:flex-end;gap:20px 40px;padding:clamp(28px,4vw,56px) 0;border-bottom:1px solid var(--line);position:relative">
-        <div style="flex:1 1 520px;min-width:0">
-          <p style="margin:0 0 6px;font:700 13px/1 'Space Mono',monospace;color:var(--pink)">01 · Featured</p>
-          <h3 style="margin:0;font:900 clamp(60px,12.5vw,230px)/.8 'Big Shoulders Display',sans-serif;text-transform:uppercase;letter-spacing:-.015em;overflow-wrap:anywhere"><a href="work/hazadapt-resiliencepoint.html" style="text-decoration:none;display:inline-block;position:relative;z-index:6;transition:color .15s" style-hover="color:transparent;-webkit-text-stroke:2px var(--ink)">Resilience&shy;Point</a></h3>
-        </div>
-        <div style="flex:0 1 340px;display:grid;gap:12px;position:relative;z-index:6">
-          <img src="images/work/hazadapt-resiliencepoint/platform-cover.png" alt="" style="width:100%;height:auto;display:block;filter:grayscale(1) contrast(1.1)">
-          <p style="margin:0;font:400 12px/1.6 'Space Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)">HazAdapt · Lead UX Designer · 2023 to 2024</p>
-          <p style="margin:0;font:600 20px/1.3 'Source Sans 3',sans-serif">We built what we thought people needed. Then the evidence changed the product.</p>
-          <a href="work/hazadapt-resiliencepoint.html" style="font:700 13px/1 'Space Mono',monospace;letter-spacing:.06em;text-transform:uppercase;min-height:44px;display:inline-flex;align-items:center">Read the case study →</a>
-          <p style="margin:0;font:400 24px/1.05 'Grenze Gotisch',serif;color:var(--pink);transform:rotate(-2deg)">↖ ruined me for shipping without evidence, honestly.</p>
-        </div>
-      </li>
       <li onMouseEnter="{{ h1 }}" onFocus="{{ h1 }}" style="display:flex;flex-wrap:wrap-reverse;align-items:flex-end;gap:20px 40px;padding:clamp(28px,4vw,56px) 0;border-bottom:1px solid var(--line)">
         <div style="flex:0 1 320px;display:grid;gap:10px;position:relative;z-index:6">
           <p style="margin:0;font:400 12px/1.6 'Space Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)">HazAdapt · Lead UX Designer · 2023 to 2024</p>
@@ -270,6 +244,10 @@ a:hover{color:var(--red)}
     </dl>
     <p style="margin:0;font:400 clamp(20px,1.8vw,24px)/1.5 'Source Sans 3',sans-serif;text-wrap:pretty">Detroit-born, lifelong artist, and someone with a bad habit of needing to know how things work. That curiosity took me from software development into UX, and it still shows up in accessibility reviews, 3D printing experiments, and whatever I'm building at 1am.</p>
     <a href="#" style="font:700 14px/1 'Space Mono',monospace;letter-spacing:.06em;text-transform:uppercase;min-height:44px;display:inline-flex;align-items:center">Want the longer version? View résumé →</a>
+    <div style="display:grid;gap:6px;padding-top:8px;border-top:1px solid var(--line)">
+      <p style="margin:0;font:400 11px/1 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">Photography Credits</p>
+      <p style="margin:0;max-width:52ch;font:400 13px/1.6 'Space Mono',monospace;letter-spacing:.02em;color:var(--muted)">Homepage cicada photograph by <a href="https://unsplash.com/@mayulec" style="color:var(--red)">Maya Alexa G. Romero</a> on <a href="https://unsplash.com/photos/a-colorful-cicada-with-translucent-wings-on-black-background-YVafzB3-8jQ" style="color:var(--red)">Unsplash</a>. Licensed under the <a href="https://unsplash.com/license" style="color:var(--red)">Unsplash License</a>.</p>
+    </div>
   </div>
 </section>
 
@@ -287,9 +265,9 @@ a:hover{color:var(--red)}
   </div>
 </footer>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;defaultTheme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;dark&quot;,&quot;light&quot;],&quot;default&quot;:&quot;dark&quot;,&quot;tsType&quot;:&quot;'dark'|'light'&quot;,&quot;section&quot;:&quot;Look&quot;},&quot;grain&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Look&quot;},&quot;tear&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;min&quot;:0,&quot;max&quot;:3,&quot;step&quot;:0.1,&quot;default&quot;:1,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Disruption&quot;,&quot;unit&quot;:&quot;×&quot;},&quot;lensSize&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;min&quot;:80,&quot;max&quot;:320,&quot;step&quot;:10,&quot;default&quot;:170,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Disruption&quot;,&quot;unit&quot;:&quot;px&quot;}}">
+<script type="text/x-dc" data-dc-script data-props="{&quot;defaultTheme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;dark&quot;,&quot;light&quot;],&quot;default&quot;:&quot;dark&quot;,&quot;tsType&quot;:&quot;'dark'|'light'&quot;,&quot;section&quot;:&quot;Look&quot;},&quot;grain&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Look&quot;}}">
 class Component extends DCLogic {
-  heroRef = React.createRef(); idxRef = React.createRef(); deskRef = React.createRef(); mqRef = React.createRef();
+  idxRef = React.createRef(); deskRef = React.createRef(); mqRef = React.createRef();
   defaults() {
     return {
       reach: { x: 2, y: 4, r: -2, w: 38 }, note: { x: 44, y: 3, r: -1.5, w: 22 },
@@ -299,7 +277,7 @@ class Component extends DCLogic {
     };
   }
   state = {
-    theme: this.props.defaultTheme ?? 'dark', bio: false, xray: false, active: 'top', hover: -1, touched: false,
+    theme: this.props.defaultTheme ?? 'dark', active: 'top', hover: -1,
     narrow: window.innerWidth < 760, canHover: window.matchMedia('(hover: hover) and (pointer: fine)').matches,
     pieces: this.defaults(), z: {}, top: 10
   };
@@ -307,7 +285,6 @@ class Component extends DCLogic {
     const r = document.documentElement;
     r.dataset.theme = this.state.theme;
     r.dataset.grain = (this.props.grain ?? true) ? 'on' : 'off';
-    r.style.setProperty('--tear', String(this.props.tear ?? 1));
   }
   componentDidMount() {
     this.applyRoot();
@@ -320,31 +297,11 @@ class Component extends DCLogic {
       sessionStorage.setItem('keIntroSeen', '1');
     } catch (e) { this.introSeen = false; }
     if (this.introSeen) document.documentElement.dataset.intro = 'seen';
-    const hero = this.heroRef.current, idx = this.idxRef.current;
-    let tx = 0, ty = 0, cx = 0, cy = 0, raf = 0;
-    const tick = () => {
-      cx += (tx - cx) * 0.08; cy += (ty - cy) * 0.08;
-      hero.style.setProperty('--mx', cx.toFixed(3)); hero.style.setProperty('--my', cy.toFixed(3));
-      raf = Math.abs(tx - cx) + Math.abs(ty - cy) > 0.002 ? requestAnimationFrame(tick) : 0;
-    };
-    const lens = e => {
-      const b = hero.getBoundingClientRect();
-      if (!this.state.xray) {
-        hero.style.setProperty('--lx', (e.clientX - b.left) + 'px');
-        hero.style.setProperty('--ly', (e.clientY - b.top) + 'px');
-        hero.style.setProperty('--lr', (this.props.lensSize ?? 170) + 'px');
-      }
-      if (!this.state.touched) this.setState({ touched: true });
-      if (!this.reduce) { tx = ((e.clientX - b.left) / b.width - 0.5) * 2; ty = ((e.clientY - b.top) / b.height - 0.5) * 2; if (!raf) raf = requestAnimationFrame(tick); }
-    };
-    this.onLens = lens;
-    this.onLeave = () => { if (!this.state.xray) hero.style.setProperty('--lr', '0px'); tx = 0; ty = 0; if (!raf && !this.reduce) raf = requestAnimationFrame(tick); };
-    hero.addEventListener('pointermove', lens); hero.addEventListener('pointerdown', lens); hero.addEventListener('pointerleave', this.onLeave);
+    const idx = this.idxRef.current;
     this.onScroll = () => {
       if (this.sraf) return;
       this.sraf = requestAnimationFrame(() => {
         this.sraf = 0; const vh = window.innerHeight;
-        hero.style.setProperty('--sy', this.reduce ? '0' : Math.min(1, window.scrollY / (hero.offsetHeight || 1)).toFixed(3));
         document.querySelectorAll('[data-p]').forEach(el => {
           const r = el.getBoundingClientRect();
           const p = this.reduce ? 1 : Math.max(0, Math.min(1, (vh - r.top) / (vh * 0.7)));
@@ -353,19 +310,6 @@ class Component extends DCLogic {
       });
     };
     window.addEventListener('scroll', this.onScroll, { passive: true }); this.onScroll();
-    if (!this.reduce && !this.introSeen) {
-      // Reuse the scroll-shear variable that tears the ghost/skull/name strips apart:
-      // sweep it in from a wide-open split down to rest so the hero assembles itself
-      // out of the same effect, instead of a plain fade.
-      const dur = 1300, t0 = performance.now();
-      const introSplit = now => {
-        const t = Math.min(1, (now - t0) / dur);
-        const eased = 1 - Math.pow(1 - t, 3);
-        hero.style.setProperty('--sy', (2.2 * (1 - eased)).toFixed(3));
-        if (t < 1) requestAnimationFrame(introSplit); else this.onScroll();
-      };
-      requestAnimationFrame(introSplit);
-    }
     this.onIdx = e => { const b = idx.getBoundingClientRect(); idx.style.setProperty('--px', (e.clientX - b.left + 40) + 'px'); idx.style.setProperty('--py', (e.clientY - b.top) + 'px'); };
     idx.addEventListener('pointermove', this.onIdx);
     this.onResize = () => { const n = window.innerWidth < 760; if (n !== this.state.narrow) this.setState({ narrow: n }); };
@@ -379,18 +323,9 @@ class Component extends DCLogic {
     else this.applyRoot();
   }
   componentWillUnmount() {
-    const hero = this.heroRef.current;
-    if (hero) { hero.removeEventListener('pointermove', this.onLens); hero.removeEventListener('pointerdown', this.onLens); hero.removeEventListener('pointerleave', this.onLeave); }
     if (this.idxRef.current) this.idxRef.current.removeEventListener('pointermove', this.onIdx);
     window.removeEventListener('scroll', this.onScroll); window.removeEventListener('resize', this.onResize);
     if (this.io) this.io.disconnect(); if (this.mq) this.mq.cancel();
-  }
-  setXray(on) {
-    const hero = this.heroRef.current;
-    this.setState({ xray: on });
-    if (!hero) return;
-    if (on) { hero.style.setProperty('--lx', '50%'); hero.style.setProperty('--ly', '50%'); hero.style.setProperty('--lr', '150vmax'); }
-    else hero.style.setProperty('--lr', '0px');
   }
   piece(id) {
     const p = this.state.pieces[id], narrow = this.state.narrow;
@@ -426,16 +361,10 @@ class Component extends DCLogic {
     const show = s.canHover && s.hover >= 0;
     const hv = i => () => { if (s.hover !== i) this.setState({ hover: i }); };
     const r = {
-      heroRef: this.heroRef, idxRef: this.idxRef, deskRef: this.deskRef, mqRef: this.mqRef,
+      idxRef: this.idxRef, deskRef: this.deskRef, mqRef: this.mqRef,
       mWork: mk('work'), mBench: mk('workbench'), mAbout: mk('about'), mContact: mk('contact'),
-      themeLabel: light ? 'Dark' : 'Light', lightPressed: light ? 'true' : 'false', xrayPressed: s.xray ? 'true' : 'false',
+      themeLabel: light ? 'Dark' : 'Light', lightPressed: light ? 'true' : 'false',
       toggleTheme: () => this.setState(st => ({ theme: st.theme === 'light' ? 'dark' : 'light' }), () => this.applyRoot()),
-      bioExpanded: s.bio ? 'true' : 'false', cueWord: s.bio ? 'oh, hi.' : 'psst.',
-      bioOpen: () => { if (!s.bio) this.setState({ bio: true }); },
-      bioClose: () => { if (s.bio) this.setState({ bio: false }); },
-      bioToggle: () => this.setState(st => ({ bio: !st.bio })),
-      bioKey: e => { if (e.key === 'Escape') this.setState({ bio: false }); },
-      bioStyle: s.bio ? { clipPath: 'inset(-20px -20px -20px -20px)', opacity: 1, visibility: 'visible', transform: 'translateY(0)', transition: 'clip-path .4s cubic-bezier(.2,.8,.2,1), opacity .2s, transform .4s' } : { clipPath: 'inset(100% -20px -20px -20px)', opacity: 0, visibility: 'hidden', transform: 'translateY(16px)', transition: 'clip-path .3s, opacity .2s, transform .3s, visibility 0s .3s' },
       ...(() => { const cur = [0, 1, 1, 2, 3][Math.max(0, s.hover)], o = {}; [0, 1, 2, 3].forEach(k => { o['pv' + k] = { display: k === cur ? 'block' : 'none', width: '100%', height: 'auto', boxShadow: '12px 12px 0 var(--red)' }; }); return o; })(), previewOn: s.canHover,
       previewStyle: { opacity: show ? 1 : 0, transform: `translate(0,-50%) rotate(${s.hover % 2 ? 3 : -3}deg) scale(${show ? 1 : 0.9})`, transition: 'opacity .2s, transform .25s', clipPath: show ? 'inset(0 0 0 0)' : 'inset(50% 0 50% 0)' },
       h0: hv(0), h1: hv(1), h2: hv(2), h3: hv(3), h4: hv(4), unhover: () => this.setState({ hover: -1 }),
