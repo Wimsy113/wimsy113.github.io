@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Krystyna Ewing</title>
+<style>html,body{background:#0d0c0c;margin:0}</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Grenze+Gotisch:wght@400;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<script type="module" src="https://cdn.spline.design/@splinetool/viewer@2.0.75/build/spline-viewer.webgpu.js"></script>
+<style>
+  html{--bg:#0d0c0c;--ink:#ece6dc;--red:oklch(0.6 0.2 27)}
+  html[data-theme="light"]{--bg:#e8e2d7;--ink:#151312;--red:oklch(0.5 0.2 27)}
+  html,body{height:100%;overflow:hidden}
+  body{color:var(--ink);font-family:system-ui,sans-serif}
+  #stage{position:relative;width:100%;height:100dvh;height:100vh;opacity:1;transition:opacity 1.1s ease}
+  body.leaving #stage{opacity:0}
+  body.leaving #skip{opacity:0;pointer-events:none}
+  #bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+  #scene{position:absolute;inset:0;width:100%;height:100%;border:0;display:block}
+  nav{position:fixed;left:0;right:0;bottom:0;z-index:10;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:4px 20px;padding:4px clamp(12px,2.4vw,32px);background:var(--bg);border-top:1px solid var(--ink);font:700 12px/1 'Space Mono',monospace,system-ui;letter-spacing:.06em;text-transform:uppercase}
+  nav a{color:inherit;text-decoration:none;min-height:44px;display:flex;align-items:center;gap:8px}
+  nav a:hover{color:var(--red)}
+  #logo{font:400 26px/1 'Grenze Gotisch',serif;letter-spacing:0;text-transform:none}
+  #navLinks{display:flex;flex-wrap:wrap;gap:0 clamp(12px,2.4vw,30px)}
+  #navLinks span{color:var(--red)}
+  #themeToggle{font:inherit;letter-spacing:inherit;text-transform:inherit;color:var(--bg);background:var(--ink);border:1px solid var(--ink);padding:0 12px;min-height:40px;cursor:pointer}
+  #themeToggle:hover{background:var(--red);border-color:var(--red)}
+  #skip{position:fixed;right:16px;bottom:64px;z-index:10;font:700 12px/1 'Space Mono',monospace,system-ui;letter-spacing:.06em;text-transform:uppercase;color:#ece6dc;background:rgba(13,12,12,.72);border:1px solid #ece6dc;padding:10px 16px;min-height:44px;display:inline-flex;align-items:center;text-decoration:none;transition:opacity .4s ease}
+  #skip:hover{background:#f45b8e;border-color:#f45b8e;color:#0d0c0c}
+  :focus-visible{outline:3px solid #f45b8e;outline-offset:3px}
+  @media (prefers-reduced-motion:reduce){#stage,#skip{transition:none}}
+</style>
+</head>
+<body>
+<div id="stage">
+  <img id="bg" src="images/cicada-intro-bg.webp" alt="Dark embossed leather texture with an ornate scrollwork and heraldic-lion pattern">
+  <spline-viewer id="scene" url="https://prod.spline.design/v1OoKckRsrBF7-zg/scene.splinecode" aria-label="Interactive cicada animation — click or drag to explore, then enter the site"></spline-viewer>
+  <nav aria-label="Primary">
+    <a id="logo" href="index.html" aria-label="Krystyna Ewing, home">K. Ewing</a>
+    <div id="navLinks">
+      <a href="index.html#work"><span aria-hidden="true">□</span>Work</a>
+      <a href="index.html#workbench"><span aria-hidden="true">□</span>Workbench</a>
+      <a href="index.html#about"><span aria-hidden="true">□</span>About</a>
+      <a href="index.html#contact"><span aria-hidden="true">□</span>Contact</a>
+    </div>
+    <div>
+      <button type="button" id="themeToggle" aria-pressed="false">Light</button>
+    </div>
+  </nav>
+</div>
+<a id="skip" href="index.html">Skip intro →</a>
+<script>
+(function () {
+  var scene = document.getElementById('scene');
+  var toggle = document.getElementById('themeToggle');
+  toggle.addEventListener('click', function () {
+    var light = document.documentElement.dataset.theme === 'light';
+    document.documentElement.dataset.theme = light ? '' : 'light';
+    toggle.textContent = light ? 'Light' : 'Dark';
+    toggle.setAttribute('aria-pressed', light ? 'false' : 'true');
+  });
+  var entered = false, going = false;
+  function goHome() {
+    if (going) return;
+    going = true;
+    // Tell index.html to play its own hero entrance (the black-veil reveal)
+    // even if this browser session already saw it -- arriving from the
+    // cicada should always land on a page that eases in, not one that just
+    // appears.
+    try { sessionStorage.setItem('fromCicada', '1'); } catch (e) {}
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduce) { window.location.href = 'index.html'; return; }
+    document.body.classList.add('leaving');
+    setTimeout(function () { window.location.href = 'index.html'; }, 1100);
+  }
+  function enterSite() {
+    if (entered) return;
+    entered = true;
+    setTimeout(goHome, 6000);
+  }
+  // spline-viewer renders in this document (it's a web component, not a
+  // cross-origin iframe), but its internal drag/orbit controls call
+  // stopPropagation() on pointerdown so the page doesn't scroll/drag while
+  // you orbit the scene -- that also stops a listener on the element itself
+  // from ever seeing the event. Listening on document in the CAPTURE phase
+  // runs before that stopPropagation() has a chance to fire, so it still
+  // sees every real interaction. isTrusted filters out the viewer's own
+  // internal pointer events (fired while it sets up those controls) from
+  // genuine user input -- a flag the browser sets and no script can spoof.
+  document.addEventListener('pointerdown', function (e) {
+    if (e.isTrusted && scene.contains(e.target)) enterSite();
+  }, true);
+  // If the Spline scene itself is set up to signal when its reveal
+  // animation has actually finished, skip the fixed 6s wait and go
+  // straight there. Covers both ways a scene could signal it: a custom
+  // event dispatched on the <spline-viewer> element (the normal path for
+  // an embedded web component -- see Spline's addEventListener docs) and
+  // window postMessage (what a cross-origin iframe embed would have to use
+  // instead, since it can't dispatch DOM events out past that boundary).
+  // Neither does anything unless the scene is actually configured, in
+  // Spline's own editor, to send a "cicada:revealed" signal.
+  scene.addEventListener('cicada:revealed', goHome);
+  window.addEventListener('message', function (e) {
+    if (e.data && e.data.type === 'cicada:revealed') goHome();
+  });
+})();
+</script>
+</body>
+</html>
