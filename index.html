@@ -7,7 +7,6 @@
 <style>html,body{background:#0d0c0c;margin:0}</style>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Grenze+Gotisch:wght@400;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-<script type="module" src="https://cdn.spline.design/@splinetool/viewer@2.0.75/build/spline-viewer.webgpu.js"></script>
 <style>
   html{--bg:#0d0c0c;--ink:#ece6dc;--red:oklch(0.6 0.2 27)}
   html[data-theme="light"]{--bg:#e8e2d7;--ink:#151312;--red:oklch(0.5 0.2 27)}
@@ -17,7 +16,7 @@
   body.leaving #stage{opacity:0}
   body.leaving #skip{opacity:0;pointer-events:none}
   #bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
-  #scene{position:absolute;inset:0;width:100%;height:100%;border:0;display:block}
+  #scene-root{position:absolute;inset:0;width:100%;height:100%}
   nav{position:fixed;left:0;right:0;bottom:0;z-index:10;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:4px 20px;padding:4px clamp(12px,2.4vw,32px);background:var(--bg);border-top:1px solid var(--ink);font:700 12px/1 'Space Mono',monospace,system-ui;letter-spacing:.06em;text-transform:uppercase}
   nav a{color:inherit;text-decoration:none;min-height:44px;display:flex;align-items:center;gap:8px}
   nav a:hover{color:var(--red)}
@@ -35,7 +34,7 @@
 <body>
 <div id="stage">
   <img id="bg" src="images/cicada-intro-bg.webp" alt="Dark embossed leather texture with an ornate scrollwork and heraldic-lion pattern">
-  <spline-viewer id="scene" url="https://prod.spline.design/v1OoKckRsrBF7-zg/scene.splinecode" aria-label="Interactive cicada animation — click or drag to explore, then enter the site"></spline-viewer>
+  <div id="scene-root" aria-label="Interactive cicada animation — click or drag to explore, then enter the site"></div>
   <nav aria-label="Primary">
     <a id="logo" href="home.html" aria-label="Krystyna Ewing, home">K. Ewing</a>
     <div id="navLinks">
@@ -52,7 +51,6 @@
 <a id="skip" href="home.html">Skip intro →</a>
 <script>
 (function () {
-  var scene = document.getElementById('scene');
   var toggle = document.getElementById('themeToggle');
   toggle.addEventListener('click', function () {
     var light = document.documentElement.dataset.theme === 'light';
@@ -79,32 +77,37 @@
     entered = true;
     setTimeout(goHome, 6000);
   }
-  // spline-viewer renders in this document (it's a web component, not a
-  // cross-origin iframe), but its internal drag/orbit controls call
-  // stopPropagation() on pointerdown so the page doesn't scroll/drag while
-  // you orbit the scene -- that also stops a listener on the element itself
-  // from ever seeing the event. Listening on document in the CAPTURE phase
-  // runs before that stopPropagation() has a chance to fire, so it still
-  // sees every real interaction. isTrusted filters out the viewer's own
-  // internal pointer events (fired while it sets up those controls) from
-  // genuine user input -- a flag the browser sets and no script can spoof.
+  window.ckEnterSite = enterSite; // used by the module script below
+  // Fallback: a real pointerdown anywhere in the scene container, in the
+  // capture phase so it isn't blocked by the scene's own drag/orbit
+  // controls calling stopPropagation(). isTrusted filters out anything a
+  // script (the scene's own setup included) might dispatch itself. This
+  // runs alongside Spline's own onMouseDown callback (wired in the module
+  // script below) as a second, independent path to the same guarded
+  // enterSite(), so either one firing is enough.
+  var sceneRoot = document.getElementById('scene-root');
   document.addEventListener('pointerdown', function (e) {
-    if (e.isTrusted && scene.contains(e.target)) enterSite();
+    if (e.isTrusted && sceneRoot.contains(e.target)) enterSite();
   }, true);
-  // If the Spline scene itself is set up to signal when its reveal
-  // animation has actually finished, skip the fixed 6s wait and go
-  // straight there. Covers both ways a scene could signal it: a custom
-  // event dispatched on the <spline-viewer> element (the normal path for
-  // an embedded web component -- see Spline's addEventListener docs) and
-  // window postMessage (what a cross-origin iframe embed would have to use
-  // instead, since it can't dispatch DOM events out past that boundary).
-  // Neither does anything unless the scene is actually configured, in
-  // Spline's own editor, to send a "cicada:revealed" signal.
-  scene.addEventListener('cicada:revealed', goHome);
-  window.addEventListener('message', function (e) {
-    if (e.data && e.data.type === 'cicada:revealed') goHome();
-  });
 })();
+</script>
+<script type="module">
+  import React from 'https://esm.sh/react@18.3.1';
+  import { createRoot } from 'https://esm.sh/react-dom@18.3.1/client';
+  import Spline from 'https://esm.sh/@splinetool/react-spline@2?deps=react@18.3.1,react-dom@18.3.1';
+
+  function App() {
+    return React.createElement(Spline, {
+      scene: 'https://prod.spline.design/v1OoKckRsrBF7-zg/scene.splinecode',
+      style: { width: '100%', height: '100%', display: 'block' },
+      // Spline's own documented interaction callback -- the reliable way
+      // to know the user actually engaged with the scene, straight from
+      // react-spline rather than inferred from raw DOM events.
+      onMouseDown: function () { window.ckEnterSite(); }
+    });
+  }
+
+  createRoot(document.getElementById('scene-root')).render(React.createElement(App));
 </script>
 </body>
 </html>
