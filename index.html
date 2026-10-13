@@ -460,7 +460,7 @@ class Component extends DCLogic {
       resetDesk: () => this.setState({ pieces: this.defaults(), z: {} }),
       mqPause: () => this.mq && this.mq.pause(), mqPlay: () => this.mq && this.mq.play()
     };
-    [0, 1, 2, 3].forEach(i => {
+    [1, 2, 3, 4].forEach(i => {
       r['tilt' + i] = e => this.tilt(e);
       r['untilt' + i] = e => this.untilt(e);
     });
