@@ -71,7 +71,6 @@ a:hover{color:var(--red)}
 }
 @media (max-width:699px){
   #wrk-01,#wrk-02,#wrk-03,#wrk-04{position:relative!important;left:0!important;right:0!important;top:0!important;bottom:0!important;width:100%!important;transform:none!important;margin:0 0 40px!important}
-  #wrk-cicadas{grid-column:1 / -1!important;grid-row:auto!important;margin:0 0 40px}
 }
 </style>
 </helmet>
@@ -180,10 +179,6 @@ a:hover{color:var(--red)}
         </div>
       </a>
 
-      <div id="wrk-cicadas" data-reveal style="grid-column:8 / span 5;grid-row:1;position:relative;overflow:hidden;aspect-ratio:4/5">
-        <canvas id="cicada-canvas" aria-label="Animated cicadas drifting over the HazAdapt work" style="display:block;width:100%;height:100%"></canvas>
-      </div>
-
       <a id="wrk-02" href="work/hazadapt-prep-checks.html" data-reveal onPointerMove="{{ tilt2 }}" onPointerLeave="{{ untilt2 }}" style="grid-column:6 / span 7;text-decoration:none;color:inherit;transform:rotate(-1.5deg)">
         <div class="tilt-card" style="position:relative;overflow:hidden;border:1px solid var(--line);background:var(--mat);aspect-ratio:12/5">
           <img src="images/hazadapt_album.png" alt="HazAdapt preparedness product collection" style="display:block;width:100%;height:100%;object-fit:contain;filter:grayscale(1) contrast(1.15);transition:filter .6s ease,transform .6s ease" style-hover="filter:grayscale(0) contrast(1.1);transform:scale(1.04)">
@@ -197,6 +192,10 @@ a:hover{color:var(--red)}
           <p style="margin:8px 0 0;font:700 11px/1 'Inter',sans-serif;letter-spacing:.1em;text-transform:uppercase;color:var(--red)">Read the case study →</p>
         </div>
       </a>
+
+      <div id="wrk-cicadas" data-reveal style="grid-column:1 / -1;position:relative;overflow:hidden;aspect-ratio:21/9">
+        <canvas id="cicada-canvas" aria-label="Animated cicadas drifting over the HazAdapt work" style="display:block;width:100%;height:100%"></canvas>
+      </div>
 
       <a id="wrk-03" href="work/true-link.html" data-reveal onPointerMove="{{ tilt3 }}" onPointerLeave="{{ untilt3 }}" style="grid-column:1 / span 8;text-decoration:none;color:inherit;transform:rotate(1.5deg)">
         <div class="tilt-card" style="position:relative;overflow:hidden;border:1px solid var(--line);background:var(--mat);aspect-ratio:12/5">
