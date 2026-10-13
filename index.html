@@ -126,11 +126,9 @@ a:hover{color:var(--red)}
     </div>
     <p id="heroKrystyna" aria-hidden="true">Krystyna</p>
     <p id="heroEwing" aria-hidden="true">Ewing</p>
-  </div>
 
-  <div id="heroInteractive" onMouseEnter="{{ bioOpen }}" onMouseLeave="{{ bioClose }}" onKeyDown="{{ bioKey }}" style="margin:clamp(14px,2vh,24px) auto 0;display:grid;justify-items:center;gap:8px;max-width:min(92vw,560px);padding:0 clamp(16px,5vw,64px)">
     <div id="heroBio" style="{{ bioStyle }}">
-      <div style="max-width:52ch;display:grid;gap:12px;padding:clamp(16px,2vw,22px);background:var(--ink);color:var(--bg);transform:rotate(-1deg);box-shadow:8px 8px 0 var(--red)">
+      <div style="max-width:52ch;margin:0 auto;display:grid;gap:12px;padding:clamp(16px,2vw,22px);background:var(--ink);color:var(--bg);transform:rotate(-1deg);box-shadow:8px 8px 0 var(--red)">
         <p style="margin:0;font:700 11px/1 'Inter',sans-serif;letter-spacing:.1em;text-transform:uppercase;color:var(--red)">UX Designer / Creative Technologist</p>
         <p style="margin:0;font:600 18px/1.4 'Inter',sans-serif">I'm a designer, artist, developer, and general maker of things. I started in software development, moved into UX because I wanted more room to be creative, and apparently never learned how to pick one thing and stick with it.</p>
         <p style="margin:0;font:400 15px/1.5 'Inter',sans-serif">I've spent the last 8+ years designing, building, testing, breaking things, and figuring out how to make them work better. Outside of UX, I make art, build 3D prints, mess around with code, and start projects because I thought, &ldquo;I wonder if I could make that.&rdquo;</p>
@@ -139,6 +137,9 @@ a:hover{color:var(--red)}
         <p style="margin:0;font:400 15px/1.5 'Inter',sans-serif">Either way, I'm probably going to try.</p>
       </div>
     </div>
+  </div>
+
+  <div id="heroInteractive" onMouseEnter="{{ bioOpen }}" onMouseLeave="{{ bioClose }}" onKeyDown="{{ bioKey }}" style="margin:clamp(14px,2vh,24px) auto 0;display:grid;justify-items:center;max-width:min(92vw,560px);padding:0 clamp(16px,5vw,64px)">
     <button type="button" onClick="{{ bioToggle }}" aria-expanded="{{ bioExpanded }}" aria-controls="heroBio" aria-label="Reveal introduction" style="font:400 clamp(26px,3.4vw,42px)/1 'Trickster',serif;color:var(--red);background:transparent;border:0;padding:4px 10px;cursor:pointer;min-height:44px" style-hover="color:var(--ink)">{{ cueWord }}</button>
   </div>
 </section>
@@ -457,8 +458,8 @@ class Component extends DCLogic {
       bioToggle: () => this.setState(st => ({ bio: !st.bio })),
       bioKey: e => { if (e.key === 'Escape') this.setState({ bio: false }); },
       bioStyle: s.bio
-        ? { maxHeight: '600px', overflow: 'hidden', opacity: 1, visibility: 'visible', transform: 'translateY(0)', transition: this.reduce ? 'none' : 'max-height .4s cubic-bezier(.2,.8,.2,1), opacity .25s .05s, transform .4s' }
-        : { maxHeight: '0px', overflow: 'hidden', opacity: 0, visibility: 'hidden', transform: 'translateY(16px)', transition: this.reduce ? 'none' : 'max-height .3s, opacity .15s, transform .3s, visibility 0s .3s' },
+        ? { position: 'absolute', left: '50%', top: '50%', zIndex: 6, width: 'min(90vw, 560px)', pointerEvents: 'auto', opacity: 1, visibility: 'visible', transform: 'translate(-50%,-50%) scale(1)', transition: this.reduce ? 'none' : 'opacity .25s, transform .35s cubic-bezier(.2,.8,.2,1)' }
+        : { position: 'absolute', left: '50%', top: '50%', zIndex: 6, width: 'min(90vw, 560px)', pointerEvents: 'none', opacity: 0, visibility: 'hidden', transform: 'translate(-50%,-50%) scale(.94)', transition: this.reduce ? 'none' : 'opacity .2s, transform .25s, visibility 0s .25s' },
       benchHint: s.narrow ? "Here's what's on the table." : 'Grab the tape to move things around. Arrow keys work too.',
       deskStyle: s.narrow ? { position: 'relative', display: 'flex', flexDirection: 'column', gap: 36, paddingTop: 16 } : { position: 'relative', height: 'clamp(640px, 62vw, 920px)' },
       resetDesk: () => this.setState({ pieces: this.defaults(), z: {} }),
