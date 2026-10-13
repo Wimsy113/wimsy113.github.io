@@ -97,7 +97,7 @@ a:hover{color:var(--red)}
 
 <main id="main">
 
-<section id="top" aria-label="Introduction" style="position:relative;padding:clamp(14px,2vh,28px) 0 clamp(20px,3vh,36px);overflow:hidden">
+<section id="top" aria-label="Introduction" style="position:relative;padding:clamp(14px,2vh,28px) 0 clamp(20px,3vh,36px)">
   <h1 style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Krystyna Ewing</h1>
 
   <div id="heroCicada" style="position:relative;width:100vw;margin-left:calc(50% - 50vw);aspect-ratio:2000/955;max-height:calc(100vh - var(--nav-h) - 140px);margin-top:clamp(8px,1.4vh,18px)">
@@ -140,7 +140,7 @@ a:hover{color:var(--red)}
         <p style="margin:0;font:400 15px/1.5 'Inter',sans-serif">Either way, I'm probably going to try.</p>
       </div>
     </div>
-    <button type="button" onClick="{{ bioToggle }}" aria-expanded="{{ bioExpanded }}" aria-controls="heroBio" aria-label="Reveal introduction" style="position:relative;z-index:1;font:400 clamp(26px,3.4vw,42px)/1 'Trickster',serif;color:var(--red);background:transparent;border:0;padding:4px 10px;cursor:pointer;min-height:44px" style-hover="color:var(--ink)">{{ cueWord }}</button>
+    <button type="button" onClick="{{ bioToggle }}" aria-expanded="{{ bioExpanded }}" aria-controls="heroBio" aria-label="Reveal introduction" style="position:relative;z-index:1;min-width:9ch;font:400 clamp(26px,3.4vw,42px)/1 'Trickster',serif;color:var(--red);background:transparent;border:0;padding:4px 10px;cursor:pointer;min-height:44px;text-align:center" style-hover="color:var(--ink)">{{ cueWord }}</button>
   </div>
 </section>
 
@@ -482,7 +482,7 @@ class Component extends DCLogic {
       bioExpanded: s.bio ? 'true' : 'false',
       bioOpen: () => { if (s.canHover && !s.bio) this.setState({ bio: true }); },
       bioClose: () => { if (s.canHover && s.bio) this.setState({ bio: false }); },
-      bioToggle: () => this.setState(st => ({ bio: !st.bio })),
+      bioToggle: () => { if (s.canHover) this.setState({ bio: true }); else this.setState(st => ({ bio: !st.bio })); },
       bioKey: e => { if (e.key === 'Escape') this.setState({ bio: false }); },
       bioStyle: s.bio
         ? { position: 'absolute', left: '50%', top: '50%', zIndex: 160, width: 'min(90vw, 560px)', pointerEvents: 'auto', opacity: 1, visibility: 'visible', transform: 'translate(-50%,-50%) scale(1)', transition: this.reduce ? 'none' : 'opacity .25s, transform .35s cubic-bezier(.2,.8,.2,1)' }
