@@ -16,7 +16,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script src="./image-slot.js"></script>
 <style>
-html{--bg:#08090b;--ink:#e7e5e1;--muted:#b5b8bc;--metal:#9299a2;--line:#30343b;--red:#f87171;--on-red:#08090b;--pink:#8b7a90;--mat:#1c1f1d;--matline:rgba(236,230,220,.07);--matline2:rgba(236,230,220,.16);--grain:.1;background:var(--bg);color:var(--ink);scroll-behavior:smooth}
+html{--bg:#08090b;--ink:#e7e5e1;--muted:#b5b8bc;--metal:#9299a2;--line:#30343b;--red:#f87171;--on-red:#08090b;--pink:#8b7a90;--mat:#1c1f1d;--matline:rgba(236,230,220,.07);--matline2:rgba(236,230,220,.16);--grain:.1;--nav-h:60px;background:var(--bg);color:var(--ink);scroll-behavior:smooth}
 html[data-theme="light"]{--bg:#e8e2d7;--ink:#151312;--muted:#4c4945;--metal:#6c6964;--line:#b9b1a3;--red:#b8231c;--on-red:#fff;--pink:#b8154f;--mat:#cfd3c8;--matline:rgba(21,19,18,.08);--matline2:rgba(21,19,18,.2);--grain:.07}
 html[data-theme="light"] nav[aria-label="Primary"]{--red:#b8231c}
 html[data-grain="off"]{--grain:0}
@@ -99,7 +99,7 @@ a:hover{color:var(--red)}
 <section id="top" aria-label="Introduction" style="position:relative;padding:clamp(14px,2vh,28px) 0 clamp(20px,3vh,36px);overflow:hidden">
   <h1 style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Krystyna Ewing</h1>
 
-  <div id="heroCicada" style="position:relative;width:100vw;margin-left:calc(50% - 50vw);aspect-ratio:2000/955;margin-top:clamp(8px,1.4vh,18px)">
+  <div id="heroCicada" style="position:relative;width:100vw;margin-left:calc(50% - 50vw);aspect-ratio:2000/955;max-height:calc(100vh - var(--nav-h) - 140px);margin-top:clamp(8px,1.4vh,18px)">
     <div style="position:absolute;inset:0;overflow:hidden">
       <img id="heroCicadaImg" src="images/cicada-hero.jpg" alt="An iridescent cicada viewed from above against a near-black background, head to the left, its translucent turquoise and violet wings spread wide to the right." style="display:block;width:100%;height:100%;object-fit:contain">
     </div>
@@ -400,6 +400,14 @@ class Component extends DCLogic {
     document.querySelectorAll('[data-reveal]').forEach(el => this.revealIo.observe(el));
 
     if (!this.reduce && this.mqRef.current) this.mq = this.mqRef.current.animate([{ transform: 'translateX(0)' }, { transform: 'translateX(-50%)' }], { duration: 28000, iterations: Infinity });
+
+    const navEl = document.querySelector('nav[aria-label="Primary"]');
+    if (navEl) {
+      const setNavH = h => document.documentElement.style.setProperty('--nav-h', h + 'px');
+      setNavH(navEl.getBoundingClientRect().height);
+      this.navRo = new ResizeObserver(es => setNavH(es[0].contentRect.height));
+      this.navRo.observe(navEl);
+    }
   }
   componentDidUpdate(pp) {
     if (pp.defaultTheme !== this.props.defaultTheme && this.props.defaultTheme) this.setState({ theme: this.props.defaultTheme }, () => this.applyRoot());
@@ -409,6 +417,7 @@ class Component extends DCLogic {
     window.removeEventListener('scroll', this.onScroll); window.removeEventListener('resize', this.onResize);
     window.removeEventListener('pointermove', this.onPointerMove);
     if (this.io) this.io.disconnect(); if (this.revealIo) this.revealIo.disconnect(); if (this.mq) this.mq.cancel();
+    if (this.navRo) this.navRo.disconnect();
   }
   tilt(e) {
     const b = e.currentTarget.getBoundingClientRect();
