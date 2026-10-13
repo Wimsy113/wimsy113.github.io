@@ -127,7 +127,9 @@ a:hover{color:var(--red)}
     </div>
     <p id="heroKrystyna" aria-hidden="true">Krystyna</p>
     <p id="heroEwing" aria-hidden="true">Ewing</p>
+  </div>
 
+  <div id="heroInteractive" onMouseEnter="{{ bioOpen }}" onMouseLeave="{{ bioClose }}" onKeyDown="{{ bioKey }}" style="position:relative;z-index:160;margin:clamp(14px,2vh,24px) auto 0;display:grid;justify-items:center;max-width:min(92vw,560px);padding:0 clamp(16px,5vw,64px)">
     <div id="heroBio" style="{{ bioStyle }}">
       <div style="max-width:52ch;margin:0 auto;display:grid;gap:12px;padding:clamp(16px,2vw,22px);background:var(--ink);color:var(--bg);transform:rotate(-1deg);box-shadow:8px 8px 0 var(--red)">
         <p style="margin:0;font:700 11px/1 'Inter',sans-serif;letter-spacing:.1em;text-transform:uppercase;color:var(--red)">UX Designer / Creative Technologist</p>
@@ -138,10 +140,7 @@ a:hover{color:var(--red)}
         <p style="margin:0;font:400 15px/1.5 'Inter',sans-serif">Either way, I'm probably going to try.</p>
       </div>
     </div>
-  </div>
-
-  <div id="heroInteractive" onMouseEnter="{{ bioOpen }}" onMouseLeave="{{ bioClose }}" onKeyDown="{{ bioKey }}" style="position:relative;z-index:160;margin:clamp(14px,2vh,24px) auto 0;display:grid;justify-items:center;max-width:min(92vw,560px);padding:0 clamp(16px,5vw,64px)">
-    <button type="button" onClick="{{ bioToggle }}" aria-expanded="{{ bioExpanded }}" aria-controls="heroBio" aria-label="Reveal introduction" style="font:400 clamp(26px,3.4vw,42px)/1 'Trickster',serif;color:var(--red);background:transparent;border:0;padding:4px 10px;cursor:pointer;min-height:44px" style-hover="color:var(--ink)">{{ cueWord }}</button>
+    <button type="button" onClick="{{ bioToggle }}" aria-expanded="{{ bioExpanded }}" aria-controls="heroBio" aria-label="Reveal introduction" style="position:relative;z-index:1;font:400 clamp(26px,3.4vw,42px)/1 'Trickster',serif;color:var(--red);background:transparent;border:0;padding:4px 10px;cursor:pointer;min-height:44px" style-hover="color:var(--ink)">{{ cueWord }}</button>
   </div>
 </section>
 
