@@ -418,7 +418,7 @@ class Component extends DCLogic {
   }
   async loadCicadaScene() {
     try {
-      const { Application } = await import('https://unpkg.com/@splinetool/runtime@1.9.48/build/runtime.js');
+      const { Application } = await import('https://unpkg.com/@splinetool/runtime@2.0.79/build/runtime.js');
       const canvas = document.getElementById('cicada-canvas');
       if (!canvas) return;
       const app = new Application(canvas);
