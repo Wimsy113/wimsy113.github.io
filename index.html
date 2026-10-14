@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -16,14 +16,13 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script src="./image-slot.js"></script>
 <style>
-html{--bg:#030509;--ink:#EDEAE4;--muted:#A9AFB8;--metal:#7D8690;--line:#1c212b;--c-turquoise:#83E2D2;--c-blue:#668FE5;--c-copper:#B89A7B;--c-opal:#D8C4ED;--red:var(--c-turquoise);--on-red:#06080c;--pink:#D8C4ED;--mat:#120f0b;--matline:rgba(184,154,123,.08);--matline2:rgba(184,154,123,.17);--grain:.1;--nav-h:60px;background:var(--bg);color:var(--ink);scroll-behavior:smooth}
+html{--bg:#030509;--ink:#EDEAE4;--muted:#A9AFB8;--metal:#7D8690;--line:#1c212b;--c-turquoise:#83E2D2;--c-blue:#668FE5;--c-copper:#B89A7B;--c-opal:#D8C4ED;--red:var(--c-turquoise);--on-red:#06080c;--pink:#D8C4ED;--mat:#120f0b;--matline:rgba(184,154,123,.08);--matline2:rgba(184,154,123,.17);--grain:.1;--rail-w:48px;background:var(--bg);color:var(--ink);scroll-behavior:smooth}
 html[data-theme="light"]{--bg:#F3F1EC;--ink:#12151a;--muted:#53585f;--metal:#686d74;--line:#d4d0c2;--c-turquoise:#0B7A68;--c-blue:#3357C2;--c-copper:#7F6040;--c-opal:#7F4FC0;--red:var(--c-turquoise);--on-red:#fff;--pink:#6B3FA0;--mat:#ece5d8;--matline:rgba(138,106,69,.1);--matline2:rgba(138,106,69,.2);--grain:.07}
-html[data-theme="light"] nav[aria-label="Primary"]{--red:#0B7A68}
 #work{--red:var(--c-blue)}
 #workbench{--red:var(--c-copper)}
 #about{--red:var(--c-opal)}
 html[data-grain="off"]{--grain:0}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:"Inter",system-ui,sans-serif;-webkit-font-smoothing:antialiased;transition:background-color .35s,color .35s;overflow-x:hidden}
+body{margin:0;padding-right:var(--rail-w);background:var(--bg);color:var(--ink);font-family:"Inter",system-ui,sans-serif;-webkit-font-smoothing:antialiased;transition:background-color .35s,color .35s;overflow-x:hidden}
 body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:300;opacity:var(--grain);mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E")}
 a{color:inherit;text-decoration-thickness:1px;text-underline-offset:.22em}
 a:hover{color:var(--red)}
@@ -67,6 +66,7 @@ a:hover{color:var(--red)}
 .tilt-card::after{content:"";position:absolute;left:5%;right:5%;top:0;height:2px;background:linear-gradient(90deg,transparent,var(--red),transparent);opacity:0;transition:opacity .45s ease;pointer-events:none;z-index:3}
 #wrk-01:hover .tilt-card::after,#wrk-02:hover .tilt-card::after,#wrk-03:hover .tilt-card::after,#wrk-04:hover .tilt-card::after,#wrk-01:focus-within .tilt-card::after,#wrk-02:focus-within .tilt-card::after,#wrk-03:focus-within .tilt-card::after,#wrk-04:focus-within .tilt-card::after{opacity:.85}
 @media (prefers-reduced-motion:reduce){#workVeins{display:none}}
+nav[aria-label="Primary"] a[aria-current="true"]{box-shadow:inset 0 0 0 3px var(--ink);letter-spacing:.22em}
 @font-face{font-family:'Trickster';src:url('fonts/Trickster-Reg.otf') format('opentype');font-weight:400;font-style:normal;font-display:swap}
 .display{font-family:'Trickster',serif;font-weight:400}
 #heroKrystyna,#heroEwing{position:relative;z-index:3;margin:0;padding:0 clamp(12px,4vw,40px);font-family:'Trickster',serif;font-weight:400;font-size:clamp(64px,19vw,150px);line-height:.86;color:#EDEAE4}
@@ -91,17 +91,14 @@ a:hover{color:var(--red)}
 <div id="pageCursor" ref="{{ cursorRef }}" aria-hidden="true"></div>
 <div id="livingGlow" aria-hidden="true"></div>
 
-<nav aria-label="Primary" style="--red:#83E2D2;--pink:#D8C4ED;position:fixed;left:0;right:0;bottom:0;z-index:150;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:4px 20px;padding:4px clamp(12px,2.4vw,32px);background:var(--bg);border-top:1px solid var(--ink);font:700 12px/1 'Inter',sans-serif;letter-spacing:.06em;text-transform:uppercase">
-  <a href="#top" aria-label="Krystyna Ewing, back to top" style="font:400 26px/1 'Trickster',serif;letter-spacing:0;text-transform:none;text-decoration:none;min-height:44px;display:flex;align-items:center">K. Ewing</a>
-  <div style="display:flex;flex-wrap:wrap;gap:0 clamp(12px,2.4vw,30px)">
-    <a href="#work" style="text-decoration:none;min-height:44px;display:flex;align-items:center;gap:8px"><span aria-hidden="true" style="color:var(--red)">{{ mWork }}</span>Work</a>
-    <a href="#workbench" style="text-decoration:none;min-height:44px;display:flex;align-items:center;gap:8px"><span aria-hidden="true" style="color:var(--red)">{{ mBench }}</span>Workbench</a>
-    <a href="#about" style="text-decoration:none;min-height:44px;display:flex;align-items:center;gap:8px"><span aria-hidden="true" style="color:var(--red)">{{ mAbout }}</span>About</a>
-    <a href="#contact" style="text-decoration:none;min-height:44px;display:flex;align-items:center;gap:8px"><span aria-hidden="true" style="color:var(--red)">{{ mContact }}</span>Contact</a>
-  </div>
-  <div style="display:flex;gap:8px">
-    <button type="button" onClick="{{ toggleTheme }}" aria-pressed="{{ lightPressed }}" style="font:inherit;letter-spacing:inherit;text-transform:inherit;color:var(--bg);background:var(--ink);border:1px solid var(--ink);padding:0 12px;min-height:40px;cursor:pointer" style-hover="background:var(--red);border-color:var(--red)">{{ themeLabel }}</button>
-  </div>
+<nav aria-label="Primary" style="position:fixed;right:0;top:0;bottom:0;z-index:200;width:var(--rail-w);display:flex;flex-direction:column;background:var(--bg);border-left:1px solid var(--line)">
+  <div aria-hidden="true" style="flex:0 0 auto;width:100%;height:3px;background:linear-gradient(180deg,#83E2D2,#668FE5,#B89A7B,#D8C4ED)"></div>
+  <a href="#top" aria-label="K. Ewing, back to top" style="flex:0 0 auto;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(180deg);padding:16px 0;font:400 20px/1 'Trickster',serif;letter-spacing:0;text-decoration:none;color:var(--ink);border-bottom:1px solid var(--line);min-height:44px;transition:color .2s ease" style-hover="color:var(--c-turquoise)">K. Ewing</a>
+  <a href="#work" aria-current="{{ curWork }}" style="flex:1 1 0;min-height:44px;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(180deg);font:700 11px/1 'Inter',sans-serif;letter-spacing:.14em;text-decoration:none;color:var(--on-red);background:var(--c-blue);transition:flex-grow .2s ease,letter-spacing .2s ease" style-hover="letter-spacing:.22em">WORK</a>
+  <a href="#workbench" aria-current="{{ curBench }}" style="flex:1 1 0;min-height:44px;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(180deg);font:700 11px/1 'Inter',sans-serif;letter-spacing:.14em;text-decoration:none;color:var(--on-red);background:var(--c-copper);transition:letter-spacing .2s ease" style-hover="letter-spacing:.22em">WORKBENCH</a>
+  <a href="#about" aria-current="{{ curAbout }}" style="flex:1 1 0;min-height:44px;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(180deg);font:700 11px/1 'Inter',sans-serif;letter-spacing:.14em;text-decoration:none;color:var(--on-red);background:var(--c-opal);transition:letter-spacing .2s ease" style-hover="letter-spacing:.22em">ABOUT</a>
+  <a href="#contact" aria-current="{{ curContact }}" style="flex:1 1 0;min-height:44px;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(180deg);font:700 11px/1 'Inter',sans-serif;letter-spacing:.14em;text-decoration:none;color:var(--on-red);background:var(--c-turquoise);transition:letter-spacing .2s ease" style-hover="letter-spacing:.22em">CONTACT</a>
+  <button type="button" onClick="{{ toggleTheme }}" aria-pressed="{{ lightPressed }}" aria-label="{{ themeLabel }} mode" style="flex:0 0 auto;min-height:44px;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(180deg);font:700 10px/1 'Inter',sans-serif;letter-spacing:.12em;text-transform:uppercase;border:0;border-top:1px solid var(--line);background:var(--ink);color:var(--bg);cursor:pointer;padding:12px 0" style-hover="background:var(--red);color:var(--on-red)">{{ themeLabel }}</button>
 </nav>
 
 <main id="main">
@@ -109,7 +106,7 @@ a:hover{color:var(--red)}
 <section id="top" aria-label="Introduction" style="position:relative;padding:clamp(14px,2vh,28px) 0 clamp(20px,3vh,36px)">
   <h1 style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Krystyna Ewing</h1>
 
-  <div id="heroCicada" style="position:relative;width:100vw;margin-left:calc(50% - 50vw);aspect-ratio:2000/955;max-height:calc(100vh - var(--nav-h) - 185px);margin-top:clamp(8px,1.4vh,18px)">
+  <div id="heroCicada" style="position:relative;width:100%;aspect-ratio:2000/955;max-height:calc(100vh - 185px);margin-top:clamp(8px,1.4vh,18px)">
     <div style="position:absolute;inset:0;overflow:hidden">
       <img id="heroCicadaImg" src="images/cicada-hero.jpg" alt="An iridescent cicada viewed from above against a near-black background, head to the left, its translucent turquoise and violet wings spread wide to the right." style="display:block;width:100%;height:100%;object-fit:contain">
     </div>
@@ -149,7 +146,7 @@ a:hover{color:var(--red)}
         <p style="margin:0;font:400 15px/1.5 'Inter',sans-serif">Either way, I'm probably going to try.</p>
       </div>
     </div>
-    <button type="button" onClick="{{ bioToggle }}" aria-expanded="{{ bioExpanded }}" aria-controls="heroBio" aria-label="Reveal introduction" style="position:relative;z-index:1;min-width:9ch;font:400 clamp(26px,3.4vw,42px)/1 'Trickster',serif;color:var(--red);background:transparent;border:0;padding:4px 10px;cursor:pointer;min-height:44px;text-align:center" style-hover="color:var(--ink)">{{ cueWord }}</button>
+    <button type="button" onClick="{{ bioToggle }}" aria-expanded="{{ bioExpanded }}" aria-controls="heroBio" aria-label="{{ bioAriaLabel }}" style="position:relative;z-index:1;min-width:9ch;font:400 clamp(26px,3.4vw,42px)/1 'Trickster',serif;color:var(--red);background:transparent;border:0;padding:4px 10px;cursor:pointer;min-height:44px;text-align:center" style-hover="color:var(--ink)">{{ cueWord }}</button>
   </div>
 
   <p style="position:relative;z-index:3;margin:clamp(10px,1.6vh,18px) auto 0;max-width:min(90vw,46ch);padding:0 clamp(16px,5vw,64px);text-align:center;font:400 clamp(15px,1.7vw,19px)/1.5 'Inter',sans-serif;color:var(--muted)">I design software, make art, build things, break things, and have a hard time leaving anything alone when I know it could work better.</p>
@@ -163,7 +160,7 @@ a:hover{color:var(--red)}
     </div>
 
     <figure data-reveal style="margin:0 0 0;position:relative;left:50%;width:100vw;transform:translateX(-50%)">
-      <a href="work/hazadapt-resiliencepoint.html" style="display:block;text-decoration:none" aria-label="ResiliencePoint — read the case study" style-hover="--titlecolor:var(--red)">
+      <a href="work/hazadapt-resiliencepoint.html" style="display:block;text-decoration:none" aria-label="01 ResiliencePoint" style-hover="--titlecolor:var(--red)">
         <div style="position:relative">
           <img src="images/work/hazadapt-resiliencepoint/platform-cover.png" alt="ResiliencePoint dashboard showing trending hazards and a nationwide activity map" style="display:block;width:100%;height:auto">
           <div aria-hidden="true" style="position:absolute;left:0;right:0;bottom:0;height:40%;background:linear-gradient(0deg,var(--bg) 18%,transparent 100%);pointer-events:none"></div>
@@ -342,12 +339,12 @@ a:hover{color:var(--red)}
   </div>
   <div data-reveal style="flex:1 1 380px;min-width:0;display:grid;gap:22px;max-width:560px">
     <h2 id="about-h" style="margin:0;font:700 12px/1 'Inter',sans-serif;letter-spacing:.12em;text-transform:uppercase;color:var(--red)">About</h2>
-    <dl style="margin:0;display:grid;grid-template-columns:auto minmax(0,1fr);gap:8px 24px;padding:16px 0;border-top:2px solid var(--ink);border-bottom:1px solid var(--line);font:400 13px/1.45 'Inter',sans-serif;letter-spacing:.02em">
-      <dt style="text-transform:uppercase;color:var(--metal)">Artist</dt><dd style="margin:0">Krystyna Ewing, Detroit-born</dd>
-      <dt style="text-transform:uppercase;color:var(--metal)">Medium</dt><dd style="margin:0">Software, UX, art, 3D printing, curiosity</dd>
-      <dt style="text-transform:uppercase;color:var(--metal)">Hours</dt><dd style="margin:0">Including 1am</dd>
-    </dl>
-    <p style="margin:0;font:400 clamp(19px,1.7vw,23px)/1.5 'Inter',sans-serif;text-wrap:pretty">Detroit-born, lifelong artist, and someone with a bad habit of needing to know how things work. That curiosity took me from software development into UX, and it still shows up in accessibility reviews, 3D printing experiments, and whatever I'm building at 1am.</p>
+    <p style="margin:0;font:400 clamp(20px,1.9vw,25px)/1.5 'Inter',sans-serif;text-wrap:pretty">Detroit-born, lifelong artist, and someone with a bad habit of needing to know how things work. That curiosity took me from software development into UX, and it still shows up in accessibility reviews, 3D printing experiments, and whatever I'm building at 1am.</p>
+    <ul aria-label="A few things that are true about me" style="list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:10px">
+      <li style="border:1px solid var(--line);padding:7px 12px;font:400 12px/1.2 'Inter',sans-serif;letter-spacing:.04em;color:var(--muted);transform:rotate(-1deg)">Detroit-born</li>
+      <li style="border:1px solid var(--line);padding:7px 12px;font:400 12px/1.2 'Inter',sans-serif;letter-spacing:.04em;color:var(--muted);transform:rotate(.5deg)">Started in software, ended up in UX</li>
+      <li style="border:1px solid var(--line);padding:7px 12px;font:400 12px/1.2 'Inter',sans-serif;letter-spacing:.04em;color:var(--muted);transform:rotate(-.5deg)">Usually awake at 1am, building something</li>
+    </ul>
     <a href="#" style="font:700 14px/1 'Inter',sans-serif;letter-spacing:.06em;text-transform:uppercase;min-height:44px;display:inline-flex;align-items:center">Want the longer version? View résumé →</a>
     <div style="display:grid;gap:6px;padding-top:6px;border-top:1px solid var(--line)">
       <p style="margin:0;font:400 11px/1 'Inter',sans-serif;letter-spacing:.1em;text-transform:uppercase;color:var(--metal)">Photography Credits</p>
@@ -361,7 +358,7 @@ a:hover{color:var(--red)}
 <footer id="contact" style="position:relative;overflow:hidden;padding:0 0 64px">
   <div id="contactEye1" aria-hidden="true" style="position:absolute;left:50%;top:14%;width:min(90vw,900px);aspect-ratio:2/1;border-radius:50%;border:1px solid color-mix(in srgb,var(--red) 30%,transparent);transform:translate(-50%,-50%)"></div>
   <div id="contactEye2" aria-hidden="true" style="position:absolute;left:50%;top:14%;width:min(64vw,640px);aspect-ratio:2/1;border-radius:50%;border:1px solid color-mix(in srgb,var(--red) 30%,transparent);transform:translate(-50%,-50%)"></div>
-  <a href="mailto:hello@krystynaewing.com" aria-label="Email hello@krystynaewing.com" onMouseEnter="{{ mqPause }}" onMouseLeave="{{ mqPlay }}" onFocus="{{ mqPause }}" onBlur="{{ mqPlay }}" style="position:relative;display:block;overflow:hidden;background:var(--red);color:var(--on-red);text-decoration:none;padding:clamp(14px,2vw,26px) 0;transform:rotate(-1.5deg);margin:24px -2vw 0;width:104vw" style-hover="color:var(--on-red)">
+  <a href="mailto:hello@krystynaewing.com" aria-label="hello@krystynaewing.com — say something" onMouseEnter="{{ mqPause }}" onMouseLeave="{{ mqPlay }}" onFocus="{{ mqPause }}" onBlur="{{ mqPlay }}" style="position:relative;display:block;overflow:hidden;background:var(--red);color:var(--on-red);text-decoration:none;padding:clamp(14px,2vw,26px) 0;transform:rotate(-1.5deg);margin:24px -2vw 0;width:104vw" style-hover="color:var(--on-red)">
     <div ref="{{ mqRef }}" aria-hidden="true" class="display" style="display:flex;width:max-content;white-space:nowrap;font-size:clamp(48px,9vw,140px);line-height:.9">
       <span style="padding-right:.4em">hello@krystynaewing.com ✕ say something ✕</span><span style="padding-right:.4em">hello@krystynaewing.com ✕ say something ✕</span>
     </div>
@@ -438,14 +435,6 @@ class Component extends DCLogic {
 
     if (!this.reduce && this.mqRef.current) this.mq = this.mqRef.current.animate([{ transform: 'translateX(0)' }, { transform: 'translateX(-50%)' }], { duration: 28000, iterations: Infinity });
 
-    const navEl = document.querySelector('nav[aria-label="Primary"]');
-    if (navEl) {
-      const setNavH = h => document.documentElement.style.setProperty('--nav-h', h + 'px');
-      setNavH(navEl.getBoundingClientRect().height);
-      this.navRo = new ResizeObserver(es => setNavH(es[0].contentRect.height));
-      this.navRo.observe(navEl);
-    }
-
     this.loadCicadaScene();
 
     this.veinRo = new ResizeObserver(() => this.drawWorkVeins());
@@ -497,7 +486,6 @@ class Component extends DCLogic {
     window.removeEventListener('scroll', this.onScroll); window.removeEventListener('resize', this.onResize);
     window.removeEventListener('pointermove', this.onPointerMove);
     if (this.io) this.io.disconnect(); if (this.revealIo) this.revealIo.disconnect(); if (this.mq) this.mq.cancel();
-    if (this.navRo) this.navRo.disconnect();
     if (this.veinRo) this.veinRo.disconnect();
   }
   tilt(e) {
@@ -535,13 +523,14 @@ class Component extends DCLogic {
     };
   }
   renderVals() {
-    const s = this.state, light = s.theme === 'light', mk = id => (s.active === id ? '■' : '□');
+    const s = this.state, light = s.theme === 'light', cur = id => (s.active === id ? 'true' : 'false');
     const r = {
       deskRef: this.deskRef, mqRef: this.mqRef, progressRef: this.progressRef, cursorRef: this.cursorRef,
-      mWork: mk('work'), mBench: mk('workbench'), mAbout: mk('about'), mContact: mk('contact'),
+      curWork: cur('work'), curBench: cur('workbench'), curAbout: cur('about'), curContact: cur('contact'),
       themeLabel: light ? 'Dark' : 'Light', lightPressed: light ? 'true' : 'false',
       toggleTheme: () => this.setState(st => ({ theme: st.theme === 'light' ? 'dark' : 'light' }), () => this.applyRoot()),
       cueWord: s.bio ? 'oh, hi.' : 'psst.',
+      bioAriaLabel: s.bio ? 'oh, hi. — hide introduction' : 'psst. — reveal introduction',
       bioExpanded: s.bio ? 'true' : 'false',
       bioOpen: () => { if (s.canHover && !s.bio) this.setState({ bio: true }); },
       bioClose: () => { if (s.canHover && s.bio) this.setState({ bio: false }); },
