@@ -17,23 +17,23 @@
 <script src="../image-slot.js"></script>
 <style>
 @font-face{font-family:'Trickster';src:url('../fonts/Trickster-Reg.otf') format('opentype');font-weight:400;font-style:normal;font-display:swap}
-html{--bg:#0d0c0c;--ink:#ece6dc;--muted:#aaa69f;--metal:#8d8a85;--ghost:#1f1d1c;--line:#34322f;--red:oklch(0.6 0.2 27);--on-red:#0d0c0c;--pink:#f45b8e;--grain:.1;background:var(--bg);color:var(--ink);scroll-behavior:smooth}
-html[data-theme="light"]{--bg:#e8e2d7;--ink:#151312;--muted:#4c4945;--metal:#6c6964;--ghost:#d8d1c4;--line:#b9b1a3;--red:oklch(0.5 0.2 27);--on-red:#fff;--pink:#b8154f;--grain:.07}
-html[data-theme="light"] nav[aria-label="Primary"]{--red:#b8231c}
+html{--bg:#030509;--ink:#EDEAE4;--muted:#A9AFB8;--metal:#7D8690;--ghost:#0b0e14;--line:#1c212b;--c-turquoise:#83E2D2;--c-blue:#668FE5;--c-copper:#B89A7B;--c-opal:#D8C4ED;--red:var(--c-blue);--on-red:#06080c;--pink:#D8C4ED;--grain:.1;background:var(--bg);color:var(--ink);scroll-behavior:smooth}
+html[data-theme="light"]{--bg:#F3F1EC;--ink:#12151a;--muted:#53585f;--metal:#71767d;--ghost:#e6e1d6;--line:#d4d0c2;--c-turquoise:#0B7A68;--c-blue:#3357C2;--c-copper:#7F6040;--c-opal:#7F4FC0;--red:var(--c-blue);--on-red:#fff;--pink:#6B3FA0;--grain:.07}
+html[data-theme="light"] nav[aria-label="Primary"]{--red:#0B7A68}
 html[data-grain="off"]{--grain:0}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:"Source Sans 3",system-ui,sans-serif;-webkit-font-smoothing:antialiased;transition:background-color .35s,color .35s;overflow-x:hidden}
 body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:300;opacity:var(--grain);mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E")}
 a{color:inherit;text-decoration-thickness:1px;text-underline-offset:.22em}
 a:hover{color:var(--red)}
 :focus-visible{outline:3px solid var(--pink);outline-offset:4px}
-::selection{background:var(--pink);color:#0d0c0c}
+::selection{background:var(--pink);color:#06080c}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
 </style>
 </helmet>
 
-<a href="#main" style="position:fixed;left:16px;top:-80px;z-index:400;background:var(--pink);color:#0d0c0c;padding:12px 18px;font:700 14px/1 'Space Mono',monospace;text-decoration:none" style-focus="top:16px">Skip to content</a>
+<a href="#main" style="position:fixed;left:16px;top:-80px;z-index:400;background:var(--pink);color:#06080c;padding:12px 18px;font:700 14px/1 'Space Mono',monospace;text-decoration:none" style-focus="top:16px">Skip to content</a>
 
-<nav aria-label="Primary" style="--red:#f87171;--pink:#8b7a90;position:fixed;left:0;right:0;bottom:0;z-index:150;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:4px 20px;padding:4px clamp(12px,2.4vw,32px);background:var(--bg);border-top:1px solid var(--ink);font:700 12px/1 'Inter',sans-serif;letter-spacing:.06em;text-transform:uppercase">
+<nav aria-label="Primary" style="--red:#83E2D2;--pink:#D8C4ED;position:fixed;left:0;right:0;bottom:0;z-index:150;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:4px 20px;padding:4px clamp(12px,2.4vw,32px);background:var(--bg);border-top:1px solid var(--ink);font:700 12px/1 'Inter',sans-serif;letter-spacing:.06em;text-transform:uppercase">
   <a href="../index.html" aria-label="Krystyna Ewing, home" style="font:400 26px/1 'Trickster',serif;letter-spacing:0;text-transform:none;text-decoration:none;min-height:44px;display:flex;align-items:center">K. Ewing</a>
   <div style="display:flex;flex-wrap:wrap;gap:0 clamp(12px,2.4vw,30px)">
     <a href="../index.html#work" style="text-decoration:none;min-height:44px;display:flex;align-items:center;gap:8px"><span aria-hidden="true" style="color:var(--red)">■</span>Work</a>

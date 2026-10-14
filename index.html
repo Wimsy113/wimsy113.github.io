@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<style>html,body{background:#0d0c0c;margin:0}</style>
+<style>html,body{background:#06080c;margin:0}</style>
 <script src="./support.js"></script>
 </head>
 <body>
@@ -16,9 +16,12 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script src="./image-slot.js"></script>
 <style>
-html{--bg:#08090b;--ink:#e7e5e1;--muted:#b5b8bc;--metal:#9299a2;--line:#30343b;--red:#f87171;--on-red:#08090b;--pink:#8b7a90;--mat:#1c1f1d;--matline:rgba(236,230,220,.07);--matline2:rgba(236,230,220,.16);--grain:.1;--nav-h:60px;background:var(--bg);color:var(--ink);scroll-behavior:smooth}
-html[data-theme="light"]{--bg:#e8e2d7;--ink:#151312;--muted:#4c4945;--metal:#6c6964;--line:#b9b1a3;--red:#b8231c;--on-red:#fff;--pink:#b8154f;--mat:#cfd3c8;--matline:rgba(21,19,18,.08);--matline2:rgba(21,19,18,.2);--grain:.07}
-html[data-theme="light"] nav[aria-label="Primary"]{--red:#b8231c}
+html{--bg:#030509;--ink:#EDEAE4;--muted:#A9AFB8;--metal:#7D8690;--line:#1c212b;--c-turquoise:#83E2D2;--c-blue:#668FE5;--c-copper:#B89A7B;--c-opal:#D8C4ED;--red:var(--c-turquoise);--on-red:#06080c;--pink:#D8C4ED;--mat:#120f0b;--matline:rgba(184,154,123,.08);--matline2:rgba(184,154,123,.17);--grain:.1;--nav-h:60px;background:var(--bg);color:var(--ink);scroll-behavior:smooth}
+html[data-theme="light"]{--bg:#F3F1EC;--ink:#12151a;--muted:#53585f;--metal:#686d74;--line:#d4d0c2;--c-turquoise:#0B7A68;--c-blue:#3357C2;--c-copper:#7F6040;--c-opal:#7F4FC0;--red:var(--c-turquoise);--on-red:#fff;--pink:#6B3FA0;--mat:#ece5d8;--matline:rgba(138,106,69,.1);--matline2:rgba(138,106,69,.2);--grain:.07}
+html[data-theme="light"] nav[aria-label="Primary"]{--red:#0B7A68}
+#work{--red:var(--c-blue)}
+#workbench{--red:var(--c-copper)}
+#about{--red:var(--c-opal)}
 html[data-grain="off"]{--grain:0}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:"Inter",system-ui,sans-serif;-webkit-font-smoothing:antialiased;transition:background-color .35s,color .35s;overflow-x:hidden}
 body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:300;opacity:var(--grain);mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E")}
@@ -29,6 +32,8 @@ a:hover{color:var(--red)}
 #introVeil{opacity:0;pointer-events:none}
 #pageCursor{position:fixed;left:0;top:0;z-index:260;width:18px;height:18px;margin:-9px;border:1px solid var(--red);border-radius:50%;pointer-events:none;transition:width .2s ease,height .2s ease,margin .2s ease}
 @media (hover:none),(pointer:coarse){#pageCursor{display:none}}
+#livingGlow{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.22;mix-blend-mode:screen;background:radial-gradient(560px circle at var(--mx,50vw) var(--my,22vh),color-mix(in srgb,var(--red) 65%,transparent),transparent 72%)}
+@media (hover:none),(pointer:coarse),(prefers-reduced-motion:reduce){#livingGlow{display:none}}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}[data-reveal]{opacity:1!important;filter:none!important;translate:0!important}}
 [data-reveal]{opacity:var(--rv,0);filter:blur(calc((1 - var(--rv,0)) * 10px));translate:0 calc((1 - var(--rv,0)) * 1.6rem);transition:opacity .7s ease,filter .7s ease,translate .7s cubic-bezier(.16,1,.3,1)}
 @media (prefers-reduced-motion:no-preference){
@@ -61,7 +66,7 @@ a:hover{color:var(--red)}
 .tilt-card{transform:perspective(70rem) rotateX(var(--card-x,0deg)) rotateY(var(--card-y,0deg));transition:transform .18s ease-out}
 @font-face{font-family:'Trickster';src:url('fonts/Trickster-Reg.otf') format('opentype');font-weight:400;font-style:normal;font-display:swap}
 .display{font-family:'Trickster',serif;font-weight:400}
-#heroKrystyna,#heroEwing{position:relative;z-index:3;margin:0;padding:0 clamp(12px,4vw,40px);font-family:'Trickster',serif;font-weight:400;font-size:clamp(64px,19vw,150px);line-height:.86;color:var(--ink)}
+#heroKrystyna,#heroEwing{position:relative;z-index:3;margin:0;padding:0 clamp(12px,4vw,40px);font-family:'Trickster',serif;font-weight:400;font-size:clamp(64px,19vw,150px);line-height:.86;color:#EDEAE4}
 #heroEwing{text-align:right;color:var(--red)}
 @media (min-width:860px){
   #heroCicada{margin-top:0}
@@ -76,13 +81,14 @@ a:hover{color:var(--red)}
 </style>
 </helmet>
 
-<a href="#main" style="position:fixed;left:16px;top:-80px;z-index:400;background:var(--pink);color:#0d0c0c;padding:12px 18px;font:700 14px/1 'Inter',sans-serif;text-decoration:none" style-focus="top:16px">Skip to content</a>
+<a href="#main" style="position:fixed;left:16px;top:-80px;z-index:400;background:var(--pink);color:#06080c;padding:12px 18px;font:700 14px/1 'Inter',sans-serif;text-decoration:none" style-focus="top:16px">Skip to content</a>
 
 <div id="introVeil" aria-hidden="true" style="position:fixed;inset:0;z-index:500;background:#000"></div>
 <div ref="{{ progressRef }}" aria-hidden="true" style="position:fixed;left:0;top:0;z-index:250;height:3px;width:0%;background:var(--red);pointer-events:none"></div>
 <div id="pageCursor" ref="{{ cursorRef }}" aria-hidden="true"></div>
+<div id="livingGlow" aria-hidden="true"></div>
 
-<nav aria-label="Primary" style="--red:#f87171;--pink:#8b7a90;position:fixed;left:0;right:0;bottom:0;z-index:150;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:4px 20px;padding:4px clamp(12px,2.4vw,32px);background:var(--bg);border-top:1px solid var(--ink);font:700 12px/1 'Inter',sans-serif;letter-spacing:.06em;text-transform:uppercase">
+<nav aria-label="Primary" style="--red:#83E2D2;--pink:#D8C4ED;position:fixed;left:0;right:0;bottom:0;z-index:150;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:4px 20px;padding:4px clamp(12px,2.4vw,32px);background:var(--bg);border-top:1px solid var(--ink);font:700 12px/1 'Inter',sans-serif;letter-spacing:.06em;text-transform:uppercase">
   <a href="#top" aria-label="Krystyna Ewing, back to top" style="font:400 26px/1 'Trickster',serif;letter-spacing:0;text-transform:none;text-decoration:none;min-height:44px;display:flex;align-items:center">K. Ewing</a>
   <div style="display:flex;flex-wrap:wrap;gap:0 clamp(12px,2.4vw,30px)">
     <a href="#work" style="text-decoration:none;min-height:44px;display:flex;align-items:center;gap:8px"><span aria-hidden="true" style="color:var(--red)">{{ mWork }}</span>Work</a>
@@ -100,7 +106,7 @@ a:hover{color:var(--red)}
 <section id="top" aria-label="Introduction" style="position:relative;padding:clamp(14px,2vh,28px) 0 clamp(20px,3vh,36px)">
   <h1 style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Krystyna Ewing</h1>
 
-  <div id="heroCicada" style="position:relative;width:100vw;margin-left:calc(50% - 50vw);aspect-ratio:2000/955;max-height:calc(100vh - var(--nav-h) - 140px);margin-top:clamp(8px,1.4vh,18px)">
+  <div id="heroCicada" style="position:relative;width:100vw;margin-left:calc(50% - 50vw);aspect-ratio:2000/955;max-height:calc(100vh - var(--nav-h) - 185px);margin-top:clamp(8px,1.4vh,18px)">
     <div style="position:absolute;inset:0;overflow:hidden">
       <img id="heroCicadaImg" src="images/cicada-hero.jpg" alt="An iridescent cicada viewed from above against a near-black background, head to the left, its translucent turquoise and violet wings spread wide to the right." style="display:block;width:100%;height:100%;object-fit:contain">
     </div>
@@ -142,6 +148,8 @@ a:hover{color:var(--red)}
     </div>
     <button type="button" onClick="{{ bioToggle }}" aria-expanded="{{ bioExpanded }}" aria-controls="heroBio" aria-label="Reveal introduction" style="position:relative;z-index:1;min-width:9ch;font:400 clamp(26px,3.4vw,42px)/1 'Trickster',serif;color:var(--red);background:transparent;border:0;padding:4px 10px;cursor:pointer;min-height:44px;text-align:center" style-hover="color:var(--ink)">{{ cueWord }}</button>
   </div>
+
+  <p style="position:relative;z-index:3;margin:clamp(10px,1.6vh,18px) auto 0;max-width:min(90vw,46ch);padding:0 clamp(16px,5vw,64px);text-align:center;font:400 clamp(15px,1.7vw,19px)/1.5 'Inter',sans-serif;color:var(--muted)">I design software, make art, build things, break things, and have a hard time leaving anything alone when I know it could work better.</p>
 </section>
 
 <section id="work" aria-labelledby="work-h" style="position:relative;padding:clamp(32px,5vh,64px) clamp(16px,4vw,40px) clamp(48px,7vh,88px)">
@@ -391,6 +399,10 @@ class Component extends DCLogic {
 
     this.onPointerMove = e => {
       if (this.cursorRef.current) this.cursorRef.current.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0)`;
+      if (!this.reduce) {
+        document.documentElement.style.setProperty('--mx', e.clientX + 'px');
+        document.documentElement.style.setProperty('--my', e.clientY + 'px');
+      }
     };
     window.addEventListener('pointermove', this.onPointerMove);
 
