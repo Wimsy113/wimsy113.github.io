@@ -140,7 +140,7 @@ nav[aria-label="Primary"] a[aria-current="true"]{color:var(--green);box-shadow:i
     </div>
   </div>
 
-  <div style="position:relative;margin-top:clamp(28px,4.5vh,56px)">
+  <div onMouseEnter="{{ bioOpen }}" onMouseLeave="{{ bioClose }}" onKeyDown="{{ bioKey }}" style="position:relative;margin-top:clamp(28px,4.5vh,56px)">
     <div class="regmark" aria-hidden="true" style="left:-1px;top:-1px"></div>
     <div class="regmark" aria-hidden="true" style="right:-1px;top:-1px"></div>
     <div class="regmark" aria-hidden="true" style="left:-1px;bottom:-1px"></div>
@@ -154,32 +154,36 @@ nav[aria-label="Primary"] a[aria-current="true"]{color:var(--green);box-shadow:i
       <span aria-hidden="true" style="position:absolute;inset:0;mix-blend-mode:color;background:var(--green);opacity:.24"></span>
       <span aria-hidden="true" class="mono" style="position:absolute;left:3%;top:9%;font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:#A8FF00;border:1px solid #A8FF00;padding:2px 6px;background:rgba(0,0,0,.6)">01 — Wing vein</span>
       <span aria-hidden="true" class="mono" style="position:absolute;right:4%;bottom:12%;font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:#A8FF00;border:1px solid #A8FF00;padding:2px 6px;background:rgba(0,0,0,.6)">02 — Thorax</span>
+      <button type="button" onClick="{{ bioToggle }}" aria-expanded="{{ bioExpanded }}" aria-controls="heroBio" aria-label="{{ bioAriaLabel }}" class="mono" style="position:absolute;z-index:5;left:4%;bottom:12%;display:inline-flex;align-items:center;gap:6px;min-height:36px;padding:4px 10px;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#A8FF00;border:1px solid #A8FF00;background:rgba(0,0,0,.6);cursor:pointer" style-hover="background:#A8FF00;color:#0B0B0B">{{ cueGlyph }} {{ cueWord }}</button>
     </div>
     <div style="display:grid;gap:14px;padding:clamp(16px,2.4vw,24px);border:1px solid var(--line);border-top:0;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))">
       <p class="mono" style="margin:0;font-size:12px;line-height:1.7;color:var(--muted)"><strong style="color:var(--fg)">01 — Wing vein.</strong> Branching, load-bearing structure — the same kind of logic I look for in an interface, just evolved instead of drawn.</p>
       <p class="mono" style="margin:0;font-size:12px;line-height:1.7;color:var(--muted)"><strong style="color:var(--fg)">02 — Thorax.</strong> Built to vibrate loud enough to find a mate from a quarter mile off. No notes app required.</p>
     </div>
     <p class="mono" style="margin:0;padding:10px clamp(16px,2.4vw,24px);border:1px solid var(--line);border-top:0;font-size:10px;letter-spacing:.02em;color:var(--muted)">Photograph by <a href="https://unsplash.com/@mayulec" style="color:var(--fg)" style-hover="color:var(--green)">Maya Alexa G. Romero</a> on <a href="https://unsplash.com/photos/a-colorful-cicada-with-translucent-wings-on-black-background-YVafzB3-8jQ" style="color:var(--fg)" style-hover="color:var(--green)">Unsplash</a>, licensed under the <a href="https://unsplash.com/license" style="color:var(--fg)" style-hover="color:var(--green)">Unsplash License</a>. Desaturated and tinted to match the site.</p>
-  </div>
 
-  <div id="heroInteractive" onMouseEnter="{{ bioOpen }}" onMouseLeave="{{ bioClose }}" onKeyDown="{{ bioKey }}" style="position:relative;z-index:160;margin-top:clamp(24px,3.4vh,40px);max-width:620px">
-    <p style="margin:0 0 16px;font-size:clamp(16px,1.6vw,19px);line-height:1.5;color:var(--fg)">I design software, make art, build things, break things, and have a hard time leaving anything alone when I know it could work better.</p>
-    <button type="button" onClick="{{ bioToggle }}" aria-expanded="{{ bioExpanded }}" aria-controls="heroBio" aria-label="{{ bioAriaLabel }}" class="mono" style="position:relative;z-index:1;display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 4px;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--green);background:transparent;border:0;cursor:pointer" style-hover="color:var(--fg)">{{ cueGlyph }} {{ cueWord }}</button>
-    <div id="heroBio" style="{{ bioStyle }}">
+    <div id="heroBio" aria-hidden="{{ bioHidden }}" style="{{ bioStyle }}">
       <div style="max-width:56ch">
         <div aria-hidden="true" style="display:flex;justify-content:center">
           <div style="position:relative;width:76px;height:18px;background:#2b2b2b;border:1px solid #000;border-bottom:0;border-radius:3px 3px 0 0;box-shadow:0 -1px 0 rgba(255,255,255,.08) inset">
             <div style="position:absolute;top:5px;left:50%;transform:translateX(-50%);width:32px;height:7px;border:1px solid #000;border-radius:1px;background:#3a3a3a"></div>
           </div>
         </div>
-        <div style="display:grid;gap:12px;padding:clamp(20px,2.4vw,26px) clamp(18px,2.2vw,24px) clamp(22px,2.8vw,28px);background:#F2F0E9;border:1px solid #000;border-top:2px solid #000">
-          <p class="mono" style="margin:0 0 2px;padding-bottom:8px;border-bottom:1px solid rgba(11,11,11,.3);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#0B0B0B;opacity:.6">Attached — Full Bio</p>
+        <div style="display:grid;gap:12px;padding:clamp(20px,2.4vw,26px) clamp(18px,2.2vw,24px) clamp(22px,2.8vw,28px);background:#F2F0E9;border:1px solid #000;border-top:2px solid #000;max-height:min(42vh,380px);overflow-y:auto">
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;padding-bottom:8px;border-bottom:1px solid rgba(11,11,11,.3)">
+            <p class="mono" style="margin:0;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#0B0B0B;opacity:.6">Attached — Full Bio</p>
+            <button type="button" tabindex="{{ bioTabIndex }}" onClick="{{ bioForceClose }}" aria-label="Close bio" class="mono" style="min-width:28px;min-height:28px;padding:0;border:0;background:transparent;color:#0B0B0B;font-size:14px;line-height:1;cursor:pointer;opacity:.6">✕</button>
+          </div>
           <p style="margin:0;font:600 17px/1.4 'Inter',sans-serif;color:#0B0B0B">I'm a designer, artist, developer, and general maker of things. I started in software development, moved into UX because I wanted more room to be creative, and apparently never learned how to pick one thing and stick with it.</p>
           <p style="margin:0;font:400 15px/1.5 'Inter',sans-serif;color:#0B0B0B">I've spent the last 8+ years designing, building, testing, breaking things, and figuring out how to make them work better. Outside of UX, I make art, build 3D prints, mess around with code, and start projects because I thought, &ldquo;I wonder if I could make that.&rdquo;</p>
           <p style="margin:0;font:400 15px/1.5 'Inter',sans-serif;color:#0B0B0B">Usually I can. Sometimes I absolutely cannot. Either way, I'm probably going to try.</p>
         </div>
       </div>
     </div>
+  </div>
+
+  <div style="position:relative;margin-top:clamp(24px,3.4vh,40px);max-width:620px">
+    <p style="margin:0;font-size:clamp(16px,1.6vw,19px);line-height:1.5;color:var(--fg)">I design software, make art, build things, break things, and have a hard time leaving anything alone when I know it could work better.</p>
   </div>
 </section>
 
@@ -642,10 +646,13 @@ class Component extends DCLogic {
       bioOpen: () => { if (s.canHover && !s.bio) this.setState({ bio: true }); },
       bioClose: () => { if (s.canHover && s.bio) this.setState({ bio: false }); },
       bioToggle: () => { if (s.canHover) this.setState({ bio: true }); else this.setState(st => ({ bio: !st.bio })); },
+      bioForceClose: () => this.setState({ bio: false }),
       bioKey: e => { if (e.key === 'Escape') this.setState({ bio: false }); },
+      bioHidden: s.bio ? 'false' : 'true',
+      bioTabIndex: s.bio ? '0' : '-1',
       bioStyle: s.bio
-        ? { marginTop: 14, maxHeight: 600, opacity: 1, overflow: 'hidden', transition: this.reduce ? 'none' : 'max-height .4s ease, opacity .3s ease' }
-        : { marginTop: 14, maxHeight: 0, opacity: 0, overflow: 'hidden', transition: this.reduce ? 'none' : 'max-height .3s ease, opacity .2s ease' },
+        ? { position: 'absolute', left: '50%', bottom: '5%', width: 'min(90%,420px)', zIndex: 6, transform: 'translateX(-50%) translateY(0)', opacity: 1, pointerEvents: 'auto', transition: this.reduce ? 'none' : 'opacity .3s ease, transform .3s ease' }
+        : { position: 'absolute', left: '50%', bottom: '5%', width: 'min(90%,420px)', zIndex: 6, transform: 'translateX(-50%) translateY(10px)', opacity: 0, pointerEvents: 'none', transition: this.reduce ? 'none' : 'opacity .2s ease, transform .2s ease' },
       benchHint: s.narrow ? "Here's what's on the table." : 'Grab the tape to move things around. Arrow keys work too.',
       deskStyle: s.narrow ? { position: 'relative', display: 'flex', flexDirection: 'column', gap: 36, paddingTop: 16 } : { position: 'relative', height: 'clamp(640px, 62vw, 920px)' },
       resetDesk: () => this.setState({ pieces: this.defaults(), z: {} }),
