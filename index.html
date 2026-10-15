@@ -50,6 +50,8 @@ nav[aria-label="Primary"] a[aria-current="true"]{color:var(--green);box-shadow:i
 #marginRail .idx{font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);transition:color .2s ease}
 #marginRail .idx[data-current="true"]{color:var(--green)}
 #workbench{margin-left:calc(-1 * var(--margin-w));padding-left:calc(var(--margin-w) + clamp(16px,3vw,32px))!important}
+#mobileBar{display:none}
+#mobileMenu a[aria-current="true"]{color:var(--green)}
 @media (max-width:859px){
   #pageGrid{grid-template-columns:1fr}
   #marginRail{display:none}
@@ -57,6 +59,12 @@ nav[aria-label="Primary"] a[aria-current="true"]{color:var(--green);box-shadow:i
   #heroGrid{grid-template-columns:1fr!important}
   #heroGrid>*{grid-column:1/-1!important}
   #heroMeta{border-left:0!important;padding-left:0!important;border-top:1px solid var(--line);padding-top:16px!important;margin-top:20px}
+  nav[aria-label="Primary"]{display:none!important}
+  #mobileBar{display:flex}
+  body{padding-right:0;padding-top:56px}
+}
+@media (min-width:860px){
+  #mobileMenu,#mobileMenuBackdrop{display:none!important}
 }
 @media (max-width:699px){
   .wrk-feature-grid{grid-template-columns:1fr!important}
@@ -79,6 +87,21 @@ nav[aria-label="Primary"] a[aria-current="true"]{color:var(--green);box-shadow:i
   <a href="#about" aria-current="{{ curAbout }}" class="mono" style="flex:1 1 0;min-height:44px;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(180deg);font-size:11px;font-weight:700;letter-spacing:.18em;text-decoration:none;color:var(--fg);border-bottom:1px solid var(--line);transition:color .2s ease,letter-spacing .2s ease" style-hover="color:var(--green);letter-spacing:.26em">ABOUT</a>
   <a href="#contact" aria-current="{{ curContact }}" class="mono" style="flex:1 1 0;min-height:44px;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(180deg);font-size:11px;font-weight:700;letter-spacing:.18em;text-decoration:none;color:var(--fg);transition:color .2s ease,letter-spacing .2s ease" style-hover="color:var(--green);letter-spacing:.26em">CONTACT</a>
   <button type="button" onClick="{{ toggleTheme }}" aria-pressed="{{ lightPressed }}" aria-label="Switch to {{ themeLabel }} mode" class="mono" style="flex:0 0 auto;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(180deg);padding:14px 0;font-size:10px;font-weight:700;letter-spacing:.14em;text-decoration:none;color:var(--muted);border:0;border-top:1px solid var(--line);background:var(--bg);cursor:pointer;min-height:44px;transition:color .2s ease" style-hover="color:var(--green)">{{ themeLabel }}</button>
+</nav>
+
+<header id="mobileBar" class="mono" aria-label="Mobile header" style="position:fixed;left:0;right:0;top:0;z-index:220;align-items:center;justify-content:space-between;padding:0 16px;height:56px;background:var(--bg);border-bottom:1px solid var(--line)">
+  <a href="#top" aria-label="K. Ewing, back to top" style="font-size:15px;font-weight:700;letter-spacing:.04em;text-decoration:none;color:var(--fg);min-height:44px;display:inline-flex;align-items:center" style-hover="color:var(--green)">K. EWING</a>
+  <button type="button" onClick="{{ menuToggle }}" aria-expanded="{{ menuExpandedAttr }}" aria-controls="mobileMenu" aria-label="{{ menuAriaLabel }}" style="min-width:44px;min-height:44px;padding:0 12px;border:1px solid var(--line);background:transparent;color:var(--fg);font:700 11px/1 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;cursor:pointer" style-hover="color:var(--green);border-color:var(--green)">{{ menuButtonLabel }}</button>
+</header>
+
+<div id="mobileMenuBackdrop" aria-hidden="true" onClick="{{ menuClose }}" style="{{ menuBackdropStyle }}"></div>
+
+<nav id="mobileMenu" aria-label="Mobile" class="mono" style="{{ menuPanelStyle }}">
+  <a href="#work" onClick="{{ menuClose }}" aria-current="{{ curWork }}" style="display:flex;align-items:center;min-height:52px;padding:0 20px;font-size:14px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;color:var(--fg);border-bottom:1px solid var(--line)" style-hover="color:var(--green)">Work</a>
+  <a href="#workbench" onClick="{{ menuClose }}" aria-current="{{ curBench }}" style="display:flex;align-items:center;min-height:52px;padding:0 20px;font-size:14px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;color:var(--fg);border-bottom:1px solid var(--line)" style-hover="color:var(--green)">Workbench</a>
+  <a href="#about" onClick="{{ menuClose }}" aria-current="{{ curAbout }}" style="display:flex;align-items:center;min-height:52px;padding:0 20px;font-size:14px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;color:var(--fg);border-bottom:1px solid var(--line)" style-hover="color:var(--green)">About</a>
+  <a href="#contact" onClick="{{ menuClose }}" aria-current="{{ curContact }}" style="display:flex;align-items:center;min-height:52px;padding:0 20px;font-size:14px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;color:var(--fg);border-bottom:1px solid var(--line)" style-hover="color:var(--green)">Contact</a>
+  <button type="button" onClick="{{ toggleTheme }}" aria-pressed="{{ lightPressed }}" style="display:flex;align-items:center;justify-content:space-between;width:100%;min-height:52px;padding:0 20px;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;border:0;background:transparent;color:var(--muted);cursor:pointer" style-hover="color:var(--green)"><span>Theme</span><span>{{ themeLabel }}</span></button>
 </nav>
 
 <div id="pageGrid">
@@ -367,8 +390,14 @@ class Component extends DCLogic {
     active: 'top', bio: false,
     narrow: window.innerWidth < 760, canHover: window.matchMedia('(hover: hover) and (pointer: fine)').matches,
     theme: document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark',
+    menuOpen: false,
     pieces: this.defaults(), z: {}, top: 10
   };
+  closeMenu() {
+    if (!this.state.menuOpen) return;
+    document.body.style.overflow = '';
+    this.setState({ menuOpen: false });
+  }
   componentDidMount() {
     this.reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     try {
@@ -402,8 +431,11 @@ class Component extends DCLogic {
     };
     window.addEventListener('pointermove', this.onPointerMove);
 
-    this.onResize = () => { const n = window.innerWidth < 760; if (n !== this.state.narrow) this.setState({ narrow: n }); this.drawWorkVeins(); };
+    this.onResize = () => { const n = window.innerWidth < 760; if (n !== this.state.narrow) this.setState({ narrow: n }); this.drawWorkVeins(); if (window.innerWidth >= 860) this.closeMenu(); };
     window.addEventListener('resize', this.onResize);
+
+    this.onKeydown = e => { if (e.key === 'Escape') this.closeMenu(); };
+    window.addEventListener('keydown', this.onKeydown);
 
     this.io = new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecting) this.setState({ active: en.target.id }); }), { rootMargin: '-45% 0px -45% 0px' });
     ['top', 'work', 'workbench', 'about', 'contact'].forEach(id => { const el = document.getElementById(id); if (el) this.io.observe(el); });
@@ -438,7 +470,7 @@ class Component extends DCLogic {
   }
   componentWillUnmount() {
     window.removeEventListener('scroll', this.onScroll); window.removeEventListener('resize', this.onResize);
-    window.removeEventListener('pointermove', this.onPointerMove);
+    window.removeEventListener('pointermove', this.onPointerMove); window.removeEventListener('keydown', this.onKeydown);
     if (this.io) this.io.disconnect(); if (this.revealIo) this.revealIo.disconnect(); if (this.mq) this.mq.cancel();
     if (this.veinRo) this.veinRo.disconnect();
   }
@@ -483,6 +515,21 @@ class Component extends DCLogic {
         try { localStorage.setItem('ke-theme', next); } catch (e) {}
         this.setState({ theme: next });
       },
+      menuExpandedAttr: s.menuOpen ? 'true' : 'false',
+      menuButtonLabel: s.menuOpen ? 'CLOSE' : 'MENU',
+      menuAriaLabel: s.menuOpen ? 'Close menu' : 'Open menu',
+      menuClose: () => this.closeMenu(),
+      menuToggle: () => {
+        const next = !s.menuOpen;
+        document.body.style.overflow = next ? 'hidden' : '';
+        this.setState({ menuOpen: next });
+      },
+      menuBackdropStyle: s.menuOpen
+        ? { display: 'block', position: 'fixed', inset: '56px 0 0 0', zIndex: 215, background: 'rgba(0,0,0,.5)' }
+        : { display: 'none' },
+      menuPanelStyle: s.menuOpen
+        ? { display: 'grid', position: 'fixed', left: 0, right: 0, top: 56, zIndex: 220, background: 'var(--bg)', borderBottom: '1px solid var(--line)', maxHeight: 'calc(100vh - 56px)', overflowY: 'auto' }
+        : { display: 'none' },
       cueWord: s.bio ? 'Collapse' : 'Expand bio',
       cueGlyph: s.bio ? '[ − ]' : '[ + ]',
       bioAriaLabel: s.bio ? 'Collapse — hide full bio' : 'Expand bio — reveal full bio',
