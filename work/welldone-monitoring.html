@@ -284,7 +284,19 @@ nav[aria-label="Primary"] a[aria-current="true"]{color:var(--red);box-shadow:ins
       <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Inter',sans-serif;text-wrap:pretty">The resulting experience connected WellDone's geographic, sensor and well information into a single monitoring workflow.</p>
       <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Inter',sans-serif;text-wrap:pretty">Users could begin with the larger network, identify a location or potential problem, investigate an individual well, and then examine the underlying information in greater detail.</p>
       <figure style="margin:clamp(20px,3vw,40px) 0 0;display:grid;gap:10px">
-        <div style="width:100%;min-width:0;aspect-ratio:21/9;position:relative"><image-slot id="welldone-monitoring-8" shape="rect" fit="contain" placeholder="Final WellDone dashboard"></image-slot></div>
+        <div style="position:relative;width:100%;min-width:0;border:1px solid var(--line)">
+          <button type="button" onClick="{{ wdOpen }}" aria-label="{{ wdOpenLabel }}" style="display:block;width:100%;padding:0;border:0;background:transparent;cursor:zoom-in">
+            <img src="../images/work/welldone-monitoring/final-dashboard-tables.webp" alt="Final dashboard: organization activity feed, pumps table, organizations table and workers table stacked beneath the map" style="{{ wdThumb0 }}">
+            <img src="../images/work/welldone-monitoring/final-dashboard-health-overview.webp" alt="Final dashboard: functional/non-functional/no-data percentage cards, a search bar, recent reports, recent tickets and a pumps table beneath the map" style="{{ wdThumb1 }}">
+            <img src="../images/work/welldone-monitoring/final-dashboard-reports-tickets.webp" alt="Final dashboard: a streamlined view with recent reports, recent tickets and a pumps table beneath the map, without the percentage cards" style="{{ wdThumb2 }}">
+            <img src="../images/work/welldone-monitoring/final-dashboard-ngo-admin-pie.webp" alt="Final dashboard: an NGO Admin view with a functional/non-functional/no-data pie chart, organization activity feed, sensors table, operators table and accounts table" style="{{ wdThumb3 }}">
+          </button>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 14px;border-top:1px solid var(--line);background:var(--bg)">
+            <button type="button" onClick="{{ wdPrev }}" aria-label="Previous dashboard view" style="min-height:44px;min-width:44px;padding:0 14px;border:1px solid var(--line);background:transparent;color:var(--ink);font:700 14px/1 'Space Mono',monospace;cursor:pointer" style-hover="color:var(--pink);border-color:var(--pink)">←</button>
+            <p style="margin:0;flex:1;text-align:center;font:400 12px/1.4 'Space Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)">{{ wdCur.name }} <span aria-hidden="true" style="color:var(--pink)">·</span> {{ wdCounter }}</p>
+            <button type="button" onClick="{{ wdNext }}" aria-label="Next dashboard view" style="min-height:44px;min-width:44px;padding:0 14px;border:1px solid var(--line);background:transparent;color:var(--ink);font:700 14px/1 'Space Mono',monospace;cursor:pointer" style-hover="color:var(--pink);border-color:var(--pink)">→</button>
+          </div>
+        </div>
         <figcaption style="font:400 12px/1.5 'Space Mono',monospace;letter-spacing:.06em;color:var(--muted)"><span style="color:var(--pink)">FIG. 08</span> — Final WellDone dashboard</figcaption>
       </figure>
       <figure style="margin:clamp(12px,2vw,28px) 0 0;display:grid;gap:10px">
@@ -329,10 +341,38 @@ nav[aria-label="Primary"] a[aria-current="true"]{color:var(--red);box-shadow:ins
   <a href="mailto:hello@krystynaewing.com" style="color:var(--ink)">hello@krystynaewing.com</a>
   <a href="#main" style="min-height:44px;display:inline-flex;align-items:center">[ ^ top ]</a>
 </footer>
+
+<sc-if value="{{ wdLbOpen }}" hint-placeholder-val="{{ false }}">
+  <div role="dialog" aria-modal="true" aria-label="{{ wdCur.alt }}" onKeyDown="{{ wdKey }}" style="position:fixed;inset:0;z-index:260;background:rgba(10,9,9,.96);color:#F2F0E9;display:grid;grid-template-rows:auto minmax(0,1fr) auto;gap:16px;padding:clamp(14px,2.4vw,32px)">
+    <div style="display:flex;flex-wrap:wrap;justify-content:flex-end">
+      <button type="button" ref="{{ wdCloseRef }}" onClick="{{ wdClose }}" style="font:700 12px/1 'Space Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:#0B0B0B;background:#F2F0E9;border:0;padding:0 16px;min-height:44px;cursor:pointer" style-hover="background:#A8FF00">✕ Close</button>
+    </div>
+    <div style="min-height:0;display:flex;align-items:center;justify-content:center">
+      <img src="../images/work/welldone-monitoring/final-dashboard-tables.webp" alt="Final dashboard: organization activity feed, pumps table, organizations table and workers table stacked beneath the map" style="{{ wdLbImg0 }}">
+      <img src="../images/work/welldone-monitoring/final-dashboard-health-overview.webp" alt="Final dashboard: functional/non-functional/no-data percentage cards, a search bar, recent reports, recent tickets and a pumps table beneath the map" style="{{ wdLbImg1 }}">
+      <img src="../images/work/welldone-monitoring/final-dashboard-reports-tickets.webp" alt="Final dashboard: a streamlined view with recent reports, recent tickets and a pumps table beneath the map, without the percentage cards" style="{{ wdLbImg2 }}">
+      <img src="../images/work/welldone-monitoring/final-dashboard-ngo-admin-pie.webp" alt="Final dashboard: an NGO Admin view with a functional/non-functional/no-data pie chart, organization activity feed, sensors table, operators table and accounts table" style="{{ wdLbImg3 }}">
+    </div>
+    <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px">
+      <button type="button" onClick="{{ wdPrev }}" aria-label="Previous dashboard view" style="font:700 12px/1 'Space Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:#F2F0E9;background:transparent;border:1px solid #F2F0E9;padding:0 16px;min-height:44px;cursor:pointer" style-hover="background:#F2F0E9;color:#0B0B0B">← Prev</button>
+      <p style="margin:0;font:400 12px/1.4 'Space Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:#aaa69f;text-align:center">{{ wdCur.name }} · {{ wdCounter }}</p>
+      <button type="button" onClick="{{ wdNext }}" aria-label="Next dashboard view" style="font:700 12px/1 'Space Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:#F2F0E9;background:transparent;border:1px solid #F2F0E9;padding:0 16px;min-height:44px;cursor:pointer" style-hover="background:#F2F0E9;color:#0B0B0B">Next →</button>
+    </div>
+  </div>
+</sc-if>
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;defaultTheme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;dark&quot;,&quot;light&quot;],&quot;default&quot;:&quot;dark&quot;,&quot;tsType&quot;:&quot;'dark'|'light'&quot;,&quot;section&quot;:&quot;Look&quot;},&quot;grain&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Look&quot;}}">
 class Component extends DCLogic {
-  state = { theme: this.props.defaultTheme ?? 'dark', active: 's01', menuOpen: false, tocOpen: true };
+  wdCloseRef = React.createRef();
+  state = { theme: this.props.defaultTheme ?? 'dark', active: 's01', menuOpen: false, tocOpen: true, wdIndex: 0, wdLbOpen: false };
+  wdViews() {
+    return [
+      { alt: 'Final dashboard: organization activity feed, pumps table, organizations table and workers table stacked beneath the map', name: 'Organization & worker tables' },
+      { alt: 'Final dashboard: functional/non-functional/no-data percentage cards, a search bar, recent reports, recent tickets and a pumps table beneath the map', name: 'Network health overview' },
+      { alt: 'Final dashboard: a streamlined view with recent reports, recent tickets and a pumps table beneath the map, without the percentage cards', name: 'Reports & tickets' },
+      { alt: 'Final dashboard: an NGO Admin view with a functional/non-functional/no-data pie chart, organization activity feed, sensors table, operators table and accounts table', name: 'NGO Admin pie chart view' }
+    ];
+  }
   applyRoot() {
     const r = document.documentElement;
     r.dataset.theme = this.state.theme;
@@ -350,12 +390,27 @@ class Component extends DCLogic {
   componentDidUpdate(pp) {
     if (pp.defaultTheme !== this.props.defaultTheme && this.props.defaultTheme) this.setState({ theme: this.props.defaultTheme }, () => this.applyRoot());
     else this.applyRoot();
+    const open = this.state.wdLbOpen;
+    if (open && !this.wdWasOpen) { this.wdLastFocus = document.activeElement; document.body.style.overflow = 'hidden'; setTimeout(() => this.wdCloseRef.current && this.wdCloseRef.current.focus(), 30); }
+    if (!open && this.wdWasOpen) { document.body.style.overflow = ''; if (this.wdLastFocus && this.wdLastFocus.focus) this.wdLastFocus.focus(); }
+    this.wdWasOpen = open;
   }
-  componentWillUnmount() { if (this.io) this.io.disconnect(); window.removeEventListener('resize', this.onMenuResize); window.removeEventListener('keydown', this.onMenuKeydown); }
+  componentWillUnmount() { if (this.io) this.io.disconnect(); window.removeEventListener('resize', this.onMenuResize); window.removeEventListener('keydown', this.onMenuKeydown); document.body.style.overflow = ''; }
   renderVals() {
     const s = this.state, light = s.theme === 'light', mk = {};
     for (let i = 1; i <= 24; i++) { const id = 's' + String(i).padStart(2, '0'); mk[id] = s.active === id ? '■' : '□'; }
+    const wdV = this.wdViews(), wdStep = d => () => this.setState(st => ({ wdIndex: (st.wdIndex + d + wdV.length) % wdV.length }));
+    const wdThumbStyle = i => i === s.wdIndex ? { display: 'block', width: '100%', height: 'auto' } : { display: 'none' };
+    const wdLbStyle = i => i === s.wdIndex ? { display: 'block', maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' } : { display: 'none' };
     return {
+      wdCur: wdV[s.wdIndex], wdCounter: (s.wdIndex + 1) + ' / ' + wdV.length,
+      wdOpenLabel: 'View larger: ' + wdV[s.wdIndex].alt,
+      wdThumb0: wdThumbStyle(0), wdThumb1: wdThumbStyle(1), wdThumb2: wdThumbStyle(2), wdThumb3: wdThumbStyle(3),
+      wdLbImg0: wdLbStyle(0), wdLbImg1: wdLbStyle(1), wdLbImg2: wdLbStyle(2), wdLbImg3: wdLbStyle(3),
+      wdPrev: wdStep(-1), wdNext: wdStep(1),
+      wdOpen: () => this.setState({ wdLbOpen: true }), wdClose: () => this.setState({ wdLbOpen: false }),
+      wdLbOpen: s.wdLbOpen, wdCloseRef: this.wdCloseRef,
+      wdKey: e => { if (e.key === 'Escape') this.setState({ wdLbOpen: false }); else if (e.key === 'ArrowLeft') wdStep(-1)(); else if (e.key === 'ArrowRight') wdStep(1)(); },
       mk, tocOpen: s.tocOpen, tocClosed: !s.tocOpen, tocExpanded: s.tocOpen ? 'true' : 'false', tocIcon: '− Hide',
       toggleToc: () => this.setState(st => ({ tocOpen: !st.tocOpen })),
       themeLabel: light ? 'Dark' : 'Light', lightPressed: light ? 'true' : 'false',
