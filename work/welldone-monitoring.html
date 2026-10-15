@@ -25,6 +25,20 @@ a{color:inherit;text-decoration-thickness:1px;text-underline-offset:.22em}
 a:hover{color:var(--red)}
 :focus-visible{outline:3px solid var(--pink);outline-offset:4px}
 ::selection{background:var(--pink);color:var(--on-red)}
+@media (prefers-reduced-motion:no-preference){
+  @keyframes wdBreathe{0%,100%{opacity:.55;transform:translate(-50%,-50%) scale(.9)}50%{opacity:1;transform:translate(-50%,-50%) scale(1.08)}}
+  @keyframes wdSpinOrbit{to{transform:translate(-50%,-50%) rotate(360deg)}}
+  @keyframes wdDriftParticle{0%{top:105%;opacity:0;transform:translateX(0) scale(.5)}15%{opacity:.8}55%{transform:translateX(5rem) scale(1.5)}90%{opacity:.5}100%{top:-5%;opacity:0;transform:translateX(-3rem) scale(.5)}}
+  #wdAura{animation:wdBreathe 7s ease-in-out infinite}
+  #wdOrbit1{animation:wdSpinOrbit 45s linear infinite}
+  #wdOrbit2{animation:wdSpinOrbit 32s linear infinite reverse}
+  #wdParticles span{opacity:0;animation:wdDriftParticle 9s linear infinite}
+  #wdParticles span:nth-child(3n+1){left:12%;animation-delay:-2s;animation-duration:11s}
+  #wdParticles span:nth-child(3n+2){left:48%;animation-delay:-5s;animation-duration:8s}
+  #wdParticles span:nth-child(3n){left:82%;animation-delay:-7s;animation-duration:13s}
+  #wdParticles span:nth-child(4n+1){margin-left:18%}
+  #wdParticles span:nth-child(5n+2){margin-left:-24%}
+}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
 
 nav[aria-label="Primary"] a[aria-current="true"]{color:var(--red);box-shadow:inset 3px 0 0 var(--red)}
@@ -84,7 +98,30 @@ nav[aria-label="Primary"] a[aria-current="true"]{color:var(--red);box-shadow:ins
       
       
     </div>
-    <img src="../images/welldone_album.png" alt="WellDone logo" style="flex:1 1 360px;min-width:0;max-width:640px;height:auto;display:block;transform:rotate(1.5deg);box-shadow:14px 14px 0 var(--red)">
+    <div style="position:relative;flex:1 1 360px;min-width:0;max-width:640px">
+      <img src="../images/work/welldone-monitoring/hero-devices.png" alt="The WellDone app shown on a phone and laptop: a mobile summary of monitor reports and functional wells, and a desktop map of well locations across Cambodia" style="position:relative;z-index:1;display:block;width:100%;height:auto">
+      <div aria-hidden="true" style="position:absolute;inset:0;z-index:0;pointer-events:none">
+        <div id="wdParticles" aria-hidden="true" style="position:absolute;inset:0;overflow:hidden">
+          <span style="position:absolute;width:5px;height:5px;border-radius:50%;background:var(--pink)"></span>
+          <span style="position:absolute;width:5px;height:5px;border-radius:50%;background:var(--pink)"></span>
+          <span style="position:absolute;width:5px;height:5px;border-radius:50%;background:var(--pink)"></span>
+          <span style="position:absolute;width:5px;height:5px;border-radius:50%;background:var(--pink)"></span>
+          <span style="position:absolute;width:5px;height:5px;border-radius:50%;background:var(--pink)"></span>
+          <span style="position:absolute;width:5px;height:5px;border-radius:50%;background:var(--pink)"></span>
+          <span style="position:absolute;width:5px;height:5px;border-radius:50%;background:var(--pink)"></span>
+          <span style="position:absolute;width:5px;height:5px;border-radius:50%;background:var(--pink)"></span>
+          <span style="position:absolute;width:5px;height:5px;border-radius:50%;background:var(--pink)"></span>
+          <span style="position:absolute;width:5px;height:5px;border-radius:50%;background:var(--pink)"></span>
+          <span style="position:absolute;width:5px;height:5px;border-radius:50%;background:var(--pink)"></span>
+          <span style="position:absolute;width:5px;height:5px;border-radius:50%;background:var(--pink)"></span>
+          <span style="position:absolute;width:5px;height:5px;border-radius:50%;background:var(--pink)"></span>
+          <span style="position:absolute;width:5px;height:5px;border-radius:50%;background:var(--pink)"></span>
+        </div>
+        <div id="wdAura" aria-hidden="true" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:38%;aspect-ratio:1;border-radius:50%;filter:blur(20px);background:radial-gradient(circle,color-mix(in srgb,var(--pink) 40%,transparent),transparent 70%)"></div>
+        <div id="wdOrbit1" aria-hidden="true" style="position:absolute;left:50%;top:50%;width:30%;aspect-ratio:1;border-radius:50%;border:1px dashed color-mix(in srgb,var(--pink) 50%,transparent);transform:translate(-50%,-50%)"></div>
+        <div id="wdOrbit2" aria-hidden="true" style="position:absolute;left:50%;top:50%;width:22%;aspect-ratio:1;border-radius:50%;border:1px solid color-mix(in srgb,var(--ink) 40%,transparent);transform:translate(-50%,-50%)"></div>
+      </div>
+    </div>
   </div>
 </header>
 
@@ -181,20 +218,20 @@ nav[aria-label="Primary"] a[aria-current="true"]{color:var(--red);box-shadow:ins
       <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Inter',sans-serif;text-wrap:pretty">The map provided a high-level view of WellDone's wells and allowed users to understand where infrastructure was located.</p>
       <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Inter',sans-serif;text-wrap:pretty">Rather than making the map purely visual, we treated it as a navigation and monitoring tool. Selecting a location could lead users deeper into the information associated with that well.</p>
       <figure style="margin:clamp(12px,2vw,28px) 0 0;display:grid;gap:10px">
-        <div style="width:100%;min-width:0;aspect-ratio:16/9;position:relative"><image-slot id="welldone-monitoring-3" shape="rect" fit="contain" placeholder="WellDone map screen"></image-slot></div>
+        <img src="../images/work/welldone-monitoring/map-screen.webp" alt="WellDone map screen showing a Cambodia-wide overview with a filter panel for country and well status, and color-coded pins marking functional, unknown and non-functional wells" style="display:block;width:100%;height:auto;border:1px solid var(--line)">
         <figcaption style="font:400 12px/1.5 'Space Mono',monospace;letter-spacing:.06em;color:var(--muted)"><span style="color:var(--pink)">FIG. 03</span> — WellDone map screen</figcaption>
       </figure>
       <h3 style="margin:28px 0 0;max-width:34ch;font:700 clamp(22px,2.2vw,30px)/1.15 'Inter',sans-serif;letter-spacing:-.01em;color:var(--pink)">Sensor data</h3>
       <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Inter',sans-serif;text-wrap:pretty">Once users identified a well they wanted to investigate, they needed access to the information being collected from it.</p>
       <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Inter',sans-serif;text-wrap:pretty">We designed views that organized sensor information into something that could be scanned and compared rather than presenting users with an undifferentiated stream of data.</p>
       <figure style="margin:clamp(12px,2vw,28px) 0 0;display:grid;gap:10px">
-        <div style="width:100%;min-width:0;aspect-ratio:16/9;position:relative"><image-slot id="welldone-monitoring-4" shape="rect" fit="contain" placeholder="Sensor / data visualization screen"></image-slot></div>
+        <img src="../images/work/welldone-monitoring/sensor-data.png" alt="WellDone Sensors admin table listing sensor numbers, dates added and color-coded status bars, grouped by organization" style="display:block;width:100%;height:auto;border:1px solid var(--line)">
         <figcaption style="font:400 12px/1.5 'Space Mono',monospace;letter-spacing:.06em;color:var(--muted)"><span style="color:var(--pink)">FIG. 04</span> — Sensor / data visualization screen</figcaption>
       </figure>
       <h3 style="margin:28px 0 0;max-width:34ch;font:700 clamp(22px,2.2vw,30px)/1.15 'Inter',sans-serif;letter-spacing:-.01em;color:var(--pink)">Individual well information</h3>
       <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Inter',sans-serif;text-wrap:pretty">The individual-well experience brought the relevant information together so users could understand what was happening at a specific location without bouncing between unrelated screens.</p>
       <figure style="margin:clamp(12px,2vw,28px) 0 0;display:grid;gap:10px">
-        <div style="width:100%;min-width:0;aspect-ratio:16/9;position:relative"><image-slot id="welldone-monitoring-5" shape="rect" fit="contain" placeholder="Individual well / detail screen"></image-slot></div>
+        <img src="../images/work/welldone-monitoring/well-detail.png" alt="Individual well detail screen for Toul Krous showing a 14-day usage chart, data summary (last upload, total and average liters), well specifications and an embedded map" style="display:block;width:100%;height:auto;border:1px solid var(--line)">
         <figcaption style="font:400 12px/1.5 'Space Mono',monospace;letter-spacing:.06em;color:var(--muted)"><span style="color:var(--pink)">FIG. 05</span> — Individual well / detail screen</figcaption>
       </figure>
     </section>
@@ -251,7 +288,7 @@ nav[aria-label="Primary"] a[aria-current="true"]{color:var(--red);box-shadow:ins
         <figcaption style="font:400 12px/1.5 'Space Mono',monospace;letter-spacing:.06em;color:var(--muted)"><span style="color:var(--pink)">FIG. 08</span> — Final WellDone dashboard</figcaption>
       </figure>
       <figure style="margin:clamp(12px,2vw,28px) 0 0;display:grid;gap:10px">
-        <div style="width:100%;min-width:0;aspect-ratio:16/9;position:relative"><image-slot id="welldone-monitoring-9" shape="rect" fit="contain" placeholder="Final map experience"></image-slot></div>
+        <img src="../images/work/welldone-monitoring/map-cluster-list.webp" alt="WellDone map with a sensor cluster popup open, listing four sensor readings each with a color-coded usage bar chart" style="display:block;width:100%;height:auto;border:1px solid var(--line)">
         <figcaption style="font:400 12px/1.5 'Space Mono',monospace;letter-spacing:.06em;color:var(--muted)"><span style="color:var(--pink)">FIG. 09</span> — Final map experience</figcaption>
       </figure>
       <figure style="margin:clamp(12px,2vw,28px) 0 0;display:grid;gap:10px">
