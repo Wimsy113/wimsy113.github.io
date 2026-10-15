@@ -17,7 +17,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
 <script src="./image-slot.js"></script>
 <style>
-html{--bg:#0B0B0B;--fg:#F2F0E9;--green:#A8FF00;--charcoal:#252525;--muted:#9a978e;--line:rgba(242,240,233,.2);--rail-w:48px;--grain:.14;background:var(--bg);color:var(--fg);scroll-behavior:smooth}
+html{--bg:#0B0B0B;--fg:#F2F0E9;--green:#A8FF00;--charcoal:#252525;--muted:#9a978e;--line:rgba(242,240,233,.2);--rail-w:48px;--margin-w:96px;--grain:.14;background:var(--bg);color:var(--fg);scroll-behavior:smooth}
 body{margin:0;padding-right:var(--rail-w);background:var(--bg);color:var(--fg);font-family:"Inter",system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:300;opacity:var(--grain);mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E")}
 a{color:inherit;text-decoration-thickness:1px;text-underline-offset:.22em}
@@ -45,15 +45,22 @@ a:hover{color:var(--green)}
 .dotfield{background-image:radial-gradient(circle,var(--fg) 1px,transparent 1px);background-size:7px 7px;opacity:.12}
 .tilt-card{transform:perspective(70rem) rotateX(var(--card-x,0deg)) rotateY(var(--card-y,0deg));transition:transform .18s ease-out}
 nav[aria-label="Primary"] a[aria-current="true"]{color:var(--green);box-shadow:inset 3px 0 0 var(--green)}
+#pageGrid{display:grid;grid-template-columns:var(--margin-w) 1fr}
+#marginRail{position:sticky;top:0;align-self:start;height:100vh;display:flex;flex-direction:column;justify-content:space-between;padding:20px 14px;border-right:1px solid var(--line)}
+#marginRail .idx{font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);transition:color .2s ease}
+#marginRail .idx[data-current="true"]{color:var(--green)}
+#workbench{margin-left:calc(-1 * var(--margin-w));padding-left:calc(var(--margin-w) + clamp(16px,3vw,32px))!important}
 @media (max-width:859px){
+  #pageGrid{grid-template-columns:1fr}
+  #marginRail{display:none}
+  #workbench{margin-left:0;padding-left:clamp(16px,3vw,32px)!important}
   #heroGrid{grid-template-columns:1fr!important}
   #heroGrid>*{grid-column:1/-1!important}
   #heroMeta{border-left:0!important;padding-left:0!important;border-top:1px solid var(--line);padding-top:16px!important;margin-top:20px}
 }
 @media (max-width:699px){
-  .wrk-row{grid-template-columns:1fr!important}
-  .wrk-row>*{grid-column:1/-1!important}
-  .wrk-num{margin-bottom:8px}
+  .wrk-feature-grid{grid-template-columns:1fr!important}
+  .wrk-pair{grid-template-columns:1fr!important;gap:clamp(28px,6vh,48px)!important}
 }
 </style>
 </helmet>
@@ -73,17 +80,20 @@ nav[aria-label="Primary"] a[aria-current="true"]{color:var(--green);box-shadow:i
   <a href="#contact" aria-current="{{ curContact }}" class="mono" style="flex:1 1 0;min-height:44px;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(180deg);font-size:11px;font-weight:700;letter-spacing:.18em;text-decoration:none;color:var(--fg);transition:color .2s ease,letter-spacing .2s ease" style-hover="color:var(--green);letter-spacing:.26em">CONTACT</a>
 </nav>
 
+<div id="pageGrid">
+<aside id="marginRail" class="mono" aria-hidden="true">
+  <div class="idx" data-current="{{ curTop }}">001<br>Intro</div>
+  <div class="idx" data-current="{{ curWork }}">002<br>Work</div>
+  <div class="idx" data-current="{{ curBench }}">003<br>Bench</div>
+  <div class="idx" data-current="{{ curAbout }}">004<br>About</div>
+  <div class="idx" style="margin-top:auto;writing-mode:vertical-rl;transform:rotate(180deg);justify-self:start">Detroit, MI</div>
+</aside>
 <main id="main">
 
 <section id="top" aria-label="Introduction" style="position:relative;padding:clamp(16px,2.4vh,32px) clamp(16px,3vw,32px) clamp(32px,5vh,64px);border-bottom:1px solid var(--line)">
 
-  <div class="mono" aria-hidden="true" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px 20px;margin-bottom:clamp(24px,4vh,48px);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">
-    <span><span style="color:var(--green)">№ 001</span> — Introduction</span>
-    <span>Detroit, MI</span>
-  </div>
-
   <div id="heroGrid" style="position:relative;display:grid;grid-template-columns:repeat(12,1fr);gap:clamp(16px,2vw,28px);align-items:start">
-    <h1 class="display" style="grid-column:1 / span 8;margin:0;font-size:clamp(38px,10.4vw,168px);line-height:.86;letter-spacing:-.01em">
+    <h1 class="display" style="grid-column:1 / span 8;margin:0;font-size:clamp(30px,8vw,128px);line-height:.86;letter-spacing:-.01em">
       <span style="display:block">Krystyna</span><span style="display:block;color:var(--green)">Ewing</span>
     </h1>
 
@@ -128,89 +138,92 @@ nav[aria-label="Primary"] a[aria-current="true"]{color:var(--green);box-shadow:i
 </section>
 
 <section id="work" aria-labelledby="work-h" style="position:relative;padding:clamp(40px,6vh,72px) clamp(16px,3vw,32px);border-bottom:1px solid var(--line)">
-  <div class="mono" data-reveal style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:clamp(20px,3vh,32px);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">
-    <span style="color:var(--green)">№ 002</span>
-    <span>Five projects, one restless practice</span>
-  </div>
+  <p class="mono" data-reveal style="margin:0 0 clamp(20px,3vh,32px);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">Five projects, one restless practice</p>
   <h2 id="work-h" class="display" data-reveal style="margin:0 0 clamp(32px,5vh,56px);font-size:clamp(34px,5.6vw,88px);line-height:.92">Selected Work</h2>
 
   <div style="position:relative">
     <svg id="workVeins" aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;overflow:visible"><path fill="none" stroke="var(--green)" stroke-width="1" opacity=".35" stroke-dasharray="2 5"></path></svg>
 
-    <article data-reveal class="wrk-row" style="position:relative;z-index:1;display:grid;grid-template-columns:repeat(12,1fr);gap:clamp(16px,2.4vw,32px);padding:clamp(24px,4vh,44px) 0;border-top:1px solid var(--line)">
-      <div class="wrk-num display" data-badge="1" style="grid-column:1/span2;font-size:clamp(36px,4.4vw,64px);line-height:1;color:var(--green)">01</div>
-      <a href="work/hazadapt-resiliencepoint.html" aria-label="01 ResiliencePoint" style="grid-column:3/span6;display:block;text-decoration:none">
+    <article data-reveal style="position:relative;z-index:1;padding-bottom:clamp(32px,5vh,56px);border-bottom:1px solid var(--line)">
+      <div class="wrk-num display" data-badge="1" aria-hidden="true" style="font-size:clamp(60px,9vw,130px);line-height:1;color:var(--green);margin-bottom:clamp(12px,2vh,20px)">01</div>
+      <a href="work/hazadapt-resiliencepoint.html" aria-label="01 ResiliencePoint" style="display:block;text-decoration:none">
         <div style="position:relative;border:1px solid var(--line);overflow:hidden">
           <img src="images/work/hazadapt-resiliencepoint/platform-cover.png" alt="ResiliencePoint dashboard showing trending hazards and a nationwide activity map" style="display:block;width:100%;height:auto;filter:grayscale(1) contrast(1.25);transition:filter .5s ease" style-hover="filter:grayscale(.2) contrast(1.15)">
         </div>
       </a>
-      <div class="mono" style="grid-column:9/span4">
-        <h3 class="display" style="margin:0 0 10px;font-size:clamp(24px,2.6vw,36px);line-height:1;text-transform:none"><a href="work/hazadapt-resiliencepoint.html" style="text-decoration:none;color:inherit" style-hover="color:var(--green)">ResiliencePoint</a></h3>
-        <p style="margin:0 0 6px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)">HazAdapt · Lead UX Designer · 2023–2024</p>
-        <p style="margin:0 0 18px;font:400 14px/1.55 'Inter',sans-serif;color:var(--fg)">We built what we thought people needed. Then the evidence changed the product.</p>
-        <a href="work/hazadapt-resiliencepoint.html" style="display:inline-flex;align-items:center;min-height:36px;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;color:var(--fg)" style-hover="color:var(--green)">→ Read the case study</a>
+      <div class="wrk-feature-grid" style="display:grid;grid-template-columns:repeat(12,1fr);gap:clamp(16px,2.4vw,32px);margin-top:clamp(16px,2.4vh,28px)">
+        <h3 class="display" style="grid-column:1/span7;margin:0;font-size:clamp(32px,4.4vw,64px);line-height:.95;text-transform:none"><a href="work/hazadapt-resiliencepoint.html" style="text-decoration:none;color:inherit" style-hover="color:var(--green)">ResiliencePoint</a></h3>
+        <div class="mono" style="grid-column:8/span5">
+          <p style="margin:0 0 8px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)">HazAdapt · Lead UX Designer · 2023–2024</p>
+          <p style="margin:0 0 18px;font:400 15px/1.55 'Inter',sans-serif;color:var(--fg)">We built what we thought people needed. Then the evidence changed the product.</p>
+          <a href="work/hazadapt-resiliencepoint.html" style="display:inline-flex;align-items:center;min-height:36px;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;color:var(--fg)" style-hover="color:var(--green)">→ Read the case study</a>
+        </div>
       </div>
     </article>
 
-    <article data-reveal class="wrk-row" style="position:relative;z-index:1;display:grid;grid-template-columns:repeat(12,1fr);gap:clamp(16px,2.4vw,32px);padding:clamp(24px,4vh,44px) 0;border-top:1px solid var(--line)">
-      <div class="wrk-num display" data-badge="2" style="grid-column:1/span2;font-size:clamp(36px,4.4vw,64px);line-height:1;color:var(--green)">02</div>
-      <div class="mono" style="grid-column:3/span4">
-        <h3 class="display" style="margin:0 0 10px;font-size:clamp(24px,2.6vw,36px);line-height:1;text-transform:none"><a href="work/hazadapt-loco.html" style="text-decoration:none;color:inherit" style-hover="color:var(--green)">LoCo</a></h3>
-        <p style="margin:0 0 6px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)">UX Research · Emergency Prep · 2023–24</p>
-        <p style="margin:0 0 18px;font:400 14px/1.55 'Inter',sans-serif;color:var(--fg)">Trusted local safety information, placed where people are already looking for preparedness guidance.</p>
-        <a href="work/hazadapt-loco.html" style="display:inline-flex;align-items:center;min-height:36px;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;color:var(--fg)" style-hover="color:var(--green)">→ Read the case study</a>
-      </div>
-      <a href="work/hazadapt-loco.html" aria-label="02 LoCo" style="grid-column:7/span6;display:block;text-decoration:none">
-        <div style="position:relative;border:1px solid var(--line);overflow:hidden;background:var(--charcoal)">
-          <img src="images/hazadapt_album.png" alt="HazAdapt product collection" style="display:block;width:100%;height:100%;object-fit:contain;filter:grayscale(1) contrast(1.25);transition:filter .5s ease" style-hover="filter:grayscale(.2) contrast(1.15)">
+    <div class="wrk-pair" style="display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(20px,3vw,40px);padding:clamp(28px,4.5vh,48px) 0;border-bottom:1px solid var(--line)">
+      <article data-reveal style="position:relative;z-index:1">
+        <div class="wrk-num display" data-badge="2" aria-hidden="true" style="font-size:clamp(28px,3.2vw,44px);line-height:1;color:var(--green);margin-bottom:10px">02</div>
+        <a href="work/hazadapt-loco.html" aria-label="02 LoCo" style="display:block;text-decoration:none">
+          <div style="position:relative;border:1px solid var(--line);overflow:hidden;background:var(--charcoal);aspect-ratio:4/3">
+            <img src="images/hazadapt_album.png" alt="HazAdapt product collection" style="display:block;width:100%;height:100%;object-fit:contain;filter:grayscale(1) contrast(1.25);transition:filter .5s ease" style-hover="filter:grayscale(.2) contrast(1.15)">
+          </div>
+        </a>
+        <div class="mono" style="margin-top:14px">
+          <h3 class="display" style="margin:0 0 8px;font-size:clamp(20px,2.2vw,30px);line-height:1;text-transform:none"><a href="work/hazadapt-loco.html" style="text-decoration:none;color:inherit" style-hover="color:var(--green)">LoCo</a></h3>
+          <p style="margin:0 0 6px;font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)">UX Research · Emergency Prep · 2023–24</p>
+          <p style="margin:0 0 14px;font:400 13px/1.5 'Inter',sans-serif;color:var(--fg)">Trusted local safety information, placed where people are already looking for preparedness guidance.</p>
+          <a href="work/hazadapt-loco.html" style="display:inline-flex;align-items:center;min-height:32px;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;color:var(--fg)" style-hover="color:var(--green)">→ Read the case study</a>
         </div>
-      </a>
-    </article>
+      </article>
 
-    <article data-reveal class="wrk-row" style="position:relative;z-index:1;display:grid;grid-template-columns:repeat(12,1fr);gap:clamp(16px,2.4vw,32px);padding:clamp(24px,4vh,44px) 0;border-top:1px solid var(--line)">
-      <div class="wrk-num display" data-badge="3" style="grid-column:1/span2;font-size:clamp(36px,4.4vw,64px);line-height:1;color:var(--green)">03</div>
-      <a href="work/hazadapt-prep-checks.html" aria-label="03 Prep Checks" style="grid-column:3/span5;display:block;text-decoration:none">
-        <div style="position:relative;border:1px solid var(--line);overflow:hidden;background:var(--charcoal)">
-          <img src="images/hazadapt_album.png" alt="HazAdapt preparedness product collection" style="display:block;width:100%;height:100%;object-fit:contain;filter:grayscale(1) contrast(1.25);transition:filter .5s ease" style-hover="filter:grayscale(.2) contrast(1.15)">
+      <article data-reveal style="position:relative;z-index:1">
+        <div class="wrk-num display" data-badge="3" aria-hidden="true" style="font-size:clamp(28px,3.2vw,44px);line-height:1;color:var(--green);margin-bottom:10px">03</div>
+        <a href="work/hazadapt-prep-checks.html" aria-label="03 Prep Checks" style="display:block;text-decoration:none">
+          <div style="position:relative;border:1px solid var(--line);overflow:hidden;background:var(--charcoal);aspect-ratio:4/3">
+            <img src="images/hazadapt_album.png" alt="HazAdapt preparedness product collection" style="display:block;width:100%;height:100%;object-fit:contain;filter:grayscale(1) contrast(1.25);transition:filter .5s ease" style-hover="filter:grayscale(.2) contrast(1.15)">
+          </div>
+        </a>
+        <div class="mono" style="margin-top:14px">
+          <h3 class="display" style="margin:0 0 8px;font-size:clamp(20px,2.2vw,30px);line-height:1;text-transform:none"><a href="work/hazadapt-prep-checks.html" style="text-decoration:none;color:inherit" style-hover="color:var(--green)">Prep Checks</a></h3>
+          <p style="margin:0 0 6px;font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)">Product Design · UX Research · 2024</p>
+          <p style="margin:0 0 14px;font:400 13px/1.5 'Inter',sans-serif;color:var(--fg)">Bite-sized preparedness activities people can actually finish — and return to.</p>
+          <a href="work/hazadapt-prep-checks.html" style="display:inline-flex;align-items:center;min-height:32px;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;color:var(--fg)" style-hover="color:var(--green)">→ Read the case study</a>
         </div>
-      </a>
-      <div class="mono" style="grid-column:8/span5">
-        <h3 class="display" style="margin:0 0 10px;font-size:clamp(24px,2.6vw,36px);line-height:1;text-transform:none"><a href="work/hazadapt-prep-checks.html" style="text-decoration:none;color:inherit" style-hover="color:var(--green)">Prep Checks</a></h3>
-        <p style="margin:0 0 6px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)">Product Design · UX Research · 2024</p>
-        <p style="margin:0 0 18px;font:400 14px/1.55 'Inter',sans-serif;color:var(--fg)">Bite-sized preparedness activities people can actually finish — and return to.</p>
-        <a href="work/hazadapt-prep-checks.html" style="display:inline-flex;align-items:center;min-height:36px;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;color:var(--fg)" style-hover="color:var(--green)">→ Read the case study</a>
-      </div>
-    </article>
+      </article>
+    </div>
 
-    <article data-reveal class="wrk-row" style="position:relative;z-index:1;display:grid;grid-template-columns:repeat(12,1fr);gap:clamp(16px,2.4vw,32px);padding:clamp(24px,4vh,44px) 0;border-top:1px solid var(--line)">
-      <div class="wrk-num display" data-badge="4" style="grid-column:1/span2;font-size:clamp(36px,4.4vw,64px);line-height:1;color:var(--green)">04</div>
-      <div class="mono" style="grid-column:3/span4">
-        <h3 class="display" style="margin:0 0 10px;font-size:clamp(24px,2.6vw,36px);line-height:1;text-transform:none"><a href="work/true-link.html" style="text-decoration:none;color:inherit" style-hover="color:var(--green)">True Link Financial</a></h3>
-        <p style="margin:0 0 6px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)">Financial UX · Workflow Design · 2023</p>
-        <p style="margin:0 0 18px;font:400 14px/1.55 'Inter',sans-serif;color:var(--fg)">Financial tools built to protect autonomy, not just assets.</p>
-        <a href="work/true-link.html" style="display:inline-flex;align-items:center;min-height:36px;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;color:var(--fg)" style-hover="color:var(--green)">→ Explore True Link</a>
-      </div>
-      <a href="work/true-link.html" aria-label="04 True Link Financial" style="grid-column:7/span6;display:block;text-decoration:none">
-        <div style="position:relative;border:1px solid var(--line);overflow:hidden;background:var(--charcoal)">
-          <img src="images/True_Link_album.png" alt="True Link financial platform collection" style="display:block;width:100%;height:100%;object-fit:contain;filter:grayscale(1) contrast(1.25);transition:filter .5s ease" style-hover="filter:grayscale(.2) contrast(1.15)">
+    <div class="wrk-pair" style="display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(20px,3vw,40px);padding:clamp(28px,4.5vh,48px) 0;border-bottom:1px solid var(--line)">
+      <article data-reveal style="position:relative;z-index:1">
+        <div class="wrk-num display" data-badge="4" aria-hidden="true" style="font-size:clamp(28px,3.2vw,44px);line-height:1;color:var(--green);margin-bottom:10px">04</div>
+        <a href="work/true-link.html" aria-label="04 True Link Financial" style="display:block;text-decoration:none">
+          <div style="position:relative;border:1px solid var(--line);overflow:hidden;background:var(--charcoal);aspect-ratio:4/3">
+            <img src="images/True_Link_album.png" alt="True Link financial platform collection" style="display:block;width:100%;height:100%;object-fit:contain;filter:grayscale(1) contrast(1.25);transition:filter .5s ease" style-hover="filter:grayscale(.2) contrast(1.15)">
+          </div>
+        </a>
+        <div class="mono" style="margin-top:14px">
+          <h3 class="display" style="margin:0 0 8px;font-size:clamp(20px,2.2vw,30px);line-height:1;text-transform:none"><a href="work/true-link.html" style="text-decoration:none;color:inherit" style-hover="color:var(--green)">True Link Financial</a></h3>
+          <p style="margin:0 0 6px;font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)">Financial UX · Workflow Design · 2023</p>
+          <p style="margin:0 0 14px;font:400 13px/1.5 'Inter',sans-serif;color:var(--fg)">Financial tools built to protect autonomy, not just assets.</p>
+          <a href="work/true-link.html" style="display:inline-flex;align-items:center;min-height:32px;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;color:var(--fg)" style-hover="color:var(--green)">→ Explore True Link</a>
         </div>
-      </a>
-    </article>
+      </article>
 
-    <article data-reveal class="wrk-row" style="position:relative;z-index:1;display:grid;grid-template-columns:repeat(12,1fr);gap:clamp(16px,2.4vw,32px);padding:clamp(24px,4vh,44px) 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
-      <div class="wrk-num display" data-badge="5" style="grid-column:1/span2;font-size:clamp(36px,4.4vw,64px);line-height:1;color:var(--green)">05</div>
-      <a href="work/welldone-monitoring.html" aria-label="05 WellDone" style="grid-column:3/span6;display:block;text-decoration:none">
-        <div style="position:relative;border:1px solid var(--line);overflow:hidden;background:var(--charcoal)">
-          <img src="images/welldone_album.png" alt="WellDone water monitoring project collection" style="display:block;width:100%;height:100%;object-fit:contain;filter:grayscale(1) contrast(1.25);transition:filter .5s ease" style-hover="filter:grayscale(.2) contrast(1.15)">
+      <article data-reveal style="position:relative;z-index:1">
+        <div class="wrk-num display" data-badge="5" aria-hidden="true" style="font-size:clamp(28px,3.2vw,44px);line-height:1;color:var(--green);margin-bottom:10px">05</div>
+        <a href="work/welldone-monitoring.html" aria-label="05 WellDone" style="display:block;text-decoration:none">
+          <div style="position:relative;border:1px solid var(--line);overflow:hidden;background:var(--charcoal);aspect-ratio:4/3">
+            <img src="images/welldone_album.png" alt="WellDone water monitoring project collection" style="display:block;width:100%;height:100%;object-fit:contain;filter:grayscale(1) contrast(1.25);transition:filter .5s ease" style-hover="filter:grayscale(.2) contrast(1.15)">
+          </div>
+        </a>
+        <div class="mono" style="margin-top:14px">
+          <h3 class="display" style="margin:0 0 8px;font-size:clamp(20px,2.2vw,30px);line-height:1;text-transform:none"><a href="work/welldone-monitoring.html" style="text-decoration:none;color:inherit" style-hover="color:var(--green)">WellDone</a></h3>
+          <p style="margin:0 0 6px;font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)">UX/UI Design · Monitoring · 2022</p>
+          <p style="margin:0 0 14px;font:400 13px/1.5 'Inter',sans-serif;color:var(--fg)">Turning a nonprofit's scattered well and sensor data into a monitoring workflow people can actually act on.</p>
+          <a href="work/welldone-monitoring.html" style="display:inline-flex;align-items:center;min-height:32px;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;color:var(--fg)" style-hover="color:var(--green)">→ View case study</a>
         </div>
-      </a>
-      <div class="mono" style="grid-column:9/span4">
-        <h3 class="display" style="margin:0 0 10px;font-size:clamp(24px,2.6vw,36px);line-height:1;text-transform:none"><a href="work/welldone-monitoring.html" style="text-decoration:none;color:inherit" style-hover="color:var(--green)">WellDone</a></h3>
-        <p style="margin:0 0 6px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)">UX/UI Design · Monitoring · 2022</p>
-        <p style="margin:0 0 18px;font:400 14px/1.55 'Inter',sans-serif;color:var(--fg)">Turning a nonprofit's scattered well and sensor data into a monitoring workflow people can actually act on.</p>
-        <a href="work/welldone-monitoring.html" style="display:inline-flex;align-items:center;min-height:36px;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;color:var(--fg)" style-hover="color:var(--green)">→ View case study</a>
-      </div>
-    </article>
+      </article>
+    </div>
   </div>
 
   <div class="mono" data-reveal style="margin-top:clamp(20px,3vh,32px);display:flex;flex-wrap:wrap;gap:8px 24px;font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:var(--muted)">
@@ -220,12 +233,9 @@ nav[aria-label="Primary"] a[aria-current="true"]{color:var(--green);box-shadow:i
   </div>
 </section>
 
-<section id="workbench" data-p aria-labelledby="wb-h" style="position:relative;padding:clamp(32px,5vw,64px) clamp(16px,3vw,32px) clamp(40px,6vw,72px);border-bottom:1px solid var(--line);clip-path:inset(calc((1 - var(--p,1)) * 10%) calc((1 - var(--p,1)) * 6%));overflow:hidden">
+<section id="workbench" data-p aria-labelledby="wb-h" style="position:relative;padding:clamp(32px,5vw,64px) clamp(16px,3vw,32px) clamp(40px,6vw,72px);border-top:1px solid var(--line);border-bottom:1px solid var(--line);clip-path:inset(calc((1 - var(--p,1)) * 10%) calc((1 - var(--p,1)) * 6%));overflow:hidden">
   <div aria-hidden="true" class="dotfield" style="position:absolute;inset:0;z-index:0;pointer-events:none"></div>
-  <div class="mono" style="position:relative;display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px;margin-bottom:clamp(20px,3vh,32px);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">
-    <span style="color:var(--green)">№ 003</span>
-    <span>Also true — art, experiments, things I make</span>
-  </div>
+  <p class="mono" style="position:relative;margin:0 0 clamp(20px,3vh,32px);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">Also true — art, experiments, things I make</p>
   <div style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:20px;margin-bottom:clamp(20px,3vw,36px)">
     <h2 id="wb-h" class="display" style="margin:0;font-size:clamp(36px,7vw,100px);line-height:.9">The Workbench</h2>
     <div class="mono" style="display:grid;gap:10px;justify-items:start;max-width:36ch">
@@ -298,10 +308,6 @@ nav[aria-label="Primary"] a[aria-current="true"]{color:var(--green);box-shadow:i
 </section>
 
 <section id="about" aria-labelledby="about-h" style="position:relative;padding:clamp(40px,6vw,72px) clamp(16px,3vw,32px);border-bottom:1px solid var(--line);display:grid;grid-template-columns:repeat(12,1fr);gap:clamp(20px,3vw,32px)">
-  <div class="mono" data-reveal style="grid-column:1/-1;display:flex;justify-content:space-between;align-items:baseline;margin-bottom:clamp(8px,1.4vh,16px);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">
-    <span style="color:var(--green)">№ 004</span>
-    <span>About</span>
-  </div>
   <h2 id="about-h" class="display" data-reveal style="grid-column:1/-1;margin:0 0 clamp(24px,4vw,40px);font-size:clamp(34px,5.6vw,80px);line-height:.92">About</h2>
 
   <div aria-hidden="true" data-reveal style="grid-column:1/span5;position:relative;min-height:clamp(260px,30vw,420px);border:1px solid var(--line);overflow:hidden;background:var(--charcoal)">
@@ -319,6 +325,7 @@ nav[aria-label="Primary"] a[aria-current="true"]{color:var(--green);box-shadow:i
 </section>
 
 </main>
+</div>
 
 <footer id="contact" style="position:relative;overflow:hidden;padding:0 0 64px">
   <a href="mailto:hello@krystynaewing.com" aria-label="hello@krystynaewing.com — say something" onMouseEnter="{{ mqPause }}" onMouseLeave="{{ mqPlay }}" onFocus="{{ mqPause }}" onBlur="{{ mqPlay }}" style="position:relative;display:block;overflow:hidden;background:var(--green);color:#0B0B0B;text-decoration:none;padding:clamp(14px,2vw,26px) 0;margin:24px 0 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)" style-hover="color:#0B0B0B">
@@ -459,7 +466,7 @@ class Component extends DCLogic {
     const s = this.state, cur = id => (s.active === id ? 'true' : 'false');
     const r = {
       deskRef: this.deskRef, mqRef: this.mqRef, progressRef: this.progressRef, cursorRef: this.cursorRef,
-      curWork: cur('work'), curBench: cur('workbench'), curAbout: cur('about'), curContact: cur('contact'),
+      curTop: cur('top'), curWork: cur('work'), curBench: cur('workbench'), curAbout: cur('about'), curContact: cur('contact'),
       cueWord: s.bio ? 'Collapse' : 'Expand bio',
       cueGlyph: s.bio ? '[ − ]' : '[ + ]',
       bioAriaLabel: s.bio ? 'Collapse — hide full bio' : 'Expand bio — reveal full bio',
