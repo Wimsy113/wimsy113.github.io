@@ -52,6 +52,9 @@ nav[aria-label="Primary"] a[aria-current="true"]{color:var(--green);box-shadow:i
 #workbench{margin-left:calc(-1 * var(--margin-w));padding-left:calc(var(--margin-w) + clamp(16px,3vw,32px))!important}
 #mobileBar{display:none}
 #mobileMenu a[aria-current="true"]{color:var(--green)}
+#invaderField{position:fixed;inset:0;z-index:1;pointer-events:none;overflow:hidden;opacity:.07}
+#invaderField svg{position:absolute;fill:var(--green);shape-rendering:crispEdges;animation:invaderDrift 26s ease-in-out infinite}
+@keyframes invaderDrift{0%,100%{transform:translate(0,0)}50%{transform:translate(14px,-10px)}}
 @media (max-width:859px){
   #pageGrid{grid-template-columns:1fr}
   #marginRail{display:none}
@@ -79,6 +82,20 @@ nav[aria-label="Primary"] a[aria-current="true"]{color:var(--green);box-shadow:i
 <div ref="{{ progressRef }}" aria-hidden="true" style="position:fixed;left:0;top:0;z-index:250;height:3px;width:0%;background:var(--green);pointer-events:none"></div>
 <div id="pageCursor" ref="{{ cursorRef }}" aria-hidden="true"></div>
 <div id="livingGlow" aria-hidden="true"></div>
+
+<svg aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden">
+  <symbol id="invA" viewBox="0 0 11 8"><rect x="2" y="0" width="1" height="1"/><rect x="8" y="0" width="1" height="1"/><rect x="3" y="1" width="1" height="1"/><rect x="7" y="1" width="1" height="1"/><rect x="2" y="2" width="7" height="1"/><rect x="1" y="3" width="2" height="1"/><rect x="4" y="3" width="3" height="1"/><rect x="8" y="3" width="2" height="1"/><rect x="0" y="4" width="11" height="1"/><rect x="0" y="5" width="1" height="1"/><rect x="2" y="5" width="7" height="1"/><rect x="10" y="5" width="1" height="1"/><rect x="0" y="6" width="1" height="1"/><rect x="2" y="6" width="1" height="1"/><rect x="8" y="6" width="1" height="1"/><rect x="10" y="6" width="1" height="1"/><rect x="3" y="7" width="2" height="1"/><rect x="6" y="7" width="2" height="1"/></symbol>
+  <symbol id="invB" viewBox="0 0 8 8"><rect x="3" y="0" width="2" height="1"/><rect x="2" y="1" width="4" height="1"/><rect x="1" y="2" width="6" height="1"/><rect x="0" y="3" width="2" height="1"/><rect x="3" y="3" width="2" height="1"/><rect x="6" y="3" width="2" height="1"/><rect x="0" y="4" width="8" height="1"/><rect x="2" y="5" width="1" height="1"/><rect x="5" y="5" width="1" height="1"/><rect x="1" y="6" width="1" height="1"/><rect x="3" y="6" width="2" height="1"/><rect x="6" y="6" width="1" height="1"/><rect x="0" y="7" width="1" height="1"/><rect x="2" y="7" width="1" height="1"/><rect x="5" y="7" width="1" height="1"/><rect x="7" y="7" width="1" height="1"/></symbol>
+</svg>
+<div id="invaderField" aria-hidden="true">
+  <svg viewBox="0 0 11 8" style="top:8%;left:6%;width:32px;height:23px;animation-delay:0s"><use href="#invA"></use></svg>
+  <svg viewBox="0 0 8 8" style="top:20%;left:84%;width:22px;height:22px;animation-delay:-4s"><use href="#invB"></use></svg>
+  <svg viewBox="0 0 11 8" style="top:46%;left:12%;width:38px;height:28px;animation-delay:-9s"><use href="#invA"></use></svg>
+  <svg viewBox="0 0 8 8" style="top:61%;left:72%;width:26px;height:26px;animation-delay:-2s"><use href="#invB"></use></svg>
+  <svg viewBox="0 0 11 8" style="top:78%;left:38%;width:34px;height:25px;animation-delay:-14s"><use href="#invA"></use></svg>
+  <svg viewBox="0 0 8 8" style="top:90%;left:90%;width:20px;height:20px;animation-delay:-7s"><use href="#invB"></use></svg>
+  <svg viewBox="0 0 11 8" style="top:34%;left:55%;width:26px;height:19px;animation-delay:-18s"><use href="#invA"></use></svg>
+</div>
 
 <nav aria-label="Primary" style="position:fixed;right:0;top:0;bottom:0;z-index:200;width:var(--rail-w);display:flex;flex-direction:column;background:var(--bg);border-left:1px solid var(--line)">
   <a href="#top" aria-label="K. Ewing, back to top" class="mono" style="flex:0 0 auto;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(180deg);padding:16px 0;font-size:15px;font-weight:700;letter-spacing:.04em;text-decoration:none;color:var(--fg);border-bottom:1px solid var(--line);min-height:44px;transition:color .2s ease" style-hover="color:var(--green)">K. EWING</a>
