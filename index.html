@@ -52,8 +52,7 @@ nav[aria-label="Primary"] a[aria-current="true"]{color:var(--green);box-shadow:i
 #workbench{margin-left:calc(-1 * var(--margin-w));padding-left:calc(var(--margin-w) + clamp(16px,3vw,32px))!important}
 #mobileBar{display:none}
 #mobileMenu a[aria-current="true"]{color:var(--green)}
-#numberField{position:fixed;inset:0;z-index:1;pointer-events:none;overflow:hidden;opacity:.28}
-#numberField span{position:absolute;color:var(--green);white-space:nowrap;font-weight:700}
+#numberField{position:fixed;inset:0;z-index:1;pointer-events:none;display:block;width:100%;height:100%;opacity:.13}
 @media (max-width:859px){
   #pageGrid{grid-template-columns:1fr}
   #marginRail{display:none}
@@ -82,15 +81,7 @@ nav[aria-label="Primary"] a[aria-current="true"]{color:var(--green);box-shadow:i
 <div id="pageCursor" ref="{{ cursorRef }}" aria-hidden="true"></div>
 <div id="livingGlow" aria-hidden="true"></div>
 
-<div id="numberField" class="mono" aria-hidden="true">
-  <span style="top:8%;left:6%;font-size:15px">{{ num0 }}</span>
-  <span style="top:20%;left:84%;font-size:14px">{{ num1 }}</span>
-  <span style="top:46%;left:12%;font-size:16px">{{ num2 }}</span>
-  <span style="top:61%;left:72%;font-size:14px">{{ num3 }}</span>
-  <span style="top:78%;left:38%;font-size:15px">{{ num4 }}</span>
-  <span style="top:90%;left:90%;font-size:14px">{{ num5 }}</span>
-  <span style="top:34%;left:55%;font-size:14px">{{ num6 }}</span>
-</div>
+<canvas id="numberField" aria-hidden="true"></canvas>
 
 <nav aria-label="Primary" style="position:fixed;right:0;top:0;bottom:0;z-index:200;width:var(--rail-w);display:flex;flex-direction:column;background:var(--bg);border-left:1px solid var(--line)">
   <a href="#top" aria-label="K. Ewing, back to top" class="mono" style="flex:0 0 auto;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(180deg);padding:16px 0;font-size:15px;font-weight:700;letter-spacing:.04em;text-decoration:none;color:var(--fg);border-bottom:1px solid var(--line);min-height:44px;transition:color .2s ease" style-hover="color:var(--green)">K. EWING</a>
@@ -443,7 +434,6 @@ class Component extends DCLogic {
     narrow: window.innerWidth < 760, canHover: window.matchMedia('(hover: hover) and (pointer: fine)').matches,
     theme: document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark',
     menuOpen: false,
-    numbers: this.genNumbers(),
     pieces: this.defaults(), z: {}, top: 10
   };
   closeMenu() {
@@ -451,27 +441,60 @@ class Component extends DCLogic {
     document.body.style.overflow = '';
     this.setState({ menuOpen: false });
   }
-  genOne() {
-    const r = Math.random();
-    if (r < 0.34) return Array.from({ length: 8 }, () => Math.round(Math.random())).join('');
-    if (r < 0.67) return Math.floor(Math.random() * 0xffffff).toString(16).toUpperCase().padStart(6, '0');
-    return String(Math.floor(Math.random() * 999999)).padStart(6, '0');
-  }
-  genNumbers() {
-    return Array.from({ length: 7 }, () => this.genOne());
+  initNumberField() {
+    const canvas = document.getElementById('numberField');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const cell = 15;
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*+=-_<>/\\|~?'.split('');
+    const pick = () => chars[Math.floor(Math.random() * chars.length)];
+    let cols = 0, rows = 0, grid = [];
+    const draw = () => {
+      const color = getComputedStyle(document.documentElement).getPropertyValue('--green').trim() || '#A8FF00';
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.font = `${cell - 3}px 'Space Mono', monospace`;
+      ctx.textBaseline = 'top';
+      ctx.fillStyle = color;
+      const skip = new Uint8Array(cols * rows);
+      document.querySelectorAll('img, image-slot').forEach(el => {
+        const r = el.getBoundingClientRect();
+        if (r.width <= 0 || r.height <= 0 || r.bottom < 0 || r.top > window.innerHeight) return;
+        const c0 = Math.max(0, Math.floor(r.left / cell)), c1 = Math.min(cols - 1, Math.ceil(r.right / cell));
+        const r0 = Math.max(0, Math.floor(r.top / cell)), r1 = Math.min(rows - 1, Math.ceil(r.bottom / cell));
+        for (let rr = r0; rr <= r1; rr++) for (let cc = c0; cc <= c1; cc++) skip[rr * cols + cc] = 1;
+      });
+      for (let r = 0; r < rows; r++) {
+        for (let c = 0; c < cols; c++) {
+          const i = r * cols + c;
+          if (!skip[i]) ctx.fillText(grid[i], c * cell, r * cell);
+        }
+      }
+    };
+    const resize = () => {
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const w = window.innerWidth, h = window.innerHeight;
+      canvas.width = w * dpr; canvas.height = h * dpr;
+      canvas.style.width = w + 'px'; canvas.style.height = h + 'px';
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      cols = Math.ceil(w / cell); rows = Math.ceil(h / cell);
+      grid = Array.from({ length: cols * rows }, pick);
+      draw();
+    };
+    this.numberFieldDraw = draw;
+    this.onNumberResize = resize;
+    window.addEventListener('resize', this.onNumberResize);
+    resize();
+    if (!this.reduce) {
+      this.numTimer = setInterval(() => {
+        const mutate = Math.max(1, Math.floor(grid.length * 0.02));
+        for (let i = 0; i < mutate; i++) grid[Math.floor(Math.random() * grid.length)] = pick();
+        draw();
+      }, 150);
+    }
   }
   componentDidMount() {
     this.reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (!this.reduce) {
-      this.numTimer = setInterval(() => {
-        const i = Math.floor(Math.random() * 7);
-        this.setState(s => {
-          const numbers = s.numbers.slice();
-          numbers[i] = this.genOne();
-          return { numbers };
-        });
-      }, 220);
-    }
+    this.initNumberField();
     try {
       this.introSeen = sessionStorage.getItem('keIntroSeen') === '1';
       sessionStorage.setItem('keIntroSeen', '1');
@@ -543,6 +566,7 @@ class Component extends DCLogic {
   componentWillUnmount() {
     window.removeEventListener('scroll', this.onScroll); window.removeEventListener('resize', this.onResize);
     window.removeEventListener('pointermove', this.onPointerMove); window.removeEventListener('keydown', this.onKeydown);
+    window.removeEventListener('resize', this.onNumberResize);
     if (this.io) this.io.disconnect(); if (this.revealIo) this.revealIo.disconnect(); if (this.mq) this.mq.cancel();
     if (this.veinRo) this.veinRo.disconnect();
     if (this.numTimer) clearInterval(this.numTimer);
@@ -586,6 +610,7 @@ class Component extends DCLogic {
         const next = s.theme === 'light' ? 'dark' : 'light';
         document.documentElement.setAttribute('data-theme', next);
         try { localStorage.setItem('ke-theme', next); } catch (e) {}
+        if (this.numberFieldDraw) this.numberFieldDraw();
         this.setState({ theme: next });
       },
       menuExpandedAttr: s.menuOpen ? 'true' : 'false',
@@ -603,8 +628,6 @@ class Component extends DCLogic {
       menuPanelStyle: s.menuOpen
         ? { display: 'grid', position: 'fixed', left: 0, right: 0, top: 56, zIndex: 220, background: 'var(--bg)', borderBottom: '1px solid var(--line)', maxHeight: 'calc(100vh - 56px)', overflowY: 'auto' }
         : { display: 'none' },
-      num0: s.numbers[0], num1: s.numbers[1], num2: s.numbers[2], num3: s.numbers[3],
-      num4: s.numbers[4], num5: s.numbers[5], num6: s.numbers[6],
       cueWord: s.bio ? 'Collapse' : 'Expand bio',
       cueGlyph: s.bio ? '[ − ]' : '[ + ]',
       bioAriaLabel: s.bio ? 'Collapse — hide full bio' : 'Expand bio — reveal full bio',
