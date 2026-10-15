@@ -26,7 +26,6 @@ a:hover{color:var(--green)}
 ::selection{background:var(--green);color:#0B0B0B}
 .display{font-family:'Archivo Black','Inter',sans-serif;font-weight:400;text-transform:uppercase}
 .mono{font-family:'Space Mono',monospace}
-.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 #introVeil{opacity:0;pointer-events:none}
 #pageCursor{position:fixed;left:0;top:0;z-index:260;width:16px;height:16px;margin:-8px;border:1px solid var(--green);border-radius:50%;pointer-events:none;transition:width .2s ease,height .2s ease,margin .2s ease}
 @media (hover:none),(pointer:coarse){#pageCursor{display:none}}
@@ -43,7 +42,6 @@ a:hover{color:var(--green)}
 .regmark::before{left:50%;top:0;width:1px;height:100%;transform:translateX(-50%)}
 .regmark::after{top:50%;left:0;height:1px;width:100%;transform:translateY(-50%)}
 .dotfield{background-image:radial-gradient(circle,var(--fg) 1px,transparent 1px);background-size:7px 7px;opacity:.12}
-.tilt-card{transform:perspective(70rem) rotateX(var(--card-x,0deg)) rotateY(var(--card-y,0deg));transition:transform .18s ease-out}
 nav[aria-label="Primary"] a[aria-current="true"]{color:var(--green);box-shadow:inset 3px 0 0 var(--green)}
 #pageGrid{display:grid;grid-template-columns:var(--margin-w) 1fr}
 #marginRail{position:sticky;top:0;align-self:start;height:100vh;display:flex;flex-direction:column;justify-content:space-between;padding:20px 14px;border-right:1px solid var(--line)}
@@ -145,7 +143,7 @@ nav[aria-label="Primary"] a[aria-current="true"]{color:var(--green);box-shadow:i
     <svg id="workVeins" aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;overflow:visible"><path fill="none" stroke="var(--green)" stroke-width="1" opacity=".35" stroke-dasharray="2 5"></path></svg>
 
     <article data-reveal style="position:relative;z-index:1;padding-bottom:clamp(32px,5vh,56px);border-bottom:1px solid var(--line)">
-      <div class="wrk-num display" data-badge="1" aria-hidden="true" style="font-size:clamp(60px,9vw,130px);line-height:1;color:var(--green);margin-bottom:clamp(12px,2vh,20px)">01</div>
+      <div class="display" data-badge="1" aria-hidden="true" style="font-size:clamp(60px,9vw,130px);line-height:1;color:var(--green);margin-bottom:clamp(12px,2vh,20px)">01</div>
       <a href="work/hazadapt-resiliencepoint.html" aria-label="01 ResiliencePoint" style="display:block;text-decoration:none">
         <div style="position:relative;border:1px solid var(--line);overflow:hidden">
           <img src="images/work/hazadapt-resiliencepoint/platform-cover.png" alt="ResiliencePoint dashboard showing trending hazards and a nationwide activity map" style="display:block;width:100%;height:auto;filter:grayscale(1) contrast(1.25);transition:filter .5s ease" style-hover="filter:grayscale(.2) contrast(1.15)">
@@ -163,7 +161,7 @@ nav[aria-label="Primary"] a[aria-current="true"]{color:var(--green);box-shadow:i
 
     <div class="wrk-pair" style="display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(20px,3vw,40px);padding:clamp(28px,4.5vh,48px) 0;border-bottom:1px solid var(--line)">
       <article data-reveal style="position:relative;z-index:1">
-        <div class="wrk-num display" data-badge="2" aria-hidden="true" style="font-size:clamp(28px,3.2vw,44px);line-height:1;color:var(--green);margin-bottom:10px">02</div>
+        <div class="display" data-badge="2" aria-hidden="true" style="font-size:clamp(28px,3.2vw,44px);line-height:1;color:var(--green);margin-bottom:10px">02</div>
         <a href="work/hazadapt-loco.html" aria-label="02 LoCo" style="display:block;text-decoration:none">
           <div style="position:relative;border:1px solid var(--line);overflow:hidden;background:var(--charcoal);aspect-ratio:4/3">
             <img src="images/hazadapt_album.png" alt="HazAdapt product collection" style="display:block;width:100%;height:100%;object-fit:contain;filter:grayscale(1) contrast(1.25);transition:filter .5s ease" style-hover="filter:grayscale(.2) contrast(1.15)">
@@ -178,7 +176,7 @@ nav[aria-label="Primary"] a[aria-current="true"]{color:var(--green);box-shadow:i
       </article>
 
       <article data-reveal style="position:relative;z-index:1">
-        <div class="wrk-num display" data-badge="3" aria-hidden="true" style="font-size:clamp(28px,3.2vw,44px);line-height:1;color:var(--green);margin-bottom:10px">03</div>
+        <div class="display" data-badge="3" aria-hidden="true" style="font-size:clamp(28px,3.2vw,44px);line-height:1;color:var(--green);margin-bottom:10px">03</div>
         <a href="work/hazadapt-prep-checks.html" aria-label="03 Prep Checks" style="display:block;text-decoration:none">
           <div style="position:relative;border:1px solid var(--line);overflow:hidden;background:var(--charcoal);aspect-ratio:4/3">
             <img src="images/hazadapt_album.png" alt="HazAdapt preparedness product collection" style="display:block;width:100%;height:100%;object-fit:contain;filter:grayscale(1) contrast(1.25);transition:filter .5s ease" style-hover="filter:grayscale(.2) contrast(1.15)">
@@ -195,7 +193,7 @@ nav[aria-label="Primary"] a[aria-current="true"]{color:var(--green);box-shadow:i
 
     <div class="wrk-pair" style="display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(20px,3vw,40px);padding:clamp(28px,4.5vh,48px) 0;border-bottom:1px solid var(--line)">
       <article data-reveal style="position:relative;z-index:1">
-        <div class="wrk-num display" data-badge="4" aria-hidden="true" style="font-size:clamp(28px,3.2vw,44px);line-height:1;color:var(--green);margin-bottom:10px">04</div>
+        <div class="display" data-badge="4" aria-hidden="true" style="font-size:clamp(28px,3.2vw,44px);line-height:1;color:var(--green);margin-bottom:10px">04</div>
         <a href="work/true-link.html" aria-label="04 True Link Financial" style="display:block;text-decoration:none">
           <div style="position:relative;border:1px solid var(--line);overflow:hidden;background:var(--charcoal);aspect-ratio:4/3">
             <img src="images/True_Link_album.png" alt="True Link financial platform collection" style="display:block;width:100%;height:100%;object-fit:contain;filter:grayscale(1) contrast(1.25);transition:filter .5s ease" style-hover="filter:grayscale(.2) contrast(1.15)">
@@ -210,7 +208,7 @@ nav[aria-label="Primary"] a[aria-current="true"]{color:var(--green);box-shadow:i
       </article>
 
       <article data-reveal style="position:relative;z-index:1">
-        <div class="wrk-num display" data-badge="5" aria-hidden="true" style="font-size:clamp(28px,3.2vw,44px);line-height:1;color:var(--green);margin-bottom:10px">05</div>
+        <div class="display" data-badge="5" aria-hidden="true" style="font-size:clamp(28px,3.2vw,44px);line-height:1;color:var(--green);margin-bottom:10px">05</div>
         <a href="work/welldone-monitoring.html" aria-label="05 WellDone" style="display:block;text-decoration:none">
           <div style="position:relative;border:1px solid var(--line);overflow:hidden;background:var(--charcoal);aspect-ratio:4/3">
             <img src="images/welldone_album.png" alt="WellDone water monitoring project collection" style="display:block;width:100%;height:100%;object-fit:contain;filter:grayscale(1) contrast(1.25);transition:filter .5s ease" style-hover="filter:grayscale(.2) contrast(1.15)">
@@ -254,51 +252,51 @@ nav[aria-label="Primary"] a[aria-current="true"]{color:var(--green);box-shadow:i
 
   <div ref="{{ deskRef }}" style="{{ deskStyle }}">
     <div style="{{ reach.style }}">
-      <figure style="margin:0;background:var(--fg);padding:12px 12px 14px;box-shadow:6px 6px 0 var(--green);position:relative">
-        <span aria-hidden="true" class="mono" style="position:absolute;top:8px;right:8px;z-index:1;padding:3px 7px;background:var(--bg);color:var(--green);font-size:10px;font-weight:700;letter-spacing:.06em">No. 01</span>
-        <button type="button" onPointerDown="{{ reach.down }}" onPointerMove="{{ reach.move }}" onPointerUp="{{ reach.up }}" onKeyDown="{{ reach.key }}" aria-label="Move Reach. Drag, or use arrow keys." class="mono" style="position:absolute;top:-18px;left:50%;transform:translateX(-50%);min-height:36px;padding:0 18px;border:0;background:var(--bg);color:var(--fg);font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;cursor:grab;touch-action:none">⠿ Reach</button>
+      <figure style="margin:0;position:relative;border:1px solid var(--green)">
+        <button type="button" onPointerDown="{{ reach.down }}" onPointerMove="{{ reach.move }}" onPointerUp="{{ reach.up }}" onKeyDown="{{ reach.key }}" aria-label="Move Reach. Drag, or use arrow keys." class="mono" style="position:absolute;top:0;right:0;z-index:2;min-width:36px;min-height:36px;padding:0 10px;border:0;border-left:1px solid var(--green);border-bottom:1px solid var(--green);background:var(--bg);color:var(--green);font-size:14px;cursor:grab;touch-action:none">⠿</button>
         <img src="images/Artwork.png" alt="Digital illustration by Krystyna Ewing — a figure in a soft cap reaching a hand forward out of shadow." style="display:block;width:100%;height:auto" draggable="false">
-        <figcaption class="mono" style="display:flex;justify-content:space-between;gap:10px;margin-top:10px;font-size:10px;letter-spacing:.04em;text-transform:uppercase;color:#151312"><strong>Reach</strong><span>Digital illustration</span></figcaption>
+        <figcaption class="mono" style="display:flex;justify-content:space-between;gap:10px;padding:8px 10px;border-top:1px solid var(--green);font-size:10px;letter-spacing:.04em;text-transform:uppercase;background:var(--bg);color:var(--fg)"><strong>No. 01 — Reach</strong><span>Digital illustration</span></figcaption>
       </figure>
     </div>
     <div style="{{ note.style }}">
-      <p class="mono" style="margin:0;font-size:clamp(18px,2vw,26px);line-height:1.3;color:var(--fg);position:relative;padding-top:24px"><button type="button" onPointerDown="{{ note.down }}" onPointerMove="{{ note.move }}" onPointerUp="{{ note.up }}" onKeyDown="{{ note.key }}" aria-label="Move note. Drag, or use arrow keys." style="position:absolute;top:-12px;left:0;min-height:36px;padding:0 14px;border:0;background:var(--charcoal);color:var(--fg);font:700 11px/1 'Space Mono',monospace;letter-spacing:.08em;text-transform:uppercase;cursor:grab;touch-action:none">⠿ Note</button>I had an idea. Unfortunately, that meant I had to make it.</p>
+      <div style="position:relative;border:1px solid var(--line);padding:18px 16px 16px">
+        <button type="button" onPointerDown="{{ note.down }}" onPointerMove="{{ note.move }}" onPointerUp="{{ note.up }}" onKeyDown="{{ note.key }}" aria-label="Move note. Drag, or use arrow keys." class="mono" style="position:absolute;top:0;right:0;min-width:36px;min-height:36px;padding:0 10px;border:0;border-left:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--bg);color:var(--fg);font-size:14px;cursor:grab;touch-action:none">⠿</button>
+        <p class="mono" style="margin:0 0 6px;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--green)">Note</p>
+        <p style="margin:0;font-size:clamp(17px,1.8vw,22px);line-height:1.35;color:var(--fg)">I had an idea. Unfortunately, that meant I had to make it.</p>
+      </div>
     </div>
     <div style="{{ portrait.style }}">
-      <figure style="margin:0;background:var(--fg);padding:12px 12px 14px;box-shadow:6px 6px 0 var(--green);position:relative">
-        <span aria-hidden="true" class="mono" style="position:absolute;top:8px;right:8px;z-index:1;padding:3px 7px;background:var(--bg);color:var(--green);font-size:10px;font-weight:700;letter-spacing:.06em">No. 02</span>
-        <button type="button" onPointerDown="{{ portrait.down }}" onPointerMove="{{ portrait.move }}" onPointerUp="{{ portrait.up }}" onKeyDown="{{ portrait.key }}" aria-label="Move Self-Portrait. Drag, or use arrow keys." class="mono" style="position:absolute;top:-18px;left:30%;min-height:36px;padding:0 18px;border:0;background:var(--bg);color:var(--fg);font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;cursor:grab;touch-action:none">⠿ Self-Portrait</button>
+      <figure style="margin:0;position:relative;border:1px solid var(--line)">
+        <button type="button" onPointerDown="{{ portrait.down }}" onPointerMove="{{ portrait.move }}" onPointerUp="{{ portrait.up }}" onKeyDown="{{ portrait.key }}" aria-label="Move Self-Portrait. Drag, or use arrow keys." class="mono" style="position:absolute;top:0;right:0;z-index:2;min-width:36px;min-height:36px;padding:0 10px;border:0;border-left:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--bg);color:var(--fg);font-size:14px;cursor:grab;touch-action:none">⠿</button>
         <img src="images/hero-portrait.png" alt="Hand-drawn self-portrait illustration by Krystyna Ewing: a character with a purple bucket hat and glowing green eyes, with her name lettered around it in purple marker." style="display:block;width:100%;height:auto" draggable="false">
-        <figcaption class="mono" style="display:flex;justify-content:space-between;gap:10px;margin-top:10px;font-size:10px;letter-spacing:.04em;text-transform:uppercase;color:#151312"><strong>Self-Portrait</strong><span>Digital illustration</span></figcaption>
+        <figcaption class="mono" style="display:flex;justify-content:space-between;gap:10px;padding:8px 10px;border-top:1px solid var(--line);font-size:10px;letter-spacing:.04em;text-transform:uppercase;background:var(--bg);color:var(--fg)"><strong>No. 02 — Self-Portrait</strong><span>Digital illustration</span></figcaption>
       </figure>
     </div>
     <div style="{{ first.style }}">
-      <figure style="margin:0;background:var(--fg);padding:10px 10px 12px;box-shadow:5px 5px 0 var(--green);position:relative">
-        <span aria-hidden="true" class="mono" style="position:absolute;top:8px;right:8px;z-index:1;padding:3px 7px;background:var(--bg);color:var(--green);font-size:10px;font-weight:700;letter-spacing:.06em">No. 03</span>
-        <button type="button" onPointerDown="{{ first.down }}" onPointerMove="{{ first.move }}" onPointerUp="{{ first.up }}" onKeyDown="{{ first.key }}" aria-label="Move First Pass. Drag, or use arrow keys." class="mono" style="position:absolute;top:-16px;left:10%;min-height:36px;padding:0 14px;border:0;background:var(--bg);color:var(--fg);font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;cursor:grab;touch-action:none">⠿ First Pass</button>
+      <figure style="margin:0;position:relative;border:1px solid var(--line)">
+        <button type="button" onPointerDown="{{ first.down }}" onPointerMove="{{ first.move }}" onPointerUp="{{ first.up }}" onKeyDown="{{ first.key }}" aria-label="Move First Pass. Drag, or use arrow keys." class="mono" style="position:absolute;top:0;right:0;z-index:2;min-width:36px;min-height:36px;padding:0 10px;border:0;border-left:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--bg);color:var(--fg);font-size:14px;cursor:grab;touch-action:none">⠿</button>
         <img src="images/website_hero.png" alt="An early, unfinished sketch mixing loose line art with a hand-lettered name banner." style="display:block;width:100%;height:auto" draggable="false">
-        <figcaption class="mono" style="margin-top:8px;font-size:10px;letter-spacing:.04em;text-transform:uppercase;color:#151312">First Pass · Sketch</figcaption>
+        <figcaption class="mono" style="padding:8px 10px;border-top:1px solid var(--line);font-size:10px;letter-spacing:.04em;text-transform:uppercase;background:var(--bg);color:var(--fg)">No. 03 — First Pass · Sketch</figcaption>
       </figure>
     </div>
     <div style="{{ fab.style }}">
-      <div style="background:var(--fg);padding:10px 10px 12px;box-shadow:5px 5px 0 var(--green);position:relative">
-        <span aria-hidden="true" class="mono" style="position:absolute;top:8px;right:8px;z-index:1;padding:3px 7px;background:var(--bg);color:var(--green);font-size:10px;font-weight:700;letter-spacing:.06em">No. 04</span>
-        <button type="button" onPointerDown="{{ fab.down }}" onPointerMove="{{ fab.move }}" onPointerUp="{{ fab.up }}" onKeyDown="{{ fab.key }}" aria-label="Move Silver Skull. Drag, or use arrow keys." class="mono" style="position:absolute;top:-16px;left:20%;z-index:2;min-height:36px;padding:0 14px;border:0;background:var(--bg);color:var(--fg);font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;cursor:grab;touch-action:none">⠿ Silver Skull</button>
+      <div style="position:relative;border:1px solid var(--line)">
+        <button type="button" onPointerDown="{{ fab.down }}" onPointerMove="{{ fab.move }}" onPointerUp="{{ fab.up }}" onKeyDown="{{ fab.key }}" aria-label="Move Silver Skull. Drag, or use arrow keys." class="mono" style="position:absolute;top:0;right:0;z-index:2;min-width:36px;min-height:36px;padding:0 10px;border:0;border-left:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--bg);color:var(--fg);font-size:14px;cursor:grab;touch-action:none">⠿</button>
         <div style="width:100%;min-width:0;aspect-ratio:4/5;position:relative"><image-slot id="v2-fab" src="images/workbench/silver-skull.jpg" shape="rect" placeholder="3D print / fabrication photo"></image-slot></div>
-        <p class="mono" style="margin:8px 0 0;font-size:10px;letter-spacing:.04em;text-transform:uppercase;color:#151312">Silver Skull · 3D printed, hand-painted</p>
+        <p class="mono" style="margin:0;padding:8px 10px;border-top:1px solid var(--line);font-size:10px;letter-spacing:.04em;text-transform:uppercase;background:var(--bg);color:var(--fg)">No. 04 — Silver Skull · 3D printed, hand-painted</p>
       </div>
     </div>
     <div style="{{ sculpt.style }}">
-      <div style="background:var(--fg);padding:10px 10px 12px;box-shadow:5px 5px 0 var(--green);position:relative">
-        <span aria-hidden="true" class="mono" style="position:absolute;top:8px;right:8px;z-index:1;padding:3px 7px;background:var(--bg);color:var(--green);font-size:10px;font-weight:700;letter-spacing:.06em">No. 05</span>
-        <button type="button" onPointerDown="{{ sculpt.down }}" onPointerMove="{{ sculpt.move }}" onPointerUp="{{ sculpt.up }}" onKeyDown="{{ sculpt.key }}" aria-label="Move Majin Buu. Drag, or use arrow keys." class="mono" style="position:absolute;top:-16px;right:12%;z-index:2;min-height:36px;padding:0 14px;border:0;background:var(--bg);color:var(--fg);font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;cursor:grab;touch-action:none">⠿ Majin Buu</button>
+      <div style="position:relative;border:1px solid var(--line)">
+        <button type="button" onPointerDown="{{ sculpt.down }}" onPointerMove="{{ sculpt.move }}" onPointerUp="{{ sculpt.up }}" onKeyDown="{{ sculpt.key }}" aria-label="Move Majin Buu. Drag, or use arrow keys." class="mono" style="position:absolute;top:0;right:0;z-index:2;min-width:36px;min-height:36px;padding:0 10px;border:0;border-left:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--bg);color:var(--fg);font-size:14px;cursor:grab;touch-action:none">⠿</button>
         <div style="width:100%;min-width:0;aspect-ratio:16/10;position:relative"><image-slot id="v2-sculpt" src="images/workbench/majin-buu-full.jpg" shape="rect" placeholder="Sculpture / mixed media photo"></image-slot></div>
-        <p class="mono" style="margin:8px 0 0;font-size:10px;letter-spacing:.04em;text-transform:uppercase;color:#151312">Majin Buu · 3D printed, hand-painted</p>
+        <p class="mono" style="margin:0;padding:8px 10px;border-top:1px solid var(--line);font-size:10px;letter-spacing:.04em;text-transform:uppercase;background:var(--bg);color:var(--fg)">No. 05 — Majin Buu · 3D printed, hand-painted</p>
       </div>
     </div>
     <div style="{{ sticky.style }}">
-      <div style="position:relative;padding:28px 20px 20px;background:var(--green);color:#0B0B0B;box-shadow:5px 5px 0 var(--charcoal)">
-        <button type="button" onPointerDown="{{ sticky.down }}" onPointerMove="{{ sticky.move }}" onPointerUp="{{ sticky.up }}" onKeyDown="{{ sticky.key }}" aria-label="Move sticky note. Drag, or use arrow keys." class="mono" style="position:absolute;top:-16px;left:40%;min-height:36px;padding:0 14px;border:0;background:var(--bg);color:var(--fg);font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;cursor:grab;touch-action:none">⠿ Sticky</button>
+      <div style="position:relative;padding:18px 16px 16px;background:var(--green);color:#0B0B0B">
+        <button type="button" onPointerDown="{{ sticky.down }}" onPointerMove="{{ sticky.move }}" onPointerUp="{{ sticky.up }}" onKeyDown="{{ sticky.key }}" aria-label="Move note. Drag, or use arrow keys." class="mono" style="position:absolute;top:0;right:0;min-width:36px;min-height:36px;padding:0 10px;border:0;border-left:1px solid #0B0B0B;background:var(--green);color:#0B0B0B;font-size:14px;cursor:grab;touch-action:none">⠿</button>
+        <p class="mono" style="margin:0 0 6px;font-size:10px;letter-spacing:.1em;text-transform:uppercase">More to come</p>
         <p style="margin:0;font:600 15px/1.4 'Inter',sans-serif">A couple of the physical pieces made it onto the table. More — sculpture, prints, anything made with my hands instead of a tablet — is still getting photographed.</p>
       </div>
     </div>
@@ -428,12 +426,6 @@ class Component extends DCLogic {
     if (this.io) this.io.disconnect(); if (this.revealIo) this.revealIo.disconnect(); if (this.mq) this.mq.cancel();
     if (this.veinRo) this.veinRo.disconnect();
   }
-  tilt(e) {
-    const b = e.currentTarget.getBoundingClientRect();
-    const x = (e.clientX - b.left) / b.width - 0.5, y = (e.clientY - b.top) / b.height - 0.5;
-    e.currentTarget.style.setProperty('--card-x', (y * -7) + 'deg'); e.currentTarget.style.setProperty('--card-y', (x * 7) + 'deg');
-  }
-  untilt(e) { e.currentTarget.style.setProperty('--card-x', '0deg'); e.currentTarget.style.setProperty('--card-y', '0deg'); }
   piece(id) {
     const p = this.state.pieces[id], narrow = this.state.narrow;
     const style = narrow
@@ -483,10 +475,6 @@ class Component extends DCLogic {
       resetDesk: () => this.setState({ pieces: this.defaults(), z: {} }),
       mqPause: () => this.mq && this.mq.pause(), mqPlay: () => this.mq && this.mq.play()
     };
-    [1, 2, 3, 4].forEach(i => {
-      r['tilt' + i] = e => this.tilt(e);
-      r['untilt' + i] = e => this.untilt(e);
-    });
     ['reach', 'note', 'portrait', 'first', 'fab', 'sculpt', 'sticky'].forEach(id => { r[id] = this.piece(id); });
     return r;
   }
