@@ -52,8 +52,8 @@ nav[aria-label="Primary"] a[aria-current="true"]{color:var(--green);box-shadow:i
 #workbench{margin-left:calc(-1 * var(--margin-w));padding-left:calc(var(--margin-w) + clamp(16px,3vw,32px))!important}
 #mobileBar{display:none}
 #mobileMenu a[aria-current="true"]{color:var(--green)}
-#numberField{position:fixed;inset:0;z-index:1;pointer-events:none;overflow:hidden;opacity:.1}
-#numberField span{position:absolute;color:var(--green);white-space:nowrap}
+#numberField{position:fixed;inset:0;z-index:1;pointer-events:none;overflow:hidden;opacity:.28}
+#numberField span{position:absolute;color:var(--green);white-space:nowrap;font-weight:700}
 @media (max-width:859px){
   #pageGrid{grid-template-columns:1fr}
   #marginRail{display:none}
@@ -83,13 +83,13 @@ nav[aria-label="Primary"] a[aria-current="true"]{color:var(--green);box-shadow:i
 <div id="livingGlow" aria-hidden="true"></div>
 
 <div id="numberField" class="mono" aria-hidden="true">
-  <span style="top:8%;left:6%;font-size:11px">{{ num0 }}</span>
-  <span style="top:20%;left:84%;font-size:10px">{{ num1 }}</span>
-  <span style="top:46%;left:12%;font-size:12px">{{ num2 }}</span>
-  <span style="top:61%;left:72%;font-size:10px">{{ num3 }}</span>
-  <span style="top:78%;left:38%;font-size:11px">{{ num4 }}</span>
-  <span style="top:90%;left:90%;font-size:10px">{{ num5 }}</span>
-  <span style="top:34%;left:55%;font-size:10px">{{ num6 }}</span>
+  <span style="top:8%;left:6%;font-size:15px">{{ num0 }}</span>
+  <span style="top:20%;left:84%;font-size:14px">{{ num1 }}</span>
+  <span style="top:46%;left:12%;font-size:16px">{{ num2 }}</span>
+  <span style="top:61%;left:72%;font-size:14px">{{ num3 }}</span>
+  <span style="top:78%;left:38%;font-size:15px">{{ num4 }}</span>
+  <span style="top:90%;left:90%;font-size:14px">{{ num5 }}</span>
+  <span style="top:34%;left:55%;font-size:14px">{{ num6 }}</span>
 </div>
 
 <nav aria-label="Primary" style="position:fixed;right:0;top:0;bottom:0;z-index:200;width:var(--rail-w);display:flex;flex-direction:column;background:var(--bg);border-left:1px solid var(--line)">
