@@ -52,9 +52,8 @@ nav[aria-label="Primary"] a[aria-current="true"]{color:var(--green);box-shadow:i
 #workbench{margin-left:calc(-1 * var(--margin-w));padding-left:calc(var(--margin-w) + clamp(16px,3vw,32px))!important}
 #mobileBar{display:none}
 #mobileMenu a[aria-current="true"]{color:var(--green)}
-#invaderField{position:fixed;inset:0;z-index:1;pointer-events:none;overflow:hidden;opacity:.07}
-#invaderField svg{position:absolute;fill:var(--green);shape-rendering:crispEdges;animation:invaderDrift 26s ease-in-out infinite}
-@keyframes invaderDrift{0%,100%{transform:translate(0,0)}50%{transform:translate(14px,-10px)}}
+#numberField{position:fixed;inset:0;z-index:1;pointer-events:none;overflow:hidden;opacity:.1}
+#numberField span{position:absolute;color:var(--green);white-space:nowrap}
 @media (max-width:859px){
   #pageGrid{grid-template-columns:1fr}
   #marginRail{display:none}
@@ -83,18 +82,14 @@ nav[aria-label="Primary"] a[aria-current="true"]{color:var(--green);box-shadow:i
 <div id="pageCursor" ref="{{ cursorRef }}" aria-hidden="true"></div>
 <div id="livingGlow" aria-hidden="true"></div>
 
-<svg aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden">
-  <symbol id="invA" viewBox="0 0 11 8"><rect x="2" y="0" width="1" height="1"/><rect x="8" y="0" width="1" height="1"/><rect x="3" y="1" width="1" height="1"/><rect x="7" y="1" width="1" height="1"/><rect x="2" y="2" width="7" height="1"/><rect x="1" y="3" width="2" height="1"/><rect x="4" y="3" width="3" height="1"/><rect x="8" y="3" width="2" height="1"/><rect x="0" y="4" width="11" height="1"/><rect x="0" y="5" width="1" height="1"/><rect x="2" y="5" width="7" height="1"/><rect x="10" y="5" width="1" height="1"/><rect x="0" y="6" width="1" height="1"/><rect x="2" y="6" width="1" height="1"/><rect x="8" y="6" width="1" height="1"/><rect x="10" y="6" width="1" height="1"/><rect x="3" y="7" width="2" height="1"/><rect x="6" y="7" width="2" height="1"/></symbol>
-  <symbol id="invB" viewBox="0 0 8 8"><rect x="3" y="0" width="2" height="1"/><rect x="2" y="1" width="4" height="1"/><rect x="1" y="2" width="6" height="1"/><rect x="0" y="3" width="2" height="1"/><rect x="3" y="3" width="2" height="1"/><rect x="6" y="3" width="2" height="1"/><rect x="0" y="4" width="8" height="1"/><rect x="2" y="5" width="1" height="1"/><rect x="5" y="5" width="1" height="1"/><rect x="1" y="6" width="1" height="1"/><rect x="3" y="6" width="2" height="1"/><rect x="6" y="6" width="1" height="1"/><rect x="0" y="7" width="1" height="1"/><rect x="2" y="7" width="1" height="1"/><rect x="5" y="7" width="1" height="1"/><rect x="7" y="7" width="1" height="1"/></symbol>
-</svg>
-<div id="invaderField" aria-hidden="true">
-  <svg viewBox="0 0 11 8" style="top:8%;left:6%;width:32px;height:23px;animation-delay:0s"><use href="#invA"></use></svg>
-  <svg viewBox="0 0 8 8" style="top:20%;left:84%;width:22px;height:22px;animation-delay:-4s"><use href="#invB"></use></svg>
-  <svg viewBox="0 0 11 8" style="top:46%;left:12%;width:38px;height:28px;animation-delay:-9s"><use href="#invA"></use></svg>
-  <svg viewBox="0 0 8 8" style="top:61%;left:72%;width:26px;height:26px;animation-delay:-2s"><use href="#invB"></use></svg>
-  <svg viewBox="0 0 11 8" style="top:78%;left:38%;width:34px;height:25px;animation-delay:-14s"><use href="#invA"></use></svg>
-  <svg viewBox="0 0 8 8" style="top:90%;left:90%;width:20px;height:20px;animation-delay:-7s"><use href="#invB"></use></svg>
-  <svg viewBox="0 0 11 8" style="top:34%;left:55%;width:26px;height:19px;animation-delay:-18s"><use href="#invA"></use></svg>
+<div id="numberField" class="mono" aria-hidden="true">
+  <span style="top:8%;left:6%;font-size:11px">{{ num0 }}</span>
+  <span style="top:20%;left:84%;font-size:10px">{{ num1 }}</span>
+  <span style="top:46%;left:12%;font-size:12px">{{ num2 }}</span>
+  <span style="top:61%;left:72%;font-size:10px">{{ num3 }}</span>
+  <span style="top:78%;left:38%;font-size:11px">{{ num4 }}</span>
+  <span style="top:90%;left:90%;font-size:10px">{{ num5 }}</span>
+  <span style="top:34%;left:55%;font-size:10px">{{ num6 }}</span>
 </div>
 
 <nav aria-label="Primary" style="position:fixed;right:0;top:0;bottom:0;z-index:200;width:var(--rail-w);display:flex;flex-direction:column;background:var(--bg);border-left:1px solid var(--line)">
@@ -448,6 +443,7 @@ class Component extends DCLogic {
     narrow: window.innerWidth < 760, canHover: window.matchMedia('(hover: hover) and (pointer: fine)').matches,
     theme: document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark',
     menuOpen: false,
+    numbers: this.genNumbers(),
     pieces: this.defaults(), z: {}, top: 10
   };
   closeMenu() {
@@ -455,8 +451,27 @@ class Component extends DCLogic {
     document.body.style.overflow = '';
     this.setState({ menuOpen: false });
   }
+  genOne() {
+    const r = Math.random();
+    if (r < 0.34) return Array.from({ length: 8 }, () => Math.round(Math.random())).join('');
+    if (r < 0.67) return Math.floor(Math.random() * 0xffffff).toString(16).toUpperCase().padStart(6, '0');
+    return String(Math.floor(Math.random() * 999999)).padStart(6, '0');
+  }
+  genNumbers() {
+    return Array.from({ length: 7 }, () => this.genOne());
+  }
   componentDidMount() {
     this.reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!this.reduce) {
+      this.numTimer = setInterval(() => {
+        const i = Math.floor(Math.random() * 7);
+        this.setState(s => {
+          const numbers = s.numbers.slice();
+          numbers[i] = this.genOne();
+          return { numbers };
+        });
+      }, 220);
+    }
     try {
       this.introSeen = sessionStorage.getItem('keIntroSeen') === '1';
       sessionStorage.setItem('keIntroSeen', '1');
@@ -530,6 +545,7 @@ class Component extends DCLogic {
     window.removeEventListener('pointermove', this.onPointerMove); window.removeEventListener('keydown', this.onKeydown);
     if (this.io) this.io.disconnect(); if (this.revealIo) this.revealIo.disconnect(); if (this.mq) this.mq.cancel();
     if (this.veinRo) this.veinRo.disconnect();
+    if (this.numTimer) clearInterval(this.numTimer);
   }
   piece(id) {
     const p = this.state.pieces[id], narrow = this.state.narrow;
@@ -587,6 +603,8 @@ class Component extends DCLogic {
       menuPanelStyle: s.menuOpen
         ? { display: 'grid', position: 'fixed', left: 0, right: 0, top: 56, zIndex: 220, background: 'var(--bg)', borderBottom: '1px solid var(--line)', maxHeight: 'calc(100vh - 56px)', overflowY: 'auto' }
         : { display: 'none' },
+      num0: s.numbers[0], num1: s.numbers[1], num2: s.numbers[2], num3: s.numbers[3],
+      num4: s.numbers[4], num5: s.numbers[5], num6: s.numbers[6],
       cueWord: s.bio ? 'Collapse' : 'Expand bio',
       cueGlyph: s.bio ? '[ − ]' : '[ + ]',
       bioAriaLabel: s.bio ? 'Collapse — hide full bio' : 'Expand bio — reveal full bio',
