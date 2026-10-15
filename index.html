@@ -166,11 +166,18 @@ nav[aria-label="Primary"] a[aria-current="true"]{color:var(--green);box-shadow:i
     <p style="margin:0 0 16px;font-size:clamp(16px,1.6vw,19px);line-height:1.5;color:var(--fg)">I design software, make art, build things, break things, and have a hard time leaving anything alone when I know it could work better.</p>
     <button type="button" onClick="{{ bioToggle }}" aria-expanded="{{ bioExpanded }}" aria-controls="heroBio" aria-label="{{ bioAriaLabel }}" class="mono" style="position:relative;z-index:1;display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 4px;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--green);background:transparent;border:0;cursor:pointer" style-hover="color:var(--fg)">{{ cueGlyph }} {{ cueWord }}</button>
     <div id="heroBio" style="{{ bioStyle }}">
-      <div style="max-width:56ch;display:grid;gap:12px;padding:clamp(16px,2vw,22px);background:var(--charcoal);border:1px solid var(--line)">
-        <p class="mono" style="margin:0;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--green)">Readout — full bio</p>
-        <p style="margin:0;font:600 17px/1.4 'Inter',sans-serif">I'm a designer, artist, developer, and general maker of things. I started in software development, moved into UX because I wanted more room to be creative, and apparently never learned how to pick one thing and stick with it.</p>
-        <p style="margin:0;font:400 15px/1.5 'Inter',sans-serif">I've spent the last 8+ years designing, building, testing, breaking things, and figuring out how to make them work better. Outside of UX, I make art, build 3D prints, mess around with code, and start projects because I thought, &ldquo;I wonder if I could make that.&rdquo;</p>
-        <p style="margin:0;font:400 15px/1.5 'Inter',sans-serif">Usually I can. Sometimes I absolutely cannot. Either way, I'm probably going to try.</p>
+      <div style="max-width:56ch">
+        <div aria-hidden="true" style="display:flex;justify-content:center">
+          <div style="position:relative;width:76px;height:18px;background:#2b2b2b;border:1px solid #000;border-bottom:0;border-radius:3px 3px 0 0;box-shadow:0 -1px 0 rgba(255,255,255,.08) inset">
+            <div style="position:absolute;top:5px;left:50%;transform:translateX(-50%);width:32px;height:7px;border:1px solid #000;border-radius:1px;background:#3a3a3a"></div>
+          </div>
+        </div>
+        <div style="display:grid;gap:12px;padding:clamp(20px,2.4vw,26px) clamp(18px,2.2vw,24px) clamp(22px,2.8vw,28px);background:#F2F0E9;border:1px solid #000;border-top:2px solid #000">
+          <p class="mono" style="margin:0 0 2px;padding-bottom:8px;border-bottom:1px solid rgba(11,11,11,.3);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#0B0B0B;opacity:.6">Attached — Full Bio</p>
+          <p style="margin:0;font:600 17px/1.4 'Inter',sans-serif;color:#0B0B0B">I'm a designer, artist, developer, and general maker of things. I started in software development, moved into UX because I wanted more room to be creative, and apparently never learned how to pick one thing and stick with it.</p>
+          <p style="margin:0;font:400 15px/1.5 'Inter',sans-serif;color:#0B0B0B">I've spent the last 8+ years designing, building, testing, breaking things, and figuring out how to make them work better. Outside of UX, I make art, build 3D prints, mess around with code, and start projects because I thought, &ldquo;I wonder if I could make that.&rdquo;</p>
+          <p style="margin:0;font:400 15px/1.5 'Inter',sans-serif;color:#0B0B0B">Usually I can. Sometimes I absolutely cannot. Either way, I'm probably going to try.</p>
+        </div>
       </div>
     </div>
   </div>
@@ -185,7 +192,7 @@ nav[aria-label="Primary"] a[aria-current="true"]{color:var(--green);box-shadow:i
 
     <article data-reveal style="position:relative;z-index:1;padding-bottom:clamp(32px,5vh,56px);border-bottom:1px solid var(--line)">
       <div class="display" data-badge="1" aria-hidden="true" style="font-size:clamp(60px,9vw,130px);line-height:1;color:var(--green);margin-bottom:clamp(12px,2vh,20px)">01</div>
-      <a href="work/hazadapt-resiliencepoint.html" aria-label="01 ResiliencePoint" style="position:relative;display:block;border:1px solid var(--line);text-decoration:none">
+      <a href="work/hazadapt-resiliencepoint.html" aria-label="01 ResiliencePoint — Platform dashboard, case study" style="position:relative;display:block;border:1px solid var(--line);text-decoration:none">
         <div class="regmark" aria-hidden="true" style="left:-1px;top:-1px"></div>
         <div class="regmark" aria-hidden="true" style="right:-1px;top:-1px"></div>
         <div class="regmark" aria-hidden="true" style="left:-1px;bottom:-1px"></div>
@@ -211,7 +218,7 @@ nav[aria-label="Primary"] a[aria-current="true"]{color:var(--green);box-shadow:i
     <div class="wrk-pair" style="display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(20px,3vw,40px);padding:clamp(28px,4.5vh,48px) 0;border-bottom:1px solid var(--line)">
       <article data-reveal style="position:relative;z-index:1">
         <div class="display" data-badge="2" aria-hidden="true" style="font-size:clamp(28px,3.2vw,44px);line-height:1;color:var(--green);margin-bottom:10px">02</div>
-        <a href="work/hazadapt-loco.html" aria-label="02 LoCo" style="position:relative;display:block;border:1px solid var(--line);text-decoration:none">
+        <a href="work/hazadapt-loco.html" aria-label="02 LoCo — HazAdapt product collection, case study" style="position:relative;display:block;border:1px solid var(--line);text-decoration:none">
           <div class="regmark" aria-hidden="true" style="left:-1px;top:-1px"></div>
           <div class="regmark" aria-hidden="true" style="right:-1px;top:-1px"></div>
           <div class="regmark" aria-hidden="true" style="left:-1px;bottom:-1px"></div>
@@ -234,7 +241,7 @@ nav[aria-label="Primary"] a[aria-current="true"]{color:var(--green);box-shadow:i
 
       <article data-reveal style="position:relative;z-index:1">
         <div class="display" data-badge="3" aria-hidden="true" style="font-size:clamp(28px,3.2vw,44px);line-height:1;color:var(--green);margin-bottom:10px">03</div>
-        <a href="work/hazadapt-prep-checks.html" aria-label="03 Prep Checks" style="position:relative;display:block;border:1px solid var(--line);text-decoration:none">
+        <a href="work/hazadapt-prep-checks.html" aria-label="03 Prep Checks — HazAdapt product collection, case study" style="position:relative;display:block;border:1px solid var(--line);text-decoration:none">
           <div class="regmark" aria-hidden="true" style="left:-1px;top:-1px"></div>
           <div class="regmark" aria-hidden="true" style="right:-1px;top:-1px"></div>
           <div class="regmark" aria-hidden="true" style="left:-1px;bottom:-1px"></div>
@@ -259,7 +266,7 @@ nav[aria-label="Primary"] a[aria-current="true"]{color:var(--green);box-shadow:i
     <div class="wrk-pair" style="display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(20px,3vw,40px);padding:clamp(28px,4.5vh,48px) 0;border-bottom:1px solid var(--line)">
       <article data-reveal style="position:relative;z-index:1">
         <div class="display" data-badge="4" aria-hidden="true" style="font-size:clamp(28px,3.2vw,44px);line-height:1;color:var(--green);margin-bottom:10px">04</div>
-        <a href="work/true-link.html" aria-label="04 True Link Financial" style="position:relative;display:block;border:1px solid var(--line);text-decoration:none">
+        <a href="work/true-link.html" aria-label="04 True Link Financial — True Link product collection, case study" style="position:relative;display:block;border:1px solid var(--line);text-decoration:none">
           <div class="regmark" aria-hidden="true" style="left:-1px;top:-1px"></div>
           <div class="regmark" aria-hidden="true" style="right:-1px;top:-1px"></div>
           <div class="regmark" aria-hidden="true" style="left:-1px;bottom:-1px"></div>
@@ -282,7 +289,7 @@ nav[aria-label="Primary"] a[aria-current="true"]{color:var(--green);box-shadow:i
 
       <article data-reveal style="position:relative;z-index:1">
         <div class="display" data-badge="5" aria-hidden="true" style="font-size:clamp(28px,3.2vw,44px);line-height:1;color:var(--green);margin-bottom:10px">05</div>
-        <a href="work/welldone-monitoring.html" aria-label="05 WellDone" style="position:relative;display:block;border:1px solid var(--line);text-decoration:none">
+        <a href="work/welldone-monitoring.html" aria-label="05 WellDone — WellDone product collection, case study" style="position:relative;display:block;border:1px solid var(--line);text-decoration:none">
           <div class="regmark" aria-hidden="true" style="left:-1px;top:-1px"></div>
           <div class="regmark" aria-hidden="true" style="right:-1px;top:-1px"></div>
           <div class="regmark" aria-hidden="true" style="left:-1px;bottom:-1px"></div>
