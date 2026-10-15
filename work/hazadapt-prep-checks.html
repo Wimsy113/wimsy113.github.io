@@ -13,53 +13,76 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="Prep Checks — making emergency preparedness feel achievable.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800;900&family=Grenze+Gotisch:wght@400;600&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
 <script src="../image-slot.js"></script>
 <style>
-@font-face{font-family:'Trickster';src:url('../fonts/Trickster-Reg.otf') format('opentype');font-weight:400;font-style:normal;font-display:swap}
-html{--bg:#030509;--ink:#EDEAE4;--muted:#A9AFB8;--metal:#7D8690;--ghost:#0b0e14;--line:#1c212b;--c-turquoise:#83E2D2;--c-blue:#668FE5;--c-copper:#B89A7B;--c-opal:#D8C4ED;--red:var(--c-copper);--on-red:#06080c;--pink:#D8C4ED;--grain:.1;--rail-w:48px;background:var(--bg);color:var(--ink);scroll-behavior:smooth}
-html[data-theme="light"]{--bg:#F3F1EC;--ink:#12151a;--muted:#53585f;--metal:#71767d;--ghost:#e6e1d6;--line:#d4d0c2;--c-turquoise:#0B7A68;--c-blue:#3357C2;--c-copper:#7F6040;--c-opal:#7F4FC0;--red:var(--c-copper);--on-red:#fff;--pink:#6B3FA0;--grain:.07}
+html{--bg:#0B0B0B;--ink:#F2F0E9;--muted:#9a978e;--metal:#9a978e;--ghost:#252525;--line:rgba(242,240,233,.2);--c-turquoise:#A8FF00;--c-blue:#A8FF00;--c-copper:#A8FF00;--c-opal:#A8FF00;--red:var(--c-copper);--on-red:#0B0B0B;--pink:#A8FF00;--grain:.1;--rail-w:48px;background:var(--bg);color:var(--ink);scroll-behavior:smooth}
+html[data-theme="light"]{--bg:#F2F0E9;--ink:#0B0B0B;--muted:#5f5c4e;--metal:#5f5c4e;--ghost:#E4E1D6;--line:rgba(11,11,11,.2);--c-turquoise:#447000;--c-blue:#447000;--c-copper:#447000;--c-opal:#447000;--red:var(--c-copper);--on-red:#F2F0E9;--pink:#447000;--grain:.07}
 html[data-grain="off"]{--grain:0}
-body{margin:0;padding-right:var(--rail-w);background:var(--bg);color:var(--ink);font-family:"Source Sans 3",system-ui,sans-serif;-webkit-font-smoothing:antialiased;transition:background-color .35s,color .35s;overflow-x:hidden}
+body{margin:0;padding-right:var(--rail-w);background:var(--bg);color:var(--ink);font-family:"Inter",system-ui,sans-serif;-webkit-font-smoothing:antialiased;transition:background-color .35s,color .35s;overflow-x:hidden}
 body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:300;opacity:var(--grain);mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E")}
 a{color:inherit;text-decoration-thickness:1px;text-underline-offset:.22em}
 a:hover{color:var(--red)}
 :focus-visible{outline:3px solid var(--pink);outline-offset:4px}
-::selection{background:var(--pink);color:#06080c}
+::selection{background:var(--pink);color:var(--on-red)}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
 
-nav[aria-label="Primary"] a[aria-current="true"]{box-shadow:inset 0 0 0 3px var(--ink);letter-spacing:.22em}
+nav[aria-label="Primary"] a[aria-current="true"]{color:var(--red);box-shadow:inset 3px 0 0 var(--red)}
+#mobileMenu a[aria-current="true"]{color:var(--red)}
+#mobileBar{display:none}
+@media (max-width:859px){
+  nav[aria-label="Primary"]{display:none!important}
+  #mobileBar{display:flex}
+  body{padding-right:0;padding-top:56px}
+}
+@media (min-width:860px){
+  #mobileMenu,#mobileMenuBackdrop{display:none!important}
+}
 </style>
 </helmet>
 
-<a href="#main" style="position:fixed;left:16px;top:-80px;z-index:400;background:var(--pink);color:#06080c;padding:12px 18px;font:700 14px/1 'Space Mono',monospace;text-decoration:none" style-focus="top:16px">Skip to content</a>
+<a href="#main" style="position:fixed;left:16px;top:-80px;z-index:400;background:var(--pink);color:var(--on-red);padding:12px 18px;font:700 14px/1 'Space Mono',monospace;text-decoration:none" style-focus="top:16px">Skip to content</a>
 
 <nav aria-label="Primary" style="position:fixed;right:0;top:0;bottom:0;z-index:200;width:var(--rail-w);display:flex;flex-direction:column;background:var(--bg);border-left:1px solid var(--line)">
-  <div aria-hidden="true" style="flex:0 0 auto;width:100%;height:3px;background:linear-gradient(180deg,#83E2D2,#668FE5,#B89A7B,#D8C4ED)"></div>
-  <a href="../index.html" aria-label="K. Ewing, home" style="flex:0 0 auto;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(180deg);padding:16px 0;font:400 20px/1 'Trickster',serif;letter-spacing:0;text-decoration:none;color:var(--ink);border-bottom:1px solid var(--line);min-height:44px;transition:color .2s ease" style-hover="color:var(--c-turquoise)">K. Ewing</a>
-  <a href="../index.html#work" aria-current="true" style="flex:1 1 0;min-height:44px;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(180deg);font:700 11px/1 'Inter',sans-serif;letter-spacing:.14em;text-decoration:none;color:var(--on-red);background:var(--c-blue);transition:letter-spacing .2s ease" style-hover="letter-spacing:.22em">WORK</a>
-  <a href="../index.html#workbench" aria-current="false" style="flex:1 1 0;min-height:44px;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(180deg);font:700 11px/1 'Inter',sans-serif;letter-spacing:.14em;text-decoration:none;color:var(--on-red);background:var(--c-copper);transition:letter-spacing .2s ease" style-hover="letter-spacing:.22em">WORKBENCH</a>
-  <a href="../index.html#about" aria-current="false" style="flex:1 1 0;min-height:44px;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(180deg);font:700 11px/1 'Inter',sans-serif;letter-spacing:.14em;text-decoration:none;color:var(--on-red);background:var(--c-opal);transition:letter-spacing .2s ease" style-hover="letter-spacing:.22em">ABOUT</a>
-  <a href="../index.html#contact" aria-current="false" style="flex:1 1 0;min-height:44px;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(180deg);font:700 11px/1 'Inter',sans-serif;letter-spacing:.14em;text-decoration:none;color:var(--on-red);background:var(--c-turquoise);transition:letter-spacing .2s ease" style-hover="letter-spacing:.22em">CONTACT</a>
-  <button type="button" onClick="{{ toggleTheme }}" aria-pressed="{{ lightPressed }}" aria-label="{{ themeLabel }} mode" style="flex:0 0 auto;min-height:44px;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(180deg);font:700 10px/1 'Inter',sans-serif;letter-spacing:.12em;text-transform:uppercase;border:0;border-top:1px solid var(--line);background:var(--ink);color:var(--bg);cursor:pointer;padding:12px 0" style-hover="background:var(--red);color:var(--on-red)">{{ themeLabel }}</button>
+  <a href="../index.html" aria-label="K. Ewing, home" class="mono" style="flex:0 0 auto;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(180deg);padding:16px 0;font-size:15px;font-weight:700;letter-spacing:.04em;text-decoration:none;color:var(--ink);border-bottom:1px solid var(--line);min-height:44px;transition:color .2s ease" style-hover="color:var(--pink)">K. EWING</a>
+  <a href="../index.html#work" aria-current="true" class="mono" style="flex:1 1 0;min-height:44px;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(180deg);font-size:11px;font-weight:700;letter-spacing:.18em;text-decoration:none;color:var(--ink);border-bottom:1px solid var(--line);transition:color .2s ease,letter-spacing .2s ease" style-hover="color:var(--pink);letter-spacing:.26em">WORK</a>
+  <a href="../index.html#workbench" aria-current="false" class="mono" style="flex:1 1 0;min-height:44px;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(180deg);font-size:11px;font-weight:700;letter-spacing:.18em;text-decoration:none;color:var(--ink);border-bottom:1px solid var(--line);transition:color .2s ease,letter-spacing .2s ease" style-hover="color:var(--pink);letter-spacing:.26em">WORKBENCH</a>
+  <a href="../index.html#about" aria-current="false" class="mono" style="flex:1 1 0;min-height:44px;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(180deg);font-size:11px;font-weight:700;letter-spacing:.18em;text-decoration:none;color:var(--ink);border-bottom:1px solid var(--line);transition:color .2s ease,letter-spacing .2s ease" style-hover="color:var(--pink);letter-spacing:.26em">ABOUT</a>
+  <a href="../index.html#contact" aria-current="false" class="mono" style="flex:1 1 0;min-height:44px;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(180deg);font-size:11px;font-weight:700;letter-spacing:.18em;text-decoration:none;color:var(--ink);transition:color .2s ease,letter-spacing .2s ease" style-hover="color:var(--pink);letter-spacing:.26em">CONTACT</a>
+  <button type="button" onClick="{{ toggleTheme }}" aria-pressed="{{ lightPressed }}" aria-label="Switch to {{ themeLabel }} mode" class="mono" style="flex:0 0 auto;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(180deg);padding:14px 0;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;color:var(--muted);border:0;border-top:1px solid var(--line);background:var(--bg);cursor:pointer;min-height:44px;transition:color .2s ease" style-hover="color:var(--pink)">{{ themeLabel }}</button>
+</nav>
+
+<div id="mobileBar" class="mono" role="navigation" aria-label="Mobile bar" style="position:fixed;left:0;right:0;top:0;z-index:220;align-items:center;justify-content:space-between;padding:0 16px;height:56px;background:var(--bg);border-bottom:1px solid var(--line)">
+  <a href="../index.html" aria-label="K. Ewing, home" style="font-size:15px;font-weight:700;letter-spacing:.04em;text-decoration:none;color:var(--ink);min-height:44px;display:inline-flex;align-items:center" style-hover="color:var(--pink)">K. EWING</a>
+  <button type="button" onClick="{{ menuToggle }}" aria-expanded="{{ menuExpandedAttr }}" aria-controls="mobileMenu" aria-label="{{ menuAriaLabel }}" style="min-width:44px;min-height:44px;padding:0 12px;border:1px solid var(--line);background:transparent;color:var(--ink);font:700 11px/1 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;cursor:pointer" style-hover="color:var(--pink);border-color:var(--pink)">{{ menuButtonLabel }}</button>
+</div>
+
+<div id="mobileMenuBackdrop" aria-hidden="true" onClick="{{ menuClose }}" style="{{ menuBackdropStyle }}"></div>
+
+<nav id="mobileMenu" aria-label="Mobile" class="mono" style="{{ menuPanelStyle }}">
+  <a href="../index.html#work" onClick="{{ menuClose }}" style="display:flex;align-items:center;min-height:52px;padding:0 20px;font-size:14px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;color:var(--ink);border-bottom:1px solid var(--line)" style-hover="color:var(--pink)">Work</a>
+  <a href="../index.html#workbench" onClick="{{ menuClose }}" style="display:flex;align-items:center;min-height:52px;padding:0 20px;font-size:14px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;color:var(--ink);border-bottom:1px solid var(--line)" style-hover="color:var(--pink)">Workbench</a>
+  <a href="../index.html#about" onClick="{{ menuClose }}" style="display:flex;align-items:center;min-height:52px;padding:0 20px;font-size:14px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;color:var(--ink);border-bottom:1px solid var(--line)" style-hover="color:var(--pink)">About</a>
+  <a href="../index.html#contact" onClick="{{ menuClose }}" style="display:flex;align-items:center;min-height:52px;padding:0 20px;font-size:14px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;color:var(--ink);border-bottom:1px solid var(--line)" style-hover="color:var(--pink)">Contact</a>
+  <button type="button" onClick="{{ toggleTheme }}" aria-pressed="{{ lightPressed }}" style="display:flex;align-items:center;justify-content:space-between;width:100%;min-height:52px;padding:0 20px;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;border:0;background:transparent;color:var(--muted);cursor:pointer" style-hover="color:var(--pink)"><span>Theme</span><span>{{ themeLabel }}</span></button>
 </nav>
 
 <header style="padding:clamp(28px,4vw,48px) clamp(16px,5vw,80px) clamp(56px,7vw,100px);border-bottom:2px solid var(--ink);position:relative;overflow:hidden">
   <p style="margin:0 0 clamp(40px,6vw,80px);font:400 12px/1 'Space Mono',monospace;letter-spacing:.08em;color:var(--muted)"><a href="../index.html">~</a> / <span style="color:var(--ink)">prep-checks</span></p>
   <p style="margin:0 0 14px;font:400 12px/1.6 'Space Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--pink)">hazadapt · Product Design · UX Research · Information Architecture</p>
-  <h1 style="margin:0;font:900 clamp(56px,12vw,220px)/.82 'Big Shoulders Display',sans-serif;text-transform:uppercase;letter-spacing:-.015em;overflow-wrap:anywhere;text-wrap:balance">Prep Checks</h1>
+  <h1 style="margin:0;font:400 clamp(56px,12vw,220px)/.82 'Archivo Black',sans-serif;text-transform:uppercase;letter-spacing:-.015em;overflow-wrap:anywhere;text-wrap:balance">Prep Checks</h1>
   <div style="display:flex;flex-wrap:wrap;gap:40px 64px;margin-top:clamp(32px,4vw,56px);align-items:flex-start">
     <div style="flex:1 1 420px;min-width:0;display:grid;gap:28px">
-      <p style="margin:0;max-width:34ch;font:600 clamp(22px,2.2vw,32px)/1.25 'Source Sans 3',sans-serif;text-wrap:pretty">Making emergency preparedness feel achievable, reframing a checklist people fail into exercises people return to.</p>
+      <p style="margin:0;max-width:34ch;font:600 clamp(22px,2.2vw,32px)/1.25 'Inter',sans-serif;text-wrap:pretty">Making emergency preparedness feel achievable, reframing a checklist people fail into exercises people return to.</p>
       <dl style="margin:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,180px),1fr));gap:18px 28px;padding-top:20px;border-top:1px solid var(--line)">
-        <div style="display:grid;gap:4px"><dt style="font:400 11px/1.3 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">Role</dt><dd style="margin:0;font:600 17px/1.35 'Source Sans 3',sans-serif">Lead UX Designer</dd></div>
-        <div style="display:grid;gap:4px"><dt style="font:400 11px/1.3 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">Platform</dt><dd style="margin:0;font:600 17px/1.35 'Source Sans 3',sans-serif">Web, Mobile Web</dd></div>
-        <div style="display:grid;gap:4px;grid-column:1 / -1"><dt style="font:400 11px/1.3 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">Focus</dt><dd style="margin:0;font:600 17px/1.35 'Source Sans 3',sans-serif">Product Design, UX Research, Information Architecture, Progress Systems, Accessibility</dd></div>
+        <div style="display:grid;gap:4px"><dt style="font:400 11px/1.3 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">Role</dt><dd style="margin:0;font:600 17px/1.35 'Inter',sans-serif">Lead UX Designer</dd></div>
+        <div style="display:grid;gap:4px"><dt style="font:400 11px/1.3 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">Platform</dt><dd style="margin:0;font:600 17px/1.35 'Inter',sans-serif">Web, Mobile Web</dd></div>
+        <div style="display:grid;gap:4px;grid-column:1 / -1"><dt style="font:400 11px/1.3 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">Focus</dt><dd style="margin:0;font:600 17px/1.35 'Inter',sans-serif">Product Design, UX Research, Information Architecture, Progress Systems, Accessibility</dd></div>
       </dl>
       
       
     </div>
-    <div aria-hidden="true" style="flex:1 1 360px;min-width:0;max-width:640px;aspect-ratio:16/10;display:flex;align-items:center;justify-content:center;background:var(--ink);color:var(--bg);transform:rotate(1.5deg);box-shadow:14px 14px 0 var(--red);overflow:hidden"><span style="font:400 clamp(60px,9vw,150px)/.8 'Grenze Gotisch',serif;padding:0 .2em;text-align:center">Prep Checks</span></div>
+    <div aria-hidden="true" style="flex:1 1 360px;min-width:0;max-width:640px;aspect-ratio:16/10;display:flex;align-items:center;justify-content:center;background:var(--ink);color:var(--bg);transform:rotate(1.5deg);box-shadow:14px 14px 0 var(--red);overflow:hidden"><span style="font:400 clamp(60px,9vw,150px)/.8 'Archivo Black',serif;padding:0 .2em;text-align:center;overflow-wrap:anywhere">Prep Checks</span></div>
   </div>
 </header>
 
@@ -68,7 +91,7 @@ nav[aria-label="Primary"] a[aria-current="true"]{box-shadow:inset 0 0 0 3px var(
   <aside aria-label="Case study contents" style="flex:0 1 230px;min-width:0;padding-top:clamp(56px,7vw,110px)">
     <nav aria-label="Sections" style="position:sticky;top:28px">
       <button type="button" onClick="{{ toggleToc }}" aria-expanded="{{ tocExpanded }}" aria-controls="toc-list" style="display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;min-height:44px;margin:0 0 10px;padding:0 0 6px;background:transparent;border:0;border-bottom:1px solid var(--line);color:var(--metal);cursor:pointer;text-align:left" style-hover="color:var(--ink)">
-        <span style="font:400 30px/1 'Grenze Gotisch',serif">contents</span>
+        <span style="font:400 30px/1 'Archivo Black',serif;overflow-wrap:anywhere">contents</span>
         <span aria-hidden="true" style="font:700 12px/1 'Space Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--pink)">{{ tocIcon }}</span>
       </button>
       <ol id="toc-list" style="list-style:none;margin:0;padding:0;display:grid;font:400 12px/1.35 'Space Mono',monospace;letter-spacing:.04em">
@@ -90,31 +113,31 @@ nav[aria-label="Primary"] a[aria-current="true"]{box-shadow:inset 0 0 0 3px var(
   <main id="main" style="flex:1 1 600px;min-width:0;max-width:1040px;margin:0 auto">
 
     <section id="s01" aria-labelledby="s01-h" style="display:grid;gap:22px;padding:clamp(56px,7vw,110px) 0;scroll-margin-top:24px">
-      <p style="margin:0;display:flex;align-items:baseline;gap:14px"><span style="font:900 40px/.8 'Big Shoulders Display',sans-serif;color:var(--pink)">01</span><span style="font:400 12px/1 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">Overview</span></p>
-      <h2 id="s01-h" style="margin:0 0 8px;max-width:22ch;font:700 clamp(34px,4vw,60px)/1.02 'Source Sans 3',sans-serif;letter-spacing:-.025em;text-wrap:balance">Overview</h2>
-      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">Emergency preparedness is usually presented as a checklist. Buy this. Store that. Make a plan. Prepare for this disaster. Prepare for another disaster. The advice is useful, but the experience can become overwhelming quickly.</p>
-      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">Prep Checks was designed to approach preparedness differently. Instead of treating preparedness as one enormous list of things someone has failed to do, we explored how smaller guided activities could help people understand what they had already accomplished and what they could realistically work on next.</p>
+      <p style="margin:0;display:flex;align-items:baseline;gap:14px"><span style="font:400 40px/.8 'Archivo Black',sans-serif;color:var(--pink);overflow-wrap:anywhere">01</span><span style="font:400 12px/1 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">Overview</span></p>
+      <h2 id="s01-h" style="margin:0 0 8px;max-width:22ch;font:700 clamp(34px,4vw,60px)/1.02 'Inter',sans-serif;letter-spacing:-.025em;text-wrap:balance">Overview</h2>
+      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Inter',sans-serif;text-wrap:pretty">Emergency preparedness is usually presented as a checklist. Buy this. Store that. Make a plan. Prepare for this disaster. Prepare for another disaster. The advice is useful, but the experience can become overwhelming quickly.</p>
+      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Inter',sans-serif;text-wrap:pretty">Prep Checks was designed to approach preparedness differently. Instead of treating preparedness as one enormous list of things someone has failed to do, we explored how smaller guided activities could help people understand what they had already accomplished and what they could realistically work on next.</p>
     </section>
 
     <section id="s02" aria-labelledby="s02-h" style="display:grid;gap:22px;padding:clamp(56px,7vw,110px) 0;border-top:1px solid var(--line);scroll-margin-top:24px">
-      <p style="margin:0;display:flex;align-items:baseline;gap:14px"><span style="font:900 40px/.8 'Big Shoulders Display',sans-serif;color:var(--pink)">02</span><span style="font:400 12px/1 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">Reframing the Product</span></p>
-      <h2 id="s02-h" style="margin:0 0 8px;max-width:22ch;font:700 clamp(34px,4vw,60px)/1.02 'Source Sans 3',sans-serif;letter-spacing:-.025em;text-wrap:balance">From checklist to exercise</h2>
-      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">One of the most important language decisions was moving away from the word checklist. We began calling them exercises. That sounds like a small copy change, but it reflected a larger product philosophy.</p>
-      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">A checklist implies that there is one correct list and that the job is finished when every box is checked. Preparedness does not really work that way. A household's needs change. A person's location changes. Hazards change. Family situations change. Supplies expire. Knowledge gets forgotten. Preparedness is a practice.</p>
-      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">Calling the activities exercises made the product feel more like something users could return to and improve over time.</p>
+      <p style="margin:0;display:flex;align-items:baseline;gap:14px"><span style="font:400 40px/.8 'Archivo Black',sans-serif;color:var(--pink);overflow-wrap:anywhere">02</span><span style="font:400 12px/1 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">Reframing the Product</span></p>
+      <h2 id="s02-h" style="margin:0 0 8px;max-width:22ch;font:700 clamp(34px,4vw,60px)/1.02 'Inter',sans-serif;letter-spacing:-.025em;text-wrap:balance">From checklist to exercise</h2>
+      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Inter',sans-serif;text-wrap:pretty">One of the most important language decisions was moving away from the word checklist. We began calling them exercises. That sounds like a small copy change, but it reflected a larger product philosophy.</p>
+      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Inter',sans-serif;text-wrap:pretty">A checklist implies that there is one correct list and that the job is finished when every box is checked. Preparedness does not really work that way. A household's needs change. A person's location changes. Hazards change. Family situations change. Supplies expire. Knowledge gets forgotten. Preparedness is a practice.</p>
+      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Inter',sans-serif;text-wrap:pretty">Calling the activities exercises made the product feel more like something users could return to and improve over time.</p>
     </section>
 
     <section id="s03" aria-labelledby="s03-h" style="display:grid;gap:22px;padding:clamp(56px,7vw,110px) 0;border-top:1px solid var(--line);scroll-margin-top:24px">
-      <p style="margin:0;display:flex;align-items:baseline;gap:14px"><span style="font:900 40px/.8 'Big Shoulders Display',sans-serif;color:var(--pink)">03</span><span style="font:400 12px/1 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">Showing Progress</span></p>
-      <h2 id="s03-h" style="margin:0 0 8px;max-width:22ch;font:700 clamp(34px,4vw,60px)/1.02 'Source Sans 3',sans-serif;letter-spacing:-.025em;text-wrap:balance">Helping users see progress</h2>
-      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">A major part of the experience involved showing users that the work they were doing actually added up to something. We explored progress indicators including a prominent purple progress bar and score-based feedback. The interface could show:</p>
-      <ul style="margin:0;padding-left:1.2em;max-width:64ch;display:grid;gap:8px;font:400 clamp(18px,1.3vw,20px)/1.55 'Source Sans 3',sans-serif">
+      <p style="margin:0;display:flex;align-items:baseline;gap:14px"><span style="font:400 40px/.8 'Archivo Black',sans-serif;color:var(--pink);overflow-wrap:anywhere">03</span><span style="font:400 12px/1 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">Showing Progress</span></p>
+      <h2 id="s03-h" style="margin:0 0 8px;max-width:22ch;font:700 clamp(34px,4vw,60px)/1.02 'Inter',sans-serif;letter-spacing:-.025em;text-wrap:balance">Helping users see progress</h2>
+      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Inter',sans-serif;text-wrap:pretty">A major part of the experience involved showing users that the work they were doing actually added up to something. We explored progress indicators including a prominent purple progress bar and score-based feedback. The interface could show:</p>
+      <ul style="margin:0;padding-left:1.2em;max-width:64ch;display:grid;gap:8px;font:400 clamp(18px,1.3vw,20px)/1.55 'Inter',sans-serif">
         <li>Completion progress</li>
         <li>Average exercise scores</li>
         <li>Areas that still needed attention</li>
         <li>Preparedness items associated with an exercise</li>
       </ul>
-      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">Instead of only telling users what was missing, the product could acknowledge what they had already accomplished.</p>
+      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Inter',sans-serif;text-wrap:pretty">Instead of only telling users what was missing, the product could acknowledge what they had already accomplished.</p>
       <figure style="margin:clamp(12px,2vw,28px) 0 0;display:grid;gap:10px">
         <div style="width:100%;min-width:0;aspect-ratio:16/9;position:relative"><image-slot id="hazadapt-prep-checks-1" shape="rect" fit="contain" placeholder="Exercise screen"></image-slot></div>
         <figcaption style="font:400 12px/1.5 'Space Mono',monospace;letter-spacing:.06em;color:var(--muted)"><span style="color:var(--pink)">FIG. 01</span> — Exercise screen</figcaption>
@@ -127,8 +150,8 @@ nav[aria-label="Primary"] a[aria-current="true"]{box-shadow:inset 0 0 0 3px var(
         <div style="width:100%;min-width:0;aspect-ratio:16/9;position:relative"><image-slot id="hazadapt-prep-checks-3" shape="rect" fit="contain" placeholder="Score or results design"></image-slot></div>
         <figcaption style="font:400 12px/1.5 'Space Mono',monospace;letter-spacing:.06em;color:var(--muted)"><span style="color:var(--pink)">FIG. 03</span> — Score or results design</figcaption>
       </figure>
-      <h3 style="margin:18px 0 0;font:800 clamp(26px,2.4vw,34px)/1 'Big Shoulders Display',sans-serif;text-transform:uppercase;letter-spacing:.01em">Emergency Items</h3>
-      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">Exercises could connect preparedness concepts with actual emergency items. This helped bridge the gap between abstract recommendations and something a person could act on. Rather than simply saying "be prepared," an exercise could help someone understand which supplies or resources were relevant to the task they had just completed.</p>
+      <h3 style="margin:18px 0 0;font:400 clamp(26px,2.4vw,34px)/1 'Archivo Black',sans-serif;text-transform:uppercase;letter-spacing:.01em;overflow-wrap:anywhere">Emergency Items</h3>
+      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Inter',sans-serif;text-wrap:pretty">Exercises could connect preparedness concepts with actual emergency items. This helped bridge the gap between abstract recommendations and something a person could act on. Rather than simply saying "be prepared," an exercise could help someone understand which supplies or resources were relevant to the task they had just completed.</p>
       <figure style="margin:clamp(12px,2vw,28px) 0 0;display:grid;gap:10px">
         <div style="width:100%;min-width:0;aspect-ratio:16/9;position:relative"><image-slot id="hazadapt-prep-checks-4" shape="rect" fit="contain" placeholder="Emergency-item cards"></image-slot></div>
         <figcaption style="font:400 12px/1.5 'Space Mono',monospace;letter-spacing:.06em;color:var(--muted)"><span style="color:var(--pink)">FIG. 04</span> — Emergency-item cards</figcaption>
@@ -136,48 +159,48 @@ nav[aria-label="Primary"] a[aria-current="true"]{box-shadow:inset 0 0 0 3px var(
     </section>
 
     <section id="s04" aria-labelledby="s04-h" style="display:grid;gap:22px;padding:clamp(56px,7vw,110px) 0;border-top:1px solid var(--line);scroll-margin-top:24px">
-      <p style="margin:0;display:flex;align-items:baseline;gap:14px"><span style="font:900 40px/.8 'Big Shoulders Display',sans-serif;color:var(--pink)">04</span><span style="font:400 12px/1 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">Researching Motivation</span></p>
-      <h2 id="s04-h" style="margin:0 0 8px;max-width:22ch;font:700 clamp(34px,4vw,60px)/1.02 'Source Sans 3',sans-serif;letter-spacing:-.025em;text-wrap:balance">Borrowing from game systems, carefully</h2>
-      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">We also explored gamification and motivation. The goal was not to turn disaster preparedness into a game. There is an obvious danger in making a serious topic feel trivial. Instead, we looked at what game systems do well:</p>
-      <ul style="margin:0;padding-left:1.2em;max-width:64ch;display:grid;gap:8px;font:400 clamp(18px,1.3vw,20px)/1.55 'Source Sans 3',sans-serif">
+      <p style="margin:0;display:flex;align-items:baseline;gap:14px"><span style="font:400 40px/.8 'Archivo Black',sans-serif;color:var(--pink);overflow-wrap:anywhere">04</span><span style="font:400 12px/1 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">Researching Motivation</span></p>
+      <h2 id="s04-h" style="margin:0 0 8px;max-width:22ch;font:700 clamp(34px,4vw,60px)/1.02 'Inter',sans-serif;letter-spacing:-.025em;text-wrap:balance">Borrowing from game systems, carefully</h2>
+      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Inter',sans-serif;text-wrap:pretty">We also explored gamification and motivation. The goal was not to turn disaster preparedness into a game. There is an obvious danger in making a serious topic feel trivial. Instead, we looked at what game systems do well:</p>
+      <ul style="margin:0;padding-left:1.2em;max-width:64ch;display:grid;gap:8px;font:400 clamp(18px,1.3vw,20px)/1.55 'Inter',sans-serif">
         <li>Make progress visible</li>
         <li>Break large goals into smaller actions</li>
         <li>Give people feedback</li>
         <li>Encourage continuation</li>
         <li>Show improvement over time</li>
       </ul>
-      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">Those principles could be used without turning emergencies into entertainment. That distinction mattered throughout the design.</p>
+      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Inter',sans-serif;text-wrap:pretty">Those principles could be used without turning emergencies into entertainment. That distinction mattered throughout the design.</p>
     </section>
 
     <section id="s05" aria-labelledby="s05-h" style="display:grid;gap:22px;padding:clamp(56px,7vw,110px) 0;border-top:1px solid var(--line);scroll-margin-top:24px">
-      <p style="margin:0;display:flex;align-items:baseline;gap:14px"><span style="font:900 40px/.8 'Big Shoulders Display',sans-serif;color:var(--pink)">05</span><span style="font:400 12px/1 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">Reducing Fear and Judgment</span></p>
-      <h2 id="s05-h" style="margin:0 0 8px;max-width:22ch;font:700 clamp(34px,4vw,60px)/1.02 'Source Sans 3',sans-serif;letter-spacing:-.025em;text-wrap:balance">Encouraging without becoming unserious</h2>
-      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">Preparedness products can accidentally communicate that users have failed. If someone opens an application and immediately sees dozens of incomplete tasks, the interface may technically be accurate while still making them less likely to continue.</p>
-      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">We wanted Prep Checks to feel encouraging without becoming unserious. That meant carefully balancing progress, incomplete actions, scores, recommendations, and educational content. The interface needed to say:</p>
-      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty"><em>Here is where you are. Here is what you already know. Here is one useful thing you can do next.</em></p>
-      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">Not:</p>
-      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty"><em>Here are 47 things you have failed to do.</em></p>
+      <p style="margin:0;display:flex;align-items:baseline;gap:14px"><span style="font:400 40px/.8 'Archivo Black',sans-serif;color:var(--pink);overflow-wrap:anywhere">05</span><span style="font:400 12px/1 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">Reducing Fear and Judgment</span></p>
+      <h2 id="s05-h" style="margin:0 0 8px;max-width:22ch;font:700 clamp(34px,4vw,60px)/1.02 'Inter',sans-serif;letter-spacing:-.025em;text-wrap:balance">Encouraging without becoming unserious</h2>
+      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Inter',sans-serif;text-wrap:pretty">Preparedness products can accidentally communicate that users have failed. If someone opens an application and immediately sees dozens of incomplete tasks, the interface may technically be accurate while still making them less likely to continue.</p>
+      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Inter',sans-serif;text-wrap:pretty">We wanted Prep Checks to feel encouraging without becoming unserious. That meant carefully balancing progress, incomplete actions, scores, recommendations, and educational content. The interface needed to say:</p>
+      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Inter',sans-serif;text-wrap:pretty"><em>Here is where you are. Here is what you already know. Here is one useful thing you can do next.</em></p>
+      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Inter',sans-serif;text-wrap:pretty">Not:</p>
+      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Inter',sans-serif;text-wrap:pretty"><em>Here are 47 things you have failed to do.</em></p>
     </section>
 
     <section id="s06" aria-labelledby="s06-h" style="display:grid;gap:22px;padding:clamp(56px,7vw,110px) 0;border-top:1px solid var(--line);scroll-margin-top:24px">
-      <p style="margin:0;display:flex;align-items:baseline;gap:14px"><span style="font:900 40px/.8 'Big Shoulders Display',sans-serif;color:var(--pink)">06</span><span style="font:400 12px/1 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">Inclusive Language</span></p>
-      <h2 id="s06-h" style="margin:0 0 8px;max-width:22ch;font:700 clamp(34px,4vw,60px)/1.02 'Source Sans 3',sans-serif;letter-spacing:-.025em;text-wrap:balance">Words carry assumptions</h2>
-      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">Language was also reviewed as part of the larger HazAdapt accessibility process. One example was changing wording around emergency services from "Trust in 911" to "Comfort in calling 911."</p>
-      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">Trust is a complicated concept. People's relationships with emergency services can be influenced by personal experience, community history, disability, immigration status, race, identity, location, and many other factors. "Comfort in calling 911" asks about behavior and experience without making the same assumption about why someone may hesitate.</p>
-      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">That type of language work became an important part of how we approached preparedness research overall.</p>
+      <p style="margin:0;display:flex;align-items:baseline;gap:14px"><span style="font:400 40px/.8 'Archivo Black',sans-serif;color:var(--pink);overflow-wrap:anywhere">06</span><span style="font:400 12px/1 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">Inclusive Language</span></p>
+      <h2 id="s06-h" style="margin:0 0 8px;max-width:22ch;font:700 clamp(34px,4vw,60px)/1.02 'Inter',sans-serif;letter-spacing:-.025em;text-wrap:balance">Words carry assumptions</h2>
+      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Inter',sans-serif;text-wrap:pretty">Language was also reviewed as part of the larger HazAdapt accessibility process. One example was changing wording around emergency services from "Trust in 911" to "Comfort in calling 911."</p>
+      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Inter',sans-serif;text-wrap:pretty">Trust is a complicated concept. People's relationships with emergency services can be influenced by personal experience, community history, disability, immigration status, race, identity, location, and many other factors. "Comfort in calling 911" asks about behavior and experience without making the same assumption about why someone may hesitate.</p>
+      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Inter',sans-serif;text-wrap:pretty">That type of language work became an important part of how we approached preparedness research overall.</p>
     </section>
 
     <section id="s07" aria-labelledby="s07-h" style="display:grid;gap:22px;padding:clamp(56px,7vw,110px) 0;border-top:1px solid var(--line);scroll-margin-top:24px">
-      <p style="margin:0;display:flex;align-items:baseline;gap:14px"><span style="font:900 40px/.8 'Big Shoulders Display',sans-serif;color:var(--pink)">07</span><span style="font:400 12px/1 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">Designing the System</span></p>
-      <h2 id="s07-h" style="margin:0 0 8px;max-width:22ch;font:700 clamp(34px,4vw,60px)/1.02 'Source Sans 3',sans-serif;letter-spacing:-.025em;text-wrap:balance">Part of a larger ecosystem</h2>
-      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">Prep Checks was built within the same broader HazAdapt design ecosystem as ResiliencePoint and Local Safety Information. That meant thinking about shared components, typography, interaction patterns, responsive behavior, and how someone might eventually move between different preparedness tools without feeling like they had entered a completely unrelated product. The Rubik typeface became part of that visual system, along with consistent component behavior across the platform.</p>
+      <p style="margin:0;display:flex;align-items:baseline;gap:14px"><span style="font:400 40px/.8 'Archivo Black',sans-serif;color:var(--pink);overflow-wrap:anywhere">07</span><span style="font:400 12px/1 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">Designing the System</span></p>
+      <h2 id="s07-h" style="margin:0 0 8px;max-width:22ch;font:700 clamp(34px,4vw,60px)/1.02 'Inter',sans-serif;letter-spacing:-.025em;text-wrap:balance">Part of a larger ecosystem</h2>
+      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Inter',sans-serif;text-wrap:pretty">Prep Checks was built within the same broader HazAdapt design ecosystem as ResiliencePoint and Local Safety Information. That meant thinking about shared components, typography, interaction patterns, responsive behavior, and how someone might eventually move between different preparedness tools without feeling like they had entered a completely unrelated product. The Rubik typeface became part of that visual system, along with consistent component behavior across the platform.</p>
     </section>
 
     <section id="s08" aria-labelledby="s08-h" style="display:grid;gap:22px;padding:clamp(56px,7vw,110px) 0;border-top:2px solid var(--ink);scroll-margin-top:24px">
-      <p style="margin:0;display:flex;align-items:baseline;gap:14px"><span style="font:900 40px/.8 'Big Shoulders Display',sans-serif;color:var(--pink)">08</span><span style="font:400 12px/1 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">What I Learned</span></p>
-      <h2 id="s08-h" style="margin:0 0 8px;max-width:18ch;font:400 clamp(52px,7vw,110px)/.86 'Grenze Gotisch',serif;color:var(--red);text-wrap:balance">Designing how the task feels, not just how it functions</h2>
-      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">Prep Checks reinforced that behavioral design is not just about getting someone to click a button. It is about understanding how the interface makes them feel about the task itself.</p>
-      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">Emergency preparedness is already intimidating. The product did not need to add another layer of pressure. The design opportunity was to make preparedness feel measurable, approachable, and possible.</p>
+      <p style="margin:0;display:flex;align-items:baseline;gap:14px"><span style="font:400 40px/.8 'Archivo Black',sans-serif;color:var(--pink);overflow-wrap:anywhere">08</span><span style="font:400 12px/1 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">What I Learned</span></p>
+      <h2 id="s08-h" style="margin:0 0 8px;max-width:18ch;font:400 clamp(52px,7vw,110px)/.86 'Archivo Black',serif;color:var(--red);text-wrap:balance;overflow-wrap:anywhere">Designing how the task feels, not just how it functions</h2>
+      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Inter',sans-serif;text-wrap:pretty">Prep Checks reinforced that behavioral design is not just about getting someone to click a button. It is about understanding how the interface makes them feel about the task itself.</p>
+      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Inter',sans-serif;text-wrap:pretty">Emergency preparedness is already intimidating. The product did not need to add another layer of pressure. The design opportunity was to make preparedness feel measurable, approachable, and possible.</p>
     </section>
   </main>
 </div>
@@ -185,11 +208,11 @@ nav[aria-label="Primary"] a[aria-current="true"]{box-shadow:inset 0 0 0 3px var(
 <nav aria-label="More case studies" style="display:flex;flex-wrap:wrap;border-top:2px solid var(--ink);border-bottom:1px solid var(--line)">
   <a href="hazadapt-resiliencepoint.html" style="flex:1 1 320px;display:grid;gap:10px;border-right:1px solid var(--line);padding:clamp(36px,5vw,72px) clamp(16px,5vw,80px);text-decoration:none" style-hover="background:var(--ink);color:var(--bg)">
     <span style="font:700 12px/1 'Space Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--pink)">← Previous</span>
-    <span style="font:900 clamp(48px,6.5vw,112px)/.84 'Big Shoulders Display',sans-serif;text-transform:uppercase;text-wrap:balance">ResiliencePoint</span>
+    <span style="font:400 clamp(48px,6.5vw,112px)/.84 'Archivo Black',sans-serif;text-transform:uppercase;text-wrap:balance;overflow-wrap:anywhere">ResiliencePoint</span>
   </a>
   <a href="hazadapt-loco.html" style="flex:1 1 320px;display:grid;gap:10px;justify-items:end;text-align:right;padding:clamp(36px,5vw,72px) clamp(16px,5vw,80px);text-decoration:none" style-hover="background:var(--ink);color:var(--bg)">
     <span style="font:700 12px/1 'Space Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--pink)">Next →</span>
-    <span style="font:400 clamp(56px,7.5vw,124px)/.82 'Grenze Gotisch',serif;text-wrap:balance">LoCo: Local Safety Information</span>
+    <span style="font:400 clamp(56px,7.5vw,124px)/.82 'Archivo Black',serif;text-wrap:balance;overflow-wrap:anywhere">LoCo: Local Safety Information</span>
   </a>
 </nav>
 
@@ -201,13 +224,17 @@ nav[aria-label="Primary"] a[aria-current="true"]{box-shadow:inset 0 0 0 3px var(
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;defaultTheme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;dark&quot;,&quot;light&quot;],&quot;default&quot;:&quot;dark&quot;,&quot;tsType&quot;:&quot;'dark'|'light'&quot;,&quot;section&quot;:&quot;Look&quot;},&quot;grain&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Look&quot;}}">
 class Component extends DCLogic {
-  state = { theme: this.props.defaultTheme ?? 'dark', active: 's01', tocOpen: true };
+  state = { theme: this.props.defaultTheme ?? 'dark', active: 's01', menuOpen: false, tocOpen: true };
   applyRoot() {
     const r = document.documentElement;
     r.dataset.theme = this.state.theme;
     r.dataset.grain = (this.props.grain ?? true) ? 'on' : 'off';
   }
   componentDidMount() {
+    this.onMenuResize = () => { if (window.innerWidth >= 860 && this.state.menuOpen) { document.body.style.overflow = ''; this.setState({ menuOpen: false }); } };
+    window.addEventListener('resize', this.onMenuResize);
+    this.onMenuKeydown = e => { if (e.key === 'Escape' && this.state.menuOpen) { document.body.style.overflow = ''; this.setState({ menuOpen: false }); } };
+    window.addEventListener('keydown', this.onMenuKeydown);
     this.applyRoot();
     this.io = new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecting) this.setState({ active: en.target.id }); }), { rootMargin: '-40% 0px -55% 0px' });
     document.querySelectorAll('main section[id]').forEach(el => this.io.observe(el));
@@ -216,7 +243,7 @@ class Component extends DCLogic {
     if (pp.defaultTheme !== this.props.defaultTheme && this.props.defaultTheme) this.setState({ theme: this.props.defaultTheme }, () => this.applyRoot());
     else this.applyRoot();
   }
-  componentWillUnmount() { if (this.io) this.io.disconnect(); }
+  componentWillUnmount() { if (this.io) this.io.disconnect(); window.removeEventListener('resize', this.onMenuResize); window.removeEventListener('keydown', this.onMenuKeydown); }
   renderVals() {
     const s = this.state, light = s.theme === 'light', mk = {};
     for (let i = 1; i <= 24; i++) { const id = 's' + String(i).padStart(2, '0'); mk[id] = s.active === id ? '■' : '□'; }
@@ -224,6 +251,13 @@ class Component extends DCLogic {
       mk, tocOpen: s.tocOpen, tocClosed: !s.tocOpen, tocExpanded: s.tocOpen ? 'true' : 'false', tocIcon: '− Hide',
       toggleToc: () => this.setState(st => ({ tocOpen: !st.tocOpen })),
       themeLabel: light ? 'Dark' : 'Light', lightPressed: light ? 'true' : 'false',
+      menuExpandedAttr: s.menuOpen ? 'true' : 'false',
+      menuButtonLabel: s.menuOpen ? 'CLOSE' : 'MENU',
+      menuAriaLabel: s.menuOpen ? 'Close menu' : 'Open menu',
+      menuClose: () => { document.body.style.overflow = ''; this.setState({ menuOpen: false }); },
+      menuToggle: () => { const next = !s.menuOpen; document.body.style.overflow = next ? 'hidden' : ''; this.setState({ menuOpen: next }); },
+      menuBackdropStyle: s.menuOpen ? { display: 'block', position: 'fixed', inset: '56px 0 0 0', zIndex: 215, background: 'rgba(0,0,0,.5)' } : { display: 'none' },
+      menuPanelStyle: s.menuOpen ? { display: 'grid', position: 'fixed', left: 0, right: 0, top: 56, zIndex: 220, background: 'var(--bg)', borderBottom: '1px solid var(--line)', maxHeight: 'calc(100vh - 56px)', overflowY: 'auto' } : { display: 'none' },
       toggleTheme: () => this.setState(st => ({ theme: st.theme === 'light' ? 'dark' : 'light' }), () => this.applyRoot())
     };
   }

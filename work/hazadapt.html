@@ -13,50 +13,73 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="hazadapt — case study overview.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800;900&family=Grenze+Gotisch:wght@400;600&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
 <script src="../image-slot.js"></script>
 <style>
-@font-face{font-family:'Trickster';src:url('../fonts/Trickster-Reg.otf') format('opentype');font-weight:400;font-style:normal;font-display:swap}
-html{--bg:#030509;--ink:#EDEAE4;--muted:#A9AFB8;--metal:#7D8690;--ghost:#0b0e14;--line:#1c212b;--c-turquoise:#83E2D2;--c-blue:#668FE5;--c-copper:#B89A7B;--c-opal:#D8C4ED;--red:var(--c-copper);--on-red:#06080c;--pink:#D8C4ED;--grain:.1;--rail-w:48px;background:var(--bg);color:var(--ink);scroll-behavior:smooth}
-html[data-theme="light"]{--bg:#F3F1EC;--ink:#12151a;--muted:#53585f;--metal:#71767d;--ghost:#e6e1d6;--line:#d4d0c2;--c-turquoise:#0B7A68;--c-blue:#3357C2;--c-copper:#7F6040;--c-opal:#7F4FC0;--red:var(--c-copper);--on-red:#fff;--pink:#6B3FA0;--grain:.07}
+html{--bg:#0B0B0B;--ink:#F2F0E9;--muted:#9a978e;--metal:#9a978e;--ghost:#252525;--line:rgba(242,240,233,.2);--c-turquoise:#A8FF00;--c-blue:#A8FF00;--c-copper:#A8FF00;--c-opal:#A8FF00;--red:var(--c-copper);--on-red:#0B0B0B;--pink:#A8FF00;--grain:.1;--rail-w:48px;background:var(--bg);color:var(--ink);scroll-behavior:smooth}
+html[data-theme="light"]{--bg:#F2F0E9;--ink:#0B0B0B;--muted:#5f5c4e;--metal:#5f5c4e;--ghost:#E4E1D6;--line:rgba(11,11,11,.2);--c-turquoise:#447000;--c-blue:#447000;--c-copper:#447000;--c-opal:#447000;--red:var(--c-copper);--on-red:#F2F0E9;--pink:#447000;--grain:.07}
 html[data-grain="off"]{--grain:0}
-body{margin:0;padding-right:var(--rail-w);background:var(--bg);color:var(--ink);font-family:"Source Sans 3",system-ui,sans-serif;-webkit-font-smoothing:antialiased;transition:background-color .35s,color .35s;overflow-x:hidden}
+body{margin:0;padding-right:var(--rail-w);background:var(--bg);color:var(--ink);font-family:"Inter",system-ui,sans-serif;-webkit-font-smoothing:antialiased;transition:background-color .35s,color .35s;overflow-x:hidden}
 body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:300;opacity:var(--grain);mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E")}
 a{color:inherit;text-decoration-thickness:1px;text-underline-offset:.22em}
 a:hover{color:var(--red)}
 :focus-visible{outline:3px solid var(--pink);outline-offset:4px}
-::selection{background:var(--pink);color:#06080c}
+::selection{background:var(--pink);color:var(--on-red)}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
 
-nav[aria-label="Primary"] a[aria-current="true"]{box-shadow:inset 0 0 0 3px var(--ink);letter-spacing:.22em}
+nav[aria-label="Primary"] a[aria-current="true"]{color:var(--red);box-shadow:inset 3px 0 0 var(--red)}
+#mobileMenu a[aria-current="true"]{color:var(--red)}
+#mobileBar{display:none}
+@media (max-width:859px){
+  nav[aria-label="Primary"]{display:none!important}
+  #mobileBar{display:flex}
+  body{padding-right:0;padding-top:56px}
+}
+@media (min-width:860px){
+  #mobileMenu,#mobileMenuBackdrop{display:none!important}
+}
 </style>
 </helmet>
 
-<a href="#main" style="position:fixed;left:16px;top:-80px;z-index:400;background:var(--pink);color:#06080c;padding:12px 18px;font:700 14px/1 'Space Mono',monospace;text-decoration:none" style-focus="top:16px">Skip to content</a>
+<a href="#main" style="position:fixed;left:16px;top:-80px;z-index:400;background:var(--pink);color:var(--on-red);padding:12px 18px;font:700 14px/1 'Space Mono',monospace;text-decoration:none" style-focus="top:16px">Skip to content</a>
 
 <nav aria-label="Primary" style="position:fixed;right:0;top:0;bottom:0;z-index:200;width:var(--rail-w);display:flex;flex-direction:column;background:var(--bg);border-left:1px solid var(--line)">
-  <div aria-hidden="true" style="flex:0 0 auto;width:100%;height:3px;background:linear-gradient(180deg,#83E2D2,#668FE5,#B89A7B,#D8C4ED)"></div>
-  <a href="../index.html" aria-label="K. Ewing, home" style="flex:0 0 auto;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(180deg);padding:16px 0;font:400 20px/1 'Trickster',serif;letter-spacing:0;text-decoration:none;color:var(--ink);border-bottom:1px solid var(--line);min-height:44px;transition:color .2s ease" style-hover="color:var(--c-turquoise)">K. Ewing</a>
-  <a href="../index.html#work" aria-current="true" style="flex:1 1 0;min-height:44px;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(180deg);font:700 11px/1 'Inter',sans-serif;letter-spacing:.14em;text-decoration:none;color:var(--on-red);background:var(--c-blue);transition:letter-spacing .2s ease" style-hover="letter-spacing:.22em">WORK</a>
-  <a href="../index.html#workbench" aria-current="false" style="flex:1 1 0;min-height:44px;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(180deg);font:700 11px/1 'Inter',sans-serif;letter-spacing:.14em;text-decoration:none;color:var(--on-red);background:var(--c-copper);transition:letter-spacing .2s ease" style-hover="letter-spacing:.22em">WORKBENCH</a>
-  <a href="../index.html#about" aria-current="false" style="flex:1 1 0;min-height:44px;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(180deg);font:700 11px/1 'Inter',sans-serif;letter-spacing:.14em;text-decoration:none;color:var(--on-red);background:var(--c-opal);transition:letter-spacing .2s ease" style-hover="letter-spacing:.22em">ABOUT</a>
-  <a href="../index.html#contact" aria-current="false" style="flex:1 1 0;min-height:44px;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(180deg);font:700 11px/1 'Inter',sans-serif;letter-spacing:.14em;text-decoration:none;color:var(--on-red);background:var(--c-turquoise);transition:letter-spacing .2s ease" style-hover="letter-spacing:.22em">CONTACT</a>
-  <button type="button" onClick="{{ toggleTheme }}" aria-pressed="{{ lightPressed }}" aria-label="{{ themeLabel }} mode" style="flex:0 0 auto;min-height:44px;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(180deg);font:700 10px/1 'Inter',sans-serif;letter-spacing:.12em;text-transform:uppercase;border:0;border-top:1px solid var(--line);background:var(--ink);color:var(--bg);cursor:pointer;padding:12px 0" style-hover="background:var(--red);color:var(--on-red)">{{ themeLabel }}</button>
+  <a href="../index.html" aria-label="K. Ewing, home" class="mono" style="flex:0 0 auto;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(180deg);padding:16px 0;font-size:15px;font-weight:700;letter-spacing:.04em;text-decoration:none;color:var(--ink);border-bottom:1px solid var(--line);min-height:44px;transition:color .2s ease" style-hover="color:var(--pink)">K. EWING</a>
+  <a href="../index.html#work" aria-current="true" class="mono" style="flex:1 1 0;min-height:44px;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(180deg);font-size:11px;font-weight:700;letter-spacing:.18em;text-decoration:none;color:var(--ink);border-bottom:1px solid var(--line);transition:color .2s ease,letter-spacing .2s ease" style-hover="color:var(--pink);letter-spacing:.26em">WORK</a>
+  <a href="../index.html#workbench" aria-current="false" class="mono" style="flex:1 1 0;min-height:44px;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(180deg);font-size:11px;font-weight:700;letter-spacing:.18em;text-decoration:none;color:var(--ink);border-bottom:1px solid var(--line);transition:color .2s ease,letter-spacing .2s ease" style-hover="color:var(--pink);letter-spacing:.26em">WORKBENCH</a>
+  <a href="../index.html#about" aria-current="false" class="mono" style="flex:1 1 0;min-height:44px;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(180deg);font-size:11px;font-weight:700;letter-spacing:.18em;text-decoration:none;color:var(--ink);border-bottom:1px solid var(--line);transition:color .2s ease,letter-spacing .2s ease" style-hover="color:var(--pink);letter-spacing:.26em">ABOUT</a>
+  <a href="../index.html#contact" aria-current="false" class="mono" style="flex:1 1 0;min-height:44px;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(180deg);font-size:11px;font-weight:700;letter-spacing:.18em;text-decoration:none;color:var(--ink);transition:color .2s ease,letter-spacing .2s ease" style-hover="color:var(--pink);letter-spacing:.26em">CONTACT</a>
+  <button type="button" onClick="{{ toggleTheme }}" aria-pressed="{{ lightPressed }}" aria-label="Switch to {{ themeLabel }} mode" class="mono" style="flex:0 0 auto;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(180deg);padding:14px 0;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;color:var(--muted);border:0;border-top:1px solid var(--line);background:var(--bg);cursor:pointer;min-height:44px;transition:color .2s ease" style-hover="color:var(--pink)">{{ themeLabel }}</button>
+</nav>
+
+<div id="mobileBar" class="mono" role="navigation" aria-label="Mobile bar" style="position:fixed;left:0;right:0;top:0;z-index:220;align-items:center;justify-content:space-between;padding:0 16px;height:56px;background:var(--bg);border-bottom:1px solid var(--line)">
+  <a href="../index.html" aria-label="K. Ewing, home" style="font-size:15px;font-weight:700;letter-spacing:.04em;text-decoration:none;color:var(--ink);min-height:44px;display:inline-flex;align-items:center" style-hover="color:var(--pink)">K. EWING</a>
+  <button type="button" onClick="{{ menuToggle }}" aria-expanded="{{ menuExpandedAttr }}" aria-controls="mobileMenu" aria-label="{{ menuAriaLabel }}" style="min-width:44px;min-height:44px;padding:0 12px;border:1px solid var(--line);background:transparent;color:var(--ink);font:700 11px/1 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;cursor:pointer" style-hover="color:var(--pink);border-color:var(--pink)">{{ menuButtonLabel }}</button>
+</div>
+
+<div id="mobileMenuBackdrop" aria-hidden="true" onClick="{{ menuClose }}" style="{{ menuBackdropStyle }}"></div>
+
+<nav id="mobileMenu" aria-label="Mobile" class="mono" style="{{ menuPanelStyle }}">
+  <a href="../index.html#work" onClick="{{ menuClose }}" style="display:flex;align-items:center;min-height:52px;padding:0 20px;font-size:14px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;color:var(--ink);border-bottom:1px solid var(--line)" style-hover="color:var(--pink)">Work</a>
+  <a href="../index.html#workbench" onClick="{{ menuClose }}" style="display:flex;align-items:center;min-height:52px;padding:0 20px;font-size:14px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;color:var(--ink);border-bottom:1px solid var(--line)" style-hover="color:var(--pink)">Workbench</a>
+  <a href="../index.html#about" onClick="{{ menuClose }}" style="display:flex;align-items:center;min-height:52px;padding:0 20px;font-size:14px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;color:var(--ink);border-bottom:1px solid var(--line)" style-hover="color:var(--pink)">About</a>
+  <a href="../index.html#contact" onClick="{{ menuClose }}" style="display:flex;align-items:center;min-height:52px;padding:0 20px;font-size:14px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;color:var(--ink);border-bottom:1px solid var(--line)" style-hover="color:var(--pink)">Contact</a>
+  <button type="button" onClick="{{ toggleTheme }}" aria-pressed="{{ lightPressed }}" style="display:flex;align-items:center;justify-content:space-between;width:100%;min-height:52px;padding:0 20px;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;border:0;background:transparent;color:var(--muted);cursor:pointer" style-hover="color:var(--pink)"><span>Theme</span><span>{{ themeLabel }}</span></button>
 </nav>
 
 <header style="padding:clamp(28px,4vw,48px) clamp(16px,5vw,80px) clamp(56px,7vw,100px);border-bottom:2px solid var(--ink);position:relative;overflow:hidden">
   <p style="margin:0 0 clamp(40px,6vw,80px);font:400 12px/1 'Space Mono',monospace;letter-spacing:.08em;color:var(--muted)"><a href="../index.html">~</a> / <span style="color:var(--ink)">work/hazadapt</span></p>
   <p style="margin:0 0 14px;font:400 12px/1.6 'Space Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--pink)">UX Design · Content Strategy · Public Safety</p>
-  <h1 style="margin:0;font:900 clamp(56px,12vw,220px)/.82 'Big Shoulders Display',sans-serif;text-transform:uppercase;letter-spacing:-.015em;overflow-wrap:anywhere;text-wrap:balance">hazadapt</h1>
+  <h1 style="margin:0;font:400 clamp(56px,12vw,220px)/.82 'Archivo Black',sans-serif;text-transform:uppercase;letter-spacing:-.015em;overflow-wrap:anywhere;text-wrap:balance">hazadapt</h1>
   <div style="display:flex;flex-wrap:wrap;gap:40px 64px;margin-top:clamp(32px,4vw,56px);align-items:flex-start">
     <div style="flex:1 1 420px;min-width:0;display:grid;gap:28px">
-      <p style="margin:0;max-width:34ch;font:600 clamp(22px,2.2vw,32px)/1.25 'Source Sans 3',sans-serif;text-wrap:pretty">A library of hazard guides and prep activities built to help people build resilience before a crisis hits and recover faster after.</p>
+      <p style="margin:0;max-width:34ch;font:600 clamp(22px,2.2vw,32px)/1.25 'Inter',sans-serif;text-wrap:pretty">A library of hazard guides and prep activities built to help people build resilience before a crisis hits and recover faster after.</p>
       <dl style="margin:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,180px),1fr));gap:18px 28px;padding-top:20px;border-top:1px solid var(--line)">
-        <div style="display:grid;gap:4px"><dt style="font:400 11px/1.3 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">Role</dt><dd style="margin:0;font:600 17px/1.35 'Source Sans 3',sans-serif">Lead UX Designer</dd></div>
-        <div style="display:grid;gap:4px"><dt style="font:400 11px/1.3 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">Timeline</dt><dd style="margin:0;font:600 17px/1.35 'Source Sans 3',sans-serif">2021 to present</dd></div>
-        <div style="display:grid;gap:4px"><dt style="font:400 11px/1.3 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">Platform</dt><dd style="margin:0;font:600 17px/1.35 'Source Sans 3',sans-serif">Web, Mobile Web</dd></div>
+        <div style="display:grid;gap:4px"><dt style="font:400 11px/1.3 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">Role</dt><dd style="margin:0;font:600 17px/1.35 'Inter',sans-serif">Lead UX Designer</dd></div>
+        <div style="display:grid;gap:4px"><dt style="font:400 11px/1.3 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">Timeline</dt><dd style="margin:0;font:600 17px/1.35 'Inter',sans-serif">2021 to present</dd></div>
+        <div style="display:grid;gap:4px"><dt style="font:400 11px/1.3 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">Platform</dt><dd style="margin:0;font:600 17px/1.35 'Inter',sans-serif">Web, Mobile Web</dd></div>
       </dl>
-      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Source Sans 3',sans-serif;text-wrap:pretty">My role spanned Prep Checks, LoCo, and supporting research and platform work across the HazAdapt preparedness ecosystem, from the everyday exercises residents use to get ready, to the local safety information that meets them where they are.</p>
+      <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Inter',sans-serif;text-wrap:pretty">My role spanned Prep Checks, LoCo, and supporting research and platform work across the HazAdapt preparedness ecosystem, from the everyday exercises residents use to get ready, to the local safety information that meets them where they are.</p>
       
     </div>
     <img src="../images/hazadapt_album.png" alt="hazadapt logo" style="flex:1 1 360px;min-width:0;max-width:640px;height:auto;display:block;transform:rotate(1.5deg);box-shadow:14px 14px 0 var(--red)">
@@ -68,23 +91,23 @@ nav[aria-label="Primary"] a[aria-current="true"]{box-shadow:inset 0 0 0 3px var(
 
     <section id="s01" aria-labelledby="s01-h" style="display:grid;gap:22px;padding:clamp(56px,7vw,110px) 0;scroll-margin-top:24px">
       <p style="margin:0;display:flex;align-items:baseline;gap:14px"><span style="font:400 12px/1 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">~/work/hazadapt</span></p>
-      <h2 id="s01-h" style="margin:0 0 8px;max-width:22ch;font:700 clamp(34px,4vw,60px)/1.02 'Source Sans 3',sans-serif;letter-spacing:-.025em;text-wrap:balance">Projects &amp; Features</h2>
+      <h2 id="s01-h" style="margin:0 0 8px;max-width:22ch;font:700 clamp(34px,4vw,60px)/1.02 'Inter',sans-serif;letter-spacing:-.025em;text-wrap:balance">Projects &amp; Features</h2>
       <div style="display:grid;border-top:2px solid var(--ink)">
         <a href="hazadapt-loco.html" style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:12px 40px;padding:clamp(24px,3vw,40px) 0;border-bottom:1px solid var(--line);text-decoration:none" style-hover="color:var(--ink);padding-left:12px">
-          <span style="flex:1 1 360px;min-width:0;display:grid;gap:8px"><span style="font:700 12px/1 'Space Mono',monospace;letter-spacing:.08em;color:var(--pink)">01 · hazadapt-loco.fig</span><span style="font:900 clamp(44px,6vw,96px)/.85 'Big Shoulders Display',sans-serif;text-transform:uppercase">LoCo</span></span>
-          <span style="flex:0 1 340px;display:grid;gap:12px"><span style="font:400 19px/1.4 'Source Sans 3',sans-serif">Bringing trusted local safety information directly into HazAdapt's Hazard Guides.</span><span style="font:700 13px/1 'Space Mono',monospace;letter-spacing:.06em;text-transform:uppercase;text-decoration:underline;text-underline-offset:.22em">View Project →</span></span>
+          <span style="flex:1 1 360px;min-width:0;display:grid;gap:8px"><span style="font:700 12px/1 'Space Mono',monospace;letter-spacing:.08em;color:var(--pink)">01 · hazadapt-loco.fig</span><span style="font:400 clamp(44px,6vw,96px)/.85 'Archivo Black',sans-serif;text-transform:uppercase;overflow-wrap:anywhere">LoCo</span></span>
+          <span style="flex:0 1 340px;display:grid;gap:12px"><span style="font:400 19px/1.4 'Inter',sans-serif">Bringing trusted local safety information directly into HazAdapt's Hazard Guides.</span><span style="font:700 13px/1 'Space Mono',monospace;letter-spacing:.06em;text-transform:uppercase;text-decoration:underline;text-underline-offset:.22em">View Project →</span></span>
         </a>
         <a href="hazadapt-prep-checks.html" style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:12px 40px;padding:clamp(24px,3vw,40px) 0;border-bottom:1px solid var(--line);text-decoration:none" style-hover="color:var(--ink);padding-left:12px">
-          <span style="flex:1 1 360px;min-width:0;display:grid;gap:8px"><span style="font:700 12px/1 'Space Mono',monospace;letter-spacing:.08em;color:var(--pink)">02 · hazadapt-prep-checks.fig</span><span style="font:900 clamp(44px,6vw,96px)/.85 'Big Shoulders Display',sans-serif;text-transform:uppercase">Prep Checks</span></span>
-          <span style="flex:0 1 340px;display:grid;gap:12px"><span style="font:400 19px/1.4 'Source Sans 3',sans-serif">Bite-sized preparedness activities people actually finish.</span><span style="font:700 13px/1 'Space Mono',monospace;letter-spacing:.06em;text-transform:uppercase;text-decoration:underline;text-underline-offset:.22em">View Project →</span></span>
+          <span style="flex:1 1 360px;min-width:0;display:grid;gap:8px"><span style="font:700 12px/1 'Space Mono',monospace;letter-spacing:.08em;color:var(--pink)">02 · hazadapt-prep-checks.fig</span><span style="font:400 clamp(44px,6vw,96px)/.85 'Archivo Black',sans-serif;text-transform:uppercase;overflow-wrap:anywhere">Prep Checks</span></span>
+          <span style="flex:0 1 340px;display:grid;gap:12px"><span style="font:400 19px/1.4 'Inter',sans-serif">Bite-sized preparedness activities people actually finish.</span><span style="font:700 13px/1 'Space Mono',monospace;letter-spacing:.06em;text-transform:uppercase;text-decoration:underline;text-underline-offset:.22em">View Project →</span></span>
         </a>
       </div>
-      <div style="margin-top:clamp(20px,3vw,40px);padding:clamp(20px,2.4vw,32px);background:var(--ink);color:var(--bg);transform:rotate(-.6deg);box-shadow:10px 10px 0 var(--red);max-width:760px"><p style="margin:0;font:400 clamp(18px,1.4vw,21px)/1.55 'Source Sans 3',sans-serif"><strong>Looking for ResiliencePoint?</strong> ResiliencePoint is my primary platform case study from my work at HazAdapt. <a href="hazadapt-resiliencepoint.html" style="color:var(--bg);font-weight:700">View the ResiliencePoint Case Study →</a></p></div>
+      <div style="margin-top:clamp(20px,3vw,40px);padding:clamp(20px,2.4vw,32px);background:var(--ink);color:var(--bg);transform:rotate(-.6deg);box-shadow:10px 10px 0 var(--red);max-width:760px"><p style="margin:0;font:400 clamp(18px,1.4vw,21px)/1.55 'Inter',sans-serif"><strong>Looking for ResiliencePoint?</strong> ResiliencePoint is my primary platform case study from my work at HazAdapt. <a href="hazadapt-resiliencepoint.html" style="color:var(--bg);font-weight:700">View the ResiliencePoint Case Study →</a></p></div>
     </section>
   </main>
 </div>
 
-<nav aria-label="Back" style="border-top:2px solid var(--ink);padding:clamp(36px,5vw,72px) clamp(16px,5vw,80px)"><a href="../index.html#work" style="font:900 clamp(40px,5vw,80px)/.9 'Big Shoulders Display',sans-serif;text-transform:uppercase;text-decoration:none" style-hover="color:var(--red)">← All work</a></nav>
+<nav aria-label="Back" style="border-top:2px solid var(--ink);padding:clamp(36px,5vw,72px) clamp(16px,5vw,80px)"><a href="../index.html#work" style="font:400 clamp(40px,5vw,80px)/.9 'Archivo Black',sans-serif;text-transform:uppercase;text-decoration:none;overflow-wrap:anywhere" style-hover="color:var(--red)">← All work</a></nav>
 
 <footer style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:16px;padding:32px clamp(16px,5vw,80px) 48px;font:400 12px/1.6 'Space Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)">
   <span>~/krystyna-ewing · © 2026</span>
@@ -94,13 +117,17 @@ nav[aria-label="Primary"] a[aria-current="true"]{box-shadow:inset 0 0 0 3px var(
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;defaultTheme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;dark&quot;,&quot;light&quot;],&quot;default&quot;:&quot;dark&quot;,&quot;tsType&quot;:&quot;'dark'|'light'&quot;,&quot;section&quot;:&quot;Look&quot;},&quot;grain&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Look&quot;}}">
 class Component extends DCLogic {
-  state = { theme: this.props.defaultTheme ?? 'dark', active: 's01', tocOpen: true };
+  state = { theme: this.props.defaultTheme ?? 'dark', active: 's01', menuOpen: false, tocOpen: true };
   applyRoot() {
     const r = document.documentElement;
     r.dataset.theme = this.state.theme;
     r.dataset.grain = (this.props.grain ?? true) ? 'on' : 'off';
   }
   componentDidMount() {
+    this.onMenuResize = () => { if (window.innerWidth >= 860 && this.state.menuOpen) { document.body.style.overflow = ''; this.setState({ menuOpen: false }); } };
+    window.addEventListener('resize', this.onMenuResize);
+    this.onMenuKeydown = e => { if (e.key === 'Escape' && this.state.menuOpen) { document.body.style.overflow = ''; this.setState({ menuOpen: false }); } };
+    window.addEventListener('keydown', this.onMenuKeydown);
     this.applyRoot();
     this.io = new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecting) this.setState({ active: en.target.id }); }), { rootMargin: '-40% 0px -55% 0px' });
     document.querySelectorAll('main section[id]').forEach(el => this.io.observe(el));
@@ -109,7 +136,7 @@ class Component extends DCLogic {
     if (pp.defaultTheme !== this.props.defaultTheme && this.props.defaultTheme) this.setState({ theme: this.props.defaultTheme }, () => this.applyRoot());
     else this.applyRoot();
   }
-  componentWillUnmount() { if (this.io) this.io.disconnect(); }
+  componentWillUnmount() { if (this.io) this.io.disconnect(); window.removeEventListener('resize', this.onMenuResize); window.removeEventListener('keydown', this.onMenuKeydown); }
   renderVals() {
     const s = this.state, light = s.theme === 'light', mk = {};
     for (let i = 1; i <= 24; i++) { const id = 's' + String(i).padStart(2, '0'); mk[id] = s.active === id ? '■' : '□'; }
@@ -117,6 +144,13 @@ class Component extends DCLogic {
       mk, tocOpen: s.tocOpen, tocClosed: !s.tocOpen, tocExpanded: s.tocOpen ? 'true' : 'false', tocIcon: '− Hide',
       toggleToc: () => this.setState(st => ({ tocOpen: !st.tocOpen })),
       themeLabel: light ? 'Dark' : 'Light', lightPressed: light ? 'true' : 'false',
+      menuExpandedAttr: s.menuOpen ? 'true' : 'false',
+      menuButtonLabel: s.menuOpen ? 'CLOSE' : 'MENU',
+      menuAriaLabel: s.menuOpen ? 'Close menu' : 'Open menu',
+      menuClose: () => { document.body.style.overflow = ''; this.setState({ menuOpen: false }); },
+      menuToggle: () => { const next = !s.menuOpen; document.body.style.overflow = next ? 'hidden' : ''; this.setState({ menuOpen: next }); },
+      menuBackdropStyle: s.menuOpen ? { display: 'block', position: 'fixed', inset: '56px 0 0 0', zIndex: 215, background: 'rgba(0,0,0,.5)' } : { display: 'none' },
+      menuPanelStyle: s.menuOpen ? { display: 'grid', position: 'fixed', left: 0, right: 0, top: 56, zIndex: 220, background: 'var(--bg)', borderBottom: '1px solid var(--line)', maxHeight: 'calc(100vh - 56px)', overflowY: 'auto' } : { display: 'none' },
       toggleTheme: () => this.setState(st => ({ theme: st.theme === 'light' ? 'dark' : 'light' }), () => this.applyRoot())
     };
   }
