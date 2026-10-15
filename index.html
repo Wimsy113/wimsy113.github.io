@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>html,body{background:#0B0B0B;margin:0}</style>
+<script>try{if(localStorage.getItem('ke-theme')==='light')document.documentElement.setAttribute('data-theme','light');}catch(e){}</script>
 <script src="./support.js"></script>
 </head>
 <body>
@@ -17,13 +18,14 @@
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
 <script src="./image-slot.js"></script>
 <style>
-html{--bg:#0B0B0B;--fg:#F2F0E9;--green:#A8FF00;--charcoal:#252525;--muted:#9a978e;--line:rgba(242,240,233,.2);--rail-w:48px;--margin-w:96px;--grain:.14;background:var(--bg);color:var(--fg);scroll-behavior:smooth}
+html{--bg:#0B0B0B;--fg:#F2F0E9;--green:#A8FF00;--on-green:#0B0B0B;--charcoal:#252525;--muted:#9a978e;--line:rgba(242,240,233,.2);--rail-w:48px;--margin-w:96px;--grain:.14;background:var(--bg);color:var(--fg);scroll-behavior:smooth}
+html[data-theme="light"]{--bg:#F2F0E9;--fg:#0B0B0B;--green:#447000;--on-green:#F2F0E9;--charcoal:#E4E1D6;--muted:#5f5c4e;--line:rgba(11,11,11,.2)}
 body{margin:0;padding-right:var(--rail-w);background:var(--bg);color:var(--fg);font-family:"Inter",system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:300;opacity:var(--grain);mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E")}
 a{color:inherit;text-decoration-thickness:1px;text-underline-offset:.22em}
 a:hover{color:var(--green)}
 :focus-visible{outline:3px solid var(--green);outline-offset:3px}
-::selection{background:var(--green);color:#0B0B0B}
+::selection{background:var(--green);color:var(--on-green)}
 .display{font-family:'Archivo Black','Inter',sans-serif;font-weight:400;text-transform:uppercase}
 .mono{font-family:'Space Mono',monospace}
 #introVeil{opacity:0;pointer-events:none}
@@ -63,7 +65,7 @@ nav[aria-label="Primary"] a[aria-current="true"]{color:var(--green);box-shadow:i
 </style>
 </helmet>
 
-<a href="#main" style="position:fixed;left:16px;top:-80px;z-index:400;background:var(--green);color:#0B0B0B;padding:12px 18px;font:700 14px/1 'Space Mono',monospace;text-decoration:none" style-focus="top:16px">Skip to content</a>
+<a href="#main" style="position:fixed;left:16px;top:-80px;z-index:400;background:var(--green);color:var(--on-green);padding:12px 18px;font:700 14px/1 'Space Mono',monospace;text-decoration:none" style-focus="top:16px">Skip to content</a>
 
 <div id="introVeil" aria-hidden="true" style="position:fixed;inset:0;z-index:500;background:#000"></div>
 <div ref="{{ progressRef }}" aria-hidden="true" style="position:fixed;left:0;top:0;z-index:250;height:3px;width:0%;background:var(--green);pointer-events:none"></div>
@@ -76,6 +78,7 @@ nav[aria-label="Primary"] a[aria-current="true"]{color:var(--green);box-shadow:i
   <a href="#workbench" aria-current="{{ curBench }}" class="mono" style="flex:1 1 0;min-height:44px;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(180deg);font-size:11px;font-weight:700;letter-spacing:.18em;text-decoration:none;color:var(--fg);border-bottom:1px solid var(--line);transition:color .2s ease,letter-spacing .2s ease" style-hover="color:var(--green);letter-spacing:.26em">WORKBENCH</a>
   <a href="#about" aria-current="{{ curAbout }}" class="mono" style="flex:1 1 0;min-height:44px;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(180deg);font-size:11px;font-weight:700;letter-spacing:.18em;text-decoration:none;color:var(--fg);border-bottom:1px solid var(--line);transition:color .2s ease,letter-spacing .2s ease" style-hover="color:var(--green);letter-spacing:.26em">ABOUT</a>
   <a href="#contact" aria-current="{{ curContact }}" class="mono" style="flex:1 1 0;min-height:44px;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(180deg);font-size:11px;font-weight:700;letter-spacing:.18em;text-decoration:none;color:var(--fg);transition:color .2s ease,letter-spacing .2s ease" style-hover="color:var(--green);letter-spacing:.26em">CONTACT</a>
+  <button type="button" onClick="{{ toggleTheme }}" aria-pressed="{{ lightPressed }}" aria-label="Switch to {{ themeLabel }} mode" class="mono" style="flex:0 0 auto;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(180deg);padding:14px 0;font-size:10px;font-weight:700;letter-spacing:.14em;text-decoration:none;color:var(--muted);border:0;border-top:1px solid var(--line);background:var(--bg);cursor:pointer;min-height:44px;transition:color .2s ease" style-hover="color:var(--green)">{{ themeLabel }}</button>
 </nav>
 
 <div id="pageGrid">
@@ -247,7 +250,7 @@ nav[aria-label="Primary"] a[aria-current="true"]{color:var(--green);box-shadow:i
     <li style="border:1px solid var(--line);padding:8px 12px">Sculpture &amp; mixed media</li>
     <li style="border:1px solid var(--line);padding:8px 12px">Illustration &amp; 3D modeling</li>
     <li style="border:1px solid var(--line);padding:8px 12px">Creative coding</li>
-    <li style="padding:8px 12px;background:var(--green);color:#0B0B0B">Strange prototypes</li>
+    <li style="padding:8px 12px;background:var(--green);color:var(--on-green)">Strange prototypes</li>
   </ul>
 
   <div ref="{{ deskRef }}" style="{{ deskStyle }}">
@@ -294,15 +297,15 @@ nav[aria-label="Primary"] a[aria-current="true"]{color:var(--green);box-shadow:i
       </div>
     </div>
     <div style="{{ sticky.style }}">
-      <div style="position:relative;padding:18px 16px 16px;background:var(--green);color:#0B0B0B">
-        <button type="button" onPointerDown="{{ sticky.down }}" onPointerMove="{{ sticky.move }}" onPointerUp="{{ sticky.up }}" onKeyDown="{{ sticky.key }}" aria-label="Move note. Drag, or use arrow keys." class="mono" style="position:absolute;top:0;right:0;min-width:36px;min-height:36px;padding:0 10px;border:0;border-left:1px solid #0B0B0B;background:var(--green);color:#0B0B0B;font-size:14px;cursor:grab;touch-action:none">⠿</button>
+      <div style="position:relative;padding:18px 16px 16px;background:var(--green);color:var(--on-green)">
+        <button type="button" onPointerDown="{{ sticky.down }}" onPointerMove="{{ sticky.move }}" onPointerUp="{{ sticky.up }}" onKeyDown="{{ sticky.key }}" aria-label="Move note. Drag, or use arrow keys." class="mono" style="position:absolute;top:0;right:0;min-width:36px;min-height:36px;padding:0 10px;border:0;border-left:1px solid var(--on-green);background:var(--green);color:var(--on-green);font-size:14px;cursor:grab;touch-action:none">⠿</button>
         <p class="mono" style="margin:0 0 6px;font-size:10px;letter-spacing:.1em;text-transform:uppercase">More to come</p>
         <p style="margin:0;font:600 15px/1.4 'Inter',sans-serif">A couple of the physical pieces made it onto the table. More — sculpture, prints, anything made with my hands instead of a tablet — is still getting photographed.</p>
       </div>
     </div>
   </div>
 
-  <a href="art.html" class="mono" style="margin-top:clamp(24px,3.5vw,40px);display:inline-flex;align-items:center;min-height:44px;font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;background:var(--fg);color:var(--bg);padding:0 18px;text-decoration:none" style-hover="background:var(--green);color:#0B0B0B">See what else I've been making →</a>
+  <a href="art.html" class="mono" style="margin-top:clamp(24px,3.5vw,40px);display:inline-flex;align-items:center;min-height:44px;font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;background:var(--fg);color:var(--bg);padding:0 18px;text-decoration:none" style-hover="background:var(--green);color:var(--on-green)">See what else I've been making →</a>
 </section>
 
 <section id="about" aria-labelledby="about-h" style="position:relative;padding:clamp(40px,6vw,72px) clamp(16px,3vw,32px);border-bottom:1px solid var(--line);display:grid;grid-template-columns:repeat(12,1fr);gap:clamp(20px,3vw,32px)">
@@ -320,13 +323,35 @@ nav[aria-label="Primary"] a[aria-current="true"]{color:var(--green);box-shadow:i
     </ul>
     <a href="#" class="mono" style="font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;min-height:44px;display:inline-flex;align-items:center" style-hover="color:var(--green)">Want the longer version? View résumé →</a>
   </div>
+
+  <div data-reveal style="grid-column:1/-1;margin-top:clamp(28px,4.5vw,52px);position:relative;border:1px solid var(--line)">
+    <div class="regmark" aria-hidden="true" style="left:-1px;top:-1px"></div>
+    <div class="regmark" aria-hidden="true" style="right:-1px;top:-1px"></div>
+    <div class="regmark" aria-hidden="true" style="left:-1px;bottom:-1px"></div>
+    <div class="regmark" aria-hidden="true" style="right:-1px;bottom:-1px"></div>
+    <div class="mono" style="display:flex;justify-content:space-between;gap:12px;padding:12px clamp(16px,2.4vw,24px);border-bottom:1px solid var(--line);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)">
+      <span>Specimen — Cicadidae, dorsal view</span>
+      <span>Field note</span>
+    </div>
+    <div style="position:relative;overflow:hidden;background:#000">
+      <img src="images/cicada-hero.jpg" alt="Macro photograph of a cicada, wings spread, viewed from above against a black background." style="display:block;width:100%;height:auto;filter:grayscale(1) contrast(1.35) brightness(1.05)">
+      <span aria-hidden="true" style="position:absolute;inset:0;mix-blend-mode:color;background:var(--green);opacity:.24"></span>
+      <span aria-hidden="true" class="mono" style="position:absolute;left:3%;top:9%;font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:#A8FF00;border:1px solid #A8FF00;padding:2px 6px;background:rgba(0,0,0,.6)">01 — Wing vein</span>
+      <span aria-hidden="true" class="mono" style="position:absolute;right:4%;bottom:12%;font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:#A8FF00;border:1px solid #A8FF00;padding:2px 6px;background:rgba(0,0,0,.6)">02 — Thorax</span>
+    </div>
+    <div style="display:grid;gap:14px;padding:clamp(16px,2.4vw,24px);grid-template-columns:repeat(auto-fit,minmax(220px,1fr))">
+      <p class="mono" style="margin:0;font-size:12px;line-height:1.7;color:var(--muted)"><strong style="color:var(--fg)">01 — Wing vein.</strong> Branching, load-bearing structure — the same kind of logic I look for in an interface, just evolved instead of drawn.</p>
+      <p class="mono" style="margin:0;font-size:12px;line-height:1.7;color:var(--muted)"><strong style="color:var(--fg)">02 — Thorax.</strong> Built to vibrate loud enough to find a mate from a quarter mile off. No notes app required.</p>
+    </div>
+    <p class="mono" style="margin:0;padding:10px clamp(16px,2.4vw,24px);border-top:1px solid var(--line);font-size:10px;letter-spacing:.02em;color:var(--muted)">Photograph by <a href="https://unsplash.com/@mayulec" style="color:var(--fg)" style-hover="color:var(--green)">Maya Alexa G. Romero</a> on <a href="https://unsplash.com/photos/a-colorful-cicada-with-translucent-wings-on-black-background-YVafzB3-8jQ" style="color:var(--fg)" style-hover="color:var(--green)">Unsplash</a>, licensed under the <a href="https://unsplash.com/license" style="color:var(--fg)" style-hover="color:var(--green)">Unsplash License</a>. Desaturated and tinted to match the site.</p>
+  </div>
 </section>
 
 </main>
 </div>
 
 <footer id="contact" style="position:relative;overflow:hidden;padding:0 0 64px">
-  <a href="mailto:hello@krystynaewing.com" aria-label="hello@krystynaewing.com — say something" onMouseEnter="{{ mqPause }}" onMouseLeave="{{ mqPlay }}" onFocus="{{ mqPause }}" onBlur="{{ mqPlay }}" style="position:relative;display:block;overflow:hidden;background:var(--green);color:#0B0B0B;text-decoration:none;padding:clamp(14px,2vw,26px) 0;margin:24px 0 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)" style-hover="color:#0B0B0B">
+  <a href="mailto:hello@krystynaewing.com" aria-label="hello@krystynaewing.com — say something" onMouseEnter="{{ mqPause }}" onMouseLeave="{{ mqPlay }}" onFocus="{{ mqPause }}" onBlur="{{ mqPlay }}" style="position:relative;display:block;overflow:hidden;background:var(--green);color:var(--on-green);text-decoration:none;padding:clamp(14px,2vw,26px) 0;margin:24px 0 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)" style-hover="color:var(--on-green)">
     <div ref="{{ mqRef }}" aria-hidden="true" class="display" style="display:flex;width:max-content;white-space:nowrap;font-size:clamp(40px,8vw,120px);line-height:.9">
       <span style="padding-right:.4em">hello@krystynaewing.com ✕ say something ✕</span><span style="padding-right:.4em">hello@krystynaewing.com ✕ say something ✕</span>
     </div>
@@ -351,6 +376,7 @@ class Component extends DCLogic {
   state = {
     active: 'top', bio: false,
     narrow: window.innerWidth < 760, canHover: window.matchMedia('(hover: hover) and (pointer: fine)').matches,
+    theme: document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark',
     pieces: this.defaults(), z: {}, top: 10
   };
   componentDidMount() {
@@ -459,6 +485,14 @@ class Component extends DCLogic {
     const r = {
       deskRef: this.deskRef, mqRef: this.mqRef, progressRef: this.progressRef, cursorRef: this.cursorRef,
       curTop: cur('top'), curWork: cur('work'), curBench: cur('workbench'), curAbout: cur('about'), curContact: cur('contact'),
+      themeLabel: s.theme === 'light' ? 'DARK' : 'LIGHT',
+      lightPressed: s.theme === 'light' ? 'true' : 'false',
+      toggleTheme: () => {
+        const next = s.theme === 'light' ? 'dark' : 'light';
+        document.documentElement.setAttribute('data-theme', next);
+        try { localStorage.setItem('ke-theme', next); } catch (e) {}
+        this.setState({ theme: next });
+      },
       cueWord: s.bio ? 'Collapse' : 'Expand bio',
       cueGlyph: s.bio ? '[ − ]' : '[ + ]',
       bioAriaLabel: s.bio ? 'Collapse — hide full bio' : 'Expand bio — reveal full bio',
