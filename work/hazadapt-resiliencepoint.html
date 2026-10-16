@@ -346,7 +346,17 @@ nav[aria-label="Primary"] a[aria-current="true"]{color:var(--red);box-shadow:ins
       <button type="button" ref="{{ closeRef }}" onClick="{{ lbClose }}" style="font:700 12px/1 'Space Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:#0B0B0B;background:#F2F0E9;border:0;padding:0 16px;min-height:44px;cursor:pointer" style-hover="background:#A8FF00">✕ Close</button>
     </div>
     <div style="min-height:0;display:flex;align-items:center;justify-content:center">
-      <img src="{{ lb.src }}" alt="{{ lb.alt }}" style="max-width:100%;max-height:100%;object-fit:contain;display:block">
+      <img src="../images/work/hazadapt-resiliencepoint/early-em-dash-screenshot.png" alt="Early EM-Dash dashboard showing hazard guide activity, usage charts, and a jurisdiction map" style="{{ lbImg0 }}">
+      <img src="../images/work/hazadapt-resiliencepoint/early-information-architecture.png" alt="Early EM-Dash resilience data table and hazard guide click-through view" style="{{ lbImg1 }}">
+      <img src="../images/work/hazadapt-resiliencepoint/dashboard-screenshot.png" alt="ResiliencePoint dashboard: trending hazards, a nationwide usage map, and summary stats" style="{{ lbImg2 }}">
+      <img src="../images/work/hazadapt-resiliencepoint/trend-cards.png" alt="Trend cards summarizing registered users, new users, prep checks completed, and emergency-item readiness" style="{{ lbImg3 }}">
+      <img src="../images/work/hazadapt-resiliencepoint/jurisdiction-map.png" alt="Jurisdiction-level risk map with low/medium/high shading" style="{{ lbImg4 }}">
+      <img src="../images/work/hazadapt-resiliencepoint/dropdown-example.png" alt="Jurisdiction risk-level map produced by the original dropdown-driven filter controls" style="{{ lbImg5 }}">
+      <img src="../images/work/hazadapt-resiliencepoint/query-builder.png" alt="Full-page Prep Check Activity query builder with hazard, area, and date range controls" style="{{ lbImg6 }}">
+      <img src="../images/work/hazadapt-resiliencepoint/residents-visitors-toggle.png" alt="Prep Check Usage by Area map with a Residents/Visitors toggle in the panel header" style="{{ lbImg7 }}">
+      <img src="../images/work/hazadapt-resiliencepoint/query-results.png" alt="Hazard Guide Activity results page for a Bleeding query, with a usage map and per-phase charts" style="{{ lbImg8 }}">
+      <img src="../images/work/hazadapt-resiliencepoint/plain-language-summaries.png" alt="Two insight cards with plain-language summaries explaining what each chart shows" style="{{ lbImg9 }}">
+      <img src="../images/work/hazadapt-resiliencepoint/saved-queries.png" alt="Saved Queries list showing past searches with date last used and quick actions" style="{{ lbImg10 }}">
     </div>
     <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px">
       <button type="button" onClick="{{ lbPrev }}" aria-label="Previous image" style="font:700 12px/1 'Space Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:#F2F0E9;background:transparent;border:1px solid #F2F0E9;padding:0 16px;min-height:44px;cursor:pointer" style-hover="background:#F2F0E9;color:#0B0B0B">← Prev</button>
@@ -403,7 +413,11 @@ class Component extends DCLogic {
     for (let i = 1; i <= 12; i++) { const id = 's' + String(i).padStart(2, '0'); mk[id] = this.state.active === id ? '■' : '□'; }
     const F = this.figs(), step = d => () => this.setState(st => ({ lb: st.lb < 0 ? st.lb : (st.lb + d + F.length) % F.length }));
     const lb = this.state.lb >= 0 ? F[this.state.lb] : { src: '', alt: '', caption: '' };
+    const lbImgStyle = i => i === this.state.lb ? { display: 'block', maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' } : { display: 'none' };
+    const lbImgs = {};
+    for (let i = 0; i < F.length; i++) lbImgs['lbImg' + i] = lbImgStyle(i);
     const r = {
+      ...lbImgs,
       tocOpen: this.state.tocOpen !== false, tocClosed: this.state.tocOpen === false, tocExpanded: this.state.tocOpen !== false ? 'true' : 'false',
       tocIcon: '− Hide',
       toggleToc: () => this.setState(s => ({ tocOpen: s.tocOpen === false })),
