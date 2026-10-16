@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>html,body{background:#0B0B0B;margin:0}</style>
 <script>try{if(localStorage.getItem('ke-theme')==='light')document.documentElement.setAttribute('data-theme','light');}catch(e){}</script>
+<script>try{if(sessionStorage.getItem('keIntroSeen')==='1')document.documentElement.dataset.intro='seen';}catch(e){}</script>
 <script src="./support.js"></script>
 </head>
 <body>
@@ -29,6 +30,7 @@ a:hover{color:var(--green)}
 .display{font-family:'Archivo Black','Inter',sans-serif;font-weight:400;text-transform:uppercase}
 .mono{font-family:'Space Mono',monospace}
 #introVeil{opacity:0;pointer-events:none}
+html[data-intro="seen"] #introVeil{display:none}
 #pageCursor{position:fixed;left:0;top:0;z-index:260;width:16px;height:16px;margin:-8px;border:1px solid var(--green);border-radius:50%;pointer-events:none;transition:width .2s ease,height .2s ease,margin .2s ease}
 @media (hover:none),(pointer:coarse){#pageCursor{display:none}}
 #livingGlow{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.14;mix-blend-mode:screen;transform:translateZ(0);will-change:transform;background:radial-gradient(520px circle at var(--mx,50vw) var(--my,20vh),color-mix(in srgb,var(--green) 55%,transparent),transparent 72%)}
@@ -556,6 +558,15 @@ class Component extends DCLogic {
       sessionStorage.setItem('keIntroSeen', '1');
     } catch (e) { this.introSeen = false; }
     if (this.introSeen) document.documentElement.dataset.intro = 'seen';
+    const veil = document.getElementById('introVeil');
+    if (veil) {
+      if (this.introSeen || this.reduce) {
+        veil.style.display = 'none';
+      } else {
+        veil.addEventListener('animationend', () => { veil.style.display = 'none'; }, { once: true });
+        setTimeout(() => { veil.style.display = 'none'; }, 1200);
+      }
+    }
 
     this.onScroll = () => {
       if (this.numTimer) { clearInterval(this.numTimer); this.numTimer = null; }
