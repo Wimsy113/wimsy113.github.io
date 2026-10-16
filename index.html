@@ -39,8 +39,8 @@ html[data-intro="seen"] #introVeil{display:none}
 @media (hover:none),(pointer:coarse){#pageCursor{display:none}}
 #livingGlow{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.14;mix-blend-mode:screen;transform:translateZ(0);will-change:transform;background:radial-gradient(520px circle at var(--mx,50vw) var(--my,20vh),color-mix(in srgb,var(--green) 55%,transparent),transparent 72%)}
 @media (hover:none),(pointer:coarse),(prefers-reduced-motion:reduce){#livingGlow{display:none}}
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}[data-reveal]{opacity:1!important;filter:none!important;translate:0!important}}
-[data-reveal]{opacity:var(--rv,0);filter:blur(calc((1 - var(--rv,0)) * 8px));translate:0 calc((1 - var(--rv,0)) * 1.2rem);transition:opacity .6s ease,filter .6s ease,translate .6s cubic-bezier(.16,1,.3,1)}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}[data-reveal]{opacity:1!important;translate:0!important}}
+[data-reveal]{opacity:var(--rv,0);translate:0 calc((1 - var(--rv,0)) * 1.2rem);transition:opacity .6s ease,translate .6s cubic-bezier(.16,1,.3,1)}
 @media (prefers-reduced-motion:no-preference){
   #workbench{transition:clip-path 1s cubic-bezier(.16,1,.3,1)}
   @keyframes introVeilOut{0%,10%{opacity:1}100%{opacity:0}}
