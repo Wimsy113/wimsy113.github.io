@@ -13,6 +13,7 @@ html[data-intro="seen"] #bootVeil{display:none}
   #bootVeilSweep{animation:bootVeilSweep 1.1s ease-in-out infinite}
 }
 </style>
+<script>window.__bootStart=Date.now();</script>
 <script>try{if(localStorage.getItem('ke-theme')==='light')document.documentElement.setAttribute('data-theme','light');}catch(e){}</script>
 <script>try{if(sessionStorage.getItem('keIntroSeen')==='1')document.documentElement.dataset.intro='seen';}catch(e){}</script>
 <link rel="preload" as="script" href="./vendor/react.production.min.js">
@@ -589,9 +590,14 @@ class Component extends DCLogic {
       if (this.introSeen || this.reduce) {
         veil.style.display = 'none';
       } else {
-        requestAnimationFrame(() => { veil.style.opacity = '0'; });
-        veil.addEventListener('transitionend', () => { veil.style.display = 'none'; }, { once: true });
-        setTimeout(() => { veil.style.display = 'none'; }, 1200);
+        const minDisplay = 1100;
+        const elapsed = Date.now() - (window.__bootStart || Date.now());
+        const remaining = Math.max(0, minDisplay - elapsed);
+        setTimeout(() => {
+          requestAnimationFrame(() => { veil.style.opacity = '0'; });
+          veil.addEventListener('transitionend', () => { veil.style.display = 'none'; }, { once: true });
+          setTimeout(() => { veil.style.display = 'none'; }, 1200);
+        }, remaining);
       }
     }
 
