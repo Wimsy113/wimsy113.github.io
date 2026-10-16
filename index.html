@@ -471,9 +471,23 @@ class Component extends DCLogic {
     menuOpen: false,
     pieces: this.defaults(), z: {}, top: 10
   };
+  lockScroll() {
+    if (this.scrollLocked) return;
+    this.savedScrollY = window.scrollY;
+    const b = document.body.style;
+    b.position = 'fixed'; b.top = `-${this.savedScrollY}px`; b.left = '0'; b.right = '0'; b.overflow = 'hidden';
+    this.scrollLocked = true;
+  }
+  unlockScroll() {
+    if (!this.scrollLocked) return;
+    const b = document.body.style;
+    b.position = ''; b.top = ''; b.left = ''; b.right = ''; b.overflow = '';
+    window.scrollTo(0, this.savedScrollY || 0);
+    this.scrollLocked = false;
+  }
   closeMenu() {
     if (!this.state.menuOpen) return;
-    document.body.style.overflow = '';
+    this.unlockScroll();
     this.setState({ menuOpen: false });
   }
   initNumberField() {
@@ -605,6 +619,7 @@ class Component extends DCLogic {
     if (this.io) this.io.disconnect(); if (this.revealIo) this.revealIo.disconnect(); if (this.mq) this.mq.cancel();
     if (this.veinRo) this.veinRo.disconnect();
     if (this.numTimer) clearInterval(this.numTimer);
+    this.unlockScroll();
   }
   piece(id) {
     const p = this.state.pieces[id], narrow = this.state.narrow;
@@ -654,7 +669,7 @@ class Component extends DCLogic {
       menuClose: () => this.closeMenu(),
       menuToggle: () => {
         const next = !s.menuOpen;
-        document.body.style.overflow = next ? 'hidden' : '';
+        if (next) this.lockScroll(); else this.unlockScroll();
         this.setState({ menuOpen: next });
       },
       menuBackdropStyle: s.menuOpen
