@@ -530,16 +530,21 @@ class Component extends DCLogic {
       draw();
     };
     this.numberFieldDraw = draw;
+    this.numberFieldGrid = () => grid;
+    this.numberFieldPick = pick;
     this.onNumberResize = resize;
     window.addEventListener('resize', this.onNumberResize);
     resize();
-    if (!this.reduce) {
-      this.numTimer = setInterval(() => {
-        const mutate = Math.max(1, Math.floor(grid.length * 0.02));
-        for (let i = 0; i < mutate; i++) grid[Math.floor(Math.random() * grid.length)] = pick();
-        draw();
-      }, 150);
-    }
+    if (!this.reduce) this.startNumberTimer();
+  }
+  startNumberTimer() {
+    if (this.numTimer || !this.numberFieldGrid) return;
+    this.numTimer = setInterval(() => {
+      const grid = this.numberFieldGrid();
+      const mutate = Math.max(1, Math.floor(grid.length * 0.02));
+      for (let i = 0; i < mutate; i++) grid[Math.floor(Math.random() * grid.length)] = this.numberFieldPick();
+      this.numberFieldDraw();
+    }, 150);
   }
   componentDidMount() {
     this.reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -551,6 +556,9 @@ class Component extends DCLogic {
     if (this.introSeen) document.documentElement.dataset.intro = 'seen';
 
     this.onScroll = () => {
+      if (this.numTimer) { clearInterval(this.numTimer); this.numTimer = null; }
+      clearTimeout(this.scrollEndTimer);
+      this.scrollEndTimer = setTimeout(() => { if (!this.reduce) this.startNumberTimer(); }, 300);
       if (this.sraf) return;
       this.sraf = requestAnimationFrame(() => {
         this.sraf = 0; const vh = window.innerHeight;
@@ -619,6 +627,7 @@ class Component extends DCLogic {
     if (this.io) this.io.disconnect(); if (this.revealIo) this.revealIo.disconnect(); if (this.mq) this.mq.cancel();
     if (this.veinRo) this.veinRo.disconnect();
     if (this.numTimer) clearInterval(this.numTimer);
+    clearTimeout(this.scrollEndTimer);
     this.unlockScroll();
   }
   piece(id) {
