@@ -17,43 +17,66 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="Krystyna Ewing's workbench — illustration, character work, and physical art, outside the client work.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800;900&family=Grenze+Gotisch:wght@400;600&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
 <script src="./image-slot.js"></script>
 <style>
-@font-face{font-family:'Trickster';src:url('fonts/Trickster-Reg.otf') format('opentype');font-weight:400;font-style:normal;font-display:swap}
-html{--bg:#030509;--ink:#EDEAE4;--muted:#A9AFB8;--metal:#7D8690;--ghost:#0b0e14;--line:#1c212b;--c-turquoise:#83E2D2;--c-blue:#668FE5;--c-copper:#B89A7B;--c-opal:#D8C4ED;--red:var(--c-copper);--on-red:#06080c;--pink:#D8C4ED;--mat:#13100d;--matline:rgba(184,154,123,.1);--matline2:rgba(184,154,123,.2);--grain:.1;--rail-w:48px;background:var(--bg);color:var(--ink);scroll-behavior:smooth}
-html[data-theme="light"]{--bg:#F3F1EC;--ink:#12151a;--muted:#53585f;--metal:#71767d;--ghost:#e6e1d6;--line:#d4d0c2;--c-turquoise:#0B7A68;--c-blue:#3357C2;--c-copper:#7F6040;--c-opal:#7F4FC0;--red:var(--c-copper);--on-red:#fff;--pink:#6B3FA0;--mat:#e8e0d1;--matline:rgba(138,106,69,.1);--matline2:rgba(138,106,69,.22);--grain:.07}
+html{--bg:#0B0B0B;--ink:#F2F0E9;--muted:#9a978e;--metal:#9a978e;--ghost:#252525;--line:rgba(242,240,233,.2);--c-turquoise:#A8FF00;--c-blue:#A8FF00;--c-copper:#A8FF00;--c-opal:#A8FF00;--red:var(--c-copper);--on-red:#0B0B0B;--pink:#A8FF00;--mat:#13100d;--matline:rgba(184,154,123,.1);--matline2:rgba(184,154,123,.2);--grain:.1;--rail-w:48px;background:var(--bg);color:var(--ink);scroll-behavior:smooth}
+html[data-theme="light"]{--bg:#F2F0E9;--ink:#0B0B0B;--muted:#5f5c4e;--metal:#5f5c4e;--ghost:#E4E1D6;--line:rgba(11,11,11,.2);--c-turquoise:#447000;--c-blue:#447000;--c-copper:#447000;--c-opal:#447000;--red:var(--c-copper);--on-red:#F2F0E9;--pink:#447000;--mat:#e8e0d1;--matline:rgba(138,106,69,.1);--matline2:rgba(138,106,69,.22);--grain:.07}
 html[data-grain="off"]{--grain:0}
-body{margin:0;padding-right:var(--rail-w);background:var(--bg);color:var(--ink);font-family:"Source Sans 3",system-ui,sans-serif;-webkit-font-smoothing:antialiased;transition:background-color .35s,color .35s;overflow-x:hidden}
-body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:300;opacity:var(--grain);mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E")}
+body{margin:0;padding-right:var(--rail-w);background:var(--bg);color:var(--ink);font-family:"Inter",system-ui,sans-serif;-webkit-font-smoothing:antialiased;transition:background-color .35s,color .35s;overflow-x:hidden}
+body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:300;opacity:var(--grain);mix-blend-mode:overlay;transform:translateZ(0);will-change:transform;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E")}
 a{color:inherit;text-decoration-thickness:1px;text-underline-offset:.22em}
 a:hover{color:var(--red)}
 :focus-visible{outline:3px solid var(--pink);outline-offset:4px}
-::selection{background:var(--pink);color:#06080c}
+::selection{background:var(--pink);color:var(--on-red)}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
 
-nav[aria-label="Primary"] a[aria-current="true"]{box-shadow:inset 0 0 0 3px var(--ink);letter-spacing:.22em}
+nav[aria-label="Primary"] a[aria-current="true"]{color:var(--red);box-shadow:inset 3px 0 0 var(--red)}
+#mobileMenu a[aria-current="true"]{color:var(--red)}
+#mobileBar{display:none}
+@media (max-width:859px){
+  nav[aria-label="Primary"]{display:none!important}
+  #mobileBar{display:flex}
+  body{padding-right:0;padding-top:56px}
+}
+@media (min-width:860px){
+  #mobileMenu,#mobileMenuBackdrop{display:none!important}
+}
 </style>
 </helmet>
 
-<a href="#main" style="position:fixed;left:16px;top:-80px;z-index:400;background:var(--pink);color:#06080c;padding:12px 18px;font:700 14px/1 'Space Mono',monospace;text-decoration:none" style-focus="top:16px">Skip to content</a>
+<a href="#main" style="position:fixed;left:16px;top:-80px;z-index:400;background:var(--pink);color:var(--on-red);padding:12px 18px;font:700 14px/1 'Space Mono',monospace;text-decoration:none" style-focus="top:16px">Skip to content</a>
 
 <nav aria-label="Primary" style="position:fixed;right:0;top:0;bottom:0;z-index:200;width:var(--rail-w);display:flex;flex-direction:column;background:var(--bg);border-left:1px solid var(--line)">
-  <div aria-hidden="true" style="flex:0 0 auto;width:100%;height:3px;background:linear-gradient(180deg,#83E2D2,#668FE5,#B89A7B,#D8C4ED)"></div>
-  <a href="index.html" aria-label="K. Ewing, home" style="flex:0 0 auto;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(180deg);padding:16px 0;font:400 20px/1 'Trickster',serif;letter-spacing:0;text-decoration:none;color:var(--ink);border-bottom:1px solid var(--line);min-height:44px;transition:color .2s ease" style-hover="color:var(--c-turquoise)">K. Ewing</a>
-  <a href="index.html#work" aria-current="false" style="flex:1 1 0;min-height:44px;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(180deg);font:700 11px/1 'Inter',sans-serif;letter-spacing:.14em;text-decoration:none;color:var(--on-red);background:var(--c-blue);transition:letter-spacing .2s ease" style-hover="letter-spacing:.22em">WORK</a>
-  <a href="art.html" aria-current="true" style="flex:1 1 0;min-height:44px;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(180deg);font:700 11px/1 'Inter',sans-serif;letter-spacing:.14em;text-decoration:none;color:var(--on-red);background:var(--c-copper);transition:letter-spacing .2s ease" style-hover="letter-spacing:.22em">WORKBENCH</a>
-  <a href="index.html#about" aria-current="false" style="flex:1 1 0;min-height:44px;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(180deg);font:700 11px/1 'Inter',sans-serif;letter-spacing:.14em;text-decoration:none;color:var(--on-red);background:var(--c-opal);transition:letter-spacing .2s ease" style-hover="letter-spacing:.22em">ABOUT</a>
-  <a href="index.html#contact" aria-current="false" style="flex:1 1 0;min-height:44px;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(180deg);font:700 11px/1 'Inter',sans-serif;letter-spacing:.14em;text-decoration:none;color:var(--on-red);background:var(--c-turquoise);transition:letter-spacing .2s ease" style-hover="letter-spacing:.22em">CONTACT</a>
-  <button type="button" onClick="{{ toggleTheme }}" aria-pressed="{{ lightPressed }}" aria-label="{{ themeLabel }} mode" style="flex:0 0 auto;min-height:44px;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(180deg);font:700 10px/1 'Inter',sans-serif;letter-spacing:.12em;text-transform:uppercase;border:0;border-top:1px solid var(--line);background:var(--ink);color:var(--bg);cursor:pointer;padding:12px 0" style-hover="background:var(--red);color:var(--on-red)">{{ themeLabel }}</button>
+  <a href="index.html#work" aria-label="K. Ewing, home" class="mono" style="flex:0 0 auto;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(180deg);padding:16px 0;font-size:15px;font-weight:700;letter-spacing:.04em;text-decoration:none;color:var(--ink);border-bottom:1px solid var(--line);min-height:44px;transition:color .2s ease" style-hover="color:var(--pink)">K. EWING</a>
+  <a href="index.html#work" aria-current="false" class="mono" style="flex:1 1 0;min-height:44px;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(180deg);font-size:11px;font-weight:700;letter-spacing:.18em;text-decoration:none;color:var(--ink);border-bottom:1px solid var(--line);transition:color .2s ease,letter-spacing .2s ease" style-hover="color:var(--pink);letter-spacing:.26em">WORK</a>
+  <a href="art.html" aria-current="true" class="mono" style="flex:1 1 0;min-height:44px;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(180deg);font-size:11px;font-weight:700;letter-spacing:.18em;text-decoration:none;color:var(--ink);border-bottom:1px solid var(--line);transition:color .2s ease,letter-spacing .2s ease" style-hover="color:var(--pink);letter-spacing:.26em">WORKBENCH</a>
+  <a href="index.html#about" aria-current="false" class="mono" style="flex:1 1 0;min-height:44px;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(180deg);font-size:11px;font-weight:700;letter-spacing:.18em;text-decoration:none;color:var(--ink);border-bottom:1px solid var(--line);transition:color .2s ease,letter-spacing .2s ease" style-hover="color:var(--pink);letter-spacing:.26em">ABOUT</a>
+  <a href="index.html#contact" aria-current="false" class="mono" style="flex:1 1 0;min-height:44px;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(180deg);font-size:11px;font-weight:700;letter-spacing:.18em;text-decoration:none;color:var(--ink);transition:color .2s ease,letter-spacing .2s ease" style-hover="color:var(--pink);letter-spacing:.26em">CONTACT</a>
+  <button type="button" onClick="{{ toggleTheme }}" aria-pressed="{{ lightPressed }}" aria-label="Switch to {{ themeLabel }} mode" class="mono" style="flex:0 0 auto;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(180deg);padding:14px 0;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;color:var(--muted);border:0;border-top:1px solid var(--line);background:var(--bg);cursor:pointer;min-height:44px;transition:color .2s ease" style-hover="color:var(--pink)">{{ themeLabel }}</button>
+</nav>
+
+<div id="mobileBar" class="mono" role="navigation" aria-label="Mobile bar" style="position:fixed;left:0;right:0;top:0;z-index:220;align-items:center;justify-content:space-between;padding:0 16px;height:56px;background:var(--bg);border-bottom:1px solid var(--line)">
+  <a href="index.html#work" aria-label="K. Ewing, home" style="font-size:15px;font-weight:700;letter-spacing:.04em;text-decoration:none;color:var(--ink);min-height:44px;display:inline-flex;align-items:center" style-hover="color:var(--pink)">K. EWING</a>
+  <button type="button" onClick="{{ menuToggle }}" aria-expanded="{{ menuExpandedAttr }}" aria-controls="mobileMenu" aria-label="{{ menuAriaLabel }}" style="min-width:44px;min-height:44px;padding:0 12px;border:1px solid var(--line);background:transparent;color:var(--ink);font:700 11px/1 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;cursor:pointer" style-hover="color:var(--pink);border-color:var(--pink)">{{ menuButtonLabel }}</button>
+</div>
+
+<div id="mobileMenuBackdrop" aria-hidden="true" onClick="{{ menuClose }}" style="{{ menuBackdropStyle }}"></div>
+
+<nav id="mobileMenu" aria-label="Mobile" class="mono" style="{{ menuPanelStyle }}">
+  <a href="index.html#work" onClick="{{ menuClose }}" style="display:flex;align-items:center;min-height:52px;padding:0 20px;font-size:14px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;color:var(--ink);border-bottom:1px solid var(--line)" style-hover="color:var(--pink)">Work</a>
+  <a href="art.html" aria-current="true" onClick="{{ menuClose }}" style="display:flex;align-items:center;min-height:52px;padding:0 20px;font-size:14px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;color:var(--ink);border-bottom:1px solid var(--line)" style-hover="color:var(--pink)">Workbench</a>
+  <a href="index.html#about" onClick="{{ menuClose }}" style="display:flex;align-items:center;min-height:52px;padding:0 20px;font-size:14px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;color:var(--ink);border-bottom:1px solid var(--line)" style-hover="color:var(--pink)">About</a>
+  <a href="index.html#contact" onClick="{{ menuClose }}" style="display:flex;align-items:center;min-height:52px;padding:0 20px;font-size:14px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;color:var(--ink);border-bottom:1px solid var(--line)" style-hover="color:var(--pink)">Contact</a>
+  <button type="button" onClick="{{ toggleTheme }}" aria-pressed="{{ lightPressed }}" style="display:flex;align-items:center;justify-content:space-between;width:100%;min-height:52px;padding:0 20px;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;border:0;background:transparent;color:var(--muted);cursor:pointer" style-hover="color:var(--pink)"><span>Theme</span><span>{{ themeLabel }}</span></button>
 </nav>
 
 <main id="main">
 
 <header style="padding:clamp(28px,4vw,48px) clamp(16px,4vw,56px) clamp(28px,3vw,40px);display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:24px 48px">
   <div>
-    <p style="margin:0 0 clamp(24px,4vw,56px);font:400 12px/1 'Space Mono',monospace;letter-spacing:.08em;color:var(--muted)"><a href="index.html">~</a> / <span style="color:var(--ink)">workbench</span></p>
-    <h1 style="margin:0;font:400 clamp(72px,11vw,190px)/.76 'Grenze Gotisch',serif">The Workbench</h1>
+    <p style="margin:0 0 clamp(24px,4vw,56px);font:400 12px/1 'Space Mono',monospace;letter-spacing:.08em;color:var(--muted)"><a href="index.html#work">~</a> / <span style="color:var(--ink)">workbench</span></p>
+    <h1 style="margin:0;font:400 clamp(31px,6.86vw,115px)/.86 'Archivo Black',sans-serif;text-transform:uppercase;letter-spacing:-.015em">The Workbench</h1>
     <p style="margin:14px 0 0;font:700 13px/1 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--pink)">Art · Experiments · Things I Make</p>
   </div>
   <nav aria-label="Jump to a piece" style="display:flex;flex-wrap:wrap;gap:8px;align-items:center">
@@ -86,7 +109,7 @@ nav[aria-label="Primary"] a[aria-current="true"]{box-shadow:inset 0 0 0 3px var(
     </div>
 
     <div style="{{ note1.style }}">
-      <p style="margin:0;font:400 clamp(28px,3vw,46px)/.98 'Grenze Gotisch',serif;color:var(--ink);position:relative;padding-top:24px"><button type="button" onPointerDown="{{ note1.down }}" onPointerMove="{{ note1.move }}" onPointerUp="{{ note1.up }}" onKeyDown="{{ note1.key }}" aria-label="Move note. Drag, or use arrow keys." style="position:absolute;top:-12px;left:0;min-height:36px;padding:0 14px;border:0;background:rgba(226,214,188,.92);color:#151312;font:700 11px/1 'Space Mono',monospace;letter-spacing:.08em;text-transform:uppercase;cursor:grab;touch-action:none;transform:rotate(-4deg)">⠿ Note</button>I had an idea. Unfortunately, that meant I had to make it.</p>
+      <p style="margin:0;font:400 clamp(22px,2.2vw,32px)/1.1 'Archivo Black',sans-serif;text-transform:uppercase;color:var(--ink);position:relative;padding-top:24px"><button type="button" onPointerDown="{{ note1.down }}" onPointerMove="{{ note1.move }}" onPointerUp="{{ note1.up }}" onKeyDown="{{ note1.key }}" aria-label="Move note. Drag, or use arrow keys." style="position:absolute;top:-12px;left:0;min-height:36px;padding:0 14px;border:0;background:rgba(226,214,188,.92);color:#151312;font:700 11px/1 'Space Mono',monospace;letter-spacing:.08em;text-transform:uppercase;cursor:grab;touch-action:none;transform:rotate(-4deg)">⠿ Note</button>I had an idea. Unfortunately, that meant I had to make it.</p>
     </div>
 
     <div id="piece-first" style="{{ first.style }}">
@@ -113,7 +136,7 @@ nav[aria-label="Primary"] a[aria-current="true"]{box-shadow:inset 0 0 0 3px var(
     </div>
 
     <div style="{{ note2.style }}">
-      <p style="margin:0;font:400 clamp(26px,2.6vw,40px)/1 'Grenze Gotisch',serif;color:var(--ink);position:relative;padding-top:24px"><button type="button" onPointerDown="{{ note2.down }}" onPointerMove="{{ note2.move }}" onPointerUp="{{ note2.up }}" onKeyDown="{{ note2.key }}" aria-label="Move note. Drag, or use arrow keys." style="position:absolute;top:-12px;left:0;min-height:36px;padding:0 14px;border:0;background:rgba(226,214,188,.92);color:#151312;font:700 11px/1 'Space Mono',monospace;letter-spacing:.08em;text-transform:uppercase;cursor:grab;touch-action:none;transform:rotate(3deg)">⠿ Note</button>This took way longer than I expected.</p>
+      <p style="margin:0;font:400 clamp(20px,2vw,28px)/1.1 'Archivo Black',sans-serif;text-transform:uppercase;color:var(--ink);position:relative;padding-top:24px"><button type="button" onPointerDown="{{ note2.down }}" onPointerMove="{{ note2.move }}" onPointerUp="{{ note2.up }}" onKeyDown="{{ note2.key }}" aria-label="Move note. Drag, or use arrow keys." style="position:absolute;top:-12px;left:0;min-height:36px;padding:0 14px;border:0;background:rgba(226,214,188,.92);color:#151312;font:700 11px/1 'Space Mono',monospace;letter-spacing:.08em;text-transform:uppercase;cursor:grab;touch-action:none;transform:rotate(3deg)">⠿ Note</button>This took way longer than I expected.</p>
     </div>
 
     <div id="piece-miniHead" style="{{ miniHead.style }}">
@@ -136,7 +159,7 @@ nav[aria-label="Primary"] a[aria-current="true"]{box-shadow:inset 0 0 0 3px var(
 
 <section aria-labelledby="drawers-h" style="padding:clamp(80px,10vw,150px) clamp(16px,5vw,80px)">
   <div style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px 40px;margin-bottom:clamp(28px,4vw,48px)">
-    <h2 id="drawers-h" style="margin:0;display:flex;flex-wrap:wrap;align-items:baseline;gap:0 .2em"><span style="font:900 clamp(52px,8vw,130px)/.85 'Big Shoulders Display',sans-serif;text-transform:uppercase">The</span><span style="font:400 clamp(66px,10vw,160px)/.7 'Grenze Gotisch',serif;color:var(--red)">drawers</span></h2>
+    <h2 id="drawers-h" style="margin:0;font:400 clamp(34px,5.6vw,88px)/.92 'Archivo Black',sans-serif;text-transform:uppercase">The <span style="color:var(--red)">Drawers</span></h2>
     <p style="margin:0 0 8px;font:400 12px/1.6 'Space Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);max-width:36ch">Placeholder drawers — each fills in as the work gets photographed.</p>
   </div>
   <div style="border-top:2px solid var(--ink)">
@@ -145,7 +168,7 @@ nav[aria-label="Primary"] a[aria-current="true"]{box-shadow:inset 0 0 0 3px var(
         <h3 style="margin:0">
           <button type="button" onClick="{{ d.toggle }}" aria-expanded="{{ d.expanded }}" aria-controls="{{ d.panelId }}" style="display:flex;align-items:center;gap:clamp(12px,2vw,28px);width:100%;padding:clamp(18px,2.4vw,30px) 0;background:transparent;border:0;color:var(--ink);cursor:pointer;text-align:left" style-hover="color:var(--red)">
             <span style="font:700 13px/1 'Space Mono',monospace;color:var(--pink);min-width:2.4em">{{ d.num }}</span>
-            <span style="flex:1;font:800 clamp(30px,4.4vw,68px)/.95 'Big Shoulders Display',sans-serif;text-transform:uppercase">{{ d.title }}</span>
+            <span style="flex:1;font:400 clamp(24px,3.6vw,52px)/1 'Archivo Black',sans-serif;text-transform:uppercase">{{ d.title }}</span>
             <span aria-hidden="true" style="font:700 13px/1 'Space Mono',monospace;letter-spacing:.06em;text-transform:uppercase">{{ d.icon }}</span>
           </button>
         </h3>
@@ -162,37 +185,38 @@ nav[aria-label="Primary"] a[aria-current="true"]{box-shadow:inset 0 0 0 3px var(
 </section>
 
 <section aria-label="Closing" style="padding:0 clamp(16px,5vw,80px) clamp(80px,10vw,140px);display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:24px">
-  <p style="margin:0;max-width:16ch;font:400 clamp(44px,6vw,96px)/.9 'Grenze Gotisch',serif">That's what's on the table right now.<a href="work/hazadapt-hazard-icons.html" aria-label="A hidden case study" style="display:inline-block;margin-left:10px;font-family:'Space Mono',monospace;font-size:13px;line-height:1;vertical-align:middle;color:var(--line);text-decoration:none;opacity:.6" style-hover="color:var(--red);opacity:1">⚠</a></p>
+  <p style="margin:0;max-width:22ch;font:400 clamp(26px,3.2vw,48px)/1.15 'Archivo Black',sans-serif;text-transform:uppercase">That's what's on the table right now.<a href="work/hazadapt-hazard-icons.html" aria-label="A hidden case study" style="display:inline-block;margin-left:10px;font-family:'Space Mono',monospace;font-size:13px;line-height:1;vertical-align:middle;color:var(--line);text-decoration:none;opacity:.6" style-hover="color:var(--red);opacity:1">⚠</a></p>
   <a href="index.html#work" style="font:700 14px/1 'Space Mono',monospace;letter-spacing:.06em;text-transform:uppercase;min-height:44px;display:inline-flex;align-items:center;background:var(--ink);color:var(--bg);padding:0 18px;text-decoration:none" style-hover="background:var(--red);color:var(--on-red)">Back to the Work →</a>
 </section>
 
 </main>
 
-<footer style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:16px;padding:32px clamp(16px,5vw,80px) 48px;border-top:1px solid var(--line);font:400 12px/1.6 'Space Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)">
-  <span>© 2026 Krystyna Ewing</span>
-  <span>Found something that doesn't work? <a href="mailto:hello@krystynaewing.com" style="color:var(--pink)">Tell me.</a></span>
+<footer style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:16px;padding:32px clamp(16px,5vw,80px) 48px;font:400 12px/1.6 'Space Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)">
+  <span>~/krystyna-ewing · © 2026</span>
+  <a href="mailto:hello@krystynaewing.com" style="color:var(--ink)">hello@krystynaewing.com</a>
+  <a href="#main" style="min-height:44px;display:inline-flex;align-items:center">[ ^ top ]</a>
 </footer>
 
 <sc-if value="{{ lbOpen }}" hint-placeholder-val="{{ false }}">
-  <div role="dialog" aria-modal="true" aria-labelledby="lb-title" onKeyDown="{{ lbKey }}" style="position:fixed;inset:0;z-index:260;background:rgba(10,9,9,.96);color:#EDEAE4;display:grid;grid-template-rows:auto minmax(0,1fr) auto;gap:16px;padding:clamp(14px,2.4vw,32px)">
+  <div role="dialog" aria-modal="true" aria-labelledby="lb-title" onKeyDown="{{ lbKey }}" style="position:fixed;inset:0;z-index:260;background:var(--bg);color:var(--ink);display:grid;grid-template-rows:auto minmax(0,1fr) auto;gap:16px;padding:clamp(14px,2.4vw,32px)">
     <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-start;gap:16px">
       <div>
-        <h2 id="lb-title" style="margin:0;font:400 clamp(40px,5vw,80px)/.85 'Grenze Gotisch',serif">{{ lb.title }}</h2>
-        <p style="margin:8px 0 0;font:400 12px/1.4 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:#aaa69f">{{ lb.medium }} · {{ lb.stageLabel }}</p>
+        <h2 id="lb-title" style="margin:0;font:400 clamp(28px,4vw,56px)/.95 'Archivo Black',sans-serif;text-transform:uppercase">{{ lb.title }}</h2>
+        <p style="margin:8px 0 0;font:400 12px/1.4 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">{{ lb.medium }} · {{ lb.stageLabel }}</p>
       </div>
-      <button type="button" ref="{{ closeRef }}" onClick="{{ lbClose }}" style="font:700 12px/1 'Space Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:#06080c;background:#EDEAE4;border:0;padding:0 16px;min-height:44px;cursor:pointer" style-hover="background:#D8C4ED">✕ Close</button>
+      <button type="button" ref="{{ closeRef }}" onClick="{{ lbClose }}" style="font:700 12px/1 'Space Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--on-red);background:var(--ink);border:0;padding:0 16px;min-height:44px;cursor:pointer" style-hover="background:var(--pink);color:var(--on-red)">✕ Close</button>
     </div>
     <div style="min-height:0;display:flex;align-items:center;justify-content:center">
       <div role="img" aria-label="{{ lb.alt }}" style="{{ lbImgStyle }}"></div>
     </div>
     <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px">
-      <button type="button" onClick="{{ lbPrev }}" style="font:700 12px/1 'Space Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:#EDEAE4;background:transparent;border:1px solid #EDEAE4;padding:0 16px;min-height:44px;cursor:pointer" style-hover="background:#EDEAE4;color:#06080c">← {{ lb.prevTitle }}</button>
+      <button type="button" onClick="{{ lbPrev }}" style="font:700 12px/1 'Space Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--ink);background:transparent;border:1px solid var(--ink);padding:0 16px;min-height:44px;cursor:pointer" style-hover="background:var(--ink);color:var(--on-red)">← {{ lb.prevTitle }}</button>
       <div role="group" aria-label="Stages" style="display:flex;gap:8px;flex-wrap:wrap">
         <sc-for list="{{ lb.stages }}" as="st" hint-placeholder-count="2">
-          <button type="button" onClick="{{ st.pick }}" aria-pressed="{{ st.pressed }}" style="font:700 12px/1 'Space Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:#EDEAE4;background:transparent;border:1px solid #7D8690;padding:0 14px;min-height:44px;cursor:pointer" style-hover="border-color:#D8C4ED;color:#D8C4ED">{{ st.mark }} {{ st.label }}</button>
+          <button type="button" onClick="{{ st.pick }}" aria-pressed="{{ st.pressed }}" style="font:700 12px/1 'Space Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--ink);background:transparent;border:1px solid var(--metal);padding:0 14px;min-height:44px;cursor:pointer" style-hover="border-color:var(--pink);color:var(--pink)">{{ st.mark }} {{ st.label }}</button>
         </sc-for>
       </div>
-      <button type="button" onClick="{{ lbNext }}" style="font:700 12px/1 'Space Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:#EDEAE4;background:transparent;border:1px solid #EDEAE4;padding:0 16px;min-height:44px;cursor:pointer" style-hover="background:#EDEAE4;color:#06080c">{{ lb.nextTitle }} →</button>
+      <button type="button" onClick="{{ lbNext }}" style="font:700 12px/1 'Space Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--ink);background:transparent;border:1px solid var(--ink);padding:0 16px;min-height:44px;cursor:pointer" style-hover="background:var(--ink);color:var(--on-red)">{{ lb.nextTitle }} →</button>
     </div>
   </div>
 </sc-if>
@@ -226,7 +250,7 @@ class Component extends DCLogic {
   state = {
     theme: this.props.defaultTheme ?? 'dark', narrow: window.innerWidth < 760,
     pieces: this.defaults(), z: {}, top: 10, stage: { reach: 0, portrait: 0, first: 0 },
-    lb: -1, flash: null, drawer: -1
+    lb: -1, flash: null, drawer: -1, menuOpen: false
   };
   applyRoot() {
     const r = document.documentElement;
@@ -235,8 +259,13 @@ class Component extends DCLogic {
   }
   componentDidMount() {
     this.applyRoot();
-    this.onResize = () => { const n = window.innerWidth < 760; if (n !== this.state.narrow) this.setState({ narrow: n }); };
+    this.onResize = () => {
+      const n = window.innerWidth < 760; if (n !== this.state.narrow) this.setState({ narrow: n });
+      if (window.innerWidth >= 860 && this.state.menuOpen) { document.body.style.overflow = ''; this.setState({ menuOpen: false }); }
+    };
     window.addEventListener('resize', this.onResize);
+    this.onMenuKeydown = e => { if (e.key === 'Escape' && this.state.menuOpen) { document.body.style.overflow = ''; this.setState({ menuOpen: false }); } };
+    window.addEventListener('keydown', this.onMenuKeydown);
   }
   componentDidUpdate(pp, ps) {
     if (pp.defaultTheme !== this.props.defaultTheme && this.props.defaultTheme) this.setState({ theme: this.props.defaultTheme }, () => this.applyRoot());
@@ -246,7 +275,7 @@ class Component extends DCLogic {
     if (!open && this.wasOpen) { document.body.style.overflow = ''; if (this.lastFocus && this.lastFocus.focus) this.lastFocus.focus(); }
     this.wasOpen = open;
   }
-  componentWillUnmount() { window.removeEventListener('resize', this.onResize); document.body.style.overflow = ''; clearTimeout(this.ft); }
+  componentWillUnmount() { window.removeEventListener('resize', this.onResize); window.removeEventListener('keydown', this.onMenuKeydown); document.body.style.overflow = ''; clearTimeout(this.ft); }
   lift(id) { this.setState(s => ({ top: s.top + 1, z: { ...s.z, [id]: s.top + 1 } })); }
   jump(id) {
     this.lift(id);
@@ -259,10 +288,10 @@ class Component extends DCLogic {
     const p = this.state.pieces[id], narrow = this.state.narrow;
     const style = narrow
       ? { position: 'relative', width: id.startsWith('note') ? '100%' : '92%', alignSelf: ['portrait', 'note2'].includes(id) ? 'flex-end' : 'flex-start', transform: `rotate(${p.r * 0.6}deg)` }
-      : { position: 'absolute', left: p.x + '%', top: p.y + '%', width: p.w + '%', transform: `rotate(${p.r}deg)`, zIndex: this.state.z[id] || 1, transition: this.drag && this.drag.id === id ? 'none' : 'transform .2s, filter .3s', filter: this.state.flash === id ? 'drop-shadow(0 0 0 #D8C4ED) drop-shadow(0 0 14px #D8C4ED)' : 'none' };
+      : { position: 'absolute', left: p.x + '%', top: p.y + '%', width: p.w + '%', transform: `rotate(${p.r}deg)`, zIndex: this.state.z[id] || 1, transition: this.drag && this.drag.id === id ? 'none' : 'transform .2s, filter .3s', filter: this.state.flash === id ? 'drop-shadow(0 0 0 var(--pink)) drop-shadow(0 0 14px var(--pink))' : 'none' };
     const clampSet = (x, y) => this.setState(s => ({ pieces: { ...s.pieces, [id]: { ...s.pieces[id], x: Math.max(-4, Math.min(92, x)), y: Math.max(-2, Math.min(94, y)) } } }));
     return {
-      style, flash: this.state.flash === id ? '4px solid #D8C4ED' : 'none',
+      style, flash: this.state.flash === id ? '4px solid var(--pink)' : 'none',
       down: e => {
         if (this.state.narrow) return;
         const d = this.deskRef.current.getBoundingClientRect();
@@ -321,7 +350,14 @@ class Component extends DCLogic {
       drawers, lbOpen: s.lb >= 0, lb: lb || { title: '', medium: '', stageLabel: '', src: '', alt: '', prevTitle: '', nextTitle: '', stages: [] },
       lbImgStyle: { width: '100%', height: '100%', backgroundImage: lb ? `url("${lb.src}")` : 'none', backgroundSize: 'contain', backgroundRepeat: 'no-repeat', backgroundPosition: 'center' },
       lbClose: () => this.setState({ lb: -1 }), lbPrev: step(-1), lbNext: step(1),
-      lbKey: e => { if (e.key === 'Escape') this.setState({ lb: -1 }); else if (e.key === 'ArrowLeft') step(-1)(); else if (e.key === 'ArrowRight') step(1)(); }
+      lbKey: e => { if (e.key === 'Escape') this.setState({ lb: -1 }); else if (e.key === 'ArrowLeft') step(-1)(); else if (e.key === 'ArrowRight') step(1)(); },
+      menuExpandedAttr: s.menuOpen ? 'true' : 'false',
+      menuButtonLabel: s.menuOpen ? 'CLOSE' : 'MENU',
+      menuAriaLabel: s.menuOpen ? 'Close menu' : 'Open menu',
+      menuClose: () => { document.body.style.overflow = ''; this.setState({ menuOpen: false }); },
+      menuToggle: () => { const next = !s.menuOpen; document.body.style.overflow = next ? 'hidden' : ''; this.setState({ menuOpen: next }); },
+      menuBackdropStyle: s.menuOpen ? { display: 'block', position: 'fixed', inset: '56px 0 0 0', zIndex: 215, background: 'rgba(0,0,0,.5)' } : { display: 'none' },
+      menuPanelStyle: s.menuOpen ? { display: 'grid', position: 'fixed', left: 0, right: 0, top: 56, zIndex: 220, background: 'var(--bg)', borderBottom: '1px solid var(--line)', maxHeight: 'calc(100vh - 56px)', overflowY: 'auto' } : { display: 'none' }
     };
     [['reach', 2], ['portrait', 2]].forEach(([id, n]) => { for (let i = 0; i < n; i++) { const on = (s.stage[id] || 0) === i; r[id + 'S' + i] = on; r[id + 'I' + i] = { display: on ? 'block' : 'none', width: '100%', height: 'auto' }; r[id + 'P' + i] = on ? 'true' : 'false'; r[id + 'M' + i] = on ? '■' : '□'; r[id + 'To' + i] = setStage(id, i); } });
     ['reach', 'note1', 'first', 'portrait', 'note2', 'miniHead', 'blade'].forEach(id => { r[id] = this.piece(id); });
