@@ -645,7 +645,7 @@ class Component extends DCLogic {
       bioAriaLabel: s.bio ? 'Collapse — hide full bio' : 'Expand bio — reveal full bio',
       bioExpanded: s.bio ? 'true' : 'false',
       bioOpen: () => { if (s.canHover && !s.bio) this.setState({ bio: true }); },
-      bioClose: () => { if (s.canHover && s.bio) this.setState({ bio: false }); },
+      bioClose: () => { if (s.bio) this.setState({ bio: false }); },
       bioToggle: () => { if (s.canHover) this.setState({ bio: true }); else this.setState(st => ({ bio: !st.bio })); },
       bioForceClose: () => this.setState({ bio: false }),
       bioKey: e => { if (e.key === 'Escape') this.setState({ bio: false }); },
