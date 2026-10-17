@@ -29,6 +29,20 @@ a{color:inherit;text-decoration-thickness:1px;text-underline-offset:.22em}
 a:hover{color:var(--red)}
 :focus-visible{outline:3px solid var(--pink);outline-offset:4px}
 ::selection{background:var(--pink);color:var(--on-red)}
+@media (prefers-reduced-motion:no-preference){
+  @keyframes pcBreathe{0%,100%{opacity:.55;transform:translate(-50%,-50%) scale(.9)}50%{opacity:1;transform:translate(-50%,-50%) scale(1.08)}}
+  @keyframes pcSpinOrbit{to{transform:translate(-50%,-50%) rotate(360deg)}}
+  @keyframes pcDriftParticle{0%{top:105%;opacity:0;transform:translateX(0) scale(.5)}15%{opacity:.8}55%{transform:translateX(5rem) scale(1.5)}90%{opacity:.5}100%{top:-5%;opacity:0;transform:translateX(-3rem) scale(.5)}}
+  #pcAura{animation:pcBreathe 7s ease-in-out infinite}
+  #pcOrbit1{animation:pcSpinOrbit 45s linear infinite}
+  #pcOrbit2{animation:pcSpinOrbit 32s linear infinite reverse}
+  #pcParticles span{opacity:0;animation:pcDriftParticle 9s linear infinite}
+  #pcParticles span:nth-child(3n+1){left:12%;animation-delay:-2s;animation-duration:11s}
+  #pcParticles span:nth-child(3n+2){left:48%;animation-delay:-5s;animation-duration:8s}
+  #pcParticles span:nth-child(3n){left:82%;animation-delay:-7s;animation-duration:13s}
+  #pcParticles span:nth-child(4n+1){margin-left:18%}
+  #pcParticles span:nth-child(5n+2){margin-left:-24%}
+}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
 
 nav[aria-label="Primary"] a[aria-current="true"]{color:var(--red);box-shadow:inset 3px 0 0 var(--red)}
@@ -76,7 +90,7 @@ nav[aria-label="Primary"] a[aria-current="true"]{color:var(--red);box-shadow:ins
   <p style="margin:0 0 16px;font:400 12px/1.5 'Space Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)">Images coming soon</p>
   <a href="https://app.hazadapt.com/prep-checks" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:8px;margin:0 0 clamp(32px,5vw,56px);padding:10px 16px;min-height:44px;border:1px solid var(--pink);color:var(--pink);text-decoration:none;font:700 12px/1 'Space Mono',monospace;letter-spacing:.08em;text-transform:uppercase" style-hover="background:var(--pink);color:var(--on-red)">Try a prep check @ HazAdapt <span aria-hidden="true">→</span></a>
   <p style="margin:0 0 14px;font:400 12px/1.6 'Space Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--pink)">hazadapt · Product Design · UX Research · Information Architecture</p>
-  <h1 style="margin:0;font:400 clamp(56px,12vw,220px)/.82 'Archivo Black',sans-serif;text-transform:uppercase;letter-spacing:-.015em;overflow-wrap:anywhere;text-wrap:balance">Prep Checks</h1>
+  <h1 style="margin:0;font:400 clamp(39px,8.4vw,154px)/.82 'Archivo Black',sans-serif;text-transform:uppercase;letter-spacing:-.015em;overflow-wrap:anywhere;text-wrap:balance">Prep Checks</h1>
   <div style="display:flex;flex-wrap:wrap;gap:40px 64px;margin-top:clamp(32px,4vw,56px);align-items:flex-start">
     <div style="flex:1 1 420px;min-width:0;display:grid;gap:28px">
       <p style="margin:0;max-width:34ch;font:600 clamp(22px,2.2vw,32px)/1.25 'Inter',sans-serif;text-wrap:pretty">Making emergency preparedness feel achievable, reframing a checklist people fail into exercises people return to.</p>
@@ -88,7 +102,30 @@ nav[aria-label="Primary"] a[aria-current="true"]{color:var(--red);box-shadow:ins
       
       
     </div>
-    <div aria-hidden="true" style="flex:1 1 360px;min-width:0;max-width:640px;aspect-ratio:16/10;display:flex;align-items:center;justify-content:center;background:var(--ink);color:var(--bg);transform:rotate(1.5deg);box-shadow:14px 14px 0 var(--red);overflow:hidden"><span style="font:400 clamp(60px,9vw,150px)/.8 'Archivo Black',serif;padding:0 .2em;text-align:center;overflow-wrap:anywhere">Prep Checks</span></div>
+    <div style="position:relative;flex:1 1 360px;min-width:0;max-width:640px">
+      <img loading="lazy" src="../images/work/hazadapt-prep-checks/hero-laptop.png" alt="An Avalanche Prep Check shown on a laptop: a drag-and-drop exercise sorting actions into Before, During, and After an avalanche" style="position:relative;z-index:1;display:block;width:100%;height:auto">
+      <div aria-hidden="true" style="position:absolute;inset:0;z-index:0;pointer-events:none">
+        <div id="pcParticles" aria-hidden="true" style="position:absolute;inset:0;overflow:hidden">
+          <span style="position:absolute;width:5px;height:5px;border-radius:50%;background:var(--pink)"></span>
+          <span style="position:absolute;width:5px;height:5px;border-radius:50%;background:var(--pink)"></span>
+          <span style="position:absolute;width:5px;height:5px;border-radius:50%;background:var(--pink)"></span>
+          <span style="position:absolute;width:5px;height:5px;border-radius:50%;background:var(--pink)"></span>
+          <span style="position:absolute;width:5px;height:5px;border-radius:50%;background:var(--pink)"></span>
+          <span style="position:absolute;width:5px;height:5px;border-radius:50%;background:var(--pink)"></span>
+          <span style="position:absolute;width:5px;height:5px;border-radius:50%;background:var(--pink)"></span>
+          <span style="position:absolute;width:5px;height:5px;border-radius:50%;background:var(--pink)"></span>
+          <span style="position:absolute;width:5px;height:5px;border-radius:50%;background:var(--pink)"></span>
+          <span style="position:absolute;width:5px;height:5px;border-radius:50%;background:var(--pink)"></span>
+          <span style="position:absolute;width:5px;height:5px;border-radius:50%;background:var(--pink)"></span>
+          <span style="position:absolute;width:5px;height:5px;border-radius:50%;background:var(--pink)"></span>
+          <span style="position:absolute;width:5px;height:5px;border-radius:50%;background:var(--pink)"></span>
+          <span style="position:absolute;width:5px;height:5px;border-radius:50%;background:var(--pink)"></span>
+        </div>
+        <div id="pcAura" aria-hidden="true" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:114%;height:114%;border-radius:50%;filter:blur(20px);background:radial-gradient(circle,color-mix(in srgb,var(--pink) 40%,transparent),transparent 70%)"></div>
+        <div id="pcOrbit1" aria-hidden="true" style="position:absolute;left:50%;top:50%;width:90%;height:90%;border-radius:50%;border:1px dashed color-mix(in srgb,var(--pink) 50%,transparent);transform:translate(-50%,-50%)"></div>
+        <div id="pcOrbit2" aria-hidden="true" style="position:absolute;left:50%;top:50%;width:66%;height:66%;border-radius:50%;border:1px solid color-mix(in srgb,var(--ink) 40%,transparent);transform:translate(-50%,-50%)"></div>
+      </div>
+    </div>
   </div>
 </header>
 
