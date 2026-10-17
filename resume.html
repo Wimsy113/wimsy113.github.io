@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+html,body{background:#0B0B0B;margin:0}
+#bootVeil{position:fixed;inset:0;z-index:999999;background:#0B0B0B;display:flex;align-items:center;justify-content:center;opacity:1;transition:opacity .5s ease}
+html[data-intro="seen"] #bootVeil{display:none}
+#bootVeilSweep{position:absolute;inset:0;background:#A8FF00}
+@media (prefers-reduced-motion:no-preference){
+  @keyframes bootVeilSweep{0%{transform:translateX(-100%)}50%{transform:translateX(0)}100%{transform:translateX(100%)}}
+  #bootVeilSweep{animation:bootVeilSweep 1.1s ease-in-out infinite}
+}
+</style>
+<script>window.__bootStart=Date.now();</script>
+<script>try{if(localStorage.getItem('ke-theme')==='light')document.documentElement.setAttribute('data-theme','light');}catch(e){}</script>
+<script>try{if(sessionStorage.getItem('keIntroSeen')==='1')document.documentElement.dataset.intro='seen';}catch(e){}</script>
+<link rel="preload" as="script" href="./vendor/react.production.min.js">
+<link rel="preload" as="script" href="./vendor/react-dom.production.min.js">
+<link rel="preload" as="script" href="./vendor/babel.min.js">
+<script>window.__resources={"https://unpkg.com/react@18.3.1/umd/react.production.min.js":"./vendor/react.production.min.js","https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js":"./vendor/react-dom.production.min.js","https://unpkg.com/@babel/standalone@7.29.0/babel.min.js":"./vendor/babel.min.js"};</script>
+</head>
+<body>
+<div id="bootVeil" aria-hidden="true">
+  <div style="position:relative;padding:28px 40px;border:1px solid rgba(242,240,233,.2)">
+    <div style="position:absolute;left:-1px;top:-1px;width:14px;height:14px;border-left:1px solid #A8FF00;border-top:1px solid #A8FF00"></div>
+    <div style="position:absolute;right:-1px;top:-1px;width:14px;height:14px;border-right:1px solid #A8FF00;border-top:1px solid #A8FF00"></div>
+    <div style="position:absolute;left:-1px;bottom:-1px;width:14px;height:14px;border-left:1px solid #A8FF00;border-bottom:1px solid #A8FF00"></div>
+    <div style="position:absolute;right:-1px;bottom:-1px;width:14px;height:14px;border-right:1px solid #A8FF00;border-bottom:1px solid #A8FF00"></div>
+    <div style="font-family:'Archivo Black','Inter',sans-serif;text-transform:uppercase;font-size:22px;color:#F2F0E9;text-align:center;margin-bottom:12px;letter-spacing:.02em">K. EWING</div>
+    <div style="display:flex;align-items:center;justify-content:center;gap:8px;font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#A8FF00">
+      <span style="width:60px;height:2px;background:rgba(242,240,233,.2);position:relative;overflow:hidden;display:inline-block">
+        <span id="bootVeilSweep"></span>
+      </span>
+      Loading
+    </div>
+  </div>
+</div>
+<script src="./support.js"></script>
+<x-dc>
+<helmet>
+<link rel="icon" href="images/favicon.ico">
+<title>Résumé — Krystyna Ewing</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Krystyna Ewing's résumé — an interactive archive of her work across HazAdapt, JPMorgan Chase, Pentagon Federal Credit Union, and True Link Financial.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+<style>
+html{--bg:#0B0B0B;--ink:#F2F0E9;--muted:#9a978e;--metal:#9a978e;--ghost:#252525;--line:rgba(242,240,233,.2);--c-turquoise:#A8FF00;--c-blue:#A8FF00;--c-copper:#A8FF00;--c-opal:#A8FF00;--red:var(--c-copper);--on-red:#0B0B0B;--pink:#A8FF00;--grain:.1;--rail-w:48px;background:var(--bg);color:var(--ink);scroll-behavior:smooth}
+html[data-theme="light"]{--bg:#F2F0E9;--ink:#0B0B0B;--muted:#5f5c4e;--metal:#5f5c4e;--ghost:#E4E1D6;--line:rgba(11,11,11,.2);--c-turquoise:#447000;--c-blue:#447000;--c-copper:#447000;--c-opal:#447000;--red:var(--c-copper);--on-red:#F2F0E9;--pink:#447000;--grain:.07}
+html[data-grain="off"]{--grain:0}
+body{margin:0;padding-right:var(--rail-w);background:var(--bg);color:var(--ink);font-family:"Inter",system-ui,sans-serif;-webkit-font-smoothing:antialiased;transition:background-color .35s,color .35s;overflow-x:hidden}
+body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:300;opacity:var(--grain);mix-blend-mode:overlay;transform:translateZ(0);will-change:transform;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E")}
+a{color:inherit;text-decoration-thickness:1px;text-underline-offset:.22em}
+a:hover{color:var(--red)}
+:focus-visible{outline:3px solid var(--pink);outline-offset:4px}
+::selection{background:var(--pink);color:var(--on-red)}
+.display{font-family:'Archivo Black','Inter',sans-serif;font-weight:400;text-transform:uppercase}
+.mono{font-family:'Space Mono',monospace}
+.regmark{position:absolute;width:14px;height:14px;pointer-events:none;color:var(--line)}
+.regmark::before,.regmark::after{content:"";position:absolute;background:currentColor}
+.regmark::before{left:50%;top:0;width:1px;height:100%;transform:translateX(-50%)}
+.regmark::after{top:50%;left:0;height:1px;width:100%;transform:translateY(-50%)}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+
+nav[aria-label="Primary"] a[aria-current="true"]{color:var(--red);box-shadow:inset 3px 0 0 var(--red)}
+#mobileMenu a[aria-current="true"]{color:var(--red)}
+#mobileBar{display:none}
+@media (max-width:859px){
+  nav[aria-label="Primary"]{display:none!important}
+  #mobileBar{display:flex}
+  body{padding-right:0;padding-top:56px}
+}
+@media (min-width:860px){
+  #mobileMenu,#mobileMenuBackdrop{display:none!important}
+}
+
+/* timeline */
+#rsTimelineDesktop{display:block}
+#rsTimelineMobile{display:none;gap:14px}
+@media (max-width:699px){
+  #rsTimelineDesktop{display:none}
+  #rsTimelineMobile{display:grid}
+  .rs-grid{grid-template-columns:1fr!important}
+  .rs-grid>*{grid-column:1/-1!important}
+  .rs-grid2{grid-template-columns:1fr!important}
+  .rs-grid2>*{grid-column:1/-1!important;border-right:0!important;border-left:0!important;padding-left:0!important}
+}
+.rs-track{position:absolute;top:0;height:40px;border:1px solid var(--pink);background:color-mix(in srgb,var(--pink) 14%,transparent);display:flex;align-items:center}
+.rs-track-fg{background:color-mix(in srgb,var(--pink) 30%,transparent)}
+
+/* file toggles */
+.rs-file-panel{overflow:hidden}
+@media (prefers-reduced-motion:no-preference){
+  .rs-file-panel{transition:grid-template-rows .4s cubic-bezier(.16,1,.3,1)}
+}
+.rs-chip{display:inline-flex;align-items:center;border:1px solid var(--line);padding:5px 10px;font:400 11px/1 'Space Mono',monospace;letter-spacing:.04em;white-space:nowrap}
+.rs-stat{font-family:'Archivo Black',sans-serif;color:var(--pink)}
+</style>
+</helmet>
+
+<a href="#main" style="position:fixed;left:16px;top:-80px;z-index:400;background:var(--pink);color:var(--on-red);padding:12px 18px;font:700 14px/1 'Space Mono',monospace;text-decoration:none" style-focus="top:16px">Skip to content</a>
+
+<nav aria-label="Primary" style="position:fixed;right:0;top:0;bottom:0;z-index:200;width:var(--rail-w);display:flex;flex-direction:column;background:var(--bg);border-left:1px solid var(--line)">
+  <a href="index.html#work" aria-label="K. Ewing, home" class="mono" style="flex:0 0 auto;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(180deg);padding:16px 0;font-size:15px;font-weight:700;letter-spacing:.04em;text-decoration:none;color:var(--ink);border-bottom:1px solid var(--line);min-height:44px;transition:color .2s ease" style-hover="color:var(--pink)">K. EWING</a>
+  <a href="index.html#work" aria-current="false" class="mono" style="flex:1 1 0;min-height:44px;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(180deg);font-size:11px;font-weight:700;letter-spacing:.18em;text-decoration:none;color:var(--ink);border-bottom:1px solid var(--line);transition:color .2s ease,letter-spacing .2s ease" style-hover="color:var(--pink);letter-spacing:.26em">WORK</a>
+  <a href="index.html#workbench" aria-current="false" class="mono" style="flex:1 1 0;min-height:44px;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(180deg);font-size:11px;font-weight:700;letter-spacing:.18em;text-decoration:none;color:var(--ink);border-bottom:1px solid var(--line);transition:color .2s ease,letter-spacing .2s ease" style-hover="color:var(--pink);letter-spacing:.26em">WORKBENCH</a>
+  <a href="index.html#about" aria-current="false" class="mono" style="flex:1 1 0;min-height:44px;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(180deg);font-size:11px;font-weight:700;letter-spacing:.18em;text-decoration:none;color:var(--ink);border-bottom:1px solid var(--line);transition:color .2s ease,letter-spacing .2s ease" style-hover="color:var(--pink);letter-spacing:.26em">ABOUT</a>
+  <a href="index.html#contact" aria-current="false" class="mono" style="flex:1 1 0;min-height:44px;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(180deg);font-size:11px;font-weight:700;letter-spacing:.18em;text-decoration:none;color:var(--ink);transition:color .2s ease,letter-spacing .2s ease" style-hover="color:var(--pink);letter-spacing:.26em">CONTACT</a>
+  <button type="button" onClick="{{ toggleTheme }}" aria-pressed="{{ lightPressed }}" aria-label="Switch to {{ themeLabel }} mode" class="mono" style="flex:0 0 auto;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(180deg);padding:14px 0;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;color:var(--muted);border:0;border-top:1px solid var(--line);background:var(--bg);cursor:pointer;min-height:44px;transition:color .2s ease" style-hover="color:var(--pink)">{{ themeLabel }}</button>
+</nav>
+
+<div id="mobileBar" class="mono" role="navigation" aria-label="Mobile bar" style="position:fixed;left:0;right:0;top:0;z-index:220;align-items:center;justify-content:space-between;padding:0 16px;height:56px;background:var(--bg);border-bottom:1px solid var(--line)">
+  <a href="index.html#work" aria-label="K. Ewing, home" style="font-size:15px;font-weight:700;letter-spacing:.04em;text-decoration:none;color:var(--ink);min-height:44px;display:inline-flex;align-items:center" style-hover="color:var(--pink)">K. EWING</a>
+  <button type="button" onClick="{{ menuToggle }}" aria-expanded="{{ menuExpandedAttr }}" aria-controls="mobileMenu" aria-label="{{ menuAriaLabel }}" style="min-width:44px;min-height:44px;padding:0 12px;border:1px solid var(--line);background:transparent;color:var(--ink);font:700 11px/1 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;cursor:pointer" style-hover="color:var(--pink);border-color:var(--pink)">{{ menuButtonLabel }}</button>
+</div>
+
+<div id="mobileMenuBackdrop" aria-hidden="true" onClick="{{ menuClose }}" style="{{ menuBackdropStyle }}"></div>
+
+<nav id="mobileMenu" aria-label="Mobile" class="mono" style="{{ menuPanelStyle }}">
+  <a href="index.html#work" onClick="{{ menuClose }}" style="display:flex;align-items:center;min-height:52px;padding:0 20px;font-size:14px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;color:var(--ink);border-bottom:1px solid var(--line)" style-hover="color:var(--pink)">Work</a>
+  <a href="index.html#workbench" onClick="{{ menuClose }}" style="display:flex;align-items:center;min-height:52px;padding:0 20px;font-size:14px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;color:var(--ink);border-bottom:1px solid var(--line)" style-hover="color:var(--pink)">Workbench</a>
+  <a href="index.html#about" onClick="{{ menuClose }}" style="display:flex;align-items:center;min-height:52px;padding:0 20px;font-size:14px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;color:var(--ink);border-bottom:1px solid var(--line)" style-hover="color:var(--pink)">About</a>
+  <a href="index.html#contact" onClick="{{ menuClose }}" style="display:flex;align-items:center;min-height:52px;padding:0 20px;font-size:14px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;color:var(--ink);border-bottom:1px solid var(--line)" style-hover="color:var(--pink)">Contact</a>
+  <button type="button" onClick="{{ toggleTheme }}" aria-pressed="{{ lightPressed }}" style="display:flex;align-items:center;justify-content:space-between;width:100%;min-height:52px;padding:0 20px;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;border:0;background:transparent;color:var(--muted);cursor:pointer" style-hover="color:var(--pink)"><span>Theme</span><span>{{ themeLabel }}</span></button>
+</nav>
+
+<main id="main">
+
+<header style="position:relative;padding:clamp(28px,4vw,48px) clamp(16px,5vw,80px) clamp(40px,6vw,72px);border-bottom:2px solid var(--ink);overflow:hidden">
+  <p class="mono" style="margin:0 0 clamp(28px,4vw,48px);font-size:12px;letter-spacing:.08em;color:var(--muted)"><a href="index.html#about">~</a> / <span style="color:var(--ink)">resume</span></p>
+  <p class="mono" style="margin:0 0 10px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--pink)">Personnel File · Archive</p>
+  <h1 class="display" style="margin:0;font-size:clamp(44px,9vw,160px);line-height:.84;letter-spacing:-.015em">Krystyna Ewing</h1>
+  <p class="mono" style="margin:14px 0 0;font-size:clamp(16px,2vw,22px);font-style:italic;letter-spacing:.01em;color:var(--pink)">Not exactly a straight line.</p>
+  <p style="margin:18px 0 0;max-width:46ch;font:400 clamp(18px,1.8vw,24px)/1.4 'Inter',sans-serif;text-wrap:pretty">Designer. Technologist. Maker. Professional tinkerer.</p>
+  <div style="display:flex;flex-wrap:wrap;align-items:center;gap:16px 24px;margin-top:clamp(28px,4vw,40px)">
+    <a href="files/Krystyna-Ewing-Resume.pdf" download="Krystyna-Ewing-Resume.pdf" class="mono" style="display:inline-flex;align-items:center;gap:10px;min-height:48px;padding:0 20px;background:var(--pink);color:var(--on-red);text-decoration:none;font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase" style-hover="background:var(--ink);color:var(--bg)">↓ Download résumé</a>
+    <span class="mono" style="font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)">PDF · 3 pages</span>
+  </div>
+</header>
+
+<section aria-labelledby="timeline-h" style="padding:clamp(48px,6vw,88px) clamp(16px,5vw,80px);border-bottom:1px solid var(--line)">
+  <p class="mono" style="margin:0 0 10px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--pink)">002 — Field note</p>
+  <h2 id="timeline-h" class="display" style="margin:0 0 14px;font-size:clamp(26px,3.6vw,48px);line-height:.95">Where the roles overlap</h2>
+  <p style="margin:0 0 clamp(32px,4vw,48px);max-width:62ch;font:400 clamp(16px,1.3vw,19px)/1.6 'Inter',sans-serif">HazAdapt has run continuously since 2022. Pentagon Federal Credit Union and JPMorgan Chase were each shorter, separate engagements that sat fully inside that same stretch of time — not a sequence, a braid.</p>
+
+  <div id="rsTimelineDesktop" aria-hidden="true" style="position:relative">
+    <div style="position:relative;height:200px;margin-right:4px">
+      <div class="mono" style="position:absolute;left:0;right:0;top:0;height:1px;background:var(--line)"></div>
+      <div class="mono" style="position:absolute;left:0%;top:-22px;font-size:10px;letter-spacing:.06em;color:var(--muted)">2020</div>
+      <div class="mono" style="position:absolute;left:28.6%;top:-22px;font-size:10px;letter-spacing:.06em;color:var(--muted)">2022</div>
+      <div class="mono" style="position:absolute;left:42.9%;top:-22px;font-size:10px;letter-spacing:.06em;color:var(--muted)">2023</div>
+      <div class="mono" style="position:absolute;left:57.1%;top:-22px;font-size:10px;letter-spacing:.06em;color:var(--muted)">2024</div>
+      <div class="mono" style="position:absolute;right:0;top:-22px;font-size:10px;letter-spacing:.06em;color:var(--pink)">Present</div>
+
+      <div class="rs-track" style="top:24px;left:0%;width:16.7%"><span class="mono" style="padding-left:8px;font-size:10px;letter-spacing:.04em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">True Link</span></div>
+
+      <div class="rs-track rs-track-fg" style="top:88px;left:28.6%;width:71.4%;border-color:var(--pink)"><span class="mono" style="padding-left:8px;font-size:10px;letter-spacing:.04em;white-space:nowrap;color:var(--pink);font-weight:700">HazAdapt — ongoing</span></div>
+
+      <div class="rs-track" style="top:136px;left:42.9%;width:11.9%"><span class="mono" style="padding-left:8px;font-size:10px;letter-spacing:.04em;white-space:nowrap;overflow:hidden">PenFed</span></div>
+
+      <div class="rs-track" style="top:136px;left:57.1%;width:7.2%"><span class="mono" style="padding-left:4px;font-size:9px;letter-spacing:.02em;white-space:nowrap;overflow:hidden">Chase</span></div>
+    </div>
+  </div>
+
+  <div id="rsTimelineMobile" aria-hidden="true">
+    <div style="display:grid;gap:4px"><span class="mono" style="font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)">2020–2021</span><div style="height:10px;background:color-mix(in srgb,var(--pink) 14%,transparent);border:1px solid var(--pink);width:30%"></div></div>
+    <div style="display:grid;gap:4px"><span class="mono" style="font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--pink)">2022–Present</span><div style="height:10px;background:color-mix(in srgb,var(--pink) 30%,transparent);border:1px solid var(--pink);width:100%"></div></div>
+    <div style="display:grid;gap:4px"><span class="mono" style="font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)">2023, overlapping HazAdapt</span><div style="height:10px;background:color-mix(in srgb,var(--pink) 14%,transparent);border:1px solid var(--pink);width:21%"></div></div>
+    <div style="display:grid;gap:4px"><span class="mono" style="font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)">2024, overlapping HazAdapt</span><div style="height:10px;background:color-mix(in srgb,var(--pink) 14%,transparent);border:1px solid var(--pink);width:11%"></div></div>
+  </div>
+</section>
+
+<section id="experience" aria-labelledby="experience-h" style="padding:clamp(48px,6vw,88px) clamp(16px,5vw,80px) 0;border-bottom:1px solid var(--line)">
+  <p class="mono" style="margin:0 0 10px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--pink)">003 — Record</p>
+  <h2 id="experience-h" class="display" style="margin:0 0 clamp(32px,4vw,56px);font-size:clamp(34px,5.6vw,80px);line-height:.92">The Experience Archive</h2>
+
+  <!-- HazAdapt: large record -->
+  <article aria-labelledby="hz-h" style="position:relative;border-top:2px solid var(--ink);padding:clamp(28px,4vw,48px) 0 clamp(40px,5vw,64px)">
+    <div class="regmark" aria-hidden="true" style="left:0;top:clamp(28px,4vw,48px)"></div>
+    <div class="regmark" aria-hidden="true" style="right:0;top:clamp(28px,4vw,48px)"></div>
+    <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:12px 24px;margin-bottom:18px">
+      <span class="mono rs-chip" style="color:var(--pink);border-color:var(--pink)">FILE_001</span>
+      <span class="mono" style="font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)">2022 — Present · Remote</span>
+    </div>
+    <div class="rs-grid" style="display:grid;grid-template-columns:repeat(12,1fr);gap:clamp(16px,2vw,32px);align-items:start">
+      <div style="grid-column:1/span8">
+        <h3 id="hz-h" class="display" style="margin:0 0 6px;font-size:clamp(44px,7.2vw,120px);line-height:.86">HazAdapt</h3>
+        <p class="mono" style="margin:0 0 16px;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--pink)">Lead UX Designer</p>
+        <p style="margin:0;max-width:56ch;font:400 clamp(17px,1.5vw,21px)/1.55 'Inter',sans-serif;text-wrap:pretty">The largest and longest-running chapter: end-to-end product design for ResiliencePoint, a community resilience dashboard, plus the design systems, accessibility research, and mentoring that scaled UX practice across HazAdapt.</p>
+      </div>
+      <div style="grid-column:9/span4;display:grid;gap:10px;padding-top:6px">
+        <a href="work/hazadapt-resiliencepoint.html" class="mono" style="display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:44px;padding:0 14px;border:1px solid var(--line);text-decoration:none;font-size:11px;letter-spacing:.04em;text-transform:uppercase" style-hover="border-color:var(--pink);color:var(--pink)">ResiliencePoint case study <span aria-hidden="true">→</span></a>
+        <a href="work/hazadapt.html" class="mono" style="display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:44px;padding:0 14px;border:1px solid var(--line);text-decoration:none;font-size:11px;letter-spacing:.04em;text-transform:uppercase" style-hover="border-color:var(--pink);color:var(--pink)">HazAdapt overview <span aria-hidden="true">→</span></a>
+      </div>
+    </div>
+
+    <button type="button" onClick="{{ hzToggle }}" aria-expanded="{{ hzExpanded }}" aria-controls="hz-panel" class="mono" style="display:inline-flex;align-items:center;gap:8px;margin-top:24px;min-height:44px;padding:0 16px;background:transparent;border:1px solid var(--ink);color:var(--ink);cursor:pointer;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase" style-hover="background:var(--ink);color:var(--bg)">{{ hzToggleLabel }}</button>
+
+    <div id="hz-panel" class="rs-file-panel" style="{{ hzPanelStyle }}">
+      <div style="overflow:hidden">
+        <div class="rs-grid" style="display:grid;grid-template-columns:repeat(12,1fr);gap:clamp(24px,3vw,40px);margin-top:clamp(28px,4vw,40px)">
+
+          <div style="grid-column:1/span4">
+            <h4 class="mono" style="margin:0 0 14px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--pink);border-bottom:1px solid var(--line);padding-bottom:8px">Product &amp; Research</h4>
+            <ul style="margin:0;padding:0;list-style:none;display:grid;gap:14px">
+              <li style="font:400 14px/1.55 'Inter',sans-serif">Led end-to-end product design for ResiliencePoint, used by emergency managers, municipal leaders, and community organizers to monitor hazard risk and response readiness.</li>
+              <li style="font:400 14px/1.55 'Inter',sans-serif">Defined product vision and prioritized the roadmap through stakeholder interviews, community workshops, and analytics — a <span class="rs-stat">40%</span> increase in active community users during high-risk events.</li>
+              <li style="font:400 14px/1.55 'Inter',sans-serif">Ran A/B experiments on hazard-guide calls-to-action; the resulting content structure improved completion rates by <span class="rs-stat">22%</span>.</li>
+            </ul>
+          </div>
+
+          <div style="grid-column:5/span4">
+            <h4 class="mono" style="margin:0 0 14px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--pink);border-bottom:1px solid var(--line);padding-bottom:8px">Systems &amp; Accessibility</h4>
+            <ul style="margin:0;padding:0;list-style:none;display:grid;gap:14px">
+              <li style="font:400 14px/1.55 'Inter',sans-serif">Architected a modular design system — component library, tokens, documentation — in Figma to accelerate delivery and ensure accessibility compliance.</li>
+              <li style="font:400 14px/1.55 'Inter',sans-serif">Led research into trauma-informed design: symbol language, color, and layout vetted to be culturally appropriate and non-triggering.</li>
+              <li style="font:400 14px/1.55 'Inter',sans-serif">Produced high-fidelity, clickable flows for multi-device validation; partnered with engineers on responsive behavior and performance.</li>
+            </ul>
+          </div>
+
+          <div style="grid-column:9/span4">
+            <h4 class="mono" style="margin:0 0 14px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--pink);border-bottom:1px solid var(--line);padding-bottom:8px">Leadership</h4>
+            <ul style="margin:0;padding:0;list-style:none;display:grid;gap:14px">
+              <li style="font:400 14px/1.55 'Inter',sans-serif">Coached and mentored two junior UX designers, establishing regular design critiques and shared resources to scale UX practice.</li>
+            </ul>
+            <h4 class="mono" style="margin:22px 0 10px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">Tools</h4>
+            <p class="mono" style="margin:0;font-size:12px;line-height:1.7;color:var(--muted)">Figma (design system) · ClickUp · Mixpanel · Google Docs &amp; Drive</p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- Chase: compact banner -->
+  <article aria-labelledby="ch-h" style="position:relative;border-top:2px solid var(--ink);background:var(--ink);color:var(--bg);padding:clamp(24px,3.4vw,40px) clamp(16px,3vw,28px);margin:0 calc(-1 * clamp(16px,5vw,80px))">
+    <div style="max-width:1040px;margin:0 auto">
+      <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:10px 20px;margin-bottom:10px">
+        <span class="mono" style="display:inline-flex;align-items:center;border:1px solid var(--bg);padding:4px 9px;font-size:10px;letter-spacing:.04em">FILE_002</span>
+        <span class="mono" style="font-size:10px;letter-spacing:.08em;text-transform:uppercase;opacity:.7">Jan – May 2024 · Columbus, OH</span>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 18px">
+        <h3 id="ch-h" class="display" style="margin:0;font-size:clamp(28px,4.4vw,56px);line-height:.9">JPMorgan Chase</h3>
+        <p class="mono" style="margin:0;font-size:12px;letter-spacing:.06em;text-transform:uppercase;opacity:.85">UX Designer — five months, Legal &amp; Regulatory Operations</p>
+      </div>
+      <p style="margin:12px 0 0;max-width:62ch;font:400 15px/1.5 'Inter',sans-serif">A short, focused embed redesigning internal case-management workflows and document notifications — not a public case study, but a sharp one.</p>
+
+      <button type="button" onClick="{{ chToggle }}" aria-expanded="{{ chExpanded }}" aria-controls="ch-panel" class="mono" style="display:inline-flex;align-items:center;gap:8px;margin-top:18px;min-height:40px;padding:0 14px;background:transparent;border:1px solid var(--bg);color:var(--bg);cursor:pointer;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase" style-hover="background:var(--bg);color:var(--ink)">{{ chToggleLabel }}</button>
+
+      <div id="ch-panel" class="rs-file-panel" style="{{ chPanelStyle }}">
+        <div style="overflow:hidden">
+          <div class="rs-grid" style="display:grid;grid-template-columns:repeat(12,1fr);gap:clamp(20px,3vw,32px);margin-top:20px;padding-top:20px;border-top:1px solid color-mix(in srgb,var(--bg) 30%,transparent)">
+            <ul style="grid-column:1/span7;margin:0;padding:0;list-style:none;display:grid;gap:10px">
+              <li style="font:400 14px/1.5 'Inter',sans-serif">Ran discovery sessions with legal SMEs to map current-state workflows and identify failure points.</li>
+              <li style="font:400 14px/1.5 'Inter',sans-serif">Built user flows, wireframes, and clickable prototypes for the internal Central Death Notification tool, clarifying edge-case handling and multi-team coordination.</li>
+              <li style="font:400 14px/1.5 'Inter',sans-serif">Ran moderated usability tests with internal users; the resulting design changes cut task time by <strong style="font-family:'Archivo Black',sans-serif;font-style:normal">18%</strong>.</li>
+              <li style="font:400 14px/1.5 'Inter',sans-serif">Presented accessibility recommendations and held new UI components to WCAG conformance.</li>
+            </ul>
+            <div style="grid-column:8/span5">
+              <h4 class="mono" style="margin:0 0 10px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;opacity:.7">Tools</h4>
+              <p class="mono" style="margin:0;font-size:12px;line-height:1.7;opacity:.85">Figma · Sketch · Confluence · Jira · InVision · basic HTML/CSS</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- PenFed: split design/engineering -->
+  <article aria-labelledby="pf-h" style="position:relative;border-top:2px solid var(--ink);padding:clamp(28px,4vw,48px) 0 clamp(40px,5vw,64px)">
+    <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:10px 20px;margin-bottom:14px">
+      <span class="mono rs-chip">FILE_003</span>
+      <span class="mono" style="font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)">Jan – Oct 2023 · Remote</span>
+    </div>
+    <h3 id="pf-h" class="display" style="margin:0 0 6px;font-size:clamp(32px,5.4vw,84px);line-height:.88">Pentagon Federal Credit Union</h3>
+    <p class="mono" style="margin:0 0 16px;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--pink)">Creative Technologist</p>
+    <p style="margin:0 0 20px;max-width:60ch;font:400 clamp(16px,1.3vw,18px)/1.55 'Inter',sans-serif">Where design and engineering had to be the same job: supporting a platform migration from legacy .NET to Salesforce Lightning, one foot in Figma and one in the component code.</p>
+
+    <button type="button" onClick="{{ pfToggle }}" aria-expanded="{{ pfExpanded }}" aria-controls="pf-panel" class="mono" style="display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;background:transparent;border:1px solid var(--ink);color:var(--ink);cursor:pointer;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase" style-hover="background:var(--ink);color:var(--bg)">{{ pfToggleLabel }}</button>
+
+    <div id="pf-panel" class="rs-file-panel" style="{{ pfPanelStyle }}">
+      <div style="overflow:hidden">
+        <div class="rs-grid2" style="display:grid;grid-template-columns:repeat(2,1fr);margin-top:clamp(24px,3vw,36px);border-top:1px solid var(--line)">
+          <div style="padding:20px clamp(16px,2vw,28px) 0 0;border-right:1px solid var(--line)">
+            <h4 class="mono" style="margin:0 0 14px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--pink)">Design</h4>
+            <ul style="margin:0;padding:0;list-style:none;display:grid;gap:12px">
+              <li style="font:400 14px/1.5 'Inter',sans-serif">Designed mobile-first component libraries and prototypes in Figma, mapping feature parity for a seamless customer experience.</li>
+              <li style="font:400 14px/1.5 'Inter',sans-serif">Led design QA sessions and documented accessibility checks across critical flows.</li>
+              <li style="font:400 14px/1.5 'Inter',sans-serif">Facilitated cross-discipline workshops to clarify API surface needs and keep error, empty, and success states consistent.</li>
+            </ul>
+          </div>
+          <div style="padding:20px 0 0 clamp(16px,2vw,28px)">
+            <h4 class="mono" style="margin:0 0 14px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--pink)">Engineering</h4>
+            <ul style="margin:0;padding:0;list-style:none;display:grid;gap:12px">
+              <li style="font:400 14px/1.5 'Inter',sans-serif">Worked with React Native developers to keep visual and interaction parity across channels.</li>
+              <li style="font:400 14px/1.5 'Inter',sans-serif">Collaborated on performance trade-offs to reduce page load times for critical flows.</li>
+              <li style="font:400 14px/1.5 'Inter',sans-serif">Led a team of front-end developers on adherence to design and accessibility standards for the online banking platform.</li>
+            </ul>
+          </div>
+          <div style="grid-column:1/-1;padding:16px 0 0;margin-top:8px;border-top:1px solid var(--line)">
+            <p class="mono" style="margin:0;font-size:12px;line-height:1.7;color:var(--muted)">Figma · Salesforce Lightning · React Native · Confluence · Jira</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- True Link: structured -->
+  <article aria-labelledby="tl-h" style="position:relative;border-top:2px solid var(--ink);border-bottom:2px solid var(--ink);padding:clamp(28px,4vw,48px) 0 clamp(40px,5vw,64px)">
+    <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:10px 20px;margin-bottom:14px">
+      <span class="mono rs-chip">FILE_004</span>
+      <span class="mono" style="font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)">Jan 2020 – Feb 2021 · Remote</span>
+    </div>
+    <div class="rs-grid" style="display:grid;grid-template-columns:repeat(12,1fr);gap:clamp(16px,2vw,32px);align-items:start">
+      <div style="grid-column:1/span7">
+        <h3 id="tl-h" class="display" style="margin:0 0 6px;font-size:clamp(34px,5.4vw,84px);line-height:.88">True Link Financial</h3>
+        <p class="mono" style="margin:0 0 16px;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--pink)">UX Designer</p>
+        <p style="margin:0;max-width:56ch;font:400 clamp(16px,1.3vw,18px)/1.55 'Inter',sans-serif">The earliest, most deliberate chapter: redesigning beneficiary management for guardians and fiduciaries handling pooled trusts, and shipping Draft Disbursements end to end.</p>
+      </div>
+      <div style="grid-column:9/span4;display:grid;gap:10px;padding-top:6px">
+        <a href="work/true-link.html" class="mono" style="display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:44px;padding:0 14px;border:1px solid var(--line);text-decoration:none;font-size:11px;letter-spacing:.04em;text-transform:uppercase" style-hover="border-color:var(--pink);color:var(--pink)">True Link overview <span aria-hidden="true">→</span></a>
+        <a href="work/true-link-create-draft-disbursements.html" class="mono" style="display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:44px;padding:0 14px;border:1px solid var(--line);text-decoration:none;font-size:11px;letter-spacing:.04em;text-transform:uppercase" style-hover="border-color:var(--pink);color:var(--pink)">Draft Disbursements <span aria-hidden="true">→</span></a>
+      </div>
+    </div>
+
+    <button type="button" onClick="{{ tlToggle }}" aria-expanded="{{ tlExpanded }}" aria-controls="tl-panel" class="mono" style="display:inline-flex;align-items:center;gap:8px;margin-top:20px;min-height:44px;padding:0 16px;background:transparent;border:1px solid var(--ink);color:var(--ink);cursor:pointer;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase" style-hover="background:var(--ink);color:var(--bg)">{{ tlToggleLabel }}</button>
+
+    <div id="tl-panel" class="rs-file-panel" style="{{ tlPanelStyle }}">
+      <div style="overflow:hidden">
+        <div class="rs-grid" style="display:grid;grid-template-columns:repeat(12,1fr);gap:clamp(20px,3vw,32px);margin-top:clamp(24px,3vw,36px);border-top:1px solid var(--line);padding-top:24px">
+          <ul style="grid-column:1/span7;margin:0;padding:0;list-style:none;display:grid;gap:12px">
+            <li style="font:400 14px/1.5 'Inter',sans-serif">Owned the redesign of the beneficiary management flow to improve clarity for guardians and fiduciaries.</li>
+            <li style="font:400 14px/1.5 'Inter',sans-serif">Led research — surveys, contextual interviews, usability tests — to quantify pain points and inform design hypotheses.</li>
+            <li style="font:400 14px/1.5 'Inter',sans-serif">Designed and shipped Draft Disbursements, automating manual steps and reducing backend processing time for account admins.</li>
+            <li style="font:400 14px/1.5 'Inter',sans-serif">Created onboarding materials and ran walkthroughs for customer success teams to support rollout and adoption.</li>
+          </ul>
+          <div style="grid-column:8/span5">
+            <h4 class="mono" style="margin:0 0 10px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">Tools</h4>
+            <p class="mono" style="margin:0 0 20px;font-size:12px;line-height:1.7;color:var(--muted)">Sketch · Figma · Adobe XD · Google Forms · Jira</p>
+            <h4 class="mono" style="margin:0 0 10px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">Selected project</h4>
+            <p style="margin:0;font:400 13px/1.55 'Inter',sans-serif;color:var(--muted)">Draft Disbursements reduced manual processing and errors across multi-step financial disbursements for pooled accounts — and improved the audit trail for compliance teams.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </article>
+
+</section>
+
+<section id="skills" aria-labelledby="skills-h" style="padding:clamp(48px,6vw,88px) clamp(16px,5vw,80px);border-bottom:1px solid var(--line)">
+  <p class="mono" style="margin:0 0 10px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--pink)">004 — Inventory</p>
+  <h2 id="skills-h" class="display" style="margin:0 0 clamp(32px,4vw,56px);font-size:clamp(30px,4.6vw,64px);line-height:.95">Capabilities</h2>
+
+  <div class="rs-grid" style="display:grid;grid-template-columns:repeat(12,1fr);gap:clamp(24px,3vw,40px) clamp(20px,3vw,36px)">
+    <div style="grid-column:1/span6;border-top:2px solid var(--ink);padding-top:16px">
+      <h3 class="mono" style="margin:0 0 12px;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--pink)">Design &amp; Research</h3>
+      <p style="margin:0;font:400 clamp(17px,1.6vw,22px)/1.6 'Inter',sans-serif">User Research, Interaction Design, Design Systems, Prototyping &amp; Testing, Journey Mapping, Stakeholder Facilitation, Agile &amp; Lean UX — in <strong>Figma</strong> (design systems, FigJam), <strong>Sketch</strong>, Adobe XD, Framer.</p>
+    </div>
+    <div style="grid-column:7/span6;border-top:2px solid var(--ink);padding-top:16px">
+      <h3 class="mono" style="margin:0 0 12px;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--pink)">Engineering &amp; Front-End</h3>
+      <p style="margin:0;font:400 clamp(17px,1.6vw,22px)/1.6 'Inter',sans-serif"><strong>HTML &amp; CSS</strong>, basic JavaScript, <strong>React</strong>, React Native, Storybook, Salesforce Lightning — close enough to the implementation to hand off specs and validate them in sprint demos.</p>
+    </div>
+    <div style="grid-column:1/span6;border-top:1px solid var(--line);padding-top:16px">
+      <h3 class="mono" style="margin:0 0 12px;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">Accessibility</h3>
+      <p style="margin:0;font:400 15px/1.6 'Inter',sans-serif">WCAG conformance reviews, color contrast, keyboard navigation, screen reader testing.</p>
+    </div>
+    <div style="grid-column:7/span6;border-top:1px solid var(--line);padding-top:16px">
+      <h3 class="mono" style="margin:0 0 12px;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">Analytics &amp; Tools</h3>
+      <p style="margin:0;font:400 15px/1.6 'Inter',sans-serif">Mixpanel, Google Analytics, Jira, Confluence — moderated and remote unmoderated testing, surveys, contextual inquiry.</p>
+    </div>
+  </div>
+</section>
+
+<section class="rs-grid" style="padding:clamp(48px,6vw,88px) clamp(16px,5vw,80px);display:grid;grid-template-columns:repeat(12,1fr);gap:clamp(24px,3vw,40px)">
+  <div style="grid-column:1/span6">
+    <p class="mono" style="margin:0 0 10px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--pink)">005 — Credentials</p>
+    <h2 class="display" style="margin:0 0 clamp(20px,2.6vw,32px);font-size:clamp(28px,3.8vw,48px);line-height:.95">Education</h2>
+    <dl style="margin:0;display:grid;gap:18px">
+      <div style="border-top:1px solid var(--line);padding-top:12px">
+        <dt style="font:600 clamp(17px,1.6vw,20px)/1.3 'Inter',sans-serif">Web Design &amp; Development</dt>
+        <dd style="margin:4px 0 0;font:400 14px/1.4 'Inter',sans-serif;color:var(--muted)">Southern New Hampshire University · 2018</dd>
+      </div>
+      <div style="border-top:1px solid var(--line);padding-top:12px">
+        <dt style="font:600 clamp(17px,1.6vw,20px)/1.3 'Inter',sans-serif">Certificate of Java Development</dt>
+        <dd style="margin:4px 0 0;font:400 14px/1.4 'Inter',sans-serif;color:var(--muted)">We Can Code IT · 2022</dd>
+      </div>
+    </dl>
+  </div>
+  <div style="grid-column:7/span6">
+    <p class="mono" style="margin:0 0 10px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--pink)">006 — Also true</p>
+    <h2 class="display" style="margin:0 0 clamp(20px,2.6vw,32px);font-size:clamp(28px,3.8vw,48px);line-height:.95">Elsewhere</h2>
+    <p style="margin:0;max-width:48ch;font:400 clamp(16px,1.4vw,19px)/1.6 'Inter',sans-serif">Mentor and reviewer for junior designers. Regular at local UX meetups and remote workshops. Occasional guest speaker at tech meetups.</p>
+  </div>
+</section>
+
+<nav aria-label="Back" style="border-top:2px solid var(--ink);padding:clamp(36px,5vw,72px) clamp(16px,5vw,80px)"><a href="index.html#about" style="font:400 clamp(40px,5vw,80px)/.9 'Archivo Black',sans-serif;text-transform:uppercase;text-decoration:none;overflow-wrap:anywhere" style-hover="color:var(--red)">← Back to the portfolio</a></nav>
+
+</main>
+
+<footer style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:16px;padding:32px clamp(16px,5vw,80px) 48px;font:400 12px/1.6 'Space Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)">
+  <span>~/krystyna-ewing · © 2026</span>
+  <a href="mailto:hello@krystynaewing.com" style="color:var(--ink)">hello@krystynaewing.com</a>
+  <a href="#main" style="min-height:44px;display:inline-flex;align-items:center">[ ^ top ]</a>
+</footer>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;defaultTheme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;dark&quot;,&quot;light&quot;],&quot;default&quot;:&quot;dark&quot;,&quot;tsType&quot;:&quot;'dark'|'light'&quot;,&quot;section&quot;:&quot;Look&quot;},&quot;grain&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Look&quot;}}">
+class Component extends DCLogic {
+  state = {
+    theme: this.props.defaultTheme ?? 'dark', menuOpen: false,
+    open: { hz: true, ch: false, pf: false, tl: false }
+  };
+  applyRoot() {
+    const r = document.documentElement;
+    r.dataset.theme = this.state.theme;
+    r.dataset.grain = (this.props.grain ?? true) ? 'on' : 'off';
+  }
+  componentDidMount() {
+    this.reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    try {
+      this.introSeen = sessionStorage.getItem('keIntroSeen') === '1';
+      sessionStorage.setItem('keIntroSeen', '1');
+    } catch (e) { this.introSeen = false; }
+    if (this.introSeen) document.documentElement.dataset.intro = 'seen';
+    const veil = document.getElementById('bootVeil');
+    if (veil) {
+      if (this.introSeen || this.reduce) {
+        veil.style.display = 'none';
+      } else {
+        const minDisplay = 1100;
+        const elapsed = Date.now() - (window.__bootStart || Date.now());
+        const remaining = Math.max(0, minDisplay - elapsed);
+        setTimeout(() => {
+          requestAnimationFrame(() => { veil.style.opacity = '0'; });
+          veil.addEventListener('transitionend', () => { veil.style.display = 'none'; }, { once: true });
+          setTimeout(() => { veil.style.display = 'none'; }, 1200);
+        }, remaining);
+      }
+    }
+    this.applyRoot();
+    this.onMenuResize = () => { if (window.innerWidth >= 860 && this.state.menuOpen) { document.body.style.overflow = ''; this.setState({ menuOpen: false }); } };
+    window.addEventListener('resize', this.onMenuResize);
+    this.onMenuKeydown = e => { if (e.key === 'Escape' && this.state.menuOpen) { document.body.style.overflow = ''; this.setState({ menuOpen: false }); } };
+    window.addEventListener('keydown', this.onMenuKeydown);
+  }
+  componentDidUpdate(pp) {
+    if (pp.defaultTheme !== this.props.defaultTheme && this.props.defaultTheme) this.setState({ theme: this.props.defaultTheme }, () => this.applyRoot());
+    else this.applyRoot();
+  }
+  componentWillUnmount() { window.removeEventListener('resize', this.onMenuResize); window.removeEventListener('keydown', this.onMenuKeydown); }
+  toggle(key) { return () => this.setState(s => ({ open: { ...s.open, [key]: !s.open[key] } })); }
+  panelStyle(isOpen) {
+    return this.reduce
+      ? { display: isOpen ? 'block' : 'none' }
+      : { display: 'grid', gridTemplateRows: isOpen ? '1fr' : '0fr' };
+  }
+  renderVals() {
+    const s = this.state, light = s.theme === 'light';
+    return {
+      themeLabel: light ? 'Dark' : 'Light', lightPressed: light ? 'true' : 'false',
+      toggleTheme: () => this.setState(st => ({ theme: st.theme === 'light' ? 'dark' : 'light' }), () => this.applyRoot()),
+      menuExpandedAttr: s.menuOpen ? 'true' : 'false',
+      menuButtonLabel: s.menuOpen ? 'CLOSE' : 'MENU',
+      menuAriaLabel: s.menuOpen ? 'Close menu' : 'Open menu',
+      menuClose: () => { document.body.style.overflow = ''; this.setState({ menuOpen: false }); },
+      menuToggle: () => { const next = !s.menuOpen; document.body.style.overflow = next ? 'hidden' : ''; this.setState({ menuOpen: next }); },
+      menuBackdropStyle: s.menuOpen ? { display: 'block', position: 'fixed', inset: '56px 0 0 0', zIndex: 215, background: 'rgba(0,0,0,.5)' } : { display: 'none' },
+      menuPanelStyle: s.menuOpen ? { display: 'grid', position: 'fixed', left: 0, right: 0, top: 56, zIndex: 220, background: 'var(--bg)', borderBottom: '1px solid var(--line)', maxHeight: 'calc(100vh - 56px)', overflowY: 'auto' } : { display: 'none' },
+      hzToggle: this.toggle('hz'), hzExpanded: s.open.hz ? 'true' : 'false', hzToggleLabel: s.open.hz ? '− Collapse the file' : '+ Explore the file',
+      hzPanelStyle: this.panelStyle(s.open.hz),
+      chToggle: this.toggle('ch'), chExpanded: s.open.ch ? 'true' : 'false', chToggleLabel: s.open.ch ? '− Collapse' : '+ Expand',
+      chPanelStyle: this.panelStyle(s.open.ch),
+      pfToggle: this.toggle('pf'), pfExpanded: s.open.pf ? 'true' : 'false', pfToggleLabel: s.open.pf ? '− Collapse the file' : '+ Explore the file',
+      pfPanelStyle: this.panelStyle(s.open.pf),
+      tlToggle: this.toggle('tl'), tlExpanded: s.open.tl ? 'true' : 'false', tlToggleLabel: s.open.tl ? '− Collapse the file' : '+ Explore the file',
+      tlPanelStyle: this.panelStyle(s.open.tl)
+    };
+  }
+}
+</script>
+</body>
+</html>
