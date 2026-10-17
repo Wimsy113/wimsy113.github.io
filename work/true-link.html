@@ -29,6 +29,20 @@ a{color:inherit;text-decoration-thickness:1px;text-underline-offset:.22em}
 a:hover{color:var(--red)}
 :focus-visible{outline:3px solid var(--pink);outline-offset:4px}
 ::selection{background:var(--pink);color:var(--on-red)}
+@media (prefers-reduced-motion:no-preference){
+  @keyframes tlBreathe{0%,100%{opacity:.55;transform:translate(-50%,-50%) scale(.9)}50%{opacity:1;transform:translate(-50%,-50%) scale(1.08)}}
+  @keyframes tlSpinOrbit{to{transform:translate(-50%,-50%) rotate(360deg)}}
+  @keyframes tlDriftParticle{0%{top:105%;opacity:0;transform:translateX(0) scale(.5)}15%{opacity:.8}55%{transform:translateX(5rem) scale(1.5)}90%{opacity:.5}100%{top:-5%;opacity:0;transform:translateX(-3rem) scale(.5)}}
+  #tlAura{animation:tlBreathe 7s ease-in-out infinite}
+  #tlOrbit1{animation:tlSpinOrbit 45s linear infinite}
+  #tlOrbit2{animation:tlSpinOrbit 32s linear infinite reverse}
+  #tlParticles span{opacity:0;animation:tlDriftParticle 9s linear infinite}
+  #tlParticles span:nth-child(3n+1){left:12%;animation-delay:-2s;animation-duration:11s}
+  #tlParticles span:nth-child(3n+2){left:48%;animation-delay:-5s;animation-duration:8s}
+  #tlParticles span:nth-child(3n){left:82%;animation-delay:-7s;animation-duration:13s}
+  #tlParticles span:nth-child(4n+1){margin-left:18%}
+  #tlParticles span:nth-child(5n+2){margin-left:-24%}
+}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
 
 nav[aria-label="Primary"] a[aria-current="true"]{color:var(--red);box-shadow:inset 3px 0 0 var(--red)}
@@ -74,7 +88,7 @@ nav[aria-label="Primary"] a[aria-current="true"]{color:var(--red);box-shadow:ins
 <header style="padding:clamp(28px,4vw,48px) clamp(16px,5vw,80px) clamp(56px,7vw,100px);border-bottom:2px solid var(--ink);position:relative;overflow:hidden">
   <p style="margin:0 0 clamp(40px,6vw,80px);font:400 12px/1 'Space Mono',monospace;letter-spacing:.08em;color:var(--muted)"><a href="../index.html#work">~</a> / <span style="color:var(--ink)">work/true-link</span></p>
   <p style="margin:0 0 14px;font:400 12px/1.6 'Space Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--pink)">Fintech · Accessibility · Design Systems</p>
-  <h1 style="margin:0;font:400 clamp(56px,12vw,220px)/.82 'Archivo Black',sans-serif;text-transform:uppercase;letter-spacing:-.015em;overflow-wrap:anywhere;text-wrap:balance">True Link</h1>
+  <h1 style="margin:0;font:400 clamp(39px,8.4vw,154px)/.82 'Archivo Black',sans-serif;text-transform:uppercase;letter-spacing:-.015em;overflow-wrap:anywhere;text-wrap:balance">True Link</h1>
   <div style="display:flex;flex-wrap:wrap;gap:40px 64px;margin-top:clamp(32px,4vw,56px);align-items:flex-start">
     <div style="flex:1 1 420px;min-width:0;display:grid;gap:28px">
       <p style="margin:0;max-width:34ch;font:600 clamp(22px,2.2vw,32px)/1.25 'Inter',sans-serif;text-wrap:pretty">Financial tools built to protect the safety and independence of aging and disabled adults without stripping away their autonomy.</p>
@@ -85,7 +99,30 @@ nav[aria-label="Primary"] a[aria-current="true"]{color:var(--red);box-shadow:ins
       <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Inter',sans-serif;text-wrap:pretty">My work at True Link spanned both sides of the platform: internal workflow tools that let trust administrators manage disbursements safely and efficiently, and the beneficiary-facing experience that makes that same money understandable to the people it belongs to.</p>
       
     </div>
-    <img loading="lazy" src="../images/True_Link_album.png" alt="True Link logo" style="flex:1 1 360px;min-width:0;max-width:640px;height:auto;display:block;transform:rotate(1.5deg);box-shadow:14px 14px 0 var(--red)">
+    <div style="position:relative;flex:1 1 360px;min-width:0;max-width:640px">
+      <img loading="lazy" src="../images/work/true-link/hero-devices.png" alt="The True Link trust administration dashboard shown across desktop and laptop screens: pending disbursement approvals and a draft disbursements queue with status flags" style="position:relative;z-index:1;display:block;width:100%;height:auto">
+      <div aria-hidden="true" style="position:absolute;inset:0;z-index:0;pointer-events:none">
+        <div id="tlParticles" aria-hidden="true" style="position:absolute;inset:0;overflow:hidden">
+          <span style="position:absolute;width:5px;height:5px;border-radius:50%;background:var(--pink)"></span>
+          <span style="position:absolute;width:5px;height:5px;border-radius:50%;background:var(--pink)"></span>
+          <span style="position:absolute;width:5px;height:5px;border-radius:50%;background:var(--pink)"></span>
+          <span style="position:absolute;width:5px;height:5px;border-radius:50%;background:var(--pink)"></span>
+          <span style="position:absolute;width:5px;height:5px;border-radius:50%;background:var(--pink)"></span>
+          <span style="position:absolute;width:5px;height:5px;border-radius:50%;background:var(--pink)"></span>
+          <span style="position:absolute;width:5px;height:5px;border-radius:50%;background:var(--pink)"></span>
+          <span style="position:absolute;width:5px;height:5px;border-radius:50%;background:var(--pink)"></span>
+          <span style="position:absolute;width:5px;height:5px;border-radius:50%;background:var(--pink)"></span>
+          <span style="position:absolute;width:5px;height:5px;border-radius:50%;background:var(--pink)"></span>
+          <span style="position:absolute;width:5px;height:5px;border-radius:50%;background:var(--pink)"></span>
+          <span style="position:absolute;width:5px;height:5px;border-radius:50%;background:var(--pink)"></span>
+          <span style="position:absolute;width:5px;height:5px;border-radius:50%;background:var(--pink)"></span>
+          <span style="position:absolute;width:5px;height:5px;border-radius:50%;background:var(--pink)"></span>
+        </div>
+        <div id="tlAura" aria-hidden="true" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:114%;height:114%;border-radius:50%;filter:blur(20px);background:radial-gradient(circle,color-mix(in srgb,var(--pink) 40%,transparent),transparent 70%)"></div>
+        <div id="tlOrbit1" aria-hidden="true" style="position:absolute;left:50%;top:50%;width:90%;height:90%;border-radius:50%;border:1px dashed color-mix(in srgb,var(--pink) 50%,transparent);transform:translate(-50%,-50%)"></div>
+        <div id="tlOrbit2" aria-hidden="true" style="position:absolute;left:50%;top:50%;width:66%;height:66%;border-radius:50%;border:1px solid color-mix(in srgb,var(--ink) 40%,transparent);transform:translate(-50%,-50%)"></div>
+      </div>
+    </div>
   </div>
 </header>
 
