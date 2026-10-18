@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+html,body{background:#0B0B0B;margin:0}
+#bootVeil{position:fixed;inset:0;z-index:999999;background:#0B0B0B;display:flex;align-items:center;justify-content:center;opacity:1;transition:opacity .5s ease}
+html[data-intro="seen"] #bootVeil{display:none}
+#bootVeilSweep{position:absolute;inset:0;background:#A8FF00}
+@media (prefers-reduced-motion:no-preference){
+  @keyframes bootVeilSweep{0%{transform:translateX(-100%)}50%{transform:translateX(0)}100%{transform:translateX(100%)}}
+  #bootVeilSweep{animation:bootVeilSweep 1.1s ease-in-out infinite}
+}
+</style>
+<script>window.__bootStart=Date.now();</script>
+<script>try{if(localStorage.getItem('ke-theme')==='light')document.documentElement.setAttribute('data-theme','light');}catch(e){}</script>
+<script>try{if(sessionStorage.getItem('keIntroSeen')==='1')document.documentElement.dataset.intro='seen';}catch(e){}</script>
+<link rel="preload" as="script" href="./vendor/react.production.min.js">
+<link rel="preload" as="script" href="./vendor/react-dom.production.min.js">
+<link rel="preload" as="script" href="./vendor/babel.min.js">
+<script>window.__resources={"https://unpkg.com/react@18.3.1/umd/react.production.min.js":"./vendor/react.production.min.js","https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js":"./vendor/react-dom.production.min.js","https://unpkg.com/@babel/standalone@7.29.0/babel.min.js":"./vendor/babel.min.js"};</script>
+</head>
+<body>
+<div id="bootVeil" aria-hidden="true">
+  <div style="position:relative;padding:28px 40px;border:1px solid rgba(242,240,233,.2)">
+    <div style="position:absolute;left:-1px;top:-1px;width:14px;height:14px;border-left:1px solid #A8FF00;border-top:1px solid #A8FF00"></div>
+    <div style="position:absolute;right:-1px;top:-1px;width:14px;height:14px;border-right:1px solid #A8FF00;border-top:1px solid #A8FF00"></div>
+    <div style="position:absolute;left:-1px;bottom:-1px;width:14px;height:14px;border-left:1px solid #A8FF00;border-bottom:1px solid #A8FF00"></div>
+    <div style="position:absolute;right:-1px;bottom:-1px;width:14px;height:14px;border-right:1px solid #A8FF00;border-bottom:1px solid #A8FF00"></div>
+    <div style="font-family:'Archivo Black','Inter',sans-serif;text-transform:uppercase;font-size:22px;color:#F2F0E9;text-align:center;margin-bottom:12px;letter-spacing:.02em">K. EWING</div>
+    <div style="display:flex;align-items:center;justify-content:center;gap:8px;font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#A8FF00">
+      <span style="width:60px;height:2px;background:rgba(242,240,233,.2);position:relative;overflow:hidden;display:inline-block">
+        <span id="bootVeilSweep"></span>
+      </span>
+      Loading
+    </div>
+  </div>
+</div>
+<script src="./support.js"></script>
+<x-dc>
+<helmet>
+<link rel="icon" href="images/favicon.ico">
+<title>About — Krystyna Ewing</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Krystyna Ewing — designer, artist, maker, and someone who has a hard time leaving things alone. UX design, creative technology, software, IT, and the things made in between.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+<style>
+html{--bg:#0B0B0B;--ink:#F2F0E9;--muted:#9a978e;--line:rgba(242,240,233,.2);--pink:#A8FF00;--on-red:#0B0B0B;--grain:.1;--rail-w:48px}
+html[data-theme="light"]{--bg:#F2F0E9;--ink:#0B0B0B;--muted:#5f5c4e;--line:rgba(11,11,11,.2);--pink:#447000;--on-red:#F2F0E9;--grain:.07}
+body{margin:0;padding-right:var(--rail-w);background:var(--bg);color:var(--ink);font-family:"Inter",system-ui,sans-serif;-webkit-font-smoothing:antialiased;transition:background-color .35s,color .35s;overflow-x:hidden}
+body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:300;opacity:var(--grain);mix-blend-mode:overlay;transform:translateZ(0);will-change:transform;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E")}
+a{color:inherit;text-decoration-thickness:1px;text-underline-offset:.22em}
+a:hover{color:var(--pink)}
+:focus-visible{outline:3px solid var(--pink);outline-offset:4px}
+::selection{background:var(--pink);color:var(--on-red)}
+.display{font-family:'Archivo Black','Inter',sans-serif;font-weight:400;text-transform:uppercase}
+.mono{font-family:'Space Mono',monospace}
+.regmark{position:absolute;width:14px;height:14px;pointer-events:none;color:var(--line)}
+.regmark::before,.regmark::after{content:"";position:absolute;background:currentColor}
+.regmark::before{left:50%;top:0;width:1px;height:100%;transform:translateX(-50%)}
+.regmark::after{top:50%;left:0;height:1px;width:100%;transform:translateY(-50%)}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+
+nav[aria-label="Primary"] a[aria-current="true"]{color:var(--pink);box-shadow:inset 3px 0 0 var(--pink)}
+#mobileMenu a[aria-current="true"]{color:var(--pink)}
+#mobileBar{display:none}
+@media (max-width:859px){
+  nav[aria-label="Primary"]{display:none!important}
+  #mobileBar{display:flex}
+  body{padding-right:0;padding-top:56px}
+}
+@media (min-width:860px){
+  #mobileMenu,#mobileMenuBackdrop{display:none!important}
+}
+
+/* ---- opening ---- */
+.ab-open{max-width:21ch}
+@media (max-width:620px){.ab-open{max-width:14ch}}
+
+/* ---- background ledger ---- */
+.ab-grid{display:grid;grid-template-columns:repeat(12,1fr)}
+.ab-grid2{display:grid;grid-template-columns:repeat(2,1fr)}
+.ab-grid3{display:grid;grid-template-columns:repeat(3,1fr)}
+@media (max-width:699px){
+  .ab-grid,.ab-grid2,.ab-grid3{grid-template-columns:1fr!important}
+  .ab-grid>*,.ab-grid2>*,.ab-grid3>*{grid-column:1/-1!important}
+}
+.ab-role{border-top:1px solid var(--line);padding:clamp(22px,3vw,34px) 0}
+.ab-role:first-of-type{border-top:2px solid var(--ink)}
+.ab-chip{display:inline-flex;align-items:center;border:1px solid var(--line);padding:7px 12px;font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
+.ab-thread{position:relative;padding-left:clamp(18px,2.6vw,28px)}
+.ab-thread::before{content:"";position:absolute;left:0;top:6px;bottom:6px;width:1px;background:linear-gradient(to bottom,transparent,var(--pink) 8%,var(--pink) 92%,transparent);opacity:.5}
+@media (max-width:620px){.ab-thread{padding-left:14px}}
+.ab-pull{margin:clamp(28px,4vw,44px) 0;font-family:'Archivo Black','Inter',sans-serif;font-weight:400;font-size:clamp(22px,2.8vw,36px);line-height:1.2;letter-spacing:-.01em;color:var(--pink);max-width:26ch;text-wrap:balance}
+</style>
+</helmet>
+
+<a href="#main" style="position:fixed;left:16px;top:-80px;z-index:400;background:var(--pink);color:var(--on-red);padding:12px 18px;font:700 14px/1 'Space Mono',monospace;text-decoration:none" style-focus="top:16px">Skip to content</a>
+
+<nav aria-label="Primary" style="position:fixed;right:0;top:0;bottom:0;z-index:200;width:var(--rail-w);display:flex;flex-direction:column;background:var(--bg);border-left:1px solid var(--line)">
+  <a href="index.html#work" aria-label="K. Ewing, home" class="mono" style="flex:0 0 auto;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(180deg);padding:16px 0;font-size:15px;font-weight:700;letter-spacing:.04em;text-decoration:none;color:var(--ink);border-bottom:1px solid var(--line);min-height:44px;transition:color .2s ease" style-hover="color:var(--pink)">K. EWING</a>
+  <a href="index.html#work" aria-current="false" class="mono" style="flex:1 1 0;min-height:44px;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(180deg);font-size:11px;font-weight:700;letter-spacing:.18em;text-decoration:none;color:var(--ink);border-bottom:1px solid var(--line);transition:color .2s ease,letter-spacing .2s ease" style-hover="color:var(--pink);letter-spacing:.26em">WORK</a>
+  <a href="index.html#workbench" aria-current="false" class="mono" style="flex:1 1 0;min-height:44px;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(180deg);font-size:11px;font-weight:700;letter-spacing:.18em;text-decoration:none;color:var(--ink);border-bottom:1px solid var(--line);transition:color .2s ease,letter-spacing .2s ease" style-hover="color:var(--pink);letter-spacing:.26em">WORKBENCH</a>
+  <a href="about.html" aria-current="true" class="mono" style="flex:1 1 0;min-height:44px;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(180deg);font-size:11px;font-weight:700;letter-spacing:.18em;text-decoration:none;color:var(--pink);border-bottom:1px solid var(--line);transition:color .2s ease,letter-spacing .2s ease" style-hover="color:var(--pink);letter-spacing:.26em">ABOUT</a>
+  <a href="index.html#contact" aria-current="false" class="mono" style="flex:1 1 0;min-height:44px;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(180deg);font-size:11px;font-weight:700;letter-spacing:.18em;text-decoration:none;color:var(--ink);transition:color .2s ease,letter-spacing .2s ease" style-hover="color:var(--pink);letter-spacing:.26em">CONTACT</a>
+  <button type="button" onClick="{{ toggleTheme }}" aria-pressed="{{ lightPressed }}" aria-label="Switch to {{ themeLabel }} mode" class="mono" style="flex:0 0 auto;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(180deg);padding:14px 0;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;color:var(--muted);border:0;border-top:1px solid var(--line);background:var(--bg);cursor:pointer;min-height:44px;transition:color .2s ease" style-hover="color:var(--pink)">{{ themeLabel }}</button>
+</nav>
+
+<div id="mobileBar" class="mono" role="navigation" aria-label="Mobile bar" style="position:fixed;left:0;right:0;top:0;z-index:220;align-items:center;justify-content:space-between;padding:0 16px;height:56px;background:var(--bg);border-bottom:1px solid var(--line)">
+  <a href="index.html#work" aria-label="K. Ewing, home" style="font-size:15px;font-weight:700;letter-spacing:.04em;text-decoration:none;color:var(--ink);min-height:44px;display:inline-flex;align-items:center" style-hover="color:var(--pink)">K. EWING</a>
+  <button type="button" onClick="{{ menuToggle }}" aria-expanded="{{ menuExpandedAttr }}" aria-controls="mobileMenu" aria-label="{{ menuAriaLabel }}" style="min-width:44px;min-height:44px;padding:0 12px;border:1px solid var(--line);background:transparent;color:var(--ink);font:700 11px/1 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;cursor:pointer" style-hover="color:var(--pink);border-color:var(--pink)">{{ menuButtonLabel }}</button>
+</div>
+
+<div id="mobileMenuBackdrop" aria-hidden="true" onClick="{{ menuClose }}" style="{{ menuBackdropStyle }}"></div>
+
+<nav id="mobileMenu" aria-label="Mobile" class="mono" style="{{ menuPanelStyle }}">
+  <a href="index.html#work" onClick="{{ menuClose }}" style="display:flex;align-items:center;min-height:52px;padding:0 20px;font-size:14px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;color:var(--ink);border-bottom:1px solid var(--line)" style-hover="color:var(--pink)">Work</a>
+  <a href="index.html#workbench" onClick="{{ menuClose }}" style="display:flex;align-items:center;min-height:52px;padding:0 20px;font-size:14px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;color:var(--ink);border-bottom:1px solid var(--line)" style-hover="color:var(--pink)">Workbench</a>
+  <a href="about.html" aria-current="true" onClick="{{ menuClose }}" style="display:flex;align-items:center;min-height:52px;padding:0 20px;font-size:14px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;color:var(--pink);border-bottom:1px solid var(--line)" style-hover="color:var(--pink)">About</a>
+  <a href="index.html#contact" onClick="{{ menuClose }}" style="display:flex;align-items:center;min-height:52px;padding:0 20px;font-size:14px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;color:var(--ink);border-bottom:1px solid var(--line)" style-hover="color:var(--pink)">Contact</a>
+  <button type="button" onClick="{{ toggleTheme }}" aria-pressed="{{ lightPressed }}" style="display:flex;align-items:center;justify-content:space-between;width:100%;min-height:52px;padding:0 20px;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;border:0;background:transparent;color:var(--muted);cursor:pointer" style-hover="color:var(--pink)"><span>Theme</span><span>{{ themeLabel }}</span></button>
+</nav>
+
+<main id="main">
+
+<header style="position:relative;padding:clamp(28px,4vw,48px) clamp(16px,5vw,80px) clamp(48px,6vw,88px);border-bottom:2px solid var(--ink)">
+  <p class="mono" style="margin:0 0 clamp(24px,3.4vw,40px);font-size:12px;letter-spacing:.08em;color:var(--muted)"><a href="index.html#about">~</a> / <span style="color:var(--ink)">about</span></p>
+  <p class="mono" style="margin:0 0 10px;font-size:clamp(15px,1.6vw,19px);font-style:italic;letter-spacing:.01em;color:var(--pink)">There's a lot going on here.</p>
+
+  <h1 class="display" style="margin:0 0 clamp(28px,4vw,44px);font-size:clamp(38px,6.6vw,108px);line-height:.96;letter-spacing:-.015em;max-width:15ch;text-wrap:balance">I'm a designer, artist, maker, and someone who has a really hard time leaving things alone when I know it could work better.</h1>
+
+  <div class="ab-grid" style="gap:clamp(20px,3vw,32px)">
+    <p style="grid-column:1/span6;margin:0;font:400 clamp(17px,1.5vw,21px)/1.6 'Inter',sans-serif;text-wrap:pretty">I've worked across UX design, software development, and IT, and somewhere in between all of that, I've spent a ridiculous amount of time making art, experimenting with 3D printing, building things, and figuring out how stuff works.</p>
+    <p style="grid-column:7/span6;margin:0;font:400 clamp(17px,1.5vw,21px)/1.6 'Inter',sans-serif;text-wrap:pretty">I don't really separate the creative side of my brain from the technical side. To me, they're part of the same process. I get curious about something, start pulling at the thread, and see where it takes me.</p>
+  </div>
+
+  <div style="display:flex;flex-wrap:wrap;align-items:center;gap:16px 24px;margin-top:clamp(28px,4vw,44px)">
+    <a href="files/Krystyna-Ewing-Resume.pdf" download="Krystyna-Ewing-Resume.pdf" class="mono" style="display:inline-flex;align-items:center;gap:10px;min-height:48px;padding:0 20px;background:var(--pink);color:var(--on-red);text-decoration:none;font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase" style-hover="background:var(--ink);color:var(--bg)">↓ Download résumé</a>
+    <a href="resume.html" class="mono" style="display:inline-flex;align-items:center;min-height:48px;font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;color:var(--ink)" style-hover="color:var(--pink)">Read the full résumé →</a>
+    <a href="mailto:hello@krystynaewing.com" class="mono" style="display:inline-flex;align-items:center;min-height:48px;font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;color:var(--ink)" style-hover="color:var(--pink)">Say hello →</a>
+  </div>
+</header>
+
+<section id="background" aria-labelledby="background-h" style="padding:clamp(48px,6vw,88px) clamp(16px,5vw,80px);border-bottom:1px solid var(--line)">
+  <p class="mono" style="margin:0 0 10px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--pink)">My Professional Background</p>
+  <h2 id="background-h" class="display" style="margin:0 0 clamp(20px,2.6vw,32px);font-size:clamp(30px,4.6vw,64px);line-height:.95">A career in more than one direction</h2>
+
+  <div class="ab-grid" style="gap:clamp(16px,2vw,32px);margin-bottom:clamp(36px,5vw,56px)">
+    <p style="grid-column:1/span6;margin:0;font:400 clamp(16px,1.3vw,19px)/1.6 'Inter',sans-serif">My career hasn't followed one straight line, and I wouldn't have it any other way.</p>
+    <p style="grid-column:7/span6;margin:0;font:400 clamp(16px,1.3vw,19px)/1.6 'Inter',sans-serif">I've worked across UX design, financial technology, software development, IT operations, and creative technology. That experience has given me the opportunity to approach products from multiple perspectives, whether I'm researching how people interact with a system, designing an interface, working with developers, or troubleshooting the technology behind it.</p>
+  </div>
+
+  <div class="ab-thread">
+
+    <!-- HazAdapt: flagship -->
+    <article class="ab-role" aria-labelledby="hz-h" style="border-top:2px solid var(--ink)">
+      <div class="ab-grid" style="gap:clamp(16px,2vw,32px);align-items:start">
+        <div style="grid-column:1/span8">
+          <h3 id="hz-h" class="display" style="margin:0 0 4px;font-size:clamp(32px,4.6vw,64px);line-height:.95">HazAdapt</h3>
+          <p class="mono" style="margin:0 0 14px;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--pink)">Lead UX Designer</p>
+          <p style="margin:0 0 10px;max-width:58ch;font:400 clamp(16px,1.3vw,19px)/1.6 'Inter',sans-serif">At HazAdapt, I've led UX design efforts across emergency preparedness and public safety products, including ResiliencePoint, LoCo, and Prep Checks.</p>
+          <p style="margin:0 0 10px;max-width:58ch;font:400 clamp(16px,1.3vw,19px)/1.6 'Inter',sans-serif">My work has included user research, usability testing, accessibility improvements, interface design, design systems, developer collaboration, and product QA.</p>
+          <p style="margin:0;max-width:58ch;font:400 clamp(16px,1.3vw,19px)/1.6 'Inter',sans-serif">A significant part of that work has involved making emergency information and preparedness tools more accessible, understandable, and useful to the people who rely on them.</p>
+        </div>
+        <div style="grid-column:9/span4;display:grid;gap:10px;padding-top:6px">
+          <a href="work/hazadapt-resiliencepoint.html" class="mono" style="display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:44px;padding:0 14px;border:1px solid var(--line);text-decoration:none;font-size:11px;letter-spacing:.04em;text-transform:uppercase" style-hover="border-color:var(--pink);color:var(--pink)">ResiliencePoint case study <span aria-hidden="true">→</span></a>
+          <a href="work/hazadapt.html" class="mono" style="display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:44px;padding:0 14px;border:1px solid var(--line);text-decoration:none;font-size:11px;letter-spacing:.04em;text-transform:uppercase" style-hover="border-color:var(--pink);color:var(--pink)">HazAdapt overview <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+    </article>
+
+    <!-- PenFed -->
+    <article class="ab-role" aria-labelledby="pf-h">
+      <h3 id="pf-h" class="display" style="margin:0 0 4px;font-size:clamp(24px,3.2vw,38px);line-height:1">Pentagon Federal Credit Union</h3>
+      <p class="mono" style="margin:0 0 12px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--pink)">Creative Technologist</p>
+      <p style="margin:0 0 8px;max-width:62ch;font:400 15px/1.6 'Inter',sans-serif">At PenFed, I worked on digital experiences involving Salesforce, React, React Native, and front-end development.</p>
+      <p style="margin:0;max-width:62ch;font:400 15px/1.6 'Inter',sans-serif">My responsibilities included translating designs into functional interfaces, collaborating on the transition from .NET to Salesforce, and working across mobile and web experiences.</p>
+    </article>
+
+    <!-- Chase -->
+    <article class="ab-role" aria-labelledby="ch-h">
+      <h3 id="ch-h" class="display" style="margin:0 0 4px;font-size:clamp(24px,3.2vw,38px);line-height:1">JPMorgan Chase</h3>
+      <p class="mono" style="margin:0 0 12px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--pink)">UX Designer</p>
+      <p style="margin:0 0 8px;max-width:62ch;font:400 15px/1.6 'Inter',sans-serif">At Chase, I worked within Legal &amp; Regulatory Control Operations, designing internal experiences supporting operational workflows.</p>
+      <p style="margin:0;max-width:62ch;font:400 15px/1.6 'Inter',sans-serif">The work involved understanding existing processes and improving how employees interacted with internal systems.</p>
+    </article>
+
+    <!-- True Link -->
+    <article class="ab-role" aria-labelledby="tl-h">
+      <div class="ab-grid" style="gap:clamp(16px,2vw,32px);align-items:start">
+        <div style="grid-column:1/span8">
+          <h3 id="tl-h" class="display" style="margin:0 0 4px;font-size:clamp(24px,3.2vw,38px);line-height:1">True Link Financial</h3>
+          <p class="mono" style="margin:0 0 12px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--pink)">UX Designer</p>
+          <p style="margin:0 0 8px;max-width:58ch;font:400 15px/1.6 'Inter',sans-serif">At True Link, I worked on experiences supporting trust administrators and beneficiaries.</p>
+          <p style="margin:0;max-width:58ch;font:400 15px/1.6 'Inter',sans-serif">My projects included improvements to beneficiary information and disbursement workflows, informed by stakeholder collaboration and user research.</p>
+        </div>
+        <div style="grid-column:9/span4;display:grid;gap:10px;padding-top:6px">
+          <a href="work/true-link.html" class="mono" style="display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:44px;padding:0 14px;border:1px solid var(--line);text-decoration:none;font-size:11px;letter-spacing:.04em;text-transform:uppercase" style-hover="border-color:var(--pink);color:var(--pink)">True Link overview <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+    </article>
+
+    <!-- Move HQ -->
+    <article class="ab-role" aria-labelledby="mh-h">
+      <h3 id="mh-h" class="display" style="margin:0 0 4px;font-size:clamp(22px,2.8vw,32px);line-height:1">Move HQ</h3>
+      <p class="mono" style="margin:0 0 12px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--pink)">User Experience Designer</p>
+      <p style="margin:0 0 8px;max-width:62ch;font:400 15px/1.6 'Inter',sans-serif">At Move HQ, I worked on user experiences supporting military families through the relocation process.</p>
+      <p style="margin:0;max-width:62ch;font:400 15px/1.6 'Inter',sans-serif">My work focused on improving digital workflows and making the experience easier to navigate for the families using the platform.</p>
+    </article>
+
+    <!-- Operation Code -->
+    <article class="ab-role" aria-labelledby="oc-h">
+      <h3 id="oc-h" class="display" style="margin:0 0 4px;font-size:clamp(22px,2.8vw,32px);line-height:1">Operation Code</h3>
+      <p class="mono" style="margin:0 0 12px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--pink)">UX Designer &amp; Evangelist</p>
+      <p style="margin:0 0 8px;max-width:62ch;font:400 15px/1.6 'Inter',sans-serif">At Operation Code, I volunteered as a UX designer and community evangelist, supporting veterans and military spouses transitioning into careers in technology.</p>
+      <p style="margin:0 0 8px;max-width:62ch;font:400 15px/1.6 'Inter',sans-serif">My work included UX design, community engagement, and helping people navigate educational and professional opportunities.</p>
+      <p style="margin:0;max-width:62ch;font:400 15px/1.6 'Inter',sans-serif">I also contributed to growing the community from approximately 400 to 800 members through outreach and engagement, while supporting efforts to connect veterans and their families with educational benefits and scholarships.</p>
+    </article>
+
+    <!-- Expedient -->
+    <article class="ab-role" aria-labelledby="ex-h">
+      <h3 id="ex-h" class="display" style="margin:0 0 4px;font-size:clamp(22px,2.8vw,32px);line-height:1">Expedient</h3>
+      <p class="mono" style="margin:0 0 12px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--pink)">Associate Analyst</p>
+      <p style="margin:0 0 8px;max-width:62ch;font:400 15px/1.6 'Inter',sans-serif">At Expedient, my work has expanded further into IT operations and technical support.</p>
+      <p style="margin:0;max-width:62ch;font:400 15px/1.6 'Inter',sans-serif">This experience has given me additional exposure to the operational side of technology, troubleshooting, internal systems, and the challenges people face when using technical tools.</p>
+    </article>
+
+  </div>
+</section>
+
+<section id="approach" aria-labelledby="approach-h" style="padding:clamp(48px,6vw,88px) clamp(16px,5vw,80px);border-bottom:1px solid var(--line)">
+  <p class="mono" style="margin:0 0 10px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--pink)">How I Approach My Work</p>
+  <h2 id="approach-h" class="display" style="margin:0 0 clamp(20px,2.6vw,32px);font-size:clamp(30px,4.6vw,64px);line-height:.95;max-width:18ch">Serious work, not a serious process</h2>
+
+  <div class="ab-grid" style="gap:clamp(16px,2vw,32px)">
+    <p style="grid-column:1/span6;margin:0;font:400 clamp(16px,1.3vw,19px)/1.6 'Inter',sans-serif">I take my work seriously, but I don't think everything about the process needs to be serious.</p>
+    <p style="grid-column:7/span6;margin:0;font:400 clamp(16px,1.3vw,19px)/1.6 'Inter',sans-serif">I like experimenting, making weird things, asking questions, and working with people who aren't afraid to bring their personalities into what they do.</p>
+  </div>
+
+  <p class="ab-pull">Accessibility, inclusion, and trauma-informed design matter to me.</p>
+
+  <p style="margin:0 0 clamp(16px,2vw,24px);max-width:68ch;font:400 clamp(16px,1.3vw,19px)/1.6 'Inter',sans-serif">A big part of my approach to design is thinking about the people who are often overlooked or forgotten. Accessibility, inclusion, and trauma-informed design matter to me, and I want those considerations to be part of the process, not something addressed at the end.</p>
+  <p style="margin:0;max-width:68ch;font:400 clamp(16px,1.3vw,19px)/1.6 'Inter',sans-serif">My background in both design and technology also means I'm comfortable looking beyond the interface itself. I want to understand how something works, why it works that way, and whether there's a better approach.</p>
+</section>
+
+<section id="beyond" aria-labelledby="beyond-h" style="padding:clamp(48px,6vw,88px) clamp(16px,5vw,80px);border-bottom:1px solid var(--line)">
+  <p class="mono" style="margin:0 0 10px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--pink)">Beyond the Screen</p>
+  <h2 id="beyond-h" class="display" style="margin:0 0 clamp(20px,2.6vw,32px);font-size:clamp(30px,4.6vw,64px);line-height:.95">What I make when no one's asking</h2>
+
+  <div class="ab-grid" style="gap:clamp(16px,2vw,32px);margin-bottom:clamp(24px,3vw,36px)">
+    <div style="grid-column:1/span7">
+      <p style="margin:0 0 14px;font:400 clamp(16px,1.3vw,19px)/1.6 'Inter',sans-serif">Outside of UX and software, I spend a lot of time working with 3D printers, creating art, experimenting with different materials, and learning new techniques.</p>
+      <p style="margin:0 0 14px;font:400 clamp(16px,1.3vw,19px)/1.6 'Inter',sans-serif">I've been involved in 3D printing for around eight years, working with both resin and FDM machines. My projects range from artistic pieces and cosplay props to experimenting with fabrication techniques, troubleshooting machines, and sharing what I've learned through content creation.</p>
+      <p style="margin:0 0 14px;font:400 clamp(16px,1.3vw,19px)/1.6 'Inter',sans-serif">I also work with illustration, 3D modeling, and digital art.</p>
+      <p style="margin:0 0 14px;font:400 clamp(16px,1.3vw,19px)/1.6 'Inter',sans-serif">I enjoy understanding how things are made, whether that's a digital experience, a physical object, or a machine I'm trying to get working again.</p>
+      <p style="margin:0;font:400 clamp(16px,1.3vw,19px)/1.6 'Inter',sans-serif">Usually, I'm making something, fixing something, learning something, or getting myself into a project that seemed a lot simpler when I started.</p>
+    </div>
+    <div style="grid-column:9/span4;padding-top:4px">
+      <ul aria-label="A few more things that are true about me" class="mono" style="list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:10px;align-content:start">
+        <li class="ab-chip">3D printing · ~8 yrs</li>
+        <li class="ab-chip">Resin &amp; FDM</li>
+        <li class="ab-chip">Cosplay &amp; art props</li>
+        <li class="ab-chip">Illustration &amp; digital art</li>
+        <li class="ab-chip">Still fixing the last machine</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="skills" aria-labelledby="skills-h" style="padding:clamp(48px,6vw,88px) clamp(16px,5vw,80px);border-bottom:1px solid var(--line)">
+  <p class="mono" style="margin:0 0 10px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--pink)">Professional Skills and Tools</p>
+  <h2 id="skills-h" class="display" style="margin:0 0 clamp(32px,4vw,56px);font-size:clamp(30px,4.6vw,64px);line-height:.95">What's in the toolbox</h2>
+
+  <div class="ab-grid" style="gap:clamp(24px,3vw,40px) clamp(20px,3vw,36px)">
+    <div style="grid-column:1/span6;border-top:2px solid var(--ink);padding-top:16px">
+      <h3 class="mono" style="margin:0 0 12px;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--pink)">UX &amp; Product Design</h3>
+      <p style="margin:0;font:400 clamp(16px,1.4vw,19px)/1.6 'Inter',sans-serif">User research, usability testing, accessibility, inclusive design, trauma-informed design, interaction design, wireframing, prototyping, design systems, and developer handoff.</p>
+    </div>
+    <div style="grid-column:7/span6;border-top:2px solid var(--ink);padding-top:16px">
+      <h3 class="mono" style="margin:0 0 12px;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--pink)">Creative Technology &amp; Development</h3>
+      <p style="margin:0;font:400 clamp(16px,1.4vw,19px)/1.6 'Inter',sans-serif">HTML, CSS, JavaScript, React, React Native, Salesforce Lightning, Ionic, and front-end implementation.</p>
+    </div>
+    <div style="grid-column:1/span6;border-top:1px solid var(--line);padding-top:16px">
+      <h3 class="mono" style="margin:0 0 12px;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">IT &amp; Technical Support</h3>
+      <p style="margin:0;font:400 15px/1.6 'Inter',sans-serif">Troubleshooting, technical support, Windows, Linux, macOS, and IT operations.</p>
+    </div>
+    <div style="grid-column:7/span6;border-top:1px solid var(--line);padding-top:16px">
+      <h3 class="mono" style="margin:0 0 12px;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">Art &amp; Fabrication</h3>
+      <p style="margin:0;font:400 15px/1.6 'Inter',sans-serif">3D printing, resin and FDM fabrication, 3D modeling, illustration, digital art, and physical prototyping.</p>
+    </div>
+    <div style="grid-column:1/span6;border-top:1px solid var(--line);padding-top:16px">
+      <h3 class="mono" style="margin:0 0 12px;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">Design &amp; Creative Tools</h3>
+      <p style="margin:0;font:400 15px/1.6 'Inter',sans-serif">Figma, Adobe XD, Sketch, Blender, Nomad Sculpt, and Spline.</p>
+    </div>
+    <div style="grid-column:7/span6;border-top:1px solid var(--line);padding-top:16px">
+      <h3 class="mono" style="margin:0 0 12px;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">Certifications &amp; Education</h3>
+      <p style="margin:0;font:400 15px/1.6 'Inter',sans-serif">CompTIA A+, Google IT Support Professional Certificate, and education in web development, UX design, and Java development.</p>
+    </div>
+  </div>
+</section>
+
+<section aria-label="Closing" style="padding:clamp(48px,6vw,88px) clamp(16px,5vw,80px);border-bottom:2px solid var(--ink)">
+  <p class="display" style="margin:0 0 clamp(28px,4vw,44px);font-size:clamp(28px,4.6vw,68px);line-height:.98;max-width:18ch;text-wrap:balance">Still pulling the thread. Still figuring out where it goes.</p>
+  <div style="display:flex;flex-wrap:wrap;align-items:center;gap:16px 24px">
+    <a href="index.html#work" class="mono" style="display:inline-flex;align-items:center;gap:10px;min-height:48px;padding:0 20px;background:var(--pink);color:var(--on-red);text-decoration:none;font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase" style-hover="background:var(--ink);color:var(--bg)">See the work →</a>
+    <a href="resume.html" class="mono" style="display:inline-flex;align-items:center;min-height:48px;font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;color:var(--ink)" style-hover="color:var(--pink)">Read the full résumé →</a>
+    <a href="mailto:hello@krystynaewing.com" class="mono" style="display:inline-flex;align-items:center;min-height:48px;font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;color:var(--ink)" style-hover="color:var(--pink)">Say hello →</a>
+  </div>
+</section>
+
+</main>
+
+<footer style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:16px;padding:32px clamp(16px,5vw,80px) 48px;font:400 12px/1.6 'Space Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)">
+  <span>~/krystyna-ewing · © 2026</span>
+  <span style="display:flex;flex-wrap:wrap;gap:4px 16px">
+    <a href="mailto:hello@krystynaewing.com" style="color:var(--ink)">hello@krystynaewing.com</a>
+    <a href="resume.html" style="color:var(--ink)">Résumé</a>
+  </span>
+  <a href="#main" style="min-height:44px;display:inline-flex;align-items:center">[ ^ top ]</a>
+</footer>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;defaultTheme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;dark&quot;,&quot;light&quot;],&quot;default&quot;:&quot;dark&quot;,&quot;tsType&quot;:&quot;'dark'|'light'&quot;,&quot;section&quot;:&quot;Look&quot;},&quot;grain&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Look&quot;}}">
+class Component extends DCLogic {
+  state = { theme: this.props.defaultTheme ?? 'dark', menuOpen: false };
+  applyRoot() {
+    const r = document.documentElement;
+    r.dataset.theme = this.state.theme;
+    r.dataset.grain = (this.props.grain ?? true) ? 'on' : 'off';
+  }
+  componentDidMount() {
+    this.reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    try {
+      this.introSeen = sessionStorage.getItem('keIntroSeen') === '1';
+      sessionStorage.setItem('keIntroSeen', '1');
+    } catch (e) { this.introSeen = false; }
+    if (this.introSeen) document.documentElement.dataset.intro = 'seen';
+    const veil = document.getElementById('bootVeil');
+    if (veil) {
+      if (this.introSeen || this.reduce) {
+        veil.style.display = 'none';
+      } else {
+        const minDisplay = 1100;
+        const elapsed = Date.now() - (window.__bootStart || Date.now());
+        const remaining = Math.max(0, minDisplay - elapsed);
+        setTimeout(() => {
+          requestAnimationFrame(() => { veil.style.opacity = '0'; });
+          veil.addEventListener('transitionend', () => { veil.style.display = 'none'; }, { once: true });
+          setTimeout(() => { veil.style.display = 'none'; }, 1200);
+        }, remaining);
+      }
+    }
+    this.applyRoot();
+    this.onMenuResize = () => { if (window.innerWidth >= 860 && this.state.menuOpen) { document.body.style.overflow = ''; this.setState({ menuOpen: false }); } };
+    window.addEventListener('resize', this.onMenuResize);
+    this.onMenuKeydown = e => { if (e.key === 'Escape' && this.state.menuOpen) { document.body.style.overflow = ''; this.setState({ menuOpen: false }); } };
+    window.addEventListener('keydown', this.onMenuKeydown);
+  }
+  componentDidUpdate(pp) {
+    if (pp.defaultTheme !== this.props.defaultTheme && this.props.defaultTheme) this.setState({ theme: this.props.defaultTheme }, () => this.applyRoot());
+    else this.applyRoot();
+  }
+  componentWillUnmount() { window.removeEventListener('resize', this.onMenuResize); window.removeEventListener('keydown', this.onMenuKeydown); }
+  renderVals() {
+    const s = this.state, light = s.theme === 'light';
+    return {
+      themeLabel: light ? 'Dark' : 'Light', lightPressed: light ? 'true' : 'false',
+      toggleTheme: () => this.setState(st => ({ theme: st.theme === 'light' ? 'dark' : 'light' }), () => this.applyRoot()),
+      menuExpandedAttr: s.menuOpen ? 'true' : 'false',
+      menuButtonLabel: s.menuOpen ? 'CLOSE' : 'MENU',
+      menuAriaLabel: s.menuOpen ? 'Close menu' : 'Open menu',
+      menuClose: () => { document.body.style.overflow = ''; this.setState({ menuOpen: false }); },
+      menuToggle: () => { const next = !s.menuOpen; document.body.style.overflow = next ? 'hidden' : ''; this.setState({ menuOpen: next }); },
+      menuBackdropStyle: s.menuOpen ? { display: 'block', position: 'fixed', inset: '56px 0 0 0', zIndex: 215, background: 'rgba(0,0,0,.5)' } : { display: 'none' },
+      menuPanelStyle: s.menuOpen ? { display: 'grid', position: 'fixed', left: 0, right: 0, top: 56, zIndex: 220, background: 'var(--bg)', borderBottom: '1px solid var(--line)', maxHeight: 'calc(100vh - 56px)', overflowY: 'auto' } : { display: 'none' }
+    };
+  }
+}
+</script>
+</body>
+</html>
