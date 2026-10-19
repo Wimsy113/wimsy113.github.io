@@ -1903,9 +1903,78 @@
     if (document.readyState !== "loading") api.__dcBoot();
     else document.addEventListener("DOMContentLoaded", () => api.__dcBoot());
   }
+  function sanitizeFallback(root) {
+    const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+    const blank = [];
+    let node;
+    while (node = walker.nextNode()) {
+      if (/^\{\{[\s\S]*\}\}$/.test(node.nodeValue.trim())) blank.push(node);
+    }
+    blank.forEach((n) => {
+      n.nodeValue = "";
+    });
+    root.querySelectorAll("*").forEach((el) => {
+      Array.from(el.attributes).forEach((attr) => {
+        if (/^on/i.test(attr.name) && /\{\{[\s\S]*\}\}/.test(attr.value)) el.removeAttribute(attr.name);
+      });
+    });
+  }
+  function armStaticFallback(doc) {
+    let rawBackup = null;
+    const captureBackup = () => {
+      if (rawBackup) return;
+      const dc = doc.querySelector("x-dc");
+      if (dc) rawBackup = dc.cloneNode(true);
+    };
+    if (doc.readyState === "loading") doc.addEventListener("DOMContentLoaded", captureBackup, { once: true });
+    else captureBackup();
+    let settled = false;
+    const reveal = () => {
+      if (settled) return;
+      settled = true;
+      const veil = doc.getElementById("bootVeil");
+      if (veil) veil.style.display = "none";
+      const style = doc.createElement("style");
+      style.textContent = "x-dc{display:block!important}";
+      doc.head.appendChild(style);
+      const stillThere = doc.querySelector("x-dc");
+      if (stillThere) {
+        sanitizeFallback(stillThere);
+        return;
+      }
+      captureBackup();
+      if (!rawBackup) return;
+      sanitizeFallback(rawBackup);
+      const host = doc.getElementById("dc-root");
+      if (host) host.replaceWith(rawBackup);
+      else doc.body.appendChild(rawBackup);
+    };
+    const revealWhenReady = () => {
+      if (doc.readyState === "loading") doc.addEventListener("DOMContentLoaded", reveal, { once: true });
+      else reveal();
+    };
+    const check = () => {
+      if (settled) return;
+      const veil = doc.getElementById("bootVeil");
+      const veilGone = !veil || getComputedStyle(veil).display === "none";
+      const host = doc.getElementById("dc-root");
+      const rendered = host && host.childNodes.length > 0;
+      if (veilGone && rendered) {
+        settled = true;
+        return;
+      }
+      revealWhenReady();
+    };
+    const timer = setTimeout(check, 5e3);
+    return () => {
+      clearTimeout(timer);
+      revealWhenReady();
+    };
+  }
   hideRawTemplate();
+  const triggerStaticFallback = armStaticFallback(document);
   loadReactUmd().then(init).catch((err) => {
     console.error("[dc] failed to load React or boot:", err);
-    throw err;
+    triggerStaticFallback();
   });
 })();
