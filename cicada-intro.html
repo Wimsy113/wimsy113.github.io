@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -33,7 +33,7 @@
 </style>
 </head>
 <body>
-<div id="stage">
+<div id="stage" role="main">
   <img id="bg" src="images/cicada-intro-bg.webp" alt="Dark embossed leather texture with an ornate scrollwork and heraldic-lion pattern">
   <spline-viewer id="scene" url="https://prod.spline.design/v1OoKckRsrBF7-zg/scene.splinecode" aria-label="Interactive cicada animation — click or drag to explore, then enter the site"></spline-viewer>
   <nav aria-label="Primary">
@@ -48,8 +48,8 @@
       <button type="button" id="themeToggle" aria-pressed="false">Light</button>
     </div>
   </nav>
+  <a id="skip" href="index.html">Skip intro →</a>
 </div>
-<a id="skip" href="index.html">Skip intro →</a>
 <script>
 (function () {
   var scene = document.getElementById('scene');
