@@ -614,9 +614,18 @@ class Component extends DCLogic {
     };
     window.addEventListener('pointermove', this.onPointerMove);
 
-    this.onResize = () => { const n = window.innerWidth < 760; if (n !== this.state.narrow) this.setState({ narrow: n }); this.drawWorkVeins(); if (window.innerWidth >= 860) this.closeMenu(); this.healReveals(); };
-    window.addEventListener('resize', this.onResize);
-    window.addEventListener('orientationchange', this.onResize);
+    this.onResize = () => {
+      if (this.rraf) return;
+      this.rraf = requestAnimationFrame(() => {
+        this.rraf = 0;
+        const n = window.innerWidth < 760;
+        if (n !== this.state.narrow) this.setState({ narrow: n });
+        this.drawWorkVeins();
+        if (window.innerWidth >= 860) this.closeMenu();
+        this.healReveals();
+      });
+    };
+    window.addEventListener('resize', this.onResize, { passive: true });
 
     this.onKeydown = e => { if (e.key === 'Escape') this.closeMenu(); };
     window.addEventListener('keydown', this.onKeydown);
@@ -667,12 +676,12 @@ class Component extends DCLogic {
   }
   componentWillUnmount() {
     window.removeEventListener('scroll', this.onScroll); window.removeEventListener('resize', this.onResize);
-    window.removeEventListener('orientationchange', this.onResize);
     window.removeEventListener('pointermove', this.onPointerMove); window.removeEventListener('keydown', this.onKeydown);
     window.removeEventListener('resize', this.onNumberResize);
     if (this.io) this.io.disconnect(); if (this.revealIo) this.revealIo.disconnect(); if (this.mq) this.mq.cancel();
     if (this.veinRo) this.veinRo.disconnect();
     if (this.workbenchIo) this.workbenchIo.disconnect();
+    if (this.rraf) cancelAnimationFrame(this.rraf);
     if (this.numTimer) clearInterval(this.numTimer);
     clearTimeout(this.scrollEndTimer);
     this.unlockScroll();
