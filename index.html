@@ -49,6 +49,7 @@ html[data-intro="seen"] #bootVeil{display:none}
 <script src="./image-slot.js"></script>
 <style>
 html{--bg:#0B0B0B;--fg:#F2F0E9;--green:#A8FF00;--on-green:#0B0B0B;--charcoal:#252525;--muted:#9a978e;--line:rgba(242,240,233,.2);--rail-w:48px;--margin-w:96px;--grain:.14;background:var(--bg);color:var(--fg);scroll-behavior:smooth}
+@media (max-width:859px){html{--grain:0}body::after{content:none!important}}
 html[data-theme="light"]{--bg:#F2F0E9;--fg:#0B0B0B;--green:#447000;--on-green:#F2F0E9;--charcoal:#E4E1D6;--muted:#5f5c4e;--line:rgba(11,11,11,.2)}
 body{margin:0;padding-right:var(--rail-w);background:var(--bg);color:var(--fg);font-family:"Inter",system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:300;opacity:var(--grain);mix-blend-mode:overlay;transform:translateZ(0);will-change:transform;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E")}
