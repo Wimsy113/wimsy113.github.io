@@ -3,28 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="preload" as="script" href="../vendor/react.production.min.js">
-<link rel="preload" as="script" href="../vendor/react-dom.production.min.js">
-<link rel="preload" as="script" href="../vendor/babel.min.js">
-<script>window.__resources={"https://unpkg.com/react@18.3.1/umd/react.production.min.js":"../vendor/react.production.min.js","https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js":"../vendor/react-dom.production.min.js","https://unpkg.com/@babel/standalone@7.29.0/babel.min.js":"../vendor/babel.min.js"};</script>
-<script src="../support.js"></script>
-</head>
-<body>
-<x-dc>
-<helmet>
 <link rel="icon" href="../images/favicon.ico">
 <title>ResiliencePoint — Krystyna Ewing</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="ResiliencePoint — turning emergency preparedness data into something emergency managers can actually use.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+<script>try{if(localStorage.getItem('ke-theme')==='light')document.documentElement.setAttribute('data-theme','light');}catch(e){}</script>
 <style>
 html{--bg:#0B0B0B;--ink:#F2F0E9;--muted:#9a978e;--metal:#9a978e;--ghost:#252525;--line:rgba(242,240,233,.2);--c-turquoise:#A8FF00;--c-blue:#A8FF00;--c-copper:#A8FF00;--c-opal:#A8FF00;--red:var(--c-copper);--on-red:#0B0B0B;--pink:#A8FF00;--grain:.1;--rail-w:48px;background:var(--bg);color:var(--ink);scroll-behavior:smooth}
-@media (max-width:859px){html{--grain:0}body::after{content:none!important}}
 html[data-theme="light"]{--bg:#F2F0E9;--ink:#0B0B0B;--muted:#5f5c4e;--metal:#5f5c4e;--ghost:#E4E1D6;--line:rgba(11,11,11,.2);--c-turquoise:#447000;--c-blue:#447000;--c-copper:#447000;--c-opal:#447000;--red:var(--c-copper);--on-red:#F2F0E9;--pink:#447000;--grain:.07}
-html[data-grain="off"]{--grain:0}
 body{margin:0;padding-right:var(--rail-w);background:var(--bg);color:var(--ink);font-family:"Inter",system-ui,sans-serif;-webkit-font-smoothing:antialiased;transition:background-color .35s,color .35s;overflow-x:hidden}
-body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:300;opacity:var(--grain);mix-blend-mode:overlay;transform:translateZ(0);will-change:transform;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E")}
+body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:300;opacity:var(--grain);mix-blend-mode:overlay;background-image:url("../images/grain.png");background-size:96px 96px}
 a{color:inherit;text-decoration-thickness:1px;text-underline-offset:.22em}
 a:hover{color:var(--red)}
 :focus-visible{outline:3px solid var(--pink);outline-offset:4px}
@@ -46,8 +35,12 @@ a:hover{color:var(--red)}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
 
 nav[aria-label="Primary"] a[aria-current="true"]{color:var(--red);box-shadow:inset 3px 0 0 var(--red)}
+.rail-item:hover{letter-spacing:.26em}
+#themeToggle:hover{color:var(--pink)}
 #mobileMenu a[aria-current="true"]{color:var(--red)}
 #mobileBar{display:none}
+#menuToggle:hover{color:var(--pink);border-color:var(--pink)}
+#themeToggleMobile:hover{color:var(--pink)}
 @media (max-width:859px){
   nav[aria-label="Primary"]{display:none!important}
   #mobileBar{display:flex}
@@ -56,33 +49,47 @@ nav[aria-label="Primary"] a[aria-current="true"]{color:var(--red);box-shadow:ins
 @media (min-width:860px){
   #mobileMenu,#mobileMenuBackdrop{display:none!important}
 }
-</style>
-</helmet>
 
-<a href="#main" style="position:fixed;left:16px;top:-80px;z-index:400;background:var(--pink);color:var(--on-red);padding:12px 18px;font:700 14px/1 'Space Mono',monospace;text-decoration:none" style-focus="top:16px">Skip to content</a>
+.skip-link{position:fixed;left:16px;top:-80px;z-index:400;background:var(--pink);color:var(--on-red);padding:12px 18px;font:700 14px/1 'Space Mono',monospace;text-decoration:none;transition:top .2s ease}
+.skip-link:focus{top:16px}
+.toc-toggle:hover{color:var(--ink)}
+.toc-show:hover{background:var(--red);color:var(--on-red)}
+.case-nav-link:hover{background:var(--ink);color:var(--bg)}
+.fig-btn{display:block;width:100%;padding:0;border:0;background:transparent;cursor:zoom-in}
+.lb-close:hover{background:#A8FF00}
+.lb-nav:hover{background:#F2F0E9;color:#0B0B0B}
+#lightbox{display:none}
+#lightbox[data-open="true"]{display:grid}
+#lightbox img{display:none;max-width:100%;max-height:100%;object-fit:contain}
+#lightbox img[data-active="true"]{display:block}
+</style>
+</head>
+<body>
+
+<a href="#main" class="skip-link">Skip to content</a>
 
 <nav aria-label="Primary" style="position:fixed;right:0;top:0;bottom:0;z-index:200;width:var(--rail-w);display:flex;flex-direction:column;background:var(--bg);border-left:1px solid var(--line)">
-  <a href="../index.html#work" aria-label="K. Ewing, home" class="mono" style="flex:0 0 auto;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(180deg);padding:16px 0;font-size:15px;font-weight:700;letter-spacing:.04em;text-decoration:none;color:var(--ink);border-bottom:1px solid var(--line);min-height:44px;transition:color .2s ease" style-hover="color:var(--pink)">K. EWING</a>
-  <a href="../index.html#work" aria-current="true" class="mono" style="flex:1 1 0;min-height:44px;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(180deg);font-size:11px;font-weight:700;letter-spacing:.18em;text-decoration:none;color:var(--ink);border-bottom:1px solid var(--line);transition:color .2s ease,letter-spacing .2s ease" style-hover="color:var(--pink);letter-spacing:.26em">WORK</a>
-  <a href="../index.html#workbench" aria-current="false" class="mono" style="flex:1 1 0;min-height:44px;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(180deg);font-size:11px;font-weight:700;letter-spacing:.18em;text-decoration:none;color:var(--ink);border-bottom:1px solid var(--line);transition:color .2s ease,letter-spacing .2s ease" style-hover="color:var(--pink);letter-spacing:.26em">WORKBENCH</a>
-  <a href="../about.html" aria-current="false" class="mono" style="flex:1 1 0;min-height:44px;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(180deg);font-size:11px;font-weight:700;letter-spacing:.18em;text-decoration:none;color:var(--ink);border-bottom:1px solid var(--line);transition:color .2s ease,letter-spacing .2s ease" style-hover="color:var(--pink);letter-spacing:.26em">ABOUT</a>
-  <a href="../index.html#contact" aria-current="false" class="mono" style="flex:1 1 0;min-height:44px;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(180deg);font-size:11px;font-weight:700;letter-spacing:.18em;text-decoration:none;color:var(--ink);transition:color .2s ease,letter-spacing .2s ease" style-hover="color:var(--pink);letter-spacing:.26em">CONTACT</a>
-  <button type="button" onClick="{{ toggleTheme }}" aria-pressed="{{ lightPressed }}" aria-label="Switch to {{ themeLabel }} mode" class="mono" style="flex:0 0 auto;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(180deg);padding:14px 0;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;color:var(--muted);border:0;border-top:1px solid var(--line);background:var(--bg);cursor:pointer;min-height:44px;transition:color .2s ease" style-hover="color:var(--pink)">{{ themeLabel }}</button>
+  <a href="../index.html#work" aria-label="K. Ewing, home" class="mono" style="flex:0 0 auto;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(180deg);padding:16px 0;font-size:15px;font-weight:700;letter-spacing:.04em;text-decoration:none;color:var(--ink);border-bottom:1px solid var(--line);min-height:44px;transition:color .2s ease">K. EWING</a>
+  <a href="../index.html#work" aria-current="true" class="mono rail-item" style="flex:1 1 0;min-height:44px;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(180deg);font-size:11px;font-weight:700;letter-spacing:.18em;text-decoration:none;color:var(--ink);border-bottom:1px solid var(--line);transition:color .2s ease,letter-spacing .2s ease">WORK</a>
+  <a href="../index.html#workbench" aria-current="false" class="mono rail-item" style="flex:1 1 0;min-height:44px;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(180deg);font-size:11px;font-weight:700;letter-spacing:.18em;text-decoration:none;color:var(--ink);border-bottom:1px solid var(--line);transition:color .2s ease,letter-spacing .2s ease">WORKBENCH</a>
+  <a href="../about.html" aria-current="false" class="mono rail-item" style="flex:1 1 0;min-height:44px;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(180deg);font-size:11px;font-weight:700;letter-spacing:.18em;text-decoration:none;color:var(--ink);border-bottom:1px solid var(--line);transition:color .2s ease,letter-spacing .2s ease">ABOUT</a>
+  <a href="../index.html#contact" aria-current="false" class="mono rail-item" style="flex:1 1 0;min-height:44px;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(180deg);font-size:11px;font-weight:700;letter-spacing:.18em;text-decoration:none;color:var(--ink);transition:color .2s ease,letter-spacing .2s ease">CONTACT</a>
+  <button type="button" id="themeToggle" aria-pressed="false" aria-label="Switch to light mode" class="mono" style="flex:0 0 auto;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(180deg);padding:14px 0;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;color:var(--muted);border:0;border-top:1px solid var(--line);background:var(--bg);cursor:pointer;min-height:44px;transition:color .2s ease">LIGHT</button>
 </nav>
 
 <div id="mobileBar" class="mono" role="navigation" aria-label="Mobile bar" style="position:fixed;left:0;right:0;top:0;z-index:220;align-items:center;justify-content:space-between;padding:0 16px;height:56px;background:var(--bg);border-bottom:1px solid var(--line)">
-  <a href="../index.html#work" aria-label="K. Ewing, home" style="font-size:15px;font-weight:700;letter-spacing:.04em;text-decoration:none;color:var(--ink);min-height:44px;display:inline-flex;align-items:center" style-hover="color:var(--pink)">K. EWING</a>
-  <button type="button" onClick="{{ menuToggle }}" aria-expanded="{{ menuExpandedAttr }}" aria-controls="mobileMenu" aria-label="{{ menuAriaLabel }}" style="min-width:44px;min-height:44px;padding:0 12px;border:1px solid var(--line);background:transparent;color:var(--ink);font:700 11px/1 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;cursor:pointer" style-hover="color:var(--pink);border-color:var(--pink)">{{ menuButtonLabel }}</button>
+  <a href="../index.html#work" aria-label="K. Ewing, home" style="font-size:15px;font-weight:700;letter-spacing:.04em;text-decoration:none;color:var(--ink);min-height:44px;display:inline-flex;align-items:center">K. EWING</a>
+  <button type="button" id="menuToggle" aria-expanded="false" aria-controls="mobileMenu" aria-label="Open menu" style="min-width:44px;min-height:44px;padding:0 12px;border:1px solid var(--line);background:transparent;color:var(--ink);font:700 11px/1 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;cursor:pointer">MENU</button>
 </div>
 
-<div id="mobileMenuBackdrop" aria-hidden="true" onClick="{{ menuClose }}" style="{{ menuBackdropStyle }}"></div>
+<div id="mobileMenuBackdrop" aria-hidden="true" style="position:fixed;inset:56px 0 0 0;z-index:215;background:rgba(0,0,0,.5)"></div>
 
-<nav id="mobileMenu" aria-label="Mobile" class="mono" style="{{ menuPanelStyle }}">
-  <a href="../index.html#work" onClick="{{ menuClose }}" style="display:flex;align-items:center;min-height:52px;padding:0 20px;font-size:14px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;color:var(--ink);border-bottom:1px solid var(--line)" style-hover="color:var(--pink)">Work</a>
-  <a href="../index.html#workbench" onClick="{{ menuClose }}" style="display:flex;align-items:center;min-height:52px;padding:0 20px;font-size:14px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;color:var(--ink);border-bottom:1px solid var(--line)" style-hover="color:var(--pink)">Workbench</a>
-  <a href="../about.html" onClick="{{ menuClose }}" style="display:flex;align-items:center;min-height:52px;padding:0 20px;font-size:14px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;color:var(--ink);border-bottom:1px solid var(--line)" style-hover="color:var(--pink)">About</a>
-  <a href="../index.html#contact" onClick="{{ menuClose }}" style="display:flex;align-items:center;min-height:52px;padding:0 20px;font-size:14px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;color:var(--ink);border-bottom:1px solid var(--line)" style-hover="color:var(--pink)">Contact</a>
-  <button type="button" onClick="{{ toggleTheme }}" aria-pressed="{{ lightPressed }}" style="display:flex;align-items:center;justify-content:space-between;width:100%;min-height:52px;padding:0 20px;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;border:0;background:transparent;color:var(--muted);cursor:pointer" style-hover="color:var(--pink)"><span>Theme</span><span>{{ themeLabel }}</span></button>
+<nav id="mobileMenu" aria-label="Mobile" class="mono" style="position:fixed;left:0;right:0;top:56px;z-index:220;background:var(--bg);border-bottom:1px solid var(--line);max-height:calc(100vh - 56px);overflow-y:auto">
+  <a href="../index.html#work" style="display:flex;align-items:center;min-height:52px;padding:0 20px;font-size:14px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;color:var(--ink);border-bottom:1px solid var(--line)">Work</a>
+  <a href="../index.html#workbench" style="display:flex;align-items:center;min-height:52px;padding:0 20px;font-size:14px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;color:var(--ink);border-bottom:1px solid var(--line)">Workbench</a>
+  <a href="../about.html" style="display:flex;align-items:center;min-height:52px;padding:0 20px;font-size:14px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;color:var(--ink);border-bottom:1px solid var(--line)">About</a>
+  <a href="../index.html#contact" style="display:flex;align-items:center;min-height:52px;padding:0 20px;font-size:14px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;color:var(--ink);border-bottom:1px solid var(--line)">Contact</a>
+  <button type="button" id="themeToggleMobile" aria-pressed="false" style="display:flex;align-items:center;justify-content:space-between;width:100%;min-height:52px;padding:0 20px;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;border:0;background:transparent;color:var(--muted);cursor:pointer"><span>Theme</span><span id="themeToggleMobileLabel">Light</span></button>
 </nav>
 
 <header style="padding:clamp(28px,4vw,48px) clamp(16px,5vw,80px) clamp(56px,7vw,100px);border-bottom:2px solid var(--ink);position:relative;overflow:hidden">
@@ -130,33 +137,29 @@ nav[aria-label="Primary"] a[aria-current="true"]{color:var(--red);box-shadow:ins
 </header>
 
 <div style="display:flex;flex-wrap:wrap;gap:0 clamp(32px,5vw,80px);padding:0 clamp(16px,5vw,80px)">
-  <sc-if value="{{ tocOpen }}" hint-placeholder-val="{{ true }}">
-  <aside aria-label="Case study contents" style="flex:0 1 230px;min-width:0;padding-top:clamp(56px,7vw,110px)">
+  <aside id="tocAside" aria-label="Case study contents" style="flex:0 1 230px;min-width:0;padding-top:clamp(56px,7vw,110px)">
     <nav aria-label="Sections" style="position:sticky;top:28px">
-      <button type="button" onClick="{{ toggleToc }}" aria-expanded="{{ tocExpanded }}" aria-controls="toc-list" style="display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;min-height:44px;margin:0 0 10px;padding:0 0 6px;background:transparent;border:0;border-bottom:1px solid var(--line);color:var(--metal);cursor:pointer;text-align:left" style-hover="color:var(--ink)">
+      <button type="button" id="tocToggle" class="toc-toggle" aria-expanded="true" aria-controls="toc-list" style="display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;min-height:44px;margin:0 0 10px;padding:0 0 6px;background:transparent;border:0;border-bottom:1px solid var(--line);color:var(--metal);cursor:pointer;text-align:left">
         <span style="font:400 30px/1 'Archivo Black',serif;overflow-wrap:anywhere">contents</span>
-        <span aria-hidden="true" style="font:700 12px/1 'Space Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--pink)">{{ tocIcon }}</span>
+        <span aria-hidden="true" style="font:700 12px/1 'Space Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--pink)">− Hide</span>
       </button>
       <ol id="toc-list" style="list-style:none;margin:0;padding:0;display:grid;font:400 12px/1.35 'Space Mono',monospace;letter-spacing:.04em">
-        <li><a href="#s01" style="display:flex;gap:10px;padding:7px 0;text-decoration:none"><span aria-hidden="true" style="color:var(--red)">{{ mk.s01 }}</span>01 Overview</a></li>
-        <li><a href="#s02" style="display:flex;gap:10px;padding:7px 0;text-decoration:none"><span aria-hidden="true" style="color:var(--red)">{{ mk.s02 }}</span>02 Understanding the Problem</a></li>
-        <li><a href="#s03" style="display:flex;gap:10px;padding:7px 0;text-decoration:none"><span aria-hidden="true" style="color:var(--red)">{{ mk.s03 }}</span>03 Research</a></li>
-        <li><a href="#s04" style="display:flex;gap:10px;padding:7px 0;text-decoration:none"><span aria-hidden="true" style="color:var(--red)">{{ mk.s04 }}</span>04 Designing the Dashboard</a></li>
-        <li><a href="#s05" style="display:flex;gap:10px;padding:7px 0;text-decoration:none"><span aria-hidden="true" style="color:var(--red)">{{ mk.s05 }}</span>05 The Problem We Found</a></li>
-        <li><a href="#s06" style="display:flex;gap:10px;padding:7px 0;text-decoration:none"><span aria-hidden="true" style="color:var(--red)">{{ mk.s06 }}</span>06 The Pivot</a></li>
-        <li><a href="#s07" style="display:flex;gap:10px;padding:7px 0;text-decoration:none"><span aria-hidden="true" style="color:var(--red)">{{ mk.s07 }}</span>07 Designing for Real Questions</a></li>
-        <li><a href="#s08" style="display:flex;gap:10px;padding:7px 0;text-decoration:none"><span aria-hidden="true" style="color:var(--red)">{{ mk.s08 }}</span>08 Results, Export &amp; Sharing</a></li>
-        <li><a href="#s09" style="display:flex;gap:10px;padding:7px 0;text-decoration:none"><span aria-hidden="true" style="color:var(--red)">{{ mk.s09 }}</span>09 Accessibility &amp; Inclusive Design</a></li>
-        <li><a href="#s10" style="display:flex;gap:10px;padding:7px 0;text-decoration:none"><span aria-hidden="true" style="color:var(--red)">{{ mk.s10 }}</span>10 Building for Development</a></li>
-        <li><a href="#s11" style="display:flex;gap:10px;padding:7px 0;text-decoration:none"><span aria-hidden="true" style="color:var(--red)">{{ mk.s11 }}</span>11 From Prototype to Production</a></li>
-        <li><a href="#s12" style="display:flex;gap:10px;padding:7px 0;text-decoration:none"><span aria-hidden="true" style="color:var(--red)">{{ mk.s12 }}</span>12 What I Learned</a></li>
+        <li><a href="#s01" style="display:flex;gap:10px;padding:7px 0;text-decoration:none"><span aria-hidden="true" class="toc-marker" data-marker="s01" style="color:var(--red)">■</span>01 Overview</a></li>
+        <li><a href="#s02" style="display:flex;gap:10px;padding:7px 0;text-decoration:none"><span aria-hidden="true" class="toc-marker" data-marker="s02" style="color:var(--red)">□</span>02 Understanding the Problem</a></li>
+        <li><a href="#s03" style="display:flex;gap:10px;padding:7px 0;text-decoration:none"><span aria-hidden="true" class="toc-marker" data-marker="s03" style="color:var(--red)">□</span>03 Research</a></li>
+        <li><a href="#s04" style="display:flex;gap:10px;padding:7px 0;text-decoration:none"><span aria-hidden="true" class="toc-marker" data-marker="s04" style="color:var(--red)">□</span>04 Designing the Dashboard</a></li>
+        <li><a href="#s05" style="display:flex;gap:10px;padding:7px 0;text-decoration:none"><span aria-hidden="true" class="toc-marker" data-marker="s05" style="color:var(--red)">□</span>05 The Problem We Found</a></li>
+        <li><a href="#s06" style="display:flex;gap:10px;padding:7px 0;text-decoration:none"><span aria-hidden="true" class="toc-marker" data-marker="s06" style="color:var(--red)">□</span>06 The Pivot</a></li>
+        <li><a href="#s07" style="display:flex;gap:10px;padding:7px 0;text-decoration:none"><span aria-hidden="true" class="toc-marker" data-marker="s07" style="color:var(--red)">□</span>07 Designing for Real Questions</a></li>
+        <li><a href="#s08" style="display:flex;gap:10px;padding:7px 0;text-decoration:none"><span aria-hidden="true" class="toc-marker" data-marker="s08" style="color:var(--red)">□</span>08 Results, Export &amp; Sharing</a></li>
+        <li><a href="#s09" style="display:flex;gap:10px;padding:7px 0;text-decoration:none"><span aria-hidden="true" class="toc-marker" data-marker="s09" style="color:var(--red)">□</span>09 Accessibility &amp; Inclusive Design</a></li>
+        <li><a href="#s10" style="display:flex;gap:10px;padding:7px 0;text-decoration:none"><span aria-hidden="true" class="toc-marker" data-marker="s10" style="color:var(--red)">□</span>10 Building for Development</a></li>
+        <li><a href="#s11" style="display:flex;gap:10px;padding:7px 0;text-decoration:none"><span aria-hidden="true" class="toc-marker" data-marker="s11" style="color:var(--red)">□</span>11 From Prototype to Production</a></li>
+        <li><a href="#s12" style="display:flex;gap:10px;padding:7px 0;text-decoration:none"><span aria-hidden="true" class="toc-marker" data-marker="s12" style="color:var(--red)">□</span>12 What I Learned</a></li>
       </ol>
     </nav>
   </aside>
-  </sc-if>
-  <sc-if value="{{ tocClosed }}" hint-placeholder-val="{{ false }}">
-    <button type="button" onClick="{{ toggleToc }}" aria-expanded="false" aria-controls="toc-list" aria-label="Show contents" style="position:fixed;left:0;top:50%;transform:translateY(-50%);z-index:140;writing-mode:vertical-rl;display:flex;align-items:center;gap:12px;padding:18px 10px;min-width:44px;background:var(--ink);color:var(--bg);border:0;cursor:pointer;font:700 12px/1 'Space Mono',monospace;letter-spacing:.12em;text-transform:uppercase" style-hover="background:var(--red);color:var(--on-red)"><span aria-hidden="true">+</span>Contents</button>
-  </sc-if>
+  <button type="button" id="tocShow" class="toc-show" aria-expanded="false" aria-controls="toc-list" aria-label="Show contents" style="display:none;position:fixed;left:0;top:50%;transform:translateY(-50%);z-index:140;writing-mode:vertical-rl;align-items:center;gap:12px;padding:18px 10px;min-width:44px;background:var(--ink);color:var(--bg);border:0;cursor:pointer;font:700 12px/1 'Space Mono',monospace;letter-spacing:.12em;text-transform:uppercase"><span aria-hidden="true">+</span>Contents</button>
 
   <main id="main" style="flex:1 1 600px;min-width:0;max-width:1040px;margin:0 auto">
 
@@ -180,11 +183,11 @@ nav[aria-label="Primary"] a[aria-current="true"]{color:var(--red);box-shadow:ins
       </ul>
       <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Inter',sans-serif;text-wrap:pretty">Those goals sound compatible, but they created a difficult interaction problem. If we exposed everything at once, the interface became overwhelming. If we hid too much, users could not understand what information was available or how to get to it.</p>
       <figure style="margin:clamp(12px,2vw,28px) 0 0;display:grid;gap:10px">
-        <button type="button" onClick="{{ openFig01 }}" aria-label="View larger: Early EM-Dash dashboard showing hazard guide activity, usage charts, and a jurisdiction map" style="display:block;width:100%;padding:0;border:0;background:transparent;cursor:zoom-in"><img loading="lazy" src="../images/work/hazadapt-resiliencepoint/early-em-dash-screenshot.png" alt="Early EM-Dash dashboard showing hazard guide activity, usage charts, and a jurisdiction map" style="display:block;width:100%;height:auto;border:1px solid var(--line)"></button>
+        <button type="button" class="fig-btn" data-fig="0" aria-label="View larger: Early EM-Dash dashboard showing hazard guide activity, usage charts, and a jurisdiction map"><img loading="lazy" src="../images/work/hazadapt-resiliencepoint/early-em-dash-screenshot.png" alt="Early EM-Dash dashboard showing hazard guide activity, usage charts, and a jurisdiction map" style="display:block;width:100%;height:auto;border:1px solid var(--line)"></button>
         <figcaption style="font:400 12px/1.5 'Space Mono',monospace;letter-spacing:.06em;color:var(--muted)"><span style="color:var(--pink)">FIG. 01</span> — EM-Dash, ResiliencePoint's predecessor</figcaption>
       </figure>
       <figure style="margin:clamp(12px,2vw,28px) 0 0;display:grid;gap:10px">
-        <button type="button" onClick="{{ openFig02 }}" aria-label="View larger: Early EM-Dash resilience data table and hazard guide click-through view" style="display:block;width:100%;padding:0;border:0;background:transparent;cursor:zoom-in"><img loading="lazy" src="../images/work/hazadapt-resiliencepoint/early-information-architecture.png" alt="Early EM-Dash resilience data table and hazard guide click-through view" style="display:block;width:100%;height:auto;border:1px solid var(--line)"></button>
+        <button type="button" class="fig-btn" data-fig="1" aria-label="View larger: Early EM-Dash resilience data table and hazard guide click-through view"><img loading="lazy" src="../images/work/hazadapt-resiliencepoint/early-information-architecture.png" alt="Early EM-Dash resilience data table and hazard guide click-through view" style="display:block;width:100%;height:auto;border:1px solid var(--line)"></button>
         <figcaption style="font:400 12px/1.5 'Space Mono',monospace;letter-spacing:.06em;color:var(--muted)"><span style="color:var(--pink)">FIG. 02</span> — Early information architecture</figcaption>
       </figure>
     </section>
@@ -212,16 +215,16 @@ nav[aria-label="Primary"] a[aria-current="true"]{color:var(--red);box-shadow:ins
       <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Inter',sans-serif;text-wrap:pretty">Location was another major part of the experience. The product needed to support multiple jurisdiction levels, including state, county, and ZIP code. Map behavior changed depending on the type of jurisdiction being viewed so users would enter the experience at a useful geographic scale instead of manually correcting the zoom every time.</p>
       <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Inter',sans-serif;text-wrap:pretty">We also worked on navigation, including redesigning the side menu so moving between major areas of the platform felt more deliberate and understandable.</p>
       <figure style="margin:clamp(12px,2vw,28px) 0 0;display:grid;gap:10px">
-        <button type="button" onClick="{{ openFig03 }}" aria-label="View larger: ResiliencePoint dashboard: trending hazards, a nationwide usage map, and summary stats" style="display:block;width:100%;padding:0;border:0;background:transparent;cursor:zoom-in"><img loading="lazy" src="../images/work/hazadapt-resiliencepoint/dashboard-screenshot.png" alt="ResiliencePoint dashboard: trending hazards, a nationwide usage map, and summary stats" style="display:block;width:100%;height:auto;border:1px solid var(--line)"></button>
+        <button type="button" class="fig-btn" data-fig="2" aria-label="View larger: ResiliencePoint dashboard: trending hazards, a nationwide usage map, and summary stats"><img loading="lazy" src="../images/work/hazadapt-resiliencepoint/dashboard-screenshot.png" alt="ResiliencePoint dashboard: trending hazards, a nationwide usage map, and summary stats" style="display:block;width:100%;height:auto;border:1px solid var(--line)"></button>
         <figcaption style="font:400 12px/1.5 'Space Mono',monospace;letter-spacing:.06em;color:var(--muted)"><span style="color:var(--pink)">FIG. 03</span> — The ResiliencePoint dashboard</figcaption>
       </figure>
       <div style="display:flex;flex-wrap:wrap;gap:24px;align-items:flex-start">
         <figure style="margin:0;flex:1 1 320px;min-width:0;display:grid;gap:10px">
-          <button type="button" onClick="{{ openFig04 }}" aria-label="View larger: Trend cards summarizing registered users, new users, prep checks completed, and emergency-item readiness" style="display:block;width:100%;padding:0;border:0;background:transparent;cursor:zoom-in"><img loading="lazy" src="../images/work/hazadapt-resiliencepoint/trend-cards.png" alt="Trend cards summarizing registered users, new users, prep checks completed, and emergency-item readiness" style="display:block;width:100%;height:auto;border:1px solid var(--line)"></button>
+          <button type="button" class="fig-btn" data-fig="3" aria-label="View larger: Trend cards summarizing registered users, new users, prep checks completed, and emergency-item readiness"><img loading="lazy" src="../images/work/hazadapt-resiliencepoint/trend-cards.png" alt="Trend cards summarizing registered users, new users, prep checks completed, and emergency-item readiness" style="display:block;width:100%;height:auto;border:1px solid var(--line)"></button>
           <figcaption style="font:400 12px/1.5 'Space Mono',monospace;letter-spacing:.06em;color:var(--muted)"><span style="color:var(--pink)">FIG. 04</span> — Quick statistics / trend cards</figcaption>
         </figure>
         <figure style="margin:0;flex:1 1 320px;min-width:0;display:grid;gap:10px">
-          <button type="button" onClick="{{ openFig05 }}" aria-label="View larger: Jurisdiction-level risk map with low/medium/high shading" style="display:block;width:100%;padding:0;border:0;background:transparent;cursor:zoom-in"><img loading="lazy" src="../images/work/hazadapt-resiliencepoint/jurisdiction-map.png" alt="Jurisdiction-level risk map with low/medium/high shading" style="display:block;width:100%;height:auto;border:1px solid var(--line)"></button>
+          <button type="button" class="fig-btn" data-fig="4" aria-label="View larger: Jurisdiction-level risk map with low/medium/high shading"><img loading="lazy" src="../images/work/hazadapt-resiliencepoint/jurisdiction-map.png" alt="Jurisdiction-level risk map with low/medium/high shading" style="display:block;width:100%;height:auto;border:1px solid var(--line)"></button>
           <figcaption style="font:400 12px/1.5 'Space Mono',monospace;letter-spacing:.06em;color:var(--muted)"><span style="color:var(--pink)">FIG. 05</span> — Jurisdiction map</figcaption>
         </figure>
       </div>
@@ -234,7 +237,7 @@ nav[aria-label="Primary"] a[aria-current="true"]{color:var(--red);box-shadow:ins
       <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Inter',sans-serif;text-wrap:pretty">Every new variable created another decision inside an increasingly compressed part of the interface. Users needed to select geography, hazards, and other criteria while still understanding the relationships between those choices. The controls were becoming an interface inside the interface.</p>
       <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Inter',sans-serif;text-wrap:pretty">Instead of making the data easier to explore, the dashboard was asking people to mentally keep track of too many selections at once. That was the point where the problem changed for us. We were not designing a better dropdown anymore. We were designing a query-building experience.</p>
       <figure style="margin:clamp(12px,2vw,28px) 0 0;display:grid;gap:10px">
-        <button type="button" onClick="{{ openFig06 }}" aria-label="View larger: Jurisdiction risk-level map produced by the original dropdown-driven filter controls" style="display:block;width:100%;max-width:435px;padding:0;border:0;background:transparent;cursor:zoom-in;margin-inline:auto"><img loading="lazy" src="../images/work/hazadapt-resiliencepoint/dropdown-example.png" alt="Jurisdiction risk-level map produced by the original dropdown-driven filter controls" style="display:block;width:100%;height:auto;border:1px solid var(--line)"></button>
+        <button type="button" class="fig-btn" data-fig="5" aria-label="View larger: Jurisdiction risk-level map produced by the original dropdown-driven filter controls" style="max-width:435px;margin-inline:auto"><img loading="lazy" src="../images/work/hazadapt-resiliencepoint/dropdown-example.png" alt="Jurisdiction risk-level map produced by the original dropdown-driven filter controls" style="display:block;width:100%;height:auto;border:1px solid var(--line)"></button>
         <figcaption style="font:400 12px/1.5 'Space Mono',monospace;letter-spacing:.06em;color:var(--muted)"><span style="color:var(--pink)">FIG. 06</span> — Earlier dropdown/filter design</figcaption>
       </figure>
     </section>
@@ -246,7 +249,7 @@ nav[aria-label="Primary"] a[aria-current="true"]{color:var(--red);box-shadow:ins
       <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Inter',sans-serif;text-wrap:pretty">Instead of opening several dropdowns and trying to remember what had been selected, users could progressively build a query. Selections were visible. Relationships between options were clearer. The interface could also support more complicated filtering without turning the dashboard into a wall of controls.</p>
       <p style="margin:0;max-width:68ch;font:600 clamp(20px,1.6vw,24px)/1.45 'Inter',sans-serif;text-wrap:pretty">This changed the product from something that primarily displayed data into something that allowed emergency managers to actively investigate it.</p>
       <figure style="margin:clamp(12px,2vw,28px) 0 0;display:grid;gap:10px">
-        <button type="button" onClick="{{ openFig07 }}" aria-label="View larger: Full-page Prep Check Activity query builder with hazard, area, and date range controls" style="display:block;width:100%;padding:0;border:0;background:transparent;cursor:zoom-in"><img loading="lazy" src="../images/work/hazadapt-resiliencepoint/query-builder.png" alt="Full-page Prep Check Activity query builder with hazard, area, and date range controls" style="display:block;width:100%;height:auto;border:1px solid var(--line)"></button>
+        <button type="button" class="fig-btn" data-fig="6" aria-label="View larger: Full-page Prep Check Activity query builder with hazard, area, and date range controls"><img loading="lazy" src="../images/work/hazadapt-resiliencepoint/query-builder.png" alt="Full-page Prep Check Activity query builder with hazard, area, and date range controls" style="display:block;width:100%;height:auto;border:1px solid var(--line)"></button>
         <figcaption style="font:400 12px/1.5 'Space Mono',monospace;letter-spacing:.06em;color:var(--muted)"><span style="color:var(--pink)">FIG. 07</span> — The redesigned, full-page query builder</figcaption>
       </figure>
     </section>
@@ -258,7 +261,7 @@ nav[aria-label="Primary"] a[aria-current="true"]{color:var(--red);box-shadow:ins
       <h3 style="margin:18px 0 0;font:400 clamp(26px,2.4vw,34px)/1 'Archivo Black',sans-serif;text-transform:uppercase;letter-spacing:.01em;overflow-wrap:anywhere">Resident vs. Visitor Segmentation</h3>
       <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Inter',sans-serif;text-wrap:pretty">Preparedness does not necessarily look the same for someone who lives in a community and someone who is temporarily there. A resident may know local hazards, evacuation routes, emergency systems, and available resources. A visitor may know almost none of those things. Treating both groups as one population could hide those differences. Adding a resident/visitor toggle allowed emergency managers to investigate the preparedness experience of each group separately.</p>
       <figure style="margin:clamp(12px,2vw,28px) 0 0;display:grid;gap:10px">
-        <button type="button" onClick="{{ openFig08 }}" aria-label="View larger: Prep Check Usage by Area map with a Residents/Visitors toggle in the panel header" style="display:block;width:100%;padding:0;border:0;background:transparent;cursor:zoom-in"><img loading="lazy" src="../images/work/hazadapt-resiliencepoint/residents-visitors-toggle.png" alt="Prep Check Usage by Area map with a Residents/Visitors toggle in the panel header" style="display:block;width:100%;height:auto;border:1px solid var(--line)"></button>
+        <button type="button" class="fig-btn" data-fig="7" aria-label="View larger: Prep Check Usage by Area map with a Residents/Visitors toggle in the panel header"><img loading="lazy" src="../images/work/hazadapt-resiliencepoint/residents-visitors-toggle.png" alt="Prep Check Usage by Area map with a Residents/Visitors toggle in the panel header" style="display:block;width:100%;height:auto;border:1px solid var(--line)"></button>
         <figcaption style="font:400 12px/1.5 'Space Mono',monospace;letter-spacing:.06em;color:var(--muted)"><span style="color:var(--pink)">FIG. 08</span> — Resident vs. visitor toggle</figcaption>
       </figure>
       <h3 style="margin:18px 0 0;font:400 clamp(26px,2.4vw,34px)/1 'Archivo Black',sans-serif;text-transform:uppercase;letter-spacing:.01em;overflow-wrap:anywhere">Local Safety Information Presence</h3>
@@ -272,16 +275,16 @@ nav[aria-label="Primary"] a[aria-current="true"]{color:var(--red);box-shadow:ins
       <h2 id="s08-h" style="margin:0 0 8px;max-width:22ch;font:700 clamp(34px,4vw,60px)/1.02 'Inter',sans-serif;letter-spacing:-.025em;text-wrap:balance">Making the results understandable and portable</h2>
       <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Inter',sans-serif;text-wrap:pretty">Giving users access to more data only helps if the results remain understandable. Trend cards helped surface changes without requiring users to interpret raw tables. Charts allowed patterns to be compared visually. Plain-language summaries provided another layer of interpretation so the interface did not assume every user wanted to analyze a chart from scratch. Users could also return to previous searches through query history, reducing the amount of repeated configuration required.</p>
       <figure style="margin:clamp(12px,2vw,28px) 0 0;display:grid;gap:10px">
-        <button type="button" onClick="{{ openFig09 }}" aria-label="View larger: Hazard Guide Activity results page for a Bleeding query, with a usage map and per-phase charts" style="display:block;width:100%;padding:0;border:0;background:transparent;cursor:zoom-in"><img loading="lazy" src="../images/work/hazadapt-resiliencepoint/query-results.png" alt="Hazard Guide Activity results page for a Bleeding query, with a usage map and per-phase charts" style="display:block;width:100%;height:auto;border:1px solid var(--line)"></button>
+        <button type="button" class="fig-btn" data-fig="8" aria-label="View larger: Hazard Guide Activity results page for a Bleeding query, with a usage map and per-phase charts"><img loading="lazy" src="../images/work/hazadapt-resiliencepoint/query-results.png" alt="Hazard Guide Activity results page for a Bleeding query, with a usage map and per-phase charts" style="display:block;width:100%;height:auto;border:1px solid var(--line)"></button>
         <figcaption style="font:400 12px/1.5 'Space Mono',monospace;letter-spacing:.06em;color:var(--muted)"><span style="color:var(--pink)">FIG. 09</span> — Results page</figcaption>
       </figure>
       <div style="display:flex;flex-wrap:wrap;gap:24px;align-items:flex-start">
         <figure style="margin:0;flex:1 1 320px;min-width:0;display:grid;gap:10px">
-          <button type="button" onClick="{{ openFig10 }}" aria-label="View larger: Two insight cards with plain-language summaries explaining what each chart shows" style="display:block;width:100%;padding:0;border:0;background:transparent;cursor:zoom-in"><img loading="lazy" src="../images/work/hazadapt-resiliencepoint/plain-language-summaries.png" alt="Two insight cards with plain-language summaries explaining what each chart shows" style="display:block;width:100%;height:auto;border:1px solid var(--line)"></button>
+          <button type="button" class="fig-btn" data-fig="9" aria-label="View larger: Two insight cards with plain-language summaries explaining what each chart shows"><img loading="lazy" src="../images/work/hazadapt-resiliencepoint/plain-language-summaries.png" alt="Two insight cards with plain-language summaries explaining what each chart shows" style="display:block;width:100%;height:auto;border:1px solid var(--line)"></button>
           <figcaption style="font:400 12px/1.5 'Space Mono',monospace;letter-spacing:.06em;color:var(--muted)"><span style="color:var(--pink)">FIG. 10</span> — Plain-language summaries</figcaption>
         </figure>
         <figure style="margin:0;flex:1 1 320px;min-width:0;display:grid;gap:10px">
-          <button type="button" onClick="{{ openFig11 }}" aria-label="View larger: Saved Queries list showing past searches with date last used and quick actions" style="display:block;width:100%;padding:0;border:0;background:transparent;cursor:zoom-in"><img loading="lazy" src="../images/work/hazadapt-resiliencepoint/saved-queries.png" alt="Saved Queries list showing past searches with date last used and quick actions" style="display:block;width:100%;height:auto;border:1px solid var(--line)"></button>
+          <button type="button" class="fig-btn" data-fig="10" aria-label="View larger: Saved Queries list showing past searches with date last used and quick actions"><img loading="lazy" src="../images/work/hazadapt-resiliencepoint/saved-queries.png" alt="Saved Queries list showing past searches with date last used and quick actions" style="display:block;width:100%;height:auto;border:1px solid var(--line)"></button>
           <figcaption style="font:400 12px/1.5 'Space Mono',monospace;letter-spacing:.06em;color:var(--muted)"><span style="color:var(--pink)">FIG. 11</span> — Query history</figcaption>
         </figure>
       </div>
@@ -327,11 +330,11 @@ nav[aria-label="Primary"] a[aria-current="true"]{color:var(--red);box-shadow:ins
 </div>
 
 <nav aria-label="More case studies" style="display:flex;flex-wrap:wrap;border-top:2px solid var(--ink);border-bottom:1px solid var(--line)">
-  <a href="welldone-monitoring.html" style="flex:1 1 320px;display:grid;gap:10px;padding:clamp(36px,5vw,72px) clamp(16px,5vw,80px);text-decoration:none;border-right:1px solid var(--line)" style-hover="background:var(--ink);color:var(--bg)">
+  <a href="welldone-monitoring.html" class="case-nav-link" style="flex:1 1 320px;display:grid;gap:10px;padding:clamp(36px,5vw,72px) clamp(16px,5vw,80px);text-decoration:none;border-right:1px solid var(--line)">
     <span style="font:700 12px/1 'Space Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--pink)">← Previous</span>
     <span style="font:400 clamp(52px,7vw,120px)/.82 'Archivo Black',sans-serif;text-transform:uppercase;overflow-wrap:anywhere">WellDone</span>
   </a>
-  <a href="hazadapt-prep-checks.html" style="flex:1 1 320px;display:grid;gap:10px;justify-items:end;text-align:right;padding:clamp(36px,5vw,72px) clamp(16px,5vw,80px);text-decoration:none" style-hover="background:var(--ink);color:var(--bg)">
+  <a href="hazadapt-prep-checks.html" class="case-nav-link" style="flex:1 1 320px;display:grid;gap:10px;justify-items:end;text-align:right;padding:clamp(36px,5vw,72px) clamp(16px,5vw,80px);text-decoration:none">
     <span style="font:700 12px/1 'Space Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--pink)">Next →</span>
     <span style="font:400 clamp(60px,8vw,130px)/.8 'Archivo Black',serif;overflow-wrap:anywhere">Prep Checks</span>
   </a>
@@ -343,104 +346,170 @@ nav[aria-label="Primary"] a[aria-current="true"]{color:var(--red);box-shadow:ins
   <a href="#main" style="min-height:44px;display:inline-flex;align-items:center">[ ^ top ]</a>
 </footer>
 
-<sc-if value="{{ lbOpen }}" hint-placeholder-val="{{ false }}">
-  <div role="dialog" aria-modal="true" aria-label="{{ lb.alt }}" onKeyDown="{{ lbKey }}" style="position:fixed;inset:0;z-index:260;background:rgba(10,9,9,.96);color:#F2F0E9;display:grid;grid-template-rows:auto minmax(0,1fr) auto;gap:16px;padding:clamp(14px,2.4vw,32px)">
-    <div style="display:flex;flex-wrap:wrap;justify-content:flex-end">
-      <button type="button" ref="{{ closeRef }}" onClick="{{ lbClose }}" style="font:700 12px/1 'Space Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:#0B0B0B;background:#F2F0E9;border:0;padding:0 16px;min-height:44px;cursor:pointer" style-hover="background:#A8FF00">✕ Close</button>
-    </div>
-    <div style="min-height:0;display:flex;align-items:center;justify-content:center">
-      <img loading="lazy" src="../images/work/hazadapt-resiliencepoint/early-em-dash-screenshot.png" alt="Early EM-Dash dashboard showing hazard guide activity, usage charts, and a jurisdiction map" style="{{ lbImg0 }}">
-      <img loading="lazy" src="../images/work/hazadapt-resiliencepoint/early-information-architecture.png" alt="Early EM-Dash resilience data table and hazard guide click-through view" style="{{ lbImg1 }}">
-      <img loading="lazy" src="../images/work/hazadapt-resiliencepoint/dashboard-screenshot.png" alt="ResiliencePoint dashboard: trending hazards, a nationwide usage map, and summary stats" style="{{ lbImg2 }}">
-      <img loading="lazy" src="../images/work/hazadapt-resiliencepoint/trend-cards.png" alt="Trend cards summarizing registered users, new users, prep checks completed, and emergency-item readiness" style="{{ lbImg3 }}">
-      <img loading="lazy" src="../images/work/hazadapt-resiliencepoint/jurisdiction-map.png" alt="Jurisdiction-level risk map with low/medium/high shading" style="{{ lbImg4 }}">
-      <img loading="lazy" src="../images/work/hazadapt-resiliencepoint/dropdown-example.png" alt="Jurisdiction risk-level map produced by the original dropdown-driven filter controls" style="{{ lbImg5 }}">
-      <img loading="lazy" src="../images/work/hazadapt-resiliencepoint/query-builder.png" alt="Full-page Prep Check Activity query builder with hazard, area, and date range controls" style="{{ lbImg6 }}">
-      <img loading="lazy" src="../images/work/hazadapt-resiliencepoint/residents-visitors-toggle.png" alt="Prep Check Usage by Area map with a Residents/Visitors toggle in the panel header" style="{{ lbImg7 }}">
-      <img loading="lazy" src="../images/work/hazadapt-resiliencepoint/query-results.png" alt="Hazard Guide Activity results page for a Bleeding query, with a usage map and per-phase charts" style="{{ lbImg8 }}">
-      <img loading="lazy" src="../images/work/hazadapt-resiliencepoint/plain-language-summaries.png" alt="Two insight cards with plain-language summaries explaining what each chart shows" style="{{ lbImg9 }}">
-      <img loading="lazy" src="../images/work/hazadapt-resiliencepoint/saved-queries.png" alt="Saved Queries list showing past searches with date last used and quick actions" style="{{ lbImg10 }}">
-    </div>
-    <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px">
-      <button type="button" onClick="{{ lbPrev }}" aria-label="Previous image" style="font:700 12px/1 'Space Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:#F2F0E9;background:transparent;border:1px solid #F2F0E9;padding:0 16px;min-height:44px;cursor:pointer" style-hover="background:#F2F0E9;color:#0B0B0B">← Prev</button>
-      <p style="margin:0;font:400 12px/1.4 'Space Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:#aaa69f;text-align:center">{{ lb.caption }}</p>
-      <button type="button" onClick="{{ lbNext }}" aria-label="Next image" style="font:700 12px/1 'Space Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:#F2F0E9;background:transparent;border:1px solid #F2F0E9;padding:0 16px;min-height:44px;cursor:pointer" style-hover="background:#F2F0E9;color:#0B0B0B">Next →</button>
-    </div>
+<div id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer" data-open="false" style="position:fixed;inset:0;z-index:260;background:rgba(10,9,9,.96);color:#F2F0E9;grid-template-rows:auto minmax(0,1fr) auto;gap:16px;padding:clamp(14px,2.4vw,32px)">
+  <div style="display:flex;flex-wrap:wrap;justify-content:flex-end">
+    <button type="button" id="lbClose" class="lb-close" style="font:700 12px/1 'Space Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:#0B0B0B;background:#F2F0E9;border:0;padding:0 16px;min-height:44px;cursor:pointer">✕ Close</button>
   </div>
-</sc-if>
-</x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;defaultTheme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;dark&quot;,&quot;light&quot;],&quot;default&quot;:&quot;dark&quot;,&quot;tsType&quot;:&quot;'dark'|'light'&quot;,&quot;section&quot;:&quot;Look&quot;},&quot;grain&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Look&quot;}}">
-class Component extends DCLogic {
-  closeRef = React.createRef();
-  state = { theme: this.props.defaultTheme ?? 'dark', active: 's01', menuOpen: false, lb: -1 };
-  applyRoot() {
-    const r = document.documentElement;
-    r.dataset.theme = this.state.theme;
-    r.dataset.grain = (this.props.grain ?? true) ? 'on' : 'off';
+  <div style="min-height:0;display:flex;align-items:center;justify-content:center">
+    <img loading="lazy" data-fig-img="0" src="../images/work/hazadapt-resiliencepoint/early-em-dash-screenshot.png" alt="Early EM-Dash dashboard showing hazard guide activity, usage charts, and a jurisdiction map">
+    <img loading="lazy" data-fig-img="1" src="../images/work/hazadapt-resiliencepoint/early-information-architecture.png" alt="Early EM-Dash resilience data table and hazard guide click-through view">
+    <img loading="lazy" data-fig-img="2" src="../images/work/hazadapt-resiliencepoint/dashboard-screenshot.png" alt="ResiliencePoint dashboard: trending hazards, a nationwide usage map, and summary stats">
+    <img loading="lazy" data-fig-img="3" src="../images/work/hazadapt-resiliencepoint/trend-cards.png" alt="Trend cards summarizing registered users, new users, prep checks completed, and emergency-item readiness">
+    <img loading="lazy" data-fig-img="4" src="../images/work/hazadapt-resiliencepoint/jurisdiction-map.png" alt="Jurisdiction-level risk map with low/medium/high shading">
+    <img loading="lazy" data-fig-img="5" src="../images/work/hazadapt-resiliencepoint/dropdown-example.png" alt="Jurisdiction risk-level map produced by the original dropdown-driven filter controls">
+    <img loading="lazy" data-fig-img="6" src="../images/work/hazadapt-resiliencepoint/query-builder.png" alt="Full-page Prep Check Activity query builder with hazard, area, and date range controls">
+    <img loading="lazy" data-fig-img="7" src="../images/work/hazadapt-resiliencepoint/residents-visitors-toggle.png" alt="Prep Check Usage by Area map with a Residents/Visitors toggle in the panel header">
+    <img loading="lazy" data-fig-img="8" src="../images/work/hazadapt-resiliencepoint/query-results.png" alt="Hazard Guide Activity results page for a Bleeding query, with a usage map and per-phase charts">
+    <img loading="lazy" data-fig-img="9" src="../images/work/hazadapt-resiliencepoint/plain-language-summaries.png" alt="Two insight cards with plain-language summaries explaining what each chart shows">
+    <img loading="lazy" data-fig-img="10" src="../images/work/hazadapt-resiliencepoint/saved-queries.png" alt="Saved Queries list showing past searches with date last used and quick actions">
+  </div>
+  <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px">
+    <button type="button" id="lbPrev" class="lb-nav" aria-label="Previous image" style="font:700 12px/1 'Space Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:#F2F0E9;background:transparent;border:1px solid #F2F0E9;padding:0 16px;min-height:44px;cursor:pointer">← Prev</button>
+    <p id="lbCaption" style="margin:0;font:400 12px/1.4 'Space Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:#aaa69f;text-align:center">FIG. 01 — EM-Dash, ResiliencePoint's predecessor</p>
+    <button type="button" id="lbNext" class="lb-nav" aria-label="Next image" style="font:700 12px/1 'Space Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:#F2F0E9;background:transparent;border:1px solid #F2F0E9;padding:0 16px;min-height:44px;cursor:pointer">Next →</button>
+  </div>
+</div>
+
+<script>
+(function(){
+  'use strict';
+  var html = document.documentElement;
+
+  function applyThemeUI(){
+    var light = html.getAttribute('data-theme') === 'light';
+    var label = light ? 'DARK' : 'LIGHT';
+    var tt = document.getElementById('themeToggle');
+    var ttm = document.getElementById('themeToggleMobile');
+    var ttml = document.getElementById('themeToggleMobileLabel');
+    if (tt) { tt.textContent = label; tt.setAttribute('aria-pressed', light ? 'true' : 'false'); tt.setAttribute('aria-label', 'Switch to ' + (light ? 'dark' : 'light') + ' mode'); }
+    if (ttm) ttm.setAttribute('aria-pressed', light ? 'true' : 'false');
+    if (ttml) ttml.textContent = label === 'DARK' ? 'Dark' : 'Light';
   }
-  componentDidMount() {
-    this.onMenuResize = () => { if (window.innerWidth >= 860 && this.state.menuOpen) { document.body.style.overflow = ''; this.setState({ menuOpen: false }); } };
-    window.addEventListener('resize', this.onMenuResize);
-    this.onMenuKeydown = e => { if (e.key === 'Escape' && this.state.menuOpen) { document.body.style.overflow = ''; this.setState({ menuOpen: false }); } };
-    window.addEventListener('keydown', this.onMenuKeydown);
-    this.applyRoot();
-    this.io = new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecting) this.setState({ active: en.target.id }); }), { rootMargin: '-40% 0px -55% 0px' });
-    for (let i = 1; i <= 12; i++) { const el = document.getElementById('s' + String(i).padStart(2, '0')); if (el) this.io.observe(el); }
+  function toggleTheme(){
+    var next = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+    if (next === 'dark') html.removeAttribute('data-theme'); else html.setAttribute('data-theme', 'light');
+    try { localStorage.setItem('ke-theme', next); } catch(e){}
+    applyThemeUI();
   }
-  componentDidUpdate(pp) {
-    if (pp.defaultTheme !== this.props.defaultTheme && this.props.defaultTheme) this.setState({ theme: this.props.defaultTheme }, () => this.applyRoot());
-    else this.applyRoot();
-    const open = this.state.lb >= 0;
-    if (open && !this.wasOpen) { this.lastFocus = document.activeElement; document.body.style.overflow = 'hidden'; setTimeout(() => this.closeRef.current && this.closeRef.current.focus(), 30); }
-    if (!open && this.wasOpen) { document.body.style.overflow = ''; if (this.lastFocus && this.lastFocus.focus) this.lastFocus.focus(); }
-    this.wasOpen = open;
+  applyThemeUI();
+  var themeToggle = document.getElementById('themeToggle');
+  var themeToggleMobile = document.getElementById('themeToggleMobile');
+  if (themeToggle) themeToggle.addEventListener('click', toggleTheme);
+  if (themeToggleMobile) themeToggleMobile.addEventListener('click', toggleTheme);
+
+  var menuToggle = document.getElementById('menuToggle');
+  var mobileMenu = document.getElementById('mobileMenu');
+  var mobileMenuBackdrop = document.getElementById('mobileMenuBackdrop');
+  var scrollLocked = false, savedScrollY = 0;
+  function lockScroll(){
+    if (scrollLocked) return;
+    savedScrollY = window.scrollY;
+    document.body.style.position = 'fixed';
+    document.body.style.top = (-savedScrollY) + 'px';
+    document.body.style.left = '0'; document.body.style.right = '0'; document.body.style.overflow = 'hidden';
+    scrollLocked = true;
   }
-  componentWillUnmount() { if (this.io) this.io.disconnect(); window.removeEventListener('resize', this.onMenuResize); window.removeEventListener('keydown', this.onMenuKeydown); document.body.style.overflow = ''; }
-  figs() {
-    return [
-      { src: '../images/work/hazadapt-resiliencepoint/early-em-dash-screenshot.png', alt: "Early EM-Dash dashboard showing hazard guide activity, usage charts, and a jurisdiction map", caption: 'FIG. 01 — EM-Dash, ResiliencePoint’s predecessor' },
-      { src: '../images/work/hazadapt-resiliencepoint/early-information-architecture.png', alt: 'Early EM-Dash resilience data table and hazard guide click-through view', caption: 'FIG. 02 — Early information architecture' },
-      { src: '../images/work/hazadapt-resiliencepoint/dashboard-screenshot.png', alt: 'ResiliencePoint dashboard: trending hazards, a nationwide usage map, and summary stats', caption: 'FIG. 03 — The ResiliencePoint dashboard' },
-      { src: '../images/work/hazadapt-resiliencepoint/trend-cards.png', alt: 'Trend cards summarizing registered users, new users, prep checks completed, and emergency-item readiness', caption: 'FIG. 04 — Quick statistics / trend cards' },
-      { src: '../images/work/hazadapt-resiliencepoint/jurisdiction-map.png', alt: 'Jurisdiction-level risk map with low/medium/high shading', caption: 'FIG. 05 — Jurisdiction map' },
-      { src: '../images/work/hazadapt-resiliencepoint/dropdown-example.png', alt: 'Jurisdiction risk-level map produced by the original dropdown-driven filter controls', caption: 'FIG. 06 — Earlier dropdown/filter design' },
-      { src: '../images/work/hazadapt-resiliencepoint/query-builder.png', alt: 'Full-page Prep Check Activity query builder with hazard, area, and date range controls', caption: 'FIG. 07 — The redesigned, full-page query builder' },
-      { src: '../images/work/hazadapt-resiliencepoint/residents-visitors-toggle.png', alt: 'Prep Check Usage by Area map with a Residents/Visitors toggle in the panel header', caption: 'FIG. 08 — Resident vs. visitor toggle' },
-      { src: '../images/work/hazadapt-resiliencepoint/query-results.png', alt: 'Hazard Guide Activity results page for a Bleeding query, with a usage map and per-phase charts', caption: 'FIG. 09 — Results page' },
-      { src: '../images/work/hazadapt-resiliencepoint/plain-language-summaries.png', alt: 'Two insight cards with plain-language summaries explaining what each chart shows', caption: 'FIG. 10 — Plain-language summaries' },
-      { src: '../images/work/hazadapt-resiliencepoint/saved-queries.png', alt: 'Saved Queries list showing past searches with date last used and quick actions', caption: 'FIG. 11 — Query history' }
-    ];
+  function unlockScroll(){
+    if (!scrollLocked) return;
+    document.body.style.position = ''; document.body.style.top = ''; document.body.style.left = ''; document.body.style.right = ''; document.body.style.overflow = '';
+    window.scrollTo(0, savedScrollY || 0);
+    scrollLocked = false;
   }
-  renderVals() {
-    const light = this.state.theme === 'light', mk = {};
-    for (let i = 1; i <= 12; i++) { const id = 's' + String(i).padStart(2, '0'); mk[id] = this.state.active === id ? '■' : '□'; }
-    const F = this.figs(), step = d => () => this.setState(st => ({ lb: st.lb < 0 ? st.lb : (st.lb + d + F.length) % F.length }));
-    const lb = this.state.lb >= 0 ? F[this.state.lb] : { src: '', alt: '', caption: '' };
-    const lbImgStyle = i => i === this.state.lb ? { display: 'block', maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' } : { display: 'none' };
-    const lbImgs = {};
-    for (let i = 0; i < F.length; i++) lbImgs['lbImg' + i] = lbImgStyle(i);
-    const r = {
-      ...lbImgs,
-      tocOpen: this.state.tocOpen !== false, tocClosed: this.state.tocOpen === false, tocExpanded: this.state.tocOpen !== false ? 'true' : 'false',
-      tocIcon: '− Hide',
-      toggleToc: () => this.setState(s => ({ tocOpen: s.tocOpen === false })),
-      mk, themeLabel: light ? 'Dark' : 'Light', lightPressed: light ? 'true' : 'false',
-      menuExpandedAttr: this.state.menuOpen ? 'true' : 'false',
-      menuButtonLabel: this.state.menuOpen ? 'CLOSE' : 'MENU',
-      menuAriaLabel: this.state.menuOpen ? 'Close menu' : 'Open menu',
-      menuClose: () => { document.body.style.overflow = ''; this.setState({ menuOpen: false }); },
-      menuToggle: () => { const next = !this.state.menuOpen; document.body.style.overflow = next ? 'hidden' : ''; this.setState({ menuOpen: next }); },
-      menuBackdropStyle: this.state.menuOpen ? { display: 'block', position: 'fixed', inset: '56px 0 0 0', zIndex: 215, background: 'rgba(0,0,0,.5)' } : { display: 'none' },
-      menuPanelStyle: this.state.menuOpen ? { display: 'grid', position: 'fixed', left: 0, right: 0, top: 56, zIndex: 220, background: 'var(--bg)', borderBottom: '1px solid var(--line)', maxHeight: 'calc(100vh - 56px)', overflowY: 'auto' } : { display: 'none' },
-      toggleTheme: () => this.setState(s => ({ theme: s.theme === 'light' ? 'dark' : 'light' }), () => this.applyRoot()),
-      closeRef: this.closeRef, lbOpen: this.state.lb >= 0, lb,
-      lbClose: () => this.setState({ lb: -1 }), lbPrev: step(-1), lbNext: step(1),
-      lbKey: e => { if (e.key === 'Escape') this.setState({ lb: -1 }); else if (e.key === 'ArrowLeft') step(-1)(); else if (e.key === 'ArrowRight') step(1)(); }
-    };
-    F.forEach((f, i) => { r['openFig' + String(i + 1).padStart(2, '0')] = () => this.setState({ lb: i }); });
-    return r;
+  function setMenuOpen(open){
+    if (menuToggle) { menuToggle.setAttribute('aria-expanded', open ? 'true' : 'false'); menuToggle.textContent = open ? 'CLOSE' : 'MENU'; menuToggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu'); }
+    if (mobileMenu) mobileMenu.style.display = open ? 'grid' : 'none';
+    if (mobileMenuBackdrop) mobileMenuBackdrop.style.display = open ? 'block' : 'none';
+    if (open) lockScroll(); else unlockScroll();
   }
-}
+  function closeMenu(){
+    if (menuToggle && menuToggle.getAttribute('aria-expanded') === 'true') setMenuOpen(false);
+  }
+  if (menuToggle) menuToggle.addEventListener('click', function(){
+    setMenuOpen(menuToggle.getAttribute('aria-expanded') !== 'true');
+  });
+  if (mobileMenuBackdrop) mobileMenuBackdrop.addEventListener('click', closeMenu);
+  window.addEventListener('keydown', function(e){ if (e.key === 'Escape') closeMenu(); });
+  window.addEventListener('resize', function(){ if (window.innerWidth >= 860) closeMenu(); });
+
+  var tocAside = document.getElementById('tocAside');
+  var tocToggle = document.getElementById('tocToggle');
+  var tocShow = document.getElementById('tocShow');
+  function setTocOpen(open){
+    if (tocAside) tocAside.style.display = open ? '' : 'none';
+    if (tocShow) tocShow.style.display = open ? 'none' : 'flex';
+    if (tocToggle) tocToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    if (tocShow) tocShow.setAttribute('aria-expanded', open ? 'true' : 'false');
+  }
+  if (tocToggle) tocToggle.addEventListener('click', function(){ setTocOpen(tocToggle.getAttribute('aria-expanded') !== 'true'); });
+  if (tocShow) tocShow.addEventListener('click', function(){ setTocOpen(true); });
+
+  var markers = Array.prototype.slice.call(document.querySelectorAll('.toc-marker'));
+  var spyIo = new IntersectionObserver(function(entries){
+    entries.forEach(function(en){
+      if (en.isIntersecting) {
+        markers.forEach(function(m){ m.textContent = (m.dataset.marker === en.target.id) ? '■' : '□'; });
+      }
+    });
+  }, { rootMargin: '-40% 0px -55% 0px' });
+  document.querySelectorAll('main section[id]').forEach(function(el){ spyIo.observe(el); });
+
+  // ---- lightbox ----
+  var figs = [
+    { caption: "FIG. 01 — EM-Dash, ResiliencePoint's predecessor" },
+    { caption: 'FIG. 02 — Early information architecture' },
+    { caption: 'FIG. 03 — The ResiliencePoint dashboard' },
+    { caption: 'FIG. 04 — Quick statistics / trend cards' },
+    { caption: 'FIG. 05 — Jurisdiction map' },
+    { caption: 'FIG. 06 — Earlier dropdown/filter design' },
+    { caption: 'FIG. 07 — The redesigned, full-page query builder' },
+    { caption: 'FIG. 08 — Resident vs. visitor toggle' },
+    { caption: 'FIG. 09 — Results page' },
+    { caption: 'FIG. 10 — Plain-language summaries' },
+    { caption: 'FIG. 11 — Query history' }
+  ];
+  var lightbox = document.getElementById('lightbox');
+  var lbClose = document.getElementById('lbClose');
+  var lbPrev = document.getElementById('lbPrev');
+  var lbNext = document.getElementById('lbNext');
+  var lbCaption = document.getElementById('lbCaption');
+  var lbImgs = Array.prototype.slice.call(lightbox.querySelectorAll('img'));
+  var current = -1, lastFocus = null;
+  function showFig(i){
+    current = i;
+    lbImgs.forEach(function(img){ img.setAttribute('data-active', img.dataset.figImg === String(i) ? 'true' : 'false'); });
+    lbCaption.textContent = figs[i].caption;
+  }
+  function openLightbox(i){
+    lastFocus = document.activeElement;
+    showFig(i);
+    lightbox.setAttribute('data-open', 'true');
+    document.body.style.overflow = 'hidden';
+    setTimeout(function(){ lbClose.focus(); }, 30);
+  }
+  function closeLightbox(){
+    lightbox.setAttribute('data-open', 'false');
+    document.body.style.overflow = '';
+    current = -1;
+    if (lastFocus && lastFocus.focus) lastFocus.focus();
+  }
+  function step(d){
+    if (current < 0) return;
+    showFig((current + d + figs.length) % figs.length);
+  }
+  document.querySelectorAll('.fig-btn').forEach(function(btn){
+    btn.addEventListener('click', function(){ openLightbox(parseInt(btn.dataset.fig, 10)); });
+  });
+  lbClose.addEventListener('click', closeLightbox);
+  lbPrev.addEventListener('click', function(){ step(-1); });
+  lbNext.addEventListener('click', function(){ step(1); });
+  lightbox.addEventListener('keydown', function(e){
+    if (e.key === 'Escape') closeLightbox();
+    else if (e.key === 'ArrowLeft') step(-1);
+    else if (e.key === 'ArrowRight') step(1);
+  });
+
+  html.classList.add('js-ready');
+})();
 </script>
 </body>
 </html>

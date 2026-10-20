@@ -3,29 +3,18 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="preload" as="script" href="../vendor/react.production.min.js">
-<link rel="preload" as="script" href="../vendor/react-dom.production.min.js">
-<link rel="preload" as="script" href="../vendor/babel.min.js">
-<script>window.__resources={"https://unpkg.com/react@18.3.1/umd/react.production.min.js":"../vendor/react.production.min.js","https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js":"../vendor/react-dom.production.min.js","https://unpkg.com/@babel/standalone@7.29.0/babel.min.js":"../vendor/babel.min.js"};</script>
-<script src="../support.js"></script>
-</head>
-<body>
-<x-dc>
-<helmet>
 <link rel="icon" href="../images/favicon.ico">
 <title>Prep Checks — hazadapt — Krystyna Ewing</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="Prep Checks — making emergency preparedness feel achievable.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
 <script src="../image-slot.js"></script>
+<script>try{if(localStorage.getItem('ke-theme')==='light')document.documentElement.setAttribute('data-theme','light');}catch(e){}</script>
 <style>
 html{--bg:#0B0B0B;--ink:#F2F0E9;--muted:#9a978e;--metal:#9a978e;--ghost:#252525;--line:rgba(242,240,233,.2);--c-turquoise:#A8FF00;--c-blue:#A8FF00;--c-copper:#A8FF00;--c-opal:#A8FF00;--red:var(--c-copper);--on-red:#0B0B0B;--pink:#A8FF00;--grain:.1;--rail-w:48px;background:var(--bg);color:var(--ink);scroll-behavior:smooth}
-@media (max-width:859px){html{--grain:0}body::after{content:none!important}}
 html[data-theme="light"]{--bg:#F2F0E9;--ink:#0B0B0B;--muted:#5f5c4e;--metal:#5f5c4e;--ghost:#E4E1D6;--line:rgba(11,11,11,.2);--c-turquoise:#447000;--c-blue:#447000;--c-copper:#447000;--c-opal:#447000;--red:var(--c-copper);--on-red:#F2F0E9;--pink:#447000;--grain:.07}
-html[data-grain="off"]{--grain:0}
 body{margin:0;padding-right:var(--rail-w);background:var(--bg);color:var(--ink);font-family:"Inter",system-ui,sans-serif;-webkit-font-smoothing:antialiased;transition:background-color .35s,color .35s;overflow-x:hidden}
-body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:300;opacity:var(--grain);mix-blend-mode:overlay;transform:translateZ(0);will-change:transform;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E")}
+body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:300;opacity:var(--grain);mix-blend-mode:overlay;background-image:url("../images/grain.png");background-size:96px 96px}
 a{color:inherit;text-decoration-thickness:1px;text-underline-offset:.22em}
 a:hover{color:var(--red)}
 :focus-visible{outline:3px solid var(--pink);outline-offset:4px}
@@ -46,9 +35,16 @@ a:hover{color:var(--red)}
 }
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
 
+.skip-link{position:fixed;left:16px;top:-80px;z-index:400;background:var(--pink);color:var(--on-red);padding:12px 18px;font:700 14px/1 'Space Mono',monospace;text-decoration:none;transition:top .2s ease}
+.skip-link:focus{top:16px}
+
 nav[aria-label="Primary"] a[aria-current="true"]{color:var(--red);box-shadow:inset 3px 0 0 var(--red)}
+.rail-item:hover{letter-spacing:.26em}
+#themeToggle:hover{color:var(--pink)}
 #mobileMenu a[aria-current="true"]{color:var(--red)}
 #mobileBar{display:none}
+#menuToggle:hover{color:var(--pink);border-color:var(--pink)}
+#themeToggleMobile:hover{color:var(--pink)}
 @media (max-width:859px){
   nav[aria-label="Primary"]{display:none!important}
   #mobileBar{display:flex}
@@ -57,39 +53,46 @@ nav[aria-label="Primary"] a[aria-current="true"]{color:var(--red);box-shadow:ins
 @media (min-width:860px){
   #mobileMenu,#mobileMenuBackdrop{display:none!important}
 }
-</style>
-</helmet>
 
-<a href="#main" style="position:fixed;left:16px;top:-80px;z-index:400;background:var(--pink);color:var(--on-red);padding:12px 18px;font:700 14px/1 'Space Mono',monospace;text-decoration:none" style-focus="top:16px">Skip to content</a>
+.btn-outline:hover{background:var(--pink);color:var(--on-red)}
+.toc-toggle:hover{color:var(--ink)}
+.toc-float:hover{background:var(--red);color:var(--on-red)}
+.case-nav:hover{background:var(--ink);color:var(--bg)}
+#tocPanel[hidden],#tocFloat[hidden]{display:none}
+</style>
+</head>
+<body>
+
+<a href="#main" class="skip-link">Skip to content</a>
 
 <nav aria-label="Primary" style="position:fixed;right:0;top:0;bottom:0;z-index:200;width:var(--rail-w);display:flex;flex-direction:column;background:var(--bg);border-left:1px solid var(--line)">
-  <a href="../index.html#work" aria-label="K. Ewing, home" class="mono" style="flex:0 0 auto;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(180deg);padding:16px 0;font-size:15px;font-weight:700;letter-spacing:.04em;text-decoration:none;color:var(--ink);border-bottom:1px solid var(--line);min-height:44px;transition:color .2s ease" style-hover="color:var(--pink)">K. EWING</a>
-  <a href="../index.html#work" aria-current="true" class="mono" style="flex:1 1 0;min-height:44px;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(180deg);font-size:11px;font-weight:700;letter-spacing:.18em;text-decoration:none;color:var(--ink);border-bottom:1px solid var(--line);transition:color .2s ease,letter-spacing .2s ease" style-hover="color:var(--pink);letter-spacing:.26em">WORK</a>
-  <a href="../index.html#workbench" aria-current="false" class="mono" style="flex:1 1 0;min-height:44px;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(180deg);font-size:11px;font-weight:700;letter-spacing:.18em;text-decoration:none;color:var(--ink);border-bottom:1px solid var(--line);transition:color .2s ease,letter-spacing .2s ease" style-hover="color:var(--pink);letter-spacing:.26em">WORKBENCH</a>
-  <a href="../about.html" aria-current="false" class="mono" style="flex:1 1 0;min-height:44px;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(180deg);font-size:11px;font-weight:700;letter-spacing:.18em;text-decoration:none;color:var(--ink);border-bottom:1px solid var(--line);transition:color .2s ease,letter-spacing .2s ease" style-hover="color:var(--pink);letter-spacing:.26em">ABOUT</a>
-  <a href="../index.html#contact" aria-current="false" class="mono" style="flex:1 1 0;min-height:44px;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(180deg);font-size:11px;font-weight:700;letter-spacing:.18em;text-decoration:none;color:var(--ink);transition:color .2s ease,letter-spacing .2s ease" style-hover="color:var(--pink);letter-spacing:.26em">CONTACT</a>
-  <button type="button" onClick="{{ toggleTheme }}" aria-pressed="{{ lightPressed }}" aria-label="Switch to {{ themeLabel }} mode" class="mono" style="flex:0 0 auto;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(180deg);padding:14px 0;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;color:var(--muted);border:0;border-top:1px solid var(--line);background:var(--bg);cursor:pointer;min-height:44px;transition:color .2s ease" style-hover="color:var(--pink)">{{ themeLabel }}</button>
+  <a href="../index.html#work" aria-label="K. Ewing, home" class="mono" style="flex:0 0 auto;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(180deg);padding:16px 0;font-size:15px;font-weight:700;letter-spacing:.04em;text-decoration:none;color:var(--ink);border-bottom:1px solid var(--line);min-height:44px;transition:color .2s ease">K. EWING</a>
+  <a href="../index.html#work" aria-current="true" class="mono rail-item" style="flex:1 1 0;min-height:44px;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(180deg);font-size:11px;font-weight:700;letter-spacing:.18em;text-decoration:none;color:var(--ink);border-bottom:1px solid var(--line);transition:color .2s ease,letter-spacing .2s ease">WORK</a>
+  <a href="../index.html#workbench" aria-current="false" class="mono rail-item" style="flex:1 1 0;min-height:44px;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(180deg);font-size:11px;font-weight:700;letter-spacing:.18em;text-decoration:none;color:var(--ink);border-bottom:1px solid var(--line);transition:color .2s ease,letter-spacing .2s ease">WORKBENCH</a>
+  <a href="../about.html" aria-current="false" class="mono rail-item" style="flex:1 1 0;min-height:44px;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(180deg);font-size:11px;font-weight:700;letter-spacing:.18em;text-decoration:none;color:var(--ink);border-bottom:1px solid var(--line);transition:color .2s ease,letter-spacing .2s ease">ABOUT</a>
+  <a href="../index.html#contact" aria-current="false" class="mono rail-item" style="flex:1 1 0;min-height:44px;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(180deg);font-size:11px;font-weight:700;letter-spacing:.18em;text-decoration:none;color:var(--ink);transition:color .2s ease,letter-spacing .2s ease">CONTACT</a>
+  <button type="button" id="themeToggle" aria-pressed="false" aria-label="Switch to light mode" class="mono" style="flex:0 0 auto;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(180deg);padding:14px 0;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;color:var(--muted);border:0;border-top:1px solid var(--line);background:var(--bg);cursor:pointer;min-height:44px;transition:color .2s ease">LIGHT</button>
 </nav>
 
 <div id="mobileBar" class="mono" role="navigation" aria-label="Mobile bar" style="position:fixed;left:0;right:0;top:0;z-index:220;align-items:center;justify-content:space-between;padding:0 16px;height:56px;background:var(--bg);border-bottom:1px solid var(--line)">
-  <a href="../index.html#work" aria-label="K. Ewing, home" style="font-size:15px;font-weight:700;letter-spacing:.04em;text-decoration:none;color:var(--ink);min-height:44px;display:inline-flex;align-items:center" style-hover="color:var(--pink)">K. EWING</a>
-  <button type="button" onClick="{{ menuToggle }}" aria-expanded="{{ menuExpandedAttr }}" aria-controls="mobileMenu" aria-label="{{ menuAriaLabel }}" style="min-width:44px;min-height:44px;padding:0 12px;border:1px solid var(--line);background:transparent;color:var(--ink);font:700 11px/1 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;cursor:pointer" style-hover="color:var(--pink);border-color:var(--pink)">{{ menuButtonLabel }}</button>
+  <a href="../index.html#work" aria-label="K. Ewing, home" style="font-size:15px;font-weight:700;letter-spacing:.04em;text-decoration:none;color:var(--ink);min-height:44px;display:inline-flex;align-items:center">K. EWING</a>
+  <button type="button" id="menuToggle" aria-expanded="false" aria-controls="mobileMenu" aria-label="Open menu" style="min-width:44px;min-height:44px;padding:0 12px;border:1px solid var(--line);background:transparent;color:var(--ink);font:700 11px/1 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;cursor:pointer">MENU</button>
 </div>
 
-<div id="mobileMenuBackdrop" aria-hidden="true" onClick="{{ menuClose }}" style="{{ menuBackdropStyle }}"></div>
+<div id="mobileMenuBackdrop" aria-hidden="true" style="display:none"></div>
 
-<nav id="mobileMenu" aria-label="Mobile" class="mono" style="{{ menuPanelStyle }}">
-  <a href="../index.html#work" onClick="{{ menuClose }}" style="display:flex;align-items:center;min-height:52px;padding:0 20px;font-size:14px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;color:var(--ink);border-bottom:1px solid var(--line)" style-hover="color:var(--pink)">Work</a>
-  <a href="../index.html#workbench" onClick="{{ menuClose }}" style="display:flex;align-items:center;min-height:52px;padding:0 20px;font-size:14px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;color:var(--ink);border-bottom:1px solid var(--line)" style-hover="color:var(--pink)">Workbench</a>
-  <a href="../about.html" onClick="{{ menuClose }}" style="display:flex;align-items:center;min-height:52px;padding:0 20px;font-size:14px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;color:var(--ink);border-bottom:1px solid var(--line)" style-hover="color:var(--pink)">About</a>
-  <a href="../index.html#contact" onClick="{{ menuClose }}" style="display:flex;align-items:center;min-height:52px;padding:0 20px;font-size:14px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;color:var(--ink);border-bottom:1px solid var(--line)" style-hover="color:var(--pink)">Contact</a>
-  <button type="button" onClick="{{ toggleTheme }}" aria-pressed="{{ lightPressed }}" style="display:flex;align-items:center;justify-content:space-between;width:100%;min-height:52px;padding:0 20px;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;border:0;background:transparent;color:var(--muted);cursor:pointer" style-hover="color:var(--pink)"><span>Theme</span><span>{{ themeLabel }}</span></button>
+<nav id="mobileMenu" aria-label="Mobile" class="mono" style="display:none">
+  <a href="../index.html#work" style="display:flex;align-items:center;min-height:52px;padding:0 20px;font-size:14px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;color:var(--ink);border-bottom:1px solid var(--line)">Work</a>
+  <a href="../index.html#workbench" style="display:flex;align-items:center;min-height:52px;padding:0 20px;font-size:14px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;color:var(--ink);border-bottom:1px solid var(--line)">Workbench</a>
+  <a href="../about.html" style="display:flex;align-items:center;min-height:52px;padding:0 20px;font-size:14px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;color:var(--ink);border-bottom:1px solid var(--line)">About</a>
+  <a href="../index.html#contact" style="display:flex;align-items:center;min-height:52px;padding:0 20px;font-size:14px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;color:var(--ink);border-bottom:1px solid var(--line)">Contact</a>
+  <button type="button" id="themeToggleMobile" aria-pressed="false" style="display:flex;align-items:center;justify-content:space-between;width:100%;min-height:52px;padding:0 20px;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;border:0;background:transparent;color:var(--muted);cursor:pointer"><span>Theme</span><span id="themeToggleMobileLabel">Light</span></button>
 </nav>
 
 <header style="padding:clamp(28px,4vw,48px) clamp(16px,5vw,80px) clamp(56px,7vw,100px);border-bottom:2px solid var(--ink);position:relative;overflow:hidden">
   <p style="margin:0 0 16px;font:400 12px/1 'Space Mono',monospace;letter-spacing:.08em;color:var(--muted)"><a href="../index.html#work">~</a> / <span style="color:var(--ink)">prep-checks</span></p>
   <p style="margin:0 0 16px;font:400 12px/1.5 'Space Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)">Images coming soon</p>
-  <a href="https://app.hazadapt.com/prep-checks" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:8px;margin:0 0 clamp(32px,5vw,56px);padding:10px 16px;min-height:44px;border:1px solid var(--pink);color:var(--pink);text-decoration:none;font:700 12px/1 'Space Mono',monospace;letter-spacing:.08em;text-transform:uppercase" style-hover="background:var(--pink);color:var(--on-red)">Try a prep check @ HazAdapt <span aria-hidden="true">→</span></a>
+  <a href="https://app.hazadapt.com/prep-checks" target="_blank" rel="noopener noreferrer" class="btn-outline" style="display:inline-flex;align-items:center;gap:8px;margin:0 0 clamp(32px,5vw,56px);padding:10px 16px;min-height:44px;border:1px solid var(--pink);color:var(--pink);text-decoration:none;font:700 12px/1 'Space Mono',monospace;letter-spacing:.08em;text-transform:uppercase">Try a prep check @ HazAdapt <span aria-hidden="true">→</span></a>
   <p style="margin:0 0 14px;font:400 12px/1.6 'Space Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--pink)">hazadapt · Product Design · UX Research · Information Architecture</p>
   <h1 style="margin:0;font:400 clamp(39px,8.4vw,154px)/.82 'Archivo Black',sans-serif;text-transform:uppercase;letter-spacing:-.015em;overflow-wrap:anywhere;text-wrap:balance">Prep Checks</h1>
   <div style="display:flex;flex-wrap:wrap;gap:40px 64px;margin-top:clamp(32px,4vw,56px);align-items:flex-start">
@@ -100,8 +103,6 @@ nav[aria-label="Primary"] a[aria-current="true"]{color:var(--red);box-shadow:ins
         <div style="display:grid;gap:4px"><dt style="font:400 11px/1.3 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">Platform</dt><dd style="margin:0;font:600 17px/1.35 'Inter',sans-serif">Web, Mobile Web</dd></div>
         <div style="display:grid;gap:4px;grid-column:1 / -1"><dt style="font:400 11px/1.3 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">Focus</dt><dd style="margin:0;font:600 17px/1.35 'Inter',sans-serif">Product Design, UX Research, Information Architecture, Progress Systems, Accessibility</dd></div>
       </dl>
-      
-      
     </div>
     <div style="position:relative;flex:1 1 360px;min-width:0;max-width:640px">
       <img loading="lazy" src="../images/work/hazadapt-prep-checks/hero-desktop.png" alt="An Avalanche Prep Check shown on an iMac: a drag-and-drop exercise sorting actions into Before, During, and After an avalanche" style="position:relative;z-index:1;display:block;width:100%;height:auto">
@@ -131,29 +132,25 @@ nav[aria-label="Primary"] a[aria-current="true"]{color:var(--red);box-shadow:ins
 </header>
 
 <div style="display:flex;flex-wrap:wrap;gap:0 clamp(32px,5vw,80px);padding:0 clamp(16px,5vw,80px)">
-  <sc-if value="{{ tocOpen }}" hint-placeholder-val="{{ true }}">
-  <aside aria-label="Case study contents" style="flex:0 1 230px;min-width:0;padding-top:clamp(56px,7vw,110px)">
+  <aside id="tocPanel" aria-label="Case study contents" style="flex:0 1 230px;min-width:0;padding-top:clamp(56px,7vw,110px)">
     <nav aria-label="Sections" style="position:sticky;top:28px">
-      <button type="button" onClick="{{ toggleToc }}" aria-expanded="{{ tocExpanded }}" aria-controls="toc-list" style="display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;min-height:44px;margin:0 0 10px;padding:0 0 6px;background:transparent;border:0;border-bottom:1px solid var(--line);color:var(--metal);cursor:pointer;text-align:left" style-hover="color:var(--ink)">
+      <button type="button" id="tocToggleBtn" class="toc-toggle" aria-expanded="true" aria-controls="toc-list" style="display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;min-height:44px;margin:0 0 10px;padding:0 0 6px;background:transparent;border:0;border-bottom:1px solid var(--line);color:var(--metal);cursor:pointer;text-align:left">
         <span style="font:400 30px/1 'Archivo Black',serif;overflow-wrap:anywhere">contents</span>
-        <span aria-hidden="true" style="font:700 12px/1 'Space Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--pink)">{{ tocIcon }}</span>
+        <span aria-hidden="true" style="font:700 12px/1 'Space Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--pink)">− Hide</span>
       </button>
       <ol id="toc-list" style="list-style:none;margin:0;padding:0;display:grid;font:400 12px/1.35 'Space Mono',monospace;letter-spacing:.04em">
-        <li><a href="#s01" style="display:flex;gap:10px;padding:7px 0;text-decoration:none"><span aria-hidden="true" style="color:var(--red)">{{ mk.s01 }}</span>01 Overview</a></li>
-        <li><a href="#s02" style="display:flex;gap:10px;padding:7px 0;text-decoration:none"><span aria-hidden="true" style="color:var(--red)">{{ mk.s02 }}</span>02 Reframing the Product</a></li>
-        <li><a href="#s03" style="display:flex;gap:10px;padding:7px 0;text-decoration:none"><span aria-hidden="true" style="color:var(--red)">{{ mk.s03 }}</span>03 Showing Progress</a></li>
-        <li><a href="#s04" style="display:flex;gap:10px;padding:7px 0;text-decoration:none"><span aria-hidden="true" style="color:var(--red)">{{ mk.s04 }}</span>04 Researching Motivation</a></li>
-        <li><a href="#s05" style="display:flex;gap:10px;padding:7px 0;text-decoration:none"><span aria-hidden="true" style="color:var(--red)">{{ mk.s05 }}</span>05 Reducing Fear and Judgment</a></li>
-        <li><a href="#s06" style="display:flex;gap:10px;padding:7px 0;text-decoration:none"><span aria-hidden="true" style="color:var(--red)">{{ mk.s06 }}</span>06 Inclusive Language</a></li>
-        <li><a href="#s07" style="display:flex;gap:10px;padding:7px 0;text-decoration:none"><span aria-hidden="true" style="color:var(--red)">{{ mk.s07 }}</span>07 Designing the System</a></li>
-        <li><a href="#s08" style="display:flex;gap:10px;padding:7px 0;text-decoration:none"><span aria-hidden="true" style="color:var(--red)">{{ mk.s08 }}</span>08 What I Learned</a></li>
+        <li><a href="#s01" style="display:flex;gap:10px;padding:7px 0;text-decoration:none"><span aria-hidden="true" class="toc-mark" data-mark="s01" style="color:var(--red)">■</span>01 Overview</a></li>
+        <li><a href="#s02" style="display:flex;gap:10px;padding:7px 0;text-decoration:none"><span aria-hidden="true" class="toc-mark" data-mark="s02" style="color:var(--red)">□</span>02 Reframing the Product</a></li>
+        <li><a href="#s03" style="display:flex;gap:10px;padding:7px 0;text-decoration:none"><span aria-hidden="true" class="toc-mark" data-mark="s03" style="color:var(--red)">□</span>03 Showing Progress</a></li>
+        <li><a href="#s04" style="display:flex;gap:10px;padding:7px 0;text-decoration:none"><span aria-hidden="true" class="toc-mark" data-mark="s04" style="color:var(--red)">□</span>04 Researching Motivation</a></li>
+        <li><a href="#s05" style="display:flex;gap:10px;padding:7px 0;text-decoration:none"><span aria-hidden="true" class="toc-mark" data-mark="s05" style="color:var(--red)">□</span>05 Reducing Fear and Judgment</a></li>
+        <li><a href="#s06" style="display:flex;gap:10px;padding:7px 0;text-decoration:none"><span aria-hidden="true" class="toc-mark" data-mark="s06" style="color:var(--red)">□</span>06 Inclusive Language</a></li>
+        <li><a href="#s07" style="display:flex;gap:10px;padding:7px 0;text-decoration:none"><span aria-hidden="true" class="toc-mark" data-mark="s07" style="color:var(--red)">□</span>07 Designing the System</a></li>
+        <li><a href="#s08" style="display:flex;gap:10px;padding:7px 0;text-decoration:none"><span aria-hidden="true" class="toc-mark" data-mark="s08" style="color:var(--red)">□</span>08 What I Learned</a></li>
       </ol>
     </nav>
   </aside>
-  </sc-if>
-  <sc-if value="{{ tocClosed }}" hint-placeholder-val="{{ false }}">
-    <button type="button" onClick="{{ toggleToc }}" aria-expanded="false" aria-controls="toc-list" aria-label="Show contents" style="position:fixed;left:0;top:50%;transform:translateY(-50%);z-index:140;writing-mode:vertical-rl;display:flex;align-items:center;gap:12px;padding:18px 10px;min-width:44px;background:var(--ink);color:var(--bg);border:0;cursor:pointer;font:700 12px/1 'Space Mono',monospace;letter-spacing:.12em;text-transform:uppercase" style-hover="background:var(--red);color:var(--on-red)"><span aria-hidden="true">+</span>Contents</button>
-  </sc-if>
+  <button type="button" id="tocFloat" class="toc-float" hidden aria-expanded="false" aria-controls="toc-list" aria-label="Show contents" style="position:fixed;left:0;top:50%;transform:translateY(-50%);z-index:140;writing-mode:vertical-rl;display:flex;align-items:center;gap:12px;padding:18px 10px;min-width:44px;background:var(--ink);color:var(--bg);border:0;cursor:pointer;font:700 12px/1 'Space Mono',monospace;letter-spacing:.12em;text-transform:uppercase"><span aria-hidden="true">+</span>Contents</button>
   <main id="main" style="flex:1 1 600px;min-width:0;max-width:1040px;margin:0 auto">
 
     <section id="s01" aria-labelledby="s01-h" style="display:grid;gap:22px;padding:clamp(56px,7vw,110px) 0;scroll-margin-top:24px">
@@ -232,11 +229,11 @@ nav[aria-label="Primary"] a[aria-current="true"]{color:var(--red);box-shadow:ins
 </div>
 
 <nav aria-label="More case studies" style="display:flex;flex-wrap:wrap;border-top:2px solid var(--ink);border-bottom:1px solid var(--line)">
-  <a href="hazadapt-resiliencepoint.html" style="flex:1 1 320px;display:grid;gap:10px;border-right:1px solid var(--line);padding:clamp(36px,5vw,72px) clamp(16px,5vw,80px);text-decoration:none" style-hover="background:var(--ink);color:var(--bg)">
+  <a href="hazadapt-resiliencepoint.html" class="case-nav" style="flex:1 1 320px;display:grid;gap:10px;border-right:1px solid var(--line);padding:clamp(36px,5vw,72px) clamp(16px,5vw,80px);text-decoration:none">
     <span style="font:700 12px/1 'Space Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--pink)">← Previous</span>
     <span style="font:400 clamp(48px,6.5vw,112px)/.84 'Archivo Black',sans-serif;text-transform:uppercase;text-wrap:balance;overflow-wrap:anywhere">ResiliencePoint</span>
   </a>
-  <a href="hazadapt-loco.html" style="flex:1 1 320px;display:grid;gap:10px;justify-items:end;text-align:right;padding:clamp(36px,5vw,72px) clamp(16px,5vw,80px);text-decoration:none" style-hover="background:var(--ink);color:var(--bg)">
+  <a href="hazadapt-loco.html" class="case-nav" style="flex:1 1 320px;display:grid;gap:10px;justify-items:end;text-align:right;padding:clamp(36px,5vw,72px) clamp(16px,5vw,80px);text-decoration:none">
     <span style="font:700 12px/1 'Space Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--pink)">Next →</span>
     <span style="font:400 clamp(56px,7.5vw,124px)/.82 'Archivo Black',serif;text-wrap:balance;overflow-wrap:anywhere">LoCo: Local Safety Information</span>
   </a>
@@ -247,47 +244,94 @@ nav[aria-label="Primary"] a[aria-current="true"]{color:var(--red);box-shadow:ins
   <a href="mailto:hello@krystynaewing.com" style="color:var(--ink)">hello@krystynaewing.com</a>
   <a href="#main" style="min-height:44px;display:inline-flex;align-items:center">[ ^ top ]</a>
 </footer>
-</x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;defaultTheme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;dark&quot;,&quot;light&quot;],&quot;default&quot;:&quot;dark&quot;,&quot;tsType&quot;:&quot;'dark'|'light'&quot;,&quot;section&quot;:&quot;Look&quot;},&quot;grain&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Look&quot;}}">
-class Component extends DCLogic {
-  state = { theme: this.props.defaultTheme ?? 'dark', active: 's01', menuOpen: false, tocOpen: true };
-  applyRoot() {
-    const r = document.documentElement;
-    r.dataset.theme = this.state.theme;
-    r.dataset.grain = (this.props.grain ?? true) ? 'on' : 'off';
+
+<script>
+(function(){
+  'use strict';
+  var html = document.documentElement;
+
+  function applyThemeUI(){
+    var light = html.getAttribute('data-theme') === 'light';
+    var label = light ? 'DARK' : 'LIGHT';
+    var tt = document.getElementById('themeToggle');
+    var ttm = document.getElementById('themeToggleMobile');
+    var ttml = document.getElementById('themeToggleMobileLabel');
+    if (tt) { tt.textContent = label; tt.setAttribute('aria-pressed', light ? 'true' : 'false'); tt.setAttribute('aria-label', 'Switch to ' + (light ? 'dark' : 'light') + ' mode'); }
+    if (ttm) ttm.setAttribute('aria-pressed', light ? 'true' : 'false');
+    if (ttml) ttml.textContent = label === 'DARK' ? 'Dark' : 'Light';
   }
-  componentDidMount() {
-    this.onMenuResize = () => { if (window.innerWidth >= 860 && this.state.menuOpen) { document.body.style.overflow = ''; this.setState({ menuOpen: false }); } };
-    window.addEventListener('resize', this.onMenuResize);
-    this.onMenuKeydown = e => { if (e.key === 'Escape' && this.state.menuOpen) { document.body.style.overflow = ''; this.setState({ menuOpen: false }); } };
-    window.addEventListener('keydown', this.onMenuKeydown);
-    this.applyRoot();
-    this.io = new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecting) this.setState({ active: en.target.id }); }), { rootMargin: '-40% 0px -55% 0px' });
-    document.querySelectorAll('main section[id]').forEach(el => this.io.observe(el));
+  function toggleTheme(){
+    var next = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+    if (next === 'dark') html.removeAttribute('data-theme'); else html.setAttribute('data-theme', 'light');
+    try { localStorage.setItem('ke-theme', next); } catch(e){}
+    applyThemeUI();
   }
-  componentDidUpdate(pp) {
-    if (pp.defaultTheme !== this.props.defaultTheme && this.props.defaultTheme) this.setState({ theme: this.props.defaultTheme }, () => this.applyRoot());
-    else this.applyRoot();
+  applyThemeUI();
+  var themeToggle = document.getElementById('themeToggle');
+  var themeToggleMobile = document.getElementById('themeToggleMobile');
+  if (themeToggle) themeToggle.addEventListener('click', toggleTheme);
+  if (themeToggleMobile) themeToggleMobile.addEventListener('click', toggleTheme);
+
+  var menuToggle = document.getElementById('menuToggle');
+  var mobileMenu = document.getElementById('mobileMenu');
+  var mobileMenuBackdrop = document.getElementById('mobileMenuBackdrop');
+  var scrollLocked = false, savedScrollY = 0;
+  function lockScroll(){
+    if (scrollLocked) return;
+    savedScrollY = window.scrollY;
+    document.body.style.position = 'fixed';
+    document.body.style.top = (-savedScrollY) + 'px';
+    document.body.style.left = '0'; document.body.style.right = '0'; document.body.style.overflow = 'hidden';
+    scrollLocked = true;
   }
-  componentWillUnmount() { if (this.io) this.io.disconnect(); window.removeEventListener('resize', this.onMenuResize); window.removeEventListener('keydown', this.onMenuKeydown); }
-  renderVals() {
-    const s = this.state, light = s.theme === 'light', mk = {};
-    for (let i = 1; i <= 24; i++) { const id = 's' + String(i).padStart(2, '0'); mk[id] = s.active === id ? '■' : '□'; }
-    return {
-      mk, tocOpen: s.tocOpen, tocClosed: !s.tocOpen, tocExpanded: s.tocOpen ? 'true' : 'false', tocIcon: '− Hide',
-      toggleToc: () => this.setState(st => ({ tocOpen: !st.tocOpen })),
-      themeLabel: light ? 'Dark' : 'Light', lightPressed: light ? 'true' : 'false',
-      menuExpandedAttr: s.menuOpen ? 'true' : 'false',
-      menuButtonLabel: s.menuOpen ? 'CLOSE' : 'MENU',
-      menuAriaLabel: s.menuOpen ? 'Close menu' : 'Open menu',
-      menuClose: () => { document.body.style.overflow = ''; this.setState({ menuOpen: false }); },
-      menuToggle: () => { const next = !s.menuOpen; document.body.style.overflow = next ? 'hidden' : ''; this.setState({ menuOpen: next }); },
-      menuBackdropStyle: s.menuOpen ? { display: 'block', position: 'fixed', inset: '56px 0 0 0', zIndex: 215, background: 'rgba(0,0,0,.5)' } : { display: 'none' },
-      menuPanelStyle: s.menuOpen ? { display: 'grid', position: 'fixed', left: 0, right: 0, top: 56, zIndex: 220, background: 'var(--bg)', borderBottom: '1px solid var(--line)', maxHeight: 'calc(100vh - 56px)', overflowY: 'auto' } : { display: 'none' },
-      toggleTheme: () => this.setState(st => ({ theme: st.theme === 'light' ? 'dark' : 'light' }), () => this.applyRoot())
-    };
+  function unlockScroll(){
+    if (!scrollLocked) return;
+    document.body.style.position = ''; document.body.style.top = ''; document.body.style.left = ''; document.body.style.right = ''; document.body.style.overflow = '';
+    window.scrollTo(0, savedScrollY || 0);
+    scrollLocked = false;
   }
-}
+  function setMenuOpen(open){
+    if (menuToggle) { menuToggle.setAttribute('aria-expanded', open ? 'true' : 'false'); menuToggle.textContent = open ? 'CLOSE' : 'MENU'; menuToggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu'); }
+    if (mobileMenu) mobileMenu.style.display = open ? 'grid' : 'none';
+    if (mobileMenuBackdrop) mobileMenuBackdrop.style.display = open ? 'block' : 'none';
+    if (open) lockScroll(); else unlockScroll();
+  }
+  function closeMenu(){
+    if (menuToggle && menuToggle.getAttribute('aria-expanded') === 'true') setMenuOpen(false);
+  }
+  if (menuToggle) menuToggle.addEventListener('click', function(){
+    setMenuOpen(menuToggle.getAttribute('aria-expanded') !== 'true');
+  });
+  if (mobileMenuBackdrop) mobileMenuBackdrop.addEventListener('click', closeMenu);
+  window.addEventListener('keydown', function(e){ if (e.key === 'Escape') closeMenu(); });
+  window.addEventListener('resize', function(){ if (window.innerWidth >= 860) closeMenu(); });
+
+  var tocPanel = document.getElementById('tocPanel');
+  var tocFloat = document.getElementById('tocFloat');
+  var tocToggleBtn = document.getElementById('tocToggleBtn');
+  function setTocOpen(open){
+    if (tocPanel) tocPanel.hidden = !open;
+    if (tocFloat) tocFloat.hidden = open;
+    if (tocToggleBtn) tocToggleBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    if (tocFloat) tocFloat.setAttribute('aria-expanded', open ? 'true' : 'false');
+  }
+  if (tocToggleBtn) tocToggleBtn.addEventListener('click', function(){ setTocOpen(tocPanel.hidden); });
+  if (tocFloat) tocFloat.addEventListener('click', function(){ setTocOpen(true); });
+
+  var marks = Array.prototype.slice.call(document.querySelectorAll('.toc-mark'));
+  function setActive(id){
+    marks.forEach(function(m){ m.textContent = m.dataset.mark === id ? '■' : '□'; });
+  }
+  var sections = Array.prototype.slice.call(document.querySelectorAll('main section[id]'));
+  if (sections.length) {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){ if (en.isIntersecting) setActive(en.target.id); });
+    }, { rootMargin: '-40% 0px -55% 0px' });
+    sections.forEach(function(el){ io.observe(el); });
+  }
+
+  html.classList.add('js-ready');
+})();
 </script>
 </body>
 </html>

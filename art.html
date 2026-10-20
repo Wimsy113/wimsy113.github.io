@@ -3,38 +3,34 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="preload" as="script" href="./vendor/react.production.min.js">
-<link rel="preload" as="script" href="./vendor/react-dom.production.min.js">
-<link rel="preload" as="script" href="./vendor/babel.min.js">
-<script>window.__resources={"https://unpkg.com/react@18.3.1/umd/react.production.min.js":"./vendor/react.production.min.js","https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js":"./vendor/react-dom.production.min.js","https://unpkg.com/@babel/standalone@7.29.0/babel.min.js":"./vendor/babel.min.js"};</script>
-<script src="./support.js"></script>
-</head>
-<body>
-<x-dc>
-<helmet>
 <link rel="icon" href="images/favicon.ico">
 <title>The Workbench — Krystyna Ewing</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="Krystyna Ewing's workbench — illustration, character work, and physical art, outside the client work.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
 <script src="./image-slot.js"></script>
+<script>try{if(localStorage.getItem('ke-theme')==='light')document.documentElement.setAttribute('data-theme','light');}catch(e){}</script>
 <style>
 html{--bg:#0B0B0B;--ink:#F2F0E9;--muted:#9a978e;--metal:#9a978e;--ghost:#252525;--line:rgba(242,240,233,.2);--c-turquoise:#A8FF00;--c-blue:#A8FF00;--c-copper:#A8FF00;--c-opal:#A8FF00;--red:var(--c-copper);--on-red:#0B0B0B;--pink:#A8FF00;--mat:#13100d;--matline:rgba(184,154,123,.1);--matline2:rgba(184,154,123,.2);--grain:.1;--rail-w:48px;background:var(--bg);color:var(--ink);scroll-behavior:smooth}
-@media (max-width:859px){html{--grain:0}body::after{content:none!important}}
 html[data-theme="light"]{--bg:#F2F0E9;--ink:#0B0B0B;--muted:#5f5c4e;--metal:#5f5c4e;--ghost:#E4E1D6;--line:rgba(11,11,11,.2);--c-turquoise:#447000;--c-blue:#447000;--c-copper:#447000;--c-opal:#447000;--red:var(--c-copper);--on-red:#F2F0E9;--pink:#447000;--mat:#e8e0d1;--matline:rgba(138,106,69,.1);--matline2:rgba(138,106,69,.22);--grain:.07}
-html[data-grain="off"]{--grain:0}
 body{margin:0;padding-right:var(--rail-w);background:var(--bg);color:var(--ink);font-family:"Inter",system-ui,sans-serif;-webkit-font-smoothing:antialiased;transition:background-color .35s,color .35s;overflow-x:hidden}
-body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:300;opacity:var(--grain);mix-blend-mode:overlay;transform:translateZ(0);will-change:transform;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E")}
+body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:300;opacity:var(--grain);mix-blend-mode:overlay;background-image:url("images/grain.png");background-size:96px 96px}
 a{color:inherit;text-decoration-thickness:1px;text-underline-offset:.22em}
 a:hover{color:var(--red)}
 :focus-visible{outline:3px solid var(--pink);outline-offset:4px}
 ::selection{background:var(--pink);color:var(--on-red)}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
 
+.skip-link{position:fixed;left:16px;top:-80px;z-index:400;background:var(--pink);color:var(--on-red);padding:12px 18px;font:700 14px/1 'Space Mono',monospace;text-decoration:none;transition:top .2s ease}
+.skip-link:focus{top:16px}
+
 nav[aria-label="Primary"] a[aria-current="true"]{color:var(--red);box-shadow:inset 3px 0 0 var(--red)}
+.rail-item:hover{letter-spacing:.26em}
+#themeToggle:hover{color:var(--pink)}
 #mobileMenu a[aria-current="true"]{color:var(--red)}
 #mobileBar{display:none}
+#menuToggle:hover{color:var(--pink);border-color:var(--pink)}
+#themeToggleMobile:hover{color:var(--pink)}
 @media (max-width:859px){
   nav[aria-label="Primary"]{display:none!important}
   #mobileBar{display:flex}
@@ -43,33 +39,54 @@ nav[aria-label="Primary"] a[aria-current="true"]{color:var(--red);box-shadow:ins
 @media (min-width:860px){
   #mobileMenu,#mobileMenuBackdrop{display:none!important}
 }
-</style>
-</helmet>
 
-<a href="#main" style="position:fixed;left:16px;top:-80px;z-index:400;background:var(--pink);color:var(--on-red);padding:12px 18px;font:700 14px/1 'Space Mono',monospace;text-decoration:none" style-focus="top:16px">Skip to content</a>
+.jump-btn:hover{background:var(--ink);color:var(--bg)}
+.reset-btn:hover{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+.piece-handle:hover{}
+.stage-btn:hover{background:#151312;color:#f3efe7}
+.warn-link:hover{color:var(--red);opacity:1}
+.back-btn:hover{background:var(--red);color:var(--on-red)}
+.drawer-toggle:hover{color:var(--red)}
+.lb-close:hover{background:var(--pink);color:var(--on-red)}
+.lb-nav-btn:hover{background:var(--ink);color:var(--on-red)}
+.lb-stage-btn:hover{border-color:var(--pink);color:var(--pink)}
+
+#deskCanvas{position:relative}
+.piece{position:relative}
+.piece[data-flash="true"]{filter:drop-shadow(0 0 0 var(--pink)) drop-shadow(0 0 14px var(--pink))}
+.piece-drag{cursor:grab;touch-action:none}
+.piece-drag:active{cursor:grabbing}
+
+#lightbox{display:none}
+#lightbox[data-open="true"]{display:grid}
+</style>
+</head>
+<body>
+
+<a href="#main" class="skip-link">Skip to content</a>
 
 <nav aria-label="Primary" style="position:fixed;right:0;top:0;bottom:0;z-index:200;width:var(--rail-w);display:flex;flex-direction:column;background:var(--bg);border-left:1px solid var(--line)">
-  <a href="index.html#work" aria-label="K. Ewing, home" class="mono" style="flex:0 0 auto;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(180deg);padding:16px 0;font-size:15px;font-weight:700;letter-spacing:.04em;text-decoration:none;color:var(--ink);border-bottom:1px solid var(--line);min-height:44px;transition:color .2s ease" style-hover="color:var(--pink)">K. EWING</a>
-  <a href="index.html#work" aria-current="false" class="mono" style="flex:1 1 0;min-height:44px;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(180deg);font-size:11px;font-weight:700;letter-spacing:.18em;text-decoration:none;color:var(--ink);border-bottom:1px solid var(--line);transition:color .2s ease,letter-spacing .2s ease" style-hover="color:var(--pink);letter-spacing:.26em">WORK</a>
-  <a href="art.html" aria-current="true" class="mono" style="flex:1 1 0;min-height:44px;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(180deg);font-size:11px;font-weight:700;letter-spacing:.18em;text-decoration:none;color:var(--ink);border-bottom:1px solid var(--line);transition:color .2s ease,letter-spacing .2s ease" style-hover="color:var(--pink);letter-spacing:.26em">WORKBENCH</a>
-  <a href="about.html" aria-current="false" class="mono" style="flex:1 1 0;min-height:44px;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(180deg);font-size:11px;font-weight:700;letter-spacing:.18em;text-decoration:none;color:var(--ink);border-bottom:1px solid var(--line);transition:color .2s ease,letter-spacing .2s ease" style-hover="color:var(--pink);letter-spacing:.26em">ABOUT</a>
-  <a href="index.html#contact" aria-current="false" class="mono" style="flex:1 1 0;min-height:44px;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(180deg);font-size:11px;font-weight:700;letter-spacing:.18em;text-decoration:none;color:var(--ink);transition:color .2s ease,letter-spacing .2s ease" style-hover="color:var(--pink);letter-spacing:.26em">CONTACT</a>
-  <button type="button" onClick="{{ toggleTheme }}" aria-pressed="{{ lightPressed }}" aria-label="Switch to {{ themeLabel }} mode" class="mono" style="flex:0 0 auto;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(180deg);padding:14px 0;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;color:var(--muted);border:0;border-top:1px solid var(--line);background:var(--bg);cursor:pointer;min-height:44px;transition:color .2s ease" style-hover="color:var(--pink)">{{ themeLabel }}</button>
+  <a href="index.html#work" aria-label="K. Ewing, home" class="mono" style="flex:0 0 auto;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(180deg);padding:16px 0;font-size:15px;font-weight:700;letter-spacing:.04em;text-decoration:none;color:var(--ink);border-bottom:1px solid var(--line);min-height:44px;transition:color .2s ease">K. EWING</a>
+  <a href="index.html#work" aria-current="false" class="mono rail-item" style="flex:1 1 0;min-height:44px;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(180deg);font-size:11px;font-weight:700;letter-spacing:.18em;text-decoration:none;color:var(--ink);border-bottom:1px solid var(--line);transition:color .2s ease,letter-spacing .2s ease">WORK</a>
+  <a href="art.html" aria-current="true" class="mono rail-item" style="flex:1 1 0;min-height:44px;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(180deg);font-size:11px;font-weight:700;letter-spacing:.18em;text-decoration:none;color:var(--ink);border-bottom:1px solid var(--line);transition:color .2s ease,letter-spacing .2s ease">WORKBENCH</a>
+  <a href="about.html" aria-current="false" class="mono rail-item" style="flex:1 1 0;min-height:44px;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(180deg);font-size:11px;font-weight:700;letter-spacing:.18em;text-decoration:none;color:var(--ink);border-bottom:1px solid var(--line);transition:color .2s ease,letter-spacing .2s ease">ABOUT</a>
+  <a href="index.html#contact" aria-current="false" class="mono rail-item" style="flex:1 1 0;min-height:44px;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(180deg);font-size:11px;font-weight:700;letter-spacing:.18em;text-decoration:none;color:var(--ink);transition:color .2s ease,letter-spacing .2s ease">CONTACT</a>
+  <button type="button" id="themeToggle" aria-pressed="false" aria-label="Switch to light mode" class="mono" style="flex:0 0 auto;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(180deg);padding:14px 0;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;color:var(--muted);border:0;border-top:1px solid var(--line);background:var(--bg);cursor:pointer;min-height:44px;transition:color .2s ease">LIGHT</button>
 </nav>
 
-<div id="mobileBar" class="mono" role="navigation" aria-label="Mobile bar" style="position:fixed;left:0;right:0;top:0;z-index:220;align-items:center;justify-content:space-between;padding:0 16px;height:56px;background:var(--bg);border-bottom:1px solid var(--line)">
-  <a href="index.html#work" aria-label="K. Ewing, home" style="font-size:15px;font-weight:700;letter-spacing:.04em;text-decoration:none;color:var(--ink);min-height:44px;display:inline-flex;align-items:center" style-hover="color:var(--pink)">K. EWING</a>
-  <button type="button" onClick="{{ menuToggle }}" aria-expanded="{{ menuExpandedAttr }}" aria-controls="mobileMenu" aria-label="{{ menuAriaLabel }}" style="min-width:44px;min-height:44px;padding:0 12px;border:1px solid var(--line);background:transparent;color:var(--ink);font:700 11px/1 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;cursor:pointer" style-hover="color:var(--pink);border-color:var(--pink)">{{ menuButtonLabel }}</button>
-</div>
+<header id="mobileBar" class="mono" aria-label="Mobile header" style="position:fixed;left:0;right:0;top:0;z-index:220;align-items:center;justify-content:space-between;padding:0 16px;height:56px;background:var(--bg);border-bottom:1px solid var(--line)">
+  <a href="index.html#work" aria-label="K. Ewing, home" style="font-size:15px;font-weight:700;letter-spacing:.04em;text-decoration:none;color:var(--ink);min-height:44px;display:inline-flex;align-items:center">K. EWING</a>
+  <button type="button" id="menuToggle" aria-expanded="false" aria-controls="mobileMenu" aria-label="Open menu" style="min-width:44px;min-height:44px;padding:0 12px;border:1px solid var(--line);background:transparent;color:var(--ink);font:700 11px/1 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;cursor:pointer">MENU</button>
+</header>
 
-<div id="mobileMenuBackdrop" aria-hidden="true" onClick="{{ menuClose }}" style="{{ menuBackdropStyle }}"></div>
+<div id="mobileMenuBackdrop" aria-hidden="true" style="position:fixed;inset:56px 0 0 0;z-index:215;background:rgba(0,0,0,.5)"></div>
 
-<nav id="mobileMenu" aria-label="Mobile" class="mono" style="{{ menuPanelStyle }}">
-  <a href="index.html#work" onClick="{{ menuClose }}" style="display:flex;align-items:center;min-height:52px;padding:0 20px;font-size:14px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;color:var(--ink);border-bottom:1px solid var(--line)" style-hover="color:var(--pink)">Work</a>
-  <a href="art.html" aria-current="true" onClick="{{ menuClose }}" style="display:flex;align-items:center;min-height:52px;padding:0 20px;font-size:14px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;color:var(--ink);border-bottom:1px solid var(--line)" style-hover="color:var(--pink)">Workbench</a>
-  <a href="about.html" onClick="{{ menuClose }}" style="display:flex;align-items:center;min-height:52px;padding:0 20px;font-size:14px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;color:var(--ink);border-bottom:1px solid var(--line)" style-hover="color:var(--pink)">About</a>
-  <a href="index.html#contact" onClick="{{ menuClose }}" style="display:flex;align-items:center;min-height:52px;padding:0 20px;font-size:14px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;color:var(--ink);border-bottom:1px solid var(--line)" style-hover="color:var(--pink)">Contact</a>
-  <button type="button" onClick="{{ toggleTheme }}" aria-pressed="{{ lightPressed }}" style="display:flex;align-items:center;justify-content:space-between;width:100%;min-height:52px;padding:0 20px;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;border:0;background:transparent;color:var(--muted);cursor:pointer" style-hover="color:var(--pink)"><span>Theme</span><span>{{ themeLabel }}</span></button>
+<nav id="mobileMenu" aria-label="Mobile" class="mono" style="position:fixed;left:0;right:0;top:56px;z-index:220;background:var(--bg);border-bottom:1px solid var(--line);max-height:calc(100vh - 56px);overflow-y:auto">
+  <a href="index.html#work" style="display:flex;align-items:center;min-height:52px;padding:0 20px;font-size:14px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;color:var(--ink);border-bottom:1px solid var(--line)">Work</a>
+  <a href="art.html" aria-current="true" style="display:flex;align-items:center;min-height:52px;padding:0 20px;font-size:14px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;color:var(--ink);border-bottom:1px solid var(--line)">Workbench</a>
+  <a href="about.html" style="display:flex;align-items:center;min-height:52px;padding:0 20px;font-size:14px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;color:var(--ink);border-bottom:1px solid var(--line)">About</a>
+  <a href="index.html#contact" style="display:flex;align-items:center;min-height:52px;padding:0 20px;font-size:14px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;color:var(--ink);border-bottom:1px solid var(--line)">Contact</a>
+  <button type="button" id="themeToggleMobile" aria-pressed="false" style="display:flex;align-items:center;justify-content:space-between;width:100%;min-height:52px;padding:0 20px;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;border:0;background:transparent;color:var(--muted);cursor:pointer"><span>Theme</span><span id="themeToggleMobileLabel">Light</span></button>
 </nav>
 
 <main id="main">
@@ -81,77 +98,77 @@ nav[aria-label="Primary"] a[aria-current="true"]{color:var(--red);box-shadow:ins
     <p style="margin:14px 0 0;font:700 13px/1 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--pink)">Art · Experiments · Things I Make</p>
   </div>
   <nav aria-label="Jump to a piece" style="display:flex;flex-wrap:wrap;gap:8px;align-items:center">
-    <button type="button" onClick="{{ jumpReach }}" style="font:700 12px/1 'Space Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--ink);background:transparent;border:1px solid var(--ink);padding:0 14px;min-height:44px;cursor:pointer" style-hover="background:var(--ink);color:var(--bg)">Reach</button>
-    <button type="button" onClick="{{ jumpPortrait }}" style="font:700 12px/1 'Space Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--ink);background:transparent;border:1px solid var(--ink);padding:0 14px;min-height:44px;cursor:pointer" style-hover="background:var(--ink);color:var(--bg)">Self-Portrait</button>
-    <button type="button" onClick="{{ jumpFirst }}" style="font:700 12px/1 'Space Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--ink);background:transparent;border:1px solid var(--ink);padding:0 14px;min-height:44px;cursor:pointer" style-hover="background:var(--ink);color:var(--bg)">First Pass</button>
-    <button type="button" onClick="{{ resetDesk }}" style="font:700 12px/1 'Space Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--on-red);background:var(--red);border:1px solid var(--red);padding:0 14px;min-height:44px;cursor:pointer" style-hover="background:var(--ink);border-color:var(--ink);color:var(--bg)">↺ Reset Table</button>
+    <button type="button" class="jump-btn" data-jump="reach" style="font:700 12px/1 'Space Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--ink);background:transparent;border:1px solid var(--ink);padding:0 14px;min-height:44px;cursor:pointer">Reach</button>
+    <button type="button" class="jump-btn" data-jump="portrait" style="font:700 12px/1 'Space Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--ink);background:transparent;border:1px solid var(--ink);padding:0 14px;min-height:44px;cursor:pointer">Self-Portrait</button>
+    <button type="button" class="jump-btn" data-jump="first" style="font:700 12px/1 'Space Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--ink);background:transparent;border:1px solid var(--ink);padding:0 14px;min-height:44px;cursor:pointer">First Pass</button>
+    <button type="button" id="resetDesk" class="reset-btn" style="font:700 12px/1 'Space Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--on-red);background:var(--red);border:1px solid var(--red);padding:0 14px;min-height:44px;cursor:pointer">↺ Reset Table</button>
   </nav>
 </header>
 
 <section aria-label="Workbench canvas" style="position:relative;background-color:var(--mat);background-image:repeating-linear-gradient(0deg,var(--matline2) 0 1px,transparent 1px 200px),repeating-linear-gradient(90deg,var(--matline2) 0 1px,transparent 1px 200px),repeating-linear-gradient(0deg,var(--matline) 0 1px,transparent 1px 40px),repeating-linear-gradient(90deg,var(--matline) 0 1px,transparent 1px 40px);padding:clamp(56px,6vw,90px) clamp(16px,4vw,56px) clamp(56px,6vw,90px);overflow:hidden;border-top:2px solid var(--ink);border-bottom:2px solid var(--ink)">
   <div aria-hidden="true" style="position:absolute;left:0;right:0;top:0;height:18px;background-image:repeating-linear-gradient(90deg,var(--red) 0 1px,transparent 1px 10px),repeating-linear-gradient(90deg,var(--red) 0 2px,transparent 2px 50px);background-size:100% 8px,100% 18px;background-repeat:no-repeat"></div>
   <div aria-hidden="true" style="position:absolute;left:0;top:0;bottom:0;width:18px;background-image:repeating-linear-gradient(180deg,var(--red) 0 1px,transparent 1px 10px),repeating-linear-gradient(180deg,var(--red) 0 2px,transparent 2px 50px);background-size:8px 100%,18px 100%;background-repeat:no-repeat"></div>
-  <p style="position:absolute;right:clamp(16px,3vw,40px);top:28px;margin:0;font:700 12px/1.5 'Space Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);text-align:right">{{ canvasHint }}</p>
+  <p id="canvasHint" style="position:absolute;right:clamp(16px,3vw,40px);top:28px;margin:0;font:700 12px/1.5 'Space Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);text-align:right">Drag the tape. Click to look closer.</p>
 
-  <div ref="{{ deskRef }}" style="{{ deskStyle }}">
-    <div id="piece-reach" style="{{ reach.style }}">
+  <div id="deskCanvas">
+    <div class="piece" id="piece-reach" data-id="reach">
       <figure style="margin:0;background:#f3efe7;padding:12px 12px 14px;box-shadow:0 18px 30px rgba(0,0,0,.35);position:relative">
-        <button type="button" onPointerDown="{{ reach.down }}" onPointerMove="{{ reach.move }}" onPointerUp="{{ reach.up }}" onKeyDown="{{ reach.key }}" aria-label="Move Reach. Drag, or use arrow keys." style="position:absolute;top:-18px;left:50%;transform:translateX(-50%) rotate(-3deg);min-height:36px;padding:0 18px;border:0;background:rgba(226,214,188,.92);color:#151312;font:700 11px/1 'Space Mono',monospace;letter-spacing:.08em;text-transform:uppercase;cursor:grab;touch-action:none;z-index:2">⠿ Reach</button>
-        <button type="button" onClick="{{ openReach }}" aria-label="View larger: Reach, digital illustration" style="display:block;width:100%;padding:0;border:0;background:transparent;cursor:zoom-in">
-          <img loading="lazy" src="images/Artwork.png" alt="Digital illustration by Krystyna Ewing — a figure in a soft cap reaching a hand forward out of shadow." style="{{ reachI0 }}" draggable="false">
-          <img loading="lazy" src="images/Hero_Image.png" alt="An earlier color pass of the same illustration, before the linework and shading were finished." style="{{ reachI1 }}" draggable="false">
+        <button type="button" class="piece-drag mono" data-piece="reach" aria-label="Move Reach. Drag, or use arrow keys." style="position:absolute;top:-18px;left:50%;transform:translateX(-50%) rotate(-3deg);min-height:36px;padding:0 18px;border:0;background:rgba(226,214,188,.92);color:#151312;font:700 11px/1 'Space Mono',monospace;letter-spacing:.08em;text-transform:uppercase;z-index:2">⠿ Reach</button>
+        <button type="button" class="piece-open" data-open-work="reach" aria-label="View larger: Reach, digital illustration" style="display:block;width:100%;padding:0;border:0;background:transparent;cursor:zoom-in">
+          <img loading="lazy" data-stage-img="reach" data-stage-index="0" src="images/Artwork.png" alt="Digital illustration by Krystyna Ewing — a figure in a soft cap reaching a hand forward out of shadow." style="display:block;width:100%;height:auto" draggable="false">
+          <img loading="lazy" data-stage-img="reach" data-stage-index="1" src="images/Hero_Image.png" alt="An earlier color pass of the same illustration, before the linework and shading were finished." style="display:none;width:100%;height:auto" draggable="false">
         </button>
         <div role="group" aria-label="Reach stages" style="display:flex;gap:6px;margin-top:10px">
-          <button type="button" onClick="{{ reachTo0 }}" aria-pressed="{{ reachP0 }}" style="font:700 11px/1 'Space Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:#151312;background:transparent;border:1px solid #151312;padding:0 10px;min-height:32px;cursor:pointer" style-hover="background:#151312;color:#f3efe7">{{ reachM0 }} Final</button>
-          <button type="button" onClick="{{ reachTo1 }}" aria-pressed="{{ reachP1 }}" style="font:700 11px/1 'Space Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:#151312;background:transparent;border:1px solid #151312;padding:0 10px;min-height:32px;cursor:pointer" style-hover="background:#151312;color:#f3efe7">{{ reachM1 }} Earlier Pass</button>
+          <button type="button" class="stage-btn mono" data-stage-btn="reach" data-stage-index="0" aria-pressed="true" style="font:700 11px/1 'Space Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:#151312;background:transparent;border:1px solid #151312;padding:0 10px;min-height:32px;cursor:pointer">■ Final</button>
+          <button type="button" class="stage-btn mono" data-stage-btn="reach" data-stage-index="1" aria-pressed="false" style="font:700 11px/1 'Space Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:#151312;background:transparent;border:1px solid #151312;padding:0 10px;min-height:32px;cursor:pointer">□ Earlier Pass</button>
         </div>
         <figcaption style="display:flex;justify-content:space-between;gap:10px;margin-top:10px;font:400 11px/1.3 'Space Mono',monospace;letter-spacing:.04em;text-transform:uppercase;color:#151312"><strong>Reach</strong><span>Digital Illustration</span></figcaption>
       </figure>
     </div>
 
-    <div style="{{ note1.style }}">
-      <p style="margin:0;font:400 clamp(22px,2.2vw,32px)/1.1 'Archivo Black',sans-serif;text-transform:uppercase;color:var(--ink);position:relative;padding-top:24px"><button type="button" onPointerDown="{{ note1.down }}" onPointerMove="{{ note1.move }}" onPointerUp="{{ note1.up }}" onKeyDown="{{ note1.key }}" aria-label="Move note. Drag, or use arrow keys." style="position:absolute;top:-12px;left:0;min-height:36px;padding:0 14px;border:0;background:rgba(226,214,188,.92);color:#151312;font:700 11px/1 'Space Mono',monospace;letter-spacing:.08em;text-transform:uppercase;cursor:grab;touch-action:none;transform:rotate(-4deg)">⠿ Note</button>I had an idea. Unfortunately, that meant I had to make it.</p>
+    <div class="piece" id="piece-note1" data-id="note1">
+      <p style="margin:0;font:400 clamp(22px,2.2vw,32px)/1.1 'Archivo Black',sans-serif;text-transform:uppercase;color:var(--ink);position:relative;padding-top:24px"><button type="button" class="piece-drag mono" data-piece="note1" aria-label="Move note. Drag, or use arrow keys." style="position:absolute;top:-12px;left:0;min-height:36px;padding:0 14px;border:0;background:rgba(226,214,188,.92);color:#151312;font:700 11px/1 'Space Mono',monospace;letter-spacing:.08em;text-transform:uppercase;transform:rotate(-4deg)">⠿ Note</button>I had an idea. Unfortunately, that meant I had to make it.</p>
     </div>
 
-    <div id="piece-first" style="{{ first.style }}">
+    <div class="piece" id="piece-first" data-id="first">
       <figure style="margin:0;background:#f3efe7;padding:10px 10px 12px;box-shadow:0 14px 24px rgba(0,0,0,.35);position:relative">
-        <button type="button" onPointerDown="{{ first.down }}" onPointerMove="{{ first.move }}" onPointerUp="{{ first.up }}" onKeyDown="{{ first.key }}" aria-label="Move First Pass. Drag, or use arrow keys." style="position:absolute;top:-16px;left:10%;transform:rotate(-6deg);min-height:36px;padding:0 14px;border:0;background:rgba(226,214,188,.92);color:#151312;font:700 11px/1 'Space Mono',monospace;letter-spacing:.08em;text-transform:uppercase;cursor:grab;touch-action:none;z-index:2">⠿ First Pass</button>
-        <button type="button" onClick="{{ openFirst }}" aria-label="View larger: First Pass, sketch" style="display:block;width:100%;padding:0;border:0;background:transparent;cursor:zoom-in"><img loading="lazy" src="images/website_hero.png" alt="An early, unfinished sketch mixing loose line art with a hand-lettered name banner." style="display:block;width:100%;height:auto" draggable="false"></button>
+        <button type="button" class="piece-drag mono" data-piece="first" aria-label="Move First Pass. Drag, or use arrow keys." style="position:absolute;top:-16px;left:10%;transform:rotate(-6deg);min-height:36px;padding:0 14px;border:0;background:rgba(226,214,188,.92);color:#151312;font:700 11px/1 'Space Mono',monospace;letter-spacing:.08em;text-transform:uppercase;z-index:2">⠿ First Pass</button>
+        <button type="button" class="piece-open" data-open-work="first" aria-label="View larger: First Pass, sketch" style="display:block;width:100%;padding:0;border:0;background:transparent;cursor:zoom-in"><img loading="lazy" src="images/website_hero.png" alt="An early, unfinished sketch mixing loose line art with a hand-lettered name banner." style="display:block;width:100%;height:auto" draggable="false"></button>
         <figcaption style="display:flex;justify-content:space-between;gap:10px;margin-top:8px;font:400 11px/1.3 'Space Mono',monospace;letter-spacing:.04em;text-transform:uppercase;color:#151312"><strong>First Pass</strong><span>Sketch, Digital</span></figcaption>
       </figure>
     </div>
 
-    <div id="piece-portrait" style="{{ portrait.style }}">
+    <div class="piece" id="piece-portrait" data-id="portrait">
       <figure style="margin:0;background:#f3efe7;padding:12px 12px 14px;box-shadow:0 18px 30px rgba(0,0,0,.35);position:relative">
-        <button type="button" onPointerDown="{{ portrait.down }}" onPointerMove="{{ portrait.move }}" onPointerUp="{{ portrait.up }}" onKeyDown="{{ portrait.key }}" aria-label="Move Self-Portrait. Drag, or use arrow keys." style="position:absolute;top:-18px;left:30%;transform:rotate(4deg);min-height:36px;padding:0 18px;border:0;background:rgba(226,214,188,.92);color:#151312;font:700 11px/1 'Space Mono',monospace;letter-spacing:.08em;text-transform:uppercase;cursor:grab;touch-action:none;z-index:2">⠿ Self-Portrait</button>
-        <button type="button" onClick="{{ openPortrait }}" aria-label="View larger: Self-Portrait, digital illustration" style="display:block;width:100%;padding:0;border:0;background:transparent;cursor:zoom-in">
-          <img loading="lazy" src="images/hero-portrait.png" alt="Hand-drawn self-portrait illustration by Krystyna Ewing: a character with a purple bucket hat and glowing green eyes, with her name lettered around it in purple marker." style="{{ portraitI0 }}" draggable="false">
-          <img loading="lazy" src="images/header.png" alt="Detail crop of the same character, face only, without the surrounding lettering." style="{{ portraitI1 }}" draggable="false">
+        <button type="button" class="piece-drag mono" data-piece="portrait" aria-label="Move Self-Portrait. Drag, or use arrow keys." style="position:absolute;top:-18px;left:30%;transform:rotate(4deg);min-height:36px;padding:0 18px;border:0;background:rgba(226,214,188,.92);color:#151312;font:700 11px/1 'Space Mono',monospace;letter-spacing:.08em;text-transform:uppercase;z-index:2">⠿ Self-Portrait</button>
+        <button type="button" class="piece-open" data-open-work="portrait" aria-label="View larger: Self-Portrait, digital illustration" style="display:block;width:100%;padding:0;border:0;background:transparent;cursor:zoom-in">
+          <img loading="lazy" data-stage-img="portrait" data-stage-index="0" src="images/hero-portrait.png" alt="Hand-drawn self-portrait illustration by Krystyna Ewing: a character with a purple bucket hat and glowing green eyes, with her name lettered around it in purple marker." style="display:block;width:100%;height:auto" draggable="false">
+          <img loading="lazy" data-stage-img="portrait" data-stage-index="1" src="images/header.png" alt="Detail crop of the same character, face only, without the surrounding lettering." style="display:none;width:100%;height:auto" draggable="false">
         </button>
         <div role="group" aria-label="Self-Portrait views" style="display:flex;gap:6px;margin-top:10px">
-          <button type="button" onClick="{{ portraitTo0 }}" aria-pressed="{{ portraitP0 }}" style="font:700 11px/1 'Space Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:#151312;background:transparent;border:1px solid #151312;padding:0 10px;min-height:32px;cursor:pointer" style-hover="background:#151312;color:#f3efe7">{{ portraitM0 }} Full Piece</button>
-          <button type="button" onClick="{{ portraitTo1 }}" aria-pressed="{{ portraitP1 }}" style="font:700 11px/1 'Space Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:#151312;background:transparent;border:1px solid #151312;padding:0 10px;min-height:32px;cursor:pointer" style-hover="background:#151312;color:#f3efe7">{{ portraitM1 }} Detail</button>
+          <button type="button" class="stage-btn mono" data-stage-btn="portrait" data-stage-index="0" aria-pressed="true" style="font:700 11px/1 'Space Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:#151312;background:transparent;border:1px solid #151312;padding:0 10px;min-height:32px;cursor:pointer">■ Full Piece</button>
+          <button type="button" class="stage-btn mono" data-stage-btn="portrait" data-stage-index="1" aria-pressed="false" style="font:700 11px/1 'Space Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:#151312;background:transparent;border:1px solid #151312;padding:0 10px;min-height:32px;cursor:pointer">□ Detail</button>
         </div>
         <figcaption style="display:flex;justify-content:space-between;gap:10px;margin-top:10px;font:400 11px/1.3 'Space Mono',monospace;letter-spacing:.04em;text-transform:uppercase;color:#151312"><strong>Self-Portrait</strong><span>Digital Illustration</span></figcaption>
       </figure>
     </div>
 
-    <div style="{{ note2.style }}">
-      <p style="margin:0;font:400 clamp(20px,2vw,28px)/1.1 'Archivo Black',sans-serif;text-transform:uppercase;color:var(--ink);position:relative;padding-top:24px"><button type="button" onPointerDown="{{ note2.down }}" onPointerMove="{{ note2.move }}" onPointerUp="{{ note2.up }}" onKeyDown="{{ note2.key }}" aria-label="Move note. Drag, or use arrow keys." style="position:absolute;top:-12px;left:0;min-height:36px;padding:0 14px;border:0;background:rgba(226,214,188,.92);color:#151312;font:700 11px/1 'Space Mono',monospace;letter-spacing:.08em;text-transform:uppercase;cursor:grab;touch-action:none;transform:rotate(3deg)">⠿ Note</button>This took way longer than I expected.</p>
+    <div class="piece" id="piece-note2" data-id="note2">
+      <p style="margin:0;font:400 clamp(20px,2vw,28px)/1.1 'Archivo Black',sans-serif;text-transform:uppercase;color:var(--ink);position:relative;padding-top:24px"><button type="button" class="piece-drag mono" data-piece="note2" aria-label="Move note. Drag, or use arrow keys." style="position:absolute;top:-12px;left:0;min-height:36px;padding:0 14px;border:0;background:rgba(226,214,188,.92);color:#151312;font:700 11px/1 'Space Mono',monospace;letter-spacing:.08em;text-transform:uppercase;transform:rotate(3deg)">⠿ Note</button>This took way longer than I expected.</p>
     </div>
 
-    <div id="piece-miniHead" style="{{ miniHead.style }}">
+    <div class="piece" id="piece-miniHead" data-id="miniHead">
       <figure style="margin:0;background:#f3efe7;padding:10px 10px 12px;box-shadow:0 14px 24px rgba(0,0,0,.35);position:relative">
-        <button type="button" onPointerDown="{{ miniHead.down }}" onPointerMove="{{ miniHead.move }}" onPointerUp="{{ miniHead.up }}" onKeyDown="{{ miniHead.key }}" aria-label="Move Painted Head. Drag, or use arrow keys." style="position:absolute;top:-16px;left:10%;transform:rotate(-5deg);min-height:36px;padding:0 14px;border:0;background:rgba(226,214,188,.92);color:#151312;font:700 11px/1 'Space Mono',monospace;letter-spacing:.08em;text-transform:uppercase;cursor:grab;touch-action:none;z-index:2">⠿ Painted Head</button>
-        <button type="button" onClick="{{ openMiniHead }}" aria-label="View larger: Painted Head, in-progress miniature" style="display:block;width:100%;padding:0;border:0;background:transparent;cursor:zoom-in"><img loading="lazy" src="images/workbench/mini-head-painting.jpg" alt="A hand-painted miniature head, mid-progress, held between two fingers — base skin tone and inked features, paint bottles and a mixing palette in the background." style="display:block;width:100%;height:auto" draggable="false"></button>
+        <button type="button" class="piece-drag mono" data-piece="miniHead" aria-label="Move Painted Head. Drag, or use arrow keys." style="position:absolute;top:-16px;left:10%;transform:rotate(-5deg);min-height:36px;padding:0 14px;border:0;background:rgba(226,214,188,.92);color:#151312;font:700 11px/1 'Space Mono',monospace;letter-spacing:.08em;text-transform:uppercase;z-index:2">⠿ Painted Head</button>
+        <button type="button" class="piece-open" data-open-work="miniHead" aria-label="View larger: Painted Head, in-progress miniature" style="display:block;width:100%;padding:0;border:0;background:transparent;cursor:zoom-in"><img loading="lazy" src="images/workbench/mini-head-painting.jpg" alt="A hand-painted miniature head, mid-progress, held between two fingers — base skin tone and inked features, paint bottles and a mixing palette in the background." style="display:block;width:100%;height:auto" draggable="false"></button>
         <figcaption style="display:flex;justify-content:space-between;gap:10px;margin-top:8px;font:400 11px/1.3 'Space Mono',monospace;letter-spacing:.04em;text-transform:uppercase;color:#151312"><strong>Painted Head</strong><span>Miniature · In Progress</span></figcaption>
       </figure>
     </div>
 
-    <div id="piece-blade" style="{{ blade.style }}">
+    <div class="piece" id="piece-blade" data-id="blade">
       <figure style="margin:0;background:#f3efe7;padding:10px 10px 12px;box-shadow:0 14px 24px rgba(0,0,0,.35);position:relative">
-        <button type="button" onPointerDown="{{ blade.down }}" onPointerMove="{{ blade.move }}" onPointerUp="{{ blade.up }}" onKeyDown="{{ blade.key }}" aria-label="Move Prop Blade. Drag, or use arrow keys." style="position:absolute;top:-16px;left:15%;transform:rotate(4deg);min-height:36px;padding:0 14px;border:0;background:rgba(226,214,188,.92);color:#151312;font:700 11px/1 'Space Mono',monospace;letter-spacing:.08em;text-transform:uppercase;cursor:grab;touch-action:none;z-index:2">⠿ Prop Blade</button>
-        <button type="button" onClick="{{ openBlade }}" aria-label="View larger: Prop Blade, in-progress 3D print" style="display:block;width:100%;padding:0;border:0;background:transparent;cursor:zoom-in"><img loading="lazy" src="images/workbench/prop-blade-print.jpg" alt="An unfinished 3D printed prop blade standing on a desk, unpainted sections still bare plastic, next to a comic poster and desk clutter." style="display:block;width:100%;height:auto" draggable="false"></button>
+        <button type="button" class="piece-drag mono" data-piece="blade" aria-label="Move Prop Blade. Drag, or use arrow keys." style="position:absolute;top:-16px;left:15%;transform:rotate(4deg);min-height:36px;padding:0 14px;border:0;background:rgba(226,214,188,.92);color:#151312;font:700 11px/1 'Space Mono',monospace;letter-spacing:.08em;text-transform:uppercase;z-index:2">⠿ Prop Blade</button>
+        <button type="button" class="piece-open" data-open-work="blade" aria-label="View larger: Prop Blade, in-progress 3D print" style="display:block;width:100%;padding:0;border:0;background:transparent;cursor:zoom-in"><img loading="lazy" src="images/workbench/prop-blade-print.jpg" alt="An unfinished 3D printed prop blade standing on a desk, unpainted sections still bare plastic, next to a comic poster and desk clutter." style="display:block;width:100%;height:auto" draggable="false"></button>
         <figcaption style="display:flex;justify-content:space-between;gap:10px;margin-top:8px;font:400 11px/1.3 'Space Mono',monospace;letter-spacing:.04em;text-transform:uppercase;color:#151312"><strong>Prop Blade</strong><span>3D Printed · In Progress</span></figcaption>
       </figure>
     </div>
@@ -163,31 +180,69 @@ nav[aria-label="Primary"] a[aria-current="true"]{color:var(--red);box-shadow:ins
     <h2 id="drawers-h" style="margin:0;font:400 clamp(34px,5.6vw,88px)/.92 'Archivo Black',sans-serif;text-transform:uppercase">The <span style="color:var(--red)">Drawers</span></h2>
     <p style="margin:0 0 8px;font:400 12px/1.6 'Space Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);max-width:36ch">Placeholder drawers — each fills in as the work gets photographed.</p>
   </div>
-  <div style="border-top:2px solid var(--ink)">
-    <sc-for list="{{ drawers }}" as="d" hint-placeholder-count="5">
-      <div style="border-bottom:1px solid var(--line)">
-        <h3 style="margin:0">
-          <button type="button" onClick="{{ d.toggle }}" aria-expanded="{{ d.expanded }}" aria-controls="{{ d.panelId }}" style="display:flex;align-items:center;gap:clamp(12px,2vw,28px);width:100%;padding:clamp(18px,2.4vw,30px) 0;background:transparent;border:0;color:var(--ink);cursor:pointer;text-align:left" style-hover="color:var(--red)">
-            <span style="font:700 13px/1 'Space Mono',monospace;color:var(--pink);min-width:2.4em">{{ d.num }}</span>
-            <span style="flex:1;font:400 clamp(24px,3.6vw,52px)/1 'Archivo Black',sans-serif;text-transform:uppercase">{{ d.title }}</span>
-            <span aria-hidden="true" style="font:700 13px/1 'Space Mono',monospace;letter-spacing:.06em;text-transform:uppercase">{{ d.icon }}</span>
-          </button>
-        </h3>
-        <sc-if value="{{ d.open }}" hint-placeholder-val="{{ false }}">
-          <div id="{{ d.panelId }}" style="display:flex;flex-wrap:wrap;gap:20px;padding:0 0 clamp(28px,3vw,44px)">
-            <div style="flex:2 1 320px;min-width:0;aspect-ratio:16/10;position:relative;transform:rotate(-.6deg)"><image-slot id="{{ d.slotA }}" src="{{ d.srcA }}" shape="rect" placeholder="{{ d.phA }}"></image-slot></div>
-            <div style="flex:1 1 200px;min-width:0;aspect-ratio:4/5;position:relative;transform:rotate(1deg)"><image-slot id="{{ d.slotB }}" src="{{ d.srcB }}" shape="rect" placeholder="{{ d.phB }}"></image-slot></div>
-            <p style="flex:1 1 220px;margin:0;align-self:flex-end;font:400 12px/1.6 'Space Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)">{{ d.note }}</p>
-          </div>
-        </sc-if>
+  <div id="drawers" style="border-top:2px solid var(--ink)">
+    <div style="border-bottom:1px solid var(--line)">
+      <h3 style="margin:0">
+        <button type="button" class="drawer-toggle mono" data-drawer="0" aria-expanded="false" aria-controls="drawer-0" style="display:flex;align-items:center;gap:clamp(12px,2vw,28px);width:100%;padding:clamp(18px,2.4vw,30px) 0;background:transparent;border:0;color:var(--ink);cursor:pointer;text-align:left">
+          <span style="font:700 13px/1 'Space Mono',monospace;color:var(--pink);min-width:2.4em">01</span>
+          <span style="flex:1;font:400 clamp(24px,3.6vw,52px)/1 'Archivo Black',sans-serif;text-transform:uppercase">3D printing &amp; fabrication</span>
+          <span aria-hidden="true" class="drawer-icon" style="font:700 13px/1 'Space Mono',monospace;letter-spacing:.06em;text-transform:uppercase">+ Open</span>
+        </button>
+      </h3>
+      <div id="drawer-0" class="drawer-panel" data-open="false" style="display:none;flex-wrap:wrap;gap:20px;padding:0 0 clamp(28px,3vw,44px)">
+        <div style="flex:2 1 320px;min-width:0;aspect-ratio:16/10;position:relative;transform:rotate(-.6deg)"><image-slot id="drawer-0-a" src="images/workbench/silver-skull.jpg" shape="rect" placeholder="3D printing &amp; fabrication — photo"></image-slot></div>
+        <div style="flex:1 1 200px;min-width:0;aspect-ratio:4/5;position:relative;transform:rotate(1deg)"><image-slot id="drawer-0-b" src="images/workbench/skull-painting-process.jpg" shape="rect" placeholder="3D printing &amp; fabrication — detail / process"></image-slot></div>
+        <p style="flex:1 1 220px;margin:0;align-self:flex-end;font:400 12px/1.6 'Space Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)">Silver Skull, 3D printed and hand-painted — plus a mid-process shot of painting a different cast.</p>
       </div>
-    </sc-for>
+    </div>
+    <div style="border-bottom:1px solid var(--line)">
+      <h3 style="margin:0">
+        <button type="button" class="drawer-toggle mono" data-drawer="1" aria-expanded="false" aria-controls="drawer-1" style="display:flex;align-items:center;gap:clamp(12px,2vw,28px);width:100%;padding:clamp(18px,2.4vw,30px) 0;background:transparent;border:0;color:var(--ink);cursor:pointer;text-align:left">
+          <span style="font:700 13px/1 'Space Mono',monospace;color:var(--pink);min-width:2.4em">02</span>
+          <span style="flex:1;font:400 clamp(24px,3.6vw,52px)/1 'Archivo Black',sans-serif;text-transform:uppercase">Sculpture &amp; mixed media</span>
+          <span aria-hidden="true" class="drawer-icon" style="font:700 13px/1 'Space Mono',monospace;letter-spacing:.06em;text-transform:uppercase">+ Open</span>
+        </button>
+      </h3>
+      <div id="drawer-1" class="drawer-panel" data-open="false" style="display:none;flex-wrap:wrap;gap:20px;padding:0 0 clamp(28px,3vw,44px)">
+        <div style="flex:2 1 320px;min-width:0;aspect-ratio:16/10;position:relative;transform:rotate(-.6deg)"><image-slot id="drawer-1-a" src="images/workbench/entomology-cicadas.jpg" shape="rect" placeholder="Sculpture &amp; mixed media — photo"></image-slot></div>
+        <div style="flex:1 1 200px;min-width:0;aspect-ratio:4/5;position:relative;transform:rotate(1deg)"><image-slot id="drawer-1-b" src="images/workbench/skull-moth-shadowbox.jpg" shape="rect" placeholder="Sculpture &amp; mixed media — detail / process"></image-slot></div>
+        <p style="flex:1 1 220px;margin:0;align-self:flex-end;font:400 12px/1.6 'Space Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)">Entomology Cicadas — a small framed specimen display. Plus a skull-and-moth shadow box, sculpted and mounted on moss.</p>
+      </div>
+    </div>
+    <div style="border-bottom:1px solid var(--line)">
+      <h3 style="margin:0">
+        <button type="button" class="drawer-toggle mono" data-drawer="2" aria-expanded="false" aria-controls="drawer-2" style="display:flex;align-items:center;gap:clamp(12px,2vw,28px);width:100%;padding:clamp(18px,2.4vw,30px) 0;background:transparent;border:0;color:var(--ink);cursor:pointer;text-align:left">
+          <span style="font:700 13px/1 'Space Mono',monospace;color:var(--pink);min-width:2.4em">03</span>
+          <span style="flex:1;font:400 clamp(24px,3.6vw,52px)/1 'Archivo Black',sans-serif;text-transform:uppercase">Digital illustration</span>
+          <span aria-hidden="true" class="drawer-icon" style="font:700 13px/1 'Space Mono',monospace;letter-spacing:.06em;text-transform:uppercase">+ Open</span>
+        </button>
+      </h3>
+      <div id="drawer-2" class="drawer-panel" data-open="false" style="display:none;flex-wrap:wrap;gap:20px;padding:0 0 clamp(28px,3vw,44px)">
+        <div style="flex:2 1 320px;min-width:0;aspect-ratio:16/10;position:relative;transform:rotate(-.6deg)"><image-slot id="drawer-2-a" src="images/workbench/stickers.jpg" shape="rect" placeholder="Digital illustration — photo"></image-slot></div>
+        <div style="flex:1 1 200px;min-width:0;aspect-ratio:4/5;position:relative;transform:rotate(1deg)"><image-slot id="drawer-2-b" src="images/workbench/digital-sketch-portrait.jpg" shape="rect" placeholder="Digital illustration — detail / process"></image-slot></div>
+        <p style="flex:1 1 220px;margin:0;align-self:flex-end;font:400 12px/1.6 'Space Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)">Stickers — original character illustration, cut and printed. Plus a digital portrait sketch, inked linework and cross-hatching.</p>
+      </div>
+    </div>
+    <div style="border-bottom:1px solid var(--line)">
+      <h3 style="margin:0">
+        <button type="button" class="drawer-toggle mono" data-drawer="3" aria-expanded="false" aria-controls="drawer-3" style="display:flex;align-items:center;gap:clamp(12px,2vw,28px);width:100%;padding:clamp(18px,2.4vw,30px) 0;background:transparent;border:0;color:var(--ink);cursor:pointer;text-align:left">
+          <span style="font:700 13px/1 'Space Mono',monospace;color:var(--pink);min-width:2.4em">04</span>
+          <span style="flex:1;font:400 clamp(24px,3.6vw,52px)/1 'Archivo Black',sans-serif;text-transform:uppercase">Unfinished ideas &amp; strange prototypes</span>
+          <span aria-hidden="true" class="drawer-icon" style="font:700 13px/1 'Space Mono',monospace;letter-spacing:.06em;text-transform:uppercase">+ Open</span>
+        </button>
+      </h3>
+      <div id="drawer-3" class="drawer-panel" data-open="false" style="display:none;flex-wrap:wrap;gap:20px;padding:0 0 clamp(28px,3vw,44px)">
+        <div style="flex:2 1 320px;min-width:0;aspect-ratio:16/10;position:relative;transform:rotate(-.6deg)"><image-slot id="drawer-3-a" src="images/workbench/majin-buu-full.jpg" shape="rect" placeholder="Unfinished ideas &amp; strange prototypes — photo"></image-slot></div>
+        <div style="flex:1 1 200px;min-width:0;aspect-ratio:4/5;position:relative;transform:rotate(1deg)"><image-slot id="drawer-3-b" src="images/workbench/majin-buu-detail.jpg" shape="rect" placeholder="Unfinished ideas &amp; strange prototypes — detail / process"></image-slot></div>
+        <p style="flex:1 1 220px;margin:0;align-self:flex-end;font:400 12px/1.6 'Space Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)">Majin Buu, 3D printed and hand-painted — still mid-paint, unfinished.</p>
+      </div>
+    </div>
   </div>
 </section>
 
 <section aria-label="Closing" style="padding:0 clamp(16px,5vw,80px) clamp(80px,10vw,140px);display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:24px">
-  <p style="margin:0;max-width:22ch;font:400 clamp(26px,3.2vw,48px)/1.15 'Archivo Black',sans-serif;text-transform:uppercase">That's what's on the table right now.<a href="work/hazadapt-hazard-icons.html" aria-label="A hidden case study" style="display:inline-block;margin-left:10px;font-family:'Space Mono',monospace;font-size:13px;line-height:1;vertical-align:middle;color:var(--line);text-decoration:none;opacity:.6" style-hover="color:var(--red);opacity:1">⚠</a></p>
-  <a href="index.html#work" style="font:700 14px/1 'Space Mono',monospace;letter-spacing:.06em;text-transform:uppercase;min-height:44px;display:inline-flex;align-items:center;background:var(--ink);color:var(--bg);padding:0 18px;text-decoration:none" style-hover="background:var(--red);color:var(--on-red)">Back to the Work →</a>
+  <p style="margin:0;max-width:22ch;font:400 clamp(26px,3.2vw,48px)/1.15 'Archivo Black',sans-serif;text-transform:uppercase">That's what's on the table right now.<a href="work/hazadapt-hazard-icons.html" aria-label="A hidden case study" class="warn-link" style="display:inline-block;margin-left:10px;font-family:'Space Mono',monospace;font-size:13px;line-height:1;vertical-align:middle;color:var(--line);text-decoration:none;opacity:.6">⚠</a></p>
+  <a href="index.html#work" class="back-btn" style="font:700 14px/1 'Space Mono',monospace;letter-spacing:.06em;text-transform:uppercase;min-height:44px;display:inline-flex;align-items:center;background:var(--ink);color:var(--bg);padding:0 18px;text-decoration:none">Back to the Work →</a>
 </section>
 
 </main>
@@ -198,173 +253,331 @@ nav[aria-label="Primary"] a[aria-current="true"]{color:var(--red);box-shadow:ins
   <a href="#main" style="min-height:44px;display:inline-flex;align-items:center">[ ^ top ]</a>
 </footer>
 
-<sc-if value="{{ lbOpen }}" hint-placeholder-val="{{ false }}">
-  <div role="dialog" aria-modal="true" aria-labelledby="lb-title" onKeyDown="{{ lbKey }}" style="position:fixed;inset:0;z-index:260;background:var(--bg);color:var(--ink);display:grid;grid-template-rows:auto minmax(0,1fr) auto;gap:16px;padding:clamp(14px,2.4vw,32px)">
-    <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-start;gap:16px">
-      <div>
-        <h2 id="lb-title" style="margin:0;font:400 clamp(28px,4vw,56px)/.95 'Archivo Black',sans-serif;text-transform:uppercase">{{ lb.title }}</h2>
-        <p style="margin:8px 0 0;font:400 12px/1.4 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">{{ lb.medium }} · {{ lb.stageLabel }}</p>
-      </div>
-      <button type="button" ref="{{ closeRef }}" onClick="{{ lbClose }}" style="font:700 12px/1 'Space Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--on-red);background:var(--ink);border:0;padding:0 16px;min-height:44px;cursor:pointer" style-hover="background:var(--pink);color:var(--on-red)">✕ Close</button>
+<div id="lightbox" role="dialog" aria-modal="true" aria-labelledby="lb-title" style="position:fixed;inset:0;z-index:260;background:var(--bg);color:var(--ink);grid-template-rows:auto minmax(0,1fr) auto;gap:16px;padding:clamp(14px,2.4vw,32px)">
+  <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-start;gap:16px">
+    <div>
+      <h2 id="lb-title" style="margin:0;font:400 clamp(28px,4vw,56px)/.95 'Archivo Black',sans-serif;text-transform:uppercase"></h2>
+      <p id="lb-meta" style="margin:8px 0 0;font:400 12px/1.4 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)"></p>
     </div>
-    <div style="min-height:0;display:flex;align-items:center;justify-content:center">
-      <div role="img" aria-label="{{ lb.alt }}" style="{{ lbImgStyle }}"></div>
-    </div>
-    <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px">
-      <button type="button" onClick="{{ lbPrev }}" style="font:700 12px/1 'Space Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--ink);background:transparent;border:1px solid var(--ink);padding:0 16px;min-height:44px;cursor:pointer" style-hover="background:var(--ink);color:var(--on-red)">← {{ lb.prevTitle }}</button>
-      <div role="group" aria-label="Stages" style="display:flex;gap:8px;flex-wrap:wrap">
-        <sc-for list="{{ lb.stages }}" as="st" hint-placeholder-count="2">
-          <button type="button" onClick="{{ st.pick }}" aria-pressed="{{ st.pressed }}" style="font:700 12px/1 'Space Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--ink);background:transparent;border:1px solid var(--metal);padding:0 14px;min-height:44px;cursor:pointer" style-hover="border-color:var(--pink);color:var(--pink)">{{ st.mark }} {{ st.label }}</button>
-        </sc-for>
-      </div>
-      <button type="button" onClick="{{ lbNext }}" style="font:700 12px/1 'Space Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--ink);background:transparent;border:1px solid var(--ink);padding:0 16px;min-height:44px;cursor:pointer" style-hover="background:var(--ink);color:var(--on-red)">{{ lb.nextTitle }} →</button>
-    </div>
+    <button type="button" id="lbClose" class="lb-close mono" style="font:700 12px/1 'Space Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--on-red);background:var(--ink);border:0;padding:0 16px;min-height:44px;cursor:pointer">✕ Close</button>
   </div>
-</sc-if>
-</x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;defaultTheme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;dark&quot;,&quot;light&quot;],&quot;default&quot;:&quot;dark&quot;,&quot;tsType&quot;:&quot;'dark'|'light'&quot;,&quot;section&quot;:&quot;Look&quot;},&quot;grain&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Look&quot;}}">
-class Component extends DCLogic {
-  deskRef = React.createRef(); closeRef = React.createRef();
-  defaults() {
-    return {
-      reach: { x: 3, y: 3, r: -2, w: 40 }, note1: { x: 48, y: 2, r: -1, w: 22 },
-      first: { x: 28, y: 46, r: 6, w: 20 }, portrait: { x: 55, y: 20, r: 1.5, w: 38 },
-      note2: { x: 4, y: 70, r: 1, w: 22 }, miniHead: { x: 56, y: 68, r: -3, w: 20 }, blade: { x: 78, y: 46, r: 2.5, w: 20 }
-    };
+  <div style="min-height:0;display:flex;align-items:center;justify-content:center">
+    <div id="lbImg" role="img" style="width:100%;height:100%;background-size:contain;background-repeat:no-repeat;background-position:center"></div>
+  </div>
+  <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px">
+    <button type="button" id="lbPrev" class="lb-nav-btn mono" style="font:700 12px/1 'Space Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--ink);background:transparent;border:1px solid var(--ink);padding:0 16px;min-height:44px;cursor:pointer"></button>
+    <div id="lbStages" role="group" aria-label="Stages" style="display:flex;gap:8px;flex-wrap:wrap"></div>
+    <button type="button" id="lbNext" class="lb-nav-btn mono" style="font:700 12px/1 'Space Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--ink);background:transparent;border:1px solid var(--ink);padding:0 16px;min-height:44px;cursor:pointer"></button>
+  </div>
+</div>
+
+<script>
+(function(){
+  'use strict';
+  var html = document.documentElement;
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function applyThemeUI(){
+    var light = html.getAttribute('data-theme') === 'light';
+    var label = light ? 'DARK' : 'LIGHT';
+    var tt = document.getElementById('themeToggle');
+    var ttm = document.getElementById('themeToggleMobile');
+    var ttml = document.getElementById('themeToggleMobileLabel');
+    if (tt) { tt.textContent = label; tt.setAttribute('aria-pressed', light ? 'true' : 'false'); tt.setAttribute('aria-label', 'Switch to ' + (light ? 'dark' : 'light') + ' mode'); }
+    if (ttm) ttm.setAttribute('aria-pressed', light ? 'true' : 'false');
+    if (ttml) ttml.textContent = label === 'DARK' ? 'Dark' : 'Light';
   }
-  works() {
-    return [
-      { id: 'reach', title: 'Reach', medium: 'Digital Illustration', stages: [
-        { label: 'Final', src: 'images/Artwork.png', alt: 'Digital illustration by Krystyna Ewing — a figure in a soft cap reaching a hand forward out of shadow.' },
-        { label: 'Earlier Pass', src: 'images/Hero_Image.png', alt: 'An earlier color pass of the same illustration, before the linework and shading were finished.' }] },
-      { id: 'portrait', title: 'Self-Portrait', medium: 'Digital Illustration', stages: [
-        { label: 'Full Piece', src: 'images/hero-portrait.png', alt: 'Hand-drawn self-portrait illustration by Krystyna Ewing: a character with a purple bucket hat and glowing green eyes, with her name lettered around it in purple marker.' },
-        { label: 'Detail', src: 'images/header.png', alt: 'Detail crop of the same character, face only, without the surrounding lettering.' }] },
-      { id: 'first', title: 'First Pass', medium: 'Sketch, Digital', stages: [
-        { label: 'Sketch', src: 'images/website_hero.png', alt: 'An early, unfinished sketch mixing loose line art with a hand-lettered name banner.' }] },
-      { id: 'miniHead', title: 'Painted Head', medium: 'Miniature', stages: [
-        { label: 'In Progress', src: 'images/workbench/mini-head-painting.jpg', alt: 'A hand-painted miniature head, mid-progress, held between two fingers — base skin tone and inked features, paint bottles and a mixing palette in the background.' }] },
-      { id: 'blade', title: 'Prop Blade', medium: '3D Printed', stages: [
-        { label: 'In Progress', src: 'images/workbench/prop-blade-print.jpg', alt: 'An unfinished 3D printed prop blade standing on a desk, unpainted sections still bare plastic, next to a comic poster and desk clutter.' }] }
-    ];
+  function toggleTheme(){
+    var next = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+    if (next === 'dark') html.removeAttribute('data-theme'); else html.setAttribute('data-theme', 'light');
+    try { localStorage.setItem('ke-theme', next); } catch(e){}
+    applyThemeUI();
   }
-  state = {
-    theme: this.props.defaultTheme ?? 'dark', narrow: window.innerWidth < 760,
-    pieces: this.defaults(), z: {}, top: 10, stage: { reach: 0, portrait: 0, first: 0 },
-    lb: -1, flash: null, drawer: -1, menuOpen: false
+  applyThemeUI();
+  var themeToggle = document.getElementById('themeToggle');
+  var themeToggleMobile = document.getElementById('themeToggleMobile');
+  if (themeToggle) themeToggle.addEventListener('click', toggleTheme);
+  if (themeToggleMobile) themeToggleMobile.addEventListener('click', toggleTheme);
+
+  var menuToggle = document.getElementById('menuToggle');
+  var mobileMenu = document.getElementById('mobileMenu');
+  var mobileMenuBackdrop = document.getElementById('mobileMenuBackdrop');
+  var scrollLocked = false, savedScrollY = 0;
+  function lockScroll(){
+    if (scrollLocked) return;
+    savedScrollY = window.scrollY;
+    document.body.style.position = 'fixed';
+    document.body.style.top = (-savedScrollY) + 'px';
+    document.body.style.left = '0'; document.body.style.right = '0'; document.body.style.overflow = 'hidden';
+    scrollLocked = true;
+  }
+  function unlockScroll(){
+    if (!scrollLocked) return;
+    document.body.style.position = ''; document.body.style.top = ''; document.body.style.left = ''; document.body.style.right = ''; document.body.style.overflow = '';
+    window.scrollTo(0, savedScrollY || 0);
+    scrollLocked = false;
+  }
+  function setMenuOpen(open){
+    if (menuToggle) { menuToggle.setAttribute('aria-expanded', open ? 'true' : 'false'); menuToggle.textContent = open ? 'CLOSE' : 'MENU'; menuToggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu'); }
+    if (mobileMenu) mobileMenu.style.display = open ? 'grid' : 'none';
+    if (mobileMenuBackdrop) mobileMenuBackdrop.style.display = open ? 'block' : 'none';
+    if (open) lockScroll(); else unlockScroll();
+  }
+  function closeMenu(){
+    if (menuToggle && menuToggle.getAttribute('aria-expanded') === 'true') setMenuOpen(false);
+  }
+  if (menuToggle) menuToggle.addEventListener('click', function(){
+    setMenuOpen(menuToggle.getAttribute('aria-expanded') !== 'true');
+  });
+  if (mobileMenuBackdrop) mobileMenuBackdrop.addEventListener('click', closeMenu);
+  window.addEventListener('keydown', function(e){ if (e.key === 'Escape' && !lbIsOpen()) closeMenu(); });
+
+  // ---- works data (shared by inline stage toggles + lightbox) ----
+  var workOrder = ['reach', 'portrait', 'first', 'miniHead', 'blade'];
+  var works = {
+    reach: { title: 'Reach', medium: 'Digital Illustration', stages: [
+      { label: 'Final', src: 'images/Artwork.png', alt: 'Digital illustration by Krystyna Ewing — a figure in a soft cap reaching a hand forward out of shadow.' },
+      { label: 'Earlier Pass', src: 'images/Hero_Image.png', alt: 'An earlier color pass of the same illustration, before the linework and shading were finished.' }] },
+    portrait: { title: 'Self-Portrait', medium: 'Digital Illustration', stages: [
+      { label: 'Full Piece', src: 'images/hero-portrait.png', alt: 'Hand-drawn self-portrait illustration by Krystyna Ewing: a character with a purple bucket hat and glowing green eyes, with her name lettered around it in purple marker.' },
+      { label: 'Detail', src: 'images/header.png', alt: 'Detail crop of the same character, face only, without the surrounding lettering.' }] },
+    first: { title: 'First Pass', medium: 'Sketch, Digital', stages: [
+      { label: 'Sketch', src: 'images/website_hero.png', alt: 'An early, unfinished sketch mixing loose line art with a hand-lettered name banner.' }] },
+    miniHead: { title: 'Painted Head', medium: 'Miniature', stages: [
+      { label: 'In Progress', src: 'images/workbench/mini-head-painting.jpg', alt: 'A hand-painted miniature head, mid-progress, held between two fingers — base skin tone and inked features, paint bottles and a mixing palette in the background.' }] },
+    blade: { title: 'Prop Blade', medium: '3D Printed', stages: [
+      { label: 'In Progress', src: 'images/workbench/prop-blade-print.jpg', alt: 'An unfinished 3D printed prop blade standing on a desk, unpainted sections still bare plastic, next to a comic poster and desk clutter.' }] }
   };
-  applyRoot() {
-    const r = document.documentElement;
-    r.dataset.theme = this.state.theme;
-    r.dataset.grain = (this.props.grain ?? true) ? 'on' : 'off';
+  var stageState = { reach: 0, portrait: 0, first: 0 };
+
+  function setStage(id, i){
+    stageState[id] = i;
+    document.querySelectorAll('[data-stage-img="' + id + '"]').forEach(function(img){
+      img.style.display = (+img.dataset.stageIndex === i) ? 'block' : 'none';
+    });
+    document.querySelectorAll('[data-stage-btn="' + id + '"]').forEach(function(btn){
+      var on = +btn.dataset.stageIndex === i;
+      btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+      var label = works[id].stages[+btn.dataset.stageIndex].label;
+      btn.textContent = (on ? '■ ' : '□ ') + label;
+    });
+    if (lbOpenId === id) renderLightbox();
   }
-  componentDidMount() {
-    this.applyRoot();
-    this.onResize = () => {
-      const n = window.innerWidth < 760; if (n !== this.state.narrow) this.setState({ narrow: n });
-      if (window.innerWidth >= 860 && this.state.menuOpen) { document.body.style.overflow = ''; this.setState({ menuOpen: false }); }
-    };
-    window.addEventListener('resize', this.onResize);
-    this.onMenuKeydown = e => { if (e.key === 'Escape' && this.state.menuOpen) { document.body.style.overflow = ''; this.setState({ menuOpen: false }); } };
-    window.addEventListener('keydown', this.onMenuKeydown);
-  }
-  componentDidUpdate(pp, ps) {
-    if (pp.defaultTheme !== this.props.defaultTheme && this.props.defaultTheme) this.setState({ theme: this.props.defaultTheme }, () => this.applyRoot());
-    else this.applyRoot();
-    const open = this.state.lb >= 0;
-    if (open && !this.wasOpen) { this.lastFocus = document.activeElement; document.body.style.overflow = 'hidden'; setTimeout(() => this.closeRef.current && this.closeRef.current.focus(), 30); }
-    if (!open && this.wasOpen) { document.body.style.overflow = ''; if (this.lastFocus && this.lastFocus.focus) this.lastFocus.focus(); }
-    this.wasOpen = open;
-  }
-  componentWillUnmount() { window.removeEventListener('resize', this.onResize); window.removeEventListener('keydown', this.onMenuKeydown); document.body.style.overflow = ''; clearTimeout(this.ft); }
-  lift(id) { this.setState(s => ({ top: s.top + 1, z: { ...s.z, [id]: s.top + 1 } })); }
-  jump(id) {
-    this.lift(id);
-    const el = document.getElementById('piece-' + id);
-    if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 80, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
-    const b = el && el.querySelector('button[aria-label^="View larger"]'); if (b) setTimeout(() => b.focus({ preventScroll: true }), 350);
-    this.setState({ flash: id }); clearTimeout(this.ft); this.ft = setTimeout(() => this.setState({ flash: null }), 1400);
-  }
-  piece(id) {
-    const p = this.state.pieces[id], narrow = this.state.narrow;
-    const style = narrow
-      ? { position: 'relative', width: id.startsWith('note') ? '100%' : '92%', alignSelf: ['portrait', 'note2'].includes(id) ? 'flex-end' : 'flex-start', transform: `rotate(${p.r * 0.6}deg)` }
-      : { position: 'absolute', left: p.x + '%', top: p.y + '%', width: p.w + '%', transform: `rotate(${p.r}deg)`, zIndex: this.state.z[id] || 1, transition: this.drag && this.drag.id === id ? 'none' : 'transform .2s, filter .3s', filter: this.state.flash === id ? 'drop-shadow(0 0 0 var(--pink)) drop-shadow(0 0 14px var(--pink))' : 'none' };
-    const clampSet = (x, y) => this.setState(s => ({ pieces: { ...s.pieces, [id]: { ...s.pieces[id], x: Math.max(-4, Math.min(92, x)), y: Math.max(-2, Math.min(94, y)) } } }));
-    return {
-      style, flash: this.state.flash === id ? '4px solid var(--pink)' : 'none',
-      down: e => {
-        if (this.state.narrow) return;
-        const d = this.deskRef.current.getBoundingClientRect();
-        this.drag = { id, sx: e.clientX, sy: e.clientY, px: p.x, py: p.y, w: d.width, h: d.height };
-        e.currentTarget.setPointerCapture(e.pointerId); e.currentTarget.style.cursor = 'grabbing'; this.lift(id);
-      },
-      move: e => { const g = this.drag; if (!g || g.id !== id) return; clampSet(g.px + (e.clientX - g.sx) / g.w * 100, g.py + (e.clientY - g.sy) / g.h * 100); },
-      up: e => { if (this.drag && this.drag.id === id) { this.drag = null; e.currentTarget.style.cursor = 'grab'; this.forceUpdate(); } },
-      key: e => {
-        if (this.state.narrow) return;
-        const k = e.shiftKey ? 6 : 2, m = { ArrowLeft: [-k, 0], ArrowRight: [k, 0], ArrowUp: [0, -k], ArrowDown: [0, k] }[e.key];
-        if (m) { e.preventDefault(); this.lift(id); clampSet(this.state.pieces[id].x + m[0], this.state.pieces[id].y + m[1]); }
-      }
-    };
-  }
-  renderVals() {
-    const s = this.state, light = s.theme === 'light', W = this.works();
-    const setStage = (id, i) => () => this.setState(st => ({ stage: { ...st.stage, [id]: i } }));
-    const open = id => () => this.setState({ lb: W.findIndex(w => w.id === id) });
-    const cats = ['3D printing & fabrication', 'Sculpture & mixed media', 'Digital illustration', 'Unfinished ideas & strange prototypes'];
-    const catImages = [
-      { srcA: 'images/workbench/silver-skull.jpg', srcB: 'images/workbench/skull-painting-process.jpg',
-        note: 'Silver Skull, 3D printed and hand-painted — plus a mid-process shot of painting a different cast.' },
-      { srcA: 'images/workbench/entomology-cicadas.jpg', srcB: 'images/workbench/skull-moth-shadowbox.jpg',
-        note: 'Entomology Cicadas — a small framed specimen display. Plus a skull-and-moth shadow box, sculpted and mounted on moss.' },
-      { srcA: 'images/workbench/stickers.jpg', srcB: 'images/workbench/digital-sketch-portrait.jpg',
-        note: 'Stickers — original character illustration, cut and printed. Plus a digital portrait sketch, inked linework and cross-hatching.' },
-      { srcA: 'images/workbench/majin-buu-full.jpg', srcB: 'images/workbench/majin-buu-detail.jpg',
-        note: 'Majin Buu, 3D printed and hand-painted — still mid-paint, unfinished.' },
-    ];
-    const drawers = cats.map((t, i) => ({
-      num: String(i + 1).padStart(2, '0'), title: t, open: s.drawer === i, expanded: s.drawer === i ? 'true' : 'false',
-      icon: s.drawer === i ? '− Close' : '+ Open', panelId: 'drawer-' + i,
-      slotA: 'drawer-' + i + '-a', slotB: 'drawer-' + i + '-b', phA: t + ' — photo', phB: t + ' — detail / process',
-      srcA: catImages[i].srcA, srcB: catImages[i].srcB, note: catImages[i].note,
-      toggle: () => this.setState(st => ({ drawer: st.drawer === i ? -1 : i }))
-    }));
-    let lb = null;
-    if (s.lb >= 0) {
-      const w = W[s.lb], si = s.stage[w.id] || 0, stg = w.stages[si];
-      const prev = W[(s.lb + W.length - 1) % W.length], next = W[(s.lb + 1) % W.length];
-      lb = { title: w.title, medium: w.medium, stageLabel: stg.label, src: stg.src, alt: stg.alt, prevTitle: prev.title, nextTitle: next.title,
-        stages: w.stages.length > 1 ? w.stages.map((x, i) => ({ label: x.label, mark: i === si ? '■' : '□', pressed: i === si ? 'true' : 'false', pick: setStage(w.id, i) })) : [] };
+  document.querySelectorAll('[data-stage-btn]').forEach(function(btn){
+    btn.addEventListener('click', function(){ setStage(btn.dataset.stageBtn, +btn.dataset.stageIndex); });
+  });
+
+  // ---- workbench piece layout + drag + keyboard ----
+  var defaults = {
+    reach: { x: 3, y: 3, r: -2, w: 40 }, note1: { x: 48, y: 2, r: -1, w: 22 },
+    first: { x: 28, y: 46, r: 6, w: 20 }, portrait: { x: 55, y: 20, r: 1.5, w: 38 },
+    note2: { x: 4, y: 70, r: 1, w: 22 }, miniHead: { x: 56, y: 68, r: -3, w: 20 }, blade: { x: 78, y: 46, r: 2.5, w: 20 }
+  };
+  var pieces = JSON.parse(JSON.stringify(defaults));
+  var zIndex = {}, topZ = 10, drag = null;
+  var narrow = window.innerWidth < 760;
+  var deskEl = document.getElementById('deskCanvas');
+  var canvasHint = document.getElementById('canvasHint');
+
+  function layoutPiece(id){
+    var el = document.getElementById('piece-' + id);
+    if (!el) return;
+    var p = pieces[id];
+    if (narrow) {
+      el.style.position = 'relative';
+      el.style.width = id.indexOf('note') === 0 ? '100%' : '92%';
+      el.style.left = ''; el.style.top = '';
+      el.style.alignSelf = (id === 'portrait' || id === 'note2') ? 'flex-end' : 'flex-start';
+      el.style.transform = 'rotate(' + (p.r * 0.6) + 'deg)';
+      el.style.zIndex = ''; el.style.transition = ''; el.style.filter = '';
+    } else {
+      el.style.position = 'absolute';
+      el.style.left = p.x + '%'; el.style.top = p.y + '%'; el.style.width = p.w + '%';
+      el.style.alignSelf = '';
+      el.style.transform = 'rotate(' + p.r + 'deg)';
+      el.style.zIndex = zIndex[id] || 1;
+      el.style.transition = (drag && drag.id === id) ? 'none' : 'transform .2s, filter .3s';
     }
-    const step = d => () => this.setState(st => ({ lb: (st.lb + d + W.length) % W.length }));
-    const r = {
-      deskRef: this.deskRef, closeRef: this.closeRef,
-      themeLabel: light ? 'Dark' : 'Light', lightPressed: light ? 'true' : 'false',
-      toggleTheme: () => this.setState(st => ({ theme: st.theme === 'light' ? 'dark' : 'light' }), () => this.applyRoot()),
-      canvasHint: s.narrow ? 'Tap anything to look closer.' : 'Drag the tape. Click to look closer.',
-      deskStyle: s.narrow ? { position: 'relative', display: 'flex', flexDirection: 'column', gap: 44, paddingTop: 40 } : { position: 'relative', height: 'clamp(900px, 82vw, 1300px)' },
-      resetDesk: () => this.setState({ pieces: this.defaults(), z: {} }),
-      jumpReach: () => this.jump('reach'), jumpPortrait: () => this.jump('portrait'), jumpFirst: () => this.jump('first'),
-      openReach: open('reach'), openPortrait: open('portrait'), openFirst: open('first'),
-      openMiniHead: open('miniHead'), openBlade: open('blade'),
-      drawers, lbOpen: s.lb >= 0, lb: lb || { title: '', medium: '', stageLabel: '', src: '', alt: '', prevTitle: '', nextTitle: '', stages: [] },
-      lbImgStyle: { width: '100%', height: '100%', backgroundImage: lb ? `url("${lb.src}")` : 'none', backgroundSize: 'contain', backgroundRepeat: 'no-repeat', backgroundPosition: 'center' },
-      lbClose: () => this.setState({ lb: -1 }), lbPrev: step(-1), lbNext: step(1),
-      lbKey: e => { if (e.key === 'Escape') this.setState({ lb: -1 }); else if (e.key === 'ArrowLeft') step(-1)(); else if (e.key === 'ArrowRight') step(1)(); },
-      menuExpandedAttr: s.menuOpen ? 'true' : 'false',
-      menuButtonLabel: s.menuOpen ? 'CLOSE' : 'MENU',
-      menuAriaLabel: s.menuOpen ? 'Close menu' : 'Open menu',
-      menuClose: () => { document.body.style.overflow = ''; this.setState({ menuOpen: false }); },
-      menuToggle: () => { const next = !s.menuOpen; document.body.style.overflow = next ? 'hidden' : ''; this.setState({ menuOpen: next }); },
-      menuBackdropStyle: s.menuOpen ? { display: 'block', position: 'fixed', inset: '56px 0 0 0', zIndex: 215, background: 'rgba(0,0,0,.5)' } : { display: 'none' },
-      menuPanelStyle: s.menuOpen ? { display: 'grid', position: 'fixed', left: 0, right: 0, top: 56, zIndex: 220, background: 'var(--bg)', borderBottom: '1px solid var(--line)', maxHeight: 'calc(100vh - 56px)', overflowY: 'auto' } : { display: 'none' }
-    };
-    [['reach', 2], ['portrait', 2]].forEach(([id, n]) => { for (let i = 0; i < n; i++) { const on = (s.stage[id] || 0) === i; r[id + 'S' + i] = on; r[id + 'I' + i] = { display: on ? 'block' : 'none', width: '100%', height: 'auto' }; r[id + 'P' + i] = on ? 'true' : 'false'; r[id + 'M' + i] = on ? '■' : '□'; r[id + 'To' + i] = setStage(id, i); } });
-    ['reach', 'note1', 'first', 'portrait', 'note2', 'miniHead', 'blade'].forEach(id => { r[id] = this.piece(id); });
-    return r;
   }
-}
+  function layoutDesk(){
+    if (!deskEl) return;
+    if (narrow) {
+      deskEl.style.position = 'relative'; deskEl.style.display = 'flex'; deskEl.style.flexDirection = 'column'; deskEl.style.gap = '44px'; deskEl.style.height = ''; deskEl.style.paddingTop = '40px';
+    } else {
+      deskEl.style.position = 'relative'; deskEl.style.display = ''; deskEl.style.flexDirection = ''; deskEl.style.gap = ''; deskEl.style.height = 'clamp(900px, 82vw, 1300px)'; deskEl.style.paddingTop = '';
+    }
+    Object.keys(pieces).forEach(layoutPiece);
+    if (canvasHint) canvasHint.textContent = narrow ? 'Tap anything to look closer.' : 'Drag the tape. Click to look closer.';
+  }
+  function lift(id){ topZ += 1; zIndex[id] = topZ; layoutPiece(id); }
+  function clampXY(x, y){ return { x: Math.max(-4, Math.min(92, x)), y: Math.max(-2, Math.min(94, y)) }; }
+
+  document.querySelectorAll('.piece-drag').forEach(function(handle){
+    var id = handle.dataset.piece;
+    handle.addEventListener('pointerdown', function(e){
+      if (narrow || !deskEl) return;
+      var d = deskEl.getBoundingClientRect();
+      drag = { id: id, sx: e.clientX, sy: e.clientY, px: pieces[id].x, py: pieces[id].y, w: d.width, h: d.height };
+      handle.setPointerCapture(e.pointerId);
+      lift(id);
+    });
+    handle.addEventListener('pointermove', function(e){
+      if (!drag || drag.id !== id) return;
+      var x = drag.px + (e.clientX - drag.sx) / drag.w * 100;
+      var y = drag.py + (e.clientY - drag.sy) / drag.h * 100;
+      var c = clampXY(x, y);
+      pieces[id].x = c.x; pieces[id].y = c.y;
+      layoutPiece(id);
+    });
+    handle.addEventListener('pointerup', function(){ if (drag && drag.id === id) { drag = null; layoutPiece(id); } });
+    handle.addEventListener('pointercancel', function(){ if (drag && drag.id === id) { drag = null; layoutPiece(id); } });
+    handle.addEventListener('keydown', function(e){
+      if (narrow) return;
+      var k = e.shiftKey ? 6 : 2;
+      var m = { ArrowLeft: [-k, 0], ArrowRight: [k, 0], ArrowUp: [0, -k], ArrowDown: [0, k] }[e.key];
+      if (m) {
+        e.preventDefault(); lift(id);
+        var c = clampXY(pieces[id].x + m[0], pieces[id].y + m[1]);
+        pieces[id].x = c.x; pieces[id].y = c.y;
+        layoutPiece(id);
+      }
+    });
+  });
+
+  var resetBtn = document.getElementById('resetDesk');
+  if (resetBtn) resetBtn.addEventListener('click', function(){
+    pieces = JSON.parse(JSON.stringify(defaults));
+    zIndex = {};
+    Object.keys(pieces).forEach(layoutPiece);
+  });
+
+  var flashTimer = null;
+  function jumpTo(id){
+    lift(id);
+    var el = document.getElementById('piece-' + id);
+    if (el) {
+      var top = el.getBoundingClientRect().top + window.scrollY - 80;
+      window.scrollTo({ top: top, behavior: reduce ? 'auto' : 'smooth' });
+      var b = el.querySelector('.piece-open');
+      if (b) setTimeout(function(){ b.focus({ preventScroll: true }); }, 350);
+    }
+    document.querySelectorAll('.piece[data-flash="true"]').forEach(function(p){ p.removeAttribute('data-flash'); });
+    if (el) el.setAttribute('data-flash', 'true');
+    clearTimeout(flashTimer);
+    flashTimer = setTimeout(function(){ if (el) el.removeAttribute('data-flash'); }, 1400);
+  }
+  document.querySelectorAll('[data-jump]').forEach(function(btn){
+    btn.addEventListener('click', function(){ jumpTo(btn.dataset.jump); });
+  });
+
+  var rraf = 0;
+  window.addEventListener('resize', function(){
+    if (rraf) return;
+    rraf = requestAnimationFrame(function(){
+      rraf = 0;
+      var n = window.innerWidth < 760;
+      if (n !== narrow) { narrow = n; layoutDesk(); }
+      if (window.innerWidth >= 860) closeMenu();
+    });
+  }, { passive: true });
+
+  layoutDesk();
+
+  // ---- drawers accordion ----
+  document.querySelectorAll('.drawer-toggle').forEach(function(btn){
+    var i = btn.dataset.drawer;
+    var panel = document.getElementById('drawer-' + i);
+    var icon = btn.querySelector('.drawer-icon');
+    btn.addEventListener('click', function(){
+      var open = btn.getAttribute('aria-expanded') !== 'true';
+      document.querySelectorAll('.drawer-toggle').forEach(function(b){
+        var p = document.getElementById('drawer-' + b.dataset.drawer);
+        var ic = b.querySelector('.drawer-icon');
+        var isThis = b === btn;
+        var willOpen = isThis ? open : false;
+        b.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
+        if (ic) ic.textContent = willOpen ? '− Close' : '+ Open';
+        if (p) { p.setAttribute('data-open', willOpen ? 'true' : 'false'); p.style.display = willOpen ? 'flex' : 'none'; }
+      });
+    });
+  });
+
+  // ---- lightbox ----
+  var lbOpenId = null, lastFocus = null;
+  var lightbox = document.getElementById('lightbox');
+  var lbTitle = document.getElementById('lb-title');
+  var lbMeta = document.getElementById('lb-meta');
+  var lbImg = document.getElementById('lbImg');
+  var lbStages = document.getElementById('lbStages');
+  var lbPrevBtn = document.getElementById('lbPrev');
+  var lbNextBtn = document.getElementById('lbNext');
+  var lbCloseBtn = document.getElementById('lbClose');
+
+  function lbIsOpen(){ return !!lbOpenId; }
+
+  function renderLightbox(){
+    var id = lbOpenId;
+    if (!id) return;
+    var w = works[id];
+    var si = stageState[id] || 0;
+    var stage = w.stages[si];
+    var idx = workOrder.indexOf(id);
+    var prev = works[workOrder[(idx + workOrder.length - 1) % workOrder.length]];
+    var next = works[workOrder[(idx + 1) % workOrder.length]];
+    lbTitle.textContent = w.title;
+    lbMeta.textContent = w.medium + ' · ' + stage.label;
+    lbImg.style.backgroundImage = 'url("' + stage.src + '")';
+    lbImg.setAttribute('aria-label', stage.alt);
+    lbPrevBtn.textContent = '← ' + prev.title;
+    lbNextBtn.textContent = next.title + ' →';
+    lbStages.innerHTML = '';
+    if (w.stages.length > 1) {
+      w.stages.forEach(function(s, i){
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'lb-stage-btn mono';
+        b.setAttribute('aria-pressed', i === si ? 'true' : 'false');
+        b.style.cssText = "font:700 12px/1 'Space Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--ink);background:transparent;border:1px solid var(--metal);padding:0 14px;min-height:44px;cursor:pointer";
+        b.textContent = (i === si ? '■ ' : '□ ') + s.label;
+        b.addEventListener('click', function(){ setStage(id, i); });
+        lbStages.appendChild(b);
+      });
+    }
+  }
+  function openLightbox(id){
+    lbOpenId = id;
+    lastFocus = document.activeElement;
+    lightbox.setAttribute('data-open', 'true');
+    renderLightbox();
+    lockScroll();
+    setTimeout(function(){ lbCloseBtn.focus(); }, 30);
+  }
+  function closeLightbox(){
+    if (!lbOpenId) return;
+    lbOpenId = null;
+    lightbox.removeAttribute('data-open');
+    unlockScroll();
+    if (lastFocus && lastFocus.focus) lastFocus.focus();
+  }
+  function stepLightbox(dir){
+    var idx = workOrder.indexOf(lbOpenId);
+    lbOpenId = workOrder[(idx + dir + workOrder.length) % workOrder.length];
+    renderLightbox();
+  }
+  document.querySelectorAll('[data-open-work]').forEach(function(btn){
+    btn.addEventListener('click', function(){ openLightbox(btn.dataset.openWork); });
+  });
+  lbCloseBtn.addEventListener('click', closeLightbox);
+  lbPrevBtn.addEventListener('click', function(){ stepLightbox(-1); });
+  lbNextBtn.addEventListener('click', function(){ stepLightbox(1); });
+  lightbox.addEventListener('keydown', function(e){
+    if (e.key === 'Escape') closeLightbox();
+    else if (e.key === 'ArrowLeft') stepLightbox(-1);
+    else if (e.key === 'ArrowRight') stepLightbox(1);
+  });
+
+  html.classList.add('js-ready');
+})();
 </script>
 </body>
 </html>
