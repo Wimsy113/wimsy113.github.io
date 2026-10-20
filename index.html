@@ -52,7 +52,7 @@ html{--bg:#0B0B0B;--fg:#F2F0E9;--green:#A8FF00;--on-green:#0B0B0B;--charcoal:#25
 @media (max-width:859px){html{--grain:0}body::after{content:none!important}}
 html[data-theme="light"]{--bg:#F2F0E9;--fg:#0B0B0B;--green:#447000;--on-green:#F2F0E9;--charcoal:#E4E1D6;--muted:#5f5c4e;--line:rgba(11,11,11,.2)}
 body{margin:0;padding-right:var(--rail-w);background:var(--bg);color:var(--fg);font-family:"Inter",system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
-body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:300;opacity:var(--grain);mix-blend-mode:overlay;transform:translateZ(0);will-change:transform;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E")}
+body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:300;opacity:var(--grain);mix-blend-mode:overlay;transform:translateZ(0);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E")}
 a{color:inherit;text-decoration-thickness:1px;text-underline-offset:.22em}
 a:hover{color:var(--green)}
 :focus-visible{outline:3px solid var(--green);outline-offset:3px}
@@ -61,7 +61,7 @@ a:hover{color:var(--green)}
 .mono{font-family:'Space Mono',monospace}
 #pageCursor{position:fixed;left:0;top:0;z-index:260;width:16px;height:16px;margin:-8px;border:1px solid var(--green);border-radius:50%;pointer-events:none;transition:width .2s ease,height .2s ease,margin .2s ease}
 @media (hover:none),(pointer:coarse){#pageCursor{display:none}}
-#livingGlow{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.14;mix-blend-mode:screen;transform:translateZ(0);will-change:transform;background:radial-gradient(520px circle at var(--mx,50vw) var(--my,20vh),color-mix(in srgb,var(--green) 55%,transparent),transparent 72%)}
+#livingGlow{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.14;mix-blend-mode:screen;transform:translateZ(0);background:radial-gradient(520px circle at var(--mx,50vw) var(--my,20vh),color-mix(in srgb,var(--green) 55%,transparent),transparent 72%)}
 @media (hover:none),(pointer:coarse),(prefers-reduced-motion:reduce){#livingGlow{display:none}}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}[data-reveal]{opacity:1!important;translate:0!important}}
 [data-reveal]{opacity:var(--rv,0);translate:0 calc((1 - var(--rv,0)) * 1.2rem);transition:opacity .6s ease,translate .6s cubic-bezier(.16,1,.3,1)}
@@ -82,7 +82,7 @@ nav[aria-label="Primary"] a[aria-current="true"]{color:var(--green);box-shadow:i
 #workbench{margin-left:calc(-1 * var(--margin-w));padding-left:calc(var(--margin-w) + clamp(16px,3vw,32px))!important}
 #mobileBar{display:none}
 #mobileMenu a[aria-current="true"]{color:var(--green)}
-#numberField{position:fixed;inset:0;z-index:1;pointer-events:none;display:block;width:100%;height:100%;opacity:.13;transform:translateZ(0);will-change:transform}
+#numberField{position:fixed;inset:0;z-index:1;pointer-events:none;display:block;width:100%;height:100%;opacity:.13;transform:translateZ(0)}
 @media (max-width:859px){
   #pageGrid{grid-template-columns:1fr}
   #marginRail{display:none}
@@ -542,7 +542,10 @@ class Component extends DCLogic {
     this.onNumberResize = resize;
     window.addEventListener('resize', this.onNumberResize);
     resize();
-    if (!this.reduce) this.startNumberTimer();
+    if (!this.reduce) {
+      if (document.readyState === 'complete') this.startNumberTimer();
+      else window.addEventListener('load', () => this.startNumberTimer(), { once: true });
+    }
   }
   startNumberTimer() {
     if (this.numTimer || !this.numberFieldGrid) return;
