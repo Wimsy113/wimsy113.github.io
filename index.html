@@ -3,50 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-html,body{background:#0B0B0B;margin:0}
-#bootVeil{position:fixed;inset:0;z-index:999999;background:#0B0B0B;display:flex;align-items:center;justify-content:center;opacity:1;transition:opacity .5s ease}
-html[data-intro="seen"] #bootVeil{display:none}
-#bootVeilSweep{position:absolute;inset:0;background:#A8FF00}
-@media (prefers-reduced-motion:no-preference){
-  @keyframes bootVeilSweep{0%{transform:translateX(-100%)}50%{transform:translateX(0)}100%{transform:translateX(100%)}}
-  #bootVeilSweep{animation:bootVeilSweep 1.1s ease-in-out infinite}
-}
-</style>
-<script>window.__bootStart=Date.now();</script>
-<script>try{if(localStorage.getItem('ke-theme')==='light')document.documentElement.setAttribute('data-theme','light');}catch(e){}</script>
-<script>try{if(sessionStorage.getItem('keIntroSeen')==='1')document.documentElement.dataset.intro='seen';}catch(e){}</script>
-<link rel="preload" as="script" href="./vendor/react.production.min.js">
-<link rel="preload" as="script" href="./vendor/react-dom.production.min.js">
-<link rel="preload" as="script" href="./vendor/babel.min.js">
-<script>window.__resources={"https://unpkg.com/react@18.3.1/umd/react.production.min.js":"./vendor/react.production.min.js","https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js":"./vendor/react-dom.production.min.js","https://unpkg.com/@babel/standalone@7.29.0/babel.min.js":"./vendor/babel.min.js"};</script>
-</head>
-<body>
-<div id="bootVeil" aria-hidden="true">
-  <div style="position:relative;padding:28px 40px;border:1px solid rgba(242,240,233,.2)">
-    <div style="position:absolute;left:-1px;top:-1px;width:14px;height:14px;border-left:1px solid #A8FF00;border-top:1px solid #A8FF00"></div>
-    <div style="position:absolute;right:-1px;top:-1px;width:14px;height:14px;border-right:1px solid #A8FF00;border-top:1px solid #A8FF00"></div>
-    <div style="position:absolute;left:-1px;bottom:-1px;width:14px;height:14px;border-left:1px solid #A8FF00;border-bottom:1px solid #A8FF00"></div>
-    <div style="position:absolute;right:-1px;bottom:-1px;width:14px;height:14px;border-right:1px solid #A8FF00;border-bottom:1px solid #A8FF00"></div>
-    <div style="font-family:'Archivo Black','Inter',sans-serif;text-transform:uppercase;font-size:22px;color:#F2F0E9;text-align:center;margin-bottom:12px;letter-spacing:.02em">K. EWING</div>
-    <div style="display:flex;align-items:center;justify-content:center;gap:8px;font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#A8FF00">
-      <span style="width:60px;height:2px;background:rgba(242,240,233,.2);position:relative;overflow:hidden;display:inline-block">
-        <span id="bootVeilSweep"></span>
-      </span>
-      Loading
-    </div>
-  </div>
-</div>
-<script src="./support.js"></script>
-<x-dc>
-<helmet>
 <link rel="icon" href="images/favicon.ico">
 <title>Krystyna Ewing — UX, Art, Technology</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="Krystyna Ewing — UX designer and creative technologist. Selected work, the workbench, and the rest.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
 <script src="./image-slot.js"></script>
+<script>try{if(localStorage.getItem('ke-theme')==='light')document.documentElement.setAttribute('data-theme','light');}catch(e){}</script>
 <style>
 html{--bg:#0B0B0B;--fg:#F2F0E9;--green:#A8FF00;--on-green:#0B0B0B;--charcoal:#252525;--muted:#9a978e;--line:rgba(242,240,233,.2);--rail-w:48px;--margin-w:96px;--grain:.14;background:var(--bg);color:var(--fg);scroll-behavior:smooth}
 @media (max-width:859px){html{--grain:0}body::after{content:none!important}}
@@ -59,14 +22,16 @@ a:hover{color:var(--green)}
 ::selection{background:var(--green);color:var(--on-green)}
 .display{font-family:'Archivo Black','Inter',sans-serif;font-weight:400;text-transform:uppercase}
 .mono{font-family:'Space Mono',monospace}
-#pageCursor{position:fixed;left:0;top:0;z-index:260;width:16px;height:16px;margin:-8px;border:1px solid var(--green);border-radius:50%;pointer-events:none;transition:width .2s ease,height .2s ease,margin .2s ease}
-@media (hover:none),(pointer:coarse){#pageCursor{display:none}}
-#livingGlow{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.14;mix-blend-mode:screen;transform:translateZ(0);background:radial-gradient(520px circle at var(--mx,50vw) var(--my,20vh),color-mix(in srgb,var(--green) 55%,transparent),transparent 72%)}
-@media (hover:none),(pointer:coarse),(prefers-reduced-motion:reduce){#livingGlow{display:none}}
+#pageCursor{position:fixed;left:0;top:0;z-index:260;width:16px;height:16px;margin:-8px;border:1px solid var(--green);border-radius:50%;pointer-events:none;transition:width .2s ease,height .2s ease,margin .2s ease;display:none}
+@media (hover:hover) and (pointer:fine){html.js-ready #pageCursor{display:block}}
+#livingGlow{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.14;mix-blend-mode:screen;transform:translateZ(0);background:radial-gradient(520px circle at var(--mx,50vw) var(--my,20vh),color-mix(in srgb,var(--green) 55%,transparent),transparent 72%);display:none}
+@media (hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference){html.js-ready #livingGlow{display:block}}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}[data-reveal]{opacity:1!important;translate:0!important}}
-[data-reveal]{opacity:var(--rv,0);translate:0 calc((1 - var(--rv,0)) * 1.2rem);transition:opacity .6s ease,translate .6s cubic-bezier(.16,1,.3,1)}
 @media (prefers-reduced-motion:no-preference){
-  #workbench{transition:clip-path 1s cubic-bezier(.16,1,.3,1)}
+  html.js-ready [data-reveal]{opacity:var(--rv,0);translate:0 calc((1 - var(--rv,0)) * 1.2rem);transition:opacity .6s ease,translate .6s cubic-bezier(.16,1,.3,1)}
+}
+@media (prefers-reduced-motion:no-preference){
+  html.js-ready #workbench{transition:clip-path 1s cubic-bezier(.16,1,.3,1)}
 }
 .regmark{position:absolute;width:14px;height:14px;pointer-events:none;color:var(--line)}
 .regmark::before,.regmark::after{content:"";position:absolute;background:currentColor}
@@ -79,10 +44,13 @@ nav[aria-label="Primary"] a[aria-current="true"]{color:var(--green);box-shadow:i
 #marginRail{position:sticky;top:0;align-self:start;height:100vh;display:flex;flex-direction:column;justify-content:space-between;padding:20px 14px;border-right:1px solid var(--line)}
 #marginRail .idx{font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);transition:color .2s ease}
 #marginRail .idx[data-current="true"]{color:var(--green)}
-#workbench{margin-left:calc(-1 * var(--margin-w));padding-left:calc(var(--margin-w) + clamp(16px,3vw,32px))!important}
+#workbench{margin-left:calc(-1 * var(--margin-w));padding-left:calc(var(--margin-w) + clamp(16px,3vw,32px))!important;clip-path:inset(0 0);overflow:hidden}
+html.js-ready #workbench{clip-path:inset(calc((1 - var(--p,0)) * 10%) calc((1 - var(--p,0)) * 6%))}
 #mobileBar{display:none}
 #mobileMenu a[aria-current="true"]{color:var(--green)}
 #numberField{position:fixed;inset:0;z-index:1;pointer-events:none;display:block;width:100%;height:100%;opacity:.13;transform:translateZ(0)}
+#mobileMenuBackdrop,#mobileMenu{display:none}
+.piece{position:relative}
 @media (max-width:859px){
   #pageGrid{grid-template-columns:1fr}
   #marginRail{display:none}
@@ -105,47 +73,56 @@ nav[aria-label="Primary"] a[aria-current="true"]{color:var(--green);box-shadow:i
   .wrk-feature-grid>*{grid-column:1/-1!important}
   .wrk-pair{grid-template-columns:1fr!important;gap:clamp(28px,6vh,48px)!important}
 }
+#heroBio{position:absolute;left:50%;top:50%;width:min(90%,420px);z-index:6;transform:translate(-50%,-50%) scale(.98);opacity:0;pointer-events:none;transition:opacity .2s ease,transform .2s ease}
+#heroBio[data-open="true"]{transform:translate(-50%,-50%) scale(1);opacity:1;pointer-events:auto;transition:opacity .3s ease,transform .3s ease}
+#mqTrack{display:flex;width:max-content;white-space:nowrap;font-size:clamp(40px,8vw,120px);line-height:.9}
+@media (prefers-reduced-motion:no-preference){
+  html.js-ready #mqTrack{animation:mqScroll 28s linear infinite}
+}
+@keyframes mqScroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+#mqTrack[data-paused="true"]{animation-play-state:paused}
 </style>
-</helmet>
+</head>
+<body>
 
-<a href="#main" style="position:fixed;left:16px;top:-80px;z-index:400;background:var(--green);color:var(--on-green);padding:12px 18px;font:700 14px/1 'Space Mono',monospace;text-decoration:none" style-focus="top:16px">Skip to content</a>
+<a href="#main" style="position:fixed;left:16px;top:-80px;z-index:400;background:var(--green);color:var(--on-green);padding:12px 18px;font:700 14px/1 'Space Mono',monospace;text-decoration:none">Skip to content</a>
 
-<div ref="{{ progressRef }}" aria-hidden="true" style="position:fixed;left:0;top:0;z-index:250;height:3px;width:0%;background:var(--green);pointer-events:none"></div>
-<div id="pageCursor" ref="{{ cursorRef }}" aria-hidden="true"></div>
+<div id="scrollProgress" aria-hidden="true" style="position:fixed;left:0;top:0;z-index:250;height:3px;width:0%;background:var(--green);pointer-events:none"></div>
+<div id="pageCursor" aria-hidden="true"></div>
 <div id="livingGlow" aria-hidden="true"></div>
 
 <canvas id="numberField" aria-hidden="true"></canvas>
 
 <nav aria-label="Primary" style="position:fixed;right:0;top:0;bottom:0;z-index:200;width:var(--rail-w);display:flex;flex-direction:column;background:var(--bg);border-left:1px solid var(--line)">
-  <a href="#top" aria-label="K. Ewing, back to top" class="mono" style="flex:0 0 auto;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(180deg);padding:16px 0;font-size:15px;font-weight:700;letter-spacing:.04em;text-decoration:none;color:var(--fg);border-bottom:1px solid var(--line);min-height:44px;transition:color .2s ease" style-hover="color:var(--green)">K. EWING</a>
-  <a href="#work" aria-current="{{ curWork }}" class="mono" style="flex:1 1 0;min-height:44px;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(180deg);font-size:11px;font-weight:700;letter-spacing:.18em;text-decoration:none;color:var(--fg);border-bottom:1px solid var(--line);transition:color .2s ease,letter-spacing .2s ease" style-hover="color:var(--green);letter-spacing:.26em">WORK</a>
-  <a href="#workbench" aria-current="{{ curBench }}" class="mono" style="flex:1 1 0;min-height:44px;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(180deg);font-size:11px;font-weight:700;letter-spacing:.18em;text-decoration:none;color:var(--fg);border-bottom:1px solid var(--line);transition:color .2s ease,letter-spacing .2s ease" style-hover="color:var(--green);letter-spacing:.26em">WORKBENCH</a>
-  <a href="#about" aria-current="{{ curAbout }}" class="mono" style="flex:1 1 0;min-height:44px;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(180deg);font-size:11px;font-weight:700;letter-spacing:.18em;text-decoration:none;color:var(--fg);border-bottom:1px solid var(--line);transition:color .2s ease,letter-spacing .2s ease" style-hover="color:var(--green);letter-spacing:.26em">ABOUT</a>
-  <a href="#contact" aria-current="{{ curContact }}" class="mono" style="flex:1 1 0;min-height:44px;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(180deg);font-size:11px;font-weight:700;letter-spacing:.18em;text-decoration:none;color:var(--fg);transition:color .2s ease,letter-spacing .2s ease" style-hover="color:var(--green);letter-spacing:.26em">CONTACT</a>
-  <button type="button" onClick="{{ toggleTheme }}" aria-pressed="{{ lightPressed }}" aria-label="Switch to {{ themeLabel }} mode" class="mono" style="flex:0 0 auto;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(180deg);padding:14px 0;font-size:10px;font-weight:700;letter-spacing:.14em;text-decoration:none;color:var(--muted);border:0;border-top:1px solid var(--line);background:var(--bg);cursor:pointer;min-height:44px;transition:color .2s ease" style-hover="color:var(--green)">{{ themeLabel }}</button>
+  <a href="#top" aria-label="K. Ewing, back to top" class="mono" style="flex:0 0 auto;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(180deg);padding:16px 0;font-size:15px;font-weight:700;letter-spacing:.04em;text-decoration:none;color:var(--fg);border-bottom:1px solid var(--line);min-height:44px;transition:color .2s ease">K. EWING</a>
+  <a href="#work" data-nav="work" aria-current="false" class="mono" style="flex:1 1 0;min-height:44px;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(180deg);font-size:11px;font-weight:700;letter-spacing:.18em;text-decoration:none;color:var(--fg);border-bottom:1px solid var(--line);transition:color .2s ease,letter-spacing .2s ease">WORK</a>
+  <a href="#workbench" data-nav="workbench" aria-current="false" class="mono" style="flex:1 1 0;min-height:44px;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(180deg);font-size:11px;font-weight:700;letter-spacing:.18em;text-decoration:none;color:var(--fg);border-bottom:1px solid var(--line);transition:color .2s ease,letter-spacing .2s ease">WORKBENCH</a>
+  <a href="#about" data-nav="about" aria-current="false" class="mono" style="flex:1 1 0;min-height:44px;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(180deg);font-size:11px;font-weight:700;letter-spacing:.18em;text-decoration:none;color:var(--fg);border-bottom:1px solid var(--line);transition:color .2s ease,letter-spacing .2s ease">ABOUT</a>
+  <a href="#contact" data-nav="contact" aria-current="false" class="mono" style="flex:1 1 0;min-height:44px;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(180deg);font-size:11px;font-weight:700;letter-spacing:.18em;text-decoration:none;color:var(--fg);transition:color .2s ease,letter-spacing .2s ease">CONTACT</a>
+  <button type="button" id="themeToggle" aria-pressed="false" aria-label="Switch to light mode" class="mono" style="flex:0 0 auto;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(180deg);padding:14px 0;font-size:10px;font-weight:700;letter-spacing:.14em;text-decoration:none;color:var(--muted);border:0;border-top:1px solid var(--line);background:var(--bg);cursor:pointer;min-height:44px;transition:color .2s ease">LIGHT</button>
 </nav>
 
 <header id="mobileBar" class="mono" aria-label="Mobile header" style="position:fixed;left:0;right:0;top:0;z-index:220;align-items:center;justify-content:space-between;padding:0 16px;height:56px;background:var(--bg);border-bottom:1px solid var(--line)">
-  <a href="#top" aria-label="K. Ewing, back to top" style="font-size:15px;font-weight:700;letter-spacing:.04em;text-decoration:none;color:var(--fg);min-height:44px;display:inline-flex;align-items:center" style-hover="color:var(--green)">K. EWING</a>
-  <button type="button" onClick="{{ menuToggle }}" aria-expanded="{{ menuExpandedAttr }}" aria-controls="mobileMenu" aria-label="{{ menuAriaLabel }}" style="min-width:44px;min-height:44px;padding:0 12px;border:1px solid var(--line);background:transparent;color:var(--fg);font:700 11px/1 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;cursor:pointer" style-hover="color:var(--green);border-color:var(--green)">{{ menuButtonLabel }}</button>
+  <a href="#top" aria-label="K. Ewing, back to top" style="font-size:15px;font-weight:700;letter-spacing:.04em;text-decoration:none;color:var(--fg);min-height:44px;display:inline-flex;align-items:center">K. EWING</a>
+  <button type="button" id="menuToggle" aria-expanded="false" aria-controls="mobileMenu" aria-label="Open menu" style="min-width:44px;min-height:44px;padding:0 12px;border:1px solid var(--line);background:transparent;color:var(--fg);font:700 11px/1 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;cursor:pointer">MENU</button>
 </header>
 
-<div id="mobileMenuBackdrop" aria-hidden="true" onClick="{{ menuClose }}" style="{{ menuBackdropStyle }}"></div>
+<div id="mobileMenuBackdrop" aria-hidden="true" style="position:fixed;inset:56px 0 0 0;z-index:215;background:rgba(0,0,0,.5)"></div>
 
-<nav id="mobileMenu" aria-label="Mobile" class="mono" style="{{ menuPanelStyle }}">
-  <a href="#work" onClick="{{ menuClose }}" aria-current="{{ curWork }}" style="display:flex;align-items:center;min-height:52px;padding:0 20px;font-size:14px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;color:var(--fg);border-bottom:1px solid var(--line)" style-hover="color:var(--green)">Work</a>
-  <a href="#workbench" onClick="{{ menuClose }}" aria-current="{{ curBench }}" style="display:flex;align-items:center;min-height:52px;padding:0 20px;font-size:14px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;color:var(--fg);border-bottom:1px solid var(--line)" style-hover="color:var(--green)">Workbench</a>
-  <a href="#about" onClick="{{ menuClose }}" aria-current="{{ curAbout }}" style="display:flex;align-items:center;min-height:52px;padding:0 20px;font-size:14px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;color:var(--fg);border-bottom:1px solid var(--line)" style-hover="color:var(--green)">About</a>
-  <a href="#contact" onClick="{{ menuClose }}" aria-current="{{ curContact }}" style="display:flex;align-items:center;min-height:52px;padding:0 20px;font-size:14px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;color:var(--fg);border-bottom:1px solid var(--line)" style-hover="color:var(--green)">Contact</a>
-  <button type="button" onClick="{{ toggleTheme }}" aria-pressed="{{ lightPressed }}" style="display:flex;align-items:center;justify-content:space-between;width:100%;min-height:52px;padding:0 20px;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;border:0;background:transparent;color:var(--muted);cursor:pointer" style-hover="color:var(--green)"><span>Theme</span><span>{{ themeLabel }}</span></button>
+<nav id="mobileMenu" aria-label="Mobile" class="mono" style="position:fixed;left:0;right:0;top:56px;z-index:220;background:var(--bg);border-bottom:1px solid var(--line);max-height:calc(100vh - 56px);overflow-y:auto">
+  <a href="#work" data-nav-mobile="work" aria-current="false" style="display:flex;align-items:center;min-height:52px;padding:0 20px;font-size:14px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;color:var(--fg);border-bottom:1px solid var(--line)">Work</a>
+  <a href="#workbench" data-nav-mobile="workbench" aria-current="false" style="display:flex;align-items:center;min-height:52px;padding:0 20px;font-size:14px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;color:var(--fg);border-bottom:1px solid var(--line)">Workbench</a>
+  <a href="#about" data-nav-mobile="about" aria-current="false" style="display:flex;align-items:center;min-height:52px;padding:0 20px;font-size:14px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;color:var(--fg);border-bottom:1px solid var(--line)">About</a>
+  <a href="#contact" data-nav-mobile="contact" aria-current="false" style="display:flex;align-items:center;min-height:52px;padding:0 20px;font-size:14px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;color:var(--fg);border-bottom:1px solid var(--line)">Contact</a>
+  <button type="button" id="themeToggleMobile" aria-pressed="false" style="display:flex;align-items:center;justify-content:space-between;width:100%;min-height:52px;padding:0 20px;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;border:0;background:transparent;color:var(--muted);cursor:pointer"><span>Theme</span><span id="themeToggleMobileLabel">Light</span></button>
 </nav>
 
 <div id="pageGrid">
 <aside id="marginRail" class="mono" aria-hidden="true">
-  <div class="idx" data-current="{{ curTop }}">001<br>Intro</div>
-  <div class="idx" data-current="{{ curWork }}">002<br>Work</div>
-  <div class="idx" data-current="{{ curBench }}">003<br>Bench</div>
-  <div class="idx" data-current="{{ curAbout }}">004<br>About</div>
+  <div class="idx" data-current="false" data-rail="top">001<br>Intro</div>
+  <div class="idx" data-current="false" data-rail="work">002<br>Work</div>
+  <div class="idx" data-current="false" data-rail="workbench">003<br>Bench</div>
+  <div class="idx" data-current="false" data-rail="about">004<br>About</div>
   <div class="idx" style="margin-top:auto;writing-mode:vertical-rl;transform:rotate(180deg);justify-self:start">Detroit, MI</div>
 </aside>
 <main id="main">
@@ -173,7 +150,7 @@ nav[aria-label="Primary"] a[aria-current="true"]{color:var(--green);box-shadow:i
     </div>
   </div>
 
-  <div onMouseEnter="{{ bioOpen }}" onMouseLeave="{{ bioClose }}" onKeyDown="{{ bioKey }}" style="position:relative;margin-top:clamp(28px,4.5vh,56px)">
+  <div id="bioHover" style="position:relative;margin-top:clamp(28px,4.5vh,56px)">
     <div class="regmark" aria-hidden="true" style="left:-1px;top:-1px"></div>
     <div class="regmark" aria-hidden="true" style="right:-1px;top:-1px"></div>
     <div class="regmark" aria-hidden="true" style="left:-1px;bottom:-1px"></div>
@@ -188,10 +165,10 @@ nav[aria-label="Primary"] a[aria-current="true"]{color:var(--green);box-shadow:i
         <span aria-hidden="true" style="position:absolute;inset:0;mix-blend-mode:color;background:var(--green);opacity:.24"></span>
         <span aria-hidden="true" class="mono" style="position:absolute;left:3%;top:9%;font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:#A8FF00;border:1px solid #A8FF00;padding:2px 6px;background:rgba(0,0,0,.6)">01 — Wing vein</span>
         <span aria-hidden="true" class="mono" style="position:absolute;right:4%;bottom:12%;font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:#A8FF00;border:1px solid #A8FF00;padding:2px 6px;background:rgba(0,0,0,.6)">02 — Thorax</span>
-        <button type="button" onClick="{{ bioToggle }}" aria-expanded="{{ bioExpanded }}" aria-controls="heroBio" aria-label="{{ bioAriaLabel }}" class="mono" style="position:absolute;z-index:5;left:4%;bottom:12%;display:inline-flex;align-items:center;gap:6px;min-height:36px;padding:4px 10px;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#A8FF00;border:1px solid #A8FF00;background:rgba(0,0,0,.6);cursor:pointer" style-hover="background:#A8FF00;color:#0B0B0B">{{ cueGlyph }} {{ cueWord }}</button>
+        <button type="button" id="bioToggle" aria-expanded="false" aria-controls="heroBio" aria-label="Expand bio — reveal full bio" class="mono" style="position:absolute;z-index:5;left:4%;bottom:12%;display:inline-flex;align-items:center;gap:6px;min-height:36px;padding:4px 10px;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#A8FF00;border:1px solid #A8FF00;background:rgba(0,0,0,.6);cursor:pointer"><span id="bioGlyph">[ + ]</span> <span id="bioWord">Expand bio</span></button>
       </div>
-      <details class="mono" onMouseEnter="{{ menuStop }}" onMouseMove="{{ menuStop }}" style="position:absolute;z-index:7;right:3%;top:8%;width:min(46%,210px);max-width:calc(100% - 6%);background:rgba(0,0,0,.78);border:1px solid var(--line)">
-        <summary onClick="{{ bioForceClose }}" style="list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:8px;min-height:30px;padding:6px 10px;font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:#A8FF00">
+      <details class="mono" id="jumpDetails" style="position:absolute;z-index:7;right:3%;top:8%;width:min(46%,210px);max-width:calc(100% - 6%);background:rgba(0,0,0,.78);border:1px solid var(--line)">
+        <summary style="list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:8px;min-height:30px;padding:6px 10px;font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:#A8FF00">
           <div class="regmark" aria-hidden="true" style="left:-1px;top:-1px"></div>
           <div class="regmark" aria-hidden="true" style="right:-1px;top:-1px"></div>
           <div class="regmark" aria-hidden="true" style="left:-1px;bottom:-1px"></div>
@@ -200,15 +177,15 @@ nav[aria-label="Primary"] a[aria-current="true"]{color:var(--green);box-shadow:i
         </summary>
         <nav aria-label="Jump to project">
           <ol style="list-style:none;margin:0;padding:2px 0;border-top:1px solid var(--line)">
-            <li><a href="#wrk-01" style="display:flex;align-items:center;min-height:30px;padding:2px 10px;font-size:10px;letter-spacing:.03em;color:#F2F0E9;text-decoration:none" style-hover="color:#A8FF00">01 — ResiliencePoint</a></li>
-            <li><a href="work/hazadapt-loco.html" style="display:flex;align-items:center;min-height:30px;padding:2px 10px;font-size:10px;letter-spacing:.03em;color:#F2F0E9;text-decoration:none" style-hover="color:#A8FF00">02 — LoCo</a></li>
-            <li><a href="work/hazadapt-prep-checks.html" style="display:flex;align-items:center;min-height:30px;padding:2px 10px;font-size:10px;letter-spacing:.03em;color:#F2F0E9;text-decoration:none" style-hover="color:#A8FF00">03 — Prep Checks</a></li>
-            <li><a href="#wrk-04" style="display:flex;align-items:center;min-height:30px;padding:2px 10px;font-size:10px;letter-spacing:.03em;color:#F2F0E9;text-decoration:none" style-hover="color:#A8FF00">04 — True Link</a></li>
-            <li><a href="#wrk-05" style="display:flex;align-items:center;min-height:30px;padding:2px 10px;font-size:10px;letter-spacing:.03em;color:#F2F0E9;text-decoration:none" style-hover="color:#A8FF00">05 — WellDone</a></li>
+            <li><a href="#wrk-01" style="display:flex;align-items:center;min-height:30px;padding:2px 10px;font-size:10px;letter-spacing:.03em;color:#F2F0E9;text-decoration:none">01 — ResiliencePoint</a></li>
+            <li><a href="work/hazadapt-loco.html" style="display:flex;align-items:center;min-height:30px;padding:2px 10px;font-size:10px;letter-spacing:.03em;color:#F2F0E9;text-decoration:none">02 — LoCo</a></li>
+            <li><a href="work/hazadapt-prep-checks.html" style="display:flex;align-items:center;min-height:30px;padding:2px 10px;font-size:10px;letter-spacing:.03em;color:#F2F0E9;text-decoration:none">03 — Prep Checks</a></li>
+            <li><a href="#wrk-04" style="display:flex;align-items:center;min-height:30px;padding:2px 10px;font-size:10px;letter-spacing:.03em;color:#F2F0E9;text-decoration:none">04 — True Link</a></li>
+            <li><a href="#wrk-05" style="display:flex;align-items:center;min-height:30px;padding:2px 10px;font-size:10px;letter-spacing:.03em;color:#F2F0E9;text-decoration:none">05 — WellDone</a></li>
           </ol>
         </nav>
       </details>
-      <div id="heroBio" aria-hidden="{{ bioHidden }}" style="{{ bioStyle }}">
+      <div id="heroBio" aria-hidden="true">
       <div style="max-width:56ch">
         <div aria-hidden="true" style="display:flex;justify-content:center">
           <div style="position:relative;width:76px;height:18px;background:#2b2b2b;border:1px solid #000;border-bottom:0;border-radius:3px 3px 0 0;box-shadow:0 -1px 0 rgba(255,255,255,.08) inset">
@@ -218,7 +195,7 @@ nav[aria-label="Primary"] a[aria-current="true"]{color:var(--green);box-shadow:i
         <div style="display:grid;gap:12px;padding:clamp(20px,2.4vw,26px) clamp(18px,2.2vw,24px) clamp(22px,2.8vw,28px);background:#F2F0E9;border:1px solid #000;border-top:2px solid #000;max-height:min(42vh,380px);overflow-y:auto">
           <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;padding-bottom:8px;border-bottom:1px solid rgba(11,11,11,.3)">
             <p class="mono" style="margin:0;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#0B0B0B;opacity:.6">Attached — Full Bio</p>
-            <button type="button" tabindex="{{ bioTabIndex }}" onClick="{{ bioForceClose }}" aria-label="Close bio" class="mono" style="min-width:28px;min-height:28px;padding:0;border:0;background:transparent;color:#0B0B0B;font-size:14px;line-height:1;cursor:pointer;opacity:.6">✕</button>
+            <button type="button" id="bioClose" tabindex="-1" aria-label="Close bio" class="mono" style="min-width:28px;min-height:28px;padding:0;border:0;background:transparent;color:#0B0B0B;font-size:14px;line-height:1;cursor:pointer;opacity:.6">✕</button>
           </div>
           <p style="margin:0;font:600 17px/1.4 'Inter',sans-serif;color:#0B0B0B">I'm a designer, artist, developer, and general maker of things. I started in software development, moved into UX because I wanted more room to be creative, and apparently never learned how to pick one thing and stick with it.</p>
           <p style="margin:0;font:400 15px/1.5 'Inter',sans-serif;color:#0B0B0B">I've spent the last 8+ years designing, building, testing, breaking things, and figuring out how to make them work better. Outside of UX, I make art, build 3D prints, mess around with code, and start projects because I thought, &ldquo;I wonder if I could make that.&rdquo;</p>
@@ -231,7 +208,7 @@ nav[aria-label="Primary"] a[aria-current="true"]{color:var(--green);box-shadow:i
       <p class="mono" style="margin:0;font-size:12px;line-height:1.7;color:var(--muted)"><strong style="color:var(--fg)">01 — Wing vein.</strong> Branching, load-bearing structure — the same kind of logic I look for in an interface, just evolved instead of drawn.</p>
       <p class="mono" style="margin:0;font-size:12px;line-height:1.7;color:var(--muted)"><strong style="color:var(--fg)">02 — Thorax.</strong> Built to vibrate loud enough to find a mate from a quarter mile off. No notes app required.</p>
     </div>
-    <p class="mono" style="margin:0;padding:10px clamp(16px,2.4vw,24px);border:1px solid var(--line);border-top:0;font-size:10px;letter-spacing:.02em;color:var(--muted)">Photograph by <a href="https://unsplash.com/@mayulec" style="color:var(--fg)" style-hover="color:var(--green)">Maya Alexa G. Romero</a> on <a href="https://unsplash.com/photos/a-colorful-cicada-with-translucent-wings-on-black-background-YVafzB3-8jQ" style="color:var(--fg)" style-hover="color:var(--green)">Unsplash</a>, licensed under the <a href="https://unsplash.com/license" style="color:var(--fg)" style-hover="color:var(--green)">Unsplash License</a>. Desaturated and tinted to match the site.</p>
+    <p class="mono" style="margin:0;padding:10px clamp(16px,2.4vw,24px);border:1px solid var(--line);border-top:0;font-size:10px;letter-spacing:.02em;color:var(--muted)">Photograph by <a href="https://unsplash.com/@mayulec" style="color:var(--fg)">Maya Alexa G. Romero</a> on <a href="https://unsplash.com/photos/a-colorful-cicada-with-translucent-wings-on-black-background-YVafzB3-8jQ" style="color:var(--fg)">Unsplash</a>, licensed under the <a href="https://unsplash.com/license" style="color:var(--fg)">Unsplash License</a>. Desaturated and tinted to match the site.</p>
   </div>
 
   <div style="position:relative;margin-top:clamp(24px,3.4vh,40px);max-width:620px">
@@ -258,16 +235,16 @@ nav[aria-label="Primary"] a[aria-current="true"]{color:var(--green);box-shadow:i
           <span>Case study</span>
         </div>
         <div style="position:relative;overflow:hidden">
-          <img loading="lazy" src="images/work/hazadapt-resiliencepoint/platform-cover.png" alt="ResiliencePoint dashboard showing trending hazards and a nationwide activity map" style="display:block;width:100%;height:auto;filter:grayscale(1) contrast(1.25);transition:filter .5s ease" style-hover="filter:grayscale(.2) contrast(1.15)">
+          <img loading="lazy" src="images/work/hazadapt-resiliencepoint/platform-cover.png" alt="ResiliencePoint dashboard showing trending hazards and a nationwide activity map" style="display:block;width:100%;height:auto;filter:grayscale(1) contrast(1.25);transition:filter .5s ease" class="hoverfade">
         </div>
       </a>
       <div class="wrk-feature-grid" style="display:grid;grid-template-columns:repeat(12,1fr);gap:clamp(16px,2.4vw,32px);margin-top:clamp(16px,2.4vh,28px)">
-        <h3 class="display" style="grid-column:1/span7;margin:0;font-size:clamp(32px,4.4vw,64px);line-height:.95;text-transform:none"><a href="work/hazadapt-resiliencepoint.html" style="text-decoration:none;color:inherit" style-hover="color:var(--green)">ResiliencePoint</a></h3>
+        <h3 class="display" style="grid-column:1/span7;margin:0;font-size:clamp(32px,4.4vw,64px);line-height:.95;text-transform:none"><a href="work/hazadapt-resiliencepoint.html" style="text-decoration:none;color:inherit">ResiliencePoint</a></h3>
         <div class="mono" style="grid-column:8/span5">
           <p style="margin:0 0 8px;font-size:13px;font-style:italic;letter-spacing:.02em;color:var(--green)">Making Sense of the Chaos</p>
           <p style="margin:0 0 8px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)">HazAdapt · Lead UX Designer · 2023–2024</p>
           <p style="margin:0 0 18px;font:400 15px/1.55 'Inter',sans-serif;color:var(--fg)">We built what we thought people needed. Then the evidence changed the product.</p>
-          <a href="work/hazadapt-resiliencepoint.html" style="display:inline-flex;align-items:center;min-height:36px;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;color:var(--fg)" style-hover="color:var(--green)">→ Read the case study</a>
+          <a href="work/hazadapt-resiliencepoint.html" style="display:inline-flex;align-items:center;min-height:36px;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;color:var(--fg)">→ Read the case study</a>
         </div>
       </div>
     </article>
@@ -285,14 +262,14 @@ nav[aria-label="Primary"] a[aria-current="true"]{color:var(--green);box-shadow:i
             <span>Case study</span>
           </div>
           <div style="position:relative;overflow:hidden">
-            <img loading="lazy" src="images/hazadapt_album.png" alt="HazAdapt product collection" style="display:block;width:100%;height:auto;filter:grayscale(1) contrast(1.25);transition:filter .5s ease" style-hover="filter:grayscale(.2) contrast(1.15)">
+            <img loading="lazy" src="images/hazadapt_album.png" alt="HazAdapt product collection" style="display:block;width:100%;height:auto;filter:grayscale(1) contrast(1.25);transition:filter .5s ease" class="hoverfade">
           </div>
         </a>
         <div class="mono" style="margin-top:14px">
-          <h3 class="display" style="margin:0 0 8px;font-size:clamp(20px,2.2vw,30px);line-height:1;text-transform:none"><a href="work/hazadapt.html" style="text-decoration:none;color:inherit" style-hover="color:var(--green)">HazAdapt</a></h3>
+          <h3 class="display" style="margin:0 0 8px;font-size:clamp(20px,2.2vw,30px);line-height:1;text-transform:none"><a href="work/hazadapt.html" style="text-decoration:none;color:inherit">HazAdapt</a></h3>
           <p style="margin:0 0 6px;font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)">LoCo &amp; Prep Checks · UX Research · 2023–2024</p>
           <p style="margin:0 0 14px;font:400 13px/1.5 'Inter',sans-serif;color:var(--fg)">Local safety information and bite-sized prep activities — two product lines built to make preparedness something people actually do.</p>
-          <a href="work/hazadapt.html" style="display:inline-flex;align-items:center;min-height:32px;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;color:var(--fg)" style-hover="color:var(--green)">→ Explore HazAdapt</a>
+          <a href="work/hazadapt.html" style="display:inline-flex;align-items:center;min-height:32px;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;color:var(--fg)">→ Explore HazAdapt</a>
         </div>
       </article>
 
@@ -308,14 +285,14 @@ nav[aria-label="Primary"] a[aria-current="true"]{color:var(--green);box-shadow:i
             <span>Case study</span>
           </div>
           <div style="position:relative;overflow:hidden">
-            <img loading="lazy" src="images/True_Link_album.png" alt="True Link financial platform collection" style="display:block;width:100%;height:auto;filter:grayscale(1) contrast(1.25);transition:filter .5s ease" style-hover="filter:grayscale(.2) contrast(1.15)">
+            <img loading="lazy" src="images/True_Link_album.png" alt="True Link financial platform collection" style="display:block;width:100%;height:auto;filter:grayscale(1) contrast(1.25);transition:filter .5s ease" class="hoverfade">
           </div>
         </a>
         <div class="mono" style="margin-top:14px">
-          <h3 class="display" style="margin:0 0 8px;font-size:clamp(20px,2.2vw,30px);line-height:1;text-transform:none"><a href="work/true-link.html" style="text-decoration:none;color:inherit" style-hover="color:var(--green)">True Link Financial</a></h3>
+          <h3 class="display" style="margin:0 0 8px;font-size:clamp(20px,2.2vw,30px);line-height:1;text-transform:none"><a href="work/true-link.html" style="text-decoration:none;color:inherit">True Link Financial</a></h3>
           <p style="margin:0 0 6px;font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)">Financial UX · Workflow Design · 2023</p>
           <p style="margin:0 0 14px;font:400 13px/1.5 'Inter',sans-serif;color:var(--fg)">Financial tools built to protect autonomy, not just assets.</p>
-          <a href="work/true-link.html" style="display:inline-flex;align-items:center;min-height:32px;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;color:var(--fg)" style-hover="color:var(--green)">→ Explore True Link</a>
+          <a href="work/true-link.html" style="display:inline-flex;align-items:center;min-height:32px;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;color:var(--fg)">→ Explore True Link</a>
         </div>
       </article>
     </div>
@@ -333,34 +310,34 @@ nav[aria-label="Primary"] a[aria-current="true"]{color:var(--green);box-shadow:i
             <span>Case study</span>
           </div>
           <div style="position:relative;overflow:hidden">
-            <img loading="lazy" src="images/welldone_album.png" alt="WellDone water monitoring project collection" style="display:block;width:100%;height:auto;filter:grayscale(1) contrast(1.25);transition:filter .5s ease" style-hover="filter:grayscale(.2) contrast(1.15)">
+            <img loading="lazy" src="images/welldone_album.png" alt="WellDone water monitoring project collection" style="display:block;width:100%;height:auto;filter:grayscale(1) contrast(1.25);transition:filter .5s ease" class="hoverfade">
           </div>
         </a>
         <div class="mono" style="margin-top:14px">
-          <h3 class="display" style="margin:0 0 8px;font-size:clamp(20px,2.2vw,30px);line-height:1;text-transform:none"><a href="work/welldone-monitoring.html" style="text-decoration:none;color:inherit" style-hover="color:var(--green)">WellDone</a></h3>
+          <h3 class="display" style="margin:0 0 8px;font-size:clamp(20px,2.2vw,30px);line-height:1;text-transform:none"><a href="work/welldone-monitoring.html" style="text-decoration:none;color:inherit">WellDone</a></h3>
           <p style="margin:0 0 6px;font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)">UX/UI Design · Monitoring · 2022</p>
           <p style="margin:0 0 14px;font:400 13px/1.5 'Inter',sans-serif;color:var(--fg)">Turning a nonprofit's scattered well and sensor data into a monitoring workflow people can actually act on.</p>
-          <a href="work/welldone-monitoring.html" style="display:inline-flex;align-items:center;min-height:32px;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;color:var(--fg)" style-hover="color:var(--green)">→ View case study</a>
+          <a href="work/welldone-monitoring.html" style="display:inline-flex;align-items:center;min-height:32px;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;color:var(--fg)">→ View case study</a>
         </div>
       </article>
     </div>
   </div>
 
   <div class="mono" data-reveal style="margin-top:clamp(20px,3vh,32px);display:flex;flex-wrap:wrap;gap:8px 24px;font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:var(--muted)">
-    <a href="work/true-link-beneficiary-experience.html" style="text-decoration:none;color:inherit;min-height:32px;display:inline-flex;align-items:center" style-hover="color:var(--green)">True Link · Beneficiary Profile →</a>
-    <a href="work/true-link-create-draft-disbursements.html" style="text-decoration:none;color:inherit;min-height:32px;display:inline-flex;align-items:center" style-hover="color:var(--green)">True Link · Create Draft Disbursements →</a>
-    <a href="work/hazadapt.html" style="text-decoration:none;color:inherit;min-height:32px;display:inline-flex;align-items:center" style-hover="color:var(--green)">HazAdapt ecosystem · 2021–present →</a>
+    <a href="work/true-link-beneficiary-experience.html" style="text-decoration:none;color:inherit;min-height:32px;display:inline-flex;align-items:center">True Link · Beneficiary Profile →</a>
+    <a href="work/true-link-create-draft-disbursements.html" style="text-decoration:none;color:inherit;min-height:32px;display:inline-flex;align-items:center">True Link · Create Draft Disbursements →</a>
+    <a href="work/hazadapt.html" style="text-decoration:none;color:inherit;min-height:32px;display:inline-flex;align-items:center">HazAdapt ecosystem · 2021–present →</a>
   </div>
 </section>
 
-<section id="workbench" aria-labelledby="wb-h" style="position:relative;padding:clamp(32px,5vw,64px) clamp(16px,3vw,32px) clamp(40px,6vw,72px);border-top:1px solid var(--line);border-bottom:1px solid var(--line);clip-path:inset(calc((1 - var(--p,0)) * 10%) calc((1 - var(--p,0)) * 6%));overflow:hidden">
+<section id="workbench" aria-labelledby="wb-h" style="position:relative;padding:clamp(32px,5vw,64px) clamp(16px,3vw,32px) clamp(40px,6vw,72px);border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
   <div aria-hidden="true" class="dotfield" style="position:absolute;inset:0;z-index:0;pointer-events:none"></div>
   <p class="mono" style="position:relative;margin:0 0 clamp(20px,3vh,32px);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">Also true — art, experiments, things I make</p>
   <div style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:20px;margin-bottom:clamp(20px,3vw,36px)">
     <h2 id="wb-h" class="display" style="margin:0;font-size:clamp(36px,7vw,100px);line-height:.9">The Workbench</h2>
     <div class="mono" style="display:grid;gap:10px;justify-items:start;max-width:36ch">
-      <p style="margin:0;font:400 15px/1.4 'Inter',sans-serif">Apparently I can't leave things alone. {{ benchHint }}</p>
-      <button type="button" onClick="{{ resetDesk }}" style="font:700 12px/1 'Space Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--fg);background:transparent;border:1px solid var(--line);padding:0 14px;min-height:44px;cursor:pointer" style-hover="background:var(--fg);color:var(--bg)">↺ Reset table</button>
+      <p style="margin:0;font:400 15px/1.4 'Inter',sans-serif" id="benchHint">Apparently I can't leave things alone. Grab the tape to move things around. Arrow keys work too.</p>
+      <button type="button" id="resetDesk" style="font:700 12px/1 'Space Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--fg);background:transparent;border:1px solid var(--line);padding:0 14px;min-height:44px;cursor:pointer">↺ Reset table</button>
     </div>
   </div>
 
@@ -372,59 +349,59 @@ nav[aria-label="Primary"] a[aria-current="true"]{color:var(--green);box-shadow:i
     <li style="padding:8px 12px;background:var(--green);color:var(--on-green)">Strange prototypes</li>
   </ul>
 
-  <div ref="{{ deskRef }}" style="{{ deskStyle }}">
-    <div style="{{ reach.style }}">
+  <div id="desk" style="position:relative;height:clamp(640px, 62vw, 920px)">
+    <div class="piece" id="piece-reach" data-id="reach" style="position:absolute;left:2%;top:4%;width:38%;transform:rotate(-2deg);z-index:1">
       <figure style="margin:0;position:relative;border:1px solid var(--green)">
-        <button type="button" onPointerDown="{{ reach.down }}" onPointerMove="{{ reach.move }}" onPointerUp="{{ reach.up }}" onKeyDown="{{ reach.key }}" aria-label="Move Reach. Drag, or use arrow keys." class="mono" style="position:absolute;top:0;right:0;z-index:2;min-width:36px;min-height:36px;padding:0 10px;border:0;border-left:1px solid var(--green);border-bottom:1px solid var(--green);background:var(--bg);color:var(--green);font-size:14px;cursor:grab;touch-action:none">⠿</button>
+        <button type="button" class="drag-handle" data-piece="reach" aria-label="Move Reach. Drag, or use arrow keys." class="mono" style="position:absolute;top:0;right:0;z-index:2;min-width:36px;min-height:36px;padding:0 10px;border:0;border-left:1px solid var(--green);border-bottom:1px solid var(--green);background:var(--bg);color:var(--green);font-size:14px;cursor:grab;touch-action:none">⠿</button>
         <img loading="lazy" src="images/Artwork.png" alt="Digital illustration by Krystyna Ewing — a figure in a soft cap reaching a hand forward out of shadow." style="display:block;width:100%;height:auto" draggable="false">
         <figcaption class="mono" style="display:flex;justify-content:space-between;gap:10px;padding:8px 10px;border-top:1px solid var(--green);font-size:10px;letter-spacing:.04em;text-transform:uppercase;background:var(--bg);color:var(--fg)"><strong>No. 01 — Reach</strong><span>Digital illustration</span></figcaption>
       </figure>
     </div>
-    <div style="{{ note.style }}">
+    <div class="piece" id="piece-note" data-id="note" style="position:absolute;left:44%;top:3%;width:22%;transform:rotate(-1.5deg);z-index:1">
       <div style="position:relative;border:1px solid var(--line);padding:18px 16px 16px">
-        <button type="button" onPointerDown="{{ note.down }}" onPointerMove="{{ note.move }}" onPointerUp="{{ note.up }}" onKeyDown="{{ note.key }}" aria-label="Move note. Drag, or use arrow keys." class="mono" style="position:absolute;top:0;right:0;min-width:36px;min-height:36px;padding:0 10px;border:0;border-left:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--bg);color:var(--fg);font-size:14px;cursor:grab;touch-action:none">⠿</button>
+        <button type="button" class="drag-handle" data-piece="note" aria-label="Move note. Drag, or use arrow keys." class="mono" style="position:absolute;top:0;right:0;min-width:36px;min-height:36px;padding:0 10px;border:0;border-left:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--bg);color:var(--fg);font-size:14px;cursor:grab;touch-action:none">⠿</button>
         <p class="mono" style="margin:0 0 6px;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--green)">Note</p>
         <p style="margin:0;font-size:clamp(17px,1.8vw,22px);line-height:1.35;color:var(--fg)">I had an idea. Unfortunately, that meant I had to make it.</p>
       </div>
     </div>
-    <div style="{{ portrait.style }}">
+    <div class="piece" id="piece-portrait" data-id="portrait" style="position:absolute;left:60%;top:16%;width:34%;transform:rotate(2deg);z-index:1">
       <figure style="margin:0;position:relative;border:1px solid var(--line)">
-        <button type="button" onPointerDown="{{ portrait.down }}" onPointerMove="{{ portrait.move }}" onPointerUp="{{ portrait.up }}" onKeyDown="{{ portrait.key }}" aria-label="Move Self-Portrait. Drag, or use arrow keys." class="mono" style="position:absolute;top:0;right:0;z-index:2;min-width:36px;min-height:36px;padding:0 10px;border:0;border-left:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--bg);color:var(--fg);font-size:14px;cursor:grab;touch-action:none">⠿</button>
+        <button type="button" class="drag-handle" data-piece="portrait" aria-label="Move Self-Portrait. Drag, or use arrow keys." class="mono" style="position:absolute;top:0;right:0;z-index:2;min-width:36px;min-height:36px;padding:0 10px;border:0;border-left:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--bg);color:var(--fg);font-size:14px;cursor:grab;touch-action:none">⠿</button>
         <img loading="lazy" src="images/hero-portrait.png" alt="Hand-drawn self-portrait illustration by Krystyna Ewing: a character with a purple bucket hat and glowing green eyes, with her name lettered around it in purple marker." style="display:block;width:100%;height:auto" draggable="false">
         <figcaption class="mono" style="display:flex;justify-content:space-between;gap:10px;padding:8px 10px;border-top:1px solid var(--line);font-size:10px;letter-spacing:.04em;text-transform:uppercase;background:var(--bg);color:var(--fg)"><strong>No. 02 — Self-Portrait</strong><span>Digital illustration</span></figcaption>
       </figure>
     </div>
-    <div style="{{ first.style }}">
+    <div class="piece" id="piece-first" data-id="first" style="position:absolute;left:33%;top:40%;width:19%;transform:rotate(6deg);z-index:1">
       <figure style="margin:0;position:relative;border:1px solid var(--line)">
-        <button type="button" onPointerDown="{{ first.down }}" onPointerMove="{{ first.move }}" onPointerUp="{{ first.up }}" onKeyDown="{{ first.key }}" aria-label="Move First Pass. Drag, or use arrow keys." class="mono" style="position:absolute;top:0;right:0;z-index:2;min-width:36px;min-height:36px;padding:0 10px;border:0;border-left:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--bg);color:var(--fg);font-size:14px;cursor:grab;touch-action:none">⠿</button>
+        <button type="button" class="drag-handle" data-piece="first" aria-label="Move First Pass. Drag, or use arrow keys." class="mono" style="position:absolute;top:0;right:0;z-index:2;min-width:36px;min-height:36px;padding:0 10px;border:0;border-left:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--bg);color:var(--fg);font-size:14px;cursor:grab;touch-action:none">⠿</button>
         <img loading="lazy" src="images/website_hero.png" alt="An early, unfinished sketch mixing loose line art with a hand-lettered name banner." style="display:block;width:100%;height:auto" draggable="false">
         <figcaption class="mono" style="padding:8px 10px;border-top:1px solid var(--line);font-size:10px;letter-spacing:.04em;text-transform:uppercase;background:var(--bg);color:var(--fg)">No. 03 — First Pass · Sketch</figcaption>
       </figure>
     </div>
-    <div style="{{ fab.style }}">
+    <div class="piece" id="piece-fab" data-id="fab" style="position:absolute;left:5%;top:58%;width:17%;transform:rotate(-3deg);z-index:1">
       <div style="position:relative;border:1px solid var(--line)">
-        <button type="button" onPointerDown="{{ fab.down }}" onPointerMove="{{ fab.move }}" onPointerUp="{{ fab.up }}" onKeyDown="{{ fab.key }}" aria-label="Move Silver Skull. Drag, or use arrow keys." class="mono" style="position:absolute;top:0;right:0;z-index:2;min-width:36px;min-height:36px;padding:0 10px;border:0;border-left:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--bg);color:var(--fg);font-size:14px;cursor:grab;touch-action:none">⠿</button>
+        <button type="button" class="drag-handle" data-piece="fab" aria-label="Move Silver Skull. Drag, or use arrow keys." class="mono" style="position:absolute;top:0;right:0;z-index:2;min-width:36px;min-height:36px;padding:0 10px;border:0;border-left:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--bg);color:var(--fg);font-size:14px;cursor:grab;touch-action:none">⠿</button>
         <div style="width:100%;min-width:0;aspect-ratio:4/5;position:relative"><image-slot id="v2-fab" src="images/workbench/silver-skull.jpg" shape="rect" placeholder="3D print / fabrication photo"></image-slot></div>
         <p class="mono" style="margin:0;padding:8px 10px;border-top:1px solid var(--line);font-size:10px;letter-spacing:.04em;text-transform:uppercase;background:var(--bg);color:var(--fg)">No. 04 — Silver Skull · 3D printed, hand-painted</p>
       </div>
     </div>
-    <div style="{{ sculpt.style }}">
+    <div class="piece" id="piece-sculpt" data-id="sculpt" style="position:absolute;left:64%;top:64%;width:28%;transform:rotate(1.5deg);z-index:1">
       <div style="position:relative;border:1px solid var(--line)">
-        <button type="button" onPointerDown="{{ sculpt.down }}" onPointerMove="{{ sculpt.move }}" onPointerUp="{{ sculpt.up }}" onKeyDown="{{ sculpt.key }}" aria-label="Move Majin Buu. Drag, or use arrow keys." class="mono" style="position:absolute;top:0;right:0;z-index:2;min-width:36px;min-height:36px;padding:0 10px;border:0;border-left:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--bg);color:var(--fg);font-size:14px;cursor:grab;touch-action:none">⠿</button>
+        <button type="button" class="drag-handle" data-piece="sculpt" aria-label="Move Majin Buu. Drag, or use arrow keys." class="mono" style="position:absolute;top:0;right:0;z-index:2;min-width:36px;min-height:36px;padding:0 10px;border:0;border-left:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--bg);color:var(--fg);font-size:14px;cursor:grab;touch-action:none">⠿</button>
         <div style="width:100%;min-width:0;aspect-ratio:16/10;position:relative"><image-slot id="v2-sculpt" src="images/workbench/majin-buu-full.jpg" shape="rect" placeholder="Sculpture / mixed media photo"></image-slot></div>
         <p class="mono" style="margin:0;padding:8px 10px;border-top:1px solid var(--line);font-size:10px;letter-spacing:.04em;text-transform:uppercase;background:var(--bg);color:var(--fg)">No. 05 — Majin Buu · 3D printed, hand-painted</p>
       </div>
     </div>
-    <div style="{{ sticky.style }}">
+    <div class="piece" id="piece-sticky" data-id="sticky" style="position:absolute;left:31%;top:74%;width:27%;transform:rotate(-1.5deg);z-index:1">
       <div style="position:relative;padding:18px 16px 16px;background:var(--green);color:var(--on-green)">
-        <button type="button" onPointerDown="{{ sticky.down }}" onPointerMove="{{ sticky.move }}" onPointerUp="{{ sticky.up }}" onKeyDown="{{ sticky.key }}" aria-label="Move note. Drag, or use arrow keys." class="mono" style="position:absolute;top:0;right:0;min-width:36px;min-height:36px;padding:0 10px;border:0;border-left:1px solid var(--on-green);background:var(--green);color:var(--on-green);font-size:14px;cursor:grab;touch-action:none">⠿</button>
+        <button type="button" class="drag-handle" data-piece="sticky" aria-label="Move note. Drag, or use arrow keys." class="mono" style="position:absolute;top:0;right:0;min-width:36px;min-height:36px;padding:0 10px;border:0;border-left:1px solid var(--on-green);background:var(--green);color:var(--on-green);font-size:14px;cursor:grab;touch-action:none">⠿</button>
         <p class="mono" style="margin:0 0 6px;font-size:10px;letter-spacing:.1em;text-transform:uppercase">More to come</p>
         <p style="margin:0;font:600 15px/1.4 'Inter',sans-serif">A couple of the physical pieces made it onto the table. More — sculpture, prints, anything made with my hands instead of a tablet — is still getting photographed.</p>
       </div>
     </div>
   </div>
 
-  <a href="art.html" class="mono" style="margin-top:clamp(24px,3.5vw,40px);display:inline-flex;align-items:center;min-height:44px;font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;background:var(--fg);color:var(--bg);padding:0 18px;text-decoration:none" style-hover="background:var(--green);color:var(--on-green)">See what else I've been making →</a>
+  <a href="art.html" class="mono" style="margin-top:clamp(24px,3.5vw,40px);display:inline-flex;align-items:center;min-height:44px;font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;background:var(--fg);color:var(--bg);padding:0 18px;text-decoration:none">See what else I've been making →</a>
 </section>
 
 <section id="about" aria-labelledby="about-h" style="position:relative;padding:clamp(40px,6vw,72px) clamp(16px,3vw,32px);border-bottom:1px solid var(--line);display:grid;grid-template-columns:repeat(12,1fr);gap:clamp(20px,3vw,32px)">
@@ -440,7 +417,7 @@ nav[aria-label="Primary"] a[aria-current="true"]{color:var(--green);box-shadow:i
       <li style="border:1px solid var(--line);padding:7px 12px">Started in software, ended up in UX</li>
       <li style="border:1px solid var(--line);padding:7px 12px">Usually awake at 1am, building something</li>
     </ul>
-    <a href="resume.html" class="mono" style="font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;min-height:44px;display:inline-flex;align-items:center" style-hover="color:var(--green)">Want the longer version? View résumé →</a>
+    <a href="resume.html" class="mono" style="font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;min-height:44px;display:inline-flex;align-items:center">Want the longer version? View résumé →</a>
   </div>
 </section>
 
@@ -448,8 +425,8 @@ nav[aria-label="Primary"] a[aria-current="true"]{color:var(--green);box-shadow:i
 </div>
 
 <footer id="contact" style="position:relative;overflow:hidden;padding:0 0 64px">
-  <a href="mailto:hello@krystynaewing.com" aria-label="hello@krystynaewing.com — say something" onMouseEnter="{{ mqPause }}" onMouseLeave="{{ mqPlay }}" onFocus="{{ mqPause }}" onBlur="{{ mqPlay }}" style="position:relative;display:block;overflow:hidden;background:var(--green);color:var(--on-green);text-decoration:none;padding:clamp(14px,2vw,26px) 0;margin:24px 0 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)" style-hover="color:var(--on-green)">
-    <div ref="{{ mqRef }}" aria-hidden="true" class="display" style="display:flex;width:max-content;white-space:nowrap;font-size:clamp(40px,8vw,120px);line-height:.9">
+  <a href="mailto:hello@krystynaewing.com" id="mqLink" aria-label="hello@krystynaewing.com — say something" style="position:relative;display:block;overflow:hidden;background:var(--green);color:var(--on-green);text-decoration:none;padding:clamp(14px,2vw,26px) 0;margin:24px 0 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+    <div id="mqTrack" aria-hidden="true" class="display">
       <span style="padding-right:.4em">hello@krystynaewing.com ✕ say something ✕</span><span style="padding-right:.4em">hello@krystynaewing.com ✕ say something ✕</span>
     </div>
   </a>
@@ -458,325 +435,423 @@ nav[aria-label="Primary"] a[aria-current="true"]{color:var(--green);box-shadow:i
     <p class="mono" style="margin:0;font-size:11px;line-height:1.6;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)">© 2026 Krystyna Ewing<br><a href="resume.html">Résumé</a> · <a href="art.html">Art</a></p>
   </div>
 </footer>
-</x-dc>
-<script type="text/x-dc" data-dc-script>
-class Component extends DCLogic {
-  deskRef = React.createRef(); mqRef = React.createRef(); progressRef = React.createRef(); cursorRef = React.createRef();
-  defaults() {
-    return {
-      reach: { x: 2, y: 4, r: -2, w: 38 }, note: { x: 44, y: 3, r: -1.5, w: 22 },
-      portrait: { x: 60, y: 16, r: 2, w: 34 }, first: { x: 33, y: 40, r: 6, w: 19 },
-      fab: { x: 5, y: 58, r: -3, w: 17 }, sculpt: { x: 64, y: 64, r: 1.5, w: 28 },
-      sticky: { x: 31, y: 74, r: -1.5, w: 27 }
-    };
+
+<script>
+(function(){
+  'use strict';
+  var html = document.documentElement;
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // ---- theme ----
+  function applyThemeUI(){
+    var light = html.getAttribute('data-theme') === 'light';
+    var label = light ? 'DARK' : 'LIGHT';
+    var tt = document.getElementById('themeToggle');
+    var ttm = document.getElementById('themeToggleMobile');
+    var ttml = document.getElementById('themeToggleMobileLabel');
+    if (tt) { tt.textContent = label; tt.setAttribute('aria-pressed', light ? 'true' : 'false'); tt.setAttribute('aria-label', 'Switch to ' + (light ? 'dark' : 'light') + ' mode'); }
+    if (ttm) ttm.setAttribute('aria-pressed', light ? 'true' : 'false');
+    if (ttml) ttml.textContent = label === 'DARK' ? 'Dark' : 'Light';
   }
-  state = {
-    active: 'top', bio: false,
-    narrow: window.innerWidth < 760, canHover: window.matchMedia('(hover: hover) and (pointer: fine)').matches,
-    theme: document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark',
-    menuOpen: false,
-    pieces: this.defaults(), z: {}, top: 10
-  };
-  lockScroll() {
-    if (this.scrollLocked) return;
-    this.savedScrollY = window.scrollY;
-    const b = document.body.style;
-    b.position = 'fixed'; b.top = `-${this.savedScrollY}px`; b.left = '0'; b.right = '0'; b.overflow = 'hidden';
-    this.scrollLocked = true;
+  function toggleTheme(){
+    var next = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+    if (next === 'dark') html.removeAttribute('data-theme'); else html.setAttribute('data-theme', 'light');
+    try { localStorage.setItem('ke-theme', next); } catch(e){}
+    applyThemeUI();
+    if (window.__numberFieldDraw) window.__numberFieldDraw();
   }
-  unlockScroll() {
-    if (!this.scrollLocked) return;
-    const b = document.body.style;
-    b.position = ''; b.top = ''; b.left = ''; b.right = ''; b.overflow = '';
-    window.scrollTo(0, this.savedScrollY || 0);
-    this.scrollLocked = false;
+  applyThemeUI();
+  var themeToggle = document.getElementById('themeToggle');
+  var themeToggleMobile = document.getElementById('themeToggleMobile');
+  if (themeToggle) themeToggle.addEventListener('click', toggleTheme);
+  if (themeToggleMobile) themeToggleMobile.addEventListener('click', toggleTheme);
+
+  // ---- mobile menu ----
+  var menuToggle = document.getElementById('menuToggle');
+  var mobileMenu = document.getElementById('mobileMenu');
+  var mobileMenuBackdrop = document.getElementById('mobileMenuBackdrop');
+  var scrollLocked = false, savedScrollY = 0;
+  function lockScroll(){
+    if (scrollLocked) return;
+    savedScrollY = window.scrollY;
+    document.body.style.position = 'fixed';
+    document.body.style.top = (-savedScrollY) + 'px';
+    document.body.style.left = '0'; document.body.style.right = '0'; document.body.style.overflow = 'hidden';
+    scrollLocked = true;
   }
-  closeMenu() {
-    if (!this.state.menuOpen) return;
-    this.unlockScroll();
-    this.setState({ menuOpen: false });
+  function unlockScroll(){
+    if (!scrollLocked) return;
+    document.body.style.position = ''; document.body.style.top = ''; document.body.style.left = ''; document.body.style.right = ''; document.body.style.overflow = '';
+    window.scrollTo(0, savedScrollY || 0);
+    scrollLocked = false;
   }
-  initNumberField() {
+  function setMenuOpen(open){
+    if (menuToggle) { menuToggle.setAttribute('aria-expanded', open ? 'true' : 'false'); menuToggle.textContent = open ? 'CLOSE' : 'MENU'; menuToggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu'); }
+    if (mobileMenu) mobileMenu.style.display = open ? 'grid' : 'none';
+    if (mobileMenuBackdrop) mobileMenuBackdrop.style.display = open ? 'block' : 'none';
+    if (open) lockScroll(); else unlockScroll();
+  }
+  function closeMenu(){
+    if (menuToggle && menuToggle.getAttribute('aria-expanded') === 'true') setMenuOpen(false);
+  }
+  if (menuToggle) menuToggle.addEventListener('click', function(){
+    setMenuOpen(menuToggle.getAttribute('aria-expanded') !== 'true');
+  });
+  if (mobileMenuBackdrop) mobileMenuBackdrop.addEventListener('click', closeMenu);
+  window.addEventListener('keydown', function(e){ if (e.key === 'Escape') closeMenu(); });
+
+  // ---- scroll progress + reveal heal (batched reads then writes) ----
+  var progressEl = document.getElementById('scrollProgress');
+  function healReveals(){
+    var vh = window.innerHeight;
+    var pending = [];
+    document.querySelectorAll('[data-reveal]').forEach(function(el){
+      if (el.style.getPropertyValue('--rv') === '1') return;
+      pending.push(el);
+    });
+    var wb = document.getElementById('workbench');
+    var wbPending = wb && wb.style.getPropertyValue('--p') !== '1' ? wb : null;
+    var rects = pending.map(function(el){ return el.getBoundingClientRect(); });
+    var wbRect = wbPending ? wbPending.getBoundingClientRect() : null;
+    pending.forEach(function(el, i){
+      var r = rects[i];
+      if (r.top < vh * 1.15 && r.bottom > -200) el.style.setProperty('--rv', '1');
+    });
+    if (wbPending && wbRect.top < vh * 1.15) wbPending.style.setProperty('--p', '1');
+  }
+  var sraf = 0, numTimer = null, scrollEndTimer = null;
+  function onScroll(){
+    if (numTimer) { clearInterval(numTimer); numTimer = null; }
+    clearTimeout(scrollEndTimer);
+    scrollEndTimer = setTimeout(function(){ if (!reduce) startNumberTimer(); }, 300);
+    if (sraf) return;
+    sraf = requestAnimationFrame(function(){
+      sraf = 0;
+      var avail = document.documentElement.scrollHeight - window.innerHeight;
+      var amount = avail > 0 ? (window.scrollY / avail) * 100 : 0;
+      if (progressEl) progressEl.style.width = amount + '%';
+      healReveals();
+    });
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  // ---- cursor + glow (desktop/hover only) ----
+  var pageCursor = document.getElementById('pageCursor');
+  function onPointerMove(e){
+    if (pageCursor) pageCursor.style.transform = 'translate3d(' + e.clientX + 'px,' + e.clientY + 'px,0)';
+    if (!reduce) {
+      html.style.setProperty('--mx', e.clientX + 'px');
+      html.style.setProperty('--my', e.clientY + 'px');
+    }
+  }
+  window.addEventListener('pointermove', onPointerMove);
+
+  // ---- resize (throttled; narrow layout + close menu + heal) ----
+  var narrow = window.innerWidth < 760;
+  var rraf = 0;
+  function applyNarrow(){
+    document.querySelectorAll('.piece').forEach(function(el){ layoutPiece(el.dataset.id); });
+    var hint = document.getElementById('benchHint');
+    if (hint) hint.textContent = narrow ? "Here's what's on the table." : "Grab the tape to move things around. Arrow keys work too.";
+  }
+  function onResize(){
+    if (rraf) return;
+    rraf = requestAnimationFrame(function(){
+      rraf = 0;
+      var n = window.innerWidth < 760;
+      if (n !== narrow) { narrow = n; applyNarrow(); }
+      if (window.innerWidth >= 860) closeMenu();
+      healReveals();
+    });
+  }
+  window.addEventListener('resize', onResize, { passive: true });
+
+  // A late-loading image (or anything else) shifting the document's total
+  // height after the user's last scroll/resize event wouldn't otherwise
+  // re-trigger the reveal check, leaving whatever's now newly in view stuck
+  // hidden with nothing left to prompt it. Watch body size directly.
+  var bodyRo = new ResizeObserver(function(){ healReveals(); });
+  bodyRo.observe(document.body);
+
+  // ---- scroll-spy nav ----
+  var navLinks = Array.prototype.slice.call(document.querySelectorAll('[data-nav]'));
+  var navLinksMobile = Array.prototype.slice.call(document.querySelectorAll('[data-nav-mobile]'));
+  var railItems = Array.prototype.slice.call(document.querySelectorAll('[data-rail]'));
+  function setActive(id){
+    navLinks.forEach(function(a){ a.setAttribute('aria-current', a.dataset.nav === id ? 'true' : 'false'); });
+    navLinksMobile.forEach(function(a){ a.setAttribute('aria-current', a.dataset.navMobile === id ? 'true' : 'false'); });
+    railItems.forEach(function(el){ el.setAttribute('data-current', el.dataset.rail === id ? 'true' : 'false'); });
+  }
+  var spyIo = new IntersectionObserver(function(entries){
+    entries.forEach(function(en){ if (en.isIntersecting) setActive(en.target.id); });
+  }, { rootMargin: '-45% 0px -45% 0px' });
+  ['top','work','workbench','about','contact'].forEach(function(id){
+    var el = document.getElementById(id);
+    if (el) spyIo.observe(el);
+  });
+
+  // ---- reveal-on-scroll (primary: IntersectionObserver; backstop: healReveals above) ----
+  var revealIo = new IntersectionObserver(function(entries){
+    entries.forEach(function(en){ if (en.isIntersecting) en.target.style.setProperty('--rv', '1'); });
+  }, { threshold: .16 });
+  document.querySelectorAll('[data-reveal]').forEach(function(el){ revealIo.observe(el); });
+
+  var workbenchEl = document.getElementById('workbench');
+  if (workbenchEl) {
+    if (reduce) {
+      workbenchEl.style.setProperty('--p', '1');
+    } else {
+      var workbenchIo = new IntersectionObserver(function(entries){
+        entries.forEach(function(en){
+          if (en.isIntersecting) { en.target.style.setProperty('--p', '1'); workbenchIo.unobserve(en.target); }
+        });
+      }, { threshold: .12 });
+      workbenchIo.observe(workbenchEl);
+    }
+  }
+
+  // ---- decorative connecting line in Selected Work ----
+  function drawWorkVeins(){
+    var svg = document.getElementById('workVeins');
+    var grid = svg ? svg.parentElement : null;
+    if (!svg || !grid) return;
+    var path = svg.querySelector('path');
+    var badges = Array.prototype.slice.call(grid.querySelectorAll('[data-badge]')).sort(function(a,b){ return a.dataset.badge - b.dataset.badge; });
+    if (badges.length < 2) { path.setAttribute('d', ''); return; }
+    var gRect = grid.getBoundingClientRect();
+    if (!gRect.width || !gRect.height) return;
+    svg.setAttribute('viewBox', '0 0 ' + gRect.width + ' ' + gRect.height);
+    var pts = badges.map(function(b){
+      var r = b.getBoundingClientRect();
+      return { x: r.left + r.width / 2 - gRect.left, y: r.top - gRect.top };
+    });
+    var d = 'M ' + pts[0].x.toFixed(1) + ' ' + pts[0].y.toFixed(1);
+    for (var i = 1; i < pts.length; i++) d += ' L ' + pts[i].x.toFixed(1) + ' ' + pts[i].y.toFixed(1);
+    path.setAttribute('d', d);
+  }
+  var veinGrid = document.getElementById('work');
+  if (veinGrid) {
+    var veinRo = new ResizeObserver(function(){ drawWorkVeins(); });
+    veinRo.observe(veinGrid);
+  }
+  requestAnimationFrame(function(){ requestAnimationFrame(drawWorkVeins); });
+
+  // ---- hero bio popup ----
+  var canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  var bioHover = document.getElementById('bioHover');
+  var bioToggleBtn = document.getElementById('bioToggle');
+  var bioCloseBtn = document.getElementById('bioClose');
+  var heroBio = document.getElementById('heroBio');
+  var bioGlyph = document.getElementById('bioGlyph');
+  var bioWord = document.getElementById('bioWord');
+  var bioOpenState = false;
+  function setBio(open){
+    bioOpenState = open;
+    if (heroBio) {
+      heroBio.setAttribute('data-open', open ? 'true' : 'false');
+      heroBio.setAttribute('aria-hidden', open ? 'false' : 'true');
+    }
+    if (bioCloseBtn) bioCloseBtn.tabIndex = open ? 0 : -1;
+    if (bioToggleBtn) {
+      bioToggleBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      bioToggleBtn.setAttribute('aria-label', open ? 'Collapse — hide full bio' : 'Expand bio — reveal full bio');
+    }
+    if (bioGlyph) bioGlyph.textContent = open ? '[ − ]' : '[ + ]';
+    if (bioWord) bioWord.textContent = open ? 'Collapse' : 'Expand bio';
+  }
+  if (bioHover) {
+    bioHover.addEventListener('mouseenter', function(){ if (canHover && !bioOpenState) setBio(true); });
+    bioHover.addEventListener('mouseleave', function(){ if (bioOpenState) setBio(false); });
+    bioHover.addEventListener('keydown', function(e){ if (e.key === 'Escape') setBio(false); });
+  }
+  if (bioToggleBtn) bioToggleBtn.addEventListener('click', function(){
+    if (canHover) setBio(true); else setBio(!bioOpenState);
+  });
+  if (bioCloseBtn) bioCloseBtn.addEventListener('click', function(){ setBio(false); });
+  var jumpDetails = document.getElementById('jumpDetails');
+  if (jumpDetails) {
+    jumpDetails.addEventListener('mouseenter', function(e){ e.stopPropagation(); });
+    jumpDetails.addEventListener('mousemove', function(e){ e.stopPropagation(); });
+    var summary = jumpDetails.querySelector('summary');
+    if (summary) summary.addEventListener('click', function(){ setBio(false); });
+  }
+
+  // ---- number field canvas (desktop only) ----
+  var numberFieldGrid = null, numberFieldDraw = null, numberFieldPick = null;
+  function initNumberField(){
     if (window.innerWidth < 860) return;
-    const canvas = document.getElementById('numberField');
+    var canvas = document.getElementById('numberField');
     if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    const cell = 15;
-    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*+=-_<>/\\|~?'.split('');
-    const pick = () => chars[Math.floor(Math.random() * chars.length)];
-    let cols = 0, rows = 0, grid = [];
-    const draw = () => {
-      const color = getComputedStyle(document.documentElement).getPropertyValue('--green').trim() || '#A8FF00';
+    var ctx = canvas.getContext('2d');
+    var cell = 15;
+    var chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*+=-_<>/\\|~?'.split('');
+    function pick(){ return chars[Math.floor(Math.random() * chars.length)]; }
+    var cols = 0, rows = 0, grid = [];
+    function draw(){
+      var color = getComputedStyle(html).getPropertyValue('--green').trim() || '#A8FF00';
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.font = `${cell - 3}px 'Space Mono', monospace`;
+      ctx.font = (cell - 3) + "px 'Space Mono', monospace";
       ctx.textBaseline = 'top';
       ctx.fillStyle = color;
-      const skip = new Uint8Array(cols * rows);
-      document.querySelectorAll('img, image-slot').forEach(el => {
-        const r = el.getBoundingClientRect();
+      var skip = new Uint8Array(cols * rows);
+      document.querySelectorAll('img, image-slot').forEach(function(el){
+        var r = el.getBoundingClientRect();
         if (r.width <= 0 || r.height <= 0 || r.bottom < 0 || r.top > window.innerHeight) return;
-        const c0 = Math.max(0, Math.floor(r.left / cell)), c1 = Math.min(cols - 1, Math.ceil(r.right / cell));
-        const r0 = Math.max(0, Math.floor(r.top / cell)), r1 = Math.min(rows - 1, Math.ceil(r.bottom / cell));
-        for (let rr = r0; rr <= r1; rr++) for (let cc = c0; cc <= c1; cc++) skip[rr * cols + cc] = 1;
+        var c0 = Math.max(0, Math.floor(r.left / cell)), c1 = Math.min(cols - 1, Math.ceil(r.right / cell));
+        var r0 = Math.max(0, Math.floor(r.top / cell)), r1 = Math.min(rows - 1, Math.ceil(r.bottom / cell));
+        for (var rr = r0; rr <= r1; rr++) for (var cc = c0; cc <= c1; cc++) skip[rr * cols + cc] = 1;
       });
-      for (let r = 0; r < rows; r++) {
-        for (let c = 0; c < cols; c++) {
-          const i = r * cols + c;
+      for (var r = 0; r < rows; r++) {
+        for (var c = 0; c < cols; c++) {
+          var i = r * cols + c;
           if (!skip[i]) ctx.fillText(grid[i], c * cell, r * cell);
         }
       }
-    };
-    const resize = () => {
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
-      const w = window.innerWidth, h = window.innerHeight;
+    }
+    function resize(){
+      var dpr = Math.min(window.devicePixelRatio || 1, 2);
+      var w = window.innerWidth, h = window.innerHeight;
       canvas.width = w * dpr; canvas.height = h * dpr;
       canvas.style.width = w + 'px'; canvas.style.height = h + 'px';
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       cols = Math.ceil(w / cell); rows = Math.ceil(h / cell);
-      grid = Array.from({ length: cols * rows }, pick);
+      grid = [];
+      for (var i = 0; i < cols * rows; i++) grid.push(pick());
       draw();
-    };
-    this.numberFieldDraw = draw;
-    this.numberFieldGrid = () => grid;
-    this.numberFieldPick = pick;
-    this.onNumberResize = resize;
-    window.addEventListener('resize', this.onNumberResize);
+    }
+    numberFieldDraw = draw;
+    numberFieldGrid = function(){ return grid; };
+    numberFieldPick = pick;
+    window.__numberFieldDraw = draw;
+    window.addEventListener('resize', resize);
     resize();
-    if (!this.reduce) {
-      if (document.readyState === 'complete') this.startNumberTimer();
-      else window.addEventListener('load', () => this.startNumberTimer(), { once: true });
+    if (!reduce) {
+      if (document.readyState === 'complete') startNumberTimer();
+      else window.addEventListener('load', function(){ startNumberTimer(); }, { once: true });
     }
   }
-  startNumberTimer() {
-    if (this.numTimer || !this.numberFieldGrid) return;
-    this.numTimer = setInterval(() => {
-      const grid = this.numberFieldGrid();
-      const mutate = Math.max(1, Math.floor(grid.length * 0.02));
-      for (let i = 0; i < mutate; i++) grid[Math.floor(Math.random() * grid.length)] = this.numberFieldPick();
-      this.numberFieldDraw();
+  function startNumberTimer(){
+    if (numTimer || !numberFieldGrid) return;
+    numTimer = setInterval(function(){
+      var grid = numberFieldGrid();
+      var mutate = Math.max(1, Math.floor(grid.length * 0.02));
+      for (var i = 0; i < mutate; i++) grid[Math.floor(Math.random() * grid.length)] = numberFieldPick();
+      numberFieldDraw();
     }, 150);
   }
-  componentDidMount() {
-    this.reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    this.initNumberField();
-    try {
-      this.introSeen = sessionStorage.getItem('keIntroSeen') === '1';
-      sessionStorage.setItem('keIntroSeen', '1');
-    } catch (e) { this.introSeen = false; }
-    if (this.introSeen) document.documentElement.dataset.intro = 'seen';
-    const veil = document.getElementById('bootVeil');
-    if (veil) {
-      if (this.introSeen || this.reduce) {
-        veil.style.display = 'none';
-      } else {
-        const minDisplay = 1100;
-        const elapsed = Date.now() - (window.__bootStart || Date.now());
-        const remaining = Math.max(0, minDisplay - elapsed);
-        setTimeout(() => {
-          requestAnimationFrame(() => { veil.style.opacity = '0'; });
-          veil.addEventListener('transitionend', () => { veil.style.display = 'none'; }, { once: true });
-          setTimeout(() => { veil.style.display = 'none'; }, 1200);
-        }, remaining);
-      }
-    }
+  initNumberField();
 
-    this.healReveals = () => {
-      const vh = window.innerHeight;
-      // Read every layout-dependent rect first, then apply all writes
-      // afterward — interleaving getBoundingClientRect() reads with style
-      // writes forces a synchronous layout recalculation on every single
-      // element instead of one batched layout for the whole pass.
-      const pending = [];
-      document.querySelectorAll('[data-reveal]').forEach(el => {
-        if (el.style.getPropertyValue('--rv') === '1') return;
-        pending.push(el);
-      });
-      const wb = document.getElementById('workbench');
-      const wbPending = wb && wb.style.getPropertyValue('--p') !== '1' ? wb : null;
-      const rects = pending.map(el => el.getBoundingClientRect());
-      const wbRect = wbPending ? wbPending.getBoundingClientRect() : null;
-      pending.forEach((el, i) => {
-        const r = rects[i];
-        if (r.top < vh * 1.15 && r.bottom > -200) el.style.setProperty('--rv', '1');
-      });
-      if (wbPending && wbRect.top < vh * 1.15) wbPending.style.setProperty('--p', '1');
-    };
-    this.onScroll = () => {
-      if (this.numTimer) { clearInterval(this.numTimer); this.numTimer = null; }
-      clearTimeout(this.scrollEndTimer);
-      this.scrollEndTimer = setTimeout(() => { if (!this.reduce) this.startNumberTimer(); }, 300);
-      if (this.sraf) return;
-      this.sraf = requestAnimationFrame(() => {
-        this.sraf = 0;
-        const avail = document.documentElement.scrollHeight - window.innerHeight;
-        const amount = avail > 0 ? (window.scrollY / avail) * 100 : 0;
-        if (this.progressRef.current) this.progressRef.current.style.width = amount + '%';
-        this.healReveals();
-      });
-    };
-    window.addEventListener('scroll', this.onScroll, { passive: true }); this.onScroll();
-
-    this.onPointerMove = e => {
-      if (this.cursorRef.current) this.cursorRef.current.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0)`;
-      if (!this.reduce) {
-        document.documentElement.style.setProperty('--mx', e.clientX + 'px');
-        document.documentElement.style.setProperty('--my', e.clientY + 'px');
-      }
-    };
-    window.addEventListener('pointermove', this.onPointerMove);
-
-    this.onResize = () => {
-      if (this.rraf) return;
-      this.rraf = requestAnimationFrame(() => {
-        this.rraf = 0;
-        const n = window.innerWidth < 760;
-        if (n !== this.state.narrow) this.setState({ narrow: n });
-        if (window.innerWidth >= 860) this.closeMenu();
-        this.healReveals();
-      });
-    };
-    window.addEventListener('resize', this.onResize, { passive: true });
-
-    this.onKeydown = e => { if (e.key === 'Escape') this.closeMenu(); };
-    window.addEventListener('keydown', this.onKeydown);
-
-    this.io = new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecting) this.setState({ active: en.target.id }); }), { rootMargin: '-45% 0px -45% 0px' });
-    ['top', 'work', 'workbench', 'about', 'contact'].forEach(id => { const el = document.getElementById(id); if (el) this.io.observe(el); });
-
-    this.revealIo = new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecting) en.target.style.setProperty('--rv', '1'); }), { threshold: .16 });
-    document.querySelectorAll('[data-reveal]').forEach(el => this.revealIo.observe(el));
-
-    const workbenchEl = document.getElementById('workbench');
-    if (workbenchEl) {
-      if (this.reduce) {
-        workbenchEl.style.setProperty('--p', '1');
-      } else {
-        this.workbenchIo = new IntersectionObserver(es => es.forEach(en => {
-          if (en.isIntersecting) { en.target.style.setProperty('--p', '1'); this.workbenchIo.unobserve(en.target); }
-        }), { threshold: .12 });
-        this.workbenchIo.observe(workbenchEl);
-      }
-    }
-
-    if (!this.reduce && this.mqRef.current) this.mq = this.mqRef.current.animate([{ transform: 'translateX(0)' }, { transform: 'translateX(-50%)' }], { duration: 28000, iterations: Infinity });
-
-    this.veinRo = new ResizeObserver(() => this.drawWorkVeins());
-    const veinGrid = document.getElementById('work');
-    if (veinGrid) this.veinRo.observe(veinGrid);
-    requestAnimationFrame(() => requestAnimationFrame(() => this.drawWorkVeins()));
-    setTimeout(() => this.healReveals(), 1500);
+  // ---- marquee pause on hover/focus ----
+  var mqTrack = document.getElementById('mqTrack');
+  var mqLink = document.getElementById('mqLink');
+  if (mqLink && mqTrack) {
+    var pause = function(){ mqTrack.setAttribute('data-paused', 'true'); };
+    var play = function(){ mqTrack.setAttribute('data-paused', 'false'); };
+    mqLink.addEventListener('mouseenter', pause);
+    mqLink.addEventListener('mouseleave', play);
+    mqLink.addEventListener('focus', pause);
+    mqLink.addEventListener('blur', play);
   }
-  drawWorkVeins() {
-    const svg = document.getElementById('workVeins');
-    const grid = svg ? svg.parentElement : null;
-    if (!svg || !grid) return;
-    const path = svg.querySelector('path');
-    const badges = Array.from(grid.querySelectorAll('[data-badge]')).sort((a, b) => a.dataset.badge - b.dataset.badge);
-    if (badges.length < 2) { path.setAttribute('d', ''); return; }
-    const gRect = grid.getBoundingClientRect();
-    if (!gRect.width || !gRect.height) return;
-    svg.setAttribute('viewBox', `0 0 ${gRect.width} ${gRect.height}`);
-    const pts = badges.map(b => {
-      const r = b.getBoundingClientRect();
-      return { x: r.left + r.width / 2 - gRect.left, y: r.top - gRect.top };
+
+  // ---- workbench pieces: layout + drag + keyboard ----
+  var defaults = {
+    reach: { x: 2, y: 4, r: -2, w: 38 }, note: { x: 44, y: 3, r: -1.5, w: 22 },
+    portrait: { x: 60, y: 16, r: 2, w: 34 }, first: { x: 33, y: 40, r: 6, w: 19 },
+    fab: { x: 5, y: 58, r: -3, w: 17 }, sculpt: { x: 64, y: 64, r: 1.5, w: 28 },
+    sticky: { x: 31, y: 74, r: -1.5, w: 27 }
+  };
+  var pieces = JSON.parse(JSON.stringify(defaults));
+  var zIndex = {}, topZ = 10;
+  var drag = null;
+  var deskEl = document.getElementById('desk');
+
+  function layoutPiece(id){
+    var el = document.getElementById('piece-' + id);
+    if (!el) return;
+    var p = pieces[id];
+    if (narrow) {
+      el.style.position = 'relative';
+      el.style.width = (id === 'note' || id === 'sticky') ? '100%' : '88%';
+      el.style.left = ''; el.style.top = '';
+      el.style.alignSelf = (id === 'portrait' || id === 'sculpt' || id === 'first') ? 'flex-end' : 'flex-start';
+      el.style.transform = 'rotate(' + (p.r * 0.6) + 'deg)';
+      el.style.zIndex = '';
+      el.style.transition = '';
+    } else {
+      el.style.position = 'absolute';
+      el.style.left = p.x + '%'; el.style.top = p.y + '%'; el.style.width = p.w + '%';
+      el.style.alignSelf = '';
+      el.style.transform = 'rotate(' + p.r + 'deg)';
+      el.style.zIndex = zIndex[id] || 1;
+      el.style.transition = (drag && drag.id === id) ? 'none' : 'transform .2s';
+    }
+  }
+  function layoutDesk(){
+    if (!deskEl) return;
+    if (narrow) {
+      deskEl.style.position = 'relative'; deskEl.style.display = 'flex'; deskEl.style.flexDirection = 'column'; deskEl.style.gap = '36px'; deskEl.style.height = ''; deskEl.style.paddingTop = '16px';
+    } else {
+      deskEl.style.position = 'relative'; deskEl.style.display = ''; deskEl.style.flexDirection = ''; deskEl.style.gap = ''; deskEl.style.height = 'clamp(640px, 62vw, 920px)'; deskEl.style.paddingTop = '';
+    }
+    Object.keys(pieces).forEach(layoutPiece);
+  }
+  var origApplyNarrow = applyNarrow;
+  applyNarrow = function(){ layoutDesk(); };
+
+  function lift(id){ topZ += 1; zIndex[id] = topZ; layoutPiece(id); }
+  function clampXY(x, y){ return { x: Math.max(-4, Math.min(92, x)), y: Math.max(-2, Math.min(92, y)) }; }
+
+  document.querySelectorAll('.drag-handle').forEach(function(handle){
+    var id = handle.dataset.piece;
+    handle.addEventListener('pointerdown', function(e){
+      if (narrow || !deskEl) return;
+      var d = deskEl.getBoundingClientRect();
+      drag = { id: id, sx: e.clientX, sy: e.clientY, px: pieces[id].x, py: pieces[id].y, w: d.width, h: d.height };
+      handle.setPointerCapture(e.pointerId);
+      handle.style.cursor = 'grabbing';
+      lift(id);
     });
-    let d = `M ${pts[0].x.toFixed(1)} ${pts[0].y.toFixed(1)}`;
-    for (let i = 1; i < pts.length; i++) d += ` L ${pts[i].x.toFixed(1)} ${pts[i].y.toFixed(1)}`;
-    path.setAttribute('d', d);
-  }
-  componentWillUnmount() {
-    window.removeEventListener('scroll', this.onScroll); window.removeEventListener('resize', this.onResize);
-    window.removeEventListener('pointermove', this.onPointerMove); window.removeEventListener('keydown', this.onKeydown);
-    window.removeEventListener('resize', this.onNumberResize);
-    if (this.io) this.io.disconnect(); if (this.revealIo) this.revealIo.disconnect(); if (this.mq) this.mq.cancel();
-    if (this.veinRo) this.veinRo.disconnect();
-    if (this.workbenchIo) this.workbenchIo.disconnect();
-    if (this.rraf) cancelAnimationFrame(this.rraf);
-    if (this.numTimer) clearInterval(this.numTimer);
-    clearTimeout(this.scrollEndTimer);
-    this.unlockScroll();
-  }
-  piece(id) {
-    const p = this.state.pieces[id], narrow = this.state.narrow;
-    const style = narrow
-      ? { position: 'relative', width: id === 'note' || id === 'sticky' ? '100%' : '88%', alignSelf: ['portrait', 'sculpt', 'first'].includes(id) ? 'flex-end' : 'flex-start', transform: `rotate(${p.r * 0.6}deg)` }
-      : { position: 'absolute', left: p.x + '%', top: p.y + '%', width: p.w + '%', transform: `rotate(${p.r}deg)`, zIndex: this.state.z[id] || 1, transition: this.drag && this.drag.id === id ? 'none' : 'transform .2s' };
-    const move = (dx, dy) => this.setState(s => ({ pieces: { ...s.pieces, [id]: { ...s.pieces[id], x: Math.max(-4, Math.min(92, s.pieces[id].x + dx)), y: Math.max(-2, Math.min(92, s.pieces[id].y + dy)) } } }));
-    const lift = () => this.setState(s => ({ top: s.top + 1, z: { ...s.z, [id]: s.top + 1 } }));
-    return {
-      style,
-      down: e => {
-        if (this.state.narrow) return;
-        const d = this.deskRef.current.getBoundingClientRect();
-        this.drag = { id, sx: e.clientX, sy: e.clientY, px: p.x, py: p.y, w: d.width, h: d.height };
-        e.currentTarget.setPointerCapture(e.pointerId); e.currentTarget.style.cursor = 'grabbing'; lift();
-      },
-      move: e => {
-        const g = this.drag; if (!g || g.id !== id) return;
-        const x = g.px + (e.clientX - g.sx) / g.w * 100, y = g.py + (e.clientY - g.sy) / g.h * 100;
-        this.setState(s => ({ pieces: { ...s.pieces, [id]: { ...s.pieces[id], x: Math.max(-4, Math.min(92, x)), y: Math.max(-2, Math.min(92, y)) } } }));
-      },
-      up: e => { if (this.drag && this.drag.id === id) { this.drag = null; e.currentTarget.style.cursor = 'grab'; this.forceUpdate(); } },
-      key: e => {
-        if (this.state.narrow) return;
-        const k = e.shiftKey ? 6 : 2, m = { ArrowLeft: [-k, 0], ArrowRight: [k, 0], ArrowUp: [0, -k], ArrowDown: [0, k] }[e.key];
-        if (m) { e.preventDefault(); lift(); move(m[0], m[1]); }
+    handle.addEventListener('pointermove', function(e){
+      if (!drag || drag.id !== id) return;
+      var x = drag.px + (e.clientX - drag.sx) / drag.w * 100;
+      var y = drag.py + (e.clientY - drag.sy) / drag.h * 100;
+      var c = clampXY(x, y);
+      pieces[id].x = c.x; pieces[id].y = c.y;
+      layoutPiece(id);
+    });
+    handle.addEventListener('pointerup', function(e){
+      if (drag && drag.id === id) { drag = null; handle.style.cursor = 'grab'; layoutPiece(id); }
+    });
+    handle.addEventListener('pointercancel', function(e){
+      if (drag && drag.id === id) { drag = null; handle.style.cursor = 'grab'; layoutPiece(id); }
+    });
+    handle.addEventListener('keydown', function(e){
+      if (narrow) return;
+      var k = e.shiftKey ? 6 : 2;
+      var m = { ArrowLeft: [-k,0], ArrowRight: [k,0], ArrowUp: [0,-k], ArrowDown: [0,k] }[e.key];
+      if (m) {
+        e.preventDefault();
+        lift(id);
+        var c = clampXY(pieces[id].x + m[0], pieces[id].y + m[1]);
+        pieces[id].x = c.x; pieces[id].y = c.y;
+        layoutPiece(id);
       }
-    };
-  }
-  renderVals() {
-    const s = this.state, cur = id => (s.active === id ? 'true' : 'false');
-    const r = {
-      deskRef: this.deskRef, mqRef: this.mqRef, progressRef: this.progressRef, cursorRef: this.cursorRef,
-      curTop: cur('top'), curWork: cur('work'), curBench: cur('workbench'), curAbout: cur('about'), curContact: cur('contact'),
-      themeLabel: s.theme === 'light' ? 'DARK' : 'LIGHT',
-      lightPressed: s.theme === 'light' ? 'true' : 'false',
-      toggleTheme: () => {
-        const next = s.theme === 'light' ? 'dark' : 'light';
-        document.documentElement.setAttribute('data-theme', next);
-        try { localStorage.setItem('ke-theme', next); } catch (e) {}
-        if (this.numberFieldDraw) this.numberFieldDraw();
-        this.setState({ theme: next });
-      },
-      menuExpandedAttr: s.menuOpen ? 'true' : 'false',
-      menuButtonLabel: s.menuOpen ? 'CLOSE' : 'MENU',
-      menuAriaLabel: s.menuOpen ? 'Close menu' : 'Open menu',
-      menuClose: () => this.closeMenu(),
-      menuToggle: () => {
-        const next = !s.menuOpen;
-        if (next) this.lockScroll(); else this.unlockScroll();
-        this.setState({ menuOpen: next });
-      },
-      menuBackdropStyle: s.menuOpen
-        ? { display: 'block', position: 'fixed', inset: '56px 0 0 0', zIndex: 215, background: 'rgba(0,0,0,.5)' }
-        : { display: 'none' },
-      menuPanelStyle: s.menuOpen
-        ? { display: 'grid', position: 'fixed', left: 0, right: 0, top: 56, zIndex: 220, background: 'var(--bg)', borderBottom: '1px solid var(--line)', maxHeight: 'calc(100vh - 56px)', overflowY: 'auto' }
-        : { display: 'none' },
-      cueWord: s.bio ? 'Collapse' : 'Expand bio',
-      cueGlyph: s.bio ? '[ − ]' : '[ + ]',
-      bioAriaLabel: s.bio ? 'Collapse — hide full bio' : 'Expand bio — reveal full bio',
-      bioExpanded: s.bio ? 'true' : 'false',
-      bioOpen: () => { if (s.canHover && !s.bio) this.setState({ bio: true }); },
-      bioClose: () => { if (s.bio) this.setState({ bio: false }); },
-      bioToggle: () => { if (s.canHover) this.setState({ bio: true }); else this.setState(st => ({ bio: !st.bio })); },
-      bioForceClose: () => this.setState({ bio: false }),
-      menuStop: e => e.stopPropagation(),
-      bioKey: e => { if (e.key === 'Escape') this.setState({ bio: false }); },
-      bioHidden: s.bio ? 'false' : 'true',
-      bioTabIndex: s.bio ? '0' : '-1',
-      bioStyle: s.bio
-        ? { position: 'absolute', left: '50%', top: '50%', width: 'min(90%,420px)', zIndex: 6, transform: 'translate(-50%,-50%) scale(1)', opacity: 1, pointerEvents: 'auto', transition: this.reduce ? 'none' : 'opacity .3s ease, transform .3s ease' }
-        : { position: 'absolute', left: '50%', top: '50%', width: 'min(90%,420px)', zIndex: 6, transform: 'translate(-50%,-50%) scale(.98)', opacity: 0, pointerEvents: 'none', transition: this.reduce ? 'none' : 'opacity .2s ease, transform .2s ease' },
-      benchHint: s.narrow ? "Here's what's on the table." : 'Grab the tape to move things around. Arrow keys work too.',
-      deskStyle: s.narrow ? { position: 'relative', display: 'flex', flexDirection: 'column', gap: 36, paddingTop: 16 } : { position: 'relative', height: 'clamp(640px, 62vw, 920px)' },
-      resetDesk: () => this.setState({ pieces: this.defaults(), z: {} }),
-      mqPause: () => this.mq && this.mq.pause(), mqPlay: () => this.mq && this.mq.play()
-    };
-    ['reach', 'note', 'portrait', 'first', 'fab', 'sculpt', 'sticky'].forEach(id => { r[id] = this.piece(id); });
-    return r;
-  }
-}
+    });
+  });
+  var resetBtn = document.getElementById('resetDesk');
+  if (resetBtn) resetBtn.addEventListener('click', function(){
+    pieces = JSON.parse(JSON.stringify(defaults));
+    zIndex = {};
+    Object.keys(pieces).forEach(layoutPiece);
+  });
+  layoutDesk();
+
+  // Flip on the resilience/self-healing flag last, once everything above has
+  // run without throwing — gates the opacity-0 reveal starting state and the
+  // hover-only cursor/glow so a JS failure anywhere above this line leaves
+  // the page fully visible instead of stuck hidden.
+  html.classList.add('js-ready');
+})();
 </script>
 </body>
 </html>
