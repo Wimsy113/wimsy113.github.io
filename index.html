@@ -577,6 +577,19 @@ class Component extends DCLogic {
       }
     }
 
+    this.healReveals = () => {
+      const vh = window.innerHeight;
+      document.querySelectorAll('[data-reveal]').forEach(el => {
+        if (el.style.getPropertyValue('--rv') === '1') return;
+        const r = el.getBoundingClientRect();
+        if (r.top < vh * 1.15 && r.bottom > -200) el.style.setProperty('--rv', '1');
+      });
+      const wb = document.getElementById('workbench');
+      if (wb && wb.style.getPropertyValue('--p') !== '1') {
+        const r = wb.getBoundingClientRect();
+        if (r.top < vh * 1.15) wb.style.setProperty('--p', '1');
+      }
+    };
     this.onScroll = () => {
       if (this.numTimer) { clearInterval(this.numTimer); this.numTimer = null; }
       clearTimeout(this.scrollEndTimer);
@@ -587,6 +600,7 @@ class Component extends DCLogic {
         const avail = document.documentElement.scrollHeight - window.innerHeight;
         const amount = avail > 0 ? (window.scrollY / avail) * 100 : 0;
         if (this.progressRef.current) this.progressRef.current.style.width = amount + '%';
+        this.healReveals();
       });
     };
     window.addEventListener('scroll', this.onScroll, { passive: true }); this.onScroll();
@@ -600,8 +614,9 @@ class Component extends DCLogic {
     };
     window.addEventListener('pointermove', this.onPointerMove);
 
-    this.onResize = () => { const n = window.innerWidth < 760; if (n !== this.state.narrow) this.setState({ narrow: n }); this.drawWorkVeins(); if (window.innerWidth >= 860) this.closeMenu(); };
+    this.onResize = () => { const n = window.innerWidth < 760; if (n !== this.state.narrow) this.setState({ narrow: n }); this.drawWorkVeins(); if (window.innerWidth >= 860) this.closeMenu(); this.healReveals(); };
     window.addEventListener('resize', this.onResize);
+    window.addEventListener('orientationchange', this.onResize);
 
     this.onKeydown = e => { if (e.key === 'Escape') this.closeMenu(); };
     window.addEventListener('keydown', this.onKeydown);
@@ -630,6 +645,7 @@ class Component extends DCLogic {
     const veinGrid = document.getElementById('work');
     if (veinGrid) this.veinRo.observe(veinGrid);
     requestAnimationFrame(() => requestAnimationFrame(() => this.drawWorkVeins()));
+    setTimeout(() => this.healReveals(), 1500);
   }
   drawWorkVeins() {
     const svg = document.getElementById('workVeins');
@@ -651,6 +667,7 @@ class Component extends DCLogic {
   }
   componentWillUnmount() {
     window.removeEventListener('scroll', this.onScroll); window.removeEventListener('resize', this.onResize);
+    window.removeEventListener('orientationchange', this.onResize);
     window.removeEventListener('pointermove', this.onPointerMove); window.removeEventListener('keydown', this.onKeydown);
     window.removeEventListener('resize', this.onNumberResize);
     if (this.io) this.io.disconnect(); if (this.revealIo) this.revealIo.disconnect(); if (this.mq) this.mq.cancel();
