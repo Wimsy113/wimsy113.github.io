@@ -1971,7 +1971,29 @@
       revealWhenReady();
     };
   }
+  function armBreakpointRepaintNudge() {
+    const BP = 860;
+    let wasWide = window.innerWidth >= BP;
+    const nudge = () => {
+      const el = document.documentElement;
+      const prev = el.style.transform;
+      el.style.transform = "translateZ(0)";
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          el.style.transform = prev;
+        });
+      });
+    };
+    window.addEventListener("resize", () => {
+      const isWide = window.innerWidth >= BP;
+      if (isWide !== wasWide) {
+        wasWide = isWide;
+        nudge();
+      }
+    }, { passive: true });
+  }
   hideRawTemplate();
+  armBreakpointRepaintNudge();
   const triggerStaticFallback = armStaticFallback(document);
   loadReactUmd().then(init).catch((err) => {
     console.error("[dc] failed to load React or boot:", err);
