@@ -17,6 +17,7 @@ body{margin:0;padding-right:var(--rail-w);background:var(--bg);color:var(--fg);f
 body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:300;opacity:var(--grain);mix-blend-mode:overlay;background-image:url("images/grain.png");background-size:96px 96px}
 a{color:inherit;text-decoration-thickness:1px;text-underline-offset:.22em}
 a:hover{color:var(--green)}
+a:hover .hoverfade{filter:grayscale(0) contrast(1)!important}
 :focus-visible{outline:3px solid var(--green);outline-offset:3px}
 ::selection{background:var(--green);color:var(--on-green)}
 .display{font-family:'Archivo Black','Inter',sans-serif;font-weight:400;text-transform:uppercase}
