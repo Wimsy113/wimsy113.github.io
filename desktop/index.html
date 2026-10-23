@@ -9,14 +9,15 @@
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#15120d; --panel:#1d1812; --panel2:#262019; --panel3:#120f0b;
-  --line:rgba(236,230,216,.1); --line-strong:rgba(236,230,216,.18);
-  --ink:#ECE6D8; --muted:#948d7c; --dim:#5f5a4e;
-  --amber:#c98a3c; --amber-bright:#e8ab5c; --red:#8f3b2e;
-  --cyan:#6fa8b2; --signal:#A8FF00; --moss:#5c6b3f;
+  --bg:#0c0a07; --panel:#19140e; --panel2:#221b13; --panel3:#0a0806;
+  --line:rgba(236,230,216,.1); --line-strong:rgba(236,230,216,.22);
+  --ink:#ECE6D8; --muted:#948d7c; --dim:#524c40;
+  --amber:#c9872f; --amber-bright:#f0ae5a; --red:#8f3b2e;
+  --cyan:#5d99a3; --signal:#A8FF00; --moss:#5c6b3f;
+  --rust:#7a4328;
 }
 *{box-sizing:border-box}
-html,body{margin:0;background:var(--bg)}
+html,body{margin:0;background:#000}
 body{color:var(--ink);font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 .mono{font-family:'Space Mono',monospace}
 .display{font-family:'Archivo Black','Inter',sans-serif;font-weight:400;text-transform:uppercase}
@@ -25,187 +26,191 @@ a{color:inherit;text-decoration:none}
 ::selection{background:var(--amber);color:var(--panel3)}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 
-/* ---- chassis / bezel ---- */
-#bezel{
-  position:relative;min-height:100vh;
-  padding:clamp(14px,2.4vw,30px);
-  background:
-    radial-gradient(1200px 500px at 15% -10%, rgba(201,138,60,.05), transparent 60%),
-    linear-gradient(155deg,#20190f,#100d09 60%);
-}
-#bezel::before{ /* brushed metal texture */
-  content:"";position:absolute;inset:0;pointer-events:none;
-  background-image:url("../images/desktop/metal-noise.png");
-  background-size:256px 256px;opacity:.5;mix-blend-mode:overlay;
-}
-.rivet{position:absolute;width:6px;height:6px;border-radius:50%;background:#0b0906;box-shadow:inset 0 1px 0 rgba(255,255,255,.15),0 1px 1px rgba(0,0,0,.6)}
+#bezel{position:relative;min-height:100vh;padding:clamp(6px,1.2vw,14px);background:#050403}
+#bezel::before{content:"";position:absolute;inset:0;pointer-events:none;background-image:url("../images/desktop/metal-noise.png");background-size:220px 220px;opacity:.6;mix-blend-mode:overlay}
+.chip{position:absolute;width:30px;height:22px;background:#020201;clip-path:polygon(0 0,70% 0,100% 100%,0 100%)}
 
-/* vent + vine, bottom-left of chassis */
-#vent{position:absolute;left:14px;bottom:12px;width:64px;z-index:2}
-#vent .grille{display:flex;flex-direction:column;gap:3px;padding:6px 8px;background:#0e0b08;border:1px solid rgba(0,0,0,.6);border-radius:3px}
-#vent .grille span{display:block;height:2px;background:#2a231a;border-radius:1px}
+#screen{position:relative;overflow:hidden;border:1px solid #000;box-shadow:inset 0 0 0 1px rgba(236,230,216,.03), inset 0 0 140px rgba(0,0,0,.75), 0 0 80px rgba(0,0,0,.8);background:
+    radial-gradient(1400px 900px at 6% 2%, rgba(201,135,47,.22), transparent 48%),
+    radial-gradient(900px 700px at 100% 100%, rgba(93,153,163,.1), transparent 45%),
+    linear-gradient(165deg,#15100a,#07060450%,#030302);
+  min-height:calc(100vh - 28px);padding:clamp(18px,3vw,36px) clamp(14px,3vw,34px) clamp(40px,5vw,60px)}
+#screen::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:6;background-image:repeating-linear-gradient(to bottom, rgba(0,0,0,0) 0px, rgba(0,0,0,0) 2px, rgba(0,0,0,.22) 3px)}
+.vignette{position:absolute;inset:0;pointer-events:none;z-index:5;background:radial-gradient(ellipse at 30% 20%, transparent 40%, rgba(0,0,0,.6) 100%)}
+.bigshape{position:absolute;pointer-events:none;z-index:0;filter:blur(2px)}
 
-/* ---- screen (the actual OS surface) ---- */
-#screen{
-  position:relative;border-radius:4px;overflow:hidden;
-  border:1px solid rgba(0,0,0,.6);
-  box-shadow:inset 0 0 0 1px rgba(236,230,216,.04), inset 0 60px 120px rgba(0,0,0,.5), 0 30px 60px rgba(0,0,0,.6);
-  background:var(--bg);
-  padding:clamp(28px,4.5vw,64px) clamp(20px,4vw,56px) clamp(60px,6vw,88px);
-}
-#screen::before{ /* light falloff */
-  content:"";position:absolute;inset:0;pointer-events:none;z-index:0;
-  background:
-    radial-gradient(900px 500px at 8% 0%, rgba(201,138,60,.10), transparent 55%),
-    radial-gradient(1000px 600px at 95% 100%, rgba(111,168,178,.09), transparent 55%);
-}
-#screen::after{ /* scanlines, static */
-  content:"";position:absolute;inset:0;pointer-events:none;z-index:3;
-  background-image:repeating-linear-gradient(to bottom, rgba(0,0,0,0) 0px, rgba(0,0,0,0) 2px, rgba(0,0,0,.14) 3px);
-}
-.vignette{position:absolute;inset:0;pointer-events:none;z-index:2;background:radial-gradient(ellipse at center, transparent 55%, rgba(0,0,0,.4) 100%)}
+/* window chrome */
+.win{position:relative;background:var(--panel);border:1px solid var(--line-strong);box-shadow:0 2px 0 rgba(0,0,0,.5), 0 30px 50px rgba(0,0,0,.6)}
+.win-bar{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:7px 10px;background:linear-gradient(180deg,#2a2116,#1c160f);border-bottom:1px solid var(--line)}
+.win-bar .label{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.win-ctl{display:flex;gap:4px}
+.win-ctl span{width:13px;height:13px;display:flex;align-items:center;justify-content:center;border:1px solid var(--line-strong);color:var(--dim);font-size:8px;line-height:1;background:var(--panel3)}
+.scratch{position:absolute;background:rgba(236,230,216,.06);pointer-events:none}
 
-/* ---- window chrome, shared ---- */
-.win{position:relative;z-index:1;background:var(--panel);border:1px solid var(--line-strong);box-shadow:0 18px 36px rgba(0,0,0,.45)}
-.win-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:8px 12px;background:var(--panel2);border-bottom:1px solid var(--line)}
-.win-bar .label{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
-.win-ctl{display:flex;gap:5px}
-.win-ctl span{width:14px;height:14px;display:flex;align-items:center;justify-content:center;border:1px solid var(--line-strong);color:var(--dim);font-size:9px;line-height:1;background:var(--panel3)}
+/* cluster stage: desktop = absolute scatter, mobile = normal stack */
+#stage{position:relative;z-index:1}
+@media (min-width:861px){
+  #stage{height:980px}
+  .cl{position:absolute}
+}
+@media (max-width:860px){
+  #stage{display:flex;flex-direction:column;gap:20px}
+  .cl{position:static!important;transform:none!important;width:100%!important}
+}
 
-/* ---- identity window ---- */
-#identity{max-width:720px;margin-bottom:clamp(28px,4vw,48px)}
-#identity .win-body{padding:clamp(22px,3vw,36px) clamp(22px,3vw,32px)}
+/* identity */
+#identity .win-body{padding:18px 20px 20px}
 .signal-dot{width:6px;height:6px;border-radius:50%;background:var(--signal);box-shadow:0 0 6px var(--signal);display:inline-block}
-@media (prefers-reduced-motion:no-preference){
-  .signal-dot{animation:pulse 2.4s ease-in-out infinite}
-}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
-#identity h1{margin:14px 0 6px;font-size:clamp(34px,5vw,58px);line-height:.94;letter-spacing:-.01em;color:var(--ink)}
-#identity .role{margin:0 0 16px;font-size:clamp(14px,1.3vw,16px);color:var(--amber-bright)}
-#identity .bio{margin:0;max-width:62ch;font-size:clamp(14px,1.1vw,16px);line-height:1.6;color:#cfc8b8}
-.meta-row{display:flex;flex-wrap:wrap;gap:6px 22px;margin-top:18px;padding-top:16px;border-top:1px solid var(--line)}
-.meta-row div{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--dim)}
-.meta-row div span{display:block;margin-top:3px;font-size:12px;letter-spacing:.02em;color:var(--muted);text-transform:none}
+@media (prefers-reduced-motion:no-preference){.signal-dot{animation:pulse 2.6s ease-in-out infinite}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+#identity h1{margin:12px 0 5px;font-size:clamp(28px,3vw,36px);line-height:.96;letter-spacing:-.005em;color:var(--ink);
+  text-shadow:-1px 0 0 rgba(143,59,46,.45), 1px 0 0 rgba(93,153,163,.4);}
+#identity .role{margin:0 0 14px;font-size:12px;color:var(--amber-bright)}
+#identity .bio{margin:0;font-size:13px;line-height:1.55;color:#bdb6a4}
+.meta-row{display:flex;flex-wrap:wrap;gap:4px 18px;margin-top:14px;padding-top:12px;border-top:1px solid var(--line)}
+.meta-row div{font-size:9px;letter-spacing:.07em;text-transform:uppercase;color:var(--dim)}
+.meta-row div span{display:block;margin-top:2px;font-size:11px;color:var(--muted);text-transform:none}
 
-/* ---- app windows (case studies) ---- */
-#apps{position:relative;z-index:1;display:flex;flex-wrap:wrap;gap:22px;align-items:flex-start;margin-bottom:clamp(32px,4vw,48px)}
-.app{flex:1 1 300px;min-width:0}
-.app.primary{flex:1.5 1 380px}
-.app .win-body{padding:16px}
-.app .frame{position:relative;border:1px solid rgba(111,168,178,.25);box-shadow:0 0 0 1px rgba(0,0,0,.4), 0 0 24px rgba(111,168,178,.08) inset;overflow:hidden;margin-bottom:14px;background:#0c0a08}
-.app .frame img{display:block;width:100%;height:auto;opacity:.92;filter:saturate(.82) contrast(1.05)}
-.app .eyebrow{margin:0 0 6px;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--amber)}
-.app h2{margin:0 0 8px;font-size:clamp(20px,2vw,28px);line-height:1;letter-spacing:-.005em;color:var(--ink)}
-.app p{margin:0 0 14px;font-size:13px;line-height:1.55;color:#bdb6a4}
-.app .open{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--amber-bright);border-top:1px solid var(--line);padding-top:12px;width:100%}
-.app.secondary{opacity:.82}
-.app.secondary .frame{filter:saturate(.7)}
-.app:hover,.app:focus-within{opacity:1}
+/* app windows */
+.app .win-body{padding:14px}
+.app .frame{position:relative;border:1px solid rgba(93,153,163,.22);overflow:hidden;margin-bottom:12px;background:#07060480}
+.app .frame img{display:block;width:100%;height:auto;filter:saturate(.75) contrast(1.08) brightness(.94)}
+.app .eyebrow{margin:0 0 5px;font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--amber)}
+.app h2{margin:0 0 7px;font-size:clamp(19px,1.8vw,25px);line-height:1;color:var(--ink)}
+.app p{margin:0 0 12px;font-size:12.5px;line-height:1.5;color:#b5ae9d}
+.app .open{display:flex;align-items:center;gap:8px;font-size:10.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--amber-bright);border-top:1px solid var(--line);padding-top:10px}
 .app .open:hover{color:var(--ink)}
+.app.dim{filter:brightness(.74) saturate(.8)}
+.app.dim:hover,.app.dim:focus-within{filter:none}
 
-/* ---- control panel strip ---- */
-#controls{position:relative;z-index:1;display:flex;flex-wrap:wrap;gap:10px}
-.ctl-btn{display:flex;align-items:center;gap:10px;padding:10px 16px;background:var(--panel);border:1px solid var(--line-strong);min-height:44px}
+.tape{position:absolute;height:16px;background:repeating-linear-gradient(45deg,#a66a1f 0 8px,#1a1309 8px 16px);opacity:.85;box-shadow:0 2px 4px rgba(0,0,0,.5)}
+
+/* controls */
+#controls{position:relative;z-index:2;display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+.ctl-btn{display:flex;align-items:center;gap:9px;padding:9px 15px;background:var(--panel);border:1px solid var(--line-strong);min-height:44px}
+.ctl-btn:nth-child(2){transform:translateY(3px)}
+.ctl-btn:nth-child(3){transform:translateY(-2px)}
 .ctl-btn:hover{background:var(--panel2);border-color:var(--amber)}
 .ctl-light{width:7px;height:7px;border-radius:50%;background:var(--amber);box-shadow:0 0 5px var(--amber)}
-.ctl-btn span.lbl{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.ctl-btn span.lbl{font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
 .ctl-btn:hover span.lbl{color:var(--ink)}
-
-@media (max-width:760px){
-  #apps{flex-direction:column}
-  .app.primary{flex:1 1 auto}
-}
 </style>
 </head>
 <body>
 
 <div id="bezel">
-  <span class="rivet" style="left:8px;top:8px"></span>
-  <span class="rivet" style="right:8px;top:8px"></span>
-  <span class="rivet" style="left:8px;bottom:8px"></span>
-  <span class="rivet" style="right:8px;bottom:8px"></span>
-
-  <div id="vent" aria-hidden="true">
-    <svg width="40" height="54" viewBox="0 0 40 54" style="position:absolute;left:10px;bottom:28px;z-index:1" aria-hidden="true">
-      <path d="M8 54 C 4 42, 14 36, 10 26 C 7 18, 16 12, 13 2" fill="none" stroke="var(--moss)" stroke-width="1.4" stroke-linecap="round" opacity=".75"/>
-      <path d="M13 24 C 17 22, 19 18, 17 14" fill="none" stroke="var(--moss)" stroke-width="1.1" stroke-linecap="round" opacity=".6"/>
-      <circle cx="13" cy="2" r="1.6" fill="var(--moss)" opacity=".8"/>
-    </svg>
-    <div class="grille"><span></span><span></span><span></span><span></span></div>
-  </div>
+  <span class="chip" style="left:0;top:0"></span>
+  <span class="chip" style="right:0;top:0;transform:scaleX(-1)"></span>
 
   <main id="screen">
     <div class="vignette" aria-hidden="true"></div>
 
-    <a href="#apps" style="position:absolute;left:-9999px;top:0;z-index:50;background:var(--amber);color:#15120d;padding:10px 16px;font-family:'Space Mono',monospace;font-size:12px" onfocus="this.style.left='16px'" onblur="this.style.left='-9999px'">Skip to case studies</a>
+    <!-- deep background shapes: suggest scale/machinery -->
+    <div class="bigshape" aria-hidden="true" style="left:-180px;top:-220px;width:620px;height:620px;border-radius:50%;background:radial-gradient(circle,rgba(93,153,163,.05),transparent 65%)"></div>
+    <div class="bigshape" aria-hidden="true" style="right:-260px;bottom:-200px;width:700px;height:700px;background:linear-gradient(145deg,rgba(0,0,0,.4),transparent 60%)"></div>
 
-    <header id="identity" class="win">
-      <div class="win-bar">
-        <span class="label mono">sys://k.ewing — terminal 01</span>
-        <div class="win-ctl" aria-hidden="true"><span>−</span><span>▢</span><span>×</span></div>
-      </div>
-      <div class="win-body">
-        <span class="mono" style="display:inline-flex;align-items:center;gap:8px;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim)"><span class="signal-dot" aria-hidden="true"></span>Signal active</span>
-        <h1 class="display">Krystyna Ewing</h1>
-        <p class="role mono">UX Designer / Creative Technologist — Columbus, Ohio</p>
-        <p class="bio">I design software, make art, build things, break things, and have a hard time leaving anything alone when I know it could work better.</p>
-        <div class="meta-row">
-          <div>Focus<span>Software · UX · Art · 3D Printing</span></div>
-          <div>Status<span>Open to new work</span></div>
-        </div>
-      </div>
-    </header>
+    <!-- exposed cable bundles -->
+    <svg aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%;z-index:0" preserveAspectRatio="none" viewBox="0 0 1440 980">
+      <path d="M0 860 C 220 820, 300 760, 420 700 S 640 560, 760 500" fill="none" stroke="#0c0906" stroke-width="10" stroke-linecap="round" opacity=".9"/>
+      <path d="M0 860 C 220 820, 300 760, 420 700 S 640 560, 760 500" fill="none" stroke="#2b2015" stroke-width="2" stroke-linecap="round" opacity=".5"/>
+      <path d="M1440 120 C 1200 160, 1120 240, 1040 330 S 900 480, 820 560" fill="none" stroke="#0c0906" stroke-width="9" stroke-linecap="round" opacity=".85"/>
+      <path d="M1440 120 C 1200 160, 1120 240, 1040 330 S 900 480, 820 560" fill="none" stroke="#2b2015" stroke-width="1.5" stroke-linecap="round" opacity=".5"/>
+      <circle cx="760" cy="500" r="5" fill="#1c140c"/>
+      <circle cx="820" cy="560" r="5" fill="#1c140c"/>
+    </svg>
 
-    <section id="apps" aria-label="Selected work">
-      <article class="app primary win">
+    <!-- fracture across the glass -->
+    <svg aria-hidden="true" style="position:absolute;z-index:6;left:52%;top:0;width:34%;height:46%" viewBox="0 0 400 420" preserveAspectRatio="none">
+      <path d="M40 0 L70 60 L48 95 L110 150 L90 190 L160 250 L140 300 L200 420" fill="none" stroke="rgba(236,230,216,.22)" stroke-width="1.1"/>
+      <path d="M40 0 L70 60 L48 95 L110 150 L90 190 L160 250 L140 300 L200 420" fill="none" stroke="rgba(93,153,163,.18)" stroke-width="2.6" opacity=".5" transform="translate(1,1)"/>
+    </svg>
+
+    <!-- vine growing up from the bezel into the identity panel -->
+    <svg aria-hidden="true" style="position:absolute;left:4px;bottom:-4px;width:70px;height:260px;z-index:2" viewBox="0 0 70 260">
+      <path d="M14 260 C 6 220, 22 196, 14 160 C 8 130, 24 108, 16 76 C 10 50, 26 30, 20 0" fill="none" stroke="var(--moss)" stroke-width="2" stroke-linecap="round" opacity=".8"/>
+      <path d="M16 170 C 26 164, 32 150, 28 136" fill="none" stroke="var(--moss)" stroke-width="1.3" stroke-linecap="round" opacity=".65"/>
+      <path d="M14 96 C 4 90, 0 78, 6 66" fill="none" stroke="var(--moss)" stroke-width="1.3" stroke-linecap="round" opacity=".65"/>
+      <circle cx="28" cy="134" r="3" fill="var(--moss)" opacity=".6"/>
+      <circle cx="6" cy="64" r="2.6" fill="var(--moss)" opacity=".6"/>
+      <circle cx="20" cy="2" r="2.4" fill="var(--moss)" opacity=".7"/>
+    </svg>
+
+    <a href="#apps" style="position:absolute;left:-9999px;top:0;z-index:50;background:var(--amber);color:#0c0a07;padding:10px 16px;font-family:'Space Mono',monospace;font-size:12px" onfocus="this.style.left='16px'" onblur="this.style.left='-9999px'">Skip to case studies</a>
+
+    <div id="stage">
+
+      <header id="identity" class="cl win" style="left:34px;top:24px;width:350px;transform:rotate(-.9deg);z-index:4">
         <div class="win-bar">
-          <span class="label mono">01 / resiliencepoint.app</span>
+          <span class="label mono">sys://k.ewing_01</span>
           <div class="win-ctl" aria-hidden="true"><span>−</span><span>▢</span><span>×</span></div>
         </div>
         <div class="win-body">
-          <div class="frame"><img loading="lazy" src="../images/work/hazadapt-resiliencepoint/platform-cover.png" alt="ResiliencePoint dashboard showing trending hazards and a nationwide activity map"></div>
-          <p class="eyebrow mono">HazAdapt · UX Research · Product Design · Data Visualization</p>
-          <h2 class="display">ResiliencePoint</h2>
-          <p>Turning emergency preparedness data into something people can actually use — a successor to EM-Dash built to help emergency managers investigate, not just view, community preparedness.</p>
-          <a class="open mono" href="../work/hazadapt-resiliencepoint.html">Lead UX Designer · 2023–2024 <span aria-hidden="true" style="margin-left:auto">open →</span></a>
+          <span class="mono" style="display:inline-flex;align-items:center;gap:7px;font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--dim)"><span class="signal-dot" aria-hidden="true"></span>Signal active</span>
+          <h1 class="display">Krystyna Ewing</h1>
+          <p class="role mono">UX Designer / Creative Technologist<br>Columbus, Ohio</p>
+          <p class="bio">I design software, make art, build things, break things, and have a hard time leaving anything alone when I know it could work better.</p>
+          <div class="meta-row">
+            <div>Focus<span>Software · UX · Art · 3D Print</span></div>
+            <div>Status<span>Open to new work</span></div>
+          </div>
         </div>
-      </article>
+      </header>
 
-      <article class="app secondary win">
-        <div class="win-bar">
-          <span class="label mono">02 / hazadapt.app</span>
-          <div class="win-ctl" aria-hidden="true"><span>−</span><span>▢</span><span>×</span></div>
-        </div>
-        <div class="win-body">
-          <div class="frame"><img loading="lazy" src="../images/work/hazadapt/hero-dual-monitor.png" alt="HazAdapt product shown across two monitors"></div>
-          <p class="eyebrow mono">UX Design · Content Strategy · Public Safety</p>
-          <h2 class="display">HazAdapt</h2>
-          <p>A library of hazard guides and prep activities built to help people build resilience before a crisis hits and recover faster after.</p>
-          <a class="open mono" href="../work/hazadapt.html">Lead UX Designer · 2021–present <span aria-hidden="true" style="margin-left:auto">open →</span></a>
-        </div>
-      </article>
+      <section id="apps" aria-label="Selected work" style="display:contents">
 
-      <article class="app secondary win">
-        <div class="win-bar">
-          <span class="label mono">03 / truelink.app</span>
-          <div class="win-ctl" aria-hidden="true"><span>−</span><span>▢</span><span>×</span></div>
-        </div>
-        <div class="win-body">
-          <div class="frame"><img loading="lazy" src="../images/work/true-link/hero-devices.png" alt="The True Link trust administration dashboard shown across desktop and laptop screens"></div>
-          <p class="eyebrow mono">Fintech · Accessibility · Design Systems</p>
-          <h2 class="display">True Link</h2>
-          <p>Financial tools built to protect the safety and independence of aging and disabled adults without stripping away their autonomy.</p>
-          <a class="open mono" href="../work/true-link.html">UX Designer · Trust team <span aria-hidden="true" style="margin-left:auto">open →</span></a>
-        </div>
-      </article>
-    </section>
+        <article class="cl app win" style="left:420px;top:56px;width:580px;transform:rotate(.5deg);z-index:5">
+          <div class="win-bar">
+            <span class="label mono">01 / resiliencepoint.app</span>
+            <div class="win-ctl" aria-hidden="true"><span>−</span><span>▢</span><span>×</span></div>
+          </div>
+          <div class="win-body">
+            <div class="frame"><img loading="lazy" src="../images/work/hazadapt-resiliencepoint/platform-cover.png" alt="ResiliencePoint dashboard showing trending hazards and a nationwide activity map"></div>
+            <p class="eyebrow mono">HazAdapt · UX Research · Product Design · Data Visualization</p>
+            <h2 class="display">ResiliencePoint</h2>
+            <p>Turning emergency preparedness data into something people can actually use — a successor to EM-Dash built to help emergency managers investigate, not just view, community preparedness.</p>
+            <a class="open mono" href="../work/hazadapt-resiliencepoint.html">Lead UX Designer · 2023–2024 <span aria-hidden="true" style="margin-left:auto">open →</span></a>
+          </div>
+        </article>
 
-    <nav id="controls" aria-label="Site sections">
-      <a class="ctl-btn" href="../about.html"><span class="ctl-light" aria-hidden="true"></span><span class="lbl mono">About</span></a>
-      <a class="ctl-btn" href="../resume.html"><span class="ctl-light" aria-hidden="true"></span><span class="lbl mono">Résumé</span></a>
-      <a class="ctl-btn" href="../art.html"><span class="ctl-light" aria-hidden="true"></span><span class="lbl mono">Creative Work</span></a>
-      <a class="ctl-btn" href="mailto:hello@krystynaewing.com"><span class="ctl-light" aria-hidden="true"></span><span class="lbl mono">Contact</span></a>
-    </nav>
+        <article class="cl app dim win" style="left:368px;top:478px;width:360px;transform:rotate(-2.2deg);z-index:2">
+          <div class="tape" style="left:-8px;bottom:-8px;width:140px;transform:rotate(-8deg)"></div>
+          <div class="win-bar">
+            <span class="label mono">02 / hazadapt.app</span>
+            <div class="win-ctl" aria-hidden="true"><span>−</span><span>▢</span><span>×</span></div>
+          </div>
+          <div class="win-body">
+            <div class="frame"><img loading="lazy" src="../images/work/hazadapt/hero-dual-monitor.png" alt="HazAdapt product shown across two monitors"></div>
+            <p class="eyebrow mono">UX Design · Content Strategy · Public Safety</p>
+            <h2 class="display">HazAdapt</h2>
+            <p>A library of hazard guides and prep activities built to help people build resilience before a crisis hits and recover faster after.</p>
+            <a class="open mono" href="../work/hazadapt.html">Lead UX Designer · 2021–present <span aria-hidden="true" style="margin-left:auto">open →</span></a>
+          </div>
+        </article>
+
+        <article class="cl app dim win" style="left:786px;top:454px;width:320px;transform:rotate(1.6deg);z-index:3">
+          <div class="win-bar">
+            <span class="label mono">03 / truelink.app</span>
+            <div class="win-ctl" aria-hidden="true"><span>−</span><span>▢</span><span>×</span></div>
+          </div>
+          <div class="win-body">
+            <div class="frame"><img loading="lazy" src="../images/work/true-link/hero-devices.png" alt="The True Link trust administration dashboard shown across desktop and laptop screens"></div>
+            <p class="eyebrow mono">Fintech · Accessibility · Design Systems</p>
+            <h2 class="display">True Link</h2>
+            <p>Financial tools built to protect the safety and independence of aging and disabled adults without stripping away their autonomy.</p>
+            <a class="open mono" href="../work/true-link.html">UX Designer · Trust team <span aria-hidden="true" style="margin-left:auto">open →</span></a>
+          </div>
+        </article>
+
+      </section>
+
+      <nav id="controls" class="cl" aria-label="Site sections" style="left:34px;top:810px;z-index:4">
+        <a class="ctl-btn" href="../about.html"><span class="ctl-light" aria-hidden="true"></span><span class="lbl mono">About</span></a>
+        <a class="ctl-btn" href="../resume.html"><span class="ctl-light" aria-hidden="true"></span><span class="lbl mono">Résumé</span></a>
+        <a class="ctl-btn" href="../art.html"><span class="ctl-light" aria-hidden="true"></span><span class="lbl mono">Creative Work</span></a>
+        <a class="ctl-btn" href="mailto:hello@krystynaewing.com"><span class="ctl-light" aria-hidden="true"></span><span class="lbl mono">Contact</span></a>
+      </nav>
+
+    </div>
   </main>
 </div>
 
