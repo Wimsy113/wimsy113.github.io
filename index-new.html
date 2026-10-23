@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Krystyna Ewing — UX Designer / Creative Technologist</title>
+<meta name="description" content="Krystyna Ewing — UX designer and creative technologist in Columbus, Ohio. Software, UX, art, and 3D printing.">
+<link rel="icon" href="images/favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<script>document.documentElement.classList.add('js');try{if(localStorage.getItem('ke-theme')==='light')document.documentElement.setAttribute('data-theme','light');}catch(e){}</script>
+<link rel="stylesheet" href="home.css">
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<!-- ───────────── Top rail ───────────── -->
+<header class="rail" id="top">
+  <div class="rail__inner">
+    <a class="nameplate" href="#top" aria-label="Krystyna Ewing, back to top">
+      <span class="screw" aria-hidden="true"></span>
+      <span class="nameplate__name">K. Ewing</span>
+      <span class="nameplate__role">UX / Creative Tech</span>
+      <span class="screw" aria-hidden="true"></span>
+    </a>
+    <nav class="keys-nav" aria-label="Primary">
+      <a class="keycap" href="#work"><span class="keycap__led" aria-hidden="true"></span>Work</a>
+      <a class="keycap" href="#workbench"><span class="keycap__led" aria-hidden="true"></span>Workbench</a>
+      <a class="keycap" href="#about"><span class="keycap__led" aria-hidden="true"></span>About</a>
+      <a class="keycap" href="#contact"><span class="keycap__led" aria-hidden="true"></span>Contact</a>
+    </nav>
+    <button type="button" class="toggle" id="themeToggle" aria-pressed="false" aria-label="Light mode">
+      <span class="toggle__track" aria-hidden="true"><span class="toggle__lever"></span></span>
+      <span class="toggle__label">Light</span>
+    </button>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- ───────────── Hero unit ───────────── -->
+<section class="unit hero" aria-labelledby="hero-name">
+  <span class="screw screw--tl" aria-hidden="true"></span><span class="screw screw--tr" aria-hidden="true"></span>
+  <span class="screw screw--bl" aria-hidden="true"></span><span class="screw screw--br" aria-hidden="true"></span>
+
+  <div class="hero__grid">
+    <div class="bezel hero__bezel">
+      <div class="screen screen--photo" data-power>
+        <img src="images/cicada-hero.jpg" width="2000" height="955" alt="Macro photograph of a cicada seen from above, its translucent wings spread, the veins lit in pale aqua and gold against black.">
+        <p class="screen__credit">Photo: Maya Alexa G. Romero / Unsplash</p>
+      </div>
+      <div class="bezel__chin" aria-hidden="true">
+        <span class="led led--on"></span><span class="led led--amber"></span>
+        <span class="vent vent--short"></span>
+        <span class="bezel__port"></span><span class="bezel__port"></span>
+      </div>
+    </div>
+
+    <div class="hero__panel">
+      <p class="etch">Columbus, Ohio · raised in Detroit</p>
+      <h1 id="hero-name" class="hero__name">Krystyna <br>Ewing</h1>
+      <p class="hero__role">UX Designer / Creative Technologist</p>
+      <p class="hero__lede">I design software, make art, build things, break things, and have a hard time leaving anything alone when I know it could work better.</p>
+
+      <dl class="spec">
+        <div><dt>Based</dt><dd>Columbus, Ohio</dd></div>
+        <div><dt>Raised</dt><dd>Detroit</dd></div>
+        <div><dt>Years</dt><dd>8+</dd></div>
+        <div><dt>Mail</dt><dd><a href="mailto:hello@krystynaewing.com">hello@krystynaewing.com</a></dd></div>
+      </dl>
+
+      <div class="hero__actions">
+        <a class="btn btn--primary" href="#work">See the work <span aria-hidden="true">↓</span></a>
+        <button type="button" class="btn" id="bioToggle" aria-expanded="false" aria-controls="bio">Read the long version</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="drawer" id="bio" role="region" aria-label="Full bio">
+    <div class="drawer__inner">
+      <span class="drawer__handle" aria-hidden="true"></span>
+      <div class="drawer__text">
+        <p>I'm a designer, artist, developer, and general maker of things. I started in software development, moved into UX because I wanted more room to be creative, and apparently never learned how to pick one thing and stick with it.</p>
+        <p>I've spent the last 8+ years designing, building, testing, breaking things, and figuring out how to make them work better. Outside of UX, I make art, build 3D prints, mess around with code, and start projects because I thought, 'I wonder if I could make that.'</p>
+        <p class="drawer__kicker">Usually I can. Sometimes I absolutely cannot. Either way, I'm probably going to try.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero__strip">
+    <ul class="indicators" aria-label="Focus areas">
+      <li><span class="led led--on" aria-hidden="true"></span>Software</li>
+      <li><span class="led led--on" aria-hidden="true"></span>UX</li>
+      <li><span class="led led--on" aria-hidden="true"></span>Art</li>
+      <li><span class="led led--on" aria-hidden="true"></span>3D Printing</li>
+    </ul>
+    <span class="vent" aria-hidden="true"></span>
+    <span class="etch etch--small" aria-hidden="true">krystynaewing.com</span>
+  </div>
+</section>
+
+<!-- ───────────── Selected work console ───────────── -->
+<section class="unit console" id="work" aria-labelledby="work-h">
+  <span class="screw screw--tl" aria-hidden="true"></span><span class="screw screw--tr" aria-hidden="true"></span>
+  <span class="screw screw--bl" aria-hidden="true"></span><span class="screw screw--br" aria-hidden="true"></span>
+
+  <header class="unit__head">
+    <h2 id="work-h" class="unit__title">Selected Work</h2>
+    <span class="unit__rule" aria-hidden="true"></span>
+    <span class="etch">4 case studies</span>
+  </header>
+
+  <div class="console__body">
+    <div class="selector" id="caseKeys">
+      <a class="selkey" href="#case-rp" data-case="case-rp">
+        <span class="selkey__num">01</span>
+        <span class="selkey__name">ResiliencePoint</span>
+        <span class="selkey__meta">HazAdapt · 2023–2024</span>
+        <span class="led selkey__led" aria-hidden="true"></span>
+      </a>
+      <a class="selkey" href="#case-hz" data-case="case-hz">
+        <span class="selkey__num">02</span>
+        <span class="selkey__name">HazAdapt</span>
+        <span class="selkey__meta">LoCo &amp; Prep Checks · 2023–2024</span>
+        <span class="led selkey__led" aria-hidden="true"></span>
+      </a>
+      <a class="selkey" href="#case-tl" data-case="case-tl">
+        <span class="selkey__num">03</span>
+        <span class="selkey__name">True Link Financial</span>
+        <span class="selkey__meta">Financial UX · 2023</span>
+        <span class="led selkey__led" aria-hidden="true"></span>
+      </a>
+      <a class="selkey" href="#case-wd" data-case="case-wd">
+        <span class="selkey__num">04</span>
+        <span class="selkey__name">WellDone</span>
+        <span class="selkey__meta">Monitoring · 2022</span>
+        <span class="led selkey__led" aria-hidden="true"></span>
+      </a>
+      <div class="selector__foot" aria-hidden="true">
+        <span class="vent vent--grille"></span>
+      </div>
+    </div>
+
+    <div class="cases">
+      <!-- 01 -->
+      <article class="case" id="case-rp" aria-labelledby="case-rp-h">
+        <div class="bay bay--screen">
+          <div class="screen" data-power>
+            <div class="screen__pan">
+              <img src="images/work/hazadapt-resiliencepoint/dashboard-screenshot.png" width="3180" height="1930" loading="lazy" alt="ResiliencePoint dashboard: trending hazards, a map of HazAdapt usage by area across the US, and community activity cards.">
+            </div>
+          </div>
+        </div>
+        <div class="case__info">
+          <p class="case__meta"><span>01</span><span>HazAdapt</span><span>Lead UX Designer</span><span>2023–2024</span></p>
+          <h3 id="case-rp-h" class="case__title">ResiliencePoint</h3>
+          <p class="case__tagline">Making Sense of the Chaos</p>
+          <p class="case__dek">We built what we thought people needed. Then the evidence changed the product.</p>
+          <div class="case__links">
+            <a class="btn btn--primary" href="work/hazadapt-resiliencepoint.html">Open case study <span aria-hidden="true">→</span></a>
+          </div>
+        </div>
+      </article>
+
+      <!-- 02 -->
+      <article class="case" id="case-hz" aria-labelledby="case-hz-h">
+        <div class="bay bay--object">
+          <div class="bay__stage">
+            <img src="images/work/hazadapt/hero-dual-monitor.png" width="1720" height="696" loading="lazy" alt="Two desktop monitors showing the HazAdapt Hazard Guide and an Avalanche Prep Check activity.">
+          </div>
+        </div>
+        <div class="case__info">
+          <p class="case__meta"><span>02</span><span>LoCo &amp; Prep Checks</span><span>UX Research</span><span>2023–2024</span></p>
+          <h3 id="case-hz-h" class="case__title">HazAdapt</h3>
+          <p class="case__dek">Local safety information and bite-sized prep activities — two product lines built to make preparedness something people actually do.</p>
+          <div class="case__links">
+            <a class="btn btn--primary" href="work/hazadapt.html">Overview <span aria-hidden="true">→</span></a>
+            <a class="btn" href="work/hazadapt-loco.html">LoCo</a>
+            <a class="btn" href="work/hazadapt-prep-checks.html">Prep Checks</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- 03 -->
+      <article class="case" id="case-tl" aria-labelledby="case-tl-h">
+        <div class="bay bay--object">
+          <div class="bay__stage">
+            <img src="images/work/true-link/hero-devices.png" width="1151" height="618" loading="lazy" alt="True Link disbursement screens shown on two desktop monitors and a laptop.">
+          </div>
+        </div>
+        <div class="case__info">
+          <p class="case__meta"><span>03</span><span>True Link Financial</span><span>Financial UX · Workflow Design</span><span>2023</span></p>
+          <h3 id="case-tl-h" class="case__title">True Link Financial</h3>
+          <p class="case__dek">Financial tools built to protect autonomy, not just assets.</p>
+          <div class="case__links">
+            <a class="btn btn--primary" href="work/true-link.html">Overview <span aria-hidden="true">→</span></a>
+            <a class="btn" href="work/true-link-beneficiary-experience.html">Beneficiary Profile</a>
+            <a class="btn" href="work/true-link-create-draft-disbursements.html">Draft Disbursements</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- 04 -->
+      <article class="case" id="case-wd" aria-labelledby="case-wd-h">
+        <div class="bay bay--screen">
+          <div class="screen" data-power>
+            <div class="screen__pan screen__pan--tall">
+              <img src="images/work/welldone-monitoring/final-dashboard-health-overview.webp" width="1440" height="1920" loading="lazy" alt="WellDone dashboard: a map of wells in Cambodia, functional and non-functional pump percentages, recent reports, tickets, and a pumps table.">
+            </div>
+          </div>
+        </div>
+        <div class="case__info">
+          <p class="case__meta"><span>04</span><span>WellDone</span><span>UX/UI Design · Monitoring</span><span>2022</span></p>
+          <h3 id="case-wd-h" class="case__title">WellDone</h3>
+          <p class="case__dek">Turning a nonprofit's scattered well and sensor data into a monitoring workflow people can actually act on.</p>
+          <div class="case__links">
+            <a class="btn btn--primary" href="work/welldone-monitoring.html">Open case study <span aria-hidden="true">→</span></a>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ───────────── Workbench mat ───────────── -->
+<section class="bench" id="workbench" aria-labelledby="bench-h">
+  <div class="mat">
+    <div class="mat__ruler mat__ruler--top" aria-hidden="true"></div>
+    <div class="mat__ruler mat__ruler--left" aria-hidden="true"></div>
+
+    <header class="bench__head">
+      <h2 id="bench-h" class="bench__title">The Workbench</h2>
+      <p class="bench__intro">Apparently I can't leave things alone.</p>
+      <ul class="labels" aria-label="What ends up on the bench">
+        <li>3D printing &amp; fabrication</li>
+        <li>Sculpture &amp; mixed media</li>
+        <li>Illustration &amp; 3D modeling</li>
+        <li>Creative coding</li>
+        <li>Strange prototypes</li>
+      </ul>
+      <p class="bench__hint" aria-hidden="true">Drag things around. Click to look closer.</p>
+    </header>
+
+    <div class="spread" id="spread">
+      <button type="button" class="print print--paper" style="--x:1%;--y:2%;--w:27%;--r:-2.2deg"
+        data-full="images/Artwork.png" data-title="No. 01 — Reach" data-sub="Digital illustration">
+        <img src="images/Artwork.png" width="1600" height="1070" loading="lazy" alt="Digital illustration of a person in a grey long-sleeve shirt reaching forward with both hands.">
+        <span class="tag"><b>No. 01 — Reach</b> Digital illustration</span>
+      </button>
+
+      <button type="button" class="print print--paper" style="--x:30%;--y:0%;--w:23%;--r:1.4deg"
+        data-full="images/hero-portrait.png" data-title="No. 02 — Self-Portrait" data-sub="Digital illustration">
+        <img src="images/hero-portrait.png" width="1056" height="663" loading="lazy" alt="Illustrated self-portrait head with purple hair and green eyes over hand-lettered purple text reading Krystyna Ewing.">
+        <span class="tag"><b>No. 02 — Self-Portrait</b> Digital illustration</span>
+      </button>
+
+      <button type="button" class="print print--paper" style="--x:55.5%;--y:3%;--w:17%;--r:-1deg"
+        data-full="images/website_hero.png" data-title="No. 03 — First Pass" data-sub="Early sketch">
+        <img src="images/website_hero.png" width="1235" height="992" loading="lazy" alt="Black line sketch of a bald figure with ear piercings, with the name Krystyna Ewing on a purple band.">
+        <span class="tag"><b>No. 03 — First Pass</b> Early sketch</span>
+      </button>
+
+      <button type="button" class="print" style="--x:75%;--y:1%;--w:14.5%;--r:2.6deg"
+        data-full="images/workbench/silver-skull.jpg" data-title="No. 04 — Silver Skull" data-sub="3D printed, hand-painted">
+        <img src="images/workbench/silver-skull.jpg" width="1320" height="1651" loading="lazy" alt="A 3D-printed skull painted metallic silver, sitting on a mossy weathered wooden beam.">
+        <span class="tag"><b>No. 04 — Silver Skull</b> 3D printed, hand-painted</span>
+      </button>
+
+      <button type="button" class="print" style="--x:2.5%;--y:47%;--w:14%;--r:1.8deg"
+        data-full="images/workbench/majin-buu-full.jpg" data-detail="images/workbench/majin-buu-detail.jpg" data-title="No. 05 — Majin Buu" data-sub="3D printed, hand-painted">
+        <img src="images/workbench/majin-buu-full.jpg" width="1350" height="1800" loading="lazy" alt="A large 3D-printed Majin Buu figure, airbrushed pink and white, standing in a garage workshop.">
+        <span class="tag"><b>No. 05 — Majin Buu</b> 3D printed, hand-painted</span>
+      </button>
+
+      <button type="button" class="print" style="--x:18%;--y:50%;--w:12.5%;--r:-3deg"
+        data-full="images/workbench/stickers.jpg" data-title="Stickers" data-sub="">
+        <img src="images/workbench/stickers.jpg" width="1350" height="1800" loading="lazy" alt="Three illustrated character stickers on a cutting mat next to Cricut weeding tools and a scraper.">
+        <span class="tag"><b>Stickers</b></span>
+      </button>
+
+      <button type="button" class="print" style="--x:33%;--y:45%;--w:12.5%;--r:2deg"
+        data-full="images/workbench/skull-moth-shadowbox.jpg" data-title="Skull &amp; moth shadowbox" data-sub="">
+        <img src="images/workbench/skull-moth-shadowbox.jpg" width="1350" height="1800" loading="lazy" alt="A black shadowbox holding a fanged white skull and a pinned cicada on carved driftwood, set in green and purple moss.">
+        <span class="tag"><b>Skull &amp; moth shadowbox</b></span>
+      </button>
+
+      <button type="button" class="print" style="--x:48%;--y:51%;--w:12%;--r:-1.4deg"
+        data-full="images/workbench/entomology-cicadas.jpg" data-title="Entomology — cicadas" data-sub="">
+        <img src="images/workbench/entomology-cicadas.jpg" width="1350" height="1800" loading="lazy" alt="Three patterned cicada and lanternfly specimens pinned on linen in a black frame, on a paint-spattered table.">
+        <span class="tag"><b>Entomology — cicadas</b></span>
+      </button>
+
+      <button type="button" class="print" style="--x:63%;--y:46%;--w:12%;--r:2.4deg"
+        data-full="images/workbench/mini-head-painting.jpg" data-title="Mini head, painting" data-sub="">
+        <img src="images/workbench/mini-head-painting.jpg" width="1350" height="1800" loading="lazy" alt="A hand holding a miniature sculpted head mid-paint, with Vallejo paint bottles and a palette behind it.">
+        <span class="tag"><b>Mini head, painting</b></span>
+      </button>
+
+      <button type="button" class="print" style="--x:77.5%;--y:50%;--w:11.5%;--r:-2deg"
+        data-full="images/workbench/skull-painting-process.jpg" data-title="Skull painting, in progress" data-sub="">
+        <img src="images/workbench/skull-painting-process.jpg" width="1320" height="1582" loading="lazy" alt="A life-size printed skull washed in wet red paint, pooling onto white paper on a cluttered desk.">
+        <span class="tag"><b>Skull painting, in progress</b></span>
+      </button>
+
+      <button type="button" class="print" style="--x:90%;--y:41%;--w:9.5%;--r:3.5deg"
+        data-full="images/workbench/digital-sketch-portrait.jpg" data-title="Digital sketch portrait" data-sub="">
+        <img src="images/workbench/digital-sketch-portrait.jpg" width="1000" height="1000" loading="lazy" alt="Digital pencil sketch of a bald young face in three-quarter view, signed K. Ewing 05/19.">
+        <span class="tag"><b>Digital sketch portrait</b></span>
+      </button>
+    </div>
+
+    <a class="bench__more" href="art.html">See what else I've been making <span aria-hidden="true">→</span></a>
+  </div>
+</section>
+
+<!-- ───────────── About ───────────── -->
+<section class="unit about" id="about" aria-labelledby="about-h">
+  <span class="screw screw--tl" aria-hidden="true"></span><span class="screw screw--tr" aria-hidden="true"></span>
+  <span class="screw screw--bl" aria-hidden="true"></span><span class="screw screw--br" aria-hidden="true"></span>
+
+  <header class="unit__head">
+    <h2 id="about-h" class="unit__title">About</h2>
+    <span class="unit__rule" aria-hidden="true"></span>
+    <span class="etch">Detroit → Columbus</span>
+  </header>
+
+  <div class="about__grid">
+    <div class="about__text">
+      <p class="about__lede">Detroit-born, lifelong artist, and someone with a bad habit of needing to know how things work. That curiosity took me from software development into UX, and it still shows up in accessibility reviews, 3D printing experiments, and whatever I'm building at 1am.</p>
+      <div class="about__links">
+        <a class="btn btn--primary" href="about.html">More about me <span aria-hidden="true">→</span></a>
+        <a class="btn" href="resume.html">Résumé</a>
+        <a class="btn" href="files/Krystyna-Ewing-Resume.pdf" download="Krystyna-Ewing-Resume.pdf">Download PDF <span aria-hidden="true">↓</span></a>
+      </div>
+    </div>
+
+    <div class="ledger-wrap">
+      <table class="ledger">
+        <caption>Where I've worked</caption>
+        <thead><tr><th scope="col">Organization</th><th scope="col">Role</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">HazAdapt</th><td>Lead UX Designer</td></tr>
+          <tr><th scope="row">Pentagon Federal Credit Union</th><td>Creative Technologist</td></tr>
+          <tr><th scope="row">JPMorgan Chase</th><td>UX Designer</td></tr>
+          <tr><th scope="row">True Link Financial</th><td>UX Designer</td></tr>
+          <tr><th scope="row">Move HQ</th><td>UX Designer</td></tr>
+          <tr><th scope="row">Operation Code</th><td>UX Designer &amp; Evangelist</td></tr>
+          <tr><th scope="row">Expedient</th><td>Associate Analyst</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ───────────── Contact ───────────── -->
+<section class="unit contact" id="contact" aria-labelledby="contact-h">
+  <span class="screw screw--tl" aria-hidden="true"></span><span class="screw screw--tr" aria-hidden="true"></span>
+  <span class="screw screw--bl" aria-hidden="true"></span><span class="screw screw--br" aria-hidden="true"></span>
+  <h2 id="contact-h" class="contact__line">Found something that doesn't work? Tell me.</h2>
+  <a class="bigkey" href="mailto:hello@krystynaewing.com">
+    <span class="bigkey__cap">
+      <span class="led led--amber" aria-hidden="true"></span>
+      <span class="bigkey__label">hello@krystynaewing.com</span>
+    </span>
+  </a>
+</section>
+
+</main>
+
+<footer class="foot">
+  <span>© 2026 Krystyna Ewing</span>
+  <span class="foot__links"><a href="resume.html">Résumé</a><a href="art.html">Art</a></span>
+  <span class="foot__credit">Cicada photo: Maya Alexa G. Romero on Unsplash (Unsplash License)</span>
+</footer>
+
+<!-- Mobile dock -->
+<nav class="dock" aria-label="Sections">
+  <a href="#work">Work</a>
+  <a href="#workbench">Bench</a>
+  <a href="#about">About</a>
+  <a href="#contact">Contact</a>
+</nav>
+
+<!-- Loupe -->
+<dialog class="loupe" id="loupe" aria-labelledby="loupeTitle">
+  <div class="loupe__frame">
+    <div class="loupe__view"><img id="loupeImg" src="" alt=""></div>
+    <div class="loupe__bar">
+      <p class="loupe__cap"><b id="loupeTitle"></b> <span id="loupeSub"></span></p>
+      <div class="loupe__ctrls">
+        <button type="button" class="btn btn--small" id="loupeDetail" hidden>Detail</button>
+        <button type="button" class="btn btn--small" id="loupePrev" aria-label="Previous piece">←</button>
+        <button type="button" class="btn btn--small" id="loupeNext" aria-label="Next piece">→</button>
+        <button type="button" class="btn btn--small btn--primary" id="loupeClose">Close</button>
+      </div>
+    </div>
+  </div>
+</dialog>
+
+<script src="home.js" onerror="document.documentElement.classList.remove('js')"></script>
+</body>
+</html>
