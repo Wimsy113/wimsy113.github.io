@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Krystyna Ewing — Terminal</title>
+<meta name="description" content="Krystyna Ewing — UX designer and creative technologist. An interactive desktop prototype.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#15120d; --panel:#1d1812; --panel2:#262019; --panel3:#120f0b;
+  --line:rgba(236,230,216,.1); --line-strong:rgba(236,230,216,.18);
+  --ink:#ECE6D8; --muted:#948d7c; --dim:#5f5a4e;
+  --amber:#c98a3c; --amber-bright:#e8ab5c; --red:#8f3b2e;
+  --cyan:#6fa8b2; --signal:#A8FF00; --moss:#5c6b3f;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg)}
+body{color:var(--ink);font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+.mono{font-family:'Space Mono',monospace}
+.display{font-family:'Archivo Black','Inter',sans-serif;font-weight:400;text-transform:uppercase}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:2px solid var(--amber-bright);outline-offset:2px}
+::selection{background:var(--amber);color:var(--panel3)}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* ---- chassis / bezel ---- */
+#bezel{
+  position:relative;min-height:100vh;
+  padding:clamp(14px,2.4vw,30px);
+  background:
+    radial-gradient(1200px 500px at 15% -10%, rgba(201,138,60,.05), transparent 60%),
+    linear-gradient(155deg,#20190f,#100d09 60%);
+}
+#bezel::before{ /* brushed metal texture */
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background-image:url("../images/desktop/metal-noise.png");
+  background-size:256px 256px;opacity:.5;mix-blend-mode:overlay;
+}
+.rivet{position:absolute;width:6px;height:6px;border-radius:50%;background:#0b0906;box-shadow:inset 0 1px 0 rgba(255,255,255,.15),0 1px 1px rgba(0,0,0,.6)}
+
+/* vent + vine, bottom-left of chassis */
+#vent{position:absolute;left:14px;bottom:12px;width:64px;z-index:2}
+#vent .grille{display:flex;flex-direction:column;gap:3px;padding:6px 8px;background:#0e0b08;border:1px solid rgba(0,0,0,.6);border-radius:3px}
+#vent .grille span{display:block;height:2px;background:#2a231a;border-radius:1px}
+
+/* ---- screen (the actual OS surface) ---- */
+#screen{
+  position:relative;border-radius:4px;overflow:hidden;
+  border:1px solid rgba(0,0,0,.6);
+  box-shadow:inset 0 0 0 1px rgba(236,230,216,.04), inset 0 60px 120px rgba(0,0,0,.5), 0 30px 60px rgba(0,0,0,.6);
+  background:var(--bg);
+  padding:clamp(28px,4.5vw,64px) clamp(20px,4vw,56px) clamp(60px,6vw,88px);
+}
+#screen::before{ /* light falloff */
+  content:"";position:absolute;inset:0;pointer-events:none;z-index:0;
+  background:
+    radial-gradient(900px 500px at 8% 0%, rgba(201,138,60,.10), transparent 55%),
+    radial-gradient(1000px 600px at 95% 100%, rgba(111,168,178,.09), transparent 55%);
+}
+#screen::after{ /* scanlines, static */
+  content:"";position:absolute;inset:0;pointer-events:none;z-index:3;
+  background-image:repeating-linear-gradient(to bottom, rgba(0,0,0,0) 0px, rgba(0,0,0,0) 2px, rgba(0,0,0,.14) 3px);
+}
+.vignette{position:absolute;inset:0;pointer-events:none;z-index:2;background:radial-gradient(ellipse at center, transparent 55%, rgba(0,0,0,.4) 100%)}
+
+/* ---- window chrome, shared ---- */
+.win{position:relative;z-index:1;background:var(--panel);border:1px solid var(--line-strong);box-shadow:0 18px 36px rgba(0,0,0,.45)}
+.win-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:8px 12px;background:var(--panel2);border-bottom:1px solid var(--line)}
+.win-bar .label{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.win-ctl{display:flex;gap:5px}
+.win-ctl span{width:14px;height:14px;display:flex;align-items:center;justify-content:center;border:1px solid var(--line-strong);color:var(--dim);font-size:9px;line-height:1;background:var(--panel3)}
+
+/* ---- identity window ---- */
+#identity{max-width:720px;margin-bottom:clamp(28px,4vw,48px)}
+#identity .win-body{padding:clamp(22px,3vw,36px) clamp(22px,3vw,32px)}
+.signal-dot{width:6px;height:6px;border-radius:50%;background:var(--signal);box-shadow:0 0 6px var(--signal);display:inline-block}
+@media (prefers-reduced-motion:no-preference){
+  .signal-dot{animation:pulse 2.4s ease-in-out infinite}
+}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+#identity h1{margin:14px 0 6px;font-size:clamp(34px,5vw,58px);line-height:.94;letter-spacing:-.01em;color:var(--ink)}
+#identity .role{margin:0 0 16px;font-size:clamp(14px,1.3vw,16px);color:var(--amber-bright)}
+#identity .bio{margin:0;max-width:62ch;font-size:clamp(14px,1.1vw,16px);line-height:1.6;color:#cfc8b8}
+.meta-row{display:flex;flex-wrap:wrap;gap:6px 22px;margin-top:18px;padding-top:16px;border-top:1px solid var(--line)}
+.meta-row div{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--dim)}
+.meta-row div span{display:block;margin-top:3px;font-size:12px;letter-spacing:.02em;color:var(--muted);text-transform:none}
+
+/* ---- app windows (case studies) ---- */
+#apps{position:relative;z-index:1;display:flex;flex-wrap:wrap;gap:22px;align-items:flex-start;margin-bottom:clamp(32px,4vw,48px)}
+.app{flex:1 1 300px;min-width:0}
+.app.primary{flex:1.5 1 380px}
+.app .win-body{padding:16px}
+.app .frame{position:relative;border:1px solid rgba(111,168,178,.25);box-shadow:0 0 0 1px rgba(0,0,0,.4), 0 0 24px rgba(111,168,178,.08) inset;overflow:hidden;margin-bottom:14px;background:#0c0a08}
+.app .frame img{display:block;width:100%;height:auto;opacity:.92;filter:saturate(.82) contrast(1.05)}
+.app .eyebrow{margin:0 0 6px;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--amber)}
+.app h2{margin:0 0 8px;font-size:clamp(20px,2vw,28px);line-height:1;letter-spacing:-.005em;color:var(--ink)}
+.app p{margin:0 0 14px;font-size:13px;line-height:1.55;color:#bdb6a4}
+.app .open{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--amber-bright);border-top:1px solid var(--line);padding-top:12px;width:100%}
+.app.secondary{opacity:.82}
+.app.secondary .frame{filter:saturate(.7)}
+.app:hover,.app:focus-within{opacity:1}
+.app .open:hover{color:var(--ink)}
+
+/* ---- control panel strip ---- */
+#controls{position:relative;z-index:1;display:flex;flex-wrap:wrap;gap:10px}
+.ctl-btn{display:flex;align-items:center;gap:10px;padding:10px 16px;background:var(--panel);border:1px solid var(--line-strong);min-height:44px}
+.ctl-btn:hover{background:var(--panel2);border-color:var(--amber)}
+.ctl-light{width:7px;height:7px;border-radius:50%;background:var(--amber);box-shadow:0 0 5px var(--amber)}
+.ctl-btn span.lbl{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.ctl-btn:hover span.lbl{color:var(--ink)}
+
+@media (max-width:760px){
+  #apps{flex-direction:column}
+  .app.primary{flex:1 1 auto}
+}
+</style>
+</head>
+<body>
+
+<div id="bezel">
+  <span class="rivet" style="left:8px;top:8px"></span>
+  <span class="rivet" style="right:8px;top:8px"></span>
+  <span class="rivet" style="left:8px;bottom:8px"></span>
+  <span class="rivet" style="right:8px;bottom:8px"></span>
+
+  <div id="vent" aria-hidden="true">
+    <svg width="40" height="54" viewBox="0 0 40 54" style="position:absolute;left:10px;bottom:28px;z-index:1" aria-hidden="true">
+      <path d="M8 54 C 4 42, 14 36, 10 26 C 7 18, 16 12, 13 2" fill="none" stroke="var(--moss)" stroke-width="1.4" stroke-linecap="round" opacity=".75"/>
+      <path d="M13 24 C 17 22, 19 18, 17 14" fill="none" stroke="var(--moss)" stroke-width="1.1" stroke-linecap="round" opacity=".6"/>
+      <circle cx="13" cy="2" r="1.6" fill="var(--moss)" opacity=".8"/>
+    </svg>
+    <div class="grille"><span></span><span></span><span></span><span></span></div>
+  </div>
+
+  <main id="screen">
+    <div class="vignette" aria-hidden="true"></div>
+
+    <a href="#apps" style="position:absolute;left:-9999px;top:0;z-index:50;background:var(--amber);color:#15120d;padding:10px 16px;font-family:'Space Mono',monospace;font-size:12px" onfocus="this.style.left='16px'" onblur="this.style.left='-9999px'">Skip to case studies</a>
+
+    <header id="identity" class="win">
+      <div class="win-bar">
+        <span class="label mono">sys://k.ewing — terminal 01</span>
+        <div class="win-ctl" aria-hidden="true"><span>−</span><span>▢</span><span>×</span></div>
+      </div>
+      <div class="win-body">
+        <span class="mono" style="display:inline-flex;align-items:center;gap:8px;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim)"><span class="signal-dot" aria-hidden="true"></span>Signal active</span>
+        <h1 class="display">Krystyna Ewing</h1>
+        <p class="role mono">UX Designer / Creative Technologist — Columbus, Ohio</p>
+        <p class="bio">I design software, make art, build things, break things, and have a hard time leaving anything alone when I know it could work better.</p>
+        <div class="meta-row">
+          <div>Focus<span>Software · UX · Art · 3D Printing</span></div>
+          <div>Status<span>Open to new work</span></div>
+        </div>
+      </div>
+    </header>
+
+    <section id="apps" aria-label="Selected work">
+      <article class="app primary win">
+        <div class="win-bar">
+          <span class="label mono">01 / resiliencepoint.app</span>
+          <div class="win-ctl" aria-hidden="true"><span>−</span><span>▢</span><span>×</span></div>
+        </div>
+        <div class="win-body">
+          <div class="frame"><img loading="lazy" src="../images/work/hazadapt-resiliencepoint/platform-cover.png" alt="ResiliencePoint dashboard showing trending hazards and a nationwide activity map"></div>
+          <p class="eyebrow mono">HazAdapt · UX Research · Product Design · Data Visualization</p>
+          <h2 class="display">ResiliencePoint</h2>
+          <p>Turning emergency preparedness data into something people can actually use — a successor to EM-Dash built to help emergency managers investigate, not just view, community preparedness.</p>
+          <a class="open mono" href="../work/hazadapt-resiliencepoint.html">Lead UX Designer · 2023–2024 <span aria-hidden="true" style="margin-left:auto">open →</span></a>
+        </div>
+      </article>
+
+      <article class="app secondary win">
+        <div class="win-bar">
+          <span class="label mono">02 / hazadapt.app</span>
+          <div class="win-ctl" aria-hidden="true"><span>−</span><span>▢</span><span>×</span></div>
+        </div>
+        <div class="win-body">
+          <div class="frame"><img loading="lazy" src="../images/work/hazadapt/hero-dual-monitor.png" alt="HazAdapt product shown across two monitors"></div>
+          <p class="eyebrow mono">UX Design · Content Strategy · Public Safety</p>
+          <h2 class="display">HazAdapt</h2>
+          <p>A library of hazard guides and prep activities built to help people build resilience before a crisis hits and recover faster after.</p>
+          <a class="open mono" href="../work/hazadapt.html">Lead UX Designer · 2021–present <span aria-hidden="true" style="margin-left:auto">open →</span></a>
+        </div>
+      </article>
+
+      <article class="app secondary win">
+        <div class="win-bar">
+          <span class="label mono">03 / truelink.app</span>
+          <div class="win-ctl" aria-hidden="true"><span>−</span><span>▢</span><span>×</span></div>
+        </div>
+        <div class="win-body">
+          <div class="frame"><img loading="lazy" src="../images/work/true-link/hero-devices.png" alt="The True Link trust administration dashboard shown across desktop and laptop screens"></div>
+          <p class="eyebrow mono">Fintech · Accessibility · Design Systems</p>
+          <h2 class="display">True Link</h2>
+          <p>Financial tools built to protect the safety and independence of aging and disabled adults without stripping away their autonomy.</p>
+          <a class="open mono" href="../work/true-link.html">UX Designer · Trust team <span aria-hidden="true" style="margin-left:auto">open →</span></a>
+        </div>
+      </article>
+    </section>
+
+    <nav id="controls" aria-label="Site sections">
+      <a class="ctl-btn" href="../about.html"><span class="ctl-light" aria-hidden="true"></span><span class="lbl mono">About</span></a>
+      <a class="ctl-btn" href="../resume.html"><span class="ctl-light" aria-hidden="true"></span><span class="lbl mono">Résumé</span></a>
+      <a class="ctl-btn" href="../art.html"><span class="ctl-light" aria-hidden="true"></span><span class="lbl mono">Creative Work</span></a>
+      <a class="ctl-btn" href="mailto:hello@krystynaewing.com"><span class="ctl-light" aria-hidden="true"></span><span class="lbl mono">Contact</span></a>
+    </nav>
+  </main>
+</div>
+
+</body>
+</html>
