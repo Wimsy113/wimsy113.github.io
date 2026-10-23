@@ -48,8 +48,23 @@ a{color:inherit;text-decoration:none}
   opacity:.16;pointer-events:none;mask-image:linear-gradient(to right, black, transparent 30%, transparent 70%, black);-webkit-mask-image:linear-gradient(to right, black, transparent 30%, transparent 70%, black)}
 .win-bar{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:7px 10px;background:linear-gradient(180deg,#141810,#0d100c);border-bottom:1px solid var(--line)}
 .win-bar .label{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.win-drag{all:unset;cursor:grab;touch-action:none;display:block;flex:1;min-height:20px;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);text-align:left}
+.win-drag:hover{color:var(--ink)}
+.win-drag:active{cursor:grabbing}
+.win-drag:focus-visible{outline:2px solid var(--phosphor-bright);outline-offset:2px}
 .win-ctl{display:flex;gap:4px}
-.win-ctl span{width:13px;height:13px;display:flex;align-items:center;justify-content:center;border:1px solid var(--line-strong);color:var(--dim);font-size:8px;line-height:1;background:#060705}
+.win-ctl button{all:unset;width:16px;height:16px;display:flex;align-items:center;justify-content:center;border:1px solid var(--line-strong);color:var(--muted);font-size:9px;line-height:1;background:#060705;cursor:pointer}
+.win-ctl button:hover{color:var(--ink);border-color:var(--phosphor-bright)}
+.win-ctl button:focus-visible{outline:2px solid var(--phosphor-bright);outline-offset:2px}
+
+.win.minimized .win-body{display:none}
+.win.closed{display:none}
+
+#closedDock{position:relative;z-index:6;display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px}
+#closedDock:empty{display:none}
+.dock-chip{all:unset;cursor:pointer;display:flex;align-items:center;gap:8px;padding:7px 12px;background:var(--panel);border:1px dashed var(--line-strong);font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+.dock-chip:hover{color:var(--ink);border-color:var(--phosphor-bright)}
+.dock-chip:focus-visible{outline:2px solid var(--phosphor-bright);outline-offset:2px}
 
 /* stage */
 #stage{position:relative;z-index:1}
@@ -178,12 +193,18 @@ __halt_if(sync==FALSE);</pre>
 
     <a href="#apps" style="position:absolute;left:-9999px;top:0;z-index:50;background:var(--phosphor-bright);color:#060705;padding:10px 16px;font-family:'Space Mono',monospace;font-size:12px" onfocus="this.style.left='16px'" onblur="this.style.left='-9999px'">Skip to case studies</a>
 
+    <div id="closedDock" class="mono" aria-label="Closed windows"></div>
+
     <div id="stage">
 
-      <header id="identity" class="cl win" style="left:30px;top:22px;width:350px;transform:rotate(-.7deg);z-index:4">
+      <header id="identity" class="cl win" data-win="identity" data-default='{"left":30,"top":22,"rotate":-0.7}' style="left:30px;top:22px;width:350px;transform:rotate(-.7deg);z-index:4">
         <div class="win-bar">
-          <span class="label mono">sys://k.ewing_01</span>
-          <div class="win-ctl" aria-hidden="true"><span>−</span><span>▢</span><span>×</span></div>
+          <button type="button" class="win-drag mono" aria-label="Move identity window. Drag, or focus and use arrow keys.">sys://k.ewing_01</button>
+          <div class="win-ctl">
+            <button type="button" data-action="min" aria-label="Minimize identity window">−</button>
+            <button type="button" data-action="restore" aria-label="Restore identity window to default position">▢</button>
+            <button type="button" data-action="close" aria-label="Close identity window">×</button>
+          </div>
         </div>
         <div class="win-body">
           <span class="mono" style="display:inline-flex;align-items:center;gap:7px;font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--dim)"><span class="signal-dot" aria-hidden="true"></span>Signal active</span>
@@ -199,10 +220,14 @@ __halt_if(sync==FALSE);</pre>
 
       <section id="apps" aria-label="Selected work" style="display:contents">
 
-        <article class="cl app win" style="left:420px;top:50px;width:580px;transform:rotate(.4deg);z-index:5">
+        <article class="cl app win" data-win="rp" data-default='{"left":420,"top":50,"rotate":0.4}' style="left:420px;top:50px;width:580px;transform:rotate(.4deg);z-index:5">
           <div class="win-bar">
-            <span class="label mono">01 / resiliencepoint.app</span>
-            <div class="win-ctl" aria-hidden="true"><span>−</span><span>▢</span><span>×</span></div>
+            <button type="button" class="win-drag mono" aria-label="Move ResiliencePoint window. Drag, or focus and use arrow keys.">01 / resiliencepoint.app</button>
+            <div class="win-ctl">
+              <button type="button" data-action="min" aria-label="Minimize ResiliencePoint window">−</button>
+              <button type="button" data-action="restore" aria-label="Restore ResiliencePoint window to default position">▢</button>
+              <button type="button" data-action="close" aria-label="Close ResiliencePoint window">×</button>
+            </div>
           </div>
           <div class="win-body">
             <div class="frame"><img loading="lazy" src="../images/work/hazadapt-resiliencepoint/platform-cover.png" alt="ResiliencePoint dashboard showing trending hazards and a nationwide activity map"></div>
@@ -213,10 +238,14 @@ __halt_if(sync==FALSE);</pre>
           </div>
         </article>
 
-        <article class="cl app dim win" style="left:60px;top:470px;width:380px;transform:rotate(-1.6deg);z-index:3">
+        <article class="cl app dim win" data-win="hazadapt" data-default='{"left":60,"top":470,"rotate":-1.6}' style="left:60px;top:470px;width:380px;transform:rotate(-1.6deg);z-index:3">
           <div class="win-bar">
-            <span class="label mono">02 / hazadapt.app</span>
-            <div class="win-ctl" aria-hidden="true"><span>−</span><span>▢</span><span>×</span></div>
+            <button type="button" class="win-drag mono" aria-label="Move HazAdapt window. Drag, or focus and use arrow keys.">02 / hazadapt.app</button>
+            <div class="win-ctl">
+              <button type="button" data-action="min" aria-label="Minimize HazAdapt window">−</button>
+              <button type="button" data-action="restore" aria-label="Restore HazAdapt window to default position">▢</button>
+              <button type="button" data-action="close" aria-label="Close HazAdapt window">×</button>
+            </div>
           </div>
           <div class="win-body">
             <div class="frame"><img loading="lazy" src="../images/work/hazadapt/hero-dual-monitor.png" alt="HazAdapt product shown across two monitors"></div>
@@ -227,10 +256,14 @@ __halt_if(sync==FALSE);</pre>
           </div>
         </article>
 
-        <article class="cl app dim win" style="left:480px;top:520px;width:340px;transform:rotate(1.1deg);z-index:2">
+        <article class="cl app dim win" data-win="truelink" data-default='{"left":480,"top":520,"rotate":1.1}' style="left:480px;top:520px;width:340px;transform:rotate(1.1deg);z-index:2">
           <div class="win-bar">
-            <span class="label mono">03 / truelink.app</span>
-            <div class="win-ctl" aria-hidden="true"><span>−</span><span>▢</span><span>×</span></div>
+            <button type="button" class="win-drag mono" aria-label="Move True Link window. Drag, or focus and use arrow keys.">03 / truelink.app</button>
+            <div class="win-ctl">
+              <button type="button" data-action="min" aria-label="Minimize True Link window">−</button>
+              <button type="button" data-action="restore" aria-label="Restore True Link window to default position">▢</button>
+              <button type="button" data-action="close" aria-label="Close True Link window">×</button>
+            </div>
           </div>
           <div class="win-body">
             <div class="frame"><img loading="lazy" src="../images/work/true-link/hero-devices.png" alt="The True Link trust administration dashboard shown across desktop and laptop screens"></div>
@@ -254,5 +287,107 @@ __halt_if(sync==FALSE);</pre>
   </main>
 </div>
 
+<script>
+(function(){
+  'use strict';
+  var dock = document.getElementById('closedDock');
+  var wins = Array.prototype.slice.call(document.querySelectorAll('[data-win]'));
+  var topZ = 10;
+  var narrow = function(){ return window.innerWidth <= 860; };
+
+  function state(el){
+    var d = JSON.parse(el.dataset.default);
+    return { x: parseFloat(el.style.left) || d.left, y: parseFloat(el.style.top) || d.top, r: d.rotate, def: d };
+  }
+  var S = {};
+  wins.forEach(function(el){ S[el.dataset.win] = state(el); });
+
+  function apply(el){
+    var s = S[el.dataset.win];
+    el.style.left = s.x + 'px';
+    el.style.top = s.y + 'px';
+    el.style.transform = 'rotate(' + s.r + 'deg)';
+  }
+  function lift(el){ topZ += 1; el.style.zIndex = topZ; }
+  function clamp(v, max){ return Math.max(-200, Math.min(max, v)); }
+
+  wins.forEach(function(el){
+    var id = el.dataset.win;
+    var drag = el.querySelector('.win-drag');
+    var minBtn = el.querySelector('[data-action="min"]');
+    var restoreBtn = el.querySelector('[data-action="restore"]');
+    var closeBtn = el.querySelector('[data-action="close"]');
+    var dragState = null;
+
+    el.addEventListener('pointerdown', function(){ lift(el); }, { capture: true });
+
+    if (drag){
+      drag.addEventListener('pointerdown', function(e){
+        if (narrow()) return;
+        dragState = { sx: e.clientX, sy: e.clientY, px: S[id].x, py: S[id].y };
+        drag.setPointerCapture(e.pointerId);
+        lift(el);
+      });
+      drag.addEventListener('pointermove', function(e){
+        if (!dragState) return;
+        S[id].x = clamp(dragState.px + (e.clientX - dragState.sx), window.innerWidth - 80);
+        S[id].y = clamp(dragState.py + (e.clientY - dragState.sy), window.innerHeight - 80);
+        apply(el);
+      });
+      drag.addEventListener('pointerup', function(){ dragState = null; });
+      drag.addEventListener('pointercancel', function(){ dragState = null; });
+      drag.addEventListener('keydown', function(e){
+        if (narrow()) return;
+        var k = e.shiftKey ? 24 : 8;
+        var m = { ArrowLeft: [-k,0], ArrowRight: [k,0], ArrowUp: [0,-k], ArrowDown: [0,k] }[e.key];
+        if (!m) return;
+        e.preventDefault(); lift(el);
+        S[id].x = clamp(S[id].x + m[0], window.innerWidth - 80);
+        S[id].y = clamp(S[id].y + m[1], window.innerHeight - 80);
+        apply(el);
+      });
+    }
+
+    if (minBtn) minBtn.addEventListener('click', function(){
+      var on = !el.classList.contains('minimized');
+      el.classList.toggle('minimized', on);
+      minBtn.setAttribute('aria-pressed', on ? 'true' : 'false');
+      minBtn.textContent = on ? '+' : '−';
+      lift(el);
+    });
+
+    if (restoreBtn) restoreBtn.addEventListener('click', function(){
+      S[id].x = S[id].def.left; S[id].y = S[id].def.top; S[id].r = S[id].def.rotate;
+      apply(el);
+      el.classList.remove('minimized');
+      if (minBtn){ minBtn.setAttribute('aria-pressed','false'); minBtn.textContent = '−'; }
+      lift(el);
+    });
+
+    if (closeBtn) closeBtn.addEventListener('click', function(){
+      el.classList.add('closed');
+      var label = (drag ? drag.textContent : id).trim();
+      var chip = document.createElement('button');
+      chip.type = 'button';
+      chip.className = 'dock-chip';
+      chip.dataset.restores = id;
+      chip.textContent = '+ ' + label;
+      chip.setAttribute('aria-label', 'Reopen ' + label);
+      chip.addEventListener('click', function(){
+        el.classList.remove('closed');
+        lift(el);
+        chip.remove();
+        drag && drag.focus();
+      });
+      dock.appendChild(chip);
+    });
+  });
+
+  window.addEventListener('resize', function(){
+    if (!narrow()) return;
+    wins.forEach(function(el){ el.style.transform = ''; });
+  });
+})();
+</script>
 </body>
 </html>
