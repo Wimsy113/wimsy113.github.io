@@ -11,9 +11,9 @@
 <script src="./image-slot.js"></script>
 <script>try{if(localStorage.getItem('ke-theme')==='light')document.documentElement.setAttribute('data-theme','light');}catch(e){}</script>
 <style>
-html{--bg:#0B0B0B;--fg:#F2F0E9;--green:#A8FF00;--on-green:#0B0B0B;--charcoal:#252525;--muted:#9a978e;--line:rgba(242,240,233,.2);--rail-w:48px;--margin-w:96px;--grain:.14;background:var(--bg);color:var(--fg);scroll-behavior:smooth}
-html[data-theme="light"]{--bg:#F2F0E9;--fg:#0B0B0B;--green:#447000;--on-green:#F2F0E9;--charcoal:#E4E1D6;--muted:#5f5c4e;--line:rgba(11,11,11,.2)}
-body{margin:0;padding-right:var(--rail-w);background:var(--bg);color:var(--fg);font-family:"Inter",system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+html{--bg:#0B0B0B;--fg:#F2F0E9;--green:#A8FF00;--on-green:#0B0B0B;--charcoal:#252525;--muted:#9a978e;--line:rgba(242,240,233,.2);--rail-w:48px;--margin-w:96px;--grain:.14;--amber:#D9A14A;--cyan:#6FB0BA;--grid-ink:rgba(242,240,233,.03);background:var(--bg);color:var(--fg);scroll-behavior:smooth}
+html[data-theme="light"]{--bg:#F2F0E9;--fg:#0B0B0B;--green:#447000;--on-green:#F2F0E9;--charcoal:#E4E1D6;--muted:#5f5c4e;--line:rgba(11,11,11,.2);--amber:#8a5c1f;--cyan:#2d6b74;--grid-ink:rgba(11,11,11,.035)}
+body{margin:0;padding-right:var(--rail-w);background-color:var(--bg);background-image:linear-gradient(var(--grid-ink) 1px,transparent 1px),linear-gradient(90deg,var(--grid-ink) 1px,transparent 1px);background-size:48px 48px;background-attachment:fixed;color:var(--fg);font-family:"Inter",system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:300;opacity:var(--grain);mix-blend-mode:overlay;background-image:url("images/grain.png");background-size:96px 96px}
 a{color:inherit;text-decoration-thickness:1px;text-underline-offset:.22em}
 a:hover{color:var(--green)}
@@ -33,11 +33,22 @@ a:hover .hoverfade{filter:grayscale(0) contrast(1)!important}
 @media (prefers-reduced-motion:no-preference){
   html.js-ready #workbench{transition:clip-path 1s cubic-bezier(.16,1,.3,1)}
 }
-.regmark{position:absolute;width:14px;height:14px;pointer-events:none;color:var(--line)}
-.regmark::before,.regmark::after{content:"";position:absolute;background:currentColor}
+.regmark{position:absolute;width:16px;height:16px;pointer-events:none;color:var(--green);opacity:.55}
+.regmark::before,.regmark::after{content:"";position:absolute;background:currentColor;box-shadow:0 0 4px currentColor}
 .regmark::before{left:50%;top:0;width:1px;height:100%;transform:translateX(-50%)}
 .regmark::after{top:50%;left:0;height:1px;width:100%;transform:translateY(-50%)}
 .dotfield{background-image:radial-gradient(circle,var(--fg) 1px,transparent 1px);background-size:7px 7px;opacity:.12}
+/* ---- physical chrome: recessed screens, glow edges, panel ticks ---- */
+nav[aria-label="Primary"]{box-shadow:inset 1px 0 0 rgba(255,255,255,.04),-10px 0 30px rgba(0,0,0,.4)}
+nav[aria-label="Primary"]::before{content:"";position:absolute;left:-1px;top:0;bottom:0;width:1px;background-image:repeating-linear-gradient(to bottom,var(--line) 0 1px,transparent 1px 9px);pointer-events:none}
+#heroMeta{position:relative}
+#heroMeta::before{content:"";position:absolute;left:-1px;top:4%;bottom:4%;width:1px;background:linear-gradient(to bottom,transparent,var(--green) 12%,var(--green) 88%,transparent);box-shadow:0 0 6px var(--green);opacity:.55;pointer-events:none}
+[data-badge]{position:relative}
+[data-badge]::before{content:"";position:absolute;left:-12px;top:10%;bottom:14%;width:2px;background:var(--green);box-shadow:0 0 7px var(--green);opacity:.6;pointer-events:none}
+.shot-frame{position:relative;background:#000;box-shadow:0 0 0 1px var(--line),inset 0 3px 14px rgba(0,0,0,.65),inset 0 -3px 22px rgba(0,0,0,.55),0 0 26px rgba(168,255,0,.05)}
+.shot-frame::before{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;background:linear-gradient(180deg,rgba(255,255,255,.06),transparent 16%,transparent 84%,rgba(0,0,0,.4));mix-blend-mode:overlay}
+.shot-frame::after{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;box-shadow:inset 0 0 0 1px rgba(168,255,0,.1)}
+.piece figure,.piece>div{box-shadow:0 10px 26px rgba(0,0,0,.35)}
 summary::-webkit-details-marker{display:none}
 nav[aria-label="Primary"] a[aria-current="true"]{color:var(--green);box-shadow:inset 3px 0 0 var(--green)}
 #pageGrid{display:grid;grid-template-columns:var(--margin-w) 1fr}
@@ -160,7 +171,7 @@ html.js-ready #workbench{clip-path:inset(calc((1 - var(--p,0)) * 10%) calc((1 - 
       <span>Field note</span>
     </div>
     <div style="position:relative">
-      <div style="position:relative;overflow:hidden;background:#000;border:1px solid var(--line)">
+      <div class="shot-frame" style="position:relative;overflow:hidden;border:1px solid var(--line)">
         <img loading="eager" fetchpriority="high" src="images/cicada-hero.jpg" alt="Macro photograph of a cicada, wings spread, viewed from above against a black background." style="display:block;width:100%;height:auto;filter:grayscale(1) contrast(1.35) brightness(1.05)">
         <span aria-hidden="true" style="position:absolute;inset:0;mix-blend-mode:color;background:var(--green);opacity:.24"></span>
         <span aria-hidden="true" class="mono" style="position:absolute;left:3%;top:9%;font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:#A8FF00;border:1px solid #A8FF00;padding:2px 6px;background:rgba(0,0,0,.6)">01 — Wing vein</span>
@@ -221,7 +232,7 @@ html.js-ready #workbench{clip-path:inset(calc((1 - var(--p,0)) * 10%) calc((1 - 
   <h2 id="work-h" class="display" data-reveal style="margin:0 0 clamp(32px,5vh,56px);font-size:clamp(34px,5.6vw,88px);line-height:.92">Selected Work</h2>
 
   <div style="position:relative">
-    <svg id="workVeins" aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;overflow:visible"><path fill="none" stroke="var(--green)" stroke-width="1" opacity=".35" stroke-dasharray="2 5"></path></svg>
+    <svg id="workVeins" aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;overflow:visible"><path fill="none" stroke="var(--cyan)" stroke-width="1" opacity=".45" stroke-dasharray="2 5"></path></svg>
 
     <article id="wrk-01" data-reveal style="position:relative;z-index:1;padding-bottom:clamp(32px,5vh,56px);border-bottom:1px solid var(--line);scroll-margin-top:24px">
       <div class="display" data-badge="1" aria-hidden="true" style="font-size:clamp(60px,9vw,130px);line-height:1;color:var(--green);margin-bottom:clamp(12px,2vh,20px)">01</div>
@@ -232,9 +243,9 @@ html.js-ready #workbench{clip-path:inset(calc((1 - var(--p,0)) * 10%) calc((1 - 
         <div class="regmark" aria-hidden="true" style="right:-1px;bottom:-1px"></div>
         <div class="mono" style="display:flex;justify-content:space-between;gap:12px;padding:12px clamp(16px,2.4vw,24px);border-bottom:1px solid var(--line);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)">
           <span>Platform dashboard</span>
-          <span>Case study</span>
+          <span style="color:var(--amber)">Case study</span>
         </div>
-        <div style="position:relative;overflow:hidden">
+        <div class="shot-frame" style="position:relative;overflow:hidden">
           <img loading="lazy" src="images/work/hazadapt-resiliencepoint/platform-cover.png" alt="ResiliencePoint dashboard showing trending hazards and a nationwide activity map" style="display:block;width:100%;height:auto;filter:grayscale(1) contrast(1.25);transition:filter .5s ease" class="hoverfade">
         </div>
       </a>
@@ -259,9 +270,9 @@ html.js-ready #workbench{clip-path:inset(calc((1 - var(--p,0)) * 10%) calc((1 - 
           <div class="regmark" aria-hidden="true" style="right:-1px;bottom:-1px"></div>
           <div class="mono" style="display:flex;justify-content:space-between;gap:12px;padding:10px clamp(14px,2vw,20px);border-bottom:1px solid var(--line);font-size:9px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)">
             <span>HazAdapt product collection</span>
-            <span>Case study</span>
+            <span style="color:var(--amber)">Case study</span>
           </div>
-          <div style="position:relative;overflow:hidden">
+          <div class="shot-frame" style="position:relative;overflow:hidden">
             <img loading="lazy" src="images/hazadapt_album.png" alt="HazAdapt product collection" style="display:block;width:100%;height:auto;filter:grayscale(1) contrast(1.25);transition:filter .5s ease" class="hoverfade">
           </div>
         </a>
@@ -282,9 +293,9 @@ html.js-ready #workbench{clip-path:inset(calc((1 - var(--p,0)) * 10%) calc((1 - 
           <div class="regmark" aria-hidden="true" style="right:-1px;bottom:-1px"></div>
           <div class="mono" style="display:flex;justify-content:space-between;gap:12px;padding:10px clamp(14px,2vw,20px);border-bottom:1px solid var(--line);font-size:9px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)">
             <span>True Link product collection</span>
-            <span>Case study</span>
+            <span style="color:var(--amber)">Case study</span>
           </div>
-          <div style="position:relative;overflow:hidden">
+          <div class="shot-frame" style="position:relative;overflow:hidden">
             <img loading="lazy" src="images/True_Link_album.png" alt="True Link financial platform collection" style="display:block;width:100%;height:auto;filter:grayscale(1) contrast(1.25);transition:filter .5s ease" class="hoverfade">
           </div>
         </a>
@@ -307,9 +318,9 @@ html.js-ready #workbench{clip-path:inset(calc((1 - var(--p,0)) * 10%) calc((1 - 
           <div class="regmark" aria-hidden="true" style="right:-1px;bottom:-1px"></div>
           <div class="mono" style="display:flex;justify-content:space-between;gap:12px;padding:10px clamp(14px,2vw,20px);border-bottom:1px solid var(--line);font-size:9px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)">
             <span>WellDone product collection</span>
-            <span>Case study</span>
+            <span style="color:var(--amber)">Case study</span>
           </div>
-          <div style="position:relative;overflow:hidden">
+          <div class="shot-frame" style="position:relative;overflow:hidden">
             <img loading="lazy" src="images/welldone_album.png" alt="WellDone water monitoring project collection" style="display:block;width:100%;height:auto;filter:grayscale(1) contrast(1.25);transition:filter .5s ease" class="hoverfade">
           </div>
         </a>
@@ -407,7 +418,7 @@ html.js-ready #workbench{clip-path:inset(calc((1 - var(--p,0)) * 10%) calc((1 - 
 <section id="about" aria-labelledby="about-h" style="position:relative;padding:clamp(40px,6vw,72px) clamp(16px,3vw,32px);border-bottom:1px solid var(--line);display:grid;grid-template-columns:repeat(12,1fr);gap:clamp(20px,3vw,32px)">
   <h2 id="about-h" class="display" data-reveal style="grid-column:1/-1;margin:0 0 clamp(24px,4vw,40px);font-size:clamp(34px,5.6vw,80px);line-height:.92">About</h2>
 
-  <div aria-hidden="true" data-reveal style="grid-column:1/span5;position:relative;min-height:clamp(260px,30vw,420px);border:1px solid var(--line);overflow:hidden;background:var(--charcoal)">
+  <div aria-hidden="true" data-reveal class="shot-frame" style="grid-column:1/span5;position:relative;min-height:clamp(260px,30vw,420px);border:1px solid var(--line);overflow:hidden;background:var(--charcoal)">
     <img loading="lazy" src="images/hero-portrait.png" alt="" style="position:absolute;left:-10%;top:0;width:120%;height:100%;object-fit:cover;object-position:50% 40%;filter:grayscale(1) contrast(1.3)">
   </div>
   <div data-reveal style="grid-column:6/span7;display:grid;gap:22px;align-content:start">
