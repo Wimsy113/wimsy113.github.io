@@ -56,14 +56,38 @@
     Array.prototype.forEach.call(document.querySelectorAll('[data-power]'), function (el) { io.observe(el); });
   });
 
+  /* ---------- Cicada drifts slower than the page as it scrolls away ---------- */
+  boot('parallax', function () {
+    var fig = document.querySelector('.hero__cicada');
+    if (!fig || reduceMotion.matches) return;
+    var pending = false;
+    function run() {
+      pending = false;
+      var y = window.scrollY;
+      if (y > window.innerHeight * 1.5) return;
+      fig.style.setProperty('--py', (y * 0.22).toFixed(1) + 'px');
+    }
+    window.addEventListener('scroll', function () {
+      if (!pending) { pending = true; window.requestAnimationFrame(run); }
+    }, { passive: true });
+    run();
+  });
+
   /* ---------- Case selector: real tabs on wide screens, all cases stacked below that ---------- */
   boot('cases', function () {
     var bank = document.getElementById('caseKeys');
     if (!bank) return;
     var keys = Array.prototype.slice.call(bank.querySelectorAll('.selkey'));
     var panels = keys.map(function (k) { return document.getElementById(k.getAttribute('data-case')); });
+    var needle = bank.querySelector('.selector__needle');
     var wide = window.matchMedia('(min-width: 1100px)');
     var current = 0;
+
+    function placeNeedle() {
+      if (!needle || !wide.matches) return;
+      var k = keys[current];
+      needle.style.setProperty('--needle', (k.offsetTop + k.offsetHeight / 2) + 'px');
+    }
 
     function select(i, focus) {
       current = i;
@@ -73,6 +97,7 @@
         k.setAttribute('tabindex', on ? '0' : '-1');
         panels[n].hidden = !on;
       });
+      placeNeedle();
       if (focus) keys[i].focus();
       var screen = panels[i].querySelector('[data-power]');
       if (screen && !reduceMotion.matches) {
@@ -129,6 +154,8 @@
     function apply() { if (wide.matches) enable(); else disable(); }
     if (wide.addEventListener) wide.addEventListener('change', apply); else wide.addListener(apply);
     apply();
+    window.addEventListener('resize', placeNeedle);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(placeNeedle); // row heights change once fonts load
 
     // A deep link such as index.html#case-tl opens that case.
     var fromHash = panels.map(function (p) { return '#' + p.id; }).indexOf(location.hash);

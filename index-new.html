@@ -19,12 +19,11 @@
 <!-- ───────────── Top rail ───────────── -->
 <header class="rail" id="top">
   <div class="rail__inner">
-    <a class="nameplate" href="#top" aria-label="Krystyna Ewing, back to top">
-      <span class="screw" aria-hidden="true"></span>
-      <span class="nameplate__name">K. Ewing</span>
-      <span class="nameplate__role">UX / Creative Tech</span>
-      <span class="screw" aria-hidden="true"></span>
+    <a class="ident" href="#top" aria-label="Krystyna Ewing, back to top">
+      <span class="ident__name">K. Ewing</span>
+      <span class="ident__role">UX / Creative Tech</span>
     </a>
+    <span class="rail__ticks" aria-hidden="true"></span>
     <nav class="keys-nav" aria-label="Primary">
       <a class="keycap" href="#work"><span class="keycap__led" aria-hidden="true"></span>Work</a>
       <a class="keycap" href="#workbench"><span class="keycap__led" aria-hidden="true"></span>Workbench</a>
@@ -40,37 +39,35 @@
 
 <main id="main">
 
-<!-- ───────────── Hero unit ───────────── -->
-<section class="unit hero" aria-labelledby="hero-name">
-  <span class="screw screw--tl" aria-hidden="true"></span><span class="screw screw--tr" aria-hidden="true"></span>
-  <span class="screw screw--bl" aria-hidden="true"></span><span class="screw screw--br" aria-hidden="true"></span>
+<!-- ───────────── Hero ───────────── -->
+<section class="hero section" aria-labelledby="hero-name">
+  <figure class="hero__cicada">
+    <img src="images/cicada-hero.jpg" width="2000" height="955" alt="Macro photograph of a cicada seen from above, its translucent wings spread, the veins lit in pale aqua and gold against black.">
+    <span class="hero__axis" aria-hidden="true"></span>
+    <span class="hero__ring" aria-hidden="true"></span>
+    <figcaption class="hero__credit">Photo: Maya Alexa G. Romero / Unsplash</figcaption>
+  </figure>
 
-  <div class="hero__grid">
-    <div class="bezel hero__bezel">
-      <div class="screen screen--photo" data-power>
-        <img src="images/cicada-hero.jpg" width="2000" height="955" alt="Macro photograph of a cicada seen from above, its translucent wings spread, the veins lit in pale aqua and gold against black.">
-        <p class="screen__credit">Photo: Maya Alexa G. Romero / Unsplash</p>
-      </div>
-      <div class="bezel__chin" aria-hidden="true">
-        <span class="led led--on"></span><span class="led led--amber"></span>
-        <span class="vent vent--short"></span>
-        <span class="bezel__port"></span><span class="bezel__port"></span>
-      </div>
+  <div class="hero__top">
+    <p class="etch">Columbus, Ohio · raised in Detroit</p>
+    <span class="hero__scale" aria-hidden="true"></span>
+    <p class="etch" aria-hidden="true">Software · UX · Art · 3D Printing</p>
+  </div>
+
+  <div class="hero__content">
+    <div class="hero__title">
+      <h1 id="hero-name" class="hero__name"><span>Krystyna</span> <span>Ewing</span></h1>
+      <p class="hero__role">UX Designer / Creative Technologist</p>
     </div>
 
-    <div class="hero__panel">
-      <p class="etch">Columbus, Ohio · raised in Detroit</p>
-      <h1 id="hero-name" class="hero__name">Krystyna <br>Ewing</h1>
-      <p class="hero__role">UX Designer / Creative Technologist</p>
+    <div class="deck">
       <p class="hero__lede">I design software, make art, build things, break things, and have a hard time leaving anything alone when I know it could work better.</p>
-
       <dl class="spec">
         <div><dt>Based</dt><dd>Columbus, Ohio</dd></div>
         <div><dt>Raised</dt><dd>Detroit</dd></div>
         <div><dt>Years</dt><dd>8+</dd></div>
         <div><dt>Mail</dt><dd><a href="mailto:hello@krystynaewing.com">hello@krystynaewing.com</a></dd></div>
       </dl>
-
       <div class="hero__actions">
         <a class="btn btn--primary" href="#work">See the work <span aria-hidden="true">↓</span></a>
         <button type="button" class="btn" id="bioToggle" aria-expanded="false" aria-controls="bio">Read the long version</button>
@@ -80,7 +77,6 @@
 
   <div class="drawer" id="bio" role="region" aria-label="Full bio">
     <div class="drawer__inner">
-      <span class="drawer__handle" aria-hidden="true"></span>
       <div class="drawer__text">
         <p>I'm a designer, artist, developer, and general maker of things. I started in software development, moved into UX because I wanted more room to be creative, and apparently never learned how to pick one thing and stick with it.</p>
         <p>I've spent the last 8+ years designing, building, testing, breaking things, and figuring out how to make them work better. Outside of UX, I make art, build 3D prints, mess around with code, and start projects because I thought, 'I wonder if I could make that.'</p>
@@ -96,24 +92,23 @@
       <li><span class="led led--on" aria-hidden="true"></span>Art</li>
       <li><span class="led led--on" aria-hidden="true"></span>3D Printing</li>
     </ul>
-    <span class="vent" aria-hidden="true"></span>
+    <span class="hero__scale" aria-hidden="true"></span>
     <span class="etch etch--small" aria-hidden="true">krystynaewing.com</span>
   </div>
 </section>
 
-<!-- ───────────── Selected work console ───────────── -->
-<section class="unit console" id="work" aria-labelledby="work-h">
-  <span class="screw screw--tl" aria-hidden="true"></span><span class="screw screw--tr" aria-hidden="true"></span>
-  <span class="screw screw--bl" aria-hidden="true"></span><span class="screw screw--br" aria-hidden="true"></span>
-
-  <header class="unit__head">
-    <h2 id="work-h" class="unit__title">Selected Work</h2>
-    <span class="unit__rule" aria-hidden="true"></span>
+<!-- ───────────── Selected work ───────────── -->
+<section class="work section" id="work" aria-labelledby="work-h">
+  <header class="seam">
+    <span class="seam__idx" aria-hidden="true">02</span>
+    <h2 id="work-h" class="seam__title">Selected Work</h2>
+    <span class="seam__rule" aria-hidden="true"></span>
     <span class="etch">4 case studies</span>
   </header>
 
-  <div class="console__body">
+  <div class="console">
     <div class="selector" id="caseKeys">
+      <span class="selector__needle" aria-hidden="true"></span>
       <a class="selkey" href="#case-rp" data-case="case-rp">
         <span class="selkey__num">01</span>
         <span class="selkey__name">ResiliencePoint</span>
@@ -138,18 +133,18 @@
         <span class="selkey__meta">Monitoring · 2022</span>
         <span class="led selkey__led" aria-hidden="true"></span>
       </a>
-      <div class="selector__foot" aria-hidden="true">
-        <span class="vent vent--grille"></span>
-      </div>
     </div>
 
     <div class="cases">
       <!-- 01 -->
       <article class="case" id="case-rp" aria-labelledby="case-rp-h">
-        <div class="bay bay--screen">
-          <div class="screen" data-power>
-            <div class="screen__pan">
-              <img src="images/work/hazadapt-resiliencepoint/dashboard-screenshot.png" width="3180" height="1930" loading="lazy" alt="ResiliencePoint dashboard: trending hazards, a map of HazAdapt usage by area across the US, and community activity cards.">
+        <div class="case__visual case__visual--screen" data-power>
+          <span class="case__ghost" aria-hidden="true">01</span>
+          <div class="plane">
+            <div class="tv">
+              <div class="screen__pan">
+                <img src="images/work/hazadapt-resiliencepoint/dashboard-screenshot.png" width="3180" height="1930" loading="lazy" alt="ResiliencePoint dashboard: trending hazards, a map of HazAdapt usage by area across the US, and community activity cards.">
+              </div>
             </div>
           </div>
         </div>
@@ -166,9 +161,12 @@
 
       <!-- 02 -->
       <article class="case" id="case-hz" aria-labelledby="case-hz-h">
-        <div class="bay bay--object">
-          <div class="bay__stage">
-            <img src="images/work/hazadapt/hero-dual-monitor.png" width="1720" height="696" loading="lazy" alt="Two desktop monitors showing the HazAdapt Hazard Guide and an Avalanche Prep Check activity.">
+        <div class="case__visual case__visual--object" data-power>
+          <span class="case__ghost" aria-hidden="true">02</span>
+          <div class="plane">
+            <div class="tv">
+              <img src="images/work/hazadapt/hero-dual-monitor.png" width="1720" height="696" loading="lazy" alt="Two desktop monitors showing the HazAdapt Hazard Guide and an Avalanche Prep Check activity.">
+            </div>
           </div>
         </div>
         <div class="case__info">
@@ -185,9 +183,12 @@
 
       <!-- 03 -->
       <article class="case" id="case-tl" aria-labelledby="case-tl-h">
-        <div class="bay bay--object">
-          <div class="bay__stage">
-            <img src="images/work/true-link/hero-devices.png" width="1151" height="618" loading="lazy" alt="True Link disbursement screens shown on two desktop monitors and a laptop.">
+        <div class="case__visual case__visual--object" data-power>
+          <span class="case__ghost" aria-hidden="true">03</span>
+          <div class="plane">
+            <div class="tv">
+              <img src="images/work/true-link/hero-devices.png" width="1151" height="618" loading="lazy" alt="True Link disbursement screens shown on two desktop monitors and a laptop.">
+            </div>
           </div>
         </div>
         <div class="case__info">
@@ -204,10 +205,13 @@
 
       <!-- 04 -->
       <article class="case" id="case-wd" aria-labelledby="case-wd-h">
-        <div class="bay bay--screen">
-          <div class="screen" data-power>
-            <div class="screen__pan screen__pan--tall">
-              <img src="images/work/welldone-monitoring/final-dashboard-health-overview.webp" width="1440" height="1920" loading="lazy" alt="WellDone dashboard: a map of wells in Cambodia, functional and non-functional pump percentages, recent reports, tickets, and a pumps table.">
+        <div class="case__visual case__visual--screen" data-power>
+          <span class="case__ghost" aria-hidden="true">04</span>
+          <div class="plane">
+            <div class="tv">
+              <div class="screen__pan screen__pan--tall">
+                <img src="images/work/welldone-monitoring/final-dashboard-health-overview.webp" width="1440" height="1920" loading="lazy" alt="WellDone dashboard: a map of wells in Cambodia, functional and non-functional pump percentages, recent reports, tickets, and a pumps table.">
+              </div>
             </div>
           </div>
         </div>
@@ -225,6 +229,13 @@
 </section>
 
 <!-- ───────────── Workbench mat ───────────── -->
+<div class="section section--seam-only" aria-hidden="true">
+  <div class="seam">
+    <span class="seam__idx">03</span>
+    <span class="seam__rule"></span>
+    <span class="etch">Art &amp; experiments</span>
+  </div>
+</div>
 <section class="bench" id="workbench" aria-labelledby="bench-h">
   <div class="mat">
     <div class="mat__ruler mat__ruler--top" aria-hidden="true"></div>
@@ -316,13 +327,11 @@
 </section>
 
 <!-- ───────────── About ───────────── -->
-<section class="unit about" id="about" aria-labelledby="about-h">
-  <span class="screw screw--tl" aria-hidden="true"></span><span class="screw screw--tr" aria-hidden="true"></span>
-  <span class="screw screw--bl" aria-hidden="true"></span><span class="screw screw--br" aria-hidden="true"></span>
-
-  <header class="unit__head">
-    <h2 id="about-h" class="unit__title">About</h2>
-    <span class="unit__rule" aria-hidden="true"></span>
+<section class="about section" id="about" aria-labelledby="about-h">
+  <header class="seam">
+    <span class="seam__idx" aria-hidden="true">04</span>
+    <h2 id="about-h" class="seam__title">About</h2>
+    <span class="seam__rule" aria-hidden="true"></span>
     <span class="etch">Detroit → Columbus</span>
   </header>
 
@@ -355,16 +364,21 @@
 </section>
 
 <!-- ───────────── Contact ───────────── -->
-<section class="unit contact" id="contact" aria-labelledby="contact-h">
-  <span class="screw screw--tl" aria-hidden="true"></span><span class="screw screw--tr" aria-hidden="true"></span>
-  <span class="screw screw--bl" aria-hidden="true"></span><span class="screw screw--br" aria-hidden="true"></span>
-  <h2 id="contact-h" class="contact__line">Found something that doesn't work? Tell me.</h2>
-  <a class="bigkey" href="mailto:hello@krystynaewing.com">
-    <span class="bigkey__cap">
-      <span class="led led--amber" aria-hidden="true"></span>
-      <span class="bigkey__label">hello@krystynaewing.com</span>
-    </span>
-  </a>
+<section class="contact section" id="contact" aria-labelledby="contact-h">
+  <div class="seam" aria-hidden="true">
+    <span class="seam__idx">05</span>
+    <span class="seam__rule"></span>
+    <span class="etch">Contact</span>
+  </div>
+  <div class="contact__body">
+    <h2 id="contact-h" class="contact__line">Found something that doesn't work? Tell me.</h2>
+    <a class="bigkey" href="mailto:hello@krystynaewing.com">
+      <span class="bigkey__cap">
+        <span class="led led--amber" aria-hidden="true"></span>
+        <span class="bigkey__label">hello@krystynaewing.com</span>
+      </span>
+    </a>
+  </div>
 </section>
 
 </main>
