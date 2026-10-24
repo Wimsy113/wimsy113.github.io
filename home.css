@@ -783,6 +783,92 @@ html:not(.js) .drawer { grid-template-rows: 1fr; }
   .loupe__ctrls .btn { flex: 1; justify-content: center; }
 }
 
+/* ==========================================================================
+   Interaction layer
+   A work light follows the cursor across the whole surface: it brightens the
+   grid, picks out the cicada's veins, and becomes the lamp over the mat.
+   Without a mouse (or with reduced motion) it rests in one place.
+   ========================================================================== */
+:root {
+  --lx: 72%; --ly: 22%; --lo: .55; --gy: 0px;
+  --grid-hot: rgba(242, 240, 233, .085);
+  --light-pool: rgba(242, 240, 233, .045);
+  --veins-filter: grayscale(1) contrast(2.4) brightness(1.15) sepia(1) hue-rotate(38deg) saturate(7);
+  --lamp-hot: rgba(255, 238, 205, .16);
+}
+:root[data-theme="light"] {
+  --grid-hot: rgba(11, 11, 11, .1);
+  --light-pool: rgba(255, 255, 255, .5);
+  --veins-filter: grayscale(1) invert(1) contrast(2.2) sepia(1) hue-rotate(40deg) saturate(5) brightness(.75);
+}
+
+.surface-light {
+  position: fixed; inset: 0; z-index: -2; pointer-events: none; opacity: var(--lo);
+  background:
+    radial-gradient(circle 340px at var(--lx) var(--ly), var(--light-pool), transparent 72%),
+    linear-gradient(var(--grid-hot) 1px, transparent 1px) 0 var(--gy) / 24px 24px,
+    linear-gradient(90deg, var(--grid-hot) 1px, transparent 1px) 0 0 / 24px 24px;
+  -webkit-mask-image: radial-gradient(circle 300px at var(--lx) var(--ly), #000, transparent 75%);
+  mask-image: radial-gradient(circle 300px at var(--lx) var(--ly), #000, transparent 75%);
+  transition: opacity .4s ease;
+}
+
+/* Cicada: a second, edge-lit copy revealed only inside the light */
+.hero__veins {
+  position: absolute; inset: 0; pointer-events: none;
+  opacity: var(--vo, 0); transition: opacity .35s ease;
+  -webkit-mask-image: radial-gradient(circle 190px at var(--vx, -999px) var(--vy, -999px), #000 0, rgba(0, 0, 0, .55) 45%, transparent 100%);
+  mask-image: radial-gradient(circle 190px at var(--vx, -999px) var(--vy, -999px), #000 0, rgba(0, 0, 0, .55) 45%, transparent 100%);
+}
+.hero__veins img { filter: var(--veins-filter); }
+.hero__ring { transform: translate(calc(-50% + var(--rdx, 0px)), calc(-50% + var(--rdy, 0px))); transition: transform .6s cubic-bezier(.2, .7, .2, 1); }
+
+/* Workbench: the light becomes the desk lamp, and prints throw their shadows away from it */
+.mat::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 30;
+  background: radial-gradient(circle 460px at var(--mx, 30%) var(--my, 12%), var(--lamp-hot), transparent 70%);
+  mix-blend-mode: screen; opacity: var(--mo, .6); transition: opacity .4s ease;
+}
+.print {
+  box-shadow:
+    0 1px 1px rgba(0, 0, 0, .25),
+    calc(var(--shx, 0) * 1px) calc(10px + var(--shy, 0) * 1px) 18px -6px rgba(0, 0, 0, .55),
+    calc(var(--shx, 0) * 2px) calc(26px + var(--shy, 0) * 2px) 40px -24px rgba(0, 0, 0, .6);
+}
+
+/* ---------- Case display: the pane leans toward the cursor; screenshots can be inspected ---------- */
+@media (min-width: 700px) {
+  .case__visual .plane {
+    transform: perspective(2200px) rotateY(calc(-11deg + var(--ty, 0deg))) rotateX(calc(3deg + var(--tx, 0deg)));
+    transition: transform .6s cubic-bezier(.2, .7, .2, 1);
+  }
+  .case__visual--object .plane { transform: perspective(2200px) rotateY(var(--ty, 0deg)) rotateX(var(--tx, 0deg)); }
+}
+.case__visual--screen .tv { cursor: zoom-in; }
+.case__visual--screen .tv:focus-visible { outline: 2px solid var(--focus); outline-offset: 4px; }
+.screen__pan img { transform-origin: var(--ox, 50%) var(--oy, 30%); transition: transform .35s cubic-bezier(.2, .7, .2, 1); }
+.tv.is-inspecting .screen__pan img { transform: scale(2); animation-play-state: paused; }
+
+/* Channel change on a screen also throws a burst of static */
+.case__visual--screen .plane::after {
+  content: ""; position: absolute; inset: 0; z-index: 4; pointer-events: none; border-radius: 3px;
+  background: url("images/grain.png") 0 0 / 90px 90px;
+  filter: contrast(2.2) brightness(1.7); mix-blend-mode: screen; opacity: 0;
+}
+.case__visual--screen.is-powering .plane::after { animation: static-burst .65s steps(7) both; }
+@keyframes static-burst {
+  0% { opacity: .95; background-position: 0 0; }
+  25% { opacity: .8; background-position: -37px 21px; }
+  50% { opacity: .5; background-position: 23px -41px; }
+  75% { opacity: .2; background-position: -11px 33px; }
+  100% { opacity: 0; background-position: 41px -9px; }
+}
+
+.seam__hint { display: none; }
+@media (min-width: 1100px) and (pointer: fine) {
+  .seam__hint { display: block; color: var(--accent); opacity: .75; }
+}
+
 /* ---------- Reduced motion ---------- */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }

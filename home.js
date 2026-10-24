@@ -216,9 +216,153 @@
     window.addEventListener('resize', placeNeedle);
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(placeNeedle); // row heights change once fonts load
 
+    // Number keys 1–4 tune straight to a project while the work section is on screen.
+    var workInView = false;
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (entries) { workInView = entries[0].isIntersecting; }, { threshold: 0.25 })
+        .observe(document.getElementById('work'));
+    }
+    window.addEventListener('keydown', function (e) {
+      if (!workInView || !wide.matches || e.altKey || e.ctrlKey || e.metaKey) return;
+      var t = e.target;
+      if (t.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName) || document.querySelector('dialog[open]')) return;
+      var n = ['1', '2', '3', '4'].indexOf(e.key);
+      if (n < 0 || n >= keys.length) return;
+      e.preventDefault();
+      select(n, bank.contains(document.activeElement));
+    });
+
     // A deep link such as index.html#case-tl opens that case.
     var fromHash = panels.map(function (p) { return '#' + p.id; }).indexOf(location.hash);
     if (fromHash > -1 && wide.matches) select(fromHash, false);
+  });
+
+  /* ---------- Work light: one cursor-driven light across the whole surface ---------- */
+  boot('worklight', function () {
+    var layer = document.querySelector('.surface-light');
+    if (!layer) return;
+    var root = html.style;
+    var fig = document.querySelector('.hero__cicada');
+    var veins = fig && fig.querySelector('.hero__veins');
+    var ring = fig && fig.querySelector('.hero__ring');
+    var mat = document.querySelector('.mat');
+    var matPrints = Array.prototype.slice.call(document.querySelectorAll('.print'));
+    // Only a real mouse or pen drives it; touch and reduced motion leave it resting in place.
+    var live = window.matchMedia('(pointer: fine)').matches && !reduceMotion.matches;
+    var px = -1, py = -1, queued = false;
+
+    function clamp(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); }
+
+    function lightCicada() {
+      var r = fig.getBoundingClientRect();
+      if (py < r.top - 200 || py > r.bottom + 200) { veins.style.setProperty('--vo', '0'); return; }
+      // Map the pointer into the figure's own (rotated) coordinates.
+      var t = getComputedStyle(fig).transform;
+      var a = 0;
+      if (t && t !== 'none') { var m = t.match(/matrix\(([^,]+),\s*([^,]+)/); if (m) a = Math.atan2(parseFloat(m[2]), parseFloat(m[1])); }
+      var w = fig.offsetWidth, h = fig.offsetHeight;
+      var dx = px - (r.left + r.width / 2), dy = py - (r.top + r.height / 2);
+      var cos = Math.cos(-a), sin = Math.sin(-a);
+      var lx = dx * cos - dy * sin + w / 2, ly = dx * sin + dy * cos + h / 2;
+      var inside = lx > -60 && lx < w + 60 && ly > -60 && ly < h + 60;
+      veins.style.setProperty('--vx', lx.toFixed(0) + 'px');
+      veins.style.setProperty('--vy', ly.toFixed(0) + 'px');
+      veins.style.setProperty('--vo', inside ? '1' : '0');
+      if (ring) {
+        ring.style.setProperty('--rdx', clamp((lx - w * 0.29) * 0.05, -14, 14).toFixed(1) + 'px');
+        ring.style.setProperty('--rdy', clamp((ly - h * 0.5) * 0.05, -14, 14).toFixed(1) + 'px');
+      }
+    }
+
+    function lightMat() {
+      var r = mat.getBoundingClientRect();
+      var over = px > r.left - 80 && px < r.right + 80 && py > r.top - 80 && py < r.bottom + 80;
+      mat.style.setProperty('--mo', over ? '1' : '.6');
+      if (!over) return;
+      mat.style.setProperty('--mx', (px - r.left).toFixed(0) + 'px');
+      mat.style.setProperty('--my', (py - r.top).toFixed(0) + 'px');
+      matPrints.forEach(function (p) {
+        var pr = p.getBoundingClientRect();
+        p.style.setProperty('--shx', clamp((pr.left + pr.width / 2 - px) / 40, -14, 14).toFixed(1));
+        p.style.setProperty('--shy', clamp((pr.top + pr.height / 2 - py) / 40, -8, 14).toFixed(1));
+      });
+    }
+
+    function frame() {
+      queued = false;
+      root.setProperty('--gy', (-(window.scrollY % 24)) + 'px'); // keep the lit grid on the page's grid
+      if (!live || px < 0) return;
+      root.setProperty('--lx', px + 'px');
+      root.setProperty('--ly', py + 'px');
+      root.setProperty('--lo', '1');
+      if (fig && veins) lightCicada();
+      if (mat) lightMat();
+    }
+    function queue() { if (!queued) { queued = true; window.requestAnimationFrame(frame); } }
+
+    window.addEventListener('scroll', queue, { passive: true });
+    if (live) {
+      window.addEventListener('pointermove', function (e) {
+        if (e.pointerType === 'touch') return;
+        px = e.clientX; py = e.clientY; queue();
+      }, { passive: true });
+      document.documentElement.addEventListener('mouseleave', function () {
+        root.setProperty('--lo', '.55');
+        if (veins) veins.style.setProperty('--vo', '0');
+        if (mat) mat.style.setProperty('--mo', '.6');
+      });
+    }
+    frame();
+  });
+
+  /* ---------- Case display: lean toward the cursor; inspect screenshots ---------- */
+  boot('caseDisplay', function () {
+    var fine = window.matchMedia('(pointer: fine)').matches;
+    Array.prototype.forEach.call(document.querySelectorAll('.case__visual'), function (v) {
+      var plane = v.querySelector('.plane');
+      var tv = v.querySelector('.tv');
+
+      if (fine && !reduceMotion.matches && plane) {
+        v.addEventListener('pointermove', function (e) {
+          var r = v.getBoundingClientRect();
+          var nx = (e.clientX - r.left) / r.width - 0.5, ny = (e.clientY - r.top) / r.height - 0.5;
+          plane.style.setProperty('--ty', (nx * 8).toFixed(2) + 'deg');
+          plane.style.setProperty('--tx', (-ny * 6).toFixed(2) + 'deg');
+        });
+        v.addEventListener('pointerleave', function () {
+          plane.style.setProperty('--ty', '0deg');
+          plane.style.setProperty('--tx', '0deg');
+        });
+      }
+
+      // Screenshots only: a 2x magnifier that follows the cursor, or the arrow keys.
+      var img = v.classList.contains('case__visual--screen') && tv && tv.querySelector('.screen__pan img');
+      if (!img) return;
+      var ox = 50, oy = 30;
+      function aim(x, y) {
+        ox = Math.max(0, Math.min(100, x)); oy = Math.max(0, Math.min(100, y));
+        img.style.setProperty('--ox', ox.toFixed(1) + '%');
+        img.style.setProperty('--oy', oy.toFixed(1) + '%');
+      }
+      if (fine) {
+        tv.addEventListener('pointermove', function (e) {
+          var r = tv.getBoundingClientRect();
+          aim((e.clientX - r.left) / r.width * 100, (e.clientY - r.top) / r.height * 100);
+          tv.classList.add('is-inspecting');
+        });
+        tv.addEventListener('pointerleave', function () { tv.classList.remove('is-inspecting'); });
+      }
+      tv.tabIndex = 0;
+      tv.setAttribute('role', 'group');
+      tv.setAttribute('aria-label', 'Inspect screenshot. Arrow keys move the magnifier, Escape resets.');
+      tv.addEventListener('focus', function () { tv.classList.add('is-inspecting'); });
+      tv.addEventListener('blur', function () { tv.classList.remove('is-inspecting'); });
+      tv.addEventListener('keydown', function (e) {
+        var step = { ArrowLeft: [-8, 0], ArrowRight: [8, 0], ArrowUp: [0, -8], ArrowDown: [0, 8] }[e.key];
+        if (step) { e.preventDefault(); tv.classList.add('is-inspecting'); aim(ox + step[0], oy + step[1]); }
+        else if (e.key === 'Escape') { tv.classList.remove('is-inspecting'); aim(50, 30); }
+      });
+    });
   });
 
   /* ---------- Cutting-mat ruler numbers (decorative) ---------- */
