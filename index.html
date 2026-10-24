@@ -9,8 +9,11 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Space+Mono:wght@400;700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-<script>document.documentElement.classList.add('js');try{if(localStorage.getItem('ke-theme')==='light')document.documentElement.setAttribute('data-theme','light');}catch(e){}</script>
+<script>document.documentElement.classList.add('js');try{if(localStorage.getItem('ke-theme')==='light')document.documentElement.setAttribute('data-theme','light');}catch(e){}
+/* Entrance: the full choreography once per tab session on a plain visit; a short one otherwise; none with reduced motion. */
+try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches){var d=document.documentElement;d.classList.add('entrance');d.setAttribute('data-entrance',(!location.hash&&!sessionStorage.getItem('ke-entrance'))?'full':'short');sessionStorage.setItem('ke-entrance','1');}}catch(e){}</script>
 <link rel="stylesheet" href="home.css">
+<link rel="stylesheet" href="motion.css">
 </head>
 <body>
 
@@ -51,6 +54,7 @@
     <img src="images/cicada-hero.jpg" width="2000" height="955" alt="Macro photograph of a cicada seen from above, its translucent wings spread, the veins lit in pale aqua and gold against black.">
     <span class="hero__veins" aria-hidden="true"><img src="images/cicada-hero.jpg" width="2000" height="955" alt=""></span>
     <span class="hero__axis" aria-hidden="true"></span>
+    <button type="button" class="cicada-hit" aria-label="Disturb the cicada"></button>
     <span class="hero__ring" aria-hidden="true"></span>
     <figcaption class="hero__credit">Photo: Maya Alexa G. Romero / Unsplash</figcaption>
   </figure>
@@ -414,5 +418,6 @@
 </dialog>
 
 <script src="home.js" onerror="document.documentElement.classList.remove('js')"></script>
+<script src="motion.js" onerror="document.documentElement.classList.remove('entrance')"></script>
 </body>
 </html>

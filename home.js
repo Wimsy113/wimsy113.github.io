@@ -148,14 +148,31 @@
       needle.style.setProperty('--needle-w', k.offsetWidth + 'px');
     }
 
+    // The outgoing project stays on screen briefly so it can collapse to a line (motion.css).
+    function leave(p) {
+      clearTimeout(p._leaveTimer);
+      p.hidden = false;
+      p.classList.add('is-leaving');
+      p.setAttribute('aria-hidden', 'true');
+      p._leaveTimer = setTimeout(function () {
+        p.classList.remove('is-leaving');
+        p.removeAttribute('aria-hidden');
+        p.hidden = panels[current] !== p;
+      }, 360);
+    }
+
     function select(i, focus) {
+      var prev = current;
       current = i;
       keys.forEach(function (k, n) {
         var on = n === i;
         k.setAttribute('aria-selected', on ? 'true' : 'false');
         k.setAttribute('tabindex', on ? '0' : '-1');
+        if (on) { clearTimeout(panels[n]._leaveTimer); panels[n].classList.remove('is-leaving'); panels[n].removeAttribute('aria-hidden'); }
         panels[n].hidden = !on;
       });
+      if (prev !== i && !reduceMotion.matches) leave(panels[prev]);
+      try { document.dispatchEvent(new CustomEvent('ke:channel', { detail: { from: prev, to: i, panel: panels[i] } })); } catch (e) {}
       placeNeedle();
       if (focus) keys[i].focus();
       var screen = panels[i].querySelector('[data-power]');
