@@ -12,22 +12,80 @@
   }
 
   /* ---------- Theme toggle (shares the ke-theme key with the rest of the site) ---------- */
+  // Same labels and behaviour as the rail on the case study pages.
   boot('theme', function () {
-    var btn = document.getElementById('themeToggle');
-    if (!btn) return;
-    var label = btn.querySelector('.toggle__label');
+    var tt = document.getElementById('themeToggle');
+    var ttm = document.getElementById('themeToggleMobile');
+    var ttml = document.getElementById('themeToggleMobileLabel');
     function sync() {
       var light = html.getAttribute('data-theme') === 'light';
-      btn.setAttribute('aria-pressed', light ? 'true' : 'false');
-      label.textContent = 'Light';
+      if (tt) {
+        tt.textContent = light ? 'DARK' : 'LIGHT';
+        tt.setAttribute('aria-pressed', light ? 'true' : 'false');
+        tt.setAttribute('aria-label', 'Switch to ' + (light ? 'dark' : 'light') + ' mode');
+      }
+      if (ttm) ttm.setAttribute('aria-pressed', light ? 'true' : 'false');
+      if (ttml) ttml.textContent = light ? 'Dark' : 'Light';
     }
-    btn.addEventListener('click', function () {
-      var light = html.getAttribute('data-theme') !== 'light';
-      if (light) html.setAttribute('data-theme', 'light'); else html.removeAttribute('data-theme');
-      try { localStorage.setItem('ke-theme', light ? 'light' : 'dark'); } catch (e) {}
+    function toggle() {
+      var next = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+      if (next === 'dark') html.removeAttribute('data-theme'); else html.setAttribute('data-theme', 'light');
+      try { localStorage.setItem('ke-theme', next); } catch (e) {}
       sync();
-    });
+    }
+    if (tt) tt.addEventListener('click', toggle);
+    if (ttm) ttm.addEventListener('click', toggle);
     sync();
+  });
+
+  /* ---------- Mobile menu (as on the case study pages) ---------- */
+  boot('mobileMenu', function () {
+    var btn = document.getElementById('menuToggle');
+    var menu = document.getElementById('mobileMenu');
+    var backdrop = document.getElementById('mobileMenuBackdrop');
+    if (!btn || !menu) return;
+    var locked = false, savedY = 0;
+    function lock() {
+      if (locked) return;
+      savedY = window.scrollY;
+      var s = document.body.style;
+      s.position = 'fixed'; s.top = (-savedY) + 'px'; s.left = '0'; s.right = '0'; s.overflow = 'hidden';
+      locked = true;
+    }
+    function unlock() {
+      if (!locked) return;
+      var s = document.body.style;
+      s.position = ''; s.top = ''; s.left = ''; s.right = ''; s.overflow = '';
+      html.style.scrollBehavior = 'auto'; // restore instantly; a smooth restore would fight any jump that follows
+      window.scrollTo(0, savedY || 0);
+      html.style.scrollBehavior = '';
+      locked = false;
+    }
+    function setOpen(open) {
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      btn.textContent = open ? 'CLOSE' : 'MENU';
+      btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+      menu.style.display = open ? 'grid' : 'none';
+      if (backdrop) backdrop.style.display = open ? 'block' : 'none';
+      if (open) lock(); else unlock();
+    }
+    function close() { if (btn.getAttribute('aria-expanded') === 'true') setOpen(false); }
+    btn.addEventListener('click', function () { setOpen(btn.getAttribute('aria-expanded') !== 'true'); });
+    if (backdrop) backdrop.addEventListener('click', close);
+    // Close (and restore the page) first, then make the jump ourselves so nothing undoes it.
+    Array.prototype.forEach.call(menu.querySelectorAll('a'), function (a) {
+      a.addEventListener('click', function (e) {
+        var href = a.getAttribute('href');
+        var target = href.charAt(0) === '#' ? document.getElementById(href.slice(1)) : null;
+        close();
+        if (!target) return;
+        e.preventDefault();
+        target.scrollIntoView();
+        if (history.pushState) history.pushState(null, '', href); else location.hash = href;
+      });
+    });
+    window.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
+    window.addEventListener('resize', function () { if (window.innerWidth >= 860) close(); });
   });
 
   /* ---------- Bio drawer ---------- */
@@ -287,7 +345,7 @@
   /* ---------- Nav: light the key for the section in view ---------- */
   boot('scrollspy', function () {
     if (!('IntersectionObserver' in window)) return;
-    var links = Array.prototype.slice.call(document.querySelectorAll('.keys-nav a, .dock a'));
+    var links = Array.prototype.slice.call(document.querySelectorAll('nav[aria-label="Primary"] a, #mobileMenu a'));
     var ids = ['work', 'workbench', 'about', 'contact'];
     var sections = ids.map(function (id) { return document.getElementById(id); }).filter(Boolean);
     var io = new IntersectionObserver(function (entries) {
