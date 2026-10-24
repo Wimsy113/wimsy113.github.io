@@ -315,13 +315,11 @@
     frame();
   });
 
-  /* ---------- Case display: lean toward the cursor; inspect screenshots ---------- */
+  /* ---------- Case display: lean toward the cursor ---------- */
   boot('caseDisplay', function () {
     var fine = window.matchMedia('(pointer: fine)').matches;
     Array.prototype.forEach.call(document.querySelectorAll('.case__visual'), function (v) {
       var plane = v.querySelector('.plane');
-      var tv = v.querySelector('.tv');
-
       if (fine && !reduceMotion.matches && plane) {
         v.addEventListener('pointermove', function (e) {
           var r = v.getBoundingClientRect();
@@ -334,34 +332,6 @@
           plane.style.setProperty('--tx', '0deg');
         });
       }
-
-      // Screenshots only: a 2x magnifier that follows the cursor, or the arrow keys.
-      var img = v.classList.contains('case__visual--screen') && tv && tv.querySelector('.screen__pan img');
-      if (!img) return;
-      var ox = 50, oy = 30;
-      function aim(x, y) {
-        ox = Math.max(0, Math.min(100, x)); oy = Math.max(0, Math.min(100, y));
-        img.style.setProperty('--ox', ox.toFixed(1) + '%');
-        img.style.setProperty('--oy', oy.toFixed(1) + '%');
-      }
-      if (fine) {
-        tv.addEventListener('pointermove', function (e) {
-          var r = tv.getBoundingClientRect();
-          aim((e.clientX - r.left) / r.width * 100, (e.clientY - r.top) / r.height * 100);
-          tv.classList.add('is-inspecting');
-        });
-        tv.addEventListener('pointerleave', function () { tv.classList.remove('is-inspecting'); });
-      }
-      tv.tabIndex = 0;
-      tv.setAttribute('role', 'group');
-      tv.setAttribute('aria-label', 'Inspect screenshot. Arrow keys move the magnifier, Escape resets.');
-      tv.addEventListener('focus', function () { tv.classList.add('is-inspecting'); });
-      tv.addEventListener('blur', function () { tv.classList.remove('is-inspecting'); });
-      tv.addEventListener('keydown', function (e) {
-        var step = { ArrowLeft: [-8, 0], ArrowRight: [8, 0], ArrowUp: [0, -8], ArrowDown: [0, 8] }[e.key];
-        if (step) { e.preventDefault(); tv.classList.add('is-inspecting'); aim(ox + step[0], oy + step[1]); }
-        else if (e.key === 'Escape') { tv.classList.remove('is-inspecting'); aim(50, 30); }
-      });
     });
   });
 

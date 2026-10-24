@@ -836,7 +836,7 @@ html:not(.js) .drawer { grid-template-rows: 1fr; }
     calc(var(--shx, 0) * 2px) calc(26px + var(--shy, 0) * 2px) 40px -24px rgba(0, 0, 0, .6);
 }
 
-/* ---------- Case display: the pane leans toward the cursor; screenshots can be inspected ---------- */
+/* ---------- Case display: the pane leans toward the cursor ---------- */
 @media (min-width: 700px) {
   .case__visual .plane {
     transform: perspective(2200px) rotateY(calc(-11deg + var(--ty, 0deg))) rotateX(calc(3deg + var(--tx, 0deg)));
@@ -844,11 +844,6 @@ html:not(.js) .drawer { grid-template-rows: 1fr; }
   }
   .case__visual--object .plane { transform: perspective(2200px) rotateY(var(--ty, 0deg)) rotateX(var(--tx, 0deg)); }
 }
-.case__visual--screen .tv { cursor: zoom-in; }
-.case__visual--screen .tv:focus-visible { outline: 2px solid var(--focus); outline-offset: 4px; }
-.screen__pan img { transform-origin: var(--ox, 50%) var(--oy, 30%); transition: transform .35s cubic-bezier(.2, .7, .2, 1); }
-.tv.is-inspecting .screen__pan img { transform: scale(2); animation-play-state: paused; }
-
 /* Channel change on a screen also throws a burst of static */
 .case__visual--screen .plane::after {
   content: ""; position: absolute; inset: 0; z-index: 4; pointer-events: none; border-radius: 3px;
