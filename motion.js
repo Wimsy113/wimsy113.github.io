@@ -239,7 +239,147 @@
     var axis = fig && $('.hero__axis', fig);
     var ring = fig && $('.hero__ring', fig);
     var img = fig && $('img', fig);
-    var words = name ? $$('.hero__name > span:not(.sr-only)') : [];
+    var build = null;
+
+    /* ---- Design-tool build for the hero text --------------------------------
+       A cursor (tagged with Krystyna's name) drags out a frame around each
+       piece, showing its real size, then the text is typed in with a caret.
+       Any input skips straight to the finished page. Hero only. */
+    function buildHero(roleEl) {
+      var lede = deck && $('.hero__lede', deck);
+      var spec = deck && $('.spec', deck);
+      var btns = deck ? $$('.hero__actions .btn', deck) : [];
+      var parts = [name, roleEl, deck, lede, spec].concat(btns).filter(Boolean);
+      var layer = document.createElement('div');
+      layer.className = 'bt-layer';
+      layer.setAttribute('aria-hidden', 'true');
+      document.body.appendChild(layer);
+
+      var skipped = false, wakers = [], finals = [];
+      parts.forEach(function (p) { p.classList.add('bt-hide'); });
+      finals.push(function () { parts.forEach(function (p) { p.classList.remove('bt-hide'); }); });
+
+      function sleep(ms) {
+        if (skipped) return Promise.resolve();
+        return new Promise(function (res) {
+          var t = setTimeout(res, ms);
+          wakers.push(function () { clearTimeout(t); res(); });
+        });
+      }
+      function rect(t) {
+        var r = t.getBoundingClientRect();
+        return { x: r.left + window.scrollX, y: r.top + window.scrollY, w: r.width, h: r.height };
+      }
+      function add(node) { layer.appendChild(node); return node; }
+
+      // Cursor
+      var cur = add(document.createElement('div'));
+      cur.className = 'bt-cursor';
+      cur.innerHTML = '<svg width="18" height="22" viewBox="0 0 18 22"><path d="M1.5 1.5 L1.5 17 L5.6 13.2 L8.6 20.4 L11.6 19.1 L8.7 12 L14.6 12 Z"/></svg><span class="bt-tag">Krystyna</span>';
+      var pos = { x: 0, y: 0 };
+      function place(x, y) { pos = { x: x, y: y }; cur.style.transform = 'translate(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px)'; }
+      function move(x, y, ms) {
+        var from = 'translate(' + pos.x.toFixed(1) + 'px,' + pos.y.toFixed(1) + 'px)';
+        cur.getAnimations().forEach(function (an) { an.cancel(); });
+        place(x, y);
+        if (skipped || !ms) return Promise.resolve();
+        cur.animate([{ transform: from }, { transform: cur.style.transform }], { duration: ms, easing: 'cubic-bezier(.45, 0, .2, 1)' });
+        return sleep(ms);
+      }
+
+      // Drag out a selection frame over a target, with handles and its real size.
+      function drag(target, ms) {
+        var r = rect(target);
+        return move(r.x, r.y, 240).then(function () {
+          var box = add(document.createElement('div'));
+          box.className = 'bt-frame';
+          box.innerHTML = '<i></i><i></i><i></i><i></i><b class="bt-size">' + Math.round(r.w) + ' × ' + Math.round(r.h) + '</b>';
+          box.style.cssText = 'left:' + r.x + 'px;top:' + r.y + 'px;width:' + r.w + 'px;height:' + r.h + 'px';
+          if (!skipped) box.animate([{ width: '0px', height: '0px' }, { width: r.w + 'px', height: r.h + 'px' }], { duration: ms, easing: 'cubic-bezier(.3, 0, .2, 1)' });
+          return move(r.x + r.w, r.y + r.h, ms).then(function () { return box; });
+        });
+      }
+      function deselect(box) { if (!box) return; box.classList.add('is-out'); setTimeout(function () { if (box.parentNode) box.parentNode.removeChild(box); }, 300); }
+      function reveal(el) {
+        if (!el) return;
+        el.classList.remove('bt-hide');
+        if (!skipped) el.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 220, easing: 'ease-out' });
+      }
+
+      // Type an element's text in with a caret. Uses the name's existing letter spans when present;
+      // otherwise wraps characters temporarily and restores the original text afterwards.
+      function type(el, msPerTick, perTick) {
+        if (!el) return Promise.resolve();
+        var chars = $$('.ch', el), restore = null;
+        if (!chars.length) {
+          var runs = [], walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, null), nodes = [];
+          while (walker.nextNode()) if (/\S/.test(walker.currentNode.nodeValue)) nodes.push(walker.currentNode);
+          nodes.forEach(function (node) {
+            var run = document.createElement('span'), text = node.nodeValue;
+            for (var i = 0; i < text.length; i++) { var c = document.createElement('span'); c.textContent = text[i]; run.appendChild(c); chars.push(c); }
+            node.parentNode.replaceChild(run, node);
+            runs.push({ run: run, text: text });
+          });
+          restore = function () { runs.forEach(function (r) { if (r.run.parentNode) r.run.parentNode.replaceChild(document.createTextNode(r.text), r.run); }); };
+        }
+        chars.forEach(function (c) { c.style.visibility = 'hidden'; });
+        el.classList.remove('bt-hide');
+        var finish = function () { chars.forEach(function (c) { c.style.visibility = ''; }); if (restore) { restore(); restore = null; } };
+        finals.push(finish);
+        var caret = add(document.createElement('div'));
+        caret.className = 'bt-caret';
+        var i = 0;
+        function tick() {
+          if (skipped || i >= chars.length) { if (caret.parentNode) caret.parentNode.removeChild(caret); finish(); return Promise.resolve(); }
+          for (var n = 0; n < (perTick || 1) && i < chars.length; n++, i++) chars[i].style.visibility = 'visible';
+          var r = rect(chars[i - 1]);
+          caret.style.cssText = 'left:' + (r.x + r.w + 1) + 'px;top:' + r.y + 'px;height:' + r.h + 'px';
+          return sleep(msPerTick).then(tick);
+        }
+        return tick();
+      }
+
+      var start = name ? rect(name) : { x: 0, y: 0, w: 0, h: 0 };
+      place(start.x + start.w * 0.7, Math.max(window.scrollY + 40, start.y - 140));
+      var done = sleep(600)
+        .then(function () { return drag(name, 360); })
+        .then(function (box) { return type(name, 42).then(function () { return box; }); })
+        .then(function (box) { return type(roleEl, 12).then(function () { deselect(box); }); })
+        .then(function () { return drag(deck, 380); })
+        .then(function (box) {
+          reveal(deck);
+          return type(lede, 8, 2)
+            .then(function () { reveal(spec); return sleep(180); })
+            .then(function () {
+              return btns.reduce(function (p, b) {
+                return p.then(function () {
+                  return drag(b, 200).then(function (bb) { return type(b, 20).then(function () { deselect(bb); }); });
+                });
+              }, Promise.resolve());
+            })
+            .then(function () { deselect(box); });
+        })
+        .then(function () {
+          var r = rect(hero);
+          return move(r.x + r.w * 0.55, pos.y - 60, 420);
+        })
+        .then(function () { cur.classList.add('is-out'); return sleep(320); })
+        .catch(function (err) { if (window.console) console.error('[motion] hero build:', err); })
+        .then(function () {
+          skipped = true;
+          finals.splice(0).forEach(function (f) { try { f(); } catch (e) {} });
+          if (layer.parentNode) layer.parentNode.removeChild(layer);
+        });
+
+      // Never leave the hero hidden, whatever happens.
+      setTimeout(function () { skipNow(); }, 12000);
+      function skipNow() {
+        if (skipped) return;
+        skipped = true;
+        wakers.splice(0).forEach(function (f) { f(); });
+      }
+      return { done: done, skip: skipNow };
+    }
 
     if (full) {
       // The rules draw first, like an instrument warming up.
@@ -260,26 +400,8 @@
         { duration: 1000, delay: 450, easing: IN_OUT });
       a(ring, [{ opacity: 0, rotate: '-140deg', scale: '.3' }, { opacity: 0.55, rotate: '0deg', scale: '1' }], { duration: 1500, delay: 700 });
 
-      // KRYSTYNA rises out of its baseline; EWING slides in across the wing and overshoots.
-      if (name) name.classList.add('is-entering');
-      if (words[0]) $$('.ch', words[0]).forEach(function (ch, i) {
-        a(ch, [{ transform: 'translate3d(0, 105%, 0) rotate(6deg)' }, { transform: 'translate3d(0, 0, 0) rotate(0deg)' }],
-          { duration: 1000, delay: 900 + i * 55 });
-      });
-      if (words[1]) $$('.ch', words[1]).forEach(function (ch, i) {
-        a(ch, [
-          { transform: 'translate3d(65vw, 0, 0) skewX(-18deg)', opacity: 0 },
-          { transform: 'translate3d(-0.08em, 0, 0) skewX(5deg)', opacity: 1, offset: 0.72 },
-          { transform: 'translate3d(0, 0, 0) skewX(0deg)', opacity: 1 }
-        ], { duration: 1300, delay: 1150 + i * 70 });
-      });
-      a(role, [{ clipPath: 'inset(0 100% 0 0)' }, { clipPath: 'inset(0 0% 0 0)' }], { duration: 900, delay: 1800, easing: 'steps(18, end)' });
-
-      // The glass panel opens from a line too, then its contents step in.
-      a(deck, [{ opacity: 0, clipPath: 'inset(50% 0 50% 0)' }, { opacity: 1, clipPath: 'inset(0% 0 0% 0)' }], { duration: 800, delay: 1450, easing: IN_OUT });
-      if (deck) Array.prototype.forEach.call(deck.children, function (c, i) {
-        a(c, [{ opacity: 0, transform: 'translate3d(0, 16px, 0)' }, { opacity: 1, transform: 'translate3d(0, 0, 0)' }], { duration: 700, delay: 1700 + i * 110 });
-      });
+      // The name, role, glass panel and buttons are built as in a design tool (see buildHero below).
+      build = buildHero(role);
       a(strip, [{ opacity: 0 }, { opacity: 1 }], { duration: 500, delay: 1900 });
       $$('.indicators .led', hero).forEach(function (led, i) {
         a(led, [{ opacity: 0.1, filter: 'brightness(.2)' }, { opacity: 1, filter: 'brightness(1)' }], { duration: 240, delay: 2050 + i * 140, easing: 'steps(2, end)' });
@@ -302,9 +424,13 @@
     html.classList.remove('entrance');
 
     var events = ['pointerdown', 'keydown', 'wheel', 'touchstart'];
-    function skip() { anims.forEach(function (an) { try { an.finish(); } catch (e) {} }); }
+    function skip() {
+      anims.forEach(function (an) { try { an.finish(); } catch (e) {} });
+      if (build) build.skip();
+    }
     events.forEach(function (ev) { window.addEventListener(ev, skip, { passive: true }); });
     var finished = anims.map(function (an) { return an.finished.catch(function () {}); });
+    if (build) finished.push(build.done);
     Promise.all(finished).then(function () {
       events.forEach(function (ev) { window.removeEventListener(ev, skip, { passive: true }); });
       if (name) name.classList.remove('is-entering');

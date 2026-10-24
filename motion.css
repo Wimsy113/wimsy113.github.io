@@ -36,6 +36,34 @@ html.entrance #mobileBar { opacity: 0; animation: entrance-failsafe .4s ease 2.8
 @keyframes entrance-failsafe { to { opacity: 1; } }
 .hero__name.is-entering > span { clip-path: inset(-40% -100vw 0 -100vw); } /* letters rise out of their baseline */
 
+/* Hero build: the name, panel and buttons are put together as in a design tool —
+   a cursor drags out frames (with handles and a live size tag) and text is typed in. */
+.bt-hide { visibility: hidden !important; }
+.bt-layer { position: absolute; left: 0; top: 0; width: 0; height: 0; z-index: 210; pointer-events: none; }
+.bt-frame { position: absolute; border: 1px solid var(--accent); box-shadow: 0 0 0 1px rgba(0, 0, 0, .35); transition: opacity .25s ease; }
+.bt-frame.is-out { opacity: 0; }
+.bt-frame i { position: absolute; width: 7px; height: 7px; background: var(--bg); border: 1px solid var(--accent); }
+.bt-frame i:nth-child(1) { left: -4px; top: -4px; }
+.bt-frame i:nth-child(2) { right: -4px; top: -4px; }
+.bt-frame i:nth-child(3) { left: -4px; bottom: -4px; }
+.bt-frame i:nth-child(4) { right: -4px; bottom: -4px; }
+.bt-size {
+  position: absolute; left: 50%; top: 100%; margin-top: 7px; transform: translateX(-50%);
+  padding: 3px 6px; border-radius: 2px; white-space: nowrap;
+  background: var(--accent); color: var(--on-accent); font: 700 10px/1 'Space Mono', monospace; letter-spacing: .04em;
+}
+.bt-cursor { position: absolute; left: 0; top: 0; transition: opacity .3s ease; }
+.bt-cursor.is-out { opacity: 0; }
+.bt-cursor svg { display: block; filter: drop-shadow(0 1px 1px rgba(0, 0, 0, .5)); }
+.bt-cursor path { fill: var(--accent); stroke: #0B0B0B; stroke-width: 1.2; stroke-linejoin: round; }
+.bt-tag {
+  position: absolute; left: 14px; top: 19px; padding: 3px 7px; white-space: nowrap;
+  border-radius: 2px 8px 8px 8px; background: var(--accent); color: var(--on-accent);
+  font: 700 10px/1 'Space Mono', monospace; letter-spacing: .04em;
+}
+.bt-caret { position: absolute; width: 2px; background: var(--accent); animation: bt-blink .8s steps(1) infinite; }
+@keyframes bt-blink { 50% { opacity: 0; } }
+
 /* ---------- 2. Living composition ---------- */
 @media (min-width: 700px) {
   .hero__cicada {
