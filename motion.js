@@ -249,7 +249,7 @@
       var lede = deck && $('.hero__lede', deck);
       var spec = deck && $('.spec', deck);
       var btns = deck ? $$('.hero__actions .btn', deck) : [];
-      var parts = [name, roleEl, deck, lede, spec].concat(btns).filter(Boolean);
+      var parts = [fig, name, roleEl, deck, lede, spec].concat(btns).filter(Boolean);
       var layer = document.createElement('div');
       layer.className = 'bt-layer';
       layer.setAttribute('aria-hidden', 'true');
@@ -339,9 +339,79 @@
         return tick();
       }
 
+      // The cicada is dragged in as a file and dropped onto the hero.
+      function dropImage() {
+        if (!fig) return Promise.resolve();
+        var phone = phoneQ.matches;
+        var hr = rect(hero);
+        var target = hit ? rect(hit) : rect(fig);
+        var dropX = target.x + target.w / 2, dropY = target.y + target.h / 2;
+        var tw = phone ? 64 : 150, th = phone ? 134 : 72;
+
+        var file = document.createElement('div');
+        file.className = 'bt-file';
+        file.innerHTML = '<div class="bt-thumb' + (phone ? ' is-portrait' : '') + '" style="width:' + tw + 'px;height:' + th + 'px;--tw:' + tw + 'px;--th:' + th + 'px"><img src="images/cicada-hero.jpg" alt=""></div>' +
+          '<span class="bt-file__name">cicada-hero.jpg</span>';
+        cur.appendChild(file);
+        cur.classList.add('is-dragging');
+        place(hr.x + Math.min(40, hr.w * 0.06), hr.y + hr.h - (phone ? 120 : 160));
+
+        var zone = add(document.createElement('div'));
+        zone.className = 'bt-zone';
+        var inset = phone ? 10 : 18;
+        zone.style.cssText = 'left:' + (hr.x + inset) + 'px;top:' + (hr.y + inset) + 'px;width:' + (hr.w - inset * 2) + 'px;height:' + (hr.h - inset * 2) + 'px';
+
+        // Drag across with a slight arc, lighting the drop zone on the way.
+        var from = { x: pos.x, y: pos.y };
+        var mid = { x: (from.x + dropX) / 2, y: Math.min(from.y, dropY) - (phone ? 40 : 90) };
+        cur.getAnimations().forEach(function (an) { an.cancel(); });
+        place(dropX, dropY);
+        var DRAG = 950;
+        if (!skipped) cur.animate([
+          { transform: 'translate(' + from.x + 'px,' + from.y + 'px)' },
+          { transform: 'translate(' + mid.x + 'px,' + mid.y + 'px)', offset: 0.55 },
+          { transform: 'translate(' + dropX + 'px,' + dropY + 'px)' }
+        ], { duration: DRAG, easing: 'cubic-bezier(.4, 0, .25, 1)' });
+        setTimeout(function () { zone.classList.add('is-on'); }, skipped ? 0 : DRAG * 0.35);
+
+        return sleep(DRAG).then(function () {
+          // Release: the thumbnail expands into the cicada's real place on the page.
+          var thumb = file.querySelector('.bt-thumb');
+          var tr = rect(thumb);
+          // Land exactly on the cicada: its real (untransformed) size, centred where it sits, at its tilt.
+          var bb = rect(fig), angle = 0;
+          var m = (getComputedStyle(fig).transform || '').match(/matrix\(([^,]+),\s*([^,]+)/);
+          if (m) angle = Math.atan2(parseFloat(m[2]), parseFloat(m[1])) * 180 / Math.PI;
+          var fw = fig.offsetWidth, fh = fig.offsetHeight;
+          var fr = { x: bb.x + bb.w / 2 - fw / 2, y: bb.y + bb.h / 2 - fh / 2, w: fw, h: fh };
+          var land = add(thumb);
+          file.parentNode && file.parentNode.removeChild(file);
+          cur.classList.remove('is-dragging');
+          land.style.cssText += ';position:absolute;left:' + tr.x + 'px;top:' + tr.y + 'px;margin:0';
+          fig.classList.remove('bt-hide');
+          if (!skipped) {
+            land.animate([
+              { left: tr.x + 'px', top: tr.y + 'px', width: tr.w + 'px', height: tr.h + 'px', transform: 'rotate(-4deg)', opacity: 1 },
+              { left: fr.x + 'px', top: fr.y + 'px', width: fr.w + 'px', height: fr.h + 'px', transform: 'rotate(' + angle.toFixed(2) + 'deg)', opacity: 0 }
+            ], { duration: 520, easing: 'cubic-bezier(.2, .7, .2, 1)', fill: 'forwards' });
+            fig.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 420, delay: 160, easing: 'ease-out', fill: 'backwards' });
+          }
+          zone.classList.remove('is-on');
+          // Its real dimensions, briefly, where it was dropped.
+          var dims = add(document.createElement('div'));
+          dims.className = 'bt-dims';
+          dims.innerHTML = '<b class="bt-size" style="position:static;transform:none;margin:0">2000 × 955</b>';
+          dims.style.cssText = 'left:' + (dropX + 16) + 'px;top:' + (dropY + 18) + 'px';
+          setTimeout(function () { dims.classList.add('is-out'); }, skipped ? 0 : 1100);
+          return sleep(560).then(function () { if (land.parentNode) land.parentNode.removeChild(land); });
+        });
+      }
+
       var start = name ? rect(name) : { x: 0, y: 0, w: 0, h: 0 };
       place(start.x + start.w * 0.7, Math.max(window.scrollY + 40, start.y - 140));
-      var done = sleep(600)
+      var done = sleep(250)
+        .then(dropImage)
+        .then(function () { return sleep(250); })
         .then(function () { return drag(name, 360); })
         .then(function (box) { return type(name, 42).then(function () { return box; }); })
         .then(function (box) { return type(roleEl, 12).then(function () { deselect(box); }); })
@@ -388,17 +458,10 @@
         a(s, [{ transform: 'scaleX(0)', transformOrigin: '0 50%' }, { transform: 'scaleX(1)', transformOrigin: '0 50%' }],
           { duration: 1100, delay: 150 + i * 1000, easing: IN_OUT });
       });
-      // The cicada opens from its own axis line — the same move as a project screen switching on.
-      a(fig, [
-        { opacity: 0, clipPath: 'inset(49.6% 0 49.6% 0)', filter: 'brightness(3.5)' },
-        { opacity: 1, clipPath: 'inset(49.6% 0 49.6% 0)', filter: 'brightness(3.5)', offset: 0.22 },
-        { opacity: 1, clipPath: 'inset(0% 0 0% 0)', filter: 'brightness(1.6)', offset: 0.62 },
-        { opacity: 1, clipPath: 'inset(0% 0 0% 0)', filter: 'brightness(1)' }
-      ], { duration: 1500, delay: 300, easing: 'cubic-bezier(.2, .7, .2, 1)' });
-      a(img, [{ scale: '1.16' }, { scale: '1' }], { duration: 2400, delay: 300 });
+      // The cicada itself is dragged in and dropped (buildHero); its axis and ring follow the drop.
       a(axis, phone ? [{ transform: 'scaleY(0)' }, { transform: 'scaleY(1)' }] : [{ transform: 'scaleX(0)' }, { transform: 'scaleX(1)' }],
-        { duration: 1000, delay: 450, easing: IN_OUT });
-      a(ring, [{ opacity: 0, rotate: '-140deg', scale: '.3' }, { opacity: 0.55, rotate: '0deg', scale: '1' }], { duration: 1500, delay: 700 });
+        { duration: 1000, delay: 1500, easing: IN_OUT });
+      a(ring, [{ opacity: 0, rotate: '-140deg', scale: '.3' }, { opacity: 0.55, rotate: '0deg', scale: '1' }], { duration: 1500, delay: 1600 });
 
       // The name, role, glass panel and buttons are built as in a design tool (see buildHero below).
       build = buildHero(role);
