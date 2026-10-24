@@ -101,13 +101,24 @@
     });
   });
 
+  /* Play the power-on flash once, then take the class off again. The end state looks the same
+     without it, and leaving it on lets iOS Safari replay the CSS animation whenever the screen
+     is redrawn (e.g. scrolling back past it). */
+  function powerOn(screen) {
+    clearTimeout(screen._powerTimer);
+    screen.classList.remove('is-powering');
+    void screen.offsetWidth; // restart if it was mid-flash
+    screen.classList.add('is-powering');
+    screen._powerTimer = setTimeout(function () { screen.classList.remove('is-powering'); }, 1000);
+  }
+
   /* ---------- Screens power on once as they scroll into view ---------- */
   boot('screens', function () {
     if (reduceMotion.matches || !('IntersectionObserver' in window)) return;
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) {
         if (!e.isIntersecting) return;
-        e.target.classList.add('is-powering');
+        powerOn(e.target);
         io.unobserve(e.target);
       });
     }, { threshold: 0.35 });
@@ -176,11 +187,7 @@
       placeNeedle();
       if (focus) keys[i].focus();
       var screen = panels[i].querySelector('[data-power]');
-      if (screen && !reduceMotion.matches) {
-        screen.classList.remove('is-powering');
-        void screen.offsetWidth; // restart the power-on animation
-        screen.classList.add('is-powering');
-      }
+      if (screen && !reduceMotion.matches) powerOn(screen);
     }
 
     function enable() {
