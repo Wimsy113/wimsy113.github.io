@@ -392,36 +392,38 @@ html:not(.js) .drawer { grid-template-rows: 1fr; }
 .indicators li { display: inline-flex; align-items: center; gap: 8px; font: 500 11px/1 var(--f-mono); letter-spacing: .14em; text-transform: uppercase; color: var(--ink-2); }
 
 /* ---------- Selected work ---------- */
-.console { display: grid; grid-template-columns: 290px minmax(0, 1fr); gap: clamp(28px, 3.6vw, 56px); align-items: start; }
+.console { display: grid; gap: clamp(28px, 3vw, 44px); }
 
-/* Channel tuner: rows on a ticked track, with a needle that slides to the selection */
-.selector { position: sticky; top: 32px; padding-left: 34px; }
+/* Channel tuner: the four projects in a row on a ticked track above the display,
+   with a needle that slides along the track to the selection */
+.selector { position: relative; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); padding-top: 14px; }
 .selector::before {
-  content: ""; position: absolute; left: 6px; top: 0; bottom: 0; width: 11px;
+  content: ""; position: absolute; left: 0; right: 0; top: 0; height: 11px;
   background:
-    linear-gradient(var(--line-strong), var(--line-strong)) 5px 0 / 1px 100% no-repeat,
-    repeating-linear-gradient(180deg, var(--line-strong) 0 1px, transparent 1px 10px) 0 0 / 11px 100% no-repeat;
+    linear-gradient(var(--line-strong), var(--line-strong)) 0 10px / 100% 1px no-repeat,
+    repeating-linear-gradient(90deg, var(--line-strong) 0 1px, transparent 1px 60px) 0 0 / 100% 11px no-repeat,
+    repeating-linear-gradient(90deg, var(--line) 0 1px, transparent 1px 12px) 0 5px / 100% 6px no-repeat;
   opacity: .8;
 }
 .selector__needle {
-  display: none; position: absolute; left: 0; top: var(--needle, 0px); width: 26px; height: 2px; margin-top: -1px;
-  background: var(--accent); box-shadow: 0 0 10px 1px rgba(var(--accent-rgb), .6);
-  transition: top .38s cubic-bezier(.3, .7, .2, 1);
+  display: none; position: absolute; top: 9px; left: var(--needle-x, 0px); width: var(--needle-w, 25%); height: 3px;
+  background: var(--accent); box-shadow: 0 0 12px 1px rgba(var(--accent-rgb), .6);
+  transition: left .38s cubic-bezier(.3, .7, .2, 1), width .38s cubic-bezier(.3, .7, .2, 1);
 }
 .selector[role="tablist"] .selector__needle { display: block; }
 .selkey {
-  position: relative; display: grid; grid-template-columns: auto 1fr; grid-template-rows: auto auto; column-gap: 14px; row-gap: 5px;
-  padding: 18px 34px 18px 12px; text-decoration: none; color: var(--ink-2);
+  position: relative; display: grid; grid-template-columns: auto 1fr; grid-template-rows: auto auto; align-content: start; column-gap: 14px; row-gap: 5px;
+  padding: 18px 34px 20px 16px; text-decoration: none; color: var(--ink-2);
   border-bottom: 1px solid var(--line);
   transition: background-color .2s ease, color .2s ease;
 }
-.selkey:first-of-type { border-top: 1px solid var(--line); }
-.selkey:hover { background: linear-gradient(90deg, rgba(255, 255, 255, .045), transparent 85%); color: var(--ink); }
+.selkey + .selkey { border-left: 1px solid var(--line); }
+.selkey:hover { background: linear-gradient(180deg, rgba(255, 255, 255, .045), transparent 85%); color: var(--ink); }
 .selkey__num { grid-row: 1 / 3; font: 700 34px/1 var(--f-display); color: var(--muted); }
 .selkey__name { font: 600 23px/1 var(--f-display); letter-spacing: .03em; text-transform: uppercase; }
 .selkey__meta { font: 500 10.5px/1.3 var(--f-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
 .selkey__led { position: absolute; top: 21px; right: 12px; }
-.selkey[aria-selected="true"] { color: var(--ink); background: linear-gradient(90deg, rgba(var(--accent-rgb), .11), transparent 85%); }
+.selkey[aria-selected="true"] { color: var(--ink); background: linear-gradient(180deg, rgba(var(--accent-rgb), .12), transparent 90%); }
 .selkey[aria-selected="true"] .selkey__num { color: var(--accent); }
 .selkey[aria-selected="true"] .selkey__led {
   background: radial-gradient(circle at 40% 35%, #f3ffd9, var(--accent) 55%);
@@ -432,7 +434,7 @@ html:not(.js) .drawer { grid-template-rows: 1fr; }
 .case { display: grid; gap: 26px; min-width: 0; scroll-margin-top: 96px; }
 
 /* The visual floats on the surface: corner marks, a ghost channel number, a light pool. */
-.case__visual { position: relative; aspect-ratio: 16 / 9.4; }
+.case__visual { position: relative; aspect-ratio: 16 / 7.6; }
 .case__visual::before { /* registration marks */
   content: ""; position: absolute; inset: 0; pointer-events: none;
   --m: var(--line-strong);
@@ -695,8 +697,8 @@ html:not(.js) .drawer { grid-template-rows: 1fr; }
   .spec { grid-template-columns: 1fr 1fr 1fr 2fr; }
   .spec > div:last-child { grid-column: auto; padding-left: 12px; border-left: 1px solid var(--line); }
 
-  .console { grid-template-columns: 1fr; }
   .selector { display: none; }               /* every case is shown in full instead */
+  .case__visual { aspect-ratio: 16 / 9.4; }
   .case__info { grid-template-columns: 1fr; grid-template-areas: "meta" "title" "tag" "dek" "links"; }
   .case__dek { margin-top: 12px; }
   .case__links { flex-direction: row; flex-wrap: wrap; min-width: 0; padding-top: 16px; }

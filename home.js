@@ -144,7 +144,8 @@
     function placeNeedle() {
       if (!needle || !wide.matches) return;
       var k = keys[current];
-      needle.style.setProperty('--needle', (k.offsetTop + k.offsetHeight / 2) + 'px');
+      needle.style.setProperty('--needle-x', k.offsetLeft + 'px');
+      needle.style.setProperty('--needle-w', k.offsetWidth + 'px');
     }
 
     function select(i, focus) {
@@ -168,7 +169,7 @@
     function enable() {
       bank.setAttribute('role', 'tablist');
       bank.setAttribute('aria-label', 'Case studies');
-      bank.setAttribute('aria-orientation', 'vertical');
+      bank.setAttribute('aria-orientation', 'horizontal');
       keys.forEach(function (k, n) {
         k.setAttribute('role', 'tab');
         k.setAttribute('aria-controls', panels[n].id);
