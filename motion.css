@@ -14,6 +14,8 @@
 /* The name is set in Trickster (one weight only, so no faux bold) */
 .hero__name { font-family: "Trickster", var(--f-display); font-weight: 400; font-size: clamp(64px, 10vw, 172px); line-height: .86; }
 @media (max-width: 699px) { .hero__name { font-size: clamp(48px, 16.5vw, 84px); } }
+/* Both lines flush left (home.css indents the second line at every size) */
+.hero__name > span:not(.sr-only) { margin-left: 0; }
 
 .sr-only { position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
 .word { display: inline-block; white-space: nowrap; }
