@@ -63,6 +63,7 @@ nav[aria-label="Primary"] a[aria-current="true"]{color:var(--red);box-shadow:ins
 #lightbox img{display:none;max-width:100%;max-height:100%;object-fit:contain}
 #lightbox img[data-active="true"]{display:block}
 </style>
+<link rel="stylesheet" href="dossier.css">
 </head>
 <body>
 
@@ -182,11 +183,11 @@ nav[aria-label="Primary"] a[aria-current="true"]{color:var(--red);box-shadow:ins
         <li>Allow them to dig deeply into the data when they needed more detail.</li>
       </ul>
       <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Inter',sans-serif;text-wrap:pretty">Those goals sound compatible, but they created a difficult interaction problem. If we exposed everything at once, the interface became overwhelming. If we hid too much, users could not understand what information was available or how to get to it.</p>
-      <figure style="margin:clamp(12px,2vw,28px) 0 0;display:grid;gap:10px">
+      <figure data-comp="bleed" style="margin:clamp(12px,2vw,28px) 0 0;display:grid;gap:10px">
         <button type="button" class="fig-btn" data-fig="0" aria-label="View larger: Early EM-Dash dashboard showing hazard guide activity, usage charts, and a jurisdiction map"><img loading="lazy" src="../images/work/hazadapt-resiliencepoint/early-em-dash-screenshot.png" alt="Early EM-Dash dashboard showing hazard guide activity, usage charts, and a jurisdiction map" style="display:block;width:100%;height:auto;border:1px solid var(--line)"></button>
         <figcaption style="font:400 12px/1.5 'Space Mono',monospace;letter-spacing:.06em;color:var(--muted)"><span style="color:var(--pink)">FIG. 01</span> — EM-Dash, ResiliencePoint's predecessor</figcaption>
       </figure>
-      <figure style="margin:clamp(12px,2vw,28px) 0 0;display:grid;gap:10px">
+      <figure data-comp="inset-r" style="margin:clamp(12px,2vw,28px) 0 0;display:grid;gap:10px">
         <button type="button" class="fig-btn" data-fig="1" aria-label="View larger: Early EM-Dash resilience data table and hazard guide click-through view"><img loading="lazy" src="../images/work/hazadapt-resiliencepoint/early-information-architecture.png" alt="Early EM-Dash resilience data table and hazard guide click-through view" style="display:block;width:100%;height:auto;border:1px solid var(--line)"></button>
         <figcaption style="font:400 12px/1.5 'Space Mono',monospace;letter-spacing:.06em;color:var(--muted)"><span style="color:var(--pink)">FIG. 02</span> — Early information architecture</figcaption>
       </figure>
@@ -214,16 +215,16 @@ nav[aria-label="Primary"] a[aria-current="true"]{color:var(--red);box-shadow:ins
       <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Inter',sans-serif;text-wrap:pretty">The dashboard was structured to provide high-level information first. Quick statistics and trend cards gave users an immediate snapshot of preparedness without requiring them to configure a complicated query. Hazard information also needed a predictable default state, so the interface surfaced the top ten hazards rather than loading users into an enormous list without context.</p>
       <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Inter',sans-serif;text-wrap:pretty">Location was another major part of the experience. The product needed to support multiple jurisdiction levels, including state, county, and ZIP code. Map behavior changed depending on the type of jurisdiction being viewed so users would enter the experience at a useful geographic scale instead of manually correcting the zoom every time.</p>
       <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Inter',sans-serif;text-wrap:pretty">We also worked on navigation, including redesigning the side menu so moving between major areas of the platform felt more deliberate and understandable.</p>
-      <figure style="margin:clamp(12px,2vw,28px) 0 0;display:grid;gap:10px">
+      <figure data-comp="bleed" style="margin:clamp(12px,2vw,28px) 0 0;display:grid;gap:10px">
         <button type="button" class="fig-btn" data-fig="2" aria-label="View larger: ResiliencePoint dashboard: trending hazards, a nationwide usage map, and summary stats"><img loading="lazy" src="../images/work/hazadapt-resiliencepoint/dashboard-screenshot.png" alt="ResiliencePoint dashboard: trending hazards, a nationwide usage map, and summary stats" style="display:block;width:100%;height:auto;border:1px solid var(--line)"></button>
         <figcaption style="font:400 12px/1.5 'Space Mono',monospace;letter-spacing:.06em;color:var(--muted)"><span style="color:var(--pink)">FIG. 03</span> — The ResiliencePoint dashboard</figcaption>
       </figure>
       <div style="display:flex;flex-wrap:wrap;gap:24px;align-items:flex-start">
-        <figure style="margin:0;flex:1 1 320px;min-width:0;display:grid;gap:10px">
+        <figure data-comp="pair" style="margin:0;flex:1 1 320px;min-width:0;display:grid;gap:10px">
           <button type="button" class="fig-btn" data-fig="3" aria-label="View larger: Trend cards summarizing registered users, new users, prep checks completed, and emergency-item readiness"><img loading="lazy" src="../images/work/hazadapt-resiliencepoint/trend-cards.png" alt="Trend cards summarizing registered users, new users, prep checks completed, and emergency-item readiness" style="display:block;width:100%;height:auto;border:1px solid var(--line)"></button>
           <figcaption style="font:400 12px/1.5 'Space Mono',monospace;letter-spacing:.06em;color:var(--muted)"><span style="color:var(--pink)">FIG. 04</span> — Quick statistics / trend cards</figcaption>
         </figure>
-        <figure style="margin:0;flex:1 1 320px;min-width:0;display:grid;gap:10px">
+        <figure data-comp="pair-drop" style="margin:0;flex:1 1 320px;min-width:0;display:grid;gap:10px">
           <button type="button" class="fig-btn" data-fig="4" aria-label="View larger: Jurisdiction-level risk map with low/medium/high shading"><img loading="lazy" src="../images/work/hazadapt-resiliencepoint/jurisdiction-map.png" alt="Jurisdiction-level risk map with low/medium/high shading" style="display:block;width:100%;height:auto;border:1px solid var(--line)"></button>
           <figcaption style="font:400 12px/1.5 'Space Mono',monospace;letter-spacing:.06em;color:var(--muted)"><span style="color:var(--pink)">FIG. 05</span> — Jurisdiction map</figcaption>
         </figure>
@@ -236,7 +237,7 @@ nav[aria-label="Primary"] a[aria-current="true"]{color:var(--red);box-shadow:ins
       <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Inter',sans-serif;text-wrap:pretty">As the product became more capable, the query controls grew with it. Filtering was originally handled through controls that behaved more like dashboard dropdowns. That approach worked while the number of options was small. It did not scale.</p>
       <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Inter',sans-serif;text-wrap:pretty">Every new variable created another decision inside an increasingly compressed part of the interface. Users needed to select geography, hazards, and other criteria while still understanding the relationships between those choices. The controls were becoming an interface inside the interface.</p>
       <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Inter',sans-serif;text-wrap:pretty">Instead of making the data easier to explore, the dashboard was asking people to mentally keep track of too many selections at once. That was the point where the problem changed for us. We were not designing a better dropdown anymore. We were designing a query-building experience.</p>
-      <figure style="margin:clamp(12px,2vw,28px) 0 0;display:grid;gap:10px">
+      <figure data-comp="specimen" style="margin:clamp(12px,2vw,28px) 0 0;display:grid;gap:10px">
         <button type="button" class="fig-btn" data-fig="5" aria-label="View larger: Jurisdiction risk-level map produced by the original dropdown-driven filter controls" style="max-width:435px;margin-inline:auto"><img loading="lazy" src="../images/work/hazadapt-resiliencepoint/dropdown-example.png" alt="Jurisdiction risk-level map produced by the original dropdown-driven filter controls" style="display:block;width:100%;height:auto;border:1px solid var(--line)"></button>
         <figcaption style="font:400 12px/1.5 'Space Mono',monospace;letter-spacing:.06em;color:var(--muted)"><span style="color:var(--pink)">FIG. 06</span> — Earlier dropdown/filter design</figcaption>
       </figure>
@@ -248,7 +249,7 @@ nav[aria-label="Primary"] a[aria-current="true"]{color:var(--red);box-shadow:ins
       <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Inter',sans-serif;text-wrap:pretty">The biggest redesign decision was moving query creation out of the compressed dashboard controls and into a full-page query experience. This gave each decision enough room to be understandable.</p>
       <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Inter',sans-serif;text-wrap:pretty">Instead of opening several dropdowns and trying to remember what had been selected, users could progressively build a query. Selections were visible. Relationships between options were clearer. The interface could also support more complicated filtering without turning the dashboard into a wall of controls.</p>
       <p style="margin:0;max-width:68ch;font:600 clamp(20px,1.6vw,24px)/1.45 'Inter',sans-serif;text-wrap:pretty">This changed the product from something that primarily displayed data into something that allowed emergency managers to actively investigate it.</p>
-      <figure style="margin:clamp(12px,2vw,28px) 0 0;display:grid;gap:10px">
+      <figure data-comp="bleed" style="margin:clamp(12px,2vw,28px) 0 0;display:grid;gap:10px">
         <button type="button" class="fig-btn" data-fig="6" aria-label="View larger: Full-page Prep Check Activity query builder with hazard, area, and date range controls"><img loading="lazy" src="../images/work/hazadapt-resiliencepoint/query-builder.png" alt="Full-page Prep Check Activity query builder with hazard, area, and date range controls" style="display:block;width:100%;height:auto;border:1px solid var(--line)"></button>
         <figcaption style="font:400 12px/1.5 'Space Mono',monospace;letter-spacing:.06em;color:var(--muted)"><span style="color:var(--pink)">FIG. 07</span> — The redesigned, full-page query builder</figcaption>
       </figure>
@@ -260,7 +261,7 @@ nav[aria-label="Primary"] a[aria-current="true"]{color:var(--red);box-shadow:ins
       <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Inter',sans-serif;text-wrap:pretty">Once the query builder had enough room to grow, we were able to introduce features that made the analytics much more useful.</p>
       <h3 style="margin:18px 0 0;font:400 clamp(26px,2.4vw,34px)/1 'Archivo Black',sans-serif;text-transform:uppercase;letter-spacing:.01em;overflow-wrap:anywhere">Resident vs. Visitor Segmentation</h3>
       <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Inter',sans-serif;text-wrap:pretty">Preparedness does not necessarily look the same for someone who lives in a community and someone who is temporarily there. A resident may know local hazards, evacuation routes, emergency systems, and available resources. A visitor may know almost none of those things. Treating both groups as one population could hide those differences. Adding a resident/visitor toggle allowed emergency managers to investigate the preparedness experience of each group separately.</p>
-      <figure style="margin:clamp(12px,2vw,28px) 0 0;display:grid;gap:10px">
+      <figure data-comp="inset-l" style="margin:clamp(12px,2vw,28px) 0 0;display:grid;gap:10px">
         <button type="button" class="fig-btn" data-fig="7" aria-label="View larger: Prep Check Usage by Area map with a Residents/Visitors toggle in the panel header"><img loading="lazy" src="../images/work/hazadapt-resiliencepoint/residents-visitors-toggle.png" alt="Prep Check Usage by Area map with a Residents/Visitors toggle in the panel header" style="display:block;width:100%;height:auto;border:1px solid var(--line)"></button>
         <figcaption style="font:400 12px/1.5 'Space Mono',monospace;letter-spacing:.06em;color:var(--muted)"><span style="color:var(--pink)">FIG. 08</span> — Resident vs. visitor toggle</figcaption>
       </figure>
@@ -274,16 +275,16 @@ nav[aria-label="Primary"] a[aria-current="true"]{color:var(--red);box-shadow:ins
       <p style="margin:0;display:flex;align-items:baseline;gap:14px"><span style="font:400 40px/.8 'Archivo Black',sans-serif;color:var(--pink);overflow-wrap:anywhere">08</span><span style="font:400 12px/1 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">Results, Export &amp; Sharing</span></p>
       <h2 id="s08-h" style="margin:0 0 8px;max-width:22ch;font:700 clamp(34px,4vw,60px)/1.02 'Inter',sans-serif;letter-spacing:-.025em;text-wrap:balance">Making the results understandable and portable</h2>
       <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Inter',sans-serif;text-wrap:pretty">Giving users access to more data only helps if the results remain understandable. Trend cards helped surface changes without requiring users to interpret raw tables. Charts allowed patterns to be compared visually. Plain-language summaries provided another layer of interpretation so the interface did not assume every user wanted to analyze a chart from scratch. Users could also return to previous searches through query history, reducing the amount of repeated configuration required.</p>
-      <figure style="margin:clamp(12px,2vw,28px) 0 0;display:grid;gap:10px">
+      <figure data-comp="bleed" style="margin:clamp(12px,2vw,28px) 0 0;display:grid;gap:10px">
         <button type="button" class="fig-btn" data-fig="8" aria-label="View larger: Hazard Guide Activity results page for a Bleeding query, with a usage map and per-phase charts"><img loading="lazy" src="../images/work/hazadapt-resiliencepoint/query-results.png" alt="Hazard Guide Activity results page for a Bleeding query, with a usage map and per-phase charts" style="display:block;width:100%;height:auto;border:1px solid var(--line)"></button>
         <figcaption style="font:400 12px/1.5 'Space Mono',monospace;letter-spacing:.06em;color:var(--muted)"><span style="color:var(--pink)">FIG. 09</span> — Results page</figcaption>
       </figure>
       <div style="display:flex;flex-wrap:wrap;gap:24px;align-items:flex-start">
-        <figure style="margin:0;flex:1 1 320px;min-width:0;display:grid;gap:10px">
+        <figure data-comp="pair" style="margin:0;flex:1 1 320px;min-width:0;display:grid;gap:10px">
           <button type="button" class="fig-btn" data-fig="9" aria-label="View larger: Two insight cards with plain-language summaries explaining what each chart shows"><img loading="lazy" src="../images/work/hazadapt-resiliencepoint/plain-language-summaries.png" alt="Two insight cards with plain-language summaries explaining what each chart shows" style="display:block;width:100%;height:auto;border:1px solid var(--line)"></button>
           <figcaption style="font:400 12px/1.5 'Space Mono',monospace;letter-spacing:.06em;color:var(--muted)"><span style="color:var(--pink)">FIG. 10</span> — Plain-language summaries</figcaption>
         </figure>
-        <figure style="margin:0;flex:1 1 320px;min-width:0;display:grid;gap:10px">
+        <figure data-comp="pair-drop" style="margin:0;flex:1 1 320px;min-width:0;display:grid;gap:10px">
           <button type="button" class="fig-btn" data-fig="10" aria-label="View larger: Saved Queries list showing past searches with date last used and quick actions"><img loading="lazy" src="../images/work/hazadapt-resiliencepoint/saved-queries.png" alt="Saved Queries list showing past searches with date last used and quick actions" style="display:block;width:100%;height:auto;border:1px solid var(--line)"></button>
           <figcaption style="font:400 12px/1.5 'Space Mono',monospace;letter-spacing:.06em;color:var(--muted)"><span style="color:var(--pink)">FIG. 11</span> — Query history</figcaption>
         </figure>
@@ -511,5 +512,6 @@ nav[aria-label="Primary"] a[aria-current="true"]{color:var(--red);box-shadow:ins
   html.classList.add('js-ready');
 })();
 </script>
+<script src="dossier.js"></script>
 </body>
 </html>

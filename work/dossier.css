@@ -1,0 +1,208 @@
+/* ==========================================================================
+   Case study as a design dossier — layered over the page's existing styles.
+   Composition and chapter styling are pure CSS (work without JS); anything
+   that hides, moves or reveals is gated on html.dz (set by dossier.js) and
+   html.dz-motion (set only when reduced motion is off).
+   ========================================================================== */
+
+/* ---------- Chapter openers: the existing number becomes a large outlined numeral ---------- */
+main > section > p:first-child {
+  position: relative; align-items: flex-end !important; justify-content: space-between;
+  padding-bottom: 14px; margin-bottom: 4px !important; border-bottom: 1px solid var(--line);
+}
+main > section > p:first-child > span:first-child {
+  font-size: clamp(76px, 10vw, 156px) !important; line-height: .78 !important;
+  color: transparent !important; -webkit-text-stroke: 1.5px var(--pink);
+  transform: translate3d(0, calc(var(--chp, 0) * -36px), 0);
+  will-change: transform;
+}
+main > section > p:first-child > span:last-child { padding-bottom: 6px; }
+main > section:nth-of-type(even) > p:first-child { flex-direction: row-reverse; }
+/* The rule under each opener carries ticks and an accent segment that draws in */
+main > section > p:first-child::after {
+  content: ""; position: absolute; left: 0; bottom: -1px; height: 3px; width: 100%;
+  background: var(--pink); transform-origin: 0 50%; transform: scaleX(.12);
+}
+main > section:nth-of-type(even) > p:first-child::after { transform-origin: 100% 50%; }
+main > section > p:first-child::before {
+  content: ""; position: absolute; left: 0; right: 0; bottom: -8px; height: 7px; pointer-events: none;
+  background: repeating-linear-gradient(90deg, var(--line) 0 1px, transparent 1px 16px);
+}
+
+/* ---------- Figures: presentation and inspection affordance ---------- */
+.fig-btn { position: relative; display: block; overflow: hidden; }
+.fig-btn img { transition: transform .5s cubic-bezier(.2, .7, .2, 1), box-shadow .3s ease; }
+.fig-btn:hover img, .fig-btn:focus-visible img { transform: scale(1.012); box-shadow: 0 24px 48px -28px rgba(0, 0, 0, .7); }
+.fig-btn::after { /* "inspect" tab, shown on hover/focus — the figure is fully visible without it */
+  content: "Inspect ↗"; position: absolute; right: 0; top: 0; z-index: 3;
+  padding: 8px 12px; background: var(--ink); color: var(--bg);
+  font: 700 11px/1 'Space Mono', monospace; letter-spacing: .1em; text-transform: uppercase;
+  opacity: 0; transform: translateY(-4px); transition: opacity .2s ease, transform .2s ease;
+}
+.fig-btn:hover::after, .fig-btn:focus-visible::after { opacity: 1; transform: none; }
+.fig-btn:focus-visible { outline: 3px solid var(--pink); outline-offset: 4px; }
+figure > figcaption { display: flex; gap: 12px; align-items: baseline; padding-top: 10px; border-top: 1px solid var(--line); }
+
+/* Composition: deliberate variation in scale (data-comp is set on each figure in the HTML) */
+figure[data-comp="specimen"] {
+  padding: clamp(18px, 3vw, 36px); border: 1px solid var(--line);
+  background: repeating-linear-gradient(0deg, transparent 0 23px, var(--line) 23px 24px),
+              repeating-linear-gradient(90deg, transparent 0 23px, var(--line) 23px 24px);
+  background-color: var(--bg);
+}
+@media (min-width: 1100px) {
+  figure[data-comp="bleed"] { margin-right: calc(-1 * var(--dz-bleed, 0px)) !important; }
+  figure[data-comp="inset-r"] { width: 74%; justify-self: end; }
+  figure[data-comp="inset-l"] { width: 86%; }
+  figure[data-comp="pair-drop"] { margin-top: 84px !important; }
+  figure[data-comp="specimen"] { width: 62%; justify-self: center; }
+}
+
+/* ---------- Annotations: numbered pins on a screenshot + an always-visible key ---------- */
+.dz-pin {
+  position: absolute; z-index: 2; width: 26px; height: 26px; margin: -13px 0 0 -13px; border-radius: 50%;
+  display: grid; place-items: center; pointer-events: none;
+  background: var(--pink); color: var(--on-red); font: 700 12px/1 'Space Mono', monospace;
+  box-shadow: 0 0 0 4px rgba(0, 0, 0, .25), 0 0 0 1px var(--bg);
+  transition: transform .25s cubic-bezier(.2, 1.4, .4, 1), box-shadow .25s ease;
+}
+.dz-pin::after { /* soft ring that pulses once when the figure comes into view */
+  content: ""; position: absolute; inset: -6px; border-radius: 50%; border: 1px solid var(--pink); opacity: 0;
+}
+.dz-pin.is-hot { transform: scale(1.35); box-shadow: 0 0 0 6px rgba(0, 0, 0, .3), 0 0 0 1px var(--bg); }
+.dz-legend {
+  list-style: none; margin: 4px 0 0; padding: 0; display: grid; gap: 0;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); border-top: 1px solid var(--line);
+}
+.dz-legend li {
+  display: flex; gap: 12px; align-items: baseline; padding: 12px 14px 12px 0; border-bottom: 1px solid var(--line);
+  font: 400 14px/1.5 'Inter', sans-serif; color: var(--ink); cursor: default; transition: color .2s ease;
+}
+.dz-legend li b {
+  flex: none; display: inline-grid; place-items: center; width: 22px; height: 22px; border-radius: 50%;
+  background: var(--pink); color: var(--on-red); font: 700 11px/1 'Space Mono', monospace;
+}
+.dz-legend li.is-hot { color: var(--pink); }
+.dz-legend q { quotes: "“" "”"; }
+.dz-legend cite { display: block; margin-top: 2px; font: 400 11px/1.4 'Space Mono', monospace; letter-spacing: .06em; font-style: normal; text-transform: uppercase; color: var(--muted); }
+
+/* ---------- Callouts: figures the text already states, pulled into the margin ---------- */
+.dz-callout {
+  display: grid; gap: 8px; align-content: start; padding: 16px 0 0; border-top: 3px solid var(--pink);
+}
+.dz-callout b { font: 400 clamp(40px, 4.4vw, 64px)/.9 'Archivo Black', sans-serif; letter-spacing: -.01em; color: var(--ink); }
+.dz-callout span { font: 400 12px/1.5 'Space Mono', monospace; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); max-width: 30ch; }
+@media (min-width: 1200px) {
+  html.dz main > section { grid-template-columns: repeat(12, minmax(0, 1fr)); grid-auto-flow: row dense; column-gap: 28px; }
+  html.dz main > section > * { grid-column: 1 / -1; }
+  html.dz main > section > p:not(:first-child),
+  html.dz main > section > h2, html.dz main > section > h3,
+  html.dz main > section > ul { grid-column: 1 / span 9; }
+  html.dz main > section > .dz-callout { grid-column: 10 / -1; grid-row: span 3; }
+}
+
+/* ---------- Key sentence in "The Pivot" set as a pull statement ---------- */
+#s06 > p[style*="font:600"] {
+  padding: 18px 0 18px 22px; border-left: 3px solid var(--pink);
+  font-size: clamp(22px, 2.1vw, 30px) !important; line-height: 1.3 !important; max-width: 30ch !important;
+}
+
+/* ---------- FIG. 06 ↔ FIG. 07 comparison ---------- */
+.dz-compare { margin-top: clamp(24px, 3vw, 44px); display: grid; gap: 18px; padding-top: 18px; border-top: 2px solid var(--ink); }
+.dz-compare__head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 10px 24px; }
+.dz-compare__title { margin: 0; font: 400 clamp(24px, 2.4vw, 34px)/1 'Archivo Black', sans-serif; text-transform: uppercase; }
+.dz-compare__title span { color: var(--pink); }
+.dz-compare__hint { margin: 0; font: 400 11px/1.4 'Space Mono', monospace; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.dz-compare__stage { display: flex; gap: 18px; align-items: stretch; --m: .5; }
+.dz-compare__side {
+  margin: 0; min-width: 0; display: grid; grid-template-rows: auto auto 1fr; gap: 10px;
+  transition: flex-grow .45s cubic-bezier(.2, .7, .2, 1), opacity .3s ease, filter .3s ease;
+}
+.dz-compare__side.is-before { flex: calc(.75 + (1 - var(--m)) * 1.05) 1 0; opacity: calc(.38 + (1 - var(--m)) * .62); }
+.dz-compare__side.is-after  { flex: calc(.75 + var(--m) * 1.05) 1 0; opacity: calc(.38 + var(--m) * .62); }
+.dz-compare__frame {
+  display: flex; align-items: center; justify-content: center; height: clamp(220px, 30vw, 420px); padding: 14px; width: 100%;
+  border: 1px solid var(--line); background: var(--bg); cursor: zoom-in; overflow: hidden;
+}
+.dz-compare__frame img { max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; display: block; }
+.dz-compare__frame:focus-visible { outline: 3px solid var(--pink); outline-offset: 3px; }
+.dz-compare__cap { margin: 0; font: 400 12px/1.5 'Space Mono', monospace; letter-spacing: .06em; color: var(--muted); }
+.dz-compare__cap span { color: var(--pink); }
+.dz-compare__quote { margin: 0; padding-left: 14px; border-left: 2px solid var(--line); font: 400 15px/1.55 'Inter', sans-serif; color: var(--ink); }
+.dz-compare__quote cite { display: block; margin-top: 6px; font: 400 11px/1.4 'Space Mono', monospace; letter-spacing: .06em; font-style: normal; text-transform: uppercase; color: var(--muted); }
+.dz-compare__controls { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 14px; }
+.dz-compare__end {
+  min-height: 44px; padding: 0 14px; border: 1px solid var(--line); background: transparent; color: var(--ink); cursor: pointer;
+  font: 700 11px/1 'Space Mono', monospace; letter-spacing: .08em; text-transform: uppercase;
+}
+.dz-compare__end:hover, .dz-compare__end[aria-pressed="true"] { border-color: var(--pink); color: var(--pink); }
+.dz-compare__range { width: 100%; accent-color: var(--pink); height: 44px; cursor: ew-resize; }
+@media (max-width: 759px) {
+  .dz-compare__stage { flex-direction: column; }
+  .dz-compare__side.is-before, .dz-compare__side.is-after { flex: none; }
+  .dz-compare__frame { height: clamp(200px, 62vw, 420px); }
+}
+
+/* ---------- Reading progress and the contents navigator ---------- */
+.dz-progress {
+  position: fixed; left: 0; right: var(--rail-w, 48px); top: 0; height: 3px; z-index: 230; pointer-events: none;
+  background: var(--pink); transform-origin: 0 50%; transform: scaleX(var(--dz-p, 0));
+}
+.dz-readout { margin: 0 0 8px; display: flex; justify-content: space-between; font: 400 11px/1 'Space Mono', monospace; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.dz-readout b { color: var(--pink); font-weight: 700; }
+#toc-list a { position: relative; transition: color .2s ease, padding-left .25s ease; }
+#toc-list a[aria-current="location"] { color: var(--ink); padding-left: 6px; font-weight: 700; }
+#toc-list a:not([aria-current="location"]) { color: var(--muted); }
+#toc-list a:hover { color: var(--pink); }
+.dz-tocbar { position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: var(--line); overflow: hidden; }
+.dz-tocbar i { display: block; height: 100%; background: var(--pink); transform-origin: 0 50%; transform: scaleX(var(--sp, 0)); }
+
+/* Existing template bug: the phone menu starts open because nothing hides it on load.
+   Hide it once the page script is ready; its MENU button opens it with an inline display. */
+html.js-ready #mobileMenu, html.js-ready #mobileMenuBackdrop { display: none; }
+
+/* Phones and small tablets: a compact chapter bar replaces the long list */
+.dz-chapbar { display: none; }
+@media (max-width: 859px) {
+  html.dz #tocAside, html.dz #tocShow { display: none !important; }
+  html.dz body { padding-top: 100px !important; }
+  html.dz main > section { scroll-margin-top: 112px !important; }
+  .dz-progress { top: 56px; right: 0; z-index: 225; }
+  .dz-chapbar {
+    display: block; position: fixed; left: 0; right: 0; top: 56px; z-index: 224;
+    background: var(--bg); border-bottom: 1px solid var(--line);
+  }
+  .dz-chapbar__btn {
+    display: flex; align-items: center; gap: 12px; width: 100%; min-height: 44px; padding: 0 16px;
+    background: transparent; border: 0; color: var(--ink); cursor: pointer; text-align: left;
+    font: 700 12px/1.2 'Space Mono', monospace; letter-spacing: .06em; text-transform: uppercase;
+  }
+  .dz-chapbar__num { color: var(--pink); }
+  .dz-chapbar__name { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .dz-chapbar__btn::after { content: "+"; font-size: 16px; color: var(--muted); }
+  .dz-chapbar__btn[aria-expanded="true"]::after { content: "−"; }
+  .dz-chapbar__list { list-style: none; margin: 0; padding: 0 0 8px; max-height: 60vh; overflow-y: auto; border-top: 1px solid var(--line); }
+  .dz-chapbar__list[hidden] { display: none; }
+  .dz-chapbar__list a {
+    display: flex; gap: 10px; align-items: center; min-height: 44px; padding: 0 16px; text-decoration: none;
+    font: 400 13px/1.3 'Space Mono', monospace; letter-spacing: .04em; color: var(--muted);
+  }
+  .dz-chapbar__list a[aria-current="location"] { color: var(--ink); font-weight: 700; }
+}
+
+/* ---------- Scroll-triggered motion (only with JS and without reduced motion) ---------- */
+html.dz-motion main > section > p:first-child::after { transform: scaleX(0); transition: transform 1s cubic-bezier(.2, .7, .2, 1) .1s; }
+html.dz-motion main > section.is-in > p:first-child::after { transform: scaleX(.12); }
+html.dz-motion main > section > h2 { clip-path: inset(0 0 100% 0); transform: translate3d(0, .35em, 0); transition: clip-path .8s cubic-bezier(.2, .7, .2, 1) .12s, transform .8s cubic-bezier(.2, .7, .2, 1) .12s; }
+html.dz-motion main > section.is-in > h2 { clip-path: inset(-10% 0 -10% 0); transform: none; }
+html.dz-motion figure.dz-reveal .fig-btn { clip-path: inset(0 100% 0 0); transition: clip-path .9s cubic-bezier(.65, 0, .35, 1); }
+html.dz-motion figure.dz-reveal.is-in .fig-btn { clip-path: inset(0 0 0 0); }
+html.dz-motion figure.dz-reveal:nth-of-type(even) .fig-btn { clip-path: inset(0 0 0 100%); }
+html.dz-motion figure.dz-reveal:nth-of-type(even).is-in .fig-btn { clip-path: inset(0 0 0 0); }
+html.dz-motion figure.is-in .dz-pin::after { animation: dz-ping 1.2s ease-out .9s 1; }
+@keyframes dz-ping { 0% { opacity: .9; transform: scale(.6); } 100% { opacity: 0; transform: scale(1.8); } }
+
+@media (prefers-reduced-motion: reduce) {
+  main > section > p:first-child > span:first-child { transform: none; }
+  .fig-btn img, .dz-compare__side, .dz-pin, #toc-list a { transition: none; }
+}
