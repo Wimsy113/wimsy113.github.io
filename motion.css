@@ -6,6 +6,15 @@
    1. Entrance  2. Living composition  3. Project transitions  4. The flight
    ========================================================================== */
 
+@font-face {
+  font-family: "Trickster";
+  src: url("fonts/Trickster-Reg.otf") format("opentype");
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+/* The name is set in Trickster (one weight only, so no faux bold) */
+.hero__name { font-family: "Trickster", var(--f-display); font-weight: 400; font-size: clamp(64px, 10vw, 172px); line-height: .86; }
+@media (max-width: 699px) { .hero__name { font-size: clamp(48px, 16.5vw, 84px); } }
+
 .sr-only { position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
 .word { display: inline-block; white-space: nowrap; }
 .ch { display: inline-block; }
