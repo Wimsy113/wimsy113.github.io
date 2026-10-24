@@ -57,7 +57,8 @@
       legend.setAttribute('aria-hidden', 'true'); // verbatim repeats of the text above; don't read twice
       var pins = [];
       note.pins.forEach(function (p, i) {
-        var pin = el('span', 'dz-pin', String(i + 1));
+        var pin = el('span', 'dz-pin');
+        pin.setAttribute('data-n', String(i + 1));
         pin.style.left = p[0] + '%';
         pin.style.top = p[1] + '%';
         pin.setAttribute('aria-hidden', 'true');
@@ -159,8 +160,6 @@
       // Set directly too, for engines that don't resolve calc() inside flex-grow.
       before.style.flexGrow = (0.75 + (1 - m) * 1.05).toFixed(3);
       after.style.flexGrow = (0.75 + m * 1.05).toFixed(3);
-      before.style.opacity = (0.38 + (1 - m) * 0.62).toFixed(3);
-      after.style.opacity = (0.38 + m * 0.62).toFixed(3);
       range.setAttribute('aria-valuetext', m < 0.34 ? 'FIG. 06 emphasised' : m > 0.66 ? 'FIG. 07 emphasised' : 'Both shown equally');
       left.setAttribute('aria-pressed', m < 0.34 ? 'true' : 'false');
       right.setAttribute('aria-pressed', m > 0.66 ? 'true' : 'false');
