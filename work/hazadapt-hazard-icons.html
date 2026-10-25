@@ -11,48 +11,51 @@
 <script src="../image-slot.js"></script>
 <script>try{if(localStorage.getItem('ke-theme')==='light')document.documentElement.setAttribute('data-theme','light');}catch(e){}</script>
 <style>
-/* ---- palette: desaturated CRT phosphor. "light" is repurposed as an
-   amber-phosphor mode, not a bright page -- the whole experience stays
-   dark in both states. ---- */
-html{--bg:#0a0d0b;--bg2:#0e1310;--ink:#c7d2c6;--muted:#95a195;--metal:#8a9289;--ghost:#161b18;--line:rgba(199,210,198,.16);--c-turquoise:#5fae82;--c-blue:#5fae82;--c-copper:#5fae82;--c-opal:#5fae82;--red:var(--c-copper);--on-red:#070908;--pink:#6fc08f;--bezel:#1c201d;--bezel-hi:#2a302b;--crt-glow:rgba(111,192,143,.16);--scan:rgba(0,0,0,.22);--grain:.1;--bar-h:46px;background:var(--bg);color:var(--ink);scroll-behavior:smooth}
-html[data-theme="light"]{--bg:#0d0a06;--bg2:#120d08;--ink:#d8c49c;--muted:#a89873;--metal:#8f7d5e;--ghost:#19140d;--line:rgba(216,196,156,.16);--c-turquoise:#c99a4a;--c-blue:#c99a4a;--c-copper:#c99a4a;--c-opal:#c99a4a;--red:var(--c-copper);--on-red:#0d0a06;--pink:#d9a84f;--bezel:#201a11;--bezel-hi:#2e2616;--crt-glow:rgba(217,168,79,.16);--scan:rgba(0,0,0,.26);--grain:.09}
+/* ---- palette: charcoal surfaces, desaturated green accent/glow.
+   "light" toggle is repurposed as an amber-phosphor alternative -- both
+   states stay dark; this never becomes a bright page. ---- */
+html{--bg:#09090a;--bg-glow:#0e1511;--bg-glow2:#0a0b0c;--panel:#18191b;--panel-edge:#242725;--card:#1d2420;--card-edge:#2c362f;--ink:#cfd6cc;--muted:#8d9690;--metal:#8d9690;--line:rgba(207,214,204,.14);--accent:#6bb589;--accent-glow:rgba(107,181,137,.35);--on-accent:#081009;--pink:var(--accent);--red:var(--accent);--grain:.08;--bar-h:46px;background:var(--bg);color:var(--ink);scroll-behavior:smooth}
+html[data-theme="light"]{--bg:#0a0806;--bg-glow:#150f09;--bg-glow2:#0b0a08;--panel:#1b1712;--panel-edge:#2a2318;--card:#211b13;--card-edge:#352c1e;--ink:#d6c6a0;--muted:#998a68;--metal:#998a68;--line:rgba(214,198,160,.14);--accent:#cd9a48;--accent-glow:rgba(205,154,72,.35);--on-accent:#0a0806;--pink:var(--accent);--red:var(--accent);--grain:.07}
 *{box-sizing:border-box}
-body{margin:0;padding-top:var(--bar-h);background-color:var(--bg);background-image:radial-gradient(ellipse 140% 90% at 50% -10%,var(--bg2),var(--bg) 60%);color:var(--ink);font-family:"Inter",system-ui,sans-serif;-webkit-font-smoothing:antialiased;transition:background-color .35s,color .35s;overflow-x:hidden;min-height:100vh}
+body{margin:0;min-height:100vh;padding-top:var(--bar-h);background-color:var(--bg);background-image:radial-gradient(1100px 760px at 20% 8%,var(--bg-glow),transparent 62%),radial-gradient(900px 700px at 96% 100%,var(--bg-glow2),transparent 55%);color:var(--ink);font-family:"Inter",system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden;transition:background-color .4s ease,color .4s ease}
 body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:300;opacity:var(--grain);mix-blend-mode:overlay;background-image:url("../images/grain.png");background-size:96px 96px}
-#crtScan{position:fixed;inset:0;pointer-events:none;z-index:301;background-image:repeating-linear-gradient(to bottom,var(--scan) 0,var(--scan) 1px,transparent 1px,transparent 3px);opacity:.5;mix-blend-mode:multiply}
-#crtVignette{position:fixed;inset:0;pointer-events:none;z-index:302;box-shadow:inset 0 0 160px 40px rgba(0,0,0,.65),inset 0 0 50px 8px rgba(0,0,0,.4)}
+#scan{position:fixed;inset:0;pointer-events:none;z-index:301;background-image:repeating-linear-gradient(to bottom,rgba(0,0,0,.14) 0,rgba(0,0,0,.14) 1px,transparent 1px,transparent 3px);opacity:.3;mix-blend-mode:multiply}
+#vignette{position:fixed;inset:0;pointer-events:none;z-index:302;box-shadow:inset 0 0 220px 60px rgba(0,0,0,.6),inset 0 0 60px 10px rgba(0,0,0,.4)}
 a{color:inherit;text-decoration-thickness:1px;text-underline-offset:.22em}
-a:hover{color:var(--red)}
-:focus-visible{outline:3px solid var(--pink);outline-offset:4px}
-::selection{background:var(--pink);color:var(--on-red)}
+a:hover{color:var(--accent)}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+::selection{background:var(--accent);color:var(--on-accent)}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
 
-.skip-link{position:fixed;left:16px;top:-80px;z-index:400;background:var(--pink);color:var(--on-red);padding:12px 18px;font:700 14px/1 'Space Mono',monospace;text-decoration:none;transition:top .2s ease}
+.skip-link{position:fixed;left:16px;top:-80px;z-index:500;background:var(--accent);color:var(--on-accent);padding:12px 18px;font:700 14px/1 'Space Mono',monospace;text-decoration:none;transition:top .2s ease}
 .skip-link:focus{top:16px}
 
-/* ---- boot-in: a brief CRT power-on flicker once the page is ready.
-   Pure CSS, keyed off the existing html.js-ready class the script already
-   sets -- no new JS needed, and it no-ops entirely under reduced motion. ---- */
 @media (prefers-reduced-motion:no-preference){
-  #crtBoot{position:fixed;inset:0;z-index:500;pointer-events:none;background:#000;opacity:1}
-  html.js-ready #crtBoot{animation:crtBootFlicker .9s steps(1,end) forwards}
-  @keyframes crtBootFlicker{0%{opacity:1}8%{opacity:0}14%{opacity:.85}22%{opacity:.05}30%{opacity:1}42%{opacity:0}100%{opacity:0;visibility:hidden}}
+  #boot{position:fixed;inset:0;z-index:600;pointer-events:none;background:#000;opacity:1}
+  html.js-ready #boot{animation:bootFlicker .85s steps(1,end) forwards}
+  @keyframes bootFlicker{0%{opacity:1}7%{opacity:0}13%{opacity:.8}20%{opacity:.05}28%{opacity:1}38%{opacity:0}100%{opacity:0;visibility:hidden}}
+  #docPanel{opacity:0}
+  html.js-ready #docPanel{animation:panelIn .55s cubic-bezier(.16,1,.3,1) .2s forwards}
+  @keyframes panelIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+  #contentsCard{opacity:0}
+  html.js-ready #contentsCard{animation:cardIn .55s cubic-bezier(.16,1,.3,1) .5s forwards}
+  @keyframes cardIn{from{opacity:0;transform:translateY(14px) rotate(-1.4deg)}to{opacity:1;transform:translateY(0) rotate(-1.4deg)}}
 }
-@media (prefers-reduced-motion:reduce){#crtBoot{display:none}}
+@media (prefers-reduced-motion:reduce){#boot{display:none}}
 
-/* ---- OS chrome: menu bar (desktop + mobile share the same bar height) ---- */
-nav[aria-label="Primary"]{display:flex;align-items:stretch;background:linear-gradient(var(--bezel-hi),var(--bezel));border-bottom:1px solid var(--line);box-shadow:0 1px 0 rgba(0,0,0,.5),0 6px 18px rgba(0,0,0,.35)}
-nav[aria-label="Primary"] a,nav[aria-label="Primary"] button{display:flex;align-items:center;height:var(--bar-h);padding:0 16px;border-right:1px solid var(--line);color:var(--ink);text-decoration:none;font:700 11px/1 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;background:transparent;border-top:0;border-bottom:0;border-left:0;cursor:pointer;transition:letter-spacing .15s ease,background .15s ease}
-nav[aria-label="Primary"] a:first-child{font:400 15px/1 'Archivo Black',sans-serif;letter-spacing:.02em;text-transform:none}
-nav[aria-label="Primary"] a[aria-current="true"]{color:var(--red);box-shadow:inset 0 -3px 0 var(--red)}
-.rail-item:hover{letter-spacing:.22em;background:rgba(255,255,255,.03)}
-#themeToggle{margin-left:auto;border-right:0;color:var(--metal)}
-#themeToggle:hover{color:var(--pink)}
-#mobileMenu a[aria-current="true"]{color:var(--red)}
-#mobileBar{display:none;background:linear-gradient(var(--bezel-hi),var(--bezel));border-bottom:1px solid var(--line)}
+/* ---- top bar: the real site nav, not part of the "computer" ---- */
+nav[aria-label="Primary"]{display:flex;align-items:stretch;background:var(--panel);border-bottom:1px solid var(--line)}
+nav[aria-label="Primary"] a,nav[aria-label="Primary"] button{display:flex;align-items:center;height:var(--bar-h);padding:0 16px;border-right:1px solid var(--line);color:var(--muted);text-decoration:none;font:700 11px/1 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;background:transparent;border-top:0;border-bottom:0;border-left:0;cursor:pointer;transition:letter-spacing .15s ease,color .15s ease}
+nav[aria-label="Primary"] a:first-child{font:400 15px/1 'Archivo Black',sans-serif;letter-spacing:.02em;text-transform:none;color:var(--ink)}
+nav[aria-label="Primary"] a[aria-current="true"]{color:var(--accent);box-shadow:inset 0 -3px 0 var(--accent)}
+.rail-item:hover{letter-spacing:.2em;color:var(--ink)}
+#themeToggle{margin-left:auto;border-right:0}
+#themeToggle:hover{color:var(--accent)}
+#mobileMenu a[aria-current="true"]{color:var(--accent)}
+#mobileBar{display:none;background:var(--panel);border-bottom:1px solid var(--line)}
 #mobileMenu,#mobileMenuBackdrop{display:none}
-#menuToggle:hover{color:var(--pink);border-color:var(--pink)}
-#themeToggleMobile:hover{color:var(--pink)}
+#menuToggle:hover{color:var(--accent);border-color:var(--accent)}
+#themeToggleMobile:hover{color:var(--accent)}
 @media (max-width:859px){
   nav[aria-label="Primary"]{display:none!important}
   #mobileBar{display:flex}
@@ -61,111 +64,81 @@ nav[aria-label="Primary"] a[aria-current="true"]{color:var(--red);box-shadow:ins
   #mobileMenu,#mobileMenuBackdrop{display:none!important}
 }
 
-/* ---- window system: a real, functional desktop. Chrome + behavior only
-   -- these rules never touch anything inside <header>, <aside id="tocAside">
-   or <main>. ---- */
-.os-window{position:relative;background:var(--ghost);border:1px solid var(--line);box-shadow:0 1px 0 rgba(255,255,255,.03) inset,0 18px 40px rgba(0,0,0,.45);display:flex;flex-direction:column;min-height:0}
-.os-window .os-body{flex:1 1 auto;min-height:0;overflow-y:auto}
-.os-titlebar{display:flex;align-items:stretch;background:linear-gradient(var(--bezel-hi),var(--bezel));border-bottom:1px solid var(--line);font:700 11px/1 'Space Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--metal);flex:0 0 auto}
-.os-drag-grip{display:flex;align-items:center;flex:1 1 auto;min-width:0;height:34px;padding:0 10px;gap:8px;cursor:grab;touch-action:none;user-select:none}
-.os-drag-grip:active{cursor:grabbing}
-.os-titletext{flex:1 1 auto;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.os-winctl{display:flex;flex:0 0 auto}
-.os-btn{width:34px;height:34px;padding:0;border:0;border-left:1px solid var(--line);background:transparent;color:var(--metal);font:700 13px/1 'Space Mono',monospace;cursor:pointer}
-.os-btn:hover{background:rgba(255,255,255,.05);color:var(--ink)}
-.os-btn[data-action="close"]:hover{background:var(--red);color:var(--on-red)}
-.os-win-focused{z-index:50;border-color:var(--pink)}
-.os-win-focused .os-titlebar{color:var(--pink)}
-.os-win-hidden{display:none!important}
-.os-float{position:fixed!important;z-index:45}
-
-@media (min-width:860px){
-  #desktop{position:fixed;inset:var(--bar-h) 0 0 0;display:grid;grid-template-columns:min(360px,32vw) 1fr;grid-template-rows:min(44vh,420px) 1fr;gap:16px;padding:20px;z-index:10}
-  #headerWin{grid-column:1;grid-row:1}
-  #tocWin{grid-column:1;grid-row:2}
-  #docWin{grid-column:2;grid-row:1/3}
-  #imagesWin{position:fixed;left:8vw;top:calc(var(--bar-h) + 6vh);width:min(900px,84vw);height:78vh;z-index:40}
-  #imagesWin:not(.os-win-hidden){display:flex}
-  .os-window:not(.os-float){max-height:100%}
-  #taskbar{position:fixed;left:0;right:0;bottom:0;z-index:60;display:flex;gap:1px;padding:6px;background:linear-gradient(var(--bezel-hi),var(--bezel));border-top:1px solid var(--line)}
-  #taskbar:empty{display:none}
+/* ---- document: the case study as the full page itself -- never a
+   small height-boxed pane. Offset asymmetrically, generous negative
+   space at wide viewports. ---- */
+@media (min-width:980px){
+  #stage{padding:56px 9vw 110px 230px}
+  #docPanel{max-width:1000px;margin-right:auto}
+  #main{max-width:720px;margin:0 auto;padding:0 clamp(16px,5vw,80px) clamp(40px,6vw,72px)}
+  #main>section:first-child{padding-top:clamp(32px,5vh,56px)!important}
 }
-@media (max-width:859px){
-  #desktop{padding-top:40px}
-  .os-window{margin:0 0 1px}
-  #imagesWin{margin:0}
-  #taskbar{display:none}
-  .os-drag-grip{cursor:default}
-  [data-app]{display:none}
-  [data-app].app-active{display:flex}
-  #appTabs{position:fixed;left:0;right:0;top:var(--bar-h);z-index:150;display:flex;background:linear-gradient(var(--bezel-hi),var(--bezel));border-bottom:1px solid var(--line)}
-  .os-winctl{display:none}
-  #appTabs button{flex:1 1 0;min-width:0;min-height:40px;padding:0 6px;border:0;border-right:1px solid var(--line);background:transparent;color:var(--metal);font:700 10px/1 'Space Mono',monospace;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-  #appTabs button[aria-selected="true"]{color:var(--pink);box-shadow:inset 0 -3px 0 var(--pink)}
+@media (max-width:979px){
+  #stage{padding:28px 16px 72px}
+  #main{padding:0 clamp(16px,5vw,32px) clamp(32px,6vw,56px)}
 }
-@media (min-width:860px){#appTabs{display:none}}
+#docPanel{position:relative;background:var(--panel);border:1px solid var(--panel-edge);box-shadow:0 1px 0 rgba(255,255,255,.03) inset,0 50px 110px rgba(0,0,0,.55),0 0 140px -50px var(--accent-glow)}
+#docPanel::before{content:"";position:absolute;left:0;right:0;top:0;height:2px;background:linear-gradient(90deg,transparent,var(--accent-glow),transparent)}
+@keyframes dotPulse{0%,100%{opacity:.5}50%{opacity:1}}
 
-#taskbarChip{display:flex;align-items:center;gap:8px;min-height:36px;padding:0 12px;background:var(--bg2);border:1px solid var(--line);color:var(--metal);font:700 10px/1 'Space Mono',monospace;letter-spacing:.06em;text-transform:uppercase;cursor:pointer}
-.taskbar-chip:hover{color:var(--pink);border-color:var(--pink)}
-
-/* ---- desktop icons: small icon + truncated 2-line label, double-click
-   (or Enter/click) opens the matching window. Pure new chrome -- the
-   destinations/labels describe real windows, not invented content. ---- */
-@media (min-width:860px){
-  #deskIcons{position:fixed;left:0;top:var(--bar-h);bottom:0;width:94px;z-index:8;display:grid;grid-auto-rows:min-content;gap:4px;padding:16px 4px;overflow-y:auto;background:var(--bg)}
-  #desktop{left:94px}
-}
-@media (max-width:859px){#deskIcons{display:none}}
-.dicon{display:grid;justify-items:center;gap:4px;width:84px;padding:8px 4px;border:1px solid transparent;background:transparent;color:var(--ink);font:400 10px/1.25 'Space Mono',monospace;cursor:pointer;text-align:center}
-.dicon:hover,.dicon:focus-visible{border-color:var(--line);background:rgba(255,255,255,.04)}
-.dicon-glyph{width:30px;height:24px;border:1.5px solid var(--metal);border-radius:2px;position:relative;background:linear-gradient(var(--bezel-hi),var(--bezel))}
-.dicon-glyph::before{content:"";position:absolute;inset:4px;border:1px solid var(--muted);opacity:.6}
-.dicon-label{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;color:var(--muted)}
-
-#docShell{position:relative}
-/* Each <section> is display:grid with no explicit column track, so its
-   implicit "auto" column sizes to the widest child's max-content width
-   -- the max-width:68ch paragraphs -- regardless of the actual container
-   width. That silently overflows on narrow screens (pre-existing on this
-   page; surfaced here because the new chrome made it visible via a
-   horizontal-scroll check). minmax(0,1fr) makes the track shrinkable. */
 main section{grid-template-columns:minmax(0,1fr)}
+main figure{position:relative}
+main figure img{cursor:zoom-in;transition:filter .2s ease}
+main figure img:hover,main figure img:focus-visible{filter:brightness(1.08)}
 
-/* images presented as their own small monitor windows, purely via CSS --
-   no markup changes inside the figures themselves */
-main figure{position:relative;padding-top:30px;background:var(--ghost);border:1px solid var(--line);box-shadow:0 10px 26px rgba(0,0,0,.4)}
-main figure::before{content:"";position:absolute;left:0;right:0;top:0;height:30px;background:linear-gradient(var(--bezel-hi),var(--bezel));border-bottom:1px solid var(--line)}
-main figure::after{content:"";position:absolute;left:10px;top:11px;width:7px;height:7px;border-radius:50%;background:var(--muted);box-shadow:16px 0 0 var(--muted),32px 0 0 var(--muted),inset 0 0 0 1px rgba(0,0,0,.4)}
-main figure img{position:relative;cursor:zoom-in}
-main figure figcaption{padding:0 12px 12px}
-main figure > div{margin:0 12px}
-main figure img[style*="border"]{margin:0 12px;width:calc(100% - 24px)!important}
+/* ---- contents card: one offset, overlapping, draggable panel -- not
+   one of several equal windows. A bottom sheet on narrow screens. ---- */
+#contentsCard{background:var(--card);border:1px solid var(--card-edge);box-shadow:0 26px 54px rgba(0,0,0,.55)}
+#contentsCard.hidden{display:none}
+@media (min-width:980px){
+  #contentsCard{position:fixed;left:28px;top:150px;width:200px;z-index:120;transform:rotate(-1.4deg)}
+}
+@media (max-width:979px){
+  #contentsCard{position:fixed;left:0;right:0;bottom:0;top:auto;z-index:220;max-height:72vh;display:flex;flex-direction:column}
+}
+#ccTop{display:flex;align-items:stretch;border-bottom:1px solid var(--line);flex:0 0 auto}
+#ccHandle{display:flex;align-items:center;gap:8px;flex:1;min-width:0;height:32px;padding:0 10px;cursor:grab;touch-action:none;user-select:none}
+#ccHandle:active{cursor:grabbing}
+@media (max-width:979px){#ccHandle{cursor:default}}
+#ccHandle .dot{width:6px;height:6px;border-radius:50%;background:var(--accent);box-shadow:0 0 6px var(--accent-glow);flex:0 0 auto}
+@media (prefers-reduced-motion:no-preference){#ccHandle .dot{animation:dotPulse 3.6s ease-in-out infinite}}
+#ccTitle{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font:700 10px/1 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+#ccClose{width:32px;height:32px;border:0;border-left:1px solid var(--line);background:transparent;color:var(--muted);font:700 13px/1 'Space Mono',monospace;cursor:pointer;flex:0 0 auto}
+#ccClose:hover{color:var(--accent)}
+#ccBody{max-height:min(58vh,480px);overflow-y:auto}
+@media (max-width:979px){#ccBody{max-height:none;flex:1;min-height:0}}
+#ccOpen{position:fixed;left:0;top:60%;z-index:119;writing-mode:vertical-rl;padding:16px 8px;min-width:40px;min-height:52px;background:var(--card);border:1px solid var(--card-edge);border-left:0;color:var(--muted);font:700 11px/1 'Space Mono',monospace;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;display:none}
+#ccOpen.show{display:flex;align-items:center;justify-content:center}
+#ccOpen:hover{color:var(--accent)}
+@media (max-width:979px){#ccOpen{left:auto;right:16px;top:auto;bottom:16px;writing-mode:horizontal-tb;min-height:44px;padding:0 16px}}
 
-/* ---- image viewer app ---- */
-#viewerStage{flex:1;min-height:0;display:flex;align-items:center;justify-content:center;overflow:auto;background:#000;padding:20px}
-#viewerStage img{max-width:100%;max-height:100%;cursor:zoom-in;transition:transform .15s ease}
-#viewerStage img.zoomed{max-width:none;max-height:none;width:180%;cursor:zoom-out}
-#viewerCaption{flex:0 0 auto;padding:10px 14px;font:400 12px/1.5 'Space Mono',monospace;letter-spacing:.06em;color:var(--muted);border-top:1px solid var(--line);text-align:center}
-#viewerNav{flex:0 0 auto;display:flex;border-top:1px solid var(--line)}
-#viewerNav button{flex:1;min-height:40px;border:0;border-right:1px solid var(--line);background:transparent;color:var(--ink);font:700 11px/1 'Space Mono',monospace;letter-spacing:.08em;text-transform:uppercase;cursor:pointer}
-#viewerNav button:last-child{border-right:0}
-#viewerNav button:hover:not(:disabled){color:var(--pink)}
-#viewerNav button:disabled{opacity:.35;cursor:default}
-
-.toc-toggle:hover{color:var(--ink)}
-.toc-show:hover{background:var(--red);color:var(--on-red)}
+.toc-toggle{display:none!important}
+.toc-show{display:none!important}
 .case-nav-link:hover{background:var(--ink);color:var(--bg)}
-nav[aria-label="More case studies"]{background:var(--ghost)}
-footer{background:var(--ghost)}
+nav[aria-label="More case studies"]{background:var(--panel);border-color:var(--panel-edge)!important}
+footer{background:var(--panel)}
+
+/* ---- image inspector: contextual, opened per image, not a separate
+   always-present app ---- */
+#inspector{position:fixed;inset:0;z-index:400;display:flex;flex-direction:column;background:rgba(4,5,4,.93)}
+#inspector.hidden{display:none}
+@media (prefers-reduced-motion:no-preference){#inspector:not(.hidden){animation:inspectorIn .22s ease}}
+@keyframes inspectorIn{from{opacity:0}to{opacity:1}}
+#inspectorClose{position:absolute;top:16px;right:16px;width:44px;height:44px;border:1px solid var(--line);background:var(--panel);color:var(--ink);font:700 16px/1 'Space Mono',monospace;cursor:pointer;z-index:2}
+#inspectorClose:hover{color:var(--accent);border-color:var(--accent)}
+#inspectorStage{flex:1;min-height:0;display:flex;align-items:center;justify-content:center;overflow:auto;padding:clamp(20px,6vw,56px)}
+#inspectorStage img{max-width:100%;max-height:100%;cursor:zoom-in;transition:width .2s ease}
+#inspectorStage img.zoomed{max-width:none;max-height:none;width:min(1400px,170%);cursor:zoom-out}
+#inspectorCaption{flex:0 0 auto;padding:14px;text-align:center;font:400 13px/1.5 'Space Mono',monospace;letter-spacing:.06em;color:var(--muted);border-top:1px solid var(--line)}
 </style>
 </head>
 <body>
 
 <a href="#main" class="skip-link">Skip to content</a>
 
-<div id="crtScan" aria-hidden="true"></div>
-<div id="crtVignette" aria-hidden="true"></div>
-<div id="crtBoot" aria-hidden="true"></div>
+<div id="boot" aria-hidden="true"></div>
+<div id="scan" aria-hidden="true"></div>
+<div id="vignette" aria-hidden="true"></div>
 
 <nav aria-label="Primary" style="position:fixed;left:0;right:0;top:0;z-index:200">
   <a href="../index.html#work" aria-label="K. Ewing, home">K. EWING</a>
@@ -183,7 +156,7 @@ footer{background:var(--ghost)}
 
 <div id="mobileMenuBackdrop" aria-hidden="true" style="position:fixed;inset:var(--bar-h) 0 0 0;z-index:215;background:rgba(0,0,0,.6)"></div>
 
-<nav id="mobileMenu" aria-label="Mobile" class="mono" style="position:fixed;left:0;right:0;top:var(--bar-h);z-index:220;background:var(--ghost);border-bottom:1px solid var(--line);max-height:calc(100vh - var(--bar-h));overflow-y:auto">
+<nav id="mobileMenu" aria-label="Mobile" class="mono" style="position:fixed;left:0;right:0;top:var(--bar-h);z-index:220;background:var(--panel);border-bottom:1px solid var(--line);max-height:calc(100vh - var(--bar-h));overflow-y:auto">
   <a href="../index.html#work" style="display:flex;align-items:center;min-height:52px;padding:0 20px;font-size:14px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;color:var(--ink);border-bottom:1px solid var(--line)">Work</a>
   <a href="../index.html#workbench" style="display:flex;align-items:center;min-height:52px;padding:0 20px;font-size:14px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;color:var(--ink);border-bottom:1px solid var(--line)">Workbench</a>
   <a href="../about.html" style="display:flex;align-items:center;min-height:52px;padding:0 20px;font-size:14px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;color:var(--ink);border-bottom:1px solid var(--line)">About</a>
@@ -191,30 +164,8 @@ footer{background:var(--ghost)}
   <button type="button" id="themeToggleMobile" aria-pressed="false" style="display:flex;align-items:center;justify-content:space-between;width:100%;min-height:52px;padding:0 20px;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;border:0;background:transparent;color:var(--muted);cursor:pointer"><span>Phosphor</span><span id="themeToggleMobileLabel">Green</span></button>
 </nav>
 
-<div id="appTabs" role="tablist" aria-label="Open application">
-  <button type="button" role="tab" aria-selected="true" aria-controls="headerWin" data-tab="headerWin">CASE_FILE</button>
-  <button type="button" role="tab" aria-selected="false" aria-controls="tocWin" data-tab="tocWin">CONTENTS</button>
-  <button type="button" role="tab" aria-selected="false" aria-controls="docWin" data-tab="docWin">DOC</button>
-  <button type="button" role="tab" aria-selected="false" aria-controls="imagesWin" data-tab="imagesWin">IMAGES</button>
-</div>
-
-<div id="deskIcons" role="navigation" aria-label="Desktop">
-  <button type="button" class="dicon" data-win="headerWin"><span class="dicon-glyph" aria-hidden="true"></span><span class="dicon-label">CASE_FILE.SYS</span></button>
-  <button type="button" class="dicon" data-win="tocWin"><span class="dicon-glyph" aria-hidden="true"></span><span class="dicon-label">CONTENTS.DAT</span></button>
-  <button type="button" class="dicon" data-win="docWin"><span class="dicon-glyph" aria-hidden="true"></span><span class="dicon-label">designing_with_empathy.doc</span></button>
-  <button type="button" class="dicon" data-win="imagesWin"><span class="dicon-glyph" aria-hidden="true"></span><span class="dicon-label">IMAGES.VWR</span></button>
-</div>
-
-<div id="desktop">
-<div id="headerWin" class="os-window" data-app>
-  <div class="os-titlebar">
-    <div class="os-drag-grip" tabindex="0" role="button" aria-label="CASE_FILE.SYS — hazard-icons window. Drag or use arrow keys to move."><span class="os-titletext">CASE_FILE.SYS — hazard-icons</span></div>
-    <div class="os-winctl">
-      <button type="button" class="os-btn" data-action="minimize" data-win="headerWin" aria-label="Minimize CASE_FILE.SYS">&#x2013;</button>
-      <button type="button" class="os-btn" data-action="close" data-win="headerWin" aria-label="Close CASE_FILE.SYS">&#x2715;</button>
-    </div>
-  </div>
-  <div class="os-body">
+<div id="stage">
+<div id="docPanel">
 <header style="padding:clamp(28px,4vw,48px) clamp(16px,5vw,80px) clamp(56px,7vw,100px);border-bottom:2px solid var(--ink);position:relative;overflow:hidden">
   <p style="margin:0 0 16px;font:400 12px/1 'Space Mono',monospace;letter-spacing:.08em;color:var(--muted)"><a href="../index.html#work">~</a> / <span style="color:var(--ink)">hazard-icons</span></p>
   <p style="margin:0 0 clamp(40px,6vw,80px);font:400 12px/1.5 'Space Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)">Images coming soon</p>
@@ -237,19 +188,16 @@ footer{background:var(--ghost)}
     </div>
   </div>
 </header>
-  </div>
-</div>
 
-<div id="tocWin" class="os-window" data-app>
-  <div class="os-titlebar">
-    <div class="os-drag-grip" tabindex="0" role="button" aria-label="CONTENTS.DAT window. Drag or use arrow keys to move."><span class="os-titletext">CONTENTS.DAT</span></div>
-    <div class="os-winctl">
-      <button type="button" class="os-btn" data-action="minimize" data-win="tocWin" aria-label="Minimize CONTENTS.DAT">&#x2013;</button>
-      <button type="button" class="os-btn" data-action="close" data-win="tocWin" aria-label="Close CONTENTS.DAT">&#x2715;</button>
-    </div>
+<button type="button" id="ccOpen" aria-label="Open contents panel">Contents</button>
+
+<div id="contentsCard">
+  <div id="ccTop">
+    <div id="ccHandle" tabindex="0" role="button" aria-label="Contents panel. Drag or use arrow keys to move."><span class="dot" aria-hidden="true"></span><span id="ccTitle">Contents</span></div>
+    <button type="button" id="ccClose" aria-label="Close contents panel">&#x2715;</button>
   </div>
-    <div class="os-body">
-  <aside id="tocAside" aria-label="Case study contents" style="flex:0 1 230px;min-width:0;padding-top:clamp(56px,7vw,110px)">
+  <div id="ccBody">
+<aside id="tocAside" aria-label="Case study contents">
     <nav aria-label="Sections" style="position:sticky;top:28px">
       <button type="button" id="tocToggle" class="toc-toggle" aria-expanded="true" aria-controls="toc-list" style="display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;min-height:44px;margin:0 0 10px;padding:0 0 6px;background:transparent;border:0;border-bottom:1px solid var(--line);color:var(--metal);cursor:pointer;text-align:left">
         <span style="font:400 30px/1 'Archivo Black',serif;overflow-wrap:anywhere">contents</span>
@@ -272,20 +220,10 @@ footer{background:var(--ghost)}
       </ol>
     </nav>
   </aside>
-    </div>
   </div>
-  <button type="button" id="tocShow" class="toc-show" aria-expanded="false" aria-controls="toc-list" aria-label="Show contents" style="display:none;position:fixed;left:0;top:50%;transform:translateY(-50%);z-index:140;writing-mode:vertical-rl;align-items:center;gap:12px;padding:18px 10px;min-width:44px;background:var(--ink);color:var(--bg);border:0;cursor:pointer;font:700 12px/1 'Space Mono',monospace;letter-spacing:.12em;text-transform:uppercase"><span aria-hidden="true">+</span>Contents</button>
+</div>
 
-<div id="docWin" class="os-window" data-app>
-  <div class="os-titlebar">
-    <div class="os-drag-grip" tabindex="0" role="button" aria-label="designing_with_empathy.doc window. Drag or use arrow keys to move."><span class="os-titletext">designing_with_empathy.doc</span></div>
-    <div class="os-winctl">
-      <button type="button" class="os-btn" data-action="minimize" data-win="docWin" aria-label="Minimize designing_with_empathy.doc">&#x2013;</button>
-      <button type="button" class="os-btn" data-action="close" data-win="docWin" aria-label="Close designing_with_empathy.doc">&#x2715;</button>
-    </div>
-  </div>
-    <div class="os-body">
-  <main id="main" style="flex:1 1 600px;min-width:0;max-width:1040px;margin:0 auto">
+<main id="main">
 
     <section id="s01" aria-labelledby="s01-h" style="display:grid;gap:22px;padding:clamp(56px,7vw,110px) 0;scroll-margin-top:24px">
       <p style="margin:0;display:flex;align-items:baseline;gap:14px"><span style="font:400 40px/.8 'Archivo Black',sans-serif;color:var(--pink);overflow-wrap:anywhere">01</span><span style="font:400 12px/1 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">Overview</span></p>
@@ -458,28 +396,14 @@ footer{background:var(--ghost)}
       <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Inter',sans-serif;text-wrap:pretty">Probably.</p>
     </section>
   </main>
-    </div>
-  </div>
-
-<div id="imagesWin" class="os-window os-win-hidden" data-app>
-  <div class="os-titlebar">
-    <div class="os-drag-grip" tabindex="0" role="button" aria-label="IMAGES.VWR window. Drag or use arrow keys to move."><span class="os-titletext">IMAGES.VWR</span></div>
-    <div class="os-winctl">
-      <button type="button" class="os-btn" data-action="minimize" data-win="imagesWin" aria-label="Minimize IMAGES.VWR">&#x2013;</button>
-      <button type="button" class="os-btn" data-action="close" data-win="imagesWin" aria-label="Close IMAGES.VWR">&#x2715;</button>
-    </div>
-  </div>
-  <div id="viewerStage"><img id="viewerImg" src="" alt=""></div>
-  <p id="viewerCaption"></p>
-  <div id="viewerNav">
-    <button type="button" id="viewerPrev">&#8592; Prev</button>
-    <button type="button" id="viewerZoom">Zoom</button>
-    <button type="button" id="viewerNext">Next &#8594;</button>
-  </div>
+</div>
 </div>
 
+<div id="inspector" class="hidden" role="dialog" aria-modal="true" aria-label="Image inspector">
+  <button type="button" id="inspectorClose" aria-label="Close image inspector">&#x2715;</button>
+  <div id="inspectorStage"><img id="inspectorImg" src="" alt=""></div>
+  <p id="inspectorCaption"></p>
 </div>
-<div id="taskbar" role="group" aria-label="Minimized windows"></div>
 
 <nav aria-label="More case studies" style="display:flex;flex-wrap:wrap;border-top:2px solid var(--ink);border-bottom:1px solid var(--line)">
   <a href="../art.html" class="case-nav-link" style="flex:1 1 320px;display:grid;gap:10px;border-right:1px solid var(--line);padding:clamp(36px,5vw,72px) clamp(16px,5vw,80px);text-decoration:none">
@@ -497,13 +421,13 @@ footer{background:var(--ghost)}
   <a href="mailto:hello@krystynaewing.com" style="color:var(--ink)">hello@krystynaewing.com</a>
   <a href="#main" style="min-height:44px;display:inline-flex;align-items:center">[ ^ top ]</a>
 </footer>
-
 <script>
 (function(){
   'use strict';
   var html = document.documentElement;
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  // ---- theme ----
   function applyThemeUI(){
     var light = html.getAttribute('data-theme') === 'light';
     var label = light ? 'AMBER' : 'GREEN';
@@ -526,6 +450,7 @@ footer{background:var(--ghost)}
   if (themeToggle) themeToggle.addEventListener('click', toggleTheme);
   if (themeToggleMobile) themeToggleMobile.addEventListener('click', toggleTheme);
 
+  // ---- mobile menu ----
   var menuToggle = document.getElementById('menuToggle');
   var mobileMenu = document.getElementById('mobileMenu');
   var mobileMenuBackdrop = document.getElementById('mobileMenuBackdrop');
@@ -560,18 +485,7 @@ footer{background:var(--ghost)}
   window.addEventListener('keydown', function(e){ if (e.key === 'Escape') closeMenu(); });
   window.addEventListener('resize', function(){ if (window.innerWidth >= 860) closeMenu(); });
 
-  var tocAside = document.getElementById('tocAside');
-  var tocToggle = document.getElementById('tocToggle');
-  var tocShow = document.getElementById('tocShow');
-  function setTocOpen(open){
-    if (tocAside) tocAside.style.display = open ? '' : 'none';
-    if (tocShow) tocShow.style.display = open ? 'none' : 'flex';
-    if (tocToggle) tocToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-    if (tocShow) tocShow.setAttribute('aria-expanded', open ? 'true' : 'false');
-  }
-  if (tocToggle) tocToggle.addEventListener('click', function(){ setTocOpen(tocToggle.getAttribute('aria-expanded') !== 'true'); });
-  if (tocShow) tocShow.addEventListener('click', function(){ setTocOpen(true); });
-
+  // ---- scroll-spy ----
   var markers = Array.prototype.slice.call(document.querySelectorAll('.toc-marker'));
   var spyIo = new IntersectionObserver(function(entries){
     entries.forEach(function(en){
@@ -582,233 +496,105 @@ footer{background:var(--ghost)}
   }, { rootMargin: '-40% 0px -55% 0px' });
   document.querySelectorAll('main section[id]').forEach(function(el){ spyIo.observe(el); });
 
-  // ================= WINDOW MANAGER =================
-  // Every window (header/contents/document/images) goes through the same
-  // open/close/minimize/focus/drag machinery. None of this touches the
-  // content inside <header>, <aside id="tocAside"> or <main> -- it only
-  // manages the chrome wrapping them.
-  var WIN_IDS = ['headerWin', 'tocWin', 'docWin', 'imagesWin'];
-  var wins = {};
-  WIN_IDS.forEach(function(id){
-    var el = document.getElementById(id);
-    if (!el) return;
-    wins[id] = {
-      el: el,
-      grip: el.querySelector('.os-drag-grip'),
-      state: el.classList.contains('os-win-hidden') ? 'closed' : 'open'
-    };
-  });
-  var topZ = 50;
-  var deskIcons = document.getElementById('deskIcons');
-  var taskbar = document.getElementById('taskbar');
-  var appTabs = document.getElementById('appTabs');
+  // ================= CONTENTS CARD =================
+  // The one supporting window: offset, overlapping, draggable, and
+  // dismissable -- reopened via a single persistent tab. Not one of
+  // several equal panels.
+  var ccCard = document.getElementById('contentsCard');
+  var ccHandle = document.getElementById('ccHandle');
+  var ccClose = document.getElementById('ccClose');
+  var ccOpen = document.getElementById('ccOpen');
+  function canFloat(){ return window.innerWidth >= 980; }
 
-  function canFloat(){ return window.innerWidth >= 860; }
-
-  function focusWindow(id){
-    var w = wins[id];
-    if (!w) return;
-    WIN_IDS.forEach(function(k){ if (wins[k]) wins[k].el.classList.remove('os-win-focused'); });
-    w.el.classList.add('os-win-focused');
-    // Always bump z-index on focus, not just once a window has been
-    // dragged -- otherwise a window opened fresh (like the image viewer,
-    // which starts in its own fixed default position) can render behind
-    // a window that was floated and focused earlier.
-    topZ += 1;
-    w.el.style.zIndex = topZ;
+  function closeCard(){
+    if (!ccCard) return;
+    ccCard.classList.add('hidden');
+    if (ccOpen) ccOpen.classList.add('show');
   }
+  function openCard(focusIt){
+    if (!ccCard) return;
+    ccCard.classList.remove('hidden');
+    if (ccOpen) ccOpen.classList.remove('show');
+    if (focusIt && ccHandle) ccHandle.focus();
+  }
+  if (ccClose) ccClose.addEventListener('click', closeCard);
+  if (ccOpen) ccOpen.addEventListener('click', function(){ openCard(true); });
 
-  function clampPos(x, y, w, h){
-    // Keep at least a titlebar-sized chunk of the window on screen and
-    // reachable, regardless of how tall its content is (the body itself
-    // scrolls once floating -- see applyFit).
-    var minVisible = 120;
+  // The card is rotated (transform:rotate(-1.4deg)), and
+  // getBoundingClientRect() on a rotated element returns its axis-aligned
+  // *visual* bounding box, not its unrotated CSS left/top -- reading that
+  // rect back as if it were the true position (as an earlier version of
+  // this code did) silently drifts the element off course with every
+  // move, in both axes, since translation and the rotated AABB don't
+  // correspond 1:1. Track true position in plain state instead, seeded
+  // once from the actual computed left/top (unaffected by the rotation
+  // transform), and never re-derive it from a post-rotation rect.
+  var ccPos = null;
+  function getCardPos(){
+    if (!ccPos) {
+      var cs = getComputedStyle(ccCard);
+      ccPos = { x: parseFloat(cs.left) || 0, y: parseFloat(cs.top) || 0 };
+    }
+    return ccPos;
+  }
+  function clampCardPos(x, y, w, h){
+    var minVisible = 80;
     var maxX = window.innerWidth - Math.min(w, window.innerWidth);
     var maxY = Math.max(0, window.innerHeight - minVisible);
     return { x: Math.max(0, Math.min(x, maxX)), y: Math.max(0, Math.min(y, maxY)) };
   }
-  function applyFit(id, top, naturalHeight){
-    // A window's height is a fixed CSS budget while it's in its default
-    // grid position, which is only correct there. Once floating, recompute
-    // against the *actual* remaining space below its current top so
-    // dragging it low never strands content past the viewport edge with
-    // no way to scroll to it.
-    var w = wins[id];
-    if (!w) return;
-    var avail = window.innerHeight - top - 16;
-    w.el.style.height = Math.max(160, Math.min(naturalHeight || avail, avail)) + 'px';
+  function setCardPos(x, y, w, h){
+    var p = clampCardPos(x, y, w, h);
+    ccPos = p;
+    ccCard.classList.add('dragged');
+    ccCard.style.left = p.x + 'px';
+    ccCard.style.top = p.y + 'px';
   }
-  function startFloat(id){
-    var w = wins[id];
-    if (!w || w.el.classList.contains('os-float') || !canFloat()) return;
-    var r = w.el.getBoundingClientRect();
-    w.el.style.width = r.width + 'px';
-    w.el.style.left = r.left + 'px';
-    w.el.style.top = r.top + 'px';
-    w.el.classList.add('os-float');
-    applyFit(id, r.top, r.height);
+  function moveCardBy(dx, dy){
+    if (!ccCard || !canFloat()) return;
+    var cur = getCardPos();
+    setCardPos(cur.x + dx, cur.y + dy, ccCard.offsetWidth, ccCard.offsetHeight);
   }
-  function moveBy(id, dx, dy){
-    var w = wins[id];
-    if (!w) return;
-    startFloat(id);
-    var r = w.el.getBoundingClientRect();
-    var p = clampPos(r.left + dx, r.top + dy, r.width, r.height);
-    w.el.style.left = p.x + 'px';
-    w.el.style.top = p.y + 'px';
-    applyFit(id, p.y, r.height);
-  }
-
-  function labelFor(id){
-    var w = wins[id];
-    var t = w && w.grip ? w.grip.querySelector('.os-titletext') : null;
-    return t ? t.textContent : id;
-  }
-  function updateIconState(id){
-    var icon = deskIcons && deskIcons.querySelector('.dicon[data-win="' + id + '"]');
-    if (icon) icon.setAttribute('aria-pressed', wins[id].state === 'open' ? 'true' : 'false');
-  }
-  function removeChip(id){
-    var chip = document.getElementById('chip-' + id);
-    if (chip) chip.remove();
-  }
-  function addChip(id){
-    if (!taskbar) return;
-    removeChip(id);
-    var chip = document.createElement('button');
-    chip.type = 'button';
-    chip.className = 'taskbar-chip';
-    chip.id = 'chip-' + id;
-    chip.textContent = labelFor(id);
-    chip.setAttribute('aria-label', 'Restore ' + labelFor(id));
-    chip.addEventListener('click', function(){ openWindow(id); });
-    taskbar.appendChild(chip);
-  }
-
-  function activateTab(id){
-    // Mobile only: exactly one app visible at a time, switched via the
-    // tab bar instead of floating/dragging.
-    WIN_IDS.forEach(function(k){
-      var w = wins[k];
-      if (!w) return;
-      var active = k === id;
-      w.el.classList.toggle('app-active', active);
-      if (active) w.el.classList.remove('os-win-hidden');
+  if (ccHandle && ccCard) {
+    var dragging = false, startX = 0, startY = 0, originL = 0, originT = 0;
+    ccHandle.addEventListener('pointerdown', function(e){
+      if (!canFloat()) return;
+      var cur = getCardPos();
+      originL = cur.x; originT = cur.y;
+      dragging = true;
+      startX = e.clientX; startY = e.clientY;
+      ccCard.classList.add('dragging');
+      ccHandle.setPointerCapture(e.pointerId);
     });
-    if (appTabs) appTabs.querySelectorAll('button').forEach(function(btn){
-      btn.setAttribute('aria-selected', btn.dataset.tab === id ? 'true' : 'false');
+    ccHandle.addEventListener('pointermove', function(e){
+      if (!dragging) return;
+      setCardPos(originL + (e.clientX - startX), originT + (e.clientY - startY), ccCard.offsetWidth, ccCard.offsetHeight);
+    });
+    (function(){
+      function endDrag(){ dragging = false; if (ccCard) ccCard.classList.remove('dragging'); }
+      ccHandle.addEventListener('pointerup', endDrag);
+      ccHandle.addEventListener('pointercancel', endDrag);
+    })();
+    ccHandle.addEventListener('keydown', function(e){
+      var step = e.shiftKey ? 40 : 10;
+      if (e.key === 'ArrowLeft') { moveCardBy(-step, 0); e.preventDefault(); }
+      else if (e.key === 'ArrowRight') { moveCardBy(step, 0); e.preventDefault(); }
+      else if (e.key === 'ArrowUp') { moveCardBy(0, -step); e.preventDefault(); }
+      else if (e.key === 'ArrowDown') { moveCardBy(0, step); e.preventDefault(); }
+      else if (e.key === 'Escape') { closeCard(); }
     });
   }
-
-  function openWindow(id){
-    var w = wins[id];
-    if (!w) return;
-    w.el.classList.remove('os-win-hidden');
-    w.state = 'open';
-    removeChip(id);
-    updateIconState(id);
-    if (canFloat()) { focusWindow(id); }
-    else { activateTab(id); }
-  }
-  function minimizeWindow(id){
-    var w = wins[id];
-    if (!w) return;
-    w.el.classList.add('os-win-hidden');
-    w.state = 'minimized';
-    addChip(id);
-    updateIconState(id);
-  }
-  function closeWindow(id){
-    var w = wins[id];
-    if (!w) return;
-    w.el.classList.add('os-win-hidden');
-    w.state = 'closed';
-    removeChip(id);
-    updateIconState(id);
-  }
-  function toggleOrFocus(id){
-    var w = wins[id];
-    if (!w) return;
-    if (w.state === 'open' && canFloat()) focusWindow(id);
-    else openWindow(id);
-  }
-
-  // ---- wire up each window: drag (pointer + keyboard), click-to-focus,
-  // minimize/close buttons ----
-  WIN_IDS.forEach(function(id){
-    var w = wins[id];
-    if (!w) return;
-    if (w.grip) {
-      var dragging = false, startX = 0, startY = 0, originL = 0, originT = 0;
-      w.grip.addEventListener('pointerdown', function(e){
-        if (!canFloat()) return;
-        startFloat(id);
-        focusWindow(id);
-        dragging = true;
-        startX = e.clientX; startY = e.clientY;
-        var r = w.el.getBoundingClientRect();
-        originL = r.left; originT = r.top;
-        w.grip.setPointerCapture(e.pointerId);
-      });
-      w.grip.addEventListener('pointermove', function(e){
-        if (!dragging) return;
-        var p = clampPos(originL + (e.clientX - startX), originT + (e.clientY - startY), w.el.offsetWidth, w.el.offsetHeight);
-        w.el.style.left = p.x + 'px';
-        w.el.style.top = p.y + 'px';
-        applyFit(id, p.y, w.el.offsetHeight);
-      });
-      (function(){
-        function endDrag(){ dragging = false; }
-        w.grip.addEventListener('pointerup', endDrag);
-        w.grip.addEventListener('pointercancel', endDrag);
-      })();
-      w.grip.addEventListener('keydown', function(e){
-        var step = e.shiftKey ? 40 : 10;
-        if (e.key === 'ArrowLeft') { moveBy(id, -step, 0); e.preventDefault(); }
-        else if (e.key === 'ArrowRight') { moveBy(id, step, 0); e.preventDefault(); }
-        else if (e.key === 'ArrowUp') { moveBy(id, 0, -step); e.preventDefault(); }
-        else if (e.key === 'ArrowDown') { moveBy(id, 0, step); e.preventDefault(); }
-        else if (e.key === 'Escape') { minimizeWindow(id); }
-      });
-      w.grip.addEventListener('focus', function(){ if (canFloat()) focusWindow(id); });
-    }
-    w.el.addEventListener('pointerdown', function(){ if (canFloat()) focusWindow(id); });
-  });
-
-  document.querySelectorAll('.os-btn').forEach(function(btn){
-    btn.addEventListener('click', function(e){
-      e.stopPropagation();
-      var id = btn.getAttribute('data-win');
-      var action = btn.getAttribute('data-action');
-      if (action === 'minimize') minimizeWindow(id);
-      else if (action === 'close') closeWindow(id);
-    });
-  });
-
-  if (deskIcons) deskIcons.querySelectorAll('.dicon').forEach(function(btn){
-    btn.addEventListener('click', function(){ toggleOrFocus(btn.getAttribute('data-win')); });
-  });
-
-  if (appTabs) appTabs.querySelectorAll('button').forEach(function(btn){
-    btn.addEventListener('click', function(){ activateTab(btn.getAttribute('data-tab')); });
-  });
-
   window.addEventListener('resize', function(){
-    if (canFloat()) return;
-    WIN_IDS.forEach(function(id){
-      var w = wins[id];
-      if (w && w.el.classList.contains('os-float')) {
-        w.el.classList.remove('os-float');
-        w.el.style.left = ''; w.el.style.top = ''; w.el.style.width = ''; w.el.style.height = ''; w.el.style.zIndex = '';
-      }
-    });
+    if (!canFloat() && ccCard && ccCard.classList.contains('dragged')) {
+      ccCard.classList.remove('dragged');
+      ccCard.style.left = ''; ccCard.style.top = '';
+      ccPos = null;
+    }
   });
 
-  // mobile default: Document is the one visible app on load
-  if (!canFloat()) activateTab('docWin');
-
-  // ---- Contents links scroll + focus the Document window instead of
-  // jumping the whole page ----
+  // Contents links scroll the page to the section (native, no boxed
+  // scroll container) and close the card on mobile, where it's a full
+  // bottom sheet covering the content underneath.
   var tocList = document.getElementById('toc-list');
   if (tocList) {
     tocList.addEventListener('click', function(e){
@@ -818,57 +604,64 @@ footer{background:var(--ghost)}
       var target = document.getElementById(targetId);
       if (!target) return;
       e.preventDefault();
-      openWindow('docWin');
       target.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
       try { history.replaceState(null, '', '#' + targetId); } catch (err) {}
+      if (!canFloat()) closeCard();
     });
   }
 
-  // ================= IMAGE VIEWER =================
-  // Built at runtime from the figures that already exist in <main> -- it
-  // reads their real src/alt/caption, it never duplicates or re-types them.
-  var figures = Array.prototype.slice.call(document.querySelectorAll('#main figure'));
-  var gallery = figures.map(function(fig){
+  // ================= IMAGE INSPECTOR =================
+  // Opens on clicking an image that's already inline in the document --
+  // reads its real src/alt/caption at open time rather than keeping a
+  // second copy of them anywhere.
+  var inspector = document.getElementById('inspector');
+  var inspectorImg = document.getElementById('inspectorImg');
+  var inspectorCaption = document.getElementById('inspectorCaption');
+  var inspectorClose = document.getElementById('inspectorClose');
+  var lastFocused = null;
+  function openInspector(img, captionHTML){
+    if (!inspector || !inspectorImg) return;
+    lastFocused = document.activeElement;
+    inspectorImg.src = img.currentSrc || img.src;
+    inspectorImg.alt = img.alt;
+    inspectorImg.classList.remove('zoomed');
+    if (inspectorCaption) inspectorCaption.innerHTML = captionHTML || '';
+    inspector.classList.remove('hidden');
+    if (inspectorClose) inspectorClose.focus();
+  }
+  function closeInspector(){
+    if (!inspector || inspector.classList.contains('hidden')) return;
+    inspector.classList.add('hidden');
+    if (lastFocused && typeof lastFocused.focus === 'function') lastFocused.focus();
+  }
+  function toggleZoom(){ if (inspectorImg) inspectorImg.classList.toggle('zoomed'); }
+  if (inspectorClose) inspectorClose.addEventListener('click', closeInspector);
+  if (inspectorImg) inspectorImg.addEventListener('click', toggleZoom);
+  var inspectorStage = document.getElementById('inspectorStage');
+  if (inspector) inspector.addEventListener('click', function(e){
+    if (e.target === inspector || e.target === inspectorStage) closeInspector();
+  });
+  window.addEventListener('keydown', function(e){
+    if (e.key === 'Escape') closeInspector();
+  });
+  document.querySelectorAll('#main figure').forEach(function(fig){
     var img = fig.querySelector('img');
     var cap = fig.querySelector('figcaption');
-    return { src: img ? img.src : '', alt: img ? img.alt : '', captionHTML: cap ? cap.innerHTML : '' };
-  });
-  var viewerImg = document.getElementById('viewerImg');
-  var viewerCaption = document.getElementById('viewerCaption');
-  var viewerPrev = document.getElementById('viewerPrev');
-  var viewerNext = document.getElementById('viewerNext');
-  var viewerZoom = document.getElementById('viewerZoom');
-  var viewerIdx = 0;
-  function showImage(i){
-    if (!gallery.length || !viewerImg) return;
-    viewerIdx = (i + gallery.length) % gallery.length;
-    var item = gallery[viewerIdx];
-    viewerImg.src = item.src;
-    viewerImg.alt = item.alt;
-    viewerImg.classList.remove('zoomed');
-    if (viewerCaption) viewerCaption.innerHTML = item.captionHTML;
-  }
-  function openViewer(i){
-    showImage(i);
-    openWindow('imagesWin');
-  }
-  if (viewerPrev) viewerPrev.addEventListener('click', function(){ showImage(viewerIdx - 1); });
-  if (viewerNext) viewerNext.addEventListener('click', function(){ showImage(viewerIdx + 1); });
-  function toggleZoom(){ if (viewerImg) viewerImg.classList.toggle('zoomed'); }
-  if (viewerZoom) viewerZoom.addEventListener('click', toggleZoom);
-  if (viewerImg) viewerImg.addEventListener('click', toggleZoom);
-  figures.forEach(function(fig, idx){
-    var img = fig.querySelector('img');
     if (!img) return;
     img.tabIndex = 0;
     img.setAttribute('role', 'button');
     img.setAttribute('aria-label', 'View larger: ' + (img.getAttribute('alt') || 'image'));
-    img.addEventListener('click', function(){ openViewer(idx); });
+    img.addEventListener('click', function(){ openInspector(img, cap ? cap.innerHTML : ''); });
     img.addEventListener('keydown', function(e){
-      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openViewer(idx); }
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openInspector(img, cap ? cap.innerHTML : ''); }
     });
   });
-  if (gallery.length) showImage(0);
+
+  // On mobile the card is a full bottom sheet, not a small corner card --
+  // leaving it open by default would cover most of the screen before the
+  // visitor has even seen the page. Start closed there; stays open by
+  // default on desktop, where it's small and out of the way.
+  if (!canFloat()) closeCard();
 
   html.classList.add('js-ready');
 })();
