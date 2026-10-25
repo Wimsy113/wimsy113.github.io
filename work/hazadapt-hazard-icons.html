@@ -2,170 +2,197 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <link rel="icon" href="../images/favicon.ico">
 <title>Designing With Empathy — hazadapt — Krystyna Ewing</title>
 <meta name="description" content="Designing With Empathy — trauma-informed iconography at HazAdapt.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
 <script src="../image-slot.js"></script>
-<script>try{if(localStorage.getItem('ke-theme')==='light')document.documentElement.setAttribute('data-theme','light');}catch(e){}</script>
 <style>
-/* ---- palette: charcoal surfaces, desaturated green accent/glow.
-   "light" toggle is repurposed as an amber-phosphor alternative -- both
-   states stay dark; this never becomes a bright page. ---- */
-html{--bg:#09090a;--bg-glow:#0e1511;--bg-glow2:#0a0b0c;--panel:#18191b;--panel-edge:#242725;--card:#1d2420;--card-edge:#2c362f;--ink:#cfd6cc;--muted:#8d9690;--metal:#8d9690;--line:rgba(207,214,204,.14);--accent:#6bb589;--accent-glow:rgba(107,181,137,.35);--on-accent:#081009;--pink:var(--accent);--red:var(--accent);--grain:.08;--bar-h:46px;background:var(--bg);color:var(--ink);scroll-behavior:smooth}
-html[data-theme="light"]{--bg:#0a0806;--bg-glow:#150f09;--bg-glow2:#0b0a08;--panel:#1b1712;--panel-edge:#2a2318;--card:#211b13;--card-edge:#352c1e;--ink:#d6c6a0;--muted:#998a68;--metal:#998a68;--line:rgba(214,198,160,.14);--accent:#cd9a48;--accent-glow:rgba(205,154,72,.35);--on-accent:#0a0806;--pink:var(--accent);--red:var(--accent);--grain:.07}
+/* =====================================================================
+   A hidden terminal, not a portfolio page. One fixed dark palette --
+   aged, murky, desaturated green on charcoal. No theme toggle, no site
+   nav, no portfolio chrome. The whole viewport is the device.
+   ===================================================================== */
+:root{
+  --bg:#09090a;--bg2:#121412;--bg3:#07080a;
+  --panel:#15161a;--panel-edge:rgba(170,186,164,.14);
+  --ink:#c6cdbf;--dim:#7d8778;--dimmer:#565f53;
+  --accent:#86a86e;--accent-dim:rgba(134,168,110,.3);--accent-dull:#5c7a4f;
+  --warn:#b9553a;
+  --line:rgba(198,205,191,.14);
+  --on-accent:#0a0d08;
+  --grain:.09;
+  /* the case-study content (locked, unmodified) still references these
+     token names from the shared portfolio system -- alias them so it
+     renders correctly in this new palette without touching its markup */
+  --muted:var(--dim);--metal:var(--dim);--pink:var(--accent);--red:var(--accent);
+}
 *{box-sizing:border-box}
-body{margin:0;min-height:100vh;padding-top:var(--bar-h);background-color:var(--bg);background-image:radial-gradient(1100px 760px at 20% 8%,var(--bg-glow),transparent 62%),radial-gradient(900px 700px at 96% 100%,var(--bg-glow2),transparent 55%);color:var(--ink);font-family:"Inter",system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden;transition:background-color .4s ease,color .4s ease}
-body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:300;opacity:var(--grain);mix-blend-mode:overlay;background-image:url("../images/grain.png");background-size:96px 96px}
-#scan{position:fixed;inset:0;pointer-events:none;z-index:301;background-image:repeating-linear-gradient(to bottom,rgba(0,0,0,.14) 0,rgba(0,0,0,.14) 1px,transparent 1px,transparent 3px);opacity:.3;mix-blend-mode:multiply}
-#vignette{position:fixed;inset:0;pointer-events:none;z-index:302;box-shadow:inset 0 0 220px 60px rgba(0,0,0,.6),inset 0 0 60px 10px rgba(0,0,0,.4)}
-a{color:inherit;text-decoration-thickness:1px;text-underline-offset:.22em}
-a:hover{color:var(--accent)}
+html,body{height:100%;margin:0}
+html{background:var(--bg);scroll-behavior:auto}
+body{
+  position:fixed;inset:0;overflow:hidden;
+  height:100vh;height:100dvh;
+  background-color:var(--bg);
+  background-image:
+    radial-gradient(1200px 820px at 14% 6%, var(--bg2), transparent 60%),
+    radial-gradient(900px 700px at 92% 96%, var(--bg3), transparent 55%);
+  color:var(--ink);
+  font-family:"Inter",system-ui,sans-serif;
+  -webkit-font-smoothing:antialiased;
+  padding:env(safe-area-inset-top,0) env(safe-area-inset-right,0) env(safe-area-inset-bottom,0) env(safe-area-inset-left,0);
+}
+body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:500;opacity:var(--grain);mix-blend-mode:overlay;background-image:url("../images/grain.png");background-size:96px 96px}
+#scan{position:fixed;inset:0;pointer-events:none;z-index:501;background-image:repeating-linear-gradient(to bottom,rgba(0,0,0,.15) 0,rgba(0,0,0,.15) 1px,transparent 1px,transparent 3px);opacity:.28;mix-blend-mode:multiply}
+#vignette{position:fixed;inset:0;pointer-events:none;z-index:502;box-shadow:inset 0 0 260px 70px rgba(0,0,0,.65),inset 0 0 70px 14px rgba(0,0,0,.45)}
+a{color:inherit}
 :focus-visible{outline:3px solid var(--accent);outline-offset:3px}
 ::selection{background:var(--accent);color:var(--on-accent)}
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 
-.skip-link{position:fixed;left:16px;top:-80px;z-index:500;background:var(--accent);color:var(--on-accent);padding:12px 18px;font:700 14px/1 'Space Mono',monospace;text-decoration:none;transition:top .2s ease}
+.skip-link{position:fixed;left:16px;top:-80px;z-index:700;background:var(--accent);color:var(--on-accent);padding:12px 18px;font:700 14px/1 'Space Mono',monospace;text-decoration:none;transition:top .2s ease}
 .skip-link:focus{top:16px}
 
 @media (prefers-reduced-motion:no-preference){
-  #boot{position:fixed;inset:0;z-index:600;pointer-events:none;background:#000;opacity:1}
-  html.js-ready #boot{animation:bootFlicker .85s steps(1,end) forwards}
-  @keyframes bootFlicker{0%{opacity:1}7%{opacity:0}13%{opacity:.8}20%{opacity:.05}28%{opacity:1}38%{opacity:0}100%{opacity:0;visibility:hidden}}
-  #docPanel{opacity:0}
-  html.js-ready #docPanel{animation:panelIn .55s cubic-bezier(.16,1,.3,1) .2s forwards}
-  @keyframes panelIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
-  #contentsCard{opacity:0}
-  html.js-ready #contentsCard{animation:cardIn .55s cubic-bezier(.16,1,.3,1) .5s forwards}
-  @keyframes cardIn{from{opacity:0;transform:translateY(14px) rotate(-1.4deg)}to{opacity:1;transform:translateY(0) rotate(-1.4deg)}}
+  #boot{position:fixed;inset:0;z-index:800;pointer-events:none;background:#000;opacity:1}
+  html.js-ready #boot{animation:bootFlicker .9s steps(1,end) forwards}
+  @keyframes bootFlicker{0%{opacity:1}6%{opacity:0}11%{opacity:.85}17%{opacity:.04}24%{opacity:1}33%{opacity:0}100%{opacity:0;visibility:hidden}}
 }
 @media (prefers-reduced-motion:reduce){#boot{display:none}}
 
-/* ---- top bar: the real site nav, not part of the "computer" ---- */
-nav[aria-label="Primary"]{display:flex;align-items:stretch;background:var(--panel);border-bottom:1px solid var(--line)}
-nav[aria-label="Primary"] a,nav[aria-label="Primary"] button{display:flex;align-items:center;height:var(--bar-h);padding:0 16px;border-right:1px solid var(--line);color:var(--muted);text-decoration:none;font:700 11px/1 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;background:transparent;border-top:0;border-bottom:0;border-left:0;cursor:pointer;transition:letter-spacing .15s ease,color .15s ease}
-nav[aria-label="Primary"] a:first-child{font:400 15px/1 'Archivo Black',sans-serif;letter-spacing:.02em;text-transform:none;color:var(--ink)}
-nav[aria-label="Primary"] a[aria-current="true"]{color:var(--accent);box-shadow:inset 0 -3px 0 var(--accent)}
-.rail-item:hover{letter-spacing:.2em;color:var(--ink)}
-#themeToggle{margin-left:auto;border-right:0}
-#themeToggle:hover{color:var(--accent)}
-#mobileMenu a[aria-current="true"]{color:var(--accent)}
-#mobileBar{display:none;background:var(--panel);border-bottom:1px solid var(--line)}
-#mobileMenu,#mobileMenuBackdrop{display:none}
-#menuToggle:hover{color:var(--accent);border-color:var(--accent)}
-#themeToggleMobile:hover{color:var(--accent)}
-@media (max-width:859px){
-  nav[aria-label="Primary"]{display:none!important}
-  #mobileBar{display:flex}
-}
-@media (min-width:860px){
-  #mobileMenu,#mobileMenuBackdrop{display:none!important}
+/* ---- screens: full-viewport, one active at a time ---- */
+.screen{position:fixed;inset:0;display:flex;flex-direction:column;opacity:1}
+.screen.off{display:none}
+@media (prefers-reduced-motion:no-preference){
+  .screen.swapping{animation:screenFlicker .32s steps(2,end)}
+  @keyframes screenFlicker{0%{opacity:0;filter:brightness(2.4)}35%{opacity:1;filter:brightness(1)}55%{opacity:.2}100%{opacity:1;filter:brightness(1)}}
 }
 
-/* ---- document: the case study as the full page itself -- never a
-   small height-boxed pane. Offset asymmetrically, generous negative
-   space at wide viewports. ---- */
-@media (min-width:980px){
-  #stage{padding:56px 9vw 110px 230px}
-  #docPanel{max-width:1000px;margin-right:auto}
-  #main{max-width:720px;margin:0 auto;padding:0 clamp(16px,5vw,80px) clamp(40px,6vw,72px)}
-  #main>section:first-child{padding-top:clamp(32px,5vh,56px)!important}
-}
-@media (max-width:979px){
-  #stage{padding:28px 16px 72px}
-  #main{padding:0 clamp(16px,5vw,32px) clamp(32px,6vw,56px)}
-}
-#docPanel{position:relative;background:var(--panel);border:1px solid var(--panel-edge);box-shadow:0 1px 0 rgba(255,255,255,.03) inset,0 50px 110px rgba(0,0,0,.55),0 0 140px -50px var(--accent-glow)}
-#docPanel::before{content:"";position:absolute;left:0;right:0;top:0;height:2px;background:linear-gradient(90deg,transparent,var(--accent-glow),transparent)}
-@keyframes dotPulse{0%,100%{opacity:.5}50%{opacity:1}}
+/* ---- exit ---- */
+#exitLink{position:fixed;z-index:600;left:clamp(12px,3vw,28px);bottom:clamp(12px,3vw,24px);display:inline-flex;align-items:center;gap:8px;min-height:40px;padding:0 14px;background:var(--panel);border:1px solid var(--panel-edge);color:var(--dim);text-decoration:none;font:700 11px/1 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase}
+#exitLink:hover{color:var(--accent);border-color:var(--accent-dim)}
+#exitLink .glyph{color:var(--accent)}
 
-main section{grid-template-columns:minmax(0,1fr)}
-main figure{position:relative}
-main figure img{cursor:zoom-in;transition:filter .2s ease}
-main figure img:hover,main figure img:focus-visible{filter:brightness(1.08)}
+/* =====================================================================
+   DIRECTORY SCREEN -- the case file's cover + its index. Asymmetric,
+   not a centered hero. This is what you see first.
+   ===================================================================== */
+#screenDirectory{overflow-y:auto}
+#dirGrid{flex:1;min-height:100%;display:grid;position:relative}
+@media (min-width:900px){
+  #dirGrid{grid-template-columns:1fr minmax(320px,420px);align-items:start;gap:0}
+}
+@media (max-width:899px){
+  #dirGrid{grid-template-columns:1fr}
+}
 
-/* ---- contents card: one offset, overlapping, draggable panel -- not
-   one of several equal windows. A bottom sheet on narrow screens. ---- */
-#contentsCard{background:var(--card);border:1px solid var(--card-edge);box-shadow:0 26px 54px rgba(0,0,0,.55)}
-#contentsCard.hidden{display:none}
-@media (min-width:980px){
-  #contentsCard{position:fixed;left:28px;top:150px;width:200px;z-index:120;transform:rotate(-1.4deg)}
+/* the "cover": real header content, treated as a case-file label pasted
+   onto the environment rather than a full-bleed marketing hero -- scaled
+   down, tilted, framed by a status readout. Decorative chrome only; the
+   header's own markup and text are untouched. */
+#coverZone{position:relative;padding-top:clamp(28px,4vh,40px)}
+#coverZone::before{
+  content:"CASE FILE // STATUS: DECLASSIFIED // 13 ENTRIES ON RECORD";
+  position:absolute;top:0;left:0;right:0;height:clamp(28px,4vh,40px);
+  display:flex;align-items:center;padding:0 clamp(16px,5vw,64px);
+  font:700 10px/1 'Space Mono',monospace;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--dimmer);border-bottom:1px solid var(--line);
+  background:linear-gradient(90deg,rgba(134,168,110,.06),transparent 45%);
 }
-@media (max-width:979px){
-  #contentsCard{position:fixed;left:0;right:0;bottom:0;top:auto;z-index:220;max-height:72vh;display:flex;flex-direction:column}
-}
-#ccTop{display:flex;align-items:stretch;border-bottom:1px solid var(--line);flex:0 0 auto}
-#ccHandle{display:flex;align-items:center;gap:8px;flex:1;min-width:0;height:32px;padding:0 10px;cursor:grab;touch-action:none;user-select:none}
-#ccHandle:active{cursor:grabbing}
-@media (max-width:979px){#ccHandle{cursor:default}}
-#ccHandle .dot{width:6px;height:6px;border-radius:50%;background:var(--accent);box-shadow:0 0 6px var(--accent-glow);flex:0 0 auto}
-@media (prefers-reduced-motion:no-preference){#ccHandle .dot{animation:dotPulse 3.6s ease-in-out infinite}}
-#ccTitle{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font:700 10px/1 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
-#ccClose{width:32px;height:32px;border:0;border-left:1px solid var(--line);background:transparent;color:var(--muted);font:700 13px/1 'Space Mono',monospace;cursor:pointer;flex:0 0 auto}
-#ccClose:hover{color:var(--accent)}
-#ccBody{max-height:min(58vh,480px);overflow-y:auto}
-@media (max-width:979px){#ccBody{max-height:none;flex:1;min-height:0}}
-#ccOpen{position:fixed;left:0;top:60%;z-index:119;writing-mode:vertical-rl;padding:16px 8px;min-width:40px;min-height:52px;background:var(--card);border:1px solid var(--card-edge);border-left:0;color:var(--muted);font:700 11px/1 'Space Mono',monospace;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;display:none}
-#ccOpen.show{display:flex;align-items:center;justify-content:center}
-#ccOpen:hover{color:var(--accent)}
-@media (max-width:979px){#ccOpen{left:auto;right:16px;top:auto;bottom:16px;writing-mode:horizontal-tb;min-height:44px;padding:0 16px}}
+#coverZone header{position:relative;overflow:visible!important;border-bottom:0!important;transform:rotate(-.3deg);transform-origin:0 0}
+#coverZone header h1{font-size:clamp(32px,4.4vw,76px)!important;line-height:.94!important;max-width:13ch;text-shadow:0 0 40px var(--accent-dim)}
+#coverZone header h1 + p{font-size:clamp(15px,1.5vw,20px)!important;margin-top:10px!important}
+#coverZone header p[style*="color:var(--pink)"]{color:var(--accent)!important}
+
+/* the directory list panel */
+#dirListZone{position:relative;padding:clamp(24px,6vh,64px) clamp(20px,5vw,56px) clamp(40px,8vh,96px);border-left:1px solid var(--line);background:linear-gradient(180deg,rgba(255,255,255,.015),transparent 30%)}
+@media (max-width:899px){#dirListZone{border-left:0;border-top:1px solid var(--line)}}
+#dirListZone #tocAside{padding:0!important}
+#dirHeading{margin:0 0 clamp(16px,3vh,28px);font:700 11px/1 'Space Mono',monospace;letter-spacing:.18em;text-transform:uppercase;color:var(--dimmer);display:flex;align-items:center;gap:10px}
+#dirHeading::before{content:"";width:7px;height:7px;background:var(--accent);box-shadow:0 0 8px var(--accent-dim);flex:0 0 auto}
+@media (prefers-reduced-motion:no-preference){#dirHeading::before{animation:blip 2.8s ease-in-out infinite}}
+@keyframes blip{0%,100%{opacity:.45}50%{opacity:1}}
 
 .toc-toggle{display:none!important}
-.toc-show{display:none!important}
-.case-nav-link:hover{background:var(--ink);color:var(--bg)}
-nav[aria-label="More case studies"]{background:var(--panel);border-color:var(--panel-edge)!important}
-footer{background:var(--panel)}
+#toc-list{font:400 15px/1.3 'Space Mono',monospace!important;letter-spacing:.02em!important;gap:0!important}
+#toc-list li{border-top:1px solid var(--line)}
+#toc-list li:last-child{border-bottom:1px solid var(--line)}
+#toc-list a{position:relative;padding:14px 4px 14px 14px!important;color:var(--dim);transition:color .12s ease,padding-left .12s ease}
+#toc-list a::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent);transform:scaleY(0);transform-origin:50% 50%;transition:transform .15s ease}
+#toc-list a:hover,#toc-list a:focus-visible{color:var(--ink);padding-left:22px!important}
+#toc-list a:hover::before,#toc-list a:focus-visible::before{transform:scaleY(1)}
+.toc-marker{color:var(--accent)!important}
+#toc-list a[data-visited="true"]{color:var(--ink)}
+#toc-list a[data-visited="true"] .toc-marker{color:var(--dimmer)!important}
 
-/* ---- image inspector: contextual, opened per image, not a separate
-   always-present app ---- */
-#inspector{position:fixed;inset:0;z-index:400;display:flex;flex-direction:column;background:rgba(4,5,4,.93)}
+/* =====================================================================
+   READER SCREEN -- one file, full viewport, chrome fixed top/bottom,
+   content scrolls between them.
+   ===================================================================== */
+#screenReader{overflow:hidden}
+#readerBar{flex:0 0 auto;display:flex;align-items:stretch;background:var(--panel);border-bottom:1px solid var(--panel-edge);height:52px}
+#readerBar button{display:flex;align-items:center;gap:8px;height:100%;padding:0 16px;border:0;border-right:1px solid var(--line);background:transparent;color:var(--dim);font:700 11px/1 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;cursor:pointer}
+#readerBar button:hover:not(:disabled){color:var(--accent)}
+#readerBar button:disabled{opacity:.3;cursor:default}
+#readerCounter{margin-left:auto;display:flex;align-items:center;padding:0 18px;color:var(--dim);font:700 11px/1 'Space Mono',monospace;letter-spacing:.12em;text-transform:uppercase}
+#readerBody{flex:1;min-height:0;overflow-y:auto;position:relative}
+#readerBody::before{content:"";position:absolute;left:0;right:0;top:0;height:2px;background:linear-gradient(90deg,transparent,var(--accent-dim),transparent);z-index:2}
+#readerInner{max-width:760px;margin:0 auto;padding:clamp(32px,6vh,64px) clamp(18px,5vw,40px) clamp(56px,10vh,110px)}
+
+/* ---- navRail: a persistent ladder of all 13 sections, visited/current
+   state visible at a glance -- the clear route through the complete
+   case study the brief requires, and what pulls the reading column off
+   dead-center into something asymmetric. Desktop only; mobile keeps its
+   own distinct bar-driven model. ---- */
+#navRail{display:none}
+@media (min-width:900px){
+  #readerInner{margin:0 auto 0 clamp(96px,13vw,170px)}
+  #navRail{
+    display:flex;flex-direction:column;align-items:center;
+    position:absolute;left:clamp(30px,5vw,64px);top:50%;transform:translateY(-50%);
+    z-index:3;
+  }
+  #navRail::before{content:"";position:absolute;left:50%;top:4px;bottom:4px;width:1px;background:var(--line);transform:translateX(-50%);z-index:-1}
+  #navRail button{width:9px;height:9px;margin:6px 0;padding:0;border:1px solid var(--dimmer);background:var(--bg);border-radius:0;cursor:pointer}
+  #navRail button[data-visited="true"]{background:var(--accent-dull);border-color:var(--accent-dull)}
+  #navRail button[aria-current="true"]{background:var(--accent);border-color:var(--accent);box-shadow:0 0 9px var(--accent-dim)}
+  #navRail button:hover,#navRail button:focus-visible{border-color:var(--accent)}
+}
+
+#main section{display:none!important;grid-template-columns:minmax(0,1fr)!important;border-top:0!important;padding:0!important}
+#main section.active{display:grid!important}
+#main figure{position:relative}
+#main figure img{cursor:zoom-in;transition:filter .18s ease}
+#main figure img:hover,#main figure img:focus-visible{filter:brightness(1.08)}
+
+/* ---- image inspector: contextual, per image ---- */
+#inspector{position:fixed;inset:0;z-index:650;display:flex;flex-direction:column;background:rgba(4,5,4,.94)}
 #inspector.hidden{display:none}
-@media (prefers-reduced-motion:no-preference){#inspector:not(.hidden){animation:inspectorIn .22s ease}}
+@media (prefers-reduced-motion:no-preference){#inspector:not(.hidden){animation:inspectorIn .2s ease}}
 @keyframes inspectorIn{from{opacity:0}to{opacity:1}}
 #inspectorClose{position:absolute;top:16px;right:16px;width:44px;height:44px;border:1px solid var(--line);background:var(--panel);color:var(--ink);font:700 16px/1 'Space Mono',monospace;cursor:pointer;z-index:2}
 #inspectorClose:hover{color:var(--accent);border-color:var(--accent)}
 #inspectorStage{flex:1;min-height:0;display:flex;align-items:center;justify-content:center;overflow:auto;padding:clamp(20px,6vw,56px)}
-#inspectorStage img{max-width:100%;max-height:100%;cursor:zoom-in;transition:width .2s ease}
+#inspectorStage img{max-width:100%;max-height:100%;cursor:zoom-in}
 #inspectorStage img.zoomed{max-width:none;max-height:none;width:min(1400px,170%);cursor:zoom-out}
-#inspectorCaption{flex:0 0 auto;padding:14px;text-align:center;font:400 13px/1.5 'Space Mono',monospace;letter-spacing:.06em;color:var(--muted);border-top:1px solid var(--line)}
+#inspectorCaption{flex:0 0 auto;padding:14px;text-align:center;font:400 13px/1.5 'Space Mono',monospace;letter-spacing:.06em;color:var(--dim);border-top:1px solid var(--line)}
 </style>
 </head>
 <body>
 
-<a href="#main" class="skip-link">Skip to content</a>
+<a href="#dirListZone" class="skip-link">Skip to file index</a>
 
 <div id="boot" aria-hidden="true"></div>
 <div id="scan" aria-hidden="true"></div>
 <div id="vignette" aria-hidden="true"></div>
 
-<nav aria-label="Primary" style="position:fixed;left:0;right:0;top:0;z-index:200">
-  <a href="../index.html#work" aria-label="K. Ewing, home">K. EWING</a>
-  <a href="../index.html#work" aria-current="true" class="rail-item">WORK</a>
-  <a href="../index.html#workbench" aria-current="false" class="rail-item">WORKBENCH</a>
-  <a href="../about.html" aria-current="false" class="rail-item">ABOUT</a>
-  <a href="../index.html#contact" aria-current="false" class="rail-item">CONTACT</a>
-  <button type="button" id="themeToggle" aria-pressed="false" aria-label="GREEN phosphor mode, press to switch to amber">GREEN</button>
-</nav>
+<nav aria-label="Exit"><a href="../art.html" id="exitLink"><span class="glyph" aria-hidden="true">■</span> Return to portfolio</a></nav>
 
-<div id="mobileBar" class="mono" role="navigation" aria-label="Mobile bar" style="position:fixed;left:0;right:0;top:0;z-index:220;align-items:center;justify-content:space-between;padding:0 16px;height:var(--bar-h)">
-  <a href="../index.html#work" aria-label="K. Ewing, home" style="font:400 15px/1 'Archivo Black',sans-serif;text-decoration:none;color:var(--ink);min-height:44px;display:inline-flex;align-items:center">K. EWING</a>
-  <button type="button" id="menuToggle" aria-expanded="false" aria-controls="mobileMenu" aria-label="Open menu" style="min-width:44px;min-height:44px;padding:0 12px;border:1px solid var(--line);background:transparent;color:var(--ink);font:700 11px/1 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;cursor:pointer">MENU</button>
-</div>
-
-<div id="mobileMenuBackdrop" aria-hidden="true" style="position:fixed;inset:var(--bar-h) 0 0 0;z-index:215;background:rgba(0,0,0,.6)"></div>
-
-<nav id="mobileMenu" aria-label="Mobile" class="mono" style="position:fixed;left:0;right:0;top:var(--bar-h);z-index:220;background:var(--panel);border-bottom:1px solid var(--line);max-height:calc(100vh - var(--bar-h));overflow-y:auto">
-  <a href="../index.html#work" style="display:flex;align-items:center;min-height:52px;padding:0 20px;font-size:14px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;color:var(--ink);border-bottom:1px solid var(--line)">Work</a>
-  <a href="../index.html#workbench" style="display:flex;align-items:center;min-height:52px;padding:0 20px;font-size:14px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;color:var(--ink);border-bottom:1px solid var(--line)">Workbench</a>
-  <a href="../about.html" style="display:flex;align-items:center;min-height:52px;padding:0 20px;font-size:14px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;color:var(--ink);border-bottom:1px solid var(--line)">About</a>
-  <a href="../index.html#contact" style="display:flex;align-items:center;min-height:52px;padding:0 20px;font-size:14px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;color:var(--ink);border-bottom:1px solid var(--line)">Contact</a>
-  <button type="button" id="themeToggleMobile" aria-pressed="false" style="display:flex;align-items:center;justify-content:space-between;width:100%;min-height:52px;padding:0 20px;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;border:0;background:transparent;color:var(--muted);cursor:pointer"><span>Phosphor</span><span id="themeToggleMobileLabel">Green</span></button>
-</nav>
-
-<div id="stage">
-<div id="docPanel">
+<div id="screenDirectory" class="screen" aria-label="Case file directory">
+  <div id="dirGrid">
+    <div id="coverZone">
 <header style="padding:clamp(28px,4vw,48px) clamp(16px,5vw,80px) clamp(56px,7vw,100px);border-bottom:2px solid var(--ink);position:relative;overflow:hidden">
   <p style="margin:0 0 16px;font:400 12px/1 'Space Mono',monospace;letter-spacing:.08em;color:var(--muted)"><a href="../index.html#work">~</a> / <span style="color:var(--ink)">hazard-icons</span></p>
   <p style="margin:0 0 clamp(40px,6vw,80px);font:400 12px/1.5 'Space Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)">Images coming soon</p>
@@ -187,16 +214,9 @@ footer{background:var(--panel)}
       <img loading="lazy" src="../images/top-secret-stamp.png" alt="" style="position:absolute;top:-22px;right:-22px;width:clamp(100px,22vw,170px);transform:rotate(6deg);pointer-events:none">
     </div>
   </div>
-</header>
-
-<button type="button" id="ccOpen" aria-label="Open contents panel">Contents</button>
-
-<div id="contentsCard">
-  <div id="ccTop">
-    <div id="ccHandle" tabindex="0" role="button" aria-label="Contents panel. Drag or use arrow keys to move."><span class="dot" aria-hidden="true"></span><span id="ccTitle">Contents</span></div>
-    <button type="button" id="ccClose" aria-label="Close contents panel">&#x2715;</button>
-  </div>
-  <div id="ccBody">
+</header>    </div>
+    <div id="dirListZone" tabindex="-1" role="region" aria-label="File index">
+      <p id="dirHeading">Select a file</p>
 <aside id="tocAside" aria-label="Case study contents">
     <nav aria-label="Sections" style="position:sticky;top:28px">
       <button type="button" id="tocToggle" class="toc-toggle" aria-expanded="true" aria-controls="toc-list" style="display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;min-height:44px;margin:0 0 10px;padding:0 0 6px;background:transparent;border:0;border-bottom:1px solid var(--line);color:var(--metal);cursor:pointer;text-align:left">
@@ -219,10 +239,20 @@ footer{background:var(--panel)}
         <li><a href="#s13" style="display:flex;gap:10px;padding:7px 0;text-decoration:none"><span aria-hidden="true" class="toc-marker" data-marker="s13" style="color:var(--red)">□</span>13 What I Took Away</a></li>
       </ol>
     </nav>
-  </aside>
+  </aside>    </div>
   </div>
 </div>
 
+<div id="screenReader" class="screen off" aria-label="Case file reader">
+  <div id="readerBar" role="navigation" aria-label="Reader controls">
+    <button type="button" id="readerBack">&#8592; Index</button>
+    <button type="button" id="readerPrev">&#8249; Prev</button>
+    <button type="button" id="readerNext">Next &#8250;</button>
+    <span id="readerCounter" aria-live="polite">01 / 13</span>
+  </div>
+  <nav id="navRail" aria-label="Jump to section"></nav>
+  <div id="readerBody">
+    <div id="readerInner">
 <main id="main">
 
     <section id="s01" aria-labelledby="s01-h" style="display:grid;gap:22px;padding:clamp(56px,7vw,110px) 0;scroll-margin-top:24px">
@@ -395,229 +425,165 @@ footer{background:var(--panel)}
       <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Inter',sans-serif;text-wrap:pretty">The broken condom is staying in that folder.</p>
       <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Inter',sans-serif;text-wrap:pretty">Probably.</p>
     </section>
-  </main>
+  </main>    </div>
+  </div>
 </div>
-</div>
-
 <div id="inspector" class="hidden" role="dialog" aria-modal="true" aria-label="Image inspector">
   <button type="button" id="inspectorClose" aria-label="Close image inspector">&#x2715;</button>
   <div id="inspectorStage"><img id="inspectorImg" src="" alt=""></div>
   <p id="inspectorCaption"></p>
 </div>
 
-<nav aria-label="More case studies" style="display:flex;flex-wrap:wrap;border-top:2px solid var(--ink);border-bottom:1px solid var(--line)">
-  <a href="../art.html" class="case-nav-link" style="flex:1 1 320px;display:grid;gap:10px;border-right:1px solid var(--line);padding:clamp(36px,5vw,72px) clamp(16px,5vw,80px);text-decoration:none">
-    <span style="font:700 12px/1 'Space Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--pink)">← Back to</span>
-    <span style="font:400 clamp(48px,6.5vw,112px)/.84 'Archivo Black',sans-serif;text-transform:uppercase;text-wrap:balance;overflow-wrap:anywhere">The Workbench</span>
-  </a>
-  <a href="hazadapt-prep-checks.html" class="case-nav-link" style="flex:1 1 320px;display:grid;gap:10px;justify-items:end;text-align:right;padding:clamp(36px,5vw,72px) clamp(16px,5vw,80px);text-decoration:none">
-    <span style="font:700 12px/1 'Space Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--pink)">Next →</span>
-    <span style="font:400 clamp(56px,7.5vw,124px)/.82 'Archivo Black',serif;text-wrap:balance;overflow-wrap:anywhere">Prep Checks</span>
-  </a>
-</nav>
-
-<footer style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:16px;padding:32px clamp(16px,5vw,80px) 48px;font:400 12px/1.6 'Space Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)">
-  <span>~/krystyna-ewing · © 2026</span>
-  <a href="mailto:hello@krystynaewing.com" style="color:var(--ink)">hello@krystynaewing.com</a>
-  <a href="#main" style="min-height:44px;display:inline-flex;align-items:center">[ ^ top ]</a>
-</footer>
 <script>
 (function(){
   'use strict';
   var html = document.documentElement;
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  // ---- theme ----
-  function applyThemeUI(){
-    var light = html.getAttribute('data-theme') === 'light';
-    var label = light ? 'AMBER' : 'GREEN';
-    var tt = document.getElementById('themeToggle');
-    var ttm = document.getElementById('themeToggleMobile');
-    var ttml = document.getElementById('themeToggleMobileLabel');
-    if (tt) { tt.textContent = label; tt.setAttribute('aria-pressed', light ? 'true' : 'false'); tt.setAttribute('aria-label', label + ' phosphor mode, press to switch to ' + (light ? 'green' : 'amber')); }
-    if (ttm) ttm.setAttribute('aria-pressed', light ? 'true' : 'false');
-    if (ttml) ttml.textContent = label === 'AMBER' ? 'Amber' : 'Green';
-  }
-  function toggleTheme(){
-    var next = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
-    if (next === 'dark') html.removeAttribute('data-theme'); else html.setAttribute('data-theme', 'light');
-    try { localStorage.setItem('ke-theme', next); } catch(e){}
-    applyThemeUI();
-  }
-  applyThemeUI();
-  var themeToggle = document.getElementById('themeToggle');
-  var themeToggleMobile = document.getElementById('themeToggleMobile');
-  if (themeToggle) themeToggle.addEventListener('click', toggleTheme);
-  if (themeToggleMobile) themeToggleMobile.addEventListener('click', toggleTheme);
-
-  // ---- mobile menu ----
-  var menuToggle = document.getElementById('menuToggle');
-  var mobileMenu = document.getElementById('mobileMenu');
-  var mobileMenuBackdrop = document.getElementById('mobileMenuBackdrop');
-  var scrollLocked = false, savedScrollY = 0;
-  function lockScroll(){
-    if (scrollLocked) return;
-    savedScrollY = window.scrollY;
-    document.body.style.position = 'fixed';
-    document.body.style.top = (-savedScrollY) + 'px';
-    document.body.style.left = '0'; document.body.style.right = '0'; document.body.style.overflow = 'hidden';
-    scrollLocked = true;
-  }
-  function unlockScroll(){
-    if (!scrollLocked) return;
-    document.body.style.position = ''; document.body.style.top = ''; document.body.style.left = ''; document.body.style.right = ''; document.body.style.overflow = '';
-    window.scrollTo(0, savedScrollY || 0);
-    scrollLocked = false;
-  }
-  function setMenuOpen(open){
-    if (menuToggle) { menuToggle.setAttribute('aria-expanded', open ? 'true' : 'false'); menuToggle.textContent = open ? 'CLOSE' : 'MENU'; menuToggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu'); }
-    if (mobileMenu) mobileMenu.style.display = open ? 'grid' : 'none';
-    if (mobileMenuBackdrop) mobileMenuBackdrop.style.display = open ? 'block' : 'none';
-    if (open) lockScroll(); else unlockScroll();
-  }
-  function closeMenu(){
-    if (menuToggle && menuToggle.getAttribute('aria-expanded') === 'true') setMenuOpen(false);
-  }
-  if (menuToggle) menuToggle.addEventListener('click', function(){
-    setMenuOpen(menuToggle.getAttribute('aria-expanded') !== 'true');
-  });
-  if (mobileMenuBackdrop) mobileMenuBackdrop.addEventListener('click', closeMenu);
-  window.addEventListener('keydown', function(e){ if (e.key === 'Escape') closeMenu(); });
-  window.addEventListener('resize', function(){ if (window.innerWidth >= 860) closeMenu(); });
-
-  // ---- scroll-spy ----
-  var markers = Array.prototype.slice.call(document.querySelectorAll('.toc-marker'));
-  var spyIo = new IntersectionObserver(function(entries){
-    entries.forEach(function(en){
-      if (en.isIntersecting) {
-        markers.forEach(function(m){ m.textContent = (m.dataset.marker === en.target.id) ? '■' : '□'; });
-      }
-    });
-  }, { rootMargin: '-40% 0px -55% 0px' });
-  document.querySelectorAll('main section[id]').forEach(function(el){ spyIo.observe(el); });
-
-  // ================= CONTENTS CARD =================
-  // The one supporting window: offset, overlapping, draggable, and
-  // dismissable -- reopened via a single persistent tab. Not one of
-  // several equal panels.
-  var ccCard = document.getElementById('contentsCard');
-  var ccHandle = document.getElementById('ccHandle');
-  var ccClose = document.getElementById('ccClose');
-  var ccOpen = document.getElementById('ccOpen');
-  function canFloat(){ return window.innerWidth >= 980; }
-
-  function closeCard(){
-    if (!ccCard) return;
-    ccCard.classList.add('hidden');
-    if (ccOpen) ccOpen.classList.add('show');
-  }
-  function openCard(focusIt){
-    if (!ccCard) return;
-    ccCard.classList.remove('hidden');
-    if (ccOpen) ccOpen.classList.remove('show');
-    if (focusIt && ccHandle) ccHandle.focus();
-  }
-  if (ccClose) ccClose.addEventListener('click', closeCard);
-  if (ccOpen) ccOpen.addEventListener('click', function(){ openCard(true); });
-
-  // The card is rotated (transform:rotate(-1.4deg)), and
-  // getBoundingClientRect() on a rotated element returns its axis-aligned
-  // *visual* bounding box, not its unrotated CSS left/top -- reading that
-  // rect back as if it were the true position (as an earlier version of
-  // this code did) silently drifts the element off course with every
-  // move, in both axes, since translation and the rotated AABB don't
-  // correspond 1:1. Track true position in plain state instead, seeded
-  // once from the actual computed left/top (unaffected by the rotation
-  // transform), and never re-derive it from a post-rotation rect.
-  var ccPos = null;
-  function getCardPos(){
-    if (!ccPos) {
-      var cs = getComputedStyle(ccCard);
-      ccPos = { x: parseFloat(cs.left) || 0, y: parseFloat(cs.top) || 0 };
-    }
-    return ccPos;
-  }
-  function clampCardPos(x, y, w, h){
-    var minVisible = 80;
-    var maxX = window.innerWidth - Math.min(w, window.innerWidth);
-    var maxY = Math.max(0, window.innerHeight - minVisible);
-    return { x: Math.max(0, Math.min(x, maxX)), y: Math.max(0, Math.min(y, maxY)) };
-  }
-  function setCardPos(x, y, w, h){
-    var p = clampCardPos(x, y, w, h);
-    ccPos = p;
-    ccCard.classList.add('dragged');
-    ccCard.style.left = p.x + 'px';
-    ccCard.style.top = p.y + 'px';
-  }
-  function moveCardBy(dx, dy){
-    if (!ccCard || !canFloat()) return;
-    var cur = getCardPos();
-    setCardPos(cur.x + dx, cur.y + dy, ccCard.offsetWidth, ccCard.offsetHeight);
-  }
-  if (ccHandle && ccCard) {
-    var dragging = false, startX = 0, startY = 0, originL = 0, originT = 0;
-    ccHandle.addEventListener('pointerdown', function(e){
-      if (!canFloat()) return;
-      var cur = getCardPos();
-      originL = cur.x; originT = cur.y;
-      dragging = true;
-      startX = e.clientX; startY = e.clientY;
-      ccCard.classList.add('dragging');
-      ccHandle.setPointerCapture(e.pointerId);
-    });
-    ccHandle.addEventListener('pointermove', function(e){
-      if (!dragging) return;
-      setCardPos(originL + (e.clientX - startX), originT + (e.clientY - startY), ccCard.offsetWidth, ccCard.offsetHeight);
-    });
-    (function(){
-      function endDrag(){ dragging = false; if (ccCard) ccCard.classList.remove('dragging'); }
-      ccHandle.addEventListener('pointerup', endDrag);
-      ccHandle.addEventListener('pointercancel', endDrag);
-    })();
-    ccHandle.addEventListener('keydown', function(e){
-      var step = e.shiftKey ? 40 : 10;
-      if (e.key === 'ArrowLeft') { moveCardBy(-step, 0); e.preventDefault(); }
-      else if (e.key === 'ArrowRight') { moveCardBy(step, 0); e.preventDefault(); }
-      else if (e.key === 'ArrowUp') { moveCardBy(0, -step); e.preventDefault(); }
-      else if (e.key === 'ArrowDown') { moveCardBy(0, step); e.preventDefault(); }
-      else if (e.key === 'Escape') { closeCard(); }
-    });
-  }
-  window.addEventListener('resize', function(){
-    if (!canFloat() && ccCard && ccCard.classList.contains('dragged')) {
-      ccCard.classList.remove('dragged');
-      ccCard.style.left = ''; ccCard.style.top = '';
-      ccPos = null;
-    }
-  });
-
-  // Contents links scroll the page to the section (native, no boxed
-  // scroll container) and close the card on mobile, where it's a full
-  // bottom sheet covering the content underneath.
+  // ================= SCREEN STATE MACHINE =================
+  // Two full-viewport screens, one visible at a time: the Directory
+  // (cover + index) and the Reader (one section of the case file).
+  // The 13 sections are the same <section> elements the case study has
+  // always had -- nothing here duplicates their content, it only
+  // controls which one is shown.
+  var SECTION_IDS = ['s01','s02','s03','s04','s05','s06','s07','s08','s09','s10','s11','s12','s13'];
+  var screenDirectory = document.getElementById('screenDirectory');
+  var screenReader = document.getElementById('screenReader');
+  var dirListZone = document.getElementById('dirListZone');
   var tocList = document.getElementById('toc-list');
+  var readerBack = document.getElementById('readerBack');
+  var readerPrev = document.getElementById('readerPrev');
+  var readerNext = document.getElementById('readerNext');
+  var readerCounter = document.getElementById('readerCounter');
+  var readerBody = document.getElementById('readerBody');
+  var navRail = document.getElementById('navRail');
+  var sections = SECTION_IDS.map(function(id){ return document.getElementById(id); });
+
+  var railButtons = [];
+  if (navRail) {
+    SECTION_IDS.forEach(function(id, i){
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.setAttribute('aria-label', 'Jump to section ' + (i + 1) + ' of ' + SECTION_IDS.length);
+      b.addEventListener('click', function(){ showSection(i); });
+      navRail.appendChild(b);
+      railButtons.push(b);
+    });
+  }
+
+  var currentIndex = -1; // -1 == directory is showing
+  var booted = false;
+
+  function pad2(n){ return n < 10 ? '0' + n : String(n); }
+
+  function flicker(el){
+    if (!booted || reduce || !el) return;
+    el.classList.remove('swapping');
+    void el.offsetWidth;
+    el.classList.add('swapping');
+  }
+
+  function updateReaderChrome(){
+    if (readerPrev) readerPrev.disabled = currentIndex <= 0;
+    if (readerNext) readerNext.disabled = currentIndex >= sections.length - 1;
+    if (readerCounter) readerCounter.textContent = pad2(currentIndex + 1) + ' / ' + pad2(sections.length);
+    var id = SECTION_IDS[currentIndex];
+    var link = tocList && tocList.querySelector('a[href="#' + id + '"]');
+    if (link) link.setAttribute('data-visited', 'true');
+    if (railButtons[currentIndex]) railButtons[currentIndex].setAttribute('data-visited', 'true');
+    railButtons.forEach(function(b, i){
+      if (i === currentIndex) b.setAttribute('aria-current', 'true');
+      else b.removeAttribute('aria-current');
+    });
+  }
+
+  function showDirectory(moveFocus){
+    currentIndex = -1;
+    sections.forEach(function(s){ if (s) s.classList.remove('active'); });
+    if (screenReader) screenReader.classList.add('off');
+    if (screenDirectory) screenDirectory.classList.remove('off');
+    flicker(screenDirectory);
+    try { history.replaceState(null, '', '#directory'); } catch(e){}
+    if (moveFocus !== false && dirListZone) dirListZone.focus();
+  }
+
+  function showSection(index, moveFocus){
+    if (index < 0 || index >= sections.length || !sections[index]) return;
+    currentIndex = index;
+    sections.forEach(function(s, i){ if (s) s.classList.toggle('active', i === index); });
+    if (screenDirectory) screenDirectory.classList.add('off');
+    if (screenReader) screenReader.classList.remove('off');
+    flicker(screenReader);
+    if (readerBody) readerBody.scrollTop = 0;
+    updateReaderChrome();
+    try { history.replaceState(null, '', '#' + SECTION_IDS[index]); } catch(e){}
+    if (moveFocus !== false) {
+      var h = sections[index].querySelector('h2') || sections[index];
+      if (h) {
+        if (!h.hasAttribute('tabindex')) h.setAttribute('tabindex', '-1');
+        h.focus();
+      }
+    }
+  }
+
+  if (readerBack) readerBack.addEventListener('click', function(){ showDirectory(); });
+  if (readerPrev) readerPrev.addEventListener('click', function(){ showSection(currentIndex - 1); });
+  if (readerNext) readerNext.addEventListener('click', function(){ showSection(currentIndex + 1); });
+
+  // Directory links open the Reader at that section instead of jumping
+  // down a long page -- there is no long page anymore.
   if (tocList) {
     tocList.addEventListener('click', function(e){
       var a = e.target.closest('a[href^="#"]');
       if (!a) return;
-      var targetId = a.getAttribute('href').slice(1);
-      var target = document.getElementById(targetId);
-      if (!target) return;
+      var idx = SECTION_IDS.indexOf(a.getAttribute('href').slice(1));
+      if (idx < 0) return;
       e.preventDefault();
-      target.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
-      try { history.replaceState(null, '', '#' + targetId); } catch (err) {}
-      if (!canFloat()) closeCard();
+      showSection(idx);
     });
   }
 
+  window.addEventListener('keydown', function(e){
+    if (!screenReader || screenReader.classList.contains('off')) return;
+    var inspectorOpen = document.getElementById('inspector') && !document.getElementById('inspector').classList.contains('hidden');
+    if (inspectorOpen) return;
+    var tag = e.target && e.target.tagName;
+    if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'BUTTON') {
+      if (e.key !== 'Escape') return;
+    }
+    if (e.key === 'ArrowRight') { showSection(currentIndex + 1); }
+    else if (e.key === 'ArrowLeft') { showSection(currentIndex - 1); }
+    else if (e.key === 'Escape') { showDirectory(); }
+  });
+
+  // Deep link: a direct visit to #s0X (or a reload) lands in the Reader
+  // at that section; anything else lands on the Directory. The complete
+  // case study stays reachable either way -- the Directory is always
+  // one click (Back) from the Reader, and Next/Prev walk every section
+  // in its original order.
+  function goToHash(moveFocus){
+    var h = (location.hash || '').slice(1);
+    var idx = SECTION_IDS.indexOf(h);
+    if (idx > -1) showSection(idx, moveFocus);
+    else showDirectory(moveFocus);
+  }
+  goToHash(false);
+  booted = true;
+  // Browser back/forward (and a pasted link opened while this page is
+  // already loaded) change location.hash without a full reload --
+  // history.replaceState above doesn't fire this event, so there's no
+  // feedback loop.
+  window.addEventListener('hashchange', function(){ goToHash(); });
+
   // ================= IMAGE INSPECTOR =================
-  // Opens on clicking an image that's already inline in the document --
+  // Opens on clicking an image that's already inline in the section --
   // reads its real src/alt/caption at open time rather than keeping a
   // second copy of them anywhere.
   var inspector = document.getElementById('inspector');
   var inspectorImg = document.getElementById('inspectorImg');
   var inspectorCaption = document.getElementById('inspectorCaption');
   var inspectorClose = document.getElementById('inspectorClose');
+  var inspectorStage = document.getElementById('inspectorStage');
   var lastFocused = null;
   function openInspector(img, captionHTML){
     if (!inspector || !inspectorImg) return;
@@ -637,12 +603,11 @@ footer{background:var(--panel)}
   function toggleZoom(){ if (inspectorImg) inspectorImg.classList.toggle('zoomed'); }
   if (inspectorClose) inspectorClose.addEventListener('click', closeInspector);
   if (inspectorImg) inspectorImg.addEventListener('click', toggleZoom);
-  var inspectorStage = document.getElementById('inspectorStage');
   if (inspector) inspector.addEventListener('click', function(e){
     if (e.target === inspector || e.target === inspectorStage) closeInspector();
   });
   window.addEventListener('keydown', function(e){
-    if (e.key === 'Escape') closeInspector();
+    if (e.key === 'Escape' && inspector && !inspector.classList.contains('hidden')) closeInspector();
   });
   document.querySelectorAll('#main figure').forEach(function(fig){
     var img = fig.querySelector('img');
@@ -656,12 +621,6 @@ footer{background:var(--panel)}
       if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openInspector(img, cap ? cap.innerHTML : ''); }
     });
   });
-
-  // On mobile the card is a full bottom sheet, not a small corner card --
-  // leaving it open by default would cover most of the screen before the
-  // visitor has even seen the page. Start closed there; stays open by
-  // default on desktop, where it's small and out of the way.
-  if (!canFloat()) closeCard();
 
   html.classList.add('js-ready');
 })();
