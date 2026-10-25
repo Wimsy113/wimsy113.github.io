@@ -11,9 +11,13 @@
 <script src="../image-slot.js"></script>
 <style>
 /* =====================================================================
-   A hidden terminal, not a portfolio page. One fixed dark palette --
-   aged, murky, desaturated green on charcoal. No theme toggle, no site
-   nav, no portfolio chrome. The whole viewport is the device.
+   A found computer, not a webpage. Boots into a device -- a bezel/
+   housing frame, an icon rail, one real document window with cascaded
+   ghost windows behind it -- studied from the actual reference stills
+   (rugged laptop, CCTV Control Service cascade, GRAVIDA monitor): a
+   visible physical casing, irregular dense zones instead of a centered
+   hero, small technical type throughout, real window occlusion, and
+   plausible instrument readouts filling the margins.
    ===================================================================== */
 :root{
   --bg:#09090a;--bg2:#121412;--bg3:#07080a;
@@ -24,6 +28,7 @@
   --line:rgba(198,205,191,.14);
   --on-accent:#0a0d08;
   --grain:.09;
+  --bezel:#121310;--bezel-edge:#2a2b26;
   /* the case-study content (locked, unmodified) still references these
      token names from the shared portfolio system -- alias them so it
      renders correctly in this new palette without touching its markup */
@@ -54,106 +59,68 @@ a{color:inherit}
 
 .skip-link{position:fixed;left:16px;top:-80px;z-index:700;background:var(--accent);color:var(--on-accent);padding:12px 18px;font:700 14px/1 'Space Mono',monospace;text-decoration:none;transition:top .2s ease}
 .skip-link:focus{top:16px}
+.off{display:none!important}
 
-@media (prefers-reduced-motion:no-preference){
-  #boot{position:fixed;inset:0;z-index:800;pointer-events:none;background:#000;opacity:1}
-  html.js-ready #boot{animation:bootFlicker .9s steps(1,end) forwards}
-  @keyframes bootFlicker{0%{opacity:1}6%{opacity:0}11%{opacity:.85}17%{opacity:.04}24%{opacity:1}33%{opacity:0}100%{opacity:0;visibility:hidden}}
-}
-@media (prefers-reduced-motion:reduce){#boot{display:none}}
+/* ---- device housing: a visible plastic/metal casing framing the
+   whole viewport, the way the rugged laptop and GRAVIDA's cream
+   casing frame their screens. ---- */
+#deviceFrame{position:fixed;inset:0;z-index:503;pointer-events:none;border:clamp(10px,2.2vw,26px) solid var(--bezel);box-shadow:inset 0 0 0 1px rgba(0,0,0,.7),inset 0 0 80px 24px rgba(0,0,0,.5)}
+#bezelLabel{position:fixed;z-index:504;top:clamp(2px,1vw,8px);left:clamp(18px,3.6vw,36px);font:700 9px/1 'Space Mono',monospace;letter-spacing:.16em;color:#55574e;pointer-events:none}
+#bezelLed{position:fixed;z-index:504;top:clamp(9px,1.7vw,17px);right:clamp(18px,3.6vw,36px);width:6px;height:6px;border-radius:50%;background:var(--accent);box-shadow:0 0 7px var(--accent-dim);pointer-events:none}
+@media (prefers-reduced-motion:no-preference){#bezelLed{animation:blip 3.4s ease-in-out infinite}}
+@keyframes blip{0%,100%{opacity:.4}50%{opacity:1}}
 
-/* ---- screens: full-viewport, one active at a time ---- */
-.screen{position:fixed;inset:0;display:flex;flex-direction:column;opacity:1}
-.screen.off{display:none}
+/* ---- screens: full-viewport, one active at a time. Padded to match
+   the device bezel's border thickness so content never renders under
+   the housing. ---- */
+.screen{position:fixed;inset:0;display:flex;flex-direction:column;padding:clamp(10px,2.2vw,26px)}
 @media (prefers-reduced-motion:no-preference){
   .screen.swapping{animation:screenFlicker .32s steps(2,end)}
   @keyframes screenFlicker{0%{opacity:0;filter:brightness(2.4)}35%{opacity:1;filter:brightness(1)}55%{opacity:.2}100%{opacity:1;filter:brightness(1)}}
 }
 
-/* ---- exit ---- */
-#exitLink{position:fixed;z-index:600;left:clamp(12px,3vw,28px);bottom:clamp(12px,3vw,24px);display:inline-flex;align-items:center;gap:8px;min-height:40px;padding:0 14px;background:var(--panel);border:1px solid var(--panel-edge);color:var(--dim);text-decoration:none;font:700 11px/1 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase}
-#exitLink:hover{color:var(--accent);border-color:var(--accent-dim)}
-#exitLink .glyph{color:var(--accent)}
+/* =====================================================================
+   BOOT SCREEN -- a terminal log before the desktop reveals itself.
+   ===================================================================== */
+#screenBoot{justify-content:center;padding-left:clamp(20px,6vw,80px);padding-right:clamp(20px,6vw,80px);cursor:pointer}
+#bootTerm{max-width:640px;width:100%}
+.bootLine{margin:0 0 7px;font:400 13px/1.5 'Space Mono',monospace;letter-spacing:.02em;color:var(--dim)}
+.bootLine b{color:var(--accent);font-weight:700}
+.bootLine.warn{color:var(--warn)}
+@media (prefers-reduced-motion:no-preference){
+  .bootLine{opacity:0;animation:bootIn .22s ease forwards;animation-delay:calc(var(--i,0) * 150ms)}
+  @keyframes bootIn{from{opacity:0;transform:translateY(3px)}to{opacity:1;transform:none}}
+}
+#bootPrompt{margin-top:18px;font:700 13px/1.5 'Space Mono',monospace;letter-spacing:.06em;color:var(--dimmer);text-transform:uppercase}
+#bootPrompt::after{content:"_";margin-left:4px;color:var(--accent)}
+@media (prefers-reduced-motion:no-preference){
+  #bootPrompt{opacity:0;animation:bootIn .22s ease forwards;animation-delay:calc(var(--bi,0) * 150ms)}
+  #bootPrompt::after{animation:blip 1s steps(1,end) infinite}
+}
 
 /* =====================================================================
-   DIRECTORY SCREEN -- the case file's cover + its index. Asymmetric,
-   not a centered hero. This is what you see first.
+   DESKTOP SCREEN -- icon rail, ghost windows, one real document window.
    ===================================================================== */
-#screenDirectory{overflow-y:auto}
-#dirGrid{flex:1;min-height:100%;display:grid;position:relative}
-@media (min-width:900px){
-  #dirGrid{grid-template-columns:1fr minmax(320px,420px);align-items:start;gap:0}
-}
-@media (max-width:899px){
-  #dirGrid{grid-template-columns:1fr}
-}
+#screenDesktop{flex-direction:row}
+#iconRail{flex:0 0 auto;width:clamp(58px,6.5vw,80px);display:flex;flex-direction:column;align-items:center;gap:4px;padding:clamp(34px,6vh,58px) 0 10px;border-right:1px solid var(--line);background:linear-gradient(180deg,rgba(255,255,255,.02),transparent 25%)}
+#iconRail .railBtn{width:84%;padding:9px 2px;display:flex;flex-direction:column;align-items:center;gap:6px;border:0;background:transparent;color:var(--dim);cursor:pointer;font:700 9px/1.15 'Space Mono',monospace;letter-spacing:.04em;text-transform:uppercase;text-decoration:none}
+#iconRail .railGlyph{width:28px;height:28px;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--accent)}
+#iconRail .railBtn:hover,#iconRail .railBtn:focus-visible{color:var(--ink)}
+#iconRail .railBtn:hover .railGlyph,#iconRail .railBtn:focus-visible .railGlyph{border-color:var(--accent)}
+#iconRail .railBtn[aria-pressed="true"]{color:var(--ink)}
+#iconRail .railBtn[aria-pressed="true"] .railGlyph{border-color:var(--accent);box-shadow:0 0 8px var(--accent-dim)}
 
-/* the "cover": real header content, treated as a case-file label pasted
-   onto the environment rather than a full-bleed marketing hero -- scaled
-   down, tilted, framed by a status readout. Decorative chrome only; the
-   header's own markup and text are untouched. */
-#coverZone{position:relative;padding-top:clamp(28px,4vh,40px)}
-#coverZone::before{
-  content:"CASE FILE // STATUS: DECLASSIFIED // 13 ENTRIES ON RECORD";
-  position:absolute;top:0;left:0;right:0;height:clamp(28px,4vh,40px);
-  display:flex;align-items:center;padding:0 clamp(16px,5vw,64px);
-  font:700 10px/1 'Space Mono',monospace;letter-spacing:.16em;text-transform:uppercase;
-  color:var(--dimmer);border-bottom:1px solid var(--line);
-  background:linear-gradient(90deg,rgba(134,168,110,.06),transparent 45%);
-}
-#coverZone header{position:relative;overflow:visible!important;border-bottom:0!important;transform:rotate(-.3deg);transform-origin:0 0}
-#coverZone header h1{font-size:clamp(32px,4.4vw,76px)!important;line-height:.94!important;max-width:13ch;text-shadow:0 0 40px var(--accent-dim)}
-#coverZone header h1 + p{font-size:clamp(15px,1.5vw,20px)!important;margin-top:10px!important}
-#coverZone header p[style*="color:var(--pink)"]{color:var(--accent)!important}
+#deskStage{position:relative;flex:1;min-width:0;overflow:hidden}
 
-/* the directory list panel */
-#dirListZone{position:relative;padding:clamp(24px,6vh,64px) clamp(20px,5vw,56px) clamp(40px,8vh,96px);border-left:1px solid var(--line);background:linear-gradient(180deg,rgba(255,255,255,.015),transparent 30%)}
-@media (max-width:899px){#dirListZone{border-left:0;border-top:1px solid var(--line)}}
-#dirListZone #tocAside{padding:0!important}
-#dirHeading{margin:0 0 clamp(16px,3vh,28px);font:700 11px/1 'Space Mono',monospace;letter-spacing:.18em;text-transform:uppercase;color:var(--dimmer);display:flex;align-items:center;gap:10px}
-#dirHeading::before{content:"";width:7px;height:7px;background:var(--accent);box-shadow:0 0 8px var(--accent-dim);flex:0 0 auto}
-@media (prefers-reduced-motion:no-preference){#dirHeading::before{animation:blip 2.8s ease-in-out infinite}}
-@keyframes blip{0%,100%{opacity:.45}50%{opacity:1}}
+.ghostWin{position:absolute;border:1px solid var(--line);background:var(--panel);opacity:.5;pointer-events:none;z-index:1}
+.ghostWin::before{content:"";position:absolute;top:0;left:0;right:0;height:16px;background:rgba(255,255,255,.025);border-bottom:1px solid var(--line)}
+#ghostWin1{top:7%;right:5%;width:26%;height:38%;transform:rotate(1.1deg)}
+#ghostWin2{bottom:5%;right:16%;width:19%;height:24%;transform:rotate(-1.8deg)}
+@media (max-width:959px){.ghostWin{display:none}}
 
-.toc-toggle{display:none!important}
-#toc-list{font:400 15px/1.3 'Space Mono',monospace!important;letter-spacing:.02em!important;gap:0!important}
-#toc-list li{border-top:1px solid var(--line)}
-#toc-list li:last-child{border-bottom:1px solid var(--line)}
-#toc-list a{position:relative;padding:14px 4px 14px 14px!important;color:var(--dim);transition:color .12s ease,padding-left .12s ease}
-#toc-list a::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent);transform:scaleY(0);transform-origin:50% 50%;transition:transform .15s ease}
-#toc-list a:hover,#toc-list a:focus-visible{color:var(--ink);padding-left:22px!important}
-#toc-list a:hover::before,#toc-list a:focus-visible::before{transform:scaleY(1)}
-.toc-marker{color:var(--accent)!important}
-#toc-list a[data-visited="true"]{color:var(--ink)}
-#toc-list a[data-visited="true"] .toc-marker{color:var(--dimmer)!important}
-
-/* =====================================================================
-   READER SCREEN -- one file, full viewport, chrome fixed top/bottom,
-   content scrolls between them.
-   ===================================================================== */
-#screenReader{overflow:hidden}
-#readerBar{flex:0 0 auto;display:flex;align-items:stretch;background:var(--panel);border-bottom:1px solid var(--panel-edge);height:52px}
-#readerBar button{display:flex;align-items:center;gap:8px;height:100%;padding:0 16px;border:0;border-right:1px solid var(--line);background:transparent;color:var(--dim);font:700 11px/1 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;cursor:pointer}
-#readerBar button:hover:not(:disabled){color:var(--accent)}
-#readerBar button:disabled{opacity:.3;cursor:default}
-#readerCounter{margin-left:auto;display:flex;align-items:center;padding:0 18px;color:var(--dim);font:700 11px/1 'Space Mono',monospace;letter-spacing:.12em;text-transform:uppercase}
-#readerBody{flex:1;min-height:0;overflow-y:auto;position:relative}
-#readerBody::before{content:"";position:absolute;left:0;right:0;top:0;height:2px;background:linear-gradient(90deg,transparent,var(--accent-dim),transparent);z-index:2}
-#readerInner{max-width:760px;margin:0 auto;padding:clamp(32px,6vh,64px) clamp(18px,5vw,40px) clamp(56px,10vh,110px)}
-
-/* ---- navRail: a persistent ladder of all 13 sections, visited/current
-   state visible at a glance -- the clear route through the complete
-   case study the brief requires, and what pulls the reading column off
-   dead-center into something asymmetric. Desktop only; mobile keeps its
-   own distinct bar-driven model. ---- */
 #navRail{display:none}
-@media (min-width:900px){
-  #readerInner{margin:0 auto 0 clamp(96px,13vw,170px)}
-  #navRail{
-    display:flex;flex-direction:column;align-items:center;
-    position:absolute;left:clamp(30px,5vw,64px);top:50%;transform:translateY(-50%);
-    z-index:3;
-  }
+@media (min-width:960px){
+  #navRail{display:flex;flex-direction:column;align-items:center;position:absolute;left:clamp(22px,3.4vw,40px);top:50%;transform:translateY(-50%);z-index:2}
   #navRail::before{content:"";position:absolute;left:50%;top:4px;bottom:4px;width:1px;background:var(--line);transform:translateX(-50%);z-index:-1}
   #navRail button{width:9px;height:9px;margin:6px 0;padding:0;border:1px solid var(--dimmer);background:var(--bg);border-radius:0;cursor:pointer}
   #navRail button[data-visited="true"]{background:var(--accent-dull);border-color:var(--accent-dull)}
@@ -161,7 +128,44 @@ a{color:inherit}
   #navRail button:hover,#navRail button:focus-visible{border-color:var(--accent)}
 }
 
-#main section{display:none!important;grid-template-columns:minmax(0,1fr)!important;border-top:0!important;padding:0!important}
+/* ---- the document window ---- */
+#docWindow{position:relative;z-index:2;display:flex;flex-direction:column;background:var(--panel);border:1px solid var(--panel-edge);box-shadow:16px 18px 0 rgba(0,0,0,.4);margin:clamp(22px,5vh,52px) clamp(18px,4vw,44px) clamp(18px,4vh,40px) clamp(18px,4vw,44px);max-width:860px;max-height:calc(100% - clamp(36px,9vh,92px))}
+@media (min-width:960px){#docWindow{margin-left:clamp(90px,11vw,150px)}}
+#docTitlebar{flex:0 0 auto;display:flex;align-items:center;gap:10px;height:32px;padding:0 10px;background:linear-gradient(180deg,#1c1e19,#121410);border-bottom:1px solid var(--panel-edge)}
+#docTitlebar .dots{display:flex;gap:5px;flex:0 0 auto}
+#docTitlebar .dots span{width:7px;height:7px;border:1px solid var(--line)}
+#docTitleText{margin-left:2px;font:700 10px/1 'Space Mono',monospace;letter-spacing:.08em;color:var(--dim);text-transform:uppercase;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#docToolbar{flex:0 0 auto;display:flex;align-items:stretch;border-bottom:1px solid var(--line);background:rgba(255,255,255,.012)}
+#docToolbar button{display:flex;align-items:center;gap:7px;height:34px;padding:0 14px;border:0;border-right:1px solid var(--line);background:transparent;color:var(--dim);font:700 10px/1 'Space Mono',monospace;letter-spacing:.08em;text-transform:uppercase;cursor:pointer}
+#docToolbar button:hover:not(:disabled){color:var(--accent)}
+#docToolbar button:disabled{opacity:.3;cursor:default}
+#docCounter{margin-left:auto;display:flex;align-items:center;padding:0 14px;color:var(--dim);font:700 10px/1 'Space Mono',monospace;letter-spacing:.1em}
+#docBody{flex:1;min-height:0;overflow-y:auto;position:relative}
+#docBody::before{content:"";position:absolute;left:0;right:0;top:0;height:2px;background:linear-gradient(90deg,transparent,var(--accent-dim),transparent);z-index:2}
+
+/* the protected header, now the "intro" that precedes section 1 inside
+   the same document window -- shown only when section 1 is active. */
+#docBody header{padding:clamp(22px,3.4vw,36px) clamp(18px,3.6vw,40px) clamp(20px,3vw,32px)!important;border-bottom:2px solid var(--ink)!important;overflow:visible!important}
+#docBody header h1{font-size:clamp(26px,3.4vw,52px)!important;line-height:.98!important;max-width:14ch;text-shadow:0 0 36px var(--accent-dim)}
+#docBody header h1 + p{font-size:clamp(14px,1.3vw,18px)!important;margin-top:8px!important}
+
+/* the protected toc list, now the "file index" mode of the same
+   window -- a dense technical listing, not a sidebar. */
+#tocAside{padding:clamp(18px,3vw,32px) clamp(18px,3.6vw,40px)!important}
+#tocAside > nav > *:first-child{margin-bottom:10px}
+.toc-toggle{display:none!important}
+#toc-list{font:400 14px/1.3 'Space Mono',monospace!important;letter-spacing:.02em!important;gap:0!important}
+#toc-list li{border-top:1px solid var(--line)}
+#toc-list li:last-child{border-bottom:1px solid var(--line)}
+#toc-list a{position:relative;padding:12px 4px 12px 12px!important;color:var(--dim);transition:color .12s ease,padding-left .12s ease}
+#toc-list a::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent);transform:scaleY(0);transition:transform .15s ease}
+#toc-list a:hover,#toc-list a:focus-visible{color:var(--ink);padding-left:18px!important}
+#toc-list a:hover::before,#toc-list a:focus-visible::before{transform:scaleY(1)}
+.toc-marker{color:var(--accent)!important}
+#toc-list a[data-visited="true"]{color:var(--ink)}
+#toc-list a[data-visited="true"] .toc-marker{color:var(--dimmer)!important}
+
+#main section{display:none!important;grid-template-columns:minmax(0,1fr)!important;border-top:0!important;padding:clamp(22px,3.4vw,36px) clamp(18px,3.6vw,40px) clamp(40px,6vh,72px)!important}
 #main section.active{display:grid!important}
 #main figure{position:relative}
 #main figure img{cursor:zoom-in;transition:filter .18s ease}
@@ -178,21 +182,66 @@ a{color:inherit}
 #inspectorStage img{max-width:100%;max-height:100%;cursor:zoom-in}
 #inspectorStage img.zoomed{max-width:none;max-height:none;width:min(1400px,170%);cursor:zoom-out}
 #inspectorCaption{flex:0 0 auto;padding:14px;text-align:center;font:400 13px/1.5 'Space Mono',monospace;letter-spacing:.06em;color:var(--dim);border-top:1px solid var(--line)}
+
+/* ---- mobile: icon rail collapses to a top bar; no ghost windows or
+   nav rail -- a distinct model, not a shrunk desktop. ---- */
+@media (max-width:959px){
+  #screenDesktop{flex-direction:column}
+  #iconRail{width:auto;flex-direction:row;padding:10px 12px;gap:4px;border-right:0;border-bottom:1px solid var(--line)}
+  #iconRail .railBtn{width:auto;flex-direction:row;padding:8px 10px}
+  #docWindow{margin:14px;max-height:none;flex:1;min-height:0}
+}
 </style>
 </head>
+
 <body>
 
-<a href="#dirListZone" class="skip-link">Skip to file index</a>
+<a href="#docWindow" class="skip-link">Skip to document</a>
 
-<div id="boot" aria-hidden="true"></div>
 <div id="scan" aria-hidden="true"></div>
 <div id="vignette" aria-hidden="true"></div>
+<div id="deviceFrame" aria-hidden="true"></div>
+<p id="bezelLabel" aria-hidden="true">IKONA-SERIES &#8226; MODEL CRT-42</p>
+<span id="bezelLed" aria-hidden="true"></span>
 
-<nav aria-label="Exit"><a href="../art.html" id="exitLink"><span class="glyph" aria-hidden="true">■</span> Return to portfolio</a></nav>
+<div id="screenBoot" class="screen" role="region" aria-label="Boot sequence" tabindex="-1">
+  <div id="bootTerm">
+    <p class="bootLine" style="--i:0"><b>IKONA BIOS</b> v2.14 -- RESTRICTED SYSTEMS DIVISION</p>
+    <p class="bootLine" style="--i:1">MEM TEST .............. 065536K <b>OK</b></p>
+    <p class="bootLine" style="--i:2">CHECKING FDD ........... NONE</p>
+    <p class="bootLine" style="--i:3">CHECKING HDD0 .......... CASEFILES.VOL <b>OK</b></p>
+    <p class="bootLine" style="--i:4">INIT DISPLAY ADAPTER ... <b>OK</b></p>
+    <p class="bootLine" style="--i:5">LOADING KERNEL ............................ <b>OK</b></p>
+    <p class="bootLine" style="--i:6">MOUNTING /casefiles/hazadapt ............. <b>OK</b></p>
+    <p class="bootLine" style="--i:7">VERIFYING ICON INTEGRITY ............ 13/13 <b>OK</b></p>
+    <p class="bootLine" style="--i:8">DECRYPTING CASE FILE ...................... <b>OK</b></p>
+    <p class="bootLine warn" style="--i:9">WARNING: SUBJECT MATTER MAY BE SENSITIVE</p>
+    <p class="bootLine warn" style="--i:10">WARNING: HANDLE WITH CARE</p>
+    <p class="bootLine" style="--i:11">STARTING DESKTOP ENVIRONMENT .............</p>
+    <p id="bootPrompt" style="--bi:13">Press any key to continue</p>
+  </div>
+</div>
 
-<div id="screenDirectory" class="screen" aria-label="Case file directory">
-  <div id="dirGrid">
-    <div id="coverZone">
+<div id="screenDesktop" class="screen off" aria-label="Desktop">
+  <nav id="iconRail" aria-label="Desktop">
+    <button type="button" id="iconIndex" class="railBtn" aria-pressed="false"><span class="railGlyph" aria-hidden="true">&#9638;</span>Index</button>
+    <a href="../art.html" class="railBtn"><span class="railGlyph" aria-hidden="true">&#9632;</span>Exit</a>
+  </nav>
+  <div id="deskStage">
+    <nav id="navRail" aria-label="Jump to section"></nav>
+    <div class="ghostWin" id="ghostWin1" aria-hidden="true"></div>
+    <div class="ghostWin" id="ghostWin2" aria-hidden="true"></div>
+    <div id="docWindow">
+      <nav id="docTitlebar" aria-label="Window title">
+        <span class="dots" aria-hidden="true"><span></span><span></span><span></span></span>
+        <span id="docTitleText">01 Overview</span>
+      </nav>
+      <nav id="docToolbar" aria-label="Section navigation">
+        <button type="button" id="docPrev">&#8249; Prev</button>
+        <button type="button" id="docNext">Next &#8250;</button>
+        <span id="docCounter" aria-live="polite">01 / 13</span>
+      </nav>
+      <div id="docBody">
 <header style="padding:clamp(28px,4vw,48px) clamp(16px,5vw,80px) clamp(56px,7vw,100px);border-bottom:2px solid var(--ink);position:relative;overflow:hidden">
   <p style="margin:0 0 16px;font:400 12px/1 'Space Mono',monospace;letter-spacing:.08em;color:var(--muted)"><a href="../index.html#work">~</a> / <span style="color:var(--ink)">hazard-icons</span></p>
   <p style="margin:0 0 clamp(40px,6vw,80px);font:400 12px/1.5 'Space Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)">Images coming soon</p>
@@ -214,46 +263,7 @@ a{color:inherit}
       <img loading="lazy" src="../images/top-secret-stamp.png" alt="" style="position:absolute;top:-22px;right:-22px;width:clamp(100px,22vw,170px);transform:rotate(6deg);pointer-events:none">
     </div>
   </div>
-</header>    </div>
-    <div id="dirListZone" tabindex="-1" role="region" aria-label="File index">
-      <p id="dirHeading">Select a file</p>
-<aside id="tocAside" aria-label="Case study contents">
-    <nav aria-label="Sections" style="position:sticky;top:28px">
-      <button type="button" id="tocToggle" class="toc-toggle" aria-expanded="true" aria-controls="toc-list" style="display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;min-height:44px;margin:0 0 10px;padding:0 0 6px;background:transparent;border:0;border-bottom:1px solid var(--line);color:var(--metal);cursor:pointer;text-align:left">
-        <span style="font:400 30px/1 'Archivo Black',serif;overflow-wrap:anywhere">contents</span>
-        <span aria-hidden="true" style="font:700 12px/1 'Space Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--pink)">− Hide</span>
-      </button>
-      <ol id="toc-list" style="list-style:none;margin:0;padding:0;display:grid;font:400 12px/1.35 'Space Mono',monospace;letter-spacing:.04em">
-        <li><a href="#s01" style="display:flex;gap:10px;padding:7px 0;text-decoration:none"><span aria-hidden="true" class="toc-marker" data-marker="s01" style="color:var(--red)">■</span>01 Overview</a></li>
-        <li><a href="#s02" style="display:flex;gap:10px;padding:7px 0;text-decoration:none"><span aria-hidden="true" class="toc-marker" data-marker="s02" style="color:var(--red)">□</span>02 The Problem</a></li>
-        <li><a href="#s03" style="display:flex;gap:10px;padding:7px 0;text-decoration:none"><span aria-hidden="true" class="toc-marker" data-marker="s03" style="color:var(--red)">□</span>03 My Approach</a></li>
-        <li><a href="#s04" style="display:flex;gap:10px;padding:7px 0;text-decoration:none"><span aria-hidden="true" class="toc-marker" data-marker="s04" style="color:var(--red)">□</span>04 Literal vs. Symbolic</a></li>
-        <li><a href="#s05" style="display:flex;gap:10px;padding:7px 0;text-decoration:none"><span aria-hidden="true" class="toc-marker" data-marker="s05" style="color:var(--red)">□</span>05 Icon Study 01</a></li>
-        <li><a href="#s06" style="display:flex;gap:10px;padding:7px 0;text-decoration:none"><span aria-hidden="true" class="toc-marker" data-marker="s06" style="color:var(--red)">□</span>06 Icon Study 02</a></li>
-        <li><a href="#s07" style="display:flex;gap:10px;padding:7px 0;text-decoration:none"><span aria-hidden="true" class="toc-marker" data-marker="s07" style="color:var(--red)">□</span>07 Icon Study 03</a></li>
-        <li><a href="#s08" style="display:flex;gap:10px;padding:7px 0;text-decoration:none"><span aria-hidden="true" class="toc-marker" data-marker="s08" style="color:var(--red)">□</span>08 A Consistent Visual Language</a></li>
-        <li><a href="#s09" style="display:flex;gap:10px;padding:7px 0;text-decoration:none"><span aria-hidden="true" class="toc-marker" data-marker="s09" style="color:var(--red)">□</span>09 Accessibility</a></li>
-        <li><a href="#s10" style="display:flex;gap:10px;padding:7px 0;text-decoration:none"><span aria-hidden="true" class="toc-marker" data-marker="s10" style="color:var(--red)">□</span>10 The Ones That Didn't Make the Cut</a></li>
-        <li><a href="#s11" style="display:flex;gap:10px;padding:7px 0;text-decoration:none"><span aria-hidden="true" class="toc-marker" data-marker="s11" style="color:var(--red)">□</span>11 Bringing the Icons Into the Product</a></li>
-        <li><a href="#s12" style="display:flex;gap:10px;padding:7px 0;text-decoration:none"><span aria-hidden="true" class="toc-marker" data-marker="s12" style="color:var(--red)">□</span>12 The Outcome</a></li>
-        <li><a href="#s13" style="display:flex;gap:10px;padding:7px 0;text-decoration:none"><span aria-hidden="true" class="toc-marker" data-marker="s13" style="color:var(--red)">□</span>13 What I Took Away</a></li>
-      </ol>
-    </nav>
-  </aside>    </div>
-  </div>
-</div>
-
-<div id="screenReader" class="screen off" aria-label="Case file reader">
-  <div id="readerBar" role="navigation" aria-label="Reader controls">
-    <button type="button" id="readerBack">&#8592; Index</button>
-    <button type="button" id="readerPrev">&#8249; Prev</button>
-    <button type="button" id="readerNext">Next &#8250;</button>
-    <span id="readerCounter" aria-live="polite">01 / 13</span>
-  </div>
-  <nav id="navRail" aria-label="Jump to section"></nav>
-  <div id="readerBody">
-    <div id="readerInner">
-<main id="main">
+</header><main id="main">
 
     <section id="s01" aria-labelledby="s01-h" style="display:grid;gap:22px;padding:clamp(56px,7vw,110px) 0;scroll-margin-top:24px">
       <p style="margin:0;display:flex;align-items:baseline;gap:14px"><span style="font:400 40px/.8 'Archivo Black',sans-serif;color:var(--pink);overflow-wrap:anywhere">01</span><span style="font:400 12px/1 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">Overview</span></p>
@@ -425,9 +435,33 @@ a{color:inherit}
       <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Inter',sans-serif;text-wrap:pretty">The broken condom is staying in that folder.</p>
       <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Inter',sans-serif;text-wrap:pretty">Probably.</p>
     </section>
-  </main>    </div>
+  </main><aside id="tocAside" aria-label="Case study contents">
+    <nav aria-label="Sections" style="position:sticky;top:28px">
+      <button type="button" id="tocToggle" class="toc-toggle" aria-expanded="true" aria-controls="toc-list" style="display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;min-height:44px;margin:0 0 10px;padding:0 0 6px;background:transparent;border:0;border-bottom:1px solid var(--line);color:var(--metal);cursor:pointer;text-align:left">
+        <span style="font:400 30px/1 'Archivo Black',serif;overflow-wrap:anywhere">contents</span>
+        <span aria-hidden="true" style="font:700 12px/1 'Space Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--pink)">− Hide</span>
+      </button>
+      <ol id="toc-list" style="list-style:none;margin:0;padding:0;display:grid;font:400 12px/1.35 'Space Mono',monospace;letter-spacing:.04em">
+        <li><a href="#s01" style="display:flex;gap:10px;padding:7px 0;text-decoration:none"><span aria-hidden="true" class="toc-marker" data-marker="s01" style="color:var(--red)">■</span>01 Overview</a></li>
+        <li><a href="#s02" style="display:flex;gap:10px;padding:7px 0;text-decoration:none"><span aria-hidden="true" class="toc-marker" data-marker="s02" style="color:var(--red)">□</span>02 The Problem</a></li>
+        <li><a href="#s03" style="display:flex;gap:10px;padding:7px 0;text-decoration:none"><span aria-hidden="true" class="toc-marker" data-marker="s03" style="color:var(--red)">□</span>03 My Approach</a></li>
+        <li><a href="#s04" style="display:flex;gap:10px;padding:7px 0;text-decoration:none"><span aria-hidden="true" class="toc-marker" data-marker="s04" style="color:var(--red)">□</span>04 Literal vs. Symbolic</a></li>
+        <li><a href="#s05" style="display:flex;gap:10px;padding:7px 0;text-decoration:none"><span aria-hidden="true" class="toc-marker" data-marker="s05" style="color:var(--red)">□</span>05 Icon Study 01</a></li>
+        <li><a href="#s06" style="display:flex;gap:10px;padding:7px 0;text-decoration:none"><span aria-hidden="true" class="toc-marker" data-marker="s06" style="color:var(--red)">□</span>06 Icon Study 02</a></li>
+        <li><a href="#s07" style="display:flex;gap:10px;padding:7px 0;text-decoration:none"><span aria-hidden="true" class="toc-marker" data-marker="s07" style="color:var(--red)">□</span>07 Icon Study 03</a></li>
+        <li><a href="#s08" style="display:flex;gap:10px;padding:7px 0;text-decoration:none"><span aria-hidden="true" class="toc-marker" data-marker="s08" style="color:var(--red)">□</span>08 A Consistent Visual Language</a></li>
+        <li><a href="#s09" style="display:flex;gap:10px;padding:7px 0;text-decoration:none"><span aria-hidden="true" class="toc-marker" data-marker="s09" style="color:var(--red)">□</span>09 Accessibility</a></li>
+        <li><a href="#s10" style="display:flex;gap:10px;padding:7px 0;text-decoration:none"><span aria-hidden="true" class="toc-marker" data-marker="s10" style="color:var(--red)">□</span>10 The Ones That Didn't Make the Cut</a></li>
+        <li><a href="#s11" style="display:flex;gap:10px;padding:7px 0;text-decoration:none"><span aria-hidden="true" class="toc-marker" data-marker="s11" style="color:var(--red)">□</span>11 Bringing the Icons Into the Product</a></li>
+        <li><a href="#s12" style="display:flex;gap:10px;padding:7px 0;text-decoration:none"><span aria-hidden="true" class="toc-marker" data-marker="s12" style="color:var(--red)">□</span>12 The Outcome</a></li>
+        <li><a href="#s13" style="display:flex;gap:10px;padding:7px 0;text-decoration:none"><span aria-hidden="true" class="toc-marker" data-marker="s13" style="color:var(--red)">□</span>13 What I Took Away</a></li>
+      </ol>
+    </nav>
+  </aside>      </div>
+    </div>
   </div>
 </div>
+
 <div id="inspector" class="hidden" role="dialog" aria-modal="true" aria-label="Image inspector">
   <button type="button" id="inspectorClose" aria-label="Close image inspector">&#x2715;</button>
   <div id="inspectorStage"><img id="inspectorImg" src="" alt=""></div>
@@ -439,24 +473,23 @@ a{color:inherit}
   'use strict';
   var html = document.documentElement;
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var BOOT_KEY = 'ke-haz-booted';
 
-  // ================= SCREEN STATE MACHINE =================
-  // Two full-viewport screens, one visible at a time: the Directory
-  // (cover + index) and the Reader (one section of the case file).
-  // The 13 sections are the same <section> elements the case study has
-  // always had -- nothing here duplicates their content, it only
-  // controls which one is shown.
   var SECTION_IDS = ['s01','s02','s03','s04','s05','s06','s07','s08','s09','s10','s11','s12','s13'];
-  var screenDirectory = document.getElementById('screenDirectory');
-  var screenReader = document.getElementById('screenReader');
-  var dirListZone = document.getElementById('dirListZone');
-  var tocList = document.getElementById('toc-list');
-  var readerBack = document.getElementById('readerBack');
-  var readerPrev = document.getElementById('readerPrev');
-  var readerNext = document.getElementById('readerNext');
-  var readerCounter = document.getElementById('readerCounter');
-  var readerBody = document.getElementById('readerBody');
+  var screenBoot = document.getElementById('screenBoot');
+  var screenDesktop = document.getElementById('screenDesktop');
+  var docWindow = document.getElementById('docWindow');
+  var docBody = document.getElementById('docBody');
+  var docTitleText = document.getElementById('docTitleText');
+  var docPrev = document.getElementById('docPrev');
+  var docNext = document.getElementById('docNext');
+  var docCounter = document.getElementById('docCounter');
+  var iconIndex = document.getElementById('iconIndex');
   var navRail = document.getElementById('navRail');
+  var mainEl = document.getElementById('main');
+  var tocAside = document.getElementById('tocAside');
+  var tocList = document.getElementById('toc-list');
+  var headerBlock = docBody.querySelector('header');
   var sections = SECTION_IDS.map(function(id){ return document.getElementById(id); });
 
   var railButtons = [];
@@ -465,13 +498,14 @@ a{color:inherit}
       var b = document.createElement('button');
       b.type = 'button';
       b.setAttribute('aria-label', 'Jump to section ' + (i + 1) + ' of ' + SECTION_IDS.length);
-      b.addEventListener('click', function(){ showSection(i); });
+      b.addEventListener('click', function(){ showReader(i); });
       navRail.appendChild(b);
       railButtons.push(b);
     });
   }
 
-  var currentIndex = -1; // -1 == directory is showing
+  var mode = 'reader';
+  var currentIndex = 0;
   var booted = false;
 
   function pad2(n){ return n < 10 ? '0' + n : String(n); }
@@ -483,55 +517,73 @@ a{color:inherit}
     el.classList.add('swapping');
   }
 
-  function updateReaderChrome(){
-    if (readerPrev) readerPrev.disabled = currentIndex <= 0;
-    if (readerNext) readerNext.disabled = currentIndex >= sections.length - 1;
-    if (readerCounter) readerCounter.textContent = pad2(currentIndex + 1) + ' / ' + pad2(sections.length);
+  function titleFor(i){
+    var link = tocList.querySelector('a[href="#' + SECTION_IDS[i] + '"]');
+    if (!link) return SECTION_IDS[i];
+    var clone = link.cloneNode(true);
+    var marker = clone.querySelector('.toc-marker');
+    if (marker) marker.parentNode.removeChild(marker);
+    return clone.textContent.replace(/\s+/g, ' ').trim();
+  }
+
+  function focusWindow(){
+    if (!docWindow.hasAttribute('tabindex')) docWindow.setAttribute('tabindex', '-1');
+    docWindow.focus();
+  }
+
+  function showReader(index, moveFocus){
+    if (index < 0 || index >= sections.length || !sections[index]) return;
+    mode = 'reader';
+    currentIndex = index;
+    mainEl.classList.remove('off');
+    tocAside.classList.add('off');
+    if (headerBlock) headerBlock.classList.toggle('off', index !== 0);
+    sections.forEach(function(s, i){ if (s) s.classList.toggle('active', i === index); });
+    docTitleText.textContent = titleFor(index);
+    docPrev.disabled = index <= 0;
+    docNext.disabled = index >= sections.length - 1;
+    docCounter.textContent = pad2(index + 1) + ' / ' + pad2(sections.length);
+    if (iconIndex) iconIndex.setAttribute('aria-pressed', 'false');
+    docBody.scrollTop = 0;
+    updateRail();
+    flicker(docWindow);
+    try { history.replaceState(null, '', '#' + SECTION_IDS[index]); } catch(e){}
+    if (moveFocus !== false) focusWindow();
+  }
+
+  function showIndex(moveFocus){
+    mode = 'index';
+    mainEl.classList.add('off');
+    if (headerBlock) headerBlock.classList.add('off');
+    tocAside.classList.remove('off');
+    docTitleText.textContent = 'FILE INDEX';
+    docPrev.disabled = true;
+    docNext.disabled = true;
+    docCounter.textContent = sections.length + ' FILES';
+    if (iconIndex) iconIndex.setAttribute('aria-pressed', 'true');
+    docBody.scrollTop = 0;
+    flicker(docWindow);
+    try { history.replaceState(null, '', '#index'); } catch(e){}
+    if (moveFocus !== false) focusWindow();
+  }
+
+  function updateRail(){
     var id = SECTION_IDS[currentIndex];
     var link = tocList && tocList.querySelector('a[href="#' + id + '"]');
     if (link) link.setAttribute('data-visited', 'true');
     if (railButtons[currentIndex]) railButtons[currentIndex].setAttribute('data-visited', 'true');
     railButtons.forEach(function(b, i){
-      if (i === currentIndex) b.setAttribute('aria-current', 'true');
+      if (i === currentIndex && mode === 'reader') b.setAttribute('aria-current', 'true');
       else b.removeAttribute('aria-current');
     });
   }
 
-  function showDirectory(moveFocus){
-    currentIndex = -1;
-    sections.forEach(function(s){ if (s) s.classList.remove('active'); });
-    if (screenReader) screenReader.classList.add('off');
-    if (screenDirectory) screenDirectory.classList.remove('off');
-    flicker(screenDirectory);
-    try { history.replaceState(null, '', '#directory'); } catch(e){}
-    if (moveFocus !== false && dirListZone) dirListZone.focus();
-  }
+  if (docPrev) docPrev.addEventListener('click', function(){ showReader(currentIndex - 1); });
+  if (docNext) docNext.addEventListener('click', function(){ showReader(currentIndex + 1); });
+  if (iconIndex) iconIndex.addEventListener('click', function(){
+    if (mode === 'index') showReader(currentIndex); else showIndex();
+  });
 
-  function showSection(index, moveFocus){
-    if (index < 0 || index >= sections.length || !sections[index]) return;
-    currentIndex = index;
-    sections.forEach(function(s, i){ if (s) s.classList.toggle('active', i === index); });
-    if (screenDirectory) screenDirectory.classList.add('off');
-    if (screenReader) screenReader.classList.remove('off');
-    flicker(screenReader);
-    if (readerBody) readerBody.scrollTop = 0;
-    updateReaderChrome();
-    try { history.replaceState(null, '', '#' + SECTION_IDS[index]); } catch(e){}
-    if (moveFocus !== false) {
-      var h = sections[index].querySelector('h2') || sections[index];
-      if (h) {
-        if (!h.hasAttribute('tabindex')) h.setAttribute('tabindex', '-1');
-        h.focus();
-      }
-    }
-  }
-
-  if (readerBack) readerBack.addEventListener('click', function(){ showDirectory(); });
-  if (readerPrev) readerPrev.addEventListener('click', function(){ showSection(currentIndex - 1); });
-  if (readerNext) readerNext.addEventListener('click', function(){ showSection(currentIndex + 1); });
-
-  // Directory links open the Reader at that section instead of jumping
-  // down a long page -- there is no long page anymore.
   if (tocList) {
     tocList.addEventListener('click', function(e){
       var a = e.target.closest('a[href^="#"]');
@@ -539,46 +591,73 @@ a{color:inherit}
       var idx = SECTION_IDS.indexOf(a.getAttribute('href').slice(1));
       if (idx < 0) return;
       e.preventDefault();
-      showSection(idx);
+      showReader(idx);
     });
   }
 
   window.addEventListener('keydown', function(e){
-    if (!screenReader || screenReader.classList.contains('off')) return;
-    var inspectorOpen = document.getElementById('inspector') && !document.getElementById('inspector').classList.contains('hidden');
-    if (inspectorOpen) return;
+    if (!screenDesktop || screenDesktop.classList.contains('off')) return;
+    var inspector = document.getElementById('inspector');
+    if (inspector && !inspector.classList.contains('hidden')) return;
     var tag = e.target && e.target.tagName;
-    if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'BUTTON') {
+    if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'BUTTON' || tag === 'A') {
       if (e.key !== 'Escape') return;
     }
-    if (e.key === 'ArrowRight') { showSection(currentIndex + 1); }
-    else if (e.key === 'ArrowLeft') { showSection(currentIndex - 1); }
-    else if (e.key === 'Escape') { showDirectory(); }
+    if (mode === 'reader') {
+      if (e.key === 'ArrowRight') { showReader(currentIndex + 1); }
+      else if (e.key === 'ArrowLeft') { showReader(currentIndex - 1); }
+    }
+    if (e.key === 'Escape' && mode === 'index') { showReader(currentIndex); }
   });
 
-  // Deep link: a direct visit to #s0X (or a reload) lands in the Reader
-  // at that section; anything else lands on the Directory. The complete
-  // case study stays reachable either way -- the Directory is always
-  // one click (Back) from the Reader, and Next/Prev walk every section
-  // in its original order.
   function goToHash(moveFocus){
     var h = (location.hash || '').slice(1);
+    if (h === 'index') { showIndex(moveFocus); return; }
     var idx = SECTION_IDS.indexOf(h);
-    if (idx > -1) showSection(idx, moveFocus);
-    else showDirectory(moveFocus);
+    showReader(idx > -1 ? idx : 0, moveFocus);
   }
-  goToHash(false);
-  booted = true;
-  // Browser back/forward (and a pasted link opened while this page is
-  // already loaded) change location.hash without a full reload --
-  // history.replaceState above doesn't fire this event, so there's no
-  // feedback loop.
   window.addEventListener('hashchange', function(){ goToHash(); });
 
+  // ================= BOOT SEQUENCE =================
+  var hasHash = !!(location.hash && location.hash.length > 1);
+  var alreadyBooted = false;
+  try { alreadyBooted = sessionStorage.getItem(BOOT_KEY) === '1'; } catch(e){}
+
+  goToHash(false); // set desktop's internal state before anything is shown
+
+  function revealDesktop(){
+    screenBoot.classList.add('off');
+    screenDesktop.classList.remove('off');
+    booted = true;
+    flicker(docWindow);
+    try { sessionStorage.setItem(BOOT_KEY, '1'); } catch(e){}
+    focusWindow();
+  }
+
+  if (hasHash || alreadyBooted || reduce) {
+    screenBoot.classList.add('off');
+    screenDesktop.classList.remove('off');
+    booted = true;
+    try { sessionStorage.setItem(BOOT_KEY, '1'); } catch(e){}
+  } else {
+    var skipped = false;
+    var bootDone = function(){
+      if (skipped) return;
+      skipped = true;
+      revealDesktop();
+    };
+    var totalDelay = 12 * 150 + 1100;
+    var bootTimer = setTimeout(bootDone, totalDelay);
+    screenBoot.addEventListener('click', function(){ clearTimeout(bootTimer); bootDone(); });
+    window.addEventListener('keydown', function onBootKey(e){
+      if (screenBoot.classList.contains('off')) { window.removeEventListener('keydown', onBootKey); return; }
+      clearTimeout(bootTimer);
+      bootDone();
+    });
+    screenBoot.focus();
+  }
+
   // ================= IMAGE INSPECTOR =================
-  // Opens on clicking an image that's already inline in the section --
-  // reads its real src/alt/caption at open time rather than keeping a
-  // second copy of them anywhere.
   var inspector = document.getElementById('inspector');
   var inspectorImg = document.getElementById('inspectorImg');
   var inspectorCaption = document.getElementById('inspectorCaption');
