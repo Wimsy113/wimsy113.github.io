@@ -11,10 +11,16 @@
 <script src="../image-slot.js"></script>
 <script>try{if(localStorage.getItem('ke-theme')==='light')document.documentElement.setAttribute('data-theme','light');}catch(e){}</script>
 <style>
-html{--bg:#0B0B0B;--ink:#F2F0E9;--muted:#9a978e;--metal:#9a978e;--ghost:#252525;--line:rgba(242,240,233,.2);--c-turquoise:#A8FF00;--c-blue:#A8FF00;--c-copper:#A8FF00;--c-opal:#A8FF00;--red:var(--c-copper);--on-red:#0B0B0B;--pink:#A8FF00;--grain:.1;--rail-w:48px;background:var(--bg);color:var(--ink);scroll-behavior:smooth}
-html[data-theme="light"]{--bg:#F2F0E9;--ink:#0B0B0B;--muted:#5f5c4e;--metal:#5f5c4e;--ghost:#E4E1D6;--line:rgba(11,11,11,.2);--c-turquoise:#447000;--c-blue:#447000;--c-copper:#447000;--c-opal:#447000;--red:var(--c-copper);--on-red:#F2F0E9;--pink:#447000;--grain:.07}
-body{margin:0;padding-right:var(--rail-w);background:var(--bg);color:var(--ink);font-family:"Inter",system-ui,sans-serif;-webkit-font-smoothing:antialiased;transition:background-color .35s,color .35s;overflow-x:hidden}
+/* ---- palette: desaturated CRT phosphor. "light" is repurposed as an
+   amber-phosphor mode, not a bright page -- the whole experience stays
+   dark in both states. ---- */
+html{--bg:#0a0d0b;--bg2:#0e1310;--ink:#c7d2c6;--muted:#95a195;--metal:#8a9289;--ghost:#161b18;--line:rgba(199,210,198,.16);--c-turquoise:#5fae82;--c-blue:#5fae82;--c-copper:#5fae82;--c-opal:#5fae82;--red:var(--c-copper);--on-red:#070908;--pink:#6fc08f;--bezel:#1c201d;--bezel-hi:#2a302b;--crt-glow:rgba(111,192,143,.16);--scan:rgba(0,0,0,.22);--grain:.1;--bar-h:46px;background:var(--bg);color:var(--ink);scroll-behavior:smooth}
+html[data-theme="light"]{--bg:#0d0a06;--bg2:#120d08;--ink:#d8c49c;--muted:#a89873;--metal:#8f7d5e;--ghost:#19140d;--line:rgba(216,196,156,.16);--c-turquoise:#c99a4a;--c-blue:#c99a4a;--c-copper:#c99a4a;--c-opal:#c99a4a;--red:var(--c-copper);--on-red:#0d0a06;--pink:#d9a84f;--bezel:#201a11;--bezel-hi:#2e2616;--crt-glow:rgba(217,168,79,.16);--scan:rgba(0,0,0,.26);--grain:.09}
+*{box-sizing:border-box}
+body{margin:0;padding-top:var(--bar-h);background-color:var(--bg);background-image:radial-gradient(ellipse 140% 90% at 50% -10%,var(--bg2),var(--bg) 60%);color:var(--ink);font-family:"Inter",system-ui,sans-serif;-webkit-font-smoothing:antialiased;transition:background-color .35s,color .35s;overflow-x:hidden;min-height:100vh}
 body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:300;opacity:var(--grain);mix-blend-mode:overlay;background-image:url("../images/grain.png");background-size:96px 96px}
+#crtScan{position:fixed;inset:0;pointer-events:none;z-index:301;background-image:repeating-linear-gradient(to bottom,var(--scan) 0,var(--scan) 1px,transparent 1px,transparent 3px);opacity:.5;mix-blend-mode:multiply}
+#crtVignette{position:fixed;inset:0;pointer-events:none;z-index:302;box-shadow:inset 0 0 160px 40px rgba(0,0,0,.65),inset 0 0 50px 8px rgba(0,0,0,.4)}
 a{color:inherit;text-decoration-thickness:1px;text-underline-offset:.22em}
 a:hover{color:var(--red)}
 :focus-visible{outline:3px solid var(--pink);outline-offset:4px}
@@ -24,55 +30,120 @@ a:hover{color:var(--red)}
 .skip-link{position:fixed;left:16px;top:-80px;z-index:400;background:var(--pink);color:var(--on-red);padding:12px 18px;font:700 14px/1 'Space Mono',monospace;text-decoration:none;transition:top .2s ease}
 .skip-link:focus{top:16px}
 
-nav[aria-label="Primary"] a[aria-current="true"]{color:var(--red);box-shadow:inset 3px 0 0 var(--red)}
-.rail-item:hover{letter-spacing:.26em}
+/* ---- boot-in: a brief CRT power-on flicker once the page is ready.
+   Pure CSS, keyed off the existing html.js-ready class the script already
+   sets -- no new JS needed, and it no-ops entirely under reduced motion. ---- */
+@media (prefers-reduced-motion:no-preference){
+  #crtBoot{position:fixed;inset:0;z-index:500;pointer-events:none;background:#000;opacity:1}
+  html.js-ready #crtBoot{animation:crtBootFlicker .9s steps(1,end) forwards}
+  @keyframes crtBootFlicker{0%{opacity:1}8%{opacity:0}14%{opacity:.85}22%{opacity:.05}30%{opacity:1}42%{opacity:0}100%{opacity:0;visibility:hidden}}
+}
+@media (prefers-reduced-motion:reduce){#crtBoot{display:none}}
+
+/* ---- OS chrome: menu bar (desktop + mobile share the same bar height) ---- */
+nav[aria-label="Primary"]{display:flex;align-items:stretch;background:linear-gradient(var(--bezel-hi),var(--bezel));border-bottom:1px solid var(--line);box-shadow:0 1px 0 rgba(0,0,0,.5),0 6px 18px rgba(0,0,0,.35)}
+nav[aria-label="Primary"] a,nav[aria-label="Primary"] button{display:flex;align-items:center;height:var(--bar-h);padding:0 16px;border-right:1px solid var(--line);color:var(--ink);text-decoration:none;font:700 11px/1 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;background:transparent;border-top:0;border-bottom:0;border-left:0;cursor:pointer;transition:letter-spacing .15s ease,background .15s ease}
+nav[aria-label="Primary"] a:first-child{font:400 15px/1 'Archivo Black',sans-serif;letter-spacing:.02em;text-transform:none}
+nav[aria-label="Primary"] a[aria-current="true"]{color:var(--red);box-shadow:inset 0 -3px 0 var(--red)}
+.rail-item:hover{letter-spacing:.22em;background:rgba(255,255,255,.03)}
+#themeToggle{margin-left:auto;border-right:0;color:var(--metal)}
 #themeToggle:hover{color:var(--pink)}
 #mobileMenu a[aria-current="true"]{color:var(--red)}
-#mobileBar{display:none}
+#mobileBar{display:none;background:linear-gradient(var(--bezel-hi),var(--bezel));border-bottom:1px solid var(--line)}
+#mobileMenu,#mobileMenuBackdrop{display:none}
 #menuToggle:hover{color:var(--pink);border-color:var(--pink)}
 #themeToggleMobile:hover{color:var(--pink)}
 @media (max-width:859px){
   nav[aria-label="Primary"]{display:none!important}
   #mobileBar{display:flex}
-  body{padding-right:0;padding-top:56px}
 }
 @media (min-width:860px){
   #mobileMenu,#mobileMenuBackdrop{display:none!important}
 }
 
+/* ---- window system: chrome only, wraps existing header/aside/main
+   without altering anything inside them ---- */
+.os-window{position:relative;background:var(--ghost);border:1px solid var(--line);box-shadow:0 1px 0 rgba(255,255,255,.03) inset,0 18px 40px rgba(0,0,0,.45)}
+.os-titlebar{display:flex;align-items:center;gap:10px;height:34px;padding:0 10px;background:linear-gradient(var(--bezel-hi),var(--bezel));border-bottom:1px solid var(--line);font:700 11px/1 'Space Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--metal);user-select:none}
+.os-dots{display:inline-flex;gap:5px;flex:0 0 auto}
+.os-dots span{width:7px;height:7px;border-radius:50%;background:var(--muted);box-shadow:inset 0 0 0 1px rgba(0,0,0,.4),0 0 4px rgba(0,0,0,.4)}
+.os-titletext{flex:1 1 auto;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.os-drag{cursor:grab;touch-action:none}
+.os-drag:active{cursor:grabbing}
+.os-win-focused{z-index:50;border-color:var(--pink)}
+.os-win-focused .os-titlebar{color:var(--pink)}
+.os-float{position:fixed;z-index:35;max-height:calc(100vh - 80px);display:flex;flex-direction:column}
+.os-float .os-body{overflow-y:auto}
+
+#docShell{margin:var(--bar-h) auto 0;max-width:1240px;padding:clamp(16px,3vw,32px) clamp(16px,3vw,32px) clamp(48px,6vw,80px)}
+#headerWin{margin-bottom:clamp(20px,3vw,32px)}
+#headerWin .os-body{padding:0}
+#contentRow{display:flex;flex-wrap:wrap;gap:0 clamp(20px,3vw,28px);align-items:flex-start;position:relative}
+#tocWin{flex:0 1 240px;min-width:0}
+#tocWin .os-body{padding:0}
+#docWin{flex:1 1 600px;min-width:0;max-width:1040px}
+#docWin .os-body{max-height:none}
+/* Each <section> is display:grid with no explicit column track, so its
+   implicit "auto" column sizes to the widest child's max-content width
+   -- the max-width:68ch paragraphs -- regardless of the actual container
+   width. That silently overflows on narrow screens (pre-existing on this
+   page; surfaced here because the new chrome made it visible via a
+   horizontal-scroll check). minmax(0,1fr) makes the track shrinkable. */
+main section{grid-template-columns:minmax(0,1fr)}
+
+/* images presented as their own small monitor windows, purely via CSS --
+   no markup changes inside the figures themselves */
+main figure{position:relative;padding-top:30px;background:var(--ghost);border:1px solid var(--line);box-shadow:0 10px 26px rgba(0,0,0,.4)}
+main figure::before{content:"";position:absolute;left:0;right:0;top:0;height:30px;background:linear-gradient(var(--bezel-hi),var(--bezel));border-bottom:1px solid var(--line)}
+main figure::after{content:"";position:absolute;left:10px;top:11px;width:7px;height:7px;border-radius:50%;background:var(--muted);box-shadow:16px 0 0 var(--muted),32px 0 0 var(--muted),inset 0 0 0 1px rgba(0,0,0,.4)}
+main figure img{position:relative}
+main figure figcaption{padding:0 12px 12px}
+main figure > div{margin:0 12px}
+main figure img[style*="border"]{margin:0 12px;width:calc(100% - 24px)!important}
+
 .toc-toggle:hover{color:var(--ink)}
 .toc-show:hover{background:var(--red);color:var(--on-red)}
 .case-nav-link:hover{background:var(--ink);color:var(--bg)}
+nav[aria-label="More case studies"]{background:var(--ghost)}
+footer{background:var(--ghost)}
 </style>
 </head>
 <body>
 
 <a href="#main" class="skip-link">Skip to content</a>
 
-<nav aria-label="Primary" style="position:fixed;right:0;top:0;bottom:0;z-index:200;width:var(--rail-w);display:flex;flex-direction:column;background:var(--bg);border-left:1px solid var(--line)">
-  <a href="../index.html#work" aria-label="K. Ewing, home" class="mono" style="flex:0 0 auto;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(180deg);padding:16px 0;font-size:15px;font-weight:700;letter-spacing:.04em;text-decoration:none;color:var(--ink);border-bottom:1px solid var(--line);min-height:44px;transition:color .2s ease">K. EWING</a>
-  <a href="../index.html#work" aria-current="true" class="mono rail-item" style="flex:1 1 0;min-height:44px;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(180deg);font-size:11px;font-weight:700;letter-spacing:.18em;text-decoration:none;color:var(--ink);border-bottom:1px solid var(--line);transition:color .2s ease,letter-spacing .2s ease">WORK</a>
-  <a href="../index.html#workbench" aria-current="false" class="mono rail-item" style="flex:1 1 0;min-height:44px;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(180deg);font-size:11px;font-weight:700;letter-spacing:.18em;text-decoration:none;color:var(--ink);border-bottom:1px solid var(--line);transition:color .2s ease,letter-spacing .2s ease">WORKBENCH</a>
-  <a href="../about.html" aria-current="false" class="mono rail-item" style="flex:1 1 0;min-height:44px;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(180deg);font-size:11px;font-weight:700;letter-spacing:.18em;text-decoration:none;color:var(--ink);border-bottom:1px solid var(--line);transition:color .2s ease,letter-spacing .2s ease">ABOUT</a>
-  <a href="../index.html#contact" aria-current="false" class="mono rail-item" style="flex:1 1 0;min-height:44px;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(180deg);font-size:11px;font-weight:700;letter-spacing:.18em;text-decoration:none;color:var(--ink);transition:color .2s ease,letter-spacing .2s ease">CONTACT</a>
-  <button type="button" id="themeToggle" aria-pressed="false" aria-label="Switch to light mode" class="mono" style="flex:0 0 auto;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(180deg);padding:14px 0;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;color:var(--muted);border:0;border-top:1px solid var(--line);background:var(--bg);cursor:pointer;min-height:44px;transition:color .2s ease">LIGHT</button>
+<div id="crtScan" aria-hidden="true"></div>
+<div id="crtVignette" aria-hidden="true"></div>
+<div id="crtBoot" aria-hidden="true"></div>
+
+<nav aria-label="Primary" style="position:fixed;left:0;right:0;top:0;z-index:200">
+  <a href="../index.html#work" aria-label="K. Ewing, home">K. EWING</a>
+  <a href="../index.html#work" aria-current="true" class="rail-item">WORK</a>
+  <a href="../index.html#workbench" aria-current="false" class="rail-item">WORKBENCH</a>
+  <a href="../about.html" aria-current="false" class="rail-item">ABOUT</a>
+  <a href="../index.html#contact" aria-current="false" class="rail-item">CONTACT</a>
+  <button type="button" id="themeToggle" aria-pressed="false" aria-label="GREEN phosphor mode, press to switch to amber">GREEN</button>
 </nav>
 
-<div id="mobileBar" class="mono" role="navigation" aria-label="Mobile bar" style="position:fixed;left:0;right:0;top:0;z-index:220;align-items:center;justify-content:space-between;padding:0 16px;height:56px;background:var(--bg);border-bottom:1px solid var(--line)">
-  <a href="../index.html#work" aria-label="K. Ewing, home" style="font-size:15px;font-weight:700;letter-spacing:.04em;text-decoration:none;color:var(--ink);min-height:44px;display:inline-flex;align-items:center">K. EWING</a>
+<div id="mobileBar" class="mono" role="navigation" aria-label="Mobile bar" style="position:fixed;left:0;right:0;top:0;z-index:220;align-items:center;justify-content:space-between;padding:0 16px;height:var(--bar-h)">
+  <a href="../index.html#work" aria-label="K. Ewing, home" style="font:400 15px/1 'Archivo Black',sans-serif;text-decoration:none;color:var(--ink);min-height:44px;display:inline-flex;align-items:center">K. EWING</a>
   <button type="button" id="menuToggle" aria-expanded="false" aria-controls="mobileMenu" aria-label="Open menu" style="min-width:44px;min-height:44px;padding:0 12px;border:1px solid var(--line);background:transparent;color:var(--ink);font:700 11px/1 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;cursor:pointer">MENU</button>
 </div>
 
-<div id="mobileMenuBackdrop" aria-hidden="true" style="position:fixed;inset:56px 0 0 0;z-index:215;background:rgba(0,0,0,.5)"></div>
+<div id="mobileMenuBackdrop" aria-hidden="true" style="position:fixed;inset:var(--bar-h) 0 0 0;z-index:215;background:rgba(0,0,0,.6)"></div>
 
-<nav id="mobileMenu" aria-label="Mobile" class="mono" style="position:fixed;left:0;right:0;top:56px;z-index:220;background:var(--bg);border-bottom:1px solid var(--line);max-height:calc(100vh - 56px);overflow-y:auto">
+<nav id="mobileMenu" aria-label="Mobile" class="mono" style="position:fixed;left:0;right:0;top:var(--bar-h);z-index:220;background:var(--ghost);border-bottom:1px solid var(--line);max-height:calc(100vh - var(--bar-h));overflow-y:auto">
   <a href="../index.html#work" style="display:flex;align-items:center;min-height:52px;padding:0 20px;font-size:14px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;color:var(--ink);border-bottom:1px solid var(--line)">Work</a>
   <a href="../index.html#workbench" style="display:flex;align-items:center;min-height:52px;padding:0 20px;font-size:14px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;color:var(--ink);border-bottom:1px solid var(--line)">Workbench</a>
   <a href="../about.html" style="display:flex;align-items:center;min-height:52px;padding:0 20px;font-size:14px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;color:var(--ink);border-bottom:1px solid var(--line)">About</a>
   <a href="../index.html#contact" style="display:flex;align-items:center;min-height:52px;padding:0 20px;font-size:14px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;color:var(--ink);border-bottom:1px solid var(--line)">Contact</a>
-  <button type="button" id="themeToggleMobile" aria-pressed="false" style="display:flex;align-items:center;justify-content:space-between;width:100%;min-height:52px;padding:0 20px;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;border:0;background:transparent;color:var(--muted);cursor:pointer"><span>Theme</span><span id="themeToggleMobileLabel">Light</span></button>
+  <button type="button" id="themeToggleMobile" aria-pressed="false" style="display:flex;align-items:center;justify-content:space-between;width:100%;min-height:52px;padding:0 20px;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;border:0;background:transparent;color:var(--muted);cursor:pointer"><span>Phosphor</span><span id="themeToggleMobileLabel">Green</span></button>
 </nav>
 
+<div id="docShell">
+<div id="headerWin" class="os-window">
+  <div class="os-titlebar" aria-hidden="true"><span class="os-dots"><span></span><span></span><span></span></span><span class="os-titletext">CASE_FILE.SYS — hazard-icons</span></div>
+  <div class="os-body">
 <header style="padding:clamp(28px,4vw,48px) clamp(16px,5vw,80px) clamp(56px,7vw,100px);border-bottom:2px solid var(--ink);position:relative;overflow:hidden">
   <p style="margin:0 0 16px;font:400 12px/1 'Space Mono',monospace;letter-spacing:.08em;color:var(--muted)"><a href="../index.html#work">~</a> / <span style="color:var(--ink)">hazard-icons</span></p>
   <p style="margin:0 0 clamp(40px,6vw,80px);font:400 12px/1.5 'Space Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)">Images coming soon</p>
@@ -95,8 +166,13 @@ nav[aria-label="Primary"] a[aria-current="true"]{color:var(--red);box-shadow:ins
     </div>
   </div>
 </header>
+  </div>
+</div>
 
-<div style="display:flex;flex-wrap:wrap;gap:0 clamp(32px,5vw,80px);padding:0 clamp(16px,5vw,80px)">
+<div id="contentRow">
+  <div id="tocWin" class="os-window">
+    <div class="os-titlebar os-drag" id="tocDragHandle" tabindex="0" role="button" aria-label="CONTENTS.DAT window, drag or use arrow keys to move"><span class="os-dots" aria-hidden="true"><span></span><span></span><span></span></span><span class="os-titletext">CONTENTS.DAT</span></div>
+    <div class="os-body">
   <aside id="tocAside" aria-label="Case study contents" style="flex:0 1 230px;min-width:0;padding-top:clamp(56px,7vw,110px)">
     <nav aria-label="Sections" style="position:sticky;top:28px">
       <button type="button" id="tocToggle" class="toc-toggle" aria-expanded="true" aria-controls="toc-list" style="display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;min-height:44px;margin:0 0 10px;padding:0 0 6px;background:transparent;border:0;border-bottom:1px solid var(--line);color:var(--metal);cursor:pointer;text-align:left">
@@ -120,7 +196,12 @@ nav[aria-label="Primary"] a[aria-current="true"]{color:var(--red);box-shadow:ins
       </ol>
     </nav>
   </aside>
+    </div>
+  </div>
   <button type="button" id="tocShow" class="toc-show" aria-expanded="false" aria-controls="toc-list" aria-label="Show contents" style="display:none;position:fixed;left:0;top:50%;transform:translateY(-50%);z-index:140;writing-mode:vertical-rl;align-items:center;gap:12px;padding:18px 10px;min-width:44px;background:var(--ink);color:var(--bg);border:0;cursor:pointer;font:700 12px/1 'Space Mono',monospace;letter-spacing:.12em;text-transform:uppercase"><span aria-hidden="true">+</span>Contents</button>
+  <div id="docWin" class="os-window">
+    <div class="os-titlebar" aria-hidden="true"><span class="os-dots"><span></span><span></span><span></span></span><span class="os-titletext">designing_with_empathy.doc</span></div>
+    <div class="os-body">
   <main id="main" style="flex:1 1 600px;min-width:0;max-width:1040px;margin:0 auto">
 
     <section id="s01" aria-labelledby="s01-h" style="display:grid;gap:22px;padding:clamp(56px,7vw,110px) 0;scroll-margin-top:24px">
@@ -294,6 +375,9 @@ nav[aria-label="Primary"] a[aria-current="true"]{color:var(--red);box-shadow:ins
       <p style="margin:0;max-width:68ch;font:400 clamp(18px,1.3vw,20px)/1.65 'Inter',sans-serif;text-wrap:pretty">Probably.</p>
     </section>
   </main>
+    </div>
+  </div>
+</div>
 </div>
 
 <nav aria-label="More case studies" style="display:flex;flex-wrap:wrap;border-top:2px solid var(--ink);border-bottom:1px solid var(--line)">
@@ -320,13 +404,13 @@ nav[aria-label="Primary"] a[aria-current="true"]{color:var(--red);box-shadow:ins
 
   function applyThemeUI(){
     var light = html.getAttribute('data-theme') === 'light';
-    var label = light ? 'DARK' : 'LIGHT';
+    var label = light ? 'AMBER' : 'GREEN';
     var tt = document.getElementById('themeToggle');
     var ttm = document.getElementById('themeToggleMobile');
     var ttml = document.getElementById('themeToggleMobileLabel');
-    if (tt) { tt.textContent = label; tt.setAttribute('aria-pressed', light ? 'true' : 'false'); tt.setAttribute('aria-label', 'Switch to ' + (light ? 'dark' : 'light') + ' mode'); }
+    if (tt) { tt.textContent = label; tt.setAttribute('aria-pressed', light ? 'true' : 'false'); tt.setAttribute('aria-label', label + ' phosphor mode, press to switch to ' + (light ? 'green' : 'amber')); }
     if (ttm) ttm.setAttribute('aria-pressed', light ? 'true' : 'false');
-    if (ttml) ttml.textContent = label === 'DARK' ? 'Dark' : 'Light';
+    if (ttml) ttml.textContent = label === 'AMBER' ? 'Amber' : 'Green';
   }
   function toggleTheme(){
     var next = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
@@ -395,6 +479,94 @@ nav[aria-label="Primary"] a[aria-current="true"]{color:var(--red);box-shadow:ins
     });
   }, { rootMargin: '-40% 0px -55% 0px' });
   document.querySelectorAll('main section[id]').forEach(function(el){ spyIo.observe(el); });
+
+  // ---- draggable Contents window (desktop only; mobile keeps the
+  // existing collapse/show behavior via tocToggle/tocShow above) ----
+  var tocWin = document.getElementById('tocWin');
+  var tocHandle = document.getElementById('tocDragHandle');
+  var docWin = document.getElementById('docWin');
+  function canFloat(){ return window.innerWidth >= 860; }
+  function focusWin(el){
+    [tocWin, docWin].forEach(function(w){ if (w) w.classList.remove('os-win-focused'); });
+    if (el) el.classList.add('os-win-focused');
+  }
+  function startFloat(){
+    if (!tocWin || tocWin.classList.contains('os-float')) return;
+    var r = tocWin.getBoundingClientRect();
+    tocWin.style.width = r.width + 'px';
+    tocWin.style.left = r.left + 'px';
+    tocWin.style.top = r.top + 'px';
+    tocWin.classList.add('os-float');
+    applyFit(r.top);
+  }
+  function clampPos(x, y, w, h){
+    // Keep at least a titlebar-sized chunk of the window on screen and
+    // reachable, regardless of how tall its content is (the body itself
+    // scrolls once floating -- see applyFit, which keeps the window's
+    // actual rendered height inside whatever viewport space is left
+    // below wherever it's been dragged to).
+    var minVisible = 120;
+    var maxX = window.innerWidth - Math.min(w, window.innerWidth);
+    var maxY = Math.max(0, window.innerHeight - minVisible);
+    return { x: Math.max(0, Math.min(x, maxX)), y: Math.max(0, Math.min(y, maxY)) };
+  }
+  function applyFit(top){
+    // The window's max-height is a fixed CSS budget (100vh - 80px), which
+    // is only correct when the window sits near the top of the screen.
+    // Recompute it against the *actual* remaining space below the
+    // window's current top so dragging it low never strands content
+    // past the viewport edge with no way to scroll to it.
+    if (!tocWin) return;
+    var avail = window.innerHeight - top - 16;
+    tocWin.style.maxHeight = Math.max(160, avail) + 'px';
+  }
+  function moveBy(dx, dy){
+    if (!tocWin) return;
+    startFloat();
+    var r = tocWin.getBoundingClientRect();
+    var p = clampPos(r.left + dx, r.top + dy, r.width, r.height);
+    tocWin.style.left = p.x + 'px';
+    tocWin.style.top = p.y + 'px';
+    applyFit(p.y);
+  }
+  if (tocHandle && tocWin) {
+    var dragging = false, startX = 0, startY = 0, originL = 0, originT = 0;
+    tocHandle.addEventListener('pointerdown', function(e){
+      if (!canFloat()) return;
+      startFloat();
+      focusWin(tocWin);
+      dragging = true;
+      startX = e.clientX; startY = e.clientY;
+      var r = tocWin.getBoundingClientRect();
+      originL = r.left; originT = r.top;
+      tocHandle.setPointerCapture(e.pointerId);
+    });
+    tocHandle.addEventListener('pointermove', function(e){
+      if (!dragging) return;
+      var p = clampPos(originL + (e.clientX - startX), originT + (e.clientY - startY), tocWin.offsetWidth, tocWin.offsetHeight);
+      tocWin.style.left = p.x + 'px';
+      tocWin.style.top = p.y + 'px';
+      applyFit(p.y);
+    });
+    function endDrag(){ dragging = false; }
+    tocHandle.addEventListener('pointerup', endDrag);
+    tocHandle.addEventListener('pointercancel', endDrag);
+    tocHandle.addEventListener('keydown', function(e){
+      var step = e.shiftKey ? 40 : 10;
+      if (e.key === 'ArrowLeft') { moveBy(-step, 0); e.preventDefault(); }
+      else if (e.key === 'ArrowRight') { moveBy(step, 0); e.preventDefault(); }
+      else if (e.key === 'ArrowUp') { moveBy(0, -step); e.preventDefault(); }
+      else if (e.key === 'ArrowDown') { moveBy(0, step); e.preventDefault(); }
+    });
+    tocHandle.addEventListener('focus', function(){ if (canFloat()) focusWin(tocWin); });
+  }
+  if (docWin) docWin.addEventListener('pointerdown', function(){ focusWin(docWin); });
+  window.addEventListener('resize', function(){
+    if (!canFloat() && tocWin && tocWin.classList.contains('os-float')) {
+      tocWin.classList.remove('os-float');
+      tocWin.style.left = ''; tocWin.style.top = ''; tocWin.style.width = '';
+    }
+  });
 
   html.classList.add('js-ready');
 })();
