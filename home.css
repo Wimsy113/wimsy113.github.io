@@ -607,8 +607,16 @@ html:not(.js) .drawer { grid-template-rows: 1fr; }
 
 /* a piece with its own grab handle (an embedded 3D scene, which needs
    its own pointer events for orbit/zoom) drags from the handle instead
-   of the whole card -- same end result, no event conflict. */
-.print--spline { cursor: default; }
+   of the whole card -- same end result, no event conflict. It isn't a
+   photo, so it gets none of the paper-card dressing: no background,
+   padding, shadow, or tape strip, at rest or in any state. */
+.print--spline {
+  cursor: default; background: transparent; padding: 0; box-shadow: none; border-radius: 0;
+}
+.print--spline::before { content: none; }
+.print--spline:hover, .print--spline:focus-visible, .print--spline.is-dragging {
+  background: transparent; box-shadow: none; transform: rotate(var(--r));
+}
 .print-handle {
   position: absolute; top: -10px; left: 50%; transform: translateX(-50%); z-index: 3;
   min-width: 34px; min-height: 24px; padding: 2px 10px; border: 0; border-radius: 2px;
