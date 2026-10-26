@@ -496,16 +496,30 @@
     var stage = document.getElementById('splineDialogStage');
     var closeBtn = document.getElementById('splineDialogClose');
     if (!trigger || !dlg || !stage || !closeBtn || typeof dlg.showModal !== 'function') return;
+    var previewViewer = trigger.querySelector('spline-viewer');
+    var sceneUrl = previewViewer ? previewViewer.getAttribute('url') : '';
 
+    // A dedicated full-size instance, not the small preview moved over --
+    // reparenting it risked it keeping whatever internal canvas size it
+    // measured itself at before the move, instead of filling the dialog.
+    // Created lazily on first open so the scene isn't loaded twice before
+    // anyone actually opens it.
+    var fullViewer = null;
     trigger.addEventListener('click', function () {
-      var viewer = trigger.querySelector('spline-viewer');
-      if (viewer) stage.appendChild(viewer);
+      if (!fullViewer && sceneUrl) {
+        fullViewer = document.createElement('spline-viewer');
+        fullViewer.setAttribute('url', sceneUrl);
+        fullViewer.style.display = 'block';
+        fullViewer.style.width = '100%';
+        fullViewer.style.height = '100%';
+        stage.appendChild(fullViewer);
+      }
       dlg.showModal();
     });
     closeBtn.addEventListener('click', function () { dlg.close(); });
-    // The stage now fills the whole dialog, so there's no empty
-    // "backdrop" area left to click -- a plain tap anywhere closes it
-    // instead, but a press-drag-release (orbiting the model) does not.
+    // The stage fills the whole dialog, so there's no empty "backdrop"
+    // area left to click -- a plain tap anywhere closes it instead, but
+    // a press-drag-release (orbiting the model) does not.
     var dsx = 0, dsy = 0, dialogDragged = false;
     dlg.addEventListener('pointerdown', function (e) { dsx = e.clientX; dsy = e.clientY; dialogDragged = false; });
     dlg.addEventListener('pointermove', function (e) {
@@ -514,13 +528,6 @@
     dlg.addEventListener('click', function (e) {
       if (e.target === closeBtn || dialogDragged) return;
       dlg.close();
-    });
-    // Fires after any close -- the close button, a backdrop click, or
-    // the browser's own native Escape handling -- so the viewer always
-    // goes back to its spot on the bench exactly once, however it closed.
-    dlg.addEventListener('close', function () {
-      var viewer = stage.querySelector('spline-viewer');
-      if (viewer) trigger.appendChild(viewer);
     });
   });
 

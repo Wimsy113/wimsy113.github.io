@@ -478,9 +478,22 @@ nav[aria-label="Primary"] a[aria-current="true"]{color:var(--red);box-shadow:ins
     var splineStage = document.getElementById('splineDialogStage');
     var splineClose = document.getElementById('splineDialogClose');
     if (!trigger || !splineDlg || !splineStage || !splineClose || typeof splineDlg.showModal !== 'function') return;
+    var previewViewer = trigger.querySelector('spline-viewer');
+    var sceneUrl = previewViewer ? previewViewer.getAttribute('url') : '';
+
+    // A dedicated full-size instance, not the small preview moved over --
+    // reparenting it risked it keeping whatever internal canvas size it
+    // measured itself at before the move, instead of filling the dialog.
+    var fullViewer = null;
     trigger.addEventListener('click', function(){
-      var viewer = trigger.querySelector('spline-viewer');
-      if (viewer) splineStage.appendChild(viewer);
+      if (!fullViewer && sceneUrl) {
+        fullViewer = document.createElement('spline-viewer');
+        fullViewer.setAttribute('url', sceneUrl);
+        fullViewer.style.display = 'block';
+        fullViewer.style.width = '100%';
+        fullViewer.style.height = '100%';
+        splineStage.appendChild(fullViewer);
+      }
       splineDlg.showModal();
     });
     splineClose.addEventListener('click', function(){ splineDlg.close(); });
@@ -492,10 +505,6 @@ nav[aria-label="Primary"] a[aria-current="true"]{color:var(--red);box-shadow:ins
     splineDlg.addEventListener('click', function(e){
       if (e.target === splineClose || dialogDragged) return;
       splineDlg.close();
-    });
-    splineDlg.addEventListener('close', function(){
-      var viewer = splineStage.querySelector('spline-viewer');
-      if (viewer) trigger.appendChild(viewer);
     });
   })();
 
