@@ -28,7 +28,6 @@
   --line:rgba(198,205,191,.14);
   --on-accent:#0a0d08;
   --grain:.09;
-  --bezel:#121310;--bezel-edge:#2a2b26;
   /* the case-study content (locked, unmodified) still references these
      token names from the shared portfolio system -- alias them so it
      renders correctly in this new palette without touching its markup */
@@ -92,19 +91,15 @@ a{color:inherit}
 .skip-link:focus{top:16px}
 .off{display:none!important}
 
-/* ---- device housing: a visible plastic/metal casing framing the
-   whole viewport, the way the rugged laptop and GRAVIDA's cream
-   casing frame their screens. ---- */
-#deviceFrame{position:fixed;inset:0;z-index:503;pointer-events:none;border:clamp(10px,2.2vw,26px) solid var(--bezel);box-shadow:inset 0 0 0 1px rgba(0,0,0,.7),inset 0 0 80px 24px rgba(0,0,0,.5)}
-#bezelLabel{position:fixed;z-index:504;top:clamp(2px,1vw,8px);left:clamp(18px,3.6vw,36px);font:700 9px/1 'Space Mono',monospace;letter-spacing:.16em;color:#55574e;pointer-events:none}
-#bezelLed{position:fixed;z-index:504;top:clamp(9px,1.7vw,17px);right:clamp(18px,3.6vw,36px);width:6px;height:6px;border-radius:50%;background:var(--accent);box-shadow:0 0 7px var(--accent-dim);pointer-events:none}
-@media (prefers-reduced-motion:no-preference){#bezelLed{animation:blip 3.4s ease-in-out infinite}}
+/* No device housing of our own: this page is the screen content of a
+   laptop that is already physically modeled wherever it's shown (the
+   workbench's embedded 3D piece). A second, CSS-drawn bezel around an
+   already-bezeled object reads as a window inside a window. Content
+   runs edge to edge; whatever frames it, frames it from the outside. */
 @keyframes blip{0%,100%{opacity:.4}50%{opacity:1}}
 
-/* ---- screens: full-viewport, one active at a time. Padded to match
-   the device bezel's border thickness so content never renders under
-   the housing. ---- */
-.screen{position:fixed;inset:0;display:flex;flex-direction:column;padding:clamp(10px,2.2vw,26px)}
+/* ---- screens: full-viewport, one active at a time, true edge to edge. ---- */
+.screen{position:fixed;inset:0;display:flex;flex-direction:column}
 @media (prefers-reduced-motion:no-preference){
   .screen.swapping{animation:screenFlicker .32s steps(2,end)}
   @keyframes screenFlicker{0%{opacity:0;filter:brightness(2.4)}35%{opacity:1;filter:brightness(1)}55%{opacity:.2}100%{opacity:1;filter:brightness(1)}}
@@ -141,27 +136,21 @@ a{color:inherit}
 #iconRail .railBtn[aria-pressed="true"]{color:var(--ink)}
 #iconRail .railBtn[aria-pressed="true"] .railGlyph{border-color:var(--accent);box-shadow:0 0 8px var(--accent-dim)}
 
-#deskStage{position:relative;flex:1;min-width:0;overflow:hidden}
-
-.ghostWin{position:absolute;border:1px solid var(--line);background:var(--panel);opacity:.5;pointer-events:none;z-index:1}
-.ghostWin::before{content:"";position:absolute;top:0;left:0;right:0;height:16px;background:rgba(255,255,255,.025);border-bottom:1px solid var(--line)}
-#ghostWin1{top:7%;right:5%;width:26%;height:38%;transform:rotate(1.1deg)}
-#ghostWin2{bottom:5%;right:16%;width:19%;height:24%;transform:rotate(-1.8deg)}
-@media (max-width:959px){.ghostWin{display:none}}
+#deskStage{position:relative;flex:1;min-width:0;overflow:hidden;display:flex}
 
 #navRail{display:none}
 @media (min-width:960px){
-  #navRail{display:flex;flex-direction:column;align-items:center;position:absolute;left:clamp(22px,3.4vw,40px);top:50%;transform:translateY(-50%);z-index:2}
-  #navRail::before{content:"";position:absolute;left:50%;top:4px;bottom:4px;width:1px;background:var(--line);transform:translateX(-50%);z-index:-1}
+  #navRail{display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;flex:0 0 auto;width:36px;border-right:1px solid var(--line);background:linear-gradient(180deg,rgba(255,255,255,.015),transparent 25%)}
+  #navRail::before{content:"";position:absolute;left:50%;top:10%;bottom:10%;width:1px;background:var(--line);transform:translateX(-50%);z-index:-1}
   #navRail button{width:9px;height:9px;margin:6px 0;padding:0;border:1px solid var(--dimmer);background:var(--bg);border-radius:0;cursor:pointer}
   #navRail button[data-visited="true"]{background:var(--accent-dull);border-color:var(--accent-dull)}
   #navRail button[aria-current="true"]{background:var(--accent);border-color:var(--accent);box-shadow:0 0 9px var(--accent-dim)}
   #navRail button:hover,#navRail button:focus-visible{border-color:var(--accent)}
 }
 
-/* ---- the document window ---- */
-#docWindow{position:relative;z-index:2;display:flex;flex-direction:column;background:var(--panel);border:1px solid var(--panel-edge);box-shadow:16px 18px 0 rgba(0,0,0,.4);margin:clamp(22px,5vh,52px) clamp(18px,4vw,44px) clamp(18px,4vh,40px) clamp(18px,4vw,44px);max-width:860px;max-height:calc(100% - clamp(36px,9vh,92px))}
-@media (min-width:960px){#docWindow{margin-left:clamp(90px,11vw,150px)}}
+/* ---- the document window: now the screen itself, not a card floating
+   on one -- no margin, no drop shadow, no separate border. ---- */
+#docWindow{position:relative;z-index:2;display:flex;flex-direction:column;background:var(--panel);flex:1;min-width:0;height:100%}
 #docTitlebar{flex:0 0 auto;display:flex;align-items:center;gap:10px;height:32px;padding:0 10px;background:linear-gradient(180deg,#1c1e19,#121410);border-bottom:1px solid var(--panel-edge)}
 #docTitlebar .dots{display:flex;gap:5px;flex:0 0 auto}
 #docTitlebar .dots span{width:7px;height:7px;border:1px solid var(--line)}
@@ -214,13 +203,12 @@ a{color:inherit}
 #inspectorStage img.zoomed{max-width:none;max-height:none;width:min(1400px,170%);cursor:zoom-out}
 #inspectorCaption{flex:0 0 auto;padding:14px;text-align:center;font:400 13px/1.5 'Space Mono',monospace;letter-spacing:.06em;color:var(--dim);border-top:1px solid var(--line)}
 
-/* ---- mobile: icon rail collapses to a top bar; no ghost windows or
-   nav rail -- a distinct model, not a shrunk desktop. ---- */
+/* ---- mobile: icon rail collapses to a top bar; no nav rail -- a
+   distinct model, not a shrunk desktop. ---- */
 @media (max-width:959px){
   #screenDesktop{flex-direction:column}
   #iconRail{width:auto;flex-direction:row;padding:10px 12px;gap:4px;border-right:0;border-bottom:1px solid var(--line)}
   #iconRail .railBtn{width:auto;flex-direction:row;padding:8px 10px}
-  #docWindow{margin:14px;max-height:none;flex:1;min-height:0}
 }
 </style>
 </head>
@@ -233,9 +221,6 @@ a{color:inherit}
 <div id="vignette" aria-hidden="true"></div>
 <div id="crtFlicker" aria-hidden="true"></div>
 <div id="glitchBar" aria-hidden="true"></div>
-<div id="deviceFrame" aria-hidden="true"></div>
-<p id="bezelLabel" aria-hidden="true">IKONA-SERIES &#8226; MODEL CRT-42</p>
-<span id="bezelLed" aria-hidden="true"></span>
 
 <div id="screenBoot" class="screen" role="region" aria-label="Boot sequence" tabindex="-1">
   <div id="bootTerm">
@@ -262,8 +247,6 @@ a{color:inherit}
   </nav>
   <div id="deskStage">
     <nav id="navRail" aria-label="Jump to section"></nav>
-    <div class="ghostWin" id="ghostWin1" aria-hidden="true"></div>
-    <div class="ghostWin" id="ghostWin2" aria-hidden="true"></div>
     <div id="docWindow">
       <nav id="docTitlebar" aria-label="Window title">
         <span class="dots" aria-hidden="true"><span></span><span></span><span></span></span>
