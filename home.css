@@ -251,7 +251,7 @@ main::before { /* the spine that ties every section together */
 .section { position: relative; padding: clamp(64px, 8vw, 120px) var(--side) 0; scroll-margin-top: 24px; }
 .section--seam-only { padding-bottom: clamp(26px, 3vw, 40px); }
 
-.seam { position: relative; display: flex; align-items: center; gap: 16px; margin-bottom: clamp(28px, 3.4vw, 48px); }
+.seam { position: relative; display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; margin-bottom: clamp(28px, 3.4vw, 48px); }
 .seam::before { /* node where the seam meets the spine */
   content: ""; position: absolute; top: 50%; left: calc(var(--side) / -2 - 4px);
   width: 9px; height: 9px; margin-top: -4.5px; border-radius: 50%;
@@ -270,6 +270,7 @@ main::before { /* the spine that ties every section together */
     linear-gradient(var(--line-strong), var(--line-strong)) 0 50% / 100% 1px no-repeat,
     repeating-linear-gradient(90deg, var(--line) 0 1px, transparent 1px 12px) 0 0 / 100% 9px no-repeat;
 }
+.seam__dek { margin: -16px 0 clamp(28px, 3.4vw, 48px); font: 500 italic clamp(16px, 1.3vw, 19px)/1.4 var(--f-body); color: var(--ink-2); max-width: 56ch; }
 
 /* ---------- Hero ---------- */
 .hero {
