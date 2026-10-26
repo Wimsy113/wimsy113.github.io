@@ -56,13 +56,6 @@ nav[aria-label="Primary"] a[aria-current="true"]{color:var(--red);box-shadow:ins
 .piece[data-flash="true"]{filter:drop-shadow(0 0 0 var(--pink)) drop-shadow(0 0 14px var(--pink))}
 .piece-drag{cursor:grab;touch-action:none}
 .piece-drag:active{cursor:grabbing}
-/* a faint, reactive cue -- not a label -- that this piece responds to you. */
-.spline-stage:hover,.spline-stage:focus-visible{filter:drop-shadow(0 0 18px rgba(134,168,110,.55));outline:none}
-.spline-stage canvas{display:block;width:100%;height:100%;pointer-events:none}
-#splineDialog{display:none}
-#splineDialog[open]{display:flex}
-#splineDialogStage canvas{display:block;width:100%;height:100%}
-
 #lightbox{display:none}
 #lightbox[data-open="true"]{display:grid}
 </style>
@@ -179,13 +172,6 @@ nav[aria-label="Primary"] a[aria-current="true"]{color:var(--red);box-shadow:ins
       </figure>
     </div>
 
-    <div class="piece" id="piece-spline" data-id="spline">
-      <figure style="margin:0">
-        <button type="button" id="splineTrigger" class="spline-stage" aria-haspopup="dialog" aria-label="Look closer" style="display:block;width:100%;padding:0;border:0;aspect-ratio:1/1;background:transparent;cursor:pointer;transition:filter .25s ease">
-          <canvas id="splinePreviewCanvas" data-spline-url="https://prod.spline.design/w8mLFGBQmWLy1FlY/scene.splinecode"></canvas>
-        </button>
-      </figure>
-    </div>
   </div>
 </section>
 
@@ -266,11 +252,6 @@ nav[aria-label="Primary"] a[aria-current="true"]{color:var(--red);box-shadow:ins
   <a href="mailto:hello@krystynaewing.com" style="color:var(--ink)">hello@krystynaewing.com</a>
   <a href="#main" style="min-height:44px;display:inline-flex;align-items:center">[ ^ top ]</a>
 </footer>
-
-<dialog id="splineDialog" aria-label="Look closer" style="position:fixed;inset:0;margin:0;width:100%;height:100%;max-width:none;max-height:none;padding:0;border:0;background:rgba(5,5,5,.92);align-items:center;justify-content:center">
-  <button type="button" id="splineDialogClose" aria-label="Close" style="position:fixed;top:18px;right:18px;z-index:2;width:44px;height:44px;border:1px solid rgba(255,255,255,.3);border-radius:2px;background:rgba(0,0,0,.5);color:#fff;font-size:22px;line-height:1;cursor:pointer">&times;</button>
-  <div id="splineDialogStage" style="width:100%;height:100%"></div>
-</dialog>
 
 <div id="lightbox" role="dialog" aria-modal="true" aria-labelledby="lb-title" style="position:fixed;inset:0;z-index:260;background:var(--bg);color:var(--ink);grid-template-rows:auto minmax(0,1fr) auto;gap:16px;padding:clamp(14px,2.4vw,32px)">
   <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-start;gap:16px">
@@ -390,8 +371,7 @@ nav[aria-label="Primary"] a[aria-current="true"]{color:var(--red);box-shadow:ins
   var defaults = {
     reach: { x: 3, y: 3, r: -2, w: 40 }, note1: { x: 48, y: 2, r: -1, w: 22 },
     first: { x: 28, y: 46, r: 6, w: 20 }, portrait: { x: 55, y: 20, r: 1.5, w: 38 },
-    note2: { x: 4, y: 70, r: 1, w: 22 }, miniHead: { x: 56, y: 68, r: -3, w: 20 }, blade: { x: 78, y: 46, r: 2.5, w: 20 },
-    spline: { x: 80, y: 4, r: -2.5, w: 18 }
+    note2: { x: 4, y: 70, r: 1, w: 22 }, miniHead: { x: 56, y: 68, r: -3, w: 20 }, blade: { x: 78, y: 46, r: 2.5, w: 20 }
   };
   var pieces = JSON.parse(JSON.stringify(defaults));
   var zIndex = {}, topZ = 10, drag = null;
@@ -470,64 +450,6 @@ nav[aria-label="Primary"] a[aria-current="true"]{color:var(--red);box-shadow:ins
     zIndex = {};
     Object.keys(pieces).forEach(layoutPiece);
   });
-
-  // ---- the laptop: static (no drag), click opens it full-viewport ----
-  // Renders straight onto a <canvas> via @splinetool/runtime instead of
-  // the <spline-viewer> web component: that component renders through an
-  // internal iframe with its own sizing/overflow a page's CSS can't
-  // reliably reach (confirmed via devtools: the iframe carries
-  // overflow:clip and isn't affected by width/height on the custom
-  // element). A canvas we create and size ourselves has no such layer.
-  (function(){
-    var trigger = document.getElementById('splineTrigger');
-    var previewCanvas = document.getElementById('splinePreviewCanvas');
-    var splineDlg = document.getElementById('splineDialog');
-    var splineStage = document.getElementById('splineDialogStage');
-    var splineClose = document.getElementById('splineDialogClose');
-    if (!trigger || !previewCanvas || !splineDlg || !splineStage || !splineClose || typeof splineDlg.showModal !== 'function') return;
-    var sceneUrl = previewCanvas.dataset.splineUrl;
-    if (!sceneUrl) return;
-
-    var runtimeImport = import('https://cdn.jsdelivr.net/npm/@splinetool/runtime@2.0.113/+esm');
-
-    runtimeImport.then(function (mod) {
-      var app = new mod.Application(previewCanvas);
-      app.load(sceneUrl).then(function () {
-        if (window.console) console.log('spline preview loaded');
-      });
-    }).catch(function (err) { if (window.console) console.error('spline preview failed:', err); });
-
-    // A dedicated canvas for the fullscreen view, created lazily on first
-    // open so the scene isn't loaded twice before anyone opens it, and
-    // sized/attached to the already-visible dialog before the runtime
-    // ever measures it.
-    var fullLoaded = false;
-    trigger.addEventListener('click', function(){
-      splineDlg.showModal();
-      if (!fullLoaded) {
-        fullLoaded = true;
-        var canvas = document.createElement('canvas');
-        canvas.id = 'splineDialogCanvas';
-        splineStage.appendChild(canvas);
-        runtimeImport.then(function (mod) {
-          var app = new mod.Application(canvas);
-          app.load(sceneUrl).then(function () {
-            if (window.console) console.log('spline dialog loaded');
-          });
-        }).catch(function (err) { if (window.console) console.error('spline dialog failed:', err); });
-      }
-    });
-    splineClose.addEventListener('click', function(){ splineDlg.close(); });
-    var dsx = 0, dsy = 0, dialogDragged = false;
-    splineDlg.addEventListener('pointerdown', function(e){ dsx = e.clientX; dsy = e.clientY; dialogDragged = false; });
-    splineDlg.addEventListener('pointermove', function(e){
-      if (Math.abs(e.clientX - dsx) + Math.abs(e.clientY - dsy) > 8) dialogDragged = true;
-    });
-    splineDlg.addEventListener('click', function(e){
-      if (e.target === splineClose || dialogDragged) return;
-      splineDlg.close();
-    });
-  })();
 
   var flashTimer = null;
   function jumpTo(id){

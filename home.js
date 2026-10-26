@@ -489,67 +489,6 @@
     });
   });
 
-  /* ---------- Workbench: the laptop -- static, click opens it full-viewport ----------
-     Renders straight onto a <canvas> via @splinetool/runtime instead of the
-     <spline-viewer> web component: that component renders through an
-     internal iframe with its own sizing/overflow that a page's CSS can't
-     reliably reach (confirmed via devtools: the iframe carries
-     overflow:clip and isn't affected by width/height set on the custom
-     element). A canvas we create and size ourselves has no such layer. */
-  boot('spline-dialog', function () {
-    var trigger = document.getElementById('splineTrigger');
-    var previewCanvas = document.getElementById('splinePreviewCanvas');
-    var dlg = document.getElementById('splineDialog');
-    var stage = document.getElementById('splineDialogStage');
-    var closeBtn = document.getElementById('splineDialogClose');
-    if (!trigger || !previewCanvas || !dlg || !stage || !closeBtn || typeof dlg.showModal !== 'function') return;
-    var sceneUrl = previewCanvas.dataset.splineUrl;
-    if (!sceneUrl) return;
-
-    var runtimeImport = import('https://cdn.jsdelivr.net/npm/@splinetool/runtime@2.0.113/+esm');
-
-    runtimeImport.then(function (mod) {
-      var app = new mod.Application(previewCanvas);
-      app.load(sceneUrl).then(function () {
-        if (window.console) console.log('[home] spline preview loaded');
-      });
-    }).catch(function (err) { if (window.console) console.error('[home] spline preview failed:', err); });
-
-    // A dedicated canvas for the fullscreen view, not the small preview's
-    // own -- created lazily on first open so the scene isn't loaded twice
-    // before anyone actually opens it, and sized/attached to the already-
-    // visible dialog before the runtime ever measures it.
-    var fullLoaded = false;
-    trigger.addEventListener('click', function () {
-      dlg.showModal();
-      if (!fullLoaded) {
-        fullLoaded = true;
-        var canvas = document.createElement('canvas');
-        canvas.id = 'splineDialogCanvas';
-        stage.appendChild(canvas);
-        runtimeImport.then(function (mod) {
-          var app = new mod.Application(canvas);
-          app.load(sceneUrl).then(function () {
-            if (window.console) console.log('[home] spline dialog loaded');
-          });
-        }).catch(function (err) { if (window.console) console.error('[home] spline dialog failed:', err); });
-      }
-    });
-    closeBtn.addEventListener('click', function () { dlg.close(); });
-    // The stage fills the whole dialog, so there's no empty "backdrop"
-    // area left to click -- a plain tap anywhere closes it instead, but
-    // a press-drag-release (orbiting the model) does not.
-    var dsx = 0, dsy = 0, dialogDragged = false;
-    dlg.addEventListener('pointerdown', function (e) { dsx = e.clientX; dsy = e.clientY; dialogDragged = false; });
-    dlg.addEventListener('pointermove', function (e) {
-      if (Math.abs(e.clientX - dsx) + Math.abs(e.clientY - dsy) > 8) dialogDragged = true;
-    });
-    dlg.addEventListener('click', function (e) {
-      if (e.target === closeBtn || dialogDragged) return;
-      dlg.close();
-    });
-  });
-
   /* ---------- Nav: light the key for the section in view ---------- */
   boot('scrollspy', function () {
     if (!('IntersectionObserver' in window)) return;
