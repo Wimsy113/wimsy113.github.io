@@ -8,6 +8,7 @@
 <meta name="description" content="Krystyna Ewing's workbench — illustration, character work, and physical art, outside the client work.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+<script type="module" src="https://unpkg.com/@splinetool/viewer@2.0.111/build/spline-viewer.js"></script>
 <script src="./image-slot.js"></script>
 <script>try{if(localStorage.getItem('ke-theme')==='light')document.documentElement.setAttribute('data-theme','light');}catch(e){}</script>
 <style>
@@ -170,6 +171,16 @@ nav[aria-label="Primary"] a[aria-current="true"]{color:var(--red);box-shadow:ins
         <button type="button" class="piece-drag mono" data-piece="blade" aria-label="Move Prop Blade. Drag, or use arrow keys." style="position:absolute;top:-16px;left:15%;transform:rotate(4deg);min-height:36px;padding:0 14px;border:0;background:rgba(226,214,188,.92);color:#151312;font:700 11px/1 'Space Mono',monospace;letter-spacing:.08em;text-transform:uppercase;z-index:2">⠿ Prop Blade</button>
         <button type="button" class="piece-open" data-open-work="blade" aria-label="View larger: Prop Blade, in-progress 3D print" style="display:block;width:100%;padding:0;border:0;background:transparent;cursor:zoom-in"><img loading="lazy" src="images/workbench/prop-blade-print.jpg" alt="An unfinished 3D printed prop blade standing on a desk, unpainted sections still bare plastic, next to a comic poster and desk clutter." style="display:block;width:100%;height:auto" draggable="false"></button>
         <figcaption style="display:flex;justify-content:space-between;gap:10px;margin-top:8px;font:400 11px/1.3 'Space Mono',monospace;letter-spacing:.04em;text-transform:uppercase;color:#151312"><strong>Prop Blade</strong><span>3D Printed · In Progress</span></figcaption>
+      </figure>
+    </div>
+
+    <div class="piece" id="piece-spline" data-id="spline">
+      <figure style="margin:0;background:#f3efe7;padding:10px 10px 12px;box-shadow:0 14px 24px rgba(0,0,0,.35);position:relative">
+        <button type="button" class="piece-drag mono" data-piece="spline" aria-label="Move 3D Experiment. Drag, or use arrow keys." style="position:absolute;top:-16px;left:15%;transform:rotate(3deg);min-height:36px;padding:0 14px;border:0;background:rgba(226,214,188,.92);color:#151312;font:700 11px/1 'Space Mono',monospace;letter-spacing:.08em;text-transform:uppercase;z-index:2">&#x28FF; 3D Experiment</button>
+        <div style="position:relative;width:100%;aspect-ratio:1/1;background:#111;overflow:hidden">
+          <spline-viewer url="https://prod.spline.design/w8mLFGBQmWLy1FlY/scene.splinecode" style="display:block;width:100%;height:100%"></spline-viewer>
+        </div>
+        <figcaption style="display:flex;justify-content:space-between;gap:10px;margin-top:8px;font:400 11px/1.3 'Space Mono',monospace;letter-spacing:.04em;text-transform:uppercase;color:#151312"><strong>3D Experiment</strong><span>Interactive</span></figcaption>
       </figure>
     </div>
   </div>
@@ -371,7 +382,8 @@ nav[aria-label="Primary"] a[aria-current="true"]{color:var(--red);box-shadow:ins
   var defaults = {
     reach: { x: 3, y: 3, r: -2, w: 40 }, note1: { x: 48, y: 2, r: -1, w: 22 },
     first: { x: 28, y: 46, r: 6, w: 20 }, portrait: { x: 55, y: 20, r: 1.5, w: 38 },
-    note2: { x: 4, y: 70, r: 1, w: 22 }, miniHead: { x: 56, y: 68, r: -3, w: 20 }, blade: { x: 78, y: 46, r: 2.5, w: 20 }
+    note2: { x: 4, y: 70, r: 1, w: 22 }, miniHead: { x: 56, y: 68, r: -3, w: 20 }, blade: { x: 78, y: 46, r: 2.5, w: 20 },
+    spline: { x: 80, y: 4, r: -2.5, w: 18 }
   };
   var pieces = JSON.parse(JSON.stringify(defaults));
   var zIndex = {}, topZ = 10, drag = null;

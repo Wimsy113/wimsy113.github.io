@@ -387,7 +387,8 @@
     var dlg = document.getElementById('loupe');
     if (!dlg || typeof dlg.showModal !== 'function') {
       // No <dialog> support: the print buttons open the image directly.
-      prints.forEach(function (p) { p.addEventListener('click', function () { if (!p.dataset.dragged) window.open(p.dataset.full, '_blank', 'noopener'); }); });
+      // Items with no data-full (e.g. an embedded 3D piece) aren't photos to loupe.
+      prints.forEach(function (p) { if (!p.dataset.full) return; p.addEventListener('click', function () { if (!p.dataset.dragged) window.open(p.dataset.full, '_blank', 'noopener'); }); });
       return;
     }
     var img = document.getElementById('loupeImg');
@@ -428,6 +429,8 @@
     dlg.addEventListener('close', function () { img.removeAttribute('src'); if (opener) opener.focus(); });
 
     prints.forEach(function (p, n) {
+      // Items with no data-full (e.g. an embedded 3D piece) aren't photos to loupe.
+      if (!p.dataset.full) return;
       p.setAttribute('aria-label', 'Look closer: ' + (p.dataset.title || '') + (p.dataset.sub ? ', ' + p.dataset.sub : ''));
       p.addEventListener('click', function (e) {
         if (p.dataset.dragged) { e.preventDefault(); delete p.dataset.dragged; return; }
@@ -447,15 +450,20 @@
 
     prints.forEach(function (p) {
       var startX, startY, baseX, baseY, moved, id = null;
+      // An item with its own grab handle (e.g. an embedded 3D piece,
+      // which needs its own pointer events for orbit/zoom) drags from
+      // that handle instead of capturing pointer events across its
+      // whole surface, same as the other items.
+      var handle = p.querySelector('.print-handle') || p;
 
-      p.addEventListener('pointerdown', function (e) {
+      handle.addEventListener('pointerdown', function (e) {
         if (!canDrag.matches || e.button !== 0) return;
         id = e.pointerId; moved = false;
         startX = e.clientX; startY = e.clientY;
         baseX = p.offsetLeft; baseY = p.offsetTop;
-        p.setPointerCapture(id);
+        handle.setPointerCapture(id);
       });
-      p.addEventListener('pointermove', function (e) {
+      handle.addEventListener('pointermove', function (e) {
         if (id !== e.pointerId) return;
         var dx = e.clientX - startX, dy = e.clientY - startY;
         if (!moved && Math.abs(dx) + Math.abs(dy) < 6) return;
@@ -476,8 +484,8 @@
           setTimeout(function () { delete p.dataset.dragged; }, 80);
         }
       }
-      p.addEventListener('pointerup', end);
-      p.addEventListener('pointercancel', end);
+      handle.addEventListener('pointerup', end);
+      handle.addEventListener('pointercancel', end);
     });
   });
 
