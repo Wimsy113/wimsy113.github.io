@@ -627,7 +627,7 @@ html:not(.js) .drawer { grid-template-rows: 1fr; }
   border: 1px solid rgba(255, 255, 255, .3); border-radius: 2px; background: rgba(0, 0, 0, .5);
   color: #fff; font-size: 22px; line-height: 1; cursor: pointer;
 }
-.spline-dialog__stage { width: min(90vw, 1400px); height: min(88vh, 1000px); }
+.spline-dialog__stage { width: 100%; height: 100%; }
 .spline-dialog__stage spline-viewer { display: block; width: 100%; height: 100%; }
 
 .bench__more {

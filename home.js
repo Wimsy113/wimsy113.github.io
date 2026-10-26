@@ -503,7 +503,18 @@
       dlg.showModal();
     });
     closeBtn.addEventListener('click', function () { dlg.close(); });
-    dlg.addEventListener('click', function (e) { if (e.target === dlg) dlg.close(); });
+    // The stage now fills the whole dialog, so there's no empty
+    // "backdrop" area left to click -- a plain tap anywhere closes it
+    // instead, but a press-drag-release (orbiting the model) does not.
+    var dsx = 0, dsy = 0, dialogDragged = false;
+    dlg.addEventListener('pointerdown', function (e) { dsx = e.clientX; dsy = e.clientY; dialogDragged = false; });
+    dlg.addEventListener('pointermove', function (e) {
+      if (Math.abs(e.clientX - dsx) + Math.abs(e.clientY - dsy) > 8) dialogDragged = true;
+    });
+    dlg.addEventListener('click', function (e) {
+      if (e.target === closeBtn || dialogDragged) return;
+      dlg.close();
+    });
     // Fires after any close -- the close button, a backdrop click, or
     // the browser's own native Escape handling -- so the viewer always
     // goes back to its spot on the bench exactly once, however it closed.
