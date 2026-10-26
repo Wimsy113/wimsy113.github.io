@@ -613,11 +613,7 @@ html:not(.js) .drawer { grid-template-rows: 1fr; }
   transition: filter .25s ease;
 }
 .spline-trigger:hover, .spline-trigger:focus-visible { filter: drop-shadow(0 0 18px rgba(134, 168, 110, .55)); outline: none; }
-.spline-trigger spline-viewer { display: block; width: 100%; height: 100%; pointer-events: none; }
-/* spline-viewer renders through an internal iframe that can carry its
-   own fixed sizing/overflow -- force it to actually fill whatever box
-   we've given the custom element, in every state. */
-spline-viewer iframe { display: block !important; width: 100% !important; height: 100% !important; min-width: 100% !important; min-height: 100% !important; max-width: none !important; overflow: visible !important; border: 0 !important; }
+.spline-trigger canvas { display: block; width: 100%; height: 100%; pointer-events: none; }
 
 .spline-dialog {
   position: fixed; inset: 0; margin: 0; width: 100%; height: 100%; max-width: none; max-height: none;
@@ -632,7 +628,7 @@ spline-viewer iframe { display: block !important; width: 100% !important; height
   color: #fff; font-size: 22px; line-height: 1; cursor: pointer;
 }
 .spline-dialog__stage { width: 100%; height: 100%; }
-.spline-dialog__stage spline-viewer { display: block; width: 100%; height: 100%; }
+.spline-dialog__stage canvas { display: block; width: 100%; height: 100%; }
 
 .bench__more {
   position: relative; display: inline-flex; align-items: center; gap: 10px; margin-top: clamp(16px, 2vw, 28px);

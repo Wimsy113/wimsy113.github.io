@@ -489,32 +489,47 @@
     });
   });
 
-  /* ---------- Workbench: the laptop -- static, click opens it full-viewport ---------- */
+  /* ---------- Workbench: the laptop -- static, click opens it full-viewport ----------
+     Renders straight onto a <canvas> via @splinetool/runtime instead of the
+     <spline-viewer> web component: that component renders through an
+     internal iframe with its own sizing/overflow that a page's CSS can't
+     reliably reach (confirmed via devtools: the iframe carries
+     overflow:clip and isn't affected by width/height set on the custom
+     element). A canvas we create and size ourselves has no such layer. */
   boot('spline-dialog', function () {
     var trigger = document.getElementById('splineTrigger');
+    var previewCanvas = document.getElementById('splinePreviewCanvas');
     var dlg = document.getElementById('splineDialog');
     var stage = document.getElementById('splineDialogStage');
     var closeBtn = document.getElementById('splineDialogClose');
-    if (!trigger || !dlg || !stage || !closeBtn || typeof dlg.showModal !== 'function') return;
-    var previewViewer = trigger.querySelector('spline-viewer');
-    var sceneUrl = previewViewer ? previewViewer.getAttribute('url') : '';
+    if (!trigger || !previewCanvas || !dlg || !stage || !closeBtn || typeof dlg.showModal !== 'function') return;
+    var sceneUrl = previewCanvas.dataset.splineUrl;
+    if (!sceneUrl) return;
 
-    // A dedicated full-size instance, not the small preview moved over --
-    // reparenting it risked it keeping whatever internal canvas size it
-    // measured itself at before the move, instead of filling the dialog.
-    // Created lazily on first open so the scene isn't loaded twice before
-    // anyone actually opens it.
-    var fullViewer = null;
+    var runtimeImport = import('https://esm.sh/@splinetool/runtime@2.0.112');
+
+    runtimeImport.then(function (mod) {
+      var app = new mod.Application(previewCanvas);
+      app.load(sceneUrl);
+    }).catch(function (err) { if (window.console) console.error('[home] spline preview failed:', err); });
+
+    // A dedicated canvas for the fullscreen view, not the small preview's
+    // own -- created lazily on first open so the scene isn't loaded twice
+    // before anyone actually opens it, and sized/attached to the already-
+    // visible dialog before the runtime ever measures it.
+    var fullLoaded = false;
     trigger.addEventListener('click', function () {
-      if (!fullViewer && sceneUrl) {
-        fullViewer = document.createElement('spline-viewer');
-        fullViewer.setAttribute('url', sceneUrl);
-        fullViewer.style.display = 'block';
-        fullViewer.style.width = '100%';
-        fullViewer.style.height = '100%';
-        stage.appendChild(fullViewer);
-      }
       dlg.showModal();
+      if (!fullLoaded) {
+        fullLoaded = true;
+        var canvas = document.createElement('canvas');
+        canvas.id = 'splineDialogCanvas';
+        stage.appendChild(canvas);
+        runtimeImport.then(function (mod) {
+          var app = new mod.Application(canvas);
+          app.load(sceneUrl);
+        }).catch(function (err) { if (window.console) console.error('[home] spline dialog failed:', err); });
+      }
     });
     closeBtn.addEventListener('click', function () { dlg.close(); });
     // The stage fills the whole dialog, so there's no empty "backdrop"

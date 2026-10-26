@@ -9,7 +9,6 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Space+Mono:wght@400;700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-<script type="module" src="https://unpkg.com/@splinetool/viewer@2.0.111/build/spline-viewer.js"></script>
 <script>document.documentElement.classList.add('js');try{if(localStorage.getItem('ke-theme')==='light')document.documentElement.setAttribute('data-theme','light');}catch(e){}
 /* Entrance: the full choreography once per tab session on a plain visit; a short one otherwise; none with reduced motion. */
 try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches){var d=document.documentElement;d.classList.add('entrance');d.setAttribute('data-entrance',(!location.hash&&!sessionStorage.getItem('ke-entrance'))?'full':'short');sessionStorage.setItem('ke-entrance','1');}}catch(e){}</script>
@@ -336,7 +335,7 @@ try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches){var d=document.d
 
       <div class="spline-perch" style="--x:80%;--y:80%;--w:14%;--r:-1.5deg">
         <button type="button" class="spline-trigger" id="splineTrigger" aria-haspopup="dialog" aria-label="Look closer">
-          <spline-viewer url="https://prod.spline.design/w8mLFGBQmWLy1FlY/scene.splinecode"></spline-viewer>
+          <canvas id="splinePreviewCanvas" data-spline-url="https://prod.spline.design/w8mLFGBQmWLy1FlY/scene.splinecode"></canvas>
         </button>
       </div>
     </div>

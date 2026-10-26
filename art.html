@@ -8,7 +8,6 @@
 <meta name="description" content="Krystyna Ewing's workbench — illustration, character work, and physical art, outside the client work.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
-<script type="module" src="https://unpkg.com/@splinetool/viewer@2.0.111/build/spline-viewer.js"></script>
 <script src="./image-slot.js"></script>
 <script>try{if(localStorage.getItem('ke-theme')==='light')document.documentElement.setAttribute('data-theme','light');}catch(e){}</script>
 <style>
@@ -59,13 +58,10 @@ nav[aria-label="Primary"] a[aria-current="true"]{color:var(--red);box-shadow:ins
 .piece-drag:active{cursor:grabbing}
 /* a faint, reactive cue -- not a label -- that this piece responds to you. */
 .spline-stage:hover,.spline-stage:focus-visible{filter:drop-shadow(0 0 18px rgba(134,168,110,.55));outline:none}
-/* spline-viewer renders through an internal iframe that can carry its
-   own fixed sizing/overflow -- force it to actually fill whatever box
-   we've given the custom element, in every state. */
-spline-viewer iframe{display:block!important;width:100%!important;height:100%!important;min-width:100%!important;min-height:100%!important;max-width:none!important;overflow:visible!important;border:0!important}
+.spline-stage canvas{display:block;width:100%;height:100%;pointer-events:none}
 #splineDialog{display:none}
 #splineDialog[open]{display:flex}
-#splineDialogStage spline-viewer{display:block;width:100%;height:100%}
+#splineDialogStage canvas{display:block;width:100%;height:100%}
 
 #lightbox{display:none}
 #lightbox[data-open="true"]{display:grid}
@@ -186,7 +182,7 @@ spline-viewer iframe{display:block!important;width:100%!important;height:100%!im
     <div class="piece" id="piece-spline" data-id="spline">
       <figure style="margin:0">
         <button type="button" id="splineTrigger" class="spline-stage" aria-haspopup="dialog" aria-label="Look closer" style="display:block;width:100%;padding:0;border:0;aspect-ratio:1/1;background:transparent;cursor:pointer;transition:filter .25s ease">
-          <spline-viewer url="https://prod.spline.design/w8mLFGBQmWLy1FlY/scene.splinecode" style="display:block;width:100%;height:100%;pointer-events:none"></spline-viewer>
+          <canvas id="splinePreviewCanvas" data-spline-url="https://prod.spline.design/w8mLFGBQmWLy1FlY/scene.splinecode"></canvas>
         </button>
       </figure>
     </div>
@@ -476,29 +472,46 @@ spline-viewer iframe{display:block!important;width:100%!important;height:100%!im
   });
 
   // ---- the laptop: static (no drag), click opens it full-viewport ----
+  // Renders straight onto a <canvas> via @splinetool/runtime instead of
+  // the <spline-viewer> web component: that component renders through an
+  // internal iframe with its own sizing/overflow a page's CSS can't
+  // reliably reach (confirmed via devtools: the iframe carries
+  // overflow:clip and isn't affected by width/height on the custom
+  // element). A canvas we create and size ourselves has no such layer.
   (function(){
     var trigger = document.getElementById('splineTrigger');
+    var previewCanvas = document.getElementById('splinePreviewCanvas');
     var splineDlg = document.getElementById('splineDialog');
     var splineStage = document.getElementById('splineDialogStage');
     var splineClose = document.getElementById('splineDialogClose');
-    if (!trigger || !splineDlg || !splineStage || !splineClose || typeof splineDlg.showModal !== 'function') return;
-    var previewViewer = trigger.querySelector('spline-viewer');
-    var sceneUrl = previewViewer ? previewViewer.getAttribute('url') : '';
+    if (!trigger || !previewCanvas || !splineDlg || !splineStage || !splineClose || typeof splineDlg.showModal !== 'function') return;
+    var sceneUrl = previewCanvas.dataset.splineUrl;
+    if (!sceneUrl) return;
 
-    // A dedicated full-size instance, not the small preview moved over --
-    // reparenting it risked it keeping whatever internal canvas size it
-    // measured itself at before the move, instead of filling the dialog.
-    var fullViewer = null;
+    var runtimeImport = import('https://esm.sh/@splinetool/runtime@2.0.112');
+
+    runtimeImport.then(function (mod) {
+      var app = new mod.Application(previewCanvas);
+      app.load(sceneUrl);
+    }).catch(function (err) { if (window.console) console.error('spline preview failed:', err); });
+
+    // A dedicated canvas for the fullscreen view, created lazily on first
+    // open so the scene isn't loaded twice before anyone opens it, and
+    // sized/attached to the already-visible dialog before the runtime
+    // ever measures it.
+    var fullLoaded = false;
     trigger.addEventListener('click', function(){
-      if (!fullViewer && sceneUrl) {
-        fullViewer = document.createElement('spline-viewer');
-        fullViewer.setAttribute('url', sceneUrl);
-        fullViewer.style.display = 'block';
-        fullViewer.style.width = '100%';
-        fullViewer.style.height = '100%';
-        splineStage.appendChild(fullViewer);
-      }
       splineDlg.showModal();
+      if (!fullLoaded) {
+        fullLoaded = true;
+        var canvas = document.createElement('canvas');
+        canvas.id = 'splineDialogCanvas';
+        splineStage.appendChild(canvas);
+        runtimeImport.then(function (mod) {
+          var app = new mod.Application(canvas);
+          app.load(sceneUrl);
+        }).catch(function (err) { if (window.console) console.error('spline dialog failed:', err); });
+      }
     });
     splineClose.addEventListener('click', function(){ splineDlg.close(); });
     var dsx = 0, dsy = 0, dialogDragged = false;
