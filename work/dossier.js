@@ -81,7 +81,6 @@
   /* ---------- Callouts: figures the text already states, in the margin ---------- */
   var CALLOUTS = [
     { s: 's04', before: 1, big: '10', label: '“the interface surfaced the top ten hazards”' },
-    { s: 's07', before: -1, big: '400–500 ft', label: '“a roughly 400 to 500 foot geographic buffer”' },
     { s: 's08', before: -1, big: 'PNG · PDF', label: '“visualizations and information to be exported as PNG or PDF”' },
     { s: 's09', before: 1, big: '4', label: '“four inclusivity showstoppers”' },
     { s: 's11', before: 1, big: 'May–Aug 2024', label: '“acceptance testing between approximately May and August 2024”' }
