@@ -58,7 +58,7 @@ nav[aria-label="Primary"] a[aria-current="true"]{color:var(--red);box-shadow:ins
 .piece-drag{cursor:grab;touch-action:none}
 .piece-drag:active{cursor:grabbing}
 /* a faint, reactive cue -- not a label -- that this piece responds to you. */
-.spline-stage:hover,.spline-stage:focus-visible{box-shadow:0 0 26px 2px rgba(134,168,110,.4)}
+.spline-stage:hover,.spline-stage:focus-visible{filter:drop-shadow(0 0 18px rgba(134,168,110,.55));outline:none}
 #splineDialog{display:none}
 #splineDialog[open]{display:flex}
 #splineDialogStage spline-viewer{display:block;width:100%;height:100%}
@@ -181,7 +181,7 @@ nav[aria-label="Primary"] a[aria-current="true"]{color:var(--red);box-shadow:ins
 
     <div class="piece" id="piece-spline" data-id="spline">
       <figure style="margin:0">
-        <button type="button" id="splineTrigger" class="spline-stage" aria-haspopup="dialog" aria-label="Look closer" style="display:block;width:100%;padding:0;border:0;aspect-ratio:1/1;background:#111;overflow:hidden;cursor:pointer;transition:box-shadow .25s ease">
+        <button type="button" id="splineTrigger" class="spline-stage" aria-haspopup="dialog" aria-label="Look closer" style="display:block;width:100%;padding:0;border:0;aspect-ratio:1/1;background:transparent;cursor:pointer;transition:filter .25s ease">
           <spline-viewer url="https://prod.spline.design/w8mLFGBQmWLy1FlY/scene.splinecode" style="display:block;width:100%;height:100%;pointer-events:none"></spline-viewer>
         </button>
       </figure>
