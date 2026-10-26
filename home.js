@@ -489,6 +489,30 @@
     });
   });
 
+  /* ---------- Workbench: the laptop -- static, click opens it full-viewport ---------- */
+  boot('spline-dialog', function () {
+    var trigger = document.getElementById('splineTrigger');
+    var dlg = document.getElementById('splineDialog');
+    var stage = document.getElementById('splineDialogStage');
+    var closeBtn = document.getElementById('splineDialogClose');
+    if (!trigger || !dlg || !stage || !closeBtn || typeof dlg.showModal !== 'function') return;
+
+    trigger.addEventListener('click', function () {
+      var viewer = trigger.querySelector('spline-viewer');
+      if (viewer) stage.appendChild(viewer);
+      dlg.showModal();
+    });
+    closeBtn.addEventListener('click', function () { dlg.close(); });
+    dlg.addEventListener('click', function (e) { if (e.target === dlg) dlg.close(); });
+    // Fires after any close -- the close button, a backdrop click, or
+    // the browser's own native Escape handling -- so the viewer always
+    // goes back to its spot on the bench exactly once, however it closed.
+    dlg.addEventListener('close', function () {
+      var viewer = stage.querySelector('spline-viewer');
+      if (viewer) trigger.appendChild(viewer);
+    });
+  });
+
   /* ---------- Nav: light the key for the section in view ---------- */
   boot('scrollspy', function () {
     if (!('IntersectionObserver' in window)) return;

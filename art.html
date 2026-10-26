@@ -58,7 +58,10 @@ nav[aria-label="Primary"] a[aria-current="true"]{color:var(--red);box-shadow:ins
 .piece-drag{cursor:grab;touch-action:none}
 .piece-drag:active{cursor:grabbing}
 /* a faint, reactive cue -- not a label -- that this piece responds to you. */
-.spline-stage:hover{box-shadow:0 0 26px 2px rgba(134,168,110,.4)}
+.spline-stage:hover,.spline-stage:focus-visible{box-shadow:0 0 26px 2px rgba(134,168,110,.4)}
+#splineDialog{display:none}
+#splineDialog[open]{display:flex}
+#splineDialogStage spline-viewer{display:block;width:100%;height:100%}
 
 #lightbox{display:none}
 #lightbox[data-open="true"]{display:grid}
@@ -177,11 +180,10 @@ nav[aria-label="Primary"] a[aria-current="true"]{color:var(--red);box-shadow:ins
     </div>
 
     <div class="piece" id="piece-spline" data-id="spline">
-      <figure style="margin:0;position:relative">
-        <button type="button" class="piece-drag mono" data-piece="spline" aria-label="Move laptop. Drag, or use arrow keys." style="position:absolute;top:-16px;left:15%;transform:rotate(3deg);min-height:36px;padding:0 14px;border:0;background:rgba(226,214,188,.92);color:#151312;font:700 11px/1 'Space Mono',monospace;letter-spacing:.08em;text-transform:uppercase;z-index:2">&#x28FF;</button>
-        <div class="spline-stage" style="position:relative;width:100%;aspect-ratio:1/1;background:#111;overflow:hidden;transition:box-shadow .25s ease">
-          <spline-viewer url="https://prod.spline.design/w8mLFGBQmWLy1FlY/scene.splinecode" style="display:block;width:100%;height:100%"></spline-viewer>
-        </div>
+      <figure style="margin:0">
+        <button type="button" id="splineTrigger" class="spline-stage" aria-haspopup="dialog" aria-label="Look closer" style="display:block;width:100%;padding:0;border:0;aspect-ratio:1/1;background:#111;overflow:hidden;cursor:pointer;transition:box-shadow .25s ease">
+          <spline-viewer url="https://prod.spline.design/w8mLFGBQmWLy1FlY/scene.splinecode" style="display:block;width:100%;height:100%;pointer-events:none"></spline-viewer>
+        </button>
       </figure>
     </div>
   </div>
@@ -264,6 +266,11 @@ nav[aria-label="Primary"] a[aria-current="true"]{color:var(--red);box-shadow:ins
   <a href="mailto:hello@krystynaewing.com" style="color:var(--ink)">hello@krystynaewing.com</a>
   <a href="#main" style="min-height:44px;display:inline-flex;align-items:center">[ ^ top ]</a>
 </footer>
+
+<dialog id="splineDialog" aria-label="Look closer" style="position:fixed;inset:0;margin:0;width:100%;height:100%;max-width:none;max-height:none;padding:0;border:0;background:rgba(5,5,5,.92);align-items:center;justify-content:center">
+  <button type="button" id="splineDialogClose" aria-label="Close" style="position:fixed;top:18px;right:18px;z-index:2;width:44px;height:44px;border:1px solid rgba(255,255,255,.3);border-radius:2px;background:rgba(0,0,0,.5);color:#fff;font-size:22px;line-height:1;cursor:pointer">&times;</button>
+  <div id="splineDialogStage" style="width:min(90vw,1400px);height:min(88vh,1000px)"></div>
+</dialog>
 
 <div id="lightbox" role="dialog" aria-modal="true" aria-labelledby="lb-title" style="position:fixed;inset:0;z-index:260;background:var(--bg);color:var(--ink);grid-template-rows:auto minmax(0,1fr) auto;gap:16px;padding:clamp(14px,2.4vw,32px)">
   <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-start;gap:16px">
@@ -463,6 +470,26 @@ nav[aria-label="Primary"] a[aria-current="true"]{color:var(--red);box-shadow:ins
     zIndex = {};
     Object.keys(pieces).forEach(layoutPiece);
   });
+
+  // ---- the laptop: static (no drag), click opens it full-viewport ----
+  (function(){
+    var trigger = document.getElementById('splineTrigger');
+    var splineDlg = document.getElementById('splineDialog');
+    var splineStage = document.getElementById('splineDialogStage');
+    var splineClose = document.getElementById('splineDialogClose');
+    if (!trigger || !splineDlg || !splineStage || !splineClose || typeof splineDlg.showModal !== 'function') return;
+    trigger.addEventListener('click', function(){
+      var viewer = trigger.querySelector('spline-viewer');
+      if (viewer) splineStage.appendChild(viewer);
+      splineDlg.showModal();
+    });
+    splineClose.addEventListener('click', function(){ splineDlg.close(); });
+    splineDlg.addEventListener('click', function(e){ if (e.target === splineDlg) splineDlg.close(); });
+    splineDlg.addEventListener('close', function(){
+      var viewer = splineStage.querySelector('spline-viewer');
+      if (viewer) trigger.appendChild(viewer);
+    });
+  })();
 
   var flashTimer = null;
   function jumpTo(id){
