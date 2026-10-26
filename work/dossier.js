@@ -122,14 +122,14 @@
       var f = el('figure', 'dz-compare__side ' + cls);
       var frame = el('button', 'dz-compare__frame');
       frame.type = 'button';
-      frame.setAttribute('aria-label', 'Inspect ' + num + ' — ' + caption);
+      frame.setAttribute('aria-label', 'Inspect ' + num + ' · ' + caption);
       var img = srcBtn.querySelector('img').cloneNode(false);
       img.removeAttribute('style');
       img.removeAttribute('loading'); // its original is already loaded or loading; don't leave an empty frame
       frame.appendChild(img);
       frame.addEventListener('click', function () { srcBtn.click(); }); // opens the page's own viewer
       var cap = el('p', 'dz-compare__cap');
-      cap.innerHTML = '<span>' + num + '</span> — ' + caption;
+      cap.innerHTML = '<span>' + num + '</span> · ' + caption;
       var q = el('blockquote', 'dz-compare__quote', quote);
       q.setAttribute('aria-hidden', 'true');
       q.appendChild(el('cite', null, cite));
