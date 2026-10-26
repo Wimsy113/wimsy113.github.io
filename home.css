@@ -263,6 +263,7 @@ main::before { /* the spine that ties every section together */
   background: var(--line-strong);
 }
 .seam__idx { font: 600 12px/1 var(--f-mono); letter-spacing: .1em; color: var(--accent); }
+.work .seam__idx { flex-basis: 100%; }
 .seam__title { margin: 0; font: 700 clamp(32px, 3.6vw, 52px)/.9 var(--f-display); letter-spacing: .03em; text-transform: uppercase; white-space: nowrap; }
 .seam__rule {
   flex: 1 1 auto; height: 9px;
