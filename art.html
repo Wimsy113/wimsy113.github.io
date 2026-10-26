@@ -488,11 +488,13 @@ nav[aria-label="Primary"] a[aria-current="true"]{color:var(--red);box-shadow:ins
     var sceneUrl = previewCanvas.dataset.splineUrl;
     if (!sceneUrl) return;
 
-    var runtimeImport = import('https://esm.sh/@splinetool/runtime@2.0.112');
+    var runtimeImport = import('https://cdn.jsdelivr.net/npm/@splinetool/runtime@2.0.113/+esm');
 
     runtimeImport.then(function (mod) {
       var app = new mod.Application(previewCanvas);
-      app.load(sceneUrl);
+      app.load(sceneUrl).then(function () {
+        if (window.console) console.log('spline preview loaded');
+      });
     }).catch(function (err) { if (window.console) console.error('spline preview failed:', err); });
 
     // A dedicated canvas for the fullscreen view, created lazily on first
@@ -509,7 +511,9 @@ nav[aria-label="Primary"] a[aria-current="true"]{color:var(--red);box-shadow:ins
         splineStage.appendChild(canvas);
         runtimeImport.then(function (mod) {
           var app = new mod.Application(canvas);
-          app.load(sceneUrl);
+          app.load(sceneUrl).then(function () {
+            if (window.console) console.log('spline dialog loaded');
+          });
         }).catch(function (err) { if (window.console) console.error('spline dialog failed:', err); });
       }
     });

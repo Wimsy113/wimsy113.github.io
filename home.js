@@ -506,11 +506,13 @@
     var sceneUrl = previewCanvas.dataset.splineUrl;
     if (!sceneUrl) return;
 
-    var runtimeImport = import('https://esm.sh/@splinetool/runtime@2.0.112');
+    var runtimeImport = import('https://cdn.jsdelivr.net/npm/@splinetool/runtime@2.0.113/+esm');
 
     runtimeImport.then(function (mod) {
       var app = new mod.Application(previewCanvas);
-      app.load(sceneUrl);
+      app.load(sceneUrl).then(function () {
+        if (window.console) console.log('[home] spline preview loaded');
+      });
     }).catch(function (err) { if (window.console) console.error('[home] spline preview failed:', err); });
 
     // A dedicated canvas for the fullscreen view, not the small preview's
@@ -527,7 +529,9 @@
         stage.appendChild(canvas);
         runtimeImport.then(function (mod) {
           var app = new mod.Application(canvas);
-          app.load(sceneUrl);
+          app.load(sceneUrl).then(function () {
+            if (window.console) console.log('[home] spline dialog loaded');
+          });
         }).catch(function (err) { if (window.console) console.error('[home] spline dialog failed:', err); });
       }
     });
