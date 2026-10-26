@@ -616,8 +616,10 @@ html:not(.js) .drawer { grid-template-rows: 1fr; }
   cursor: grab; box-shadow: 0 1px 2px rgba(0, 0, 0, .2);
 }
 .print-handle:active { cursor: grabbing; }
-.print-spline-stage { position: relative; width: 100%; aspect-ratio: 1 / 1; background: #111; overflow: hidden; border-radius: 1px; }
+.print-spline-stage { position: relative; width: 100%; aspect-ratio: 1 / 1; background: #111; overflow: hidden; border-radius: 1px; transition: box-shadow .25s ease; }
 .print-spline-stage spline-viewer { display: block; width: 100%; height: 100%; }
+/* a faint, reactive cue -- not a label -- that this piece responds to you. */
+.print-spline-stage:hover { box-shadow: 0 0 26px 2px rgba(134, 168, 110, .4); }
 
 .bench__more {
   position: relative; display: inline-flex; align-items: center; gap: 10px; margin-top: clamp(16px, 2vw, 28px);
