@@ -614,6 +614,10 @@ html:not(.js) .drawer { grid-template-rows: 1fr; }
 }
 .spline-trigger:hover, .spline-trigger:focus-visible { filter: drop-shadow(0 0 18px rgba(134, 168, 110, .55)); outline: none; }
 .spline-trigger spline-viewer { display: block; width: 100%; height: 100%; pointer-events: none; }
+/* spline-viewer renders through an internal iframe that can carry its
+   own fixed sizing/overflow -- force it to actually fill whatever box
+   we've given the custom element, in every state. */
+spline-viewer iframe { display: block !important; width: 100% !important; height: 100% !important; min-width: 100% !important; min-height: 100% !important; max-width: none !important; overflow: visible !important; border: 0 !important; }
 
 .spline-dialog {
   position: fixed; inset: 0; margin: 0; width: 100%; height: 100%; max-width: none; max-height: none;
