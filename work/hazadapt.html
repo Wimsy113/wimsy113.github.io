@@ -156,6 +156,8 @@ nav[aria-label="Primary"] a[aria-current="true"]{color:var(--red);box-shadow:ins
   <a href="#main" style="min-height:44px;display:inline-flex;align-items:center">[ ^ top ]</a>
 </footer>
 
+<canvas id="canvas3d" style="display:block;width:100%;aspect-ratio:16/10;background:transparent"></canvas>
+
 <script>
 (function(){
   'use strict';
@@ -219,6 +221,17 @@ nav[aria-label="Primary"] a[aria-current="true"]{color:var(--red);box-shadow:ins
 
   html.classList.add('js-ready');
 })();
+</script>
+
+<script type="module">
+import { Application } from 'https://cdn.jsdelivr.net/npm/@splinetool/runtime@2.0.118/+esm';
+
+const canvas = document.getElementById('canvas3d');
+// htmlContentMode 'inline' runs the scene's HTML content (if any) directly in
+// this page — zero-latency window.spline. Use the default 'sandbox' instead
+// if this page embeds scenes you didn't author.
+const app = new Application(canvas, { htmlContentMode: 'inline' });
+app.load('https://prod.spline.design/wOq0j-lqs0PBKTfW/scene.splinecode');
 </script>
 </body>
 </html>
