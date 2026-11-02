@@ -289,23 +289,16 @@
     sections.concat($$('figure.dz-reveal', main)).forEach(function (t) { if (t.getBoundingClientRect().top < vh) t.classList.add('is-in'); });
   });
 
-  /* ---------- Viewer: 1:1 zoom with drag-to-pan, and a figure counter ---------- */
+  /* ---------- Viewer: figure counter ---------- */
   boot('viewer', function () {
     var lb = document.getElementById('lightbox');
     if (!lb) return;
     var stage = lb.children[1];
-    var barEl = lb.children[2];
-    var next = document.getElementById('lbNext');
     var caption = document.getElementById('lbCaption');
     var imgs = $$('img', stage);
 
-    var zoom = el('button', 'lb-nav', 'Zoom 1:1');
-    zoom.type = 'button';
-    zoom.setAttribute('aria-pressed', 'false');
-    zoom.style.cssText = "font:700 12px/1 'Space Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:#F2F0E9;background:transparent;border:1px solid #F2F0E9;padding:0 16px;min-height:44px;cursor:pointer";
     var counter = el('span', null, '');
     counter.style.cssText = "font:700 12px/1 'Space Mono',monospace;letter-spacing:.08em;color:#A8FF00;margin-right:10px";
-    if (barEl && next) barEl.insertBefore(zoom, next);
     // Beside the caption, not inside it: the page's own script rewrites the caption text.
     if (caption) {
       var capWrap = el('div');
@@ -316,51 +309,13 @@
     }
 
     function activeImg() { return imgs.filter(function (i) { return i.getAttribute('data-active') === 'true'; })[0]; }
-    function setZoom(on) {
-      var img = activeImg();
-      zoom.setAttribute('aria-pressed', on ? 'true' : 'false');
-      zoom.textContent = on ? 'Fit to screen' : 'Zoom 1:1';
-      stage.style.overflow = on ? 'auto' : '';
-      stage.style.alignItems = on ? 'flex-start' : '';
-      stage.style.justifyContent = on ? 'flex-start' : '';
-      stage.style.cursor = on ? 'grab' : '';
-      imgs.forEach(function (i) { i.style.maxWidth = ''; i.style.maxHeight = ''; i.style.cursor = 'zoom-in'; });
-      if (on && img) {
-        img.style.maxWidth = 'none'; img.style.maxHeight = 'none'; img.style.cursor = 'grab';
-        stage.scrollLeft = (img.scrollWidth - stage.clientWidth) / 2;
-        stage.scrollTop = 0;
-      }
-    }
     function sync() {
       setTimeout(function () {
         var img = activeImg();
         if (img) counter.textContent = String(+img.getAttribute('data-fig-img') + 1).padStart(2, '0') + ' / ' + String(imgs.length).padStart(2, '0');
-        setZoom(false);
       }, 0);
     }
-    zoom.addEventListener('click', function () { setZoom(zoom.getAttribute('aria-pressed') !== 'true'); });
-    imgs.forEach(function (i) {
-      i.style.cursor = 'zoom-in';
-      i.addEventListener('click', function () { if (!moved) setZoom(zoom.getAttribute('aria-pressed') !== 'true'); });
-    });
-    // Drag to pan while zoomed.
-    var drag = null, moved = false;
-    stage.addEventListener('pointerdown', function (e) {
-      if (zoom.getAttribute('aria-pressed') !== 'true') return;
-      drag = { x: e.clientX, y: e.clientY, l: stage.scrollLeft, t: stage.scrollTop }; moved = false;
-      stage.setPointerCapture(e.pointerId); stage.style.cursor = 'grabbing';
-    });
-    stage.addEventListener('pointermove', function (e) {
-      if (!drag) return;
-      var dx = e.clientX - drag.x, dy = e.clientY - drag.y;
-      if (Math.abs(dx) + Math.abs(dy) > 4) moved = true;
-      stage.scrollLeft = drag.l - dx; stage.scrollTop = drag.t - dy;
-    });
-    function endDrag() { if (drag) { drag = null; stage.style.cursor = 'grab'; setTimeout(function () { moved = false; }, 0); } }
-    stage.addEventListener('pointerup', endDrag);
-    stage.addEventListener('pointercancel', endDrag);
     lb.addEventListener('keydown', function (e) {
-      if (e.key === 'z' || e.key === 'Z') { e.preventDefault(); setZoom(zoom.getAttribute('aria-pressed') !== 'true'); }
       if (e.key === 'ArrowLeft' || e.key === 'ArrowRight' || e.key === 'Escape') sync();
     });
     ['lbPrev', 'lbNext', 'lbClose'].forEach(function (id) { var b = document.getElementById(id); if (b) b.addEventListener('click', sync); });

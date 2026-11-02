@@ -199,8 +199,7 @@ a{color:inherit}
 #inspectorClose{position:absolute;top:16px;right:16px;width:44px;height:44px;border:1px solid var(--line);background:var(--panel);color:var(--ink);font:700 16px/1 'Space Mono',monospace;cursor:pointer;z-index:2}
 #inspectorClose:hover{color:var(--accent);border-color:var(--accent)}
 #inspectorStage{flex:1;min-height:0;display:flex;align-items:center;justify-content:center;overflow:auto;padding:clamp(20px,6vw,56px)}
-#inspectorStage img{max-width:100%;max-height:100%;cursor:zoom-in}
-#inspectorStage img.zoomed{max-width:none;max-height:none;width:min(1400px,170%);cursor:zoom-out}
+#inspectorStage img{max-width:100%;max-height:100%}
 #inspectorCaption{flex:0 0 auto;padding:14px;text-align:center;font:400 13px/1.5 'Space Mono',monospace;letter-spacing:.06em;color:var(--dim);border-top:1px solid var(--line)}
 
 /* ---- mobile: icon rail collapses to a top bar; no nav rail -- a
@@ -689,7 +688,6 @@ a{color:inherit}
     lastFocused = document.activeElement;
     inspectorImg.src = img.currentSrc || img.src;
     inspectorImg.alt = img.alt;
-    inspectorImg.classList.remove('zoomed');
     if (inspectorCaption) inspectorCaption.innerHTML = captionHTML || '';
     inspector.classList.remove('hidden');
     if (inspectorClose) inspectorClose.focus();
@@ -699,9 +697,7 @@ a{color:inherit}
     inspector.classList.add('hidden');
     if (lastFocused && typeof lastFocused.focus === 'function') lastFocused.focus();
   }
-  function toggleZoom(){ if (inspectorImg) inspectorImg.classList.toggle('zoomed'); }
   if (inspectorClose) inspectorClose.addEventListener('click', closeInspector);
-  if (inspectorImg) inspectorImg.addEventListener('click', toggleZoom);
   if (inspector) inspector.addEventListener('click', function(e){
     if (e.target === inspector || e.target === inspectorStage) closeInspector();
   });
