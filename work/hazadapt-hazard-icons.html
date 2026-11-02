@@ -9,6 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
 <script src="../image-slot.js"></script>
+<script type="module" src="https://unpkg.com/@google/model-viewer@4.4.0/dist/model-viewer.min.js"></script>
 <style>
 /* =====================================================================
    A found computer, not a webpage. Boots into a device -- a bezel/
@@ -36,6 +37,7 @@
 *{box-sizing:border-box}
 html,body{height:100%;margin:0}
 html{background:var(--bg);scroll-behavior:auto}
+@media (prefers-reduced-motion:no-preference){html.unlocked{scroll-behavior:smooth}}
 body{
   position:fixed;inset:0;overflow:hidden;
   height:100vh;height:100dvh;
@@ -48,6 +50,10 @@ body{
   -webkit-font-smoothing:antialiased;
   padding:env(safe-area-inset-top,0) env(safe-area-inset-right,0) env(safe-area-inset-bottom,0) env(safe-area-inset-left,0);
 }
+/* Only the disk screen needs the fixed, non-scrolling app-shell frame.
+   Once it's opened, the page becomes a normal, continuously scrollable
+   document -- no inner scroll container standing in for page scroll. */
+body.unlocked{position:static;inset:auto;overflow:visible;height:auto;min-height:100dvh}
 body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:500;opacity:var(--grain);mix-blend-mode:overlay;background-image:url("../images/grain.png");background-size:96px 96px}
 #scan{position:fixed;inset:0;pointer-events:none;z-index:501;background-image:repeating-linear-gradient(to bottom,rgba(0,0,0,.15) 0,rgba(0,0,0,.15) 1px,transparent 1px,transparent 3px);opacity:.28;mix-blend-mode:multiply}
 /* faint chromatic fringe right at the screen edge -- decorative only,
@@ -106,41 +112,60 @@ a{color:inherit}
 }
 
 /* =====================================================================
-   BOOT SCREEN -- a terminal log before the desktop reveals itself.
+   BOOT SCREEN -- the floppy disk. A recovered file, not a webpage menu.
+   The disk is the entrance: everything else here is readout dressing
+   around it. Camera-orbit (model-viewer's own drag handling) and
+   "open the file" are two different gestures, so the open control is
+   a plain sibling button, never nested inside the model -- a drag to
+   orbit the disk can never be mistaken for (or swallow) a click to
+   open it.
    ===================================================================== */
-#screenBoot{justify-content:center;padding-left:clamp(20px,6vw,80px);padding-right:clamp(20px,6vw,80px);cursor:pointer}
-#bootTerm{max-width:640px;width:100%}
-.bootLine{margin:0 0 7px;font:400 13px/1.5 'Space Mono',monospace;letter-spacing:.02em;color:var(--dim)}
-.bootLine b{color:var(--accent);font-weight:700}
-.bootLine.warn{color:var(--warn)}
+#screenBoot{justify-content:center;align-items:center;padding:clamp(20px,6vw,80px)}
+#diskReadout{margin:0 0 clamp(14px,2.4vw,22px);font:400 12px/1.6 'Space Mono',monospace;letter-spacing:.06em;color:var(--dim);text-align:center}
+#diskReadout b{color:var(--accent);font-weight:700}
+#diskStage{position:relative;display:flex;flex-direction:column;align-items:center;gap:clamp(16px,2.6vw,26px);width:min(520px,94vw)}
+#diskGlow{position:absolute;left:50%;top:46%;width:min(640px,140vw);height:min(640px,140vw);transform:translate(-50%,-50%);z-index:0;pointer-events:none;border-radius:50%;
+  background:
+    radial-gradient(closest-side, rgba(134,168,110,.6), transparent 55%),
+    radial-gradient(closest-side, rgba(134,168,110,.28), transparent 70%),
+    radial-gradient(closest-side, rgba(134,168,110,.1), transparent 85%);
+  filter:blur(6px);opacity:.85;transition:opacity .35s ease,filter .35s ease}
 @media (prefers-reduced-motion:no-preference){
-  .bootLine{opacity:0;animation:bootIn .22s ease forwards;animation-delay:calc(var(--i,0) * 150ms)}
-  @keyframes bootIn{from{opacity:0;transform:translateY(3px)}to{opacity:1;transform:none}}
+  #diskGlow{animation:diskBreathe 6s ease-in-out infinite}
+  @keyframes diskBreathe{0%,100%{opacity:.8;transform:translate(-50%,-50%) scale(.98)}50%{opacity:1;transform:translate(-50%,-50%) scale(1.03)}}
 }
-#bootPrompt{margin-top:18px;font:700 13px/1.5 'Space Mono',monospace;letter-spacing:.06em;color:var(--dimmer);text-transform:uppercase}
-#bootPrompt::after{content:"_";margin-left:4px;color:var(--accent)}
-@media (prefers-reduced-motion:no-preference){
-  #bootPrompt{opacity:0;animation:bootIn .22s ease forwards;animation-delay:calc(var(--bi,0) * 150ms)}
-  #bootPrompt::after{animation:blip 1s steps(1,end) infinite}
-}
+#diskModelWrap{position:relative;z-index:1;width:min(300px,62vw);aspect-ratio:1/1}
+model-viewer{--poster-color:transparent;width:100%;height:100%;display:block;background:transparent;filter:drop-shadow(0 18px 40px rgba(0,0,0,.6))}
+model-viewer .progress-bar{position:absolute;left:0;right:0;bottom:0;height:3px;background:rgba(198,205,191,.12)}
+model-viewer .progress-bar.hide{display:none}
+model-viewer .update-bar{height:100%;width:0;background:var(--accent);transition:width .2s}
+#diskActivate{position:relative;z-index:1;display:inline-flex;align-items:center;gap:10px;min-height:48px;padding:0 24px;border:1px solid var(--accent-dull);background:rgba(10,13,8,.5);color:var(--ink);font:700 13px/1 'Space Mono',monospace;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;transition:border-color .2s ease,color .2s ease,background .2s ease}
+#diskActivate::after{content:"\2192";color:var(--accent)}
+#diskActivate:hover,#diskActivate:focus-visible{border-color:var(--accent);color:#eef3ee;background:rgba(10,13,8,.75)}
+#diskStage:hover #diskGlow,#diskStage:focus-within #diskGlow{opacity:1;filter:blur(10px) brightness(1.3)}
+#diskHint{margin:0;font:400 11px/1.5 'Space Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--dimmer);text-align:center}
+#diskFallback{display:none;position:relative;z-index:1;margin:0;font:400 12px/1.5 'Space Mono',monospace;letter-spacing:.04em;color:var(--warn);text-align:center;max-width:46ch}
+#diskStage.model-failed #diskModelWrap{display:none}
+#diskStage.model-failed #diskFallback{display:block}
+#diskAttribution{position:relative;z-index:1;display:grid;gap:4px;margin-top:4px;font:400 11px/1.6 'Space Mono',monospace;letter-spacing:.05em;text-transform:uppercase;color:var(--dimmer);text-align:center}
+#diskAttribution a{color:var(--dim);text-decoration:underline;text-decoration-color:var(--accent-dull);text-underline-offset:.2em}
+#diskAttribution a:hover,#diskAttribution a:focus-visible{color:var(--accent)}
 
 /* =====================================================================
    DESKTOP SCREEN -- icon rail, ghost windows, one real document window.
    ===================================================================== */
-#screenDesktop{flex-direction:row}
-#iconRail{flex:0 0 auto;width:clamp(58px,6.5vw,80px);display:flex;flex-direction:column;align-items:center;gap:4px;padding:clamp(34px,6vh,58px) 0 10px;border-right:1px solid var(--line);background:linear-gradient(180deg,rgba(255,255,255,.02),transparent 25%)}
+#screenDesktop{flex-direction:row;position:static;inset:auto;min-height:100dvh;height:auto}
+#iconRail{flex:0 0 auto;width:clamp(58px,6.5vw,80px);display:flex;flex-direction:column;align-items:center;gap:4px;padding:clamp(34px,6vh,58px) 0 10px;border-right:1px solid var(--line);background:linear-gradient(180deg,rgba(255,255,255,.02),transparent 25%);position:sticky;top:0;align-self:flex-start;height:100dvh}
 #iconRail .railBtn{width:84%;padding:9px 2px;display:flex;flex-direction:column;align-items:center;gap:6px;border:0;background:transparent;color:var(--dim);cursor:pointer;font:700 9px/1.15 'Space Mono',monospace;letter-spacing:.04em;text-transform:uppercase;text-decoration:none}
 #iconRail .railGlyph{width:28px;height:28px;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--accent)}
 #iconRail .railBtn:hover,#iconRail .railBtn:focus-visible{color:var(--ink)}
 #iconRail .railBtn:hover .railGlyph,#iconRail .railBtn:focus-visible .railGlyph{border-color:var(--accent)}
-#iconRail .railBtn[aria-pressed="true"]{color:var(--ink)}
-#iconRail .railBtn[aria-pressed="true"] .railGlyph{border-color:var(--accent);box-shadow:0 0 8px var(--accent-dim)}
 
-#deskStage{position:relative;flex:1;min-width:0;overflow:hidden;display:flex}
+#deskStage{position:relative;flex:1;min-width:0;display:flex}
 
 #navRail{display:none}
 @media (min-width:960px){
-  #navRail{display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;flex:0 0 auto;width:36px;border-right:1px solid var(--line);background:linear-gradient(180deg,rgba(255,255,255,.015),transparent 25%)}
+  #navRail{display:flex;flex-direction:column;align-items:center;justify-content:center;position:sticky;top:0;align-self:flex-start;height:100dvh;flex:0 0 auto;width:36px;border-right:1px solid var(--line);background:linear-gradient(180deg,rgba(255,255,255,.015),transparent 25%)}
   #navRail::before{content:"";position:absolute;left:50%;top:10%;bottom:10%;width:1px;background:var(--line);transform:translateX(-50%);z-index:-1}
   #navRail button{width:9px;height:9px;margin:6px 0;padding:0;border:1px solid var(--dimmer);background:var(--bg);border-radius:0;cursor:pointer}
   #navRail button[data-visited="true"]{background:var(--accent-dull);border-color:var(--accent-dull)}
@@ -150,28 +175,24 @@ a{color:inherit}
 
 /* ---- the document window: now the screen itself, not a card floating
    on one -- no margin, no drop shadow, no separate border. ---- */
-#docWindow{position:relative;z-index:2;display:flex;flex-direction:column;background:var(--panel);flex:1;min-width:0;height:100%}
+#docWindow{position:relative;z-index:2;display:flex;flex-direction:column;background:var(--panel);flex:1;min-width:0}
 #docTitlebar{flex:0 0 auto;display:flex;align-items:center;gap:10px;height:32px;padding:0 10px;background:linear-gradient(180deg,#1c1e19,#121410);border-bottom:1px solid var(--panel-edge)}
 #docTitlebar .dots{display:flex;gap:5px;flex:0 0 auto}
 #docTitlebar .dots span{width:7px;height:7px;border:1px solid var(--line)}
 #docTitleText{margin-left:2px;font:700 10px/1 'Space Mono',monospace;letter-spacing:.08em;color:var(--dim);text-transform:uppercase;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-#docToolbar{flex:0 0 auto;display:flex;align-items:stretch;border-bottom:1px solid var(--line);background:rgba(255,255,255,.012)}
-#docToolbar button{display:flex;align-items:center;gap:7px;height:34px;padding:0 14px;border:0;border-right:1px solid var(--line);background:transparent;color:var(--dim);font:700 10px/1 'Space Mono',monospace;letter-spacing:.08em;text-transform:uppercase;cursor:pointer}
-#docToolbar button:hover:not(:disabled){color:var(--accent)}
-#docToolbar button:disabled{opacity:.3;cursor:default}
-#docCounter{margin-left:auto;display:flex;align-items:center;padding:0 14px;color:var(--dim);font:700 10px/1 'Space Mono',monospace;letter-spacing:.1em}
-#docBody{flex:1;min-height:0;overflow-y:auto;position:relative}
+#docBody{position:relative;display:flex;flex-wrap:wrap}
 #docBody::before{content:"";position:absolute;left:0;right:0;top:0;height:2px;background:linear-gradient(90deg,transparent,var(--accent-dim),transparent);z-index:2}
 
-/* the protected header, now the "intro" that precedes section 1 inside
-   the same document window -- shown only when section 1 is active. */
-#docBody header{padding:clamp(22px,3.4vw,36px) clamp(18px,3.6vw,40px) clamp(20px,3vw,32px)!important;border-bottom:2px solid var(--ink)!important;overflow:visible!important}
+/* the protected header, now the document's own intro, always visible
+   above the continuously-scrolling sections that follow it. */
+#docBody header{flex:1 1 100%;padding:clamp(22px,3.4vw,36px) clamp(18px,3.6vw,40px) clamp(20px,3vw,32px)!important;border-bottom:2px solid var(--ink)!important;overflow:visible!important}
 #docBody header h1{font-size:clamp(26px,3.4vw,52px)!important;line-height:.98!important;max-width:14ch;text-shadow:0 0 36px var(--accent-dim)}
 #docBody header h1 + p{font-size:clamp(14px,1.3vw,18px)!important;margin-top:8px!important}
+#main{flex:1 1 480px;min-width:0}
 
-/* the protected toc list, now the "file index" mode of the same
-   window -- a dense technical listing, not a sidebar. */
-#tocAside{padding:clamp(18px,3vw,32px) clamp(18px,3.6vw,40px)!important}
+/* the protected toc list, now a permanent, sticky sidebar next to the
+   scrolling document instead of a separate "index" screen. */
+#tocAside{flex:0 0 240px;padding:clamp(18px,3vw,32px) clamp(18px,3.6vw,40px)!important;border-left:1px solid var(--line)}
 #tocAside > nav > *:first-child{margin-bottom:10px}
 .toc-toggle{display:none!important}
 #toc-list{font:400 14px/1.3 'Space Mono',monospace!important;letter-spacing:.02em!important;gap:0!important}
@@ -179,14 +200,14 @@ a{color:inherit}
 #toc-list li:last-child{border-bottom:1px solid var(--line)}
 #toc-list a{position:relative;padding:12px 4px 12px 12px!important;color:var(--dim);transition:color .12s ease,padding-left .12s ease}
 #toc-list a::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent);transform:scaleY(0);transition:transform .15s ease}
-#toc-list a:hover,#toc-list a:focus-visible{color:var(--ink);padding-left:18px!important}
-#toc-list a:hover::before,#toc-list a:focus-visible::before{transform:scaleY(1)}
+#toc-list a:hover,#toc-list a:focus-visible,#toc-list a[aria-current="true"]{color:var(--ink);padding-left:18px!important}
+#toc-list a:hover::before,#toc-list a:focus-visible::before,#toc-list a[aria-current="true"]::before{transform:scaleY(1)}
 .toc-marker{color:var(--accent)!important}
 #toc-list a[data-visited="true"]{color:var(--ink)}
 #toc-list a[data-visited="true"] .toc-marker{color:var(--dimmer)!important}
+#toc-list a[aria-current="true"] .toc-marker{color:var(--accent)!important}
 
-#main section{display:none!important;grid-template-columns:minmax(0,1fr)!important;border-top:0!important;padding:clamp(22px,3.4vw,36px) clamp(18px,3.6vw,40px) clamp(40px,6vh,72px)!important}
-#main section.active{display:grid!important}
+#main section{display:grid!important;grid-template-columns:minmax(0,1fr)!important;padding:clamp(22px,3.4vw,36px) clamp(18px,3.6vw,40px) clamp(40px,6vh,72px)!important}
 #main figure{position:relative}
 #main figure img{cursor:zoom-in;transition:filter .18s ease}
 #main figure img:hover,#main figure img:focus-visible{filter:brightness(1.08)}
@@ -206,8 +227,12 @@ a{color:inherit}
    distinct model, not a shrunk desktop. ---- */
 @media (max-width:959px){
   #screenDesktop{flex-direction:column}
-  #iconRail{width:auto;flex-direction:row;padding:10px 12px;gap:4px;border-right:0;border-bottom:1px solid var(--line)}
+  #iconRail{position:static;height:auto;width:auto;flex-direction:row;padding:10px 12px;gap:4px;border-right:0;border-bottom:1px solid var(--line)}
   #iconRail .railBtn{width:auto;flex-direction:row;padding:8px 10px}
+  #deskStage{flex-direction:column}
+  #tocAside{flex:1 1 100%;border-left:0;border-top:2px solid var(--ink)}
+  #tocAside > nav{position:static!important;top:auto!important}
+  #secretStamp{right:4px!important;width:clamp(84px,18vw,170px)!important}
 }
 </style>
 </head>
@@ -221,27 +246,39 @@ a{color:inherit}
 <div id="crtFlicker" aria-hidden="true"></div>
 <div id="glitchBar" aria-hidden="true"></div>
 
-<div id="screenBoot" class="screen" role="region" aria-label="Boot sequence" tabindex="-1">
-  <div id="bootTerm">
-    <p class="bootLine" style="--i:0"><b>IKONA BIOS</b> v2.14 -- RESTRICTED SYSTEMS DIVISION</p>
-    <p class="bootLine" style="--i:1">MEM TEST .............. 065536K <b>OK</b></p>
-    <p class="bootLine" style="--i:2">CHECKING FDD ........... NONE</p>
-    <p class="bootLine" style="--i:3">CHECKING HDD0 .......... CASEFILES.VOL <b>OK</b></p>
-    <p class="bootLine" style="--i:4">INIT DISPLAY ADAPTER ... <b>OK</b></p>
-    <p class="bootLine" style="--i:5">LOADING KERNEL ............................ <b>OK</b></p>
-    <p class="bootLine" style="--i:6">MOUNTING /casefiles/hazadapt ............. <b>OK</b></p>
-    <p class="bootLine" style="--i:7">VERIFYING ICON INTEGRITY ............ 13/13 <b>OK</b></p>
-    <p class="bootLine" style="--i:8">DECRYPTING CASE FILE ...................... <b>OK</b></p>
-    <p class="bootLine warn" style="--i:9">WARNING: SUBJECT MATTER MAY BE SENSITIVE</p>
-    <p class="bootLine warn" style="--i:10">WARNING: HANDLE WITH CARE</p>
-    <p class="bootLine" style="--i:11">STARTING DESKTOP ENVIRONMENT .............</p>
-    <p id="bootPrompt" style="--bi:13">Press any key to continue</p>
+<div id="screenBoot" class="screen" role="region" aria-label="Case file: recovered floppy disk" tabindex="-1">
+  <p id="diskReadout"><b>IKONA BIOS</b> v2.14 &middot; FDD DETECTED: CASEFILES.VOL</p>
+  <div id="diskStage">
+    <div id="diskGlow" aria-hidden="true"></div>
+    <div id="diskModelWrap">
+      <model-viewer
+        id="diskModel"
+        src="../images/work/hazadapt-hazard-icons/black_and_white_floppy_disk.glb"
+        alt="A black and white floppy disk, 3D model. Drag to rotate."
+        ar
+        ar-modes="webxr scene-viewer quick-look"
+        camera-controls
+        tone-mapping="neutral"
+        shadow-intensity="1">
+        <div class="progress-bar hide" slot="progress-bar">
+          <div class="update-bar"></div>
+        </div>
+      </model-viewer>
+    </div>
+    <p id="diskFallback" role="status">3D preview unavailable here &mdash; the case file still opens below.</p>
+    <button type="button" id="diskActivate">Access Disk</button>
+    <p id="diskHint">Drag the disk to rotate &middot; Access Disk to open the file</p>
+    <div id="diskAttribution">
+      <p>Asset / <a href="https://skfb.ly/oKKRx" target="_blank" rel="noopener noreferrer">Black and White Floppy Disk</a></p>
+      <p>Creator / <a href="https://skfb.ly/oKKRx" target="_blank" rel="noopener noreferrer">l0r3l3i</a></p>
+      <p>License / <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer">CC BY 4.0</a></p>
+    </div>
   </div>
 </div>
 
 <div id="screenDesktop" class="screen off" aria-label="Desktop">
   <nav id="iconRail" aria-label="Desktop">
-    <button type="button" id="iconIndex" class="railBtn" aria-pressed="false"><span class="railGlyph" aria-hidden="true">&#9638;</span>Index</button>
+    <a href="#docWindow" id="iconTop" class="railBtn"><span class="railGlyph" aria-hidden="true">&#9650;</span>Top</a>
     <a href="../art.html" class="railBtn"><span class="railGlyph" aria-hidden="true">&#9632;</span>Exit</a>
   </nav>
   <div id="deskStage">
@@ -249,12 +286,7 @@ a{color:inherit}
     <div id="docWindow">
       <nav id="docTitlebar" aria-label="Window title">
         <span class="dots" aria-hidden="true"><span></span><span></span><span></span></span>
-        <span id="docTitleText">01 Overview</span>
-      </nav>
-      <nav id="docToolbar" aria-label="Section navigation">
-        <button type="button" id="docPrev">&#8249; Prev</button>
-        <button type="button" id="docNext">Next &#8250;</button>
-        <span id="docCounter" aria-live="polite">01 / 13</span>
+        <span id="docTitleText">Designing With Empathy</span>
       </nav>
       <div id="docBody">
 <header style="padding:clamp(28px,4vw,48px) clamp(16px,5vw,80px) clamp(56px,7vw,100px);border-bottom:2px solid var(--ink);position:relative;overflow:hidden">
@@ -275,7 +307,7 @@ a{color:inherit}
     </div>
     <div aria-hidden="true" style="position:relative;flex:1 1 360px;min-width:0;max-width:640px;aspect-ratio:16/10;display:flex;align-items:center;justify-content:center;background:var(--ink);color:var(--bg);transform:rotate(1.5deg);box-shadow:14px 14px 0 var(--red)">
       <span style="font:400 clamp(44px,7vw,110px)/.9 'Archivo Black',serif;padding:0 .2em;text-align:center;overflow-wrap:anywhere">Hazard Icons</span>
-      <img loading="lazy" src="../images/top-secret-stamp.png" alt="" style="position:absolute;top:-22px;right:-22px;width:clamp(100px,22vw,170px);transform:rotate(6deg);pointer-events:none">
+      <img id="secretStamp" loading="lazy" src="../images/top-secret-stamp.png" alt="" style="position:absolute;top:-22px;right:-22px;width:clamp(100px,22vw,170px);transform:rotate(6deg);pointer-events:none">
     </div>
   </div>
 </header><main id="main">
@@ -494,43 +526,10 @@ a{color:inherit}
   var screenBoot = document.getElementById('screenBoot');
   var screenDesktop = document.getElementById('screenDesktop');
   var docWindow = document.getElementById('docWindow');
-  var docBody = document.getElementById('docBody');
   var docTitleText = document.getElementById('docTitleText');
-  var docPrev = document.getElementById('docPrev');
-  var docNext = document.getElementById('docNext');
-  var docCounter = document.getElementById('docCounter');
-  var iconIndex = document.getElementById('iconIndex');
   var navRail = document.getElementById('navRail');
-  var mainEl = document.getElementById('main');
-  var tocAside = document.getElementById('tocAside');
   var tocList = document.getElementById('toc-list');
-  var headerBlock = docBody.querySelector('header');
   var sections = SECTION_IDS.map(function(id){ return document.getElementById(id); });
-
-  var railButtons = [];
-  if (navRail) {
-    SECTION_IDS.forEach(function(id, i){
-      var b = document.createElement('button');
-      b.type = 'button';
-      b.setAttribute('aria-label', 'Jump to section ' + (i + 1) + ' of ' + SECTION_IDS.length);
-      b.addEventListener('click', function(){ showReader(i); });
-      navRail.appendChild(b);
-      railButtons.push(b);
-    });
-  }
-
-  var mode = 'reader';
-  var currentIndex = 0;
-  var booted = false;
-
-  function pad2(n){ return n < 10 ? '0' + n : String(n); }
-
-  function flicker(el){
-    if (!booted || reduce || !el) return;
-    el.classList.remove('swapping');
-    void el.offsetWidth;
-    el.classList.add('swapping');
-  }
 
   function titleFor(i){
     var link = tocList.querySelector('a[href="#' + SECTION_IDS[i] + '"]');
@@ -541,140 +540,106 @@ a{color:inherit}
     return clone.textContent.replace(/\s+/g, ' ').trim();
   }
 
+  function scrollToSection(index){
+    if (index < 0 || index >= sections.length || !sections[index]) return;
+    sections[index].scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+    try { history.replaceState(null, '', '#' + SECTION_IDS[index]); } catch(e){}
+  }
+
+  var railButtons = [];
+  if (navRail) {
+    SECTION_IDS.forEach(function(id, i){
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.setAttribute('aria-label', 'Scroll to section ' + (i + 1) + ' of ' + SECTION_IDS.length + ': ' + titleFor(i));
+      b.addEventListener('click', function(){ scrollToSection(i); });
+      navRail.appendChild(b);
+      railButtons.push(b);
+    });
+  }
+
+  // ---- scroll-spy: everything is already on the page, continuously
+  // scrollable; this just tracks which section is in view so the nav
+  // rail and the contents list can highlight it, and the title bar can
+  // read it out. It never hides or re-shows content. ----
+  var activeIndex = 0;
+  var visited = {};
+  function setActive(index){
+    if (index === activeIndex && visited[index]) return;
+    activeIndex = index;
+    visited[index] = true;
+    docTitleText.textContent = titleFor(index);
+    var id = SECTION_IDS[index];
+    tocList.querySelectorAll('a[aria-current]').forEach(function(a){ a.removeAttribute('aria-current'); });
+    var link = tocList.querySelector('a[href="#' + id + '"]');
+    if (link) { link.setAttribute('aria-current', 'true'); link.setAttribute('data-visited', 'true'); }
+    railButtons.forEach(function(b, i){
+      if (i === index) b.setAttribute('aria-current', 'true'); else b.removeAttribute('aria-current');
+      if (visited[i]) b.setAttribute('data-visited', 'true');
+    });
+    try { history.replaceState(null, '', '#' + id); } catch(e){}
+  }
+  var spy = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if (!entry.isIntersecting) return;
+      var idx = SECTION_IDS.indexOf(entry.target.id);
+      if (idx > -1) setActive(idx);
+    });
+  }, { rootMargin: '-10% 0px -70% 0px', threshold: 0 });
+  sections.forEach(function(s){ if (s) spy.observe(s); });
+
   function focusWindow(){
     if (!docWindow.hasAttribute('tabindex')) docWindow.setAttribute('tabindex', '-1');
     docWindow.focus();
   }
 
-  function showReader(index, moveFocus){
-    if (index < 0 || index >= sections.length || !sections[index]) return;
-    mode = 'reader';
-    currentIndex = index;
-    mainEl.classList.remove('off');
-    tocAside.classList.add('off');
-    if (headerBlock) headerBlock.classList.toggle('off', index !== 0);
-    sections.forEach(function(s, i){ if (s) s.classList.toggle('active', i === index); });
-    docTitleText.textContent = titleFor(index);
-    docPrev.disabled = index <= 0;
-    docNext.disabled = index >= sections.length - 1;
-    docCounter.textContent = pad2(index + 1) + ' / ' + pad2(sections.length);
-    if (iconIndex) iconIndex.setAttribute('aria-pressed', 'false');
-    docBody.scrollTop = 0;
-    updateRail();
-    flicker(docWindow);
-    try { history.replaceState(null, '', '#' + SECTION_IDS[index]); } catch(e){}
-    if (moveFocus !== false) focusWindow();
+  function goToHashSection(){
+    var idx = SECTION_IDS.indexOf((location.hash || '').slice(1));
+    if (idx > -1) scrollToSection(idx);
   }
+  window.addEventListener('hashchange', goToHashSection);
 
-  function showIndex(moveFocus){
-    mode = 'index';
-    mainEl.classList.add('off');
-    if (headerBlock) headerBlock.classList.add('off');
-    tocAside.classList.remove('off');
-    docTitleText.textContent = 'FILE INDEX';
-    docPrev.disabled = true;
-    docNext.disabled = true;
-    docCounter.textContent = sections.length + ' FILES';
-    if (iconIndex) iconIndex.setAttribute('aria-pressed', 'true');
-    docBody.scrollTop = 0;
-    flicker(docWindow);
-    try { history.replaceState(null, '', '#index'); } catch(e){}
-    if (moveFocus !== false) focusWindow();
-  }
-
-  function updateRail(){
-    var id = SECTION_IDS[currentIndex];
-    var link = tocList && tocList.querySelector('a[href="#' + id + '"]');
-    if (link) link.setAttribute('data-visited', 'true');
-    if (railButtons[currentIndex]) railButtons[currentIndex].setAttribute('data-visited', 'true');
-    railButtons.forEach(function(b, i){
-      if (i === currentIndex && mode === 'reader') b.setAttribute('aria-current', 'true');
-      else b.removeAttribute('aria-current');
-    });
-  }
-
-  if (docPrev) docPrev.addEventListener('click', function(){ showReader(currentIndex - 1); });
-  if (docNext) docNext.addEventListener('click', function(){ showReader(currentIndex + 1); });
-  if (iconIndex) iconIndex.addEventListener('click', function(){
-    if (mode === 'index') showReader(currentIndex); else showIndex();
-  });
-
-  if (tocList) {
-    tocList.addEventListener('click', function(e){
-      var a = e.target.closest('a[href^="#"]');
-      if (!a) return;
-      var idx = SECTION_IDS.indexOf(a.getAttribute('href').slice(1));
-      if (idx < 0) return;
-      e.preventDefault();
-      showReader(idx);
-    });
-  }
-
-  window.addEventListener('keydown', function(e){
-    if (!screenDesktop || screenDesktop.classList.contains('off')) return;
-    var inspector = document.getElementById('inspector');
-    if (inspector && !inspector.classList.contains('hidden')) return;
-    var tag = e.target && e.target.tagName;
-    if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'BUTTON' || tag === 'A') {
-      if (e.key !== 'Escape') return;
-    }
-    if (mode === 'reader') {
-      if (e.key === 'ArrowRight') { showReader(currentIndex + 1); }
-      else if (e.key === 'ArrowLeft') { showReader(currentIndex - 1); }
-    }
-    if (e.key === 'Escape' && mode === 'index') { showReader(currentIndex); }
-  });
-
-  function goToHash(moveFocus){
-    var h = (location.hash || '').slice(1);
-    if (h === 'index') { showIndex(moveFocus); return; }
-    var idx = SECTION_IDS.indexOf(h);
-    showReader(idx > -1 ? idx : 0, moveFocus);
-  }
-  window.addEventListener('hashchange', function(){ goToHash(); });
-
-  // ================= BOOT SEQUENCE =================
+  // ================= THE FLOPPY DISK =================
   var hasHash = !!(location.hash && location.hash.length > 1);
   var alreadyBooted = false;
   try { alreadyBooted = sessionStorage.getItem(BOOT_KEY) === '1'; } catch(e){}
 
-  goToHash(false); // set desktop's internal state before anything is shown
+  var diskActivate = document.getElementById('diskActivate');
+  var diskModel = document.getElementById('diskModel');
+  var diskStage = document.getElementById('diskStage');
 
   function revealDesktop(){
     screenBoot.classList.add('off');
     screenDesktop.classList.remove('off');
-    booted = true;
-    flicker(docWindow);
+    html.classList.add('unlocked');
+    document.body.classList.add('unlocked');
+    if (!reduce) { screenDesktop.classList.remove('swapping'); void screenDesktop.offsetWidth; screenDesktop.classList.add('swapping'); }
     try { sessionStorage.setItem(BOOT_KEY, '1'); } catch(e){}
-    focusWindow();
+    if (hasHash) { requestAnimationFrame(function(){ requestAnimationFrame(goToHashSection); }); }
+    else focusWindow();
   }
 
   if (hasHash || alreadyBooted) {
-    screenBoot.classList.add('off');
-    screenDesktop.classList.remove('off');
-    booted = true;
-    try { sessionStorage.setItem(BOOT_KEY, '1'); } catch(e){}
+    revealDesktop();
   } else {
-    var skipped = false;
-    var bootDone = function(){
-      if (skipped) return;
-      skipped = true;
-      revealDesktop();
-    };
-    // Reduced motion: all boot lines render at full opacity immediately
-    // (the stagger animation only runs under no-preference), so there's
-    // nothing to wait through -- advance quickly instead of skipping
-    // the boot screen's content outright.
-    var totalDelay = reduce ? 900 : (12 * 150 + 1100);
-    var bootTimer = setTimeout(bootDone, totalDelay);
-    screenBoot.addEventListener('click', function(){ clearTimeout(bootTimer); bootDone(); });
-    window.addEventListener('keydown', function onBootKey(e){
-      if (screenBoot.classList.contains('off')) { window.removeEventListener('keydown', onBootKey); return; }
-      clearTimeout(bootTimer);
-      bootDone();
-    });
     screenBoot.focus();
   }
+  if (diskActivate) diskActivate.addEventListener('click', revealDesktop);
+
+  // The explicit button above is the one reliable way to open the case
+  // study -- it never competes with model-viewer's own drag-to-orbit
+  // gesture for the same pointer events. If the viewer script never
+  // registers (blocked/offline) or the model itself fails to load,
+  // fall back to the activation button alone; it never depended on
+  // WebGL in the first place.
+  if (diskModel) {
+    diskModel.addEventListener('error', function(){ if (diskStage) diskStage.classList.add('model-failed'); });
+  }
+  setTimeout(function(){
+    if (diskStage && (!window.customElements || !customElements.get('model-viewer'))) {
+      diskStage.classList.add('model-failed');
+    }
+  }, 4000);
 
   // ================= IMAGE INSPECTOR =================
   var inspector = document.getElementById('inspector');
